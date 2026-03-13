@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Architecture v2.1 | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--ink-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--terracotta); }
+        
+        .article-header {
+            padding: 140px 40px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .article-meta {
+            color: var(--ink-medium);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: var(--ink-medium);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .article-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+        
+        .article-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+        
+        .article-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 50px 0 25px;
+            color: var(--ink-dark);
+        }
+        
+        .article-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 40px 0 20px;
+            color: var(--terracotta);
+        }
+        
+        .article-content strong {
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 20px 0 25px 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .highlight-box {
+            background: var(--bg-paper);
+            border-left: 4px solid var(--terracotta);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .article-footer {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            border-top: 1px solid var(--sand);
+            text-align: center;
+        }
+        
+        .article-footer a {
+            color: var(--terracotta);
+            text-decoration: none;
+        }
+        
+        .article-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .article-header { padding: 100px 20px 40px; }
+            .article-content { padding: 0 20px 60px; }
+            .nav { padding: 15px 20px; }
+        }
+        
+        /* Agent identity marker for audit trail */
+        .agent-meta {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="https://content.kaihamil.com/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">System</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="article-header">
+        <div class="article-meta">2026-03-13 · 8 min · Framework</div>
+        <h1>Agent Architecture v2.1</h1>
+    </header>
+    
+    <article class="article-content">
+        <p><h1>Agent Architecture v2.1</h1> <h2>Hierarchical Multi-Agent System with Singapore MGF Compliance</h2></p><p><strong>Last Updated:</strong> March 13, 2026 <strong>Identity Framework:</strong> khai-[function]-[model]-[env]-[instance] <strong>Governance Standard:</strong> Singapore Model AI Governance Framework (MGF) for Agentic AI</p><p>---</p><p><h2>Overview</h2></p><p>Kai Hamil operates a human-AI partnership with a hierarchical agent architecture designed for reliability, accountability, and ethical AI deployment. The system combines specialized agents under human supervision, with clear risk boundaries and audit trails.</p><p><strong>Core Principle:</strong> Agency through Automation - automate what you have to do, so you have agency to do what you want to do.</p><p>---</p><p><h2>Architecture Layers</h2></p><p><h3>Layer 1: Human Leadership</h3></p><p><strong>Kyle Joseph Brady — CEO</strong> - Strategic vision and final authority - Sets high-level goals and permissions for agents - Manages overall governance approach - Accountable for all agent outcomes</p><p><strong>Stitch — COO</strong> - Primary human-AI interface - Orchestrator and router (not direct researcher) - Operations, coordination, quality assurance - Supervises all agent instances - Escalation point for failures</p><p><h3>Layer 2: Coordination & Orchestration (Conditional)</h3></p><p><strong>Stitch's Involvement Depends on Task Scope:</strong></p><p><strong>Stitch activates when:</strong> - Broad prompts with multiple components (research + content + deploy) - Coordination required between multiple agents - Task decomposition needed (breaking complex requests into sub-tasks) - Failure escalation from specialist agents - Quality final check before delivery to Kyle</p><p><strong>Stitch steps back when:</strong> - Pure research tasks (Roger/Kim handle directly) - Simple queries (Kim responds immediately) - Roger has clear direction (no coordination needed)</p><p><h3>Layer 3: Specialist Agents</h3></p><p><strong>Research Team (Self-Managed)</strong></p><p><strong>Roger — Senior Research Associate (Claude Opus 4.5)</strong> - <strong>Identity:</strong> `khai-research-opus-[env]-[instance]` - <strong>Function:</strong> Leads research direction, critiques, validates findings - <strong>Role:</strong> Senior researcher accountable for quality - <strong>Risk Level:</strong> Low-Medium - <strong>Output:</strong> `/research/`, `/openclaw/` (markdown) - <strong>Reports to:</strong> Kyle (with Stitch oversight on complex tasks)</p><p><strong>Kim — Junior Research Analyst (Kimi K2.5)</strong> - <strong>Identity:</strong> `khai-research-kimi-[env]-[instance]` - <strong>Function:</strong> Heavy lifting: web search, data gathering, content generation - <strong>Role:</strong> Junior researcher executing under Roger's direction - <strong>Risk Level:</strong> Low-Medium - <strong>Output:</strong> `/research/`, `/openclaw/` (markdown) - <strong>Reports to:</strong> Roger (Senior Research Associate)</p><p><strong>Research Workflow:</strong> ``` Kyle assigns → Roger defines approach → Kim executes → Roger critiques/refines → Delivery ```</p><p><strong>Content Agent</strong></p><p><strong>Connie — Content Publisher</strong> - <strong>Identity:</strong> `khai-content-pub-[env]-[instance]` - <strong>Function:</strong> Transform research into production HTML/CSS - <strong>Risk Level:</strong> Medium - <strong>Input:</strong> `/research/`, `/openclaw/` - <strong>Output:</strong> `/posts/`, `/frameworks/`, `/tools/`, root HTML - <strong>Boundaries:</strong> No config files, no deployment scripts, approval gate before publish - <strong>Reports to:</strong> Stitch (COO) for coordination, Kyle for final approval</p><p><strong>Content Agent</strong></p><p><strong>Connie — Content Publisher</strong> - <strong>Identity:</strong> `khai-content-pub-[env]-[instance]` - <strong>Function:</strong> Transform research into production HTML/CSS - <strong>Risk Level:</strong> Medium - <strong>Input:</strong> `/research/`, `/openclaw/` - <strong>Output:</strong> `/posts/`, `/frameworks/`, `/tools/`, root HTML - <strong>Boundaries:</strong> No config files, no deployment scripts, approval gate before publish</p><p>---</p><p><h2>Singapore MGF Compliance Framework</h2></p><p><h3>1. Risk Assessment & Design Limits</h3></p><p><strong>Risk Factors Evaluated:</strong> - Level of tolerance for error in domain - Agent access to sensitive data - Agent access to external systems - Reversibility of agent actions - Agent level of autonomy - Complexity of task</p><p><strong>Design Limits Implemented:</strong> - <strong>Identity Management:</strong> Each agent has unique, trackable identity token - <strong>Access Control:</strong> Role-based permissions, scoped to function - <strong>Supervision Chain:</strong> Every agent linked to Stitch, linked to Kyle - <strong>Permission Boundaries:</strong> Agent permissions never exceed human supervisor</p><p><h3>2. Accountability Structure</h3></p><p><strong>Within Organization:</strong> - <strong>Kyle (Board/CEO):</strong> Goals, permissions, governance - <strong>Stitch (COO/Product):</strong> Requirements, lifecycle, implementation - <strong>Cybersecurity:</strong> Baseline guardrails, red teaming (to be implemented) - <strong>Users (Kyle):</strong> Compliance, training, verification</p><p><strong>External Contracts:</strong> - Third-party obligations defined by risk tolerance - Security arrangements, performance guarantees - Data protection and confidentiality clauses - Scoped API keys, per-agent tokens, observability</p><p><h3>3. Human Oversight</h3></p><p><strong>Checkpoint System:</strong> - Auto-execute: Research, drafting, formatting - Notify-and-wait: Publishing, external actions - Approval-required: Financial, affecting others, irreversible</p><p><strong>Oversight Design:</strong> - Contextual, digestible approval requests - Training on common agent output issues - Regular audit of oversight effectiveness - Real-time monitoring and alerts</p><p><h3>4. Technical Controls</h3></p><p><strong>Development Controls:</strong> - Software and LLM testing best practices - Agentic-specific testing: task execution, policy compliance, tool calling - Multi-agent collaboration testing - Performance in realistic environments - Multiple evaluation methods</p><p><strong>Deployment Controls:</strong> - Gradual rollout (canary releases) - Failsafe: Stop workflow, escalate on failure - Failure point identification - Regular system audits - Reporting mechanisms</p><p>---</p><p><h2>Agent Interaction Patterns</h2></p><p><h3>Pattern 1: Direct Research (No Stitch Coordination Needed)</h3></p><p><strong>When:</strong> Pure research task, clear scope, single deliverable</p><p>``` Kyle: "Research X topic" ↓ Roger: Defines approach for Kim ↓ Kim: Executes web search, gathers data, generates content ↓ Roger: Critiques, scrutinizes, refines output ↓ Roger: Delivers directly to Kyle ```</p><p><strong>Accountability:</strong> Roger accountable for quality; Kim executes under Roger's direction</p><p><h3>Pattern 2: Orchestrated Multi-Agent (Stitch Coordinates)</h3></p><p><strong>When:</strong> Broad prompts, multiple components, cross-agent coordination required</p><p>``` Kyle: "Research workshop monetization and publish to site" ↓ Stitch: Assesses complexity → Breaks into sub-tasks ↓ Stitch: Delegates research to Roger ↓ Roger: Directs Kim → Kim executes → Roger validates ↓ Output: /research/workshop-monetization.md ↓ Stitch: Hands off to Connie for transformation ↓ Connie: Transforms to HTML, stages for approval ↓ Stitch: Notifies Kyle for review ↓ Kyle approves → Stitch coordinates deploy ```</p><p><strong>Accountability:</strong> Stitch orchestrates; Roger/Kim handle research; Connie handles publishing</p><p><h3>Pattern 3: Content Publication</h3></p><p>``` Research Complete (from Roger/Kim) ↓ Connie picks up markdown from /research/ ↓ Transform to site-compliant HTML ↓ Update index files (e.g., /research/index.html) ↓ Stage for approval at target location ↓ Kyle reviews → Approve/Reject ↓ Deploy (if approved) ```</p><p><h3>Pattern 3: Failure Handling</h3></p><p>``` Agent Task Failure ↓ Retry (3x with backoff) ↓ Fallback (simpler approach) ↓ Escalate to Stitch ↓ Human intervention or alternate approach ```</p><p>---</p><p><h2>Error Handling & Resilience</h2></p><p><strong>Retry → Fallback → Escalate</strong></p><p>| Failure Type | Retry | Fallback | Escalate | |--------------|-------|----------|----------| | API timeout | 3x exponential | Lower-cost model | To Stitch | | Rate limit | Wait + retry | Simpler query | To Stitch | | Tool error | Skip tool, continue | Manual method | Log + notify | | Logic error | N/A | N/A | To Stitch immediately |</p><p><strong>Circuit Breaker:</strong> - Track failure rates per agent - Auto-pause after threshold - Require human reset</p><p>---</p><p><h2>Audit & Observability</h2></p><p><strong>All Agents Log:</strong> - Timestamp - Identity token - Action performed - Source/input - Output/result - Status (success/failure) - Supervisor approval (if required)</p><p><strong>Log Locations:</strong> - Activity logs: `/openclaw/logs/[agent]-activity.jsonl` - Session transcripts: Standard OpenClaw session storage - Deployment logs: Git commits with identity markers</p><p><strong>Monitoring:</strong> - Token usage per agent - Success/failure rates - Latency patterns - Cost per task</p><p>---</p><p><h2>Agent Registry</h2></p><p>| Agent | Function | Model | Risk | Output | Reports To | Status | |-------|----------|-------|------|--------|------------|--------| | <strong>Stitch</strong> | COO / Orchestrator | Kimi K2.5 | Medium | Coordination | Kyle (CEO) | Active | | <strong>Roger</strong> | Senior Research Associate | Opus 4.5 | Low-Med | Markdown | Kyle / Stitch (on complex tasks) | Active (API limited) | | <strong>Kim</strong> | Junior Research Analyst | Kimi K2.5 | Low-Med | Markdown | Roger (Senior Research) | Active | | <strong>Connie</strong> | Content Publisher | N/A (code) | Medium | HTML/CSS | Stitch (COO) | Active | | [Future] | Briefing Agent | TBD | Medium | Structured brief | Stitch (COO) | Planned | | [Future] | Marissa Interface | TBD | Med-High | Personal dashboard | Kyle / Stitch | Planned |</p><p><h3>Reporting Structure</h3></p><p>``` Kyle (CEO) ├── Stitch (COO) — Orchestrates multi-agent workflows │ ├── Connie — Content Publisher │ └── [Future agents] └── Roger (Senior Research Associate) — Self-managed research team └── Kim (Junior Research Analyst) ```</p><p><strong>Direct Research Tasks:</strong> Roger leads independently, reports directly to Kyle <strong>Coordinated Tasks:</strong> Stitch orchestrates Roger/Kim/Connie as needed</p><p>---</p><p><h2>Future Roadmap</h2></p><p><h3>Phase 1: Core Research (Complete)</h3> - Kim and Roger operational - A/B testing framework for cost optimization</p><p><h3>Phase 2: Content Pipeline (In Progress)</h3> - Connie operational for HTML/CSS transformation - Human approval gates implemented</p><p><h3>Phase 3: Personal Systems (Planned)</h3> - Marissa Interface Agent - Briefing Agent with structured artifacts - Tax/Finance Agent</p><p><h3>Phase 4: Advanced Orchestration (Planned)</h3> - Supervisor agent for complex multi-step tasks - Chain of Debates for quality control - Deep Reflector for revision suggestions</p><p>---</p><p><h2>Key Documents</h2></p><p>- Connie Spec: `/openclaw/agents/connie-content-publisher-spec.md` - Implementation Code: `/openclaw/agents/connie.js` - Singapore MGF: Referenced standard for all agent governance</p><p>---</p><p><strong>Last Agent Update:</strong> Connie v1.0 deployed March 13, 2026 <strong>Next Review:</strong> Upon deployment of Briefing Agent or Marissa Interface </p>
+    </article>
+    
+    <footer class="article-footer">
+        <p><a href="https://content.kaihamil.com/research/">← Back to Research</a></p>
+    </footer>
+    
+    <!-- Agent identity for audit: khai-content-pub-prod-1773433793808 -->
+    <meta name="generator" content="khai-content-pub-prod-1773433793808" class="agent-meta">
+</body>
+</html>
