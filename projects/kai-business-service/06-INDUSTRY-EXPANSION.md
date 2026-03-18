@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Industry Expansion Analysis
 
 ---
@@ -27,7 +27,7 @@
 
 ### Pain Points (Insurance-Specific)
 
-| Pain Point | How Agent OS Solves It |
+| Pain Point | How Valé OS Solves It |
 |------------|------------------------|
 | Policy documents scattered across carriers | Unified client file with all policies |
 | Renewal tracking by memory/spreadsheet | Automated 60/30/15-day renewal alerts |
@@ -97,7 +97,7 @@ Same tiers apply. May warrant +$50/mo premium for compliance features.
 
 ### Pain Points (Mortgage-Specific)
 
-| Pain Point | How Agent OS Solves It |
+| Pain Point | How Valé OS Solves It |
 |------------|------------------------|
 | Document chaos (100+ docs per loan) | Auto-organized loan file structure |
 | Chasing borrowers for documents | Automated doc request follow-ups |

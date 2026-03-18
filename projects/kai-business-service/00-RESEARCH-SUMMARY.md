@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Market Research & Strategic Summary
 
 ---
@@ -90,7 +90,7 @@ They need to track *touchpoints and artifacts*, not content calendars.
 
 ### The Gap We Fill
 
-| Need | VAs | Consultants | IT | Coaches | **ClearPath** |
+| Need | VAs | Consultants | IT | Coaches | **Valé OS** |
 |------|-----|-------------|----|---------|----|
 | Build the system | ❌ | ✓ (strategy) | ✓ (tools) | ✓ (personal) | ✓ |
 | Implement the system | ❌ | ❌ | ✓ | ❌ | ✓ |
@@ -183,7 +183,7 @@ This is the "upgrade path" — start with manual systems, introduce AI layer as 
 
 ## Service Name Alternatives
 
-If "ClearPath Operations" doesn't resonate:
+If "Valé OS" doesn't resonate:
 - **Systemize** (verb-forward)
 - **Ops Clarity** (state-focused)
 - **Tidy Ops** (approachable)

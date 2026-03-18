@@ -1,5 +1,5 @@
-# ClearPath Operations
-## Agent OS as a Service — Technical & Business Model
+# Valé OS
+## Valé OS as a Service — Technical & Business Model
 
 ---
 
@@ -26,7 +26,7 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 ## Why This Is Different
 
 ### vs. Traditional SaaS
-| SaaS | Agent OS |
+| SaaS | Valé OS |
 |------|----------|
 | Shared infrastructure | Dedicated instance |
 | You learn the software | Software learns you |
@@ -35,7 +35,7 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 | One-size-fits-all | Evolves with you |
 
 ### vs. Virtual Assistants
-| VA | Agent OS |
+| VA | Valé OS |
 |----|----------|
 | 40 hrs/week max | 24/7/365 |
 | Gets sick, quits | Always available |
@@ -44,7 +44,7 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 | $2-4K/month | $500-900/month |
 
 ### vs. Chatbots/AI Assistants
-| Generic AI | Agent OS |
+| Generic AI | Valé OS |
 |------------|----------|
 | No memory of you | Knows your business deeply |
 | Can't take action | Files, organizes, alerts |

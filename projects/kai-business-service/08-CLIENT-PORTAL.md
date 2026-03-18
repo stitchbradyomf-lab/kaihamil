@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Client Portal — Web Dashboard
 
 ---
@@ -388,7 +388,7 @@ PUT  /api/settings        → Update preferences
 ### Default: Kai Hamil Branded
 - `client.kaihamil.com`
 - Kai's logo in header
-- "Powered by ClearPath Operations"
+- "Powered by Valé OS"
 - Consistent color scheme
 
 ### White-Label (Scale Add-on)
@@ -403,14 +403,14 @@ PUT  /api/settings        → Update preferences
 ## Sample Onboarding Email
 
 ```
-Subject: Your ClearPath Portal is Ready 🎉
+Subject: Your Valé OS Portal is Ready 🎉
 
 Hi Sarah,
 
 Great news — your personal operations dashboard is live!
 
 🌐 Your Portal: https://sarah.kaihamil.com
-📱 Your Telegram Bot: @Sarah_ClearPath_bot
+📱 Your Telegram Bot: @Sarah_Valé OS_bot
 
 Log in with your email to:
 ✓ See what your AI assistant is doing

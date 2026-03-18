@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Implementation Guide (Internal Operations)
 
 ---

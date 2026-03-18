@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Pricing & Packages
 
 ---
@@ -179,9 +179,9 @@ Everything in Growth, plus:
 | **Operations consultant** | $5,000-15,000 project | Strategy, then they disappear |
 | **Part-time office manager** | $2,000-4,000 | Overhead, benefits, PTO, management |
 | **Generic AI tools** | $20-100 | No memory, no context, starts over each time |
-| **ClearPath Growth** | **$597/month** | Your own AI + systems + ongoing support |
+| **Valé OS Growth** | **$597/month** | Your own AI + systems + ongoing support |
 
-### Why Agent OS Beats Traditional Options
+### Why Valé OS Beats Traditional Options
 
 | | VA | Consultant | Generic AI | **Your AI Agent** |
 |---|---|---|---|---|

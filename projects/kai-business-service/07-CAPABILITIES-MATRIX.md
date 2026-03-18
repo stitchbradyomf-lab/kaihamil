@@ -1,4 +1,4 @@
-# ClearPath Operations
+# Valé OS
 ## Capabilities Matrix — What's Actually Included
 
 ---
