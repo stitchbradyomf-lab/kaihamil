@@ -1,5 +1,5 @@
-# ClearPath Operations
-## Your Own AI Operations Assistant
+# Valé OS by Kai Hamil
+## Your Personal Operating System in the Cloud
 
 ---
 
@@ -7,7 +7,7 @@
 
 You started your business to do what you're great at—selling homes, helping clients, closing deals. Not to manage 47 browser tabs, hunt for contracts you *know* you saved somewhere, or wake up at 3am wondering if you followed up with that lead.
 
-**ClearPath Operations** gives you your own dedicated AI assistant that watches everything, organizes everything, and keeps you on track — without adding another thing to your plate.
+**Valé OS** gives you your own dedicated AI assistant — your Valé — that watches everything, organizes everything, and keeps you on track — without adding another thing to your plate.
 
 ---
 
@@ -144,4 +144,4 @@ No pitch. No pressure. Just clarity.
 
 ---
 
-*ClearPath Operations — Because your business deserves better than "I'll remember that."*
+*Valé OS by Kai Hamil — Your Valé, your craft.*
