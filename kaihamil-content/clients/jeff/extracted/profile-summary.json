@@ -1,0 +1,14 @@
+{
+  "client_id": "jeff",
+  "client_name": "Jeffrey Weber",
+  "total_transactions": 2,
+  "active_neighborhoods": [
+    "Westfield",
+    "Cranford",
+    "Mountainside",
+    "Scotch Plains"
+  ],
+  "years_active": 5,
+  "price_range_specialization": {},
+  "last_updated": "2026-02-27T00:55:56.920678"
+}

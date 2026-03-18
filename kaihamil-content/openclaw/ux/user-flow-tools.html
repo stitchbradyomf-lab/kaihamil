@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Flow: Tools Experience | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 50px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 { font-size: 2.2rem; font-weight: 300; margin-bottom: 10px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Diagram container */
+        .diagram-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .diagram-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .diagram-title h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--brown-dark);
+        }
+        
+        .zoom-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .zoom-controls button {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .zoom-controls button:hover {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+        }
+        
+        #diagram {
+            min-height: 600px;
+            transform-origin: top left;
+            transition: transform 0.2s;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.entry { background: #faf6f1; border: 2px solid #c9a227; }
+        .legend-color.quiz { background: #dbeafe; border: 1px solid #1e40af; }
+        .legend-color.wisdom { background: #fce7f3; border: 1px solid #9d174d; }
+        .legend-color.framework { background: #d1fae5; border: 1px solid #065f46; }
+        .legend-color.complete { background: #f0fdf4; border: 1px solid #15803d; }
+        
+        /* Pathways section */
+        .pathways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .pathway-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .pathway-card h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        
+        .pathway-steps {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .pathway-steps span {
+            color: var(--brown-dark);
+            font-weight: 500;
+        }
+        
+        /* Notes section */
+        .notes {
+            background: linear-gradient(135deg, #fff8e7 0%, #fef3c7 100%);
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .notes h3 {
+            font-size: 1rem;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        
+        .notes ul {
+            padding-left: 20px;
+            color: var(--brown-medium);
+        }
+        
+        .notes li {
+            margin-bottom: 8px;
+        }
+        
+        .notes code {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
+        }
+        
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero { padding: 80px 20px 40px; }
+            .hero h1 { font-size: 1.6rem; }
+            .diagram-wrapper { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/openclaw/ux/">UX Flows</a>
+            <a href="/openclaw/">Operations</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">User Experience</span>
+        <h1>Tools & Assessment <strong>User Flow</strong></h1>
+        <p>Every forward path from the main content page through the tools experience</p>
+    </header>
+    
+    <main class="container">
+        <div class="diagram-wrapper">
+            <div class="diagram-title">
+                <h2>📊 Complete User Journey Map</h2>
+                <div class="zoom-controls">
+                    <button onclick="zoom(0.8)">Zoom Out</button>
+                    <button onclick="zoom(1)">Reset</button>
+                    <button onclick="zoom(1.2)">Zoom In</button>
+                </div>
+            </div>
+            
+            <div id="diagram">
+                <pre class="mermaid">
+flowchart TB
+    %% Entry Points
+    HOME[/"🏠 Home Page"/]
+    
+    %% Primary CTAs from Home
+    HOME -->|"Hero CTA"| QUIZ
+    HOME -->|"Tools Card"| TOOLS_INDEX
+    
+    %% Tools Index
+    TOOLS_INDEX[/"🛠️ Tools Index"/]
+    
+    %% From Tools Index
+    TOOLS_INDEX --> QUIZ
+    TOOLS_INDEX --> ADV_ASSESS
+    TOOLS_INDEX --> PROBLEM_AUDIT
+    TOOLS_INDEX --> FIVE_FILTERS
+    TOOLS_INDEX --> SCRIPT_READER
+    TOOLS_INDEX --> FREE_HOUR
+    TOOLS_INDEX --> HOUR_APART
+    
+    %% ═══════════════════════════════════════════
+    %% AI USER QUIZ FLOW
+    %% ═══════════════════════════════════════════
+    
+    subgraph QUIZ_FLOW ["🎯 AI User Type Quiz"]
+        QUIZ[/"Quiz Start"/]
+        Q1["Q1: Exploring vs Building"]
+        Q2["Q2: Investigating vs Executing"]
+        Q3["Q3: Expand vs Focus"]
+        Q4["Q4: Discover vs Decide"]
+        Q5["Q5: Validator"]
+        QUIZ_RESULTS["📊 Results"]
+        
+        QUIZ --> Q1 --> Q2 --> Q3 --> Q4 --> Q5 --> QUIZ_RESULTS
+    end
+    
+    QUIZ_RESULTS -->|"Deep Dive →"| DEEP_DIVE
+    
+    %% ═══════════════════════════════════════════
+    %% ADVANCED ASSESSMENT
+    %% ═══════════════════════════════════════════
+    
+    subgraph ADV_FLOW ["🔬 Advanced Assessment"]
+        ADV_ASSESS[/"8-Question Behavioral"/]
+        ADV_RESULTS["📈 Bar Chart Results"]
+        ADV_ASSESS --> ADV_RESULTS
+    end
+    
+    ADV_RESULTS --> DEEP_DIVE
+    
+    DEEP_DIVE[/"🔍 AI Profile Deep Dive"/]
+    
+    %% ═══════════════════════════════════════════
+    %% FREE TIME TOOL
+    %% ═══════════════════════════════════════════
+    
+    subgraph FREE_FLOW ["⏳ The Free Time Tool"]
+        FREE_HOUR[/"Start"/]
+        FREE_S1["Context Input"]
+        FREE_S2["8 Philosophy Cards"]
+        FREE_S3["Philosophy Detail"]
+        
+        FREE_HOUR --> FREE_S1 --> FREE_S2 --> FREE_S3
+    end
+    
+    FREE_S3 -->|"Start My Hour"| HOUR_APART
+    FREE_S3 -->|"Read Story"| STORY_PAGE
+    
+    STORY_PAGE[/"📖 Story Page"/]
+    
+    %% ═══════════════════════════════════════════
+    %% HOUR APART
+    %% ═══════════════════════════════════════════
+    
+    subgraph HOUR_FLOW ["🔮 The Hour Apart"]
+        HOUR_APART[/"Start"/]
+        HA_S1["Type Select"]
+        HA_S2["Philosophy Lens"]
+        HA_S3["Timer + Mission"]
+        HA_S4["Reflection"]
+        HA_S5["✅ Complete"]
+        
+        HOUR_APART --> HA_S1 --> HA_S2 --> HA_S3 --> HA_S4 --> HA_S5
+    end
+    
+    HA_S5 -->|"Take Quiz"| QUIZ
+    
+    %% ═══════════════════════════════════════════
+    %% OTHER TOOLS
+    %% ═══════════════════════════════════════════
+    
+    PROBLEM_AUDIT[/"🔍 Problem Audit"/] --> PA_COMPLETE["✅ Report"]
+    FIVE_FILTERS[/"◫ 5 Filters"/] --> FF_COMPLETE["✅ Verdict"]
+    SCRIPT_READER[/"📜 Script Reader"/] --> SR_ACTIVE["📺 Active"]
+    
+    %% Styling
+    classDef entry fill:#faf6f1,stroke:#c9a227,stroke-width:3px
+    classDef quiz fill:#dbeafe,stroke:#1e40af
+    classDef wisdom fill:#fce7f3,stroke:#9d174d
+    classDef framework fill:#d1fae5,stroke:#065f46
+    classDef complete fill:#f0fdf4,stroke:#15803d,stroke-width:2px
+    
+    class HOME,TOOLS_INDEX entry
+    class QUIZ,Q1,Q2,Q3,Q4,Q5,QUIZ_RESULTS,ADV_ASSESS,ADV_RESULTS,DEEP_DIVE quiz
+    class FREE_HOUR,FREE_S1,FREE_S2,FREE_S3,HOUR_APART,HA_S1,HA_S2,HA_S3,HA_S4,HA_S5 wisdom
+    class PROBLEM_AUDIT,FIVE_FILTERS,SCRIPT_READER framework
+    class PA_COMPLETE,FF_COMPLETE,SR_ACTIVE,STORY_PAGE,HA_S5 complete
+                </pre>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color entry"></div>
+                    <span>Entry Points</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color quiz"></div>
+                    <span>Assessment Flow</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color wisdom"></div>
+                    <span>Wisdom Tools</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color framework"></div>
+                    <span>Framework Tools</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color complete"></div>
+                    <span>Completion States</span>
+                </div>
+            </div>
+        </div>
+        
+        <h2 style="margin-top: 40px; font-weight: 400;">Key Pathways</h2>
+        
+        <div class="pathways">
+            <div class="pathway-card">
+                <h3>🎯 Path A: Quick Assessment</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Hero CTA → <span>Quiz</span> → 5 Questions → <span>Results</span> → Deep Dive
+                </div>
+            </div>
+            
+            <div class="pathway-card">
+                <h3>🔬 Path B: Behavioral Profile</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Tools → <span>Advanced Assessment</span> → 8 Questions → <span>Results</span> → Deep Dive
+                </div>
+            </div>
+            
+            <div class="pathway-card">
+                <h3>⏳ Path C: Free Time Journey</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Tools → <span>Free Time</span> → Context → Philosophy → <span>Hour Apart</span>
+                </div>
+            </div>
+            
+            <div class="pathway-card">
+                <h3>🔮 Path D: Direct Hour Apart</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Tools → <span>Hour Apart</span> → Type → Lens → Timer → <span>Reflection</span>
+                </div>
+            </div>
+            
+            <div class="pathway-card">
+                <h3>◫ Path E: Decision Framework</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Tools → <span>5 Filters</span> → Decision Entry → <span>Verdict</span>
+                </div>
+            </div>
+            
+            <div class="pathway-card">
+                <h3>🔍 Path F: Problem Diagnosis</h3>
+                <div class="pathway-steps">
+                    <span>Home</span> → Tools → <span>Problem Audit</span> → 5 Steps → <span>Report</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="notes">
+            <h3>⚠️ Implementation Notes</h3>
+            <ul>
+                <li><strong>Quiz versions:</strong> Multiple versions exist (<code>ai-user-quiz.html</code>, <code>v2</code>, <code>v3</code>) - home currently links to v1</li>
+                <li><strong>Broken link:</strong> Hour Apart completion "Take the Full Quiz" button has no href attribute</li>
+                <li><strong>Cross-flow:</strong> Free Hour naturally flows into Hour Apart via "Start My Hour" button</li>
+                <li><strong>State persistence:</strong> Both Free Hour and Hour Apart use localStorage for progress recovery</li>
+                <li><strong>Story page:</strong> <code>/wisdom/philosophy-of-not-scrolling.html</code> - linked from Free Hour detail view</li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="margin-top: 10px;"><a href="/openclaw/ux/">← Back to UX Flows</a> · <a href="/openclaw/">Operations</a></p>
+    </footer>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#faf6f1',
+                primaryTextColor: '#3d2817',
+                primaryBorderColor: '#c9a227',
+                lineColor: '#6b5344',
+                secondaryColor: '#fffdf9',
+                tertiaryColor: '#e8dfd3'
+            },
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            }
+        });
+        
+        // Zoom functionality
+        let currentZoom = 1;
+        
+        function zoom(level) {
+            currentZoom = level;
+            document.getElementById('diagram').style.transform = `scale(${level})`;
+        }
+    </script>
+</body>
+</html>

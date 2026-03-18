@@ -1,0 +1,21 @@
+{
+  "description": "Tier 2 Access Allowlist for Kai Hamil",
+  "lastUpdated": "2026-03-16",
+  "version": "1.0",
+  "accessList": [
+    {
+      "email": "kyle@kaihamil.com",
+      "name": "Kyle",
+      "verified": true,
+      "dateAdded": "2026-03-16",
+      "tier": "email-verified",
+      "source": "manual"
+    }
+  ],
+  "pendingVerifications": [],
+  "stats": {
+    "totalVerified": 1,
+    "totalPending": 0,
+    "lastEntry": "2026-03-16"
+  }
+}

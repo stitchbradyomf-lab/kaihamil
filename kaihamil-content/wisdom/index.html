@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+            --deep-teal: #2d5a5a;
+            --ochre: #b8860b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--ink-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--terracotta); }
+        
+        /* Hero */
+        .hero {
+            padding: 140px 40px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--sand) 100%);
+        }
+        
+        .hero-eyebrow {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--terracotta);
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--ink-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Map Container */
+        .map-section {
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .map-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .map-intro h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .map-intro p {
+            color: var(--ink-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Experience Grid */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .experience-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 12px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--terracotta);
+        }
+        
+        .experience-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .experience-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--ink-dark);
+        }
+        
+        .experience-card p {
+            color: var(--ink-medium);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .traditions-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tradition-tag {
+            background: var(--sand);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--ink-medium);
+        }
+        
+        /* Featured Exploration */
+        .featured-section {
+            background: var(--bg-paper);
+            border-top: 1px solid var(--sand);
+            border-bottom: 1px solid var(--sand);
+            padding: 80px 40px;
+        }
+        
+        .featured-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .featured-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .featured-text p {
+            color: var(--ink-medium);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .featured-link {
+            color: var(--terracotta);
+            text-decoration: none;
+            border-bottom: 1px solid var(--terracotta);
+            padding-bottom: 2px;
+            font-weight: 500;
+        }
+        
+        .featured-visual {
+            background: linear-gradient(135deg, var(--sand) 0%, var(--bg-warm) 100%);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .featured-visual .greek-words {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        /* Philosophy Index */
+        .philosophy-index {
+            padding: 80px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .philosophy-index h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .traditions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .tradition-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 8px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tradition-card:hover {
+            border-color: var(--deep-teal);
+            background: white;
+        }
+        
+        .tradition-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--deep-teal);
+        }
+        
+        .tradition-card p {
+            font-size: 0.85rem;
+            color: var(--ink-medium);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--ink-medium);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .experience-grid { grid-template-columns: 1fr; }
+            .featured-content { grid-template-columns: 1fr; }
+            .traditions-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav { padding: 15px 20px; }
+            .hero { padding: 100px 20px 60px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">System</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <p class="hero-eyebrow">The Human Experience</p>
+        <h1>Self</h1>
+        <p>Universal questions, explored through practical patterns and timeless wisdom. Navigate uncertainty, purpose, love, and meaning — with AI as your practice partner.</p>
+    </header>
+    
+    <section class="map-section">
+        <div class="map-intro">
+            <h2>Navigate Your Experience</h2>
+            <p>Choose the terrain you're currently traveling. Each exploration presents practical patterns for working with universal human experiences — drawn from philosophy, psychology, and lived wisdom.</p>
+        </div>
+        
+        <div class="experience-grid">
+            <a href="/wisdom/uncertainty.html" class="experience-card">
+                <div class="experience-icon">🌊</div>
+                <h3>Uncertainty & Change</h3>
+                <p>When the ground shifts beneath you. How different traditions approach impermanence, the unknown, and the uncontrollable.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Stoicism</span>
+                    <span class="tradition-tag">Buddhism</span>
+                    <span class="tradition-tag">Taoism</span>
+                    <span class="tradition-tag">+3 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/love.html" class="experience-card">
+                <div class="experience-icon">💫</div>
+                <h3>Love & Relationships</h3>
+                <p>The many forms of human connection. From Greek classifications to Eastern relationship frameworks to modern attachment theory.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Ancient Greek</span>
+                    <span class="tradition-tag">Confucian</span>
+                    <span class="tradition-tag">Christian</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/purpose.html" class="experience-card">
+                <div class="experience-icon">🧭</div>
+                <h3>Purpose & Work</h3>
+                <p>Finding meaning in what you do. Aristotelian flourishing, Japanese ikigai, and the question of good work versus meaningful work.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Aristotle</span>
+                    <span class="tradition-tag">Japanese</span>
+                    <span class="tradition-tag">Protestant</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/suffering.html" class="experience-card">
+                <div class="experience-icon">⚡</div>
+                <h3>Suffering & Resilience</h3>
+                <p>When life breaks you. Buddhist paths through pain, the Book of Job, Nietzschean transformation, and Frankl's search for meaning.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Buddhism</span>
+                    <span class="tradition-tag">Abrahamic</span>
+                    <span class="tradition-tag">Nietzsche</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/mortality.html" class="experience-card">
+                <div class="experience-icon">🌙</div>
+                <h3>Mortality & Time</h3>
+                <p>Confronting the finite. Memento mori across traditions, Tibetan death practices, Epicurean non-existence, and existential authenticity.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Stoic</span>
+                    <span class="tradition-tag">Tibetan</span>
+                    <span class="tradition-tag">Epicurean</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/ambition.html" class="experience-card">
+                <div class="experience-icon">🔥</div>
+                <h3>Ambition & Desire</h3>
+                <p>Wanting more. The Bhagavad Gita on duty without attachment, Daoist natural ambition, and the modern achievement trap.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Hindu</span>
+                    <span class="tradition-tag">Daoist</span>
+                    <span class="tradition-tag">Modern</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/when-the-script-stops-working.html" class="experience-card">
+                <div class="experience-icon">📜</div>
+                <h3>When the Script Stops Working</h3>
+                <p>What happens when the playbook fails. Empathy for the moment when old patterns no longer apply and new paths must emerge.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Existential</span>
+                    <span class="tradition-tag">Stoic</span>
+                    <span class="tradition-tag">Buddhist</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+            
+            <a href="/wisdom/philosophy-of-not-scrolling.html" class="experience-card">
+                <div class="experience-icon">📵</div>
+                <h3>Philosophy of Not Scrolling</h3>
+                <p>Reclaiming attention from the infinite feed. Wrestling philosophy meets parking lot presence. Choosing wandering over doomscrolling.</p>
+                <div class="traditions-preview">
+                    <span class="tradition-tag">Modern</span>
+                    <span class="tradition-tag">Stoic</span>
+                    <span class="tradition-tag">Buddhist</span>
+                    <span class="tradition-tag">+2 more</span>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <section class="featured-section">
+        <div class="featured-content">
+            <div class="featured-text">
+                <h2>Featured Pattern</h2>
+                <p>The Greeks understood what we often forget: love isn't one thing. It's many things — each with its own texture, demands, and gifts.</p>
+                <p>From eros (desire) to agape (unconditional love) to philia (friendship), exploring the landscape of human connection reveals why we struggle with relationships: we're often speaking different languages.</p>
+                <a href="/research/physics-of-love.html" class="featured-link">Read The Physics of Love →</a>
+            </div>
+            <div class="featured-visual">
+                <div class="greek-words">
+                    ἔρως • φιλία • ἀγάπη<br>
+                    στοργή • ἔρως • πρᾶξις
+                </div>
+                <p style="color: var(--ink-medium); font-size: 0.9rem;">Seven Greek words for seven kinds of love</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="philosophy-index">
+        <h2>Patterns & Sources</h2>
+        <div class="traditions-grid">
+            <div class="tradition-card">
+                <h4>Ancient Greek</h4>
+                <p>Eudaimonia, virtue ethics, and the examined life</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Stoicism</h4>
+                <p>Control, resilience, and amor fati</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Buddhism</h4>
+                <p>Impermanence, suffering, and liberation</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Taoism</h4>
+                <p>Flow, naturalness, and wu wei</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Confucian</h4>
+                <p>Relationships, ritual, and social harmony</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Existentialist</h4>
+                <p>Authenticity, choice, and meaning-making</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Abrahamic</h4>
+                <p>Covenant, faith, and divine relationship</p>
+            </div>
+            <div class="tradition-card">
+                <h4>Hindu</h4>
+                <p>Dharma, duty, and the paths of yoga</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Navigate the human experience — practical wisdom for modern life</p>
+    </footer>
+</body>
+</html>

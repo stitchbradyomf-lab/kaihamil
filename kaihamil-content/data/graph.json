@@ -1,0 +1,770 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "created": "2026-03-08",
+    "description": "Kai Hamil knowledge graph for navigation",
+    "nodeCount": 75,
+    "edgeCount": 146
+  },
+  "nodes": [
+    {
+      "id": "root",
+      "label": "Kai Hamil",
+      "type": "root",
+      "branch": null,
+      "url": "/",
+      "description": "Entry point: Quiz + System // Self"
+    },
+    {
+      "id": "paradigm",
+      "label": "System // Self",
+      "type": "paradigm",
+      "branch": null,
+      "url": "/paradigm/",
+      "description": "The central paradigm: Doing things better // Doing better things"
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "type": "collection",
+      "branch": "system",
+      "url": "/system/",
+      "tagline": "Doing things better",
+      "description": "Science, frameworks, tools for others"
+    },
+    {
+      "id": "self",
+      "label": "Self",
+      "type": "collection",
+      "branch": "self",
+      "url": "/self/",
+      "tagline": "Doing better things",
+      "description": "Art, wisdom, how we grow ourselves"
+    },
+    {
+      "id": "frameworks",
+      "label": "Frameworks",
+      "type": "collection",
+      "branch": "system",
+      "url": "/frameworks/",
+      "description": "Mental models and structured thinking"
+    },
+    {
+      "id": "tools-system",
+      "label": "System Tools",
+      "type": "collection",
+      "branch": "system",
+      "url": "/tools/system/",
+      "description": "Problem-solving and assessment tools"
+    },
+    {
+      "id": "research",
+      "label": "Research",
+      "type": "collection",
+      "branch": "system",
+      "url": "/research/",
+      "description": "Explorations and drafts (disclaimer: unvalidated)"
+    },
+    {
+      "id": "wisdom",
+      "label": "Wisdom Traditions",
+      "type": "collection",
+      "branch": "self",
+      "url": "/wisdom/",
+      "description": "Ancient wisdom applied to modern life"
+    },
+    {
+      "id": "tools-self",
+      "label": "Self Tools",
+      "type": "collection",
+      "branch": "self",
+      "url": "/tools/self/",
+      "description": "Reflection and personal growth tools"
+    },
+    {
+      "id": "about",
+      "label": "About",
+      "type": "collection",
+      "branch": "both",
+      "url": "/about/",
+      "description": "Who is behind this"
+    },
+    {
+      "id": "operations",
+      "label": "Operations",
+      "type": "collection",
+      "branch": "meta",
+      "url": "/openclaw/",
+      "description": "How the sausage is made"
+    },
+    {
+      "id": "ux-flows",
+      "label": "UX Flows",
+      "type": "collection",
+      "branch": "meta",
+      "url": "/openclaw/ux/",
+      "description": "User experience diagrams"
+    },
+    {
+      "id": "prototypes",
+      "label": "Prototypes",
+      "type": "collection",
+      "branch": "meta",
+      "url": "/prototypes/",
+      "description": "Client work and experiments"
+    },
+    {
+      "id": "cause-effect",
+      "label": "Cause & Effect",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/cause-effect.html",
+      "description": "Understanding chains of causation"
+    },
+    {
+      "id": "pdsa",
+      "label": "PDSA Cycle",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/cause-and-effect/",
+      "description": "Plan-Do-Study-Act improvement cycle"
+    },
+    {
+      "id": "5-filters",
+      "label": "5 Filters Assessment",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/5-filters.html",
+      "description": "Decision-making under uncertainty"
+    },
+    {
+      "id": "problem-audit",
+      "label": "Problem Audit",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/problem-audit.html",
+      "description": "Structured problem analysis"
+    },
+    {
+      "id": "realtor-discovery",
+      "label": "Realtor Discovery",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/realtor-discovery.html",
+      "description": "Client discovery for real estate"
+    },
+    {
+      "id": "system-self-framework",
+      "label": "System // Self Framework",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/system-self.html",
+      "description": "The core paradigm explained"
+    },
+    {
+      "id": "ai-usage-advanced",
+      "label": "AI Usage Advanced",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/ai-usage-advanced.html",
+      "description": "Deep assessment of AI integration"
+    },
+    {
+      "id": "ai-profile-deepdive",
+      "label": "AI Profile Deep Dive",
+      "type": "content",
+      "branch": "system",
+      "url": "/frameworks/ai-usage-advanced-deepdive.html",
+      "description": "Detailed AI user profile analysis"
+    },
+    {
+      "id": "ai-quiz-v3",
+      "label": "AI Problem Solver Quiz",
+      "type": "content",
+      "branch": "system",
+      "url": "/tools/ai-user-quiz-v3.html",
+      "description": "Discover your problem-solving type (Double Diamond)"
+    },
+    {
+      "id": "quiz-result",
+      "label": "Quiz Result",
+      "type": "content",
+      "branch": "system",
+      "url": "/tools/quiz-result.html",
+      "description": "Your problem-solver type revealed"
+    },
+    {
+      "id": "script-reader",
+      "label": "Script Reader",
+      "type": "content",
+      "branch": "system",
+      "url": "/tools/script-reader.html",
+      "description": "Tool for reading scripts aloud"
+    },
+    {
+      "id": "control-chart-evaluator",
+      "label": "Control Chart Evaluator",
+      "type": "content",
+      "branch": "system",
+      "url": "/tools/control-chart-evaluator.html",
+      "description": "Interactive tool to classify variation"
+    },
+    {
+      "id": "knowledge-graph",
+      "label": "Knowledge Graph",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/knowledge-graph.html",
+      "description": "Visual map of all concepts"
+    },
+    {
+      "id": "kg-design-brief",
+      "label": "KG Design Brief",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/kg-design-brief.html",
+      "description": "Design rationale for the knowledge graph"
+    },
+    {
+      "id": "assembly-agency",
+      "label": "Assembly to Agency",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/assembly-to-agency-draft.html",
+      "description": "The shift from instruction to intention"
+    },
+    {
+      "id": "sysself-messaging",
+      "label": "System/Self Messaging",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/system-self-messaging.html",
+      "description": "How to communicate the paradigm"
+    },
+    {
+      "id": "problem-first-mapping",
+      "label": "Problem-First Mapping",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/problem-first-mapping.html",
+      "description": "Start with the problem, not the solution"
+    },
+    {
+      "id": "dental-lollipop",
+      "label": "Dental Lollipop",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/dental-lollipop.html",
+      "description": "Unexpected product research"
+    },
+    {
+      "id": "realtor-research",
+      "label": "Realtor Research",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/realtor.html",
+      "description": "Real estate industry analysis"
+    },
+    {
+      "id": "future-work",
+      "label": "Future of Work",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/future-of-work.html",
+      "description": "How work is changing"
+    },
+    {
+      "id": "truth-happiness",
+      "label": "Truth vs Happiness",
+      "type": "content",
+      "branch": "both",
+      "url": "/research/truth-vs-happiness.html",
+      "description": "Can you have both?"
+    },
+    {
+      "id": "meal-planning",
+      "label": "Meal Planning",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/meal-planning.html",
+      "description": "Systematizing family meals"
+    },
+    {
+      "id": "amazon-monetization",
+      "label": "Amazon Monetization",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/amazon-monetization.html",
+      "description": "Platform economics research"
+    },
+    {
+      "id": "real-problems-pitch",
+      "label": "Real Problems Pitch",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/real-problems-pitch.html",
+      "description": "Pitching real solutions"
+    },
+    {
+      "id": "not-scrolling-research",
+      "label": "Philosophy of Not Scrolling (Research)",
+      "type": "content",
+      "branch": "self",
+      "url": "/research/philosophy-of-not-scrolling.html",
+      "description": "Research behind the philosophy"
+    },
+    {
+      "id": "common-cause-variation",
+      "label": "Common Cause Variation",
+      "type": "content",
+      "branch": "system",
+      "url": "/research/common-cause-variation.html",
+      "description": "Distinguishing normal variation from special cause"
+    },
+    {
+      "id": "uncertainty",
+      "label": "Uncertainty",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/uncertainty.html",
+      "description": "Living with not knowing"
+    },
+    {
+      "id": "purpose",
+      "label": "Purpose",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/purpose.html",
+      "description": "Finding meaning in life"
+    },
+    {
+      "id": "love",
+      "label": "Love",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/love.html",
+      "description": "What the traditions say about love"
+    },
+    {
+      "id": "suffering",
+      "label": "Suffering",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/suffering.html",
+      "description": "The role of suffering in growth"
+    },
+    {
+      "id": "mortality",
+      "label": "Mortality",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/mortality.html",
+      "description": "Confronting our finite time"
+    },
+    {
+      "id": "ambition",
+      "label": "Ambition",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/ambition.html",
+      "description": "The drive to achieve"
+    },
+    {
+      "id": "script-stops",
+      "label": "When the Script Stops Working",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/when-script-stops.html",
+      "description": "What happens when the playbook fails"
+    },
+    {
+      "id": "not-scrolling",
+      "label": "Philosophy of Not Scrolling",
+      "type": "content",
+      "branch": "self",
+      "url": "/wisdom/philosophy-of-not-scrolling.html",
+      "description": "Reclaiming attention"
+    },
+    {
+      "id": "free-hour",
+      "label": "The Free Hour",
+      "type": "content",
+      "branch": "self",
+      "url": "/tools/free-hour.html",
+      "description": "What would you do with found time?"
+    },
+    {
+      "id": "hour-apart",
+      "label": "The Hour Apart",
+      "type": "content",
+      "branch": "self",
+      "url": "/tools/philosophy-lab.html",
+      "description": "Pick a lens. See differently."
+    },
+    {
+      "id": "parking-lot",
+      "label": "Parking Lot Philosophy",
+      "type": "content",
+      "branch": "self",
+      "url": "/tools/parking-lot-philosophy.html",
+      "description": "Philosophy in everyday moments"
+    },
+    {
+      "id": "about-index",
+      "label": "About",
+      "type": "content",
+      "branch": "both",
+      "url": "/about/",
+      "description": "About Kai Hamil"
+    },
+    {
+      "id": "kyle-bio",
+      "label": "Kyle Joseph Brady",
+      "type": "content",
+      "branch": "both",
+      "url": "/about/kyle-joseph-brady.html",
+      "description": "The human behind the work"
+    },
+    {
+      "id": "post-5filters-openclaw",
+      "label": "5 Filters Applied to OpenClaw",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/5-filters-openclaw.html",
+      "description": "Framework in action"
+    },
+    {
+      "id": "post-ai-video",
+      "label": "AI Video Editing Tools",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/ai-video-editing.html",
+      "description": "Tools for AI-assisted video"
+    },
+    {
+      "id": "post-cause-effect",
+      "label": "Thinking in Cause & Effect",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/thinking-cause-effect.html",
+      "description": "Applying causal thinking"
+    },
+    {
+      "id": "post-5-1-ratio",
+      "label": "The 5:1 Ratio",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/5-1-ratio.html",
+      "description": "Balance in feedback"
+    },
+    {
+      "id": "post-agent-arch",
+      "label": "AI Agent Architecture",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/ai-agent-architecture.html",
+      "description": "How agents are built"
+    },
+    {
+      "id": "post-what-building",
+      "label": "What I'm Building",
+      "type": "content",
+      "branch": "both",
+      "url": "/posts/what-building.html",
+      "description": "The vision and the work"
+    },
+    {
+      "id": "post-physics-love",
+      "label": "The Physics of Love",
+      "type": "content",
+      "branch": "self",
+      "url": "/posts/physics-of-love.html",
+      "description": "Love as a force"
+    },
+    {
+      "id": "post-5filters-uncertainty",
+      "label": "5 Filters: Deciding in Uncertainty",
+      "type": "content",
+      "branch": "system",
+      "url": "/posts/5-filters-uncertainty.html",
+      "description": "Decision-making when you don't know"
+    },
+    {
+      "id": "ops-dashboard",
+      "label": "Operations Dashboard",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/",
+      "description": "Central operations hub"
+    },
+    {
+      "id": "ops-baseline",
+      "label": "Baseline Dashboard",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/baseline.html",
+      "description": "Starting metrics"
+    },
+    {
+      "id": "ops-architecture",
+      "label": "Agent Architecture",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/architecture.html",
+      "description": "Technical architecture"
+    },
+    {
+      "id": "ops-org",
+      "label": "Org Chart",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/org.html",
+      "description": "Agent organization"
+    },
+    {
+      "id": "ops-tasks",
+      "label": "Implementation Tasks",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/tasks.html",
+      "description": "What's being built"
+    },
+    {
+      "id": "ops-style",
+      "label": "Style Audit",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/style.html",
+      "description": "Design consistency check"
+    },
+    {
+      "id": "ops-deploy",
+      "label": "Deploy History",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/deploy.html",
+      "description": "What shipped when"
+    },
+    {
+      "id": "ops-tokens",
+      "label": "Token Usage",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/tokens.html",
+      "description": "AI cost tracking"
+    },
+    {
+      "id": "ux-index",
+      "label": "UX Flows Index",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/ux/",
+      "description": "User flow diagrams"
+    },
+    {
+      "id": "ux-tools-flow",
+      "label": "Tools User Flow",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/ux/user-flow-tools.html",
+      "description": "How users navigate tools"
+    },
+    {
+      "id": "ux-site-nav",
+      "label": "Site Navigation",
+      "type": "content",
+      "branch": "meta",
+      "url": "/openclaw/ux/site-navigation-current.html",
+      "description": "Full site map"
+    },
+    {
+      "id": "jeff-portfolio",
+      "label": "Jeff Portfolio Intelligence",
+      "type": "content",
+      "branch": "meta",
+      "url": "/prototypes/jeff-portfolio.html",
+      "description": "Real estate portfolio analysis"
+    },
+    {
+      "id": "realtor-memory",
+      "label": "Realtor Memory",
+      "type": "content",
+      "branch": "meta",
+      "url": "/prototypes/realtor-memory.html",
+      "description": "Client relationship memory"
+    }
+  ],
+  "edges": [
+    {"source": "root", "target": "paradigm", "type": "contains", "label": "opens"},
+    {"source": "root", "target": "ai-quiz-v3", "type": "contains", "label": "entry quiz"},
+    {"source": "root", "target": "operations", "type": "contains", "label": "meta"},
+    
+    {"source": "paradigm", "target": "system", "type": "contains", "label": "branch"},
+    {"source": "paradigm", "target": "self", "type": "contains", "label": "branch"},
+    {"source": "paradigm", "target": "about", "type": "contains", "label": "who"},
+    {"source": "system", "target": "self", "type": "contrasts", "label": "complements"},
+    
+    {"source": "system", "target": "frameworks", "type": "contains"},
+    {"source": "system", "target": "tools-system", "type": "contains"},
+    {"source": "system", "target": "research", "type": "contains"},
+    
+    {"source": "self", "target": "wisdom", "type": "contains"},
+    {"source": "self", "target": "tools-self", "type": "contains"},
+    
+    {"source": "frameworks", "target": "cause-effect", "type": "contains"},
+    {"source": "frameworks", "target": "pdsa", "type": "contains"},
+    {"source": "frameworks", "target": "5-filters", "type": "contains"},
+    {"source": "frameworks", "target": "problem-audit", "type": "contains"},
+    {"source": "frameworks", "target": "realtor-discovery", "type": "contains"},
+    {"source": "frameworks", "target": "system-self-framework", "type": "contains"},
+    {"source": "frameworks", "target": "ai-usage-advanced", "type": "contains"},
+    {"source": "frameworks", "target": "ai-profile-deepdive", "type": "contains"},
+    
+    {"source": "tools-system", "target": "ai-quiz-v3", "type": "contains"},
+    {"source": "tools-system", "target": "quiz-result", "type": "contains"},
+    {"source": "tools-system", "target": "script-reader", "type": "contains"},
+    {"source": "tools-system", "target": "control-chart-evaluator", "type": "contains"},
+    
+    {"source": "research", "target": "knowledge-graph", "type": "contains"},
+    {"source": "research", "target": "kg-design-brief", "type": "contains"},
+    {"source": "research", "target": "assembly-agency", "type": "contains"},
+    {"source": "research", "target": "sysself-messaging", "type": "contains"},
+    {"source": "research", "target": "problem-first-mapping", "type": "contains"},
+    {"source": "research", "target": "dental-lollipop", "type": "contains"},
+    {"source": "research", "target": "realtor-research", "type": "contains"},
+    {"source": "research", "target": "future-work", "type": "contains"},
+    {"source": "research", "target": "truth-happiness", "type": "contains"},
+    {"source": "research", "target": "meal-planning", "type": "contains"},
+    {"source": "research", "target": "amazon-monetization", "type": "contains"},
+    {"source": "research", "target": "real-problems-pitch", "type": "contains"},
+    {"source": "research", "target": "not-scrolling-research", "type": "contains"},
+    {"source": "research", "target": "common-cause-variation", "type": "contains"},
+    
+    {"source": "wisdom", "target": "uncertainty", "type": "contains"},
+    {"source": "wisdom", "target": "purpose", "type": "contains"},
+    {"source": "wisdom", "target": "love", "type": "contains"},
+    {"source": "wisdom", "target": "suffering", "type": "contains"},
+    {"source": "wisdom", "target": "mortality", "type": "contains"},
+    {"source": "wisdom", "target": "ambition", "type": "contains"},
+    {"source": "wisdom", "target": "script-stops", "type": "contains"},
+    {"source": "wisdom", "target": "not-scrolling", "type": "contains"},
+    
+    {"source": "tools-self", "target": "free-hour", "type": "contains"},
+    {"source": "tools-self", "target": "hour-apart", "type": "contains"},
+    {"source": "tools-self", "target": "parking-lot", "type": "contains"},
+    
+    {"source": "about", "target": "about-index", "type": "contains"},
+    {"source": "about", "target": "kyle-bio", "type": "contains"},
+    
+    {"source": "operations", "target": "ops-dashboard", "type": "contains"},
+    {"source": "operations", "target": "ops-baseline", "type": "contains"},
+    {"source": "operations", "target": "ops-architecture", "type": "contains"},
+    {"source": "operations", "target": "ops-org", "type": "contains"},
+    {"source": "operations", "target": "ops-tasks", "type": "contains"},
+    {"source": "operations", "target": "ops-style", "type": "contains"},
+    {"source": "operations", "target": "ops-deploy", "type": "contains"},
+    {"source": "operations", "target": "ops-tokens", "type": "contains"},
+    {"source": "operations", "target": "ux-flows", "type": "contains"},
+    {"source": "operations", "target": "prototypes", "type": "contains"},
+    
+    {"source": "ux-flows", "target": "ux-index", "type": "contains"},
+    {"source": "ux-flows", "target": "ux-tools-flow", "type": "contains"},
+    {"source": "ux-flows", "target": "ux-site-nav", "type": "contains"},
+    
+    {"source": "prototypes", "target": "jeff-portfolio", "type": "contains"},
+    {"source": "prototypes", "target": "realtor-memory", "type": "contains"},
+    
+    {"source": "cause-effect", "target": "pdsa", "type": "related", "label": "implements"},
+    {"source": "cause-effect", "target": "post-cause-effect", "type": "applies"},
+    
+    {"source": "5-filters", "target": "post-5filters-openclaw", "type": "applies"},
+    {"source": "5-filters", "target": "post-5filters-uncertainty", "type": "applies"},
+    {"source": "5-filters", "target": "uncertainty", "type": "related"},
+    
+    {"source": "ai-quiz-v3", "target": "quiz-result", "type": "deepens"},
+    {"source": "ai-quiz-v3", "target": "ai-profile-deepdive", "type": "deepens"},
+    {"source": "ai-quiz-v3", "target": "hour-apart", "type": "related"},
+    {"source": "quiz-result", "target": "ai-profile-deepdive", "type": "deepens"},
+    
+    {"source": "ai-usage-advanced", "target": "ai-profile-deepdive", "type": "deepens"},
+    {"source": "ai-usage-advanced", "target": "ai-quiz-v3", "type": "related"},
+    
+    {"source": "system-self-framework", "target": "paradigm", "type": "related"},
+    {"source": "system-self-framework", "target": "assembly-agency", "type": "explores"},
+    
+    {"source": "realtor-discovery", "target": "realtor-research", "type": "explores"},
+    {"source": "realtor-discovery", "target": "realtor-memory", "type": "applies"},
+    
+    {"source": "knowledge-graph", "target": "kg-design-brief", "type": "related"},
+    {"source": "knowledge-graph", "target": "paradigm", "type": "related"},
+    
+    {"source": "assembly-agency", "target": "paradigm", "type": "related"},
+    {"source": "sysself-messaging", "target": "paradigm", "type": "related"},
+    {"source": "problem-first-mapping", "target": "ai-quiz-v3", "type": "related"},
+    {"source": "real-problems-pitch", "target": "paradigm", "type": "related"},
+    
+    {"source": "not-scrolling", "target": "not-scrolling-research", "type": "explores"},
+    {"source": "not-scrolling", "target": "free-hour", "type": "related"},
+    
+    {"source": "uncertainty", "target": "suffering", "type": "related"},
+    {"source": "uncertainty", "target": "5-filters", "type": "related"},
+    {"source": "suffering", "target": "mortality", "type": "related"},
+    {"source": "mortality", "target": "purpose", "type": "related"},
+    {"source": "love", "target": "post-physics-love", "type": "applies"},
+    {"source": "ambition", "target": "purpose", "type": "related"},
+    
+    {"source": "script-stops", "target": "free-hour", "type": "related"},
+    {"source": "script-stops", "target": "kyle-bio", "type": "related"},
+    {"source": "script-stops", "target": "uncertainty", "type": "related"},
+    
+    {"source": "free-hour", "target": "hour-apart", "type": "deepens"},
+    {"source": "hour-apart", "target": "wisdom", "type": "related"},
+    {"source": "parking-lot", "target": "wisdom", "type": "related"},
+    
+    {"source": "kyle-bio", "target": "paradigm", "type": "inspires"},
+    {"source": "kyle-bio", "target": "post-what-building", "type": "related"},
+    
+    {"source": "post-5filters-openclaw", "target": "5-filters", "type": "related"},
+    {"source": "post-5filters-uncertainty", "target": "5-filters", "type": "related"},
+    {"source": "post-5filters-uncertainty", "target": "uncertainty", "type": "related"},
+    {"source": "post-cause-effect", "target": "cause-effect", "type": "related"},
+    {"source": "post-agent-arch", "target": "ops-architecture", "type": "related"},
+    {"source": "post-what-building", "target": "paradigm", "type": "related"},
+    {"source": "post-physics-love", "target": "love", "type": "related"},
+    
+    {"source": "truth-happiness", "target": "wisdom", "type": "related"},
+    {"source": "future-work", "target": "assembly-agency", "type": "related"},
+    
+    {"source": "jeff-portfolio", "target": "realtor-discovery", "type": "related"},
+    {"source": "realtor-memory", "target": "realtor-discovery", "type": "related"},
+    
+    {"source": "common-cause-variation", "target": "control-chart-evaluator", "type": "deepens"},
+    {"source": "common-cause-variation", "target": "uncertainty", "type": "related"},
+    {"source": "common-cause-variation", "target": "cause-effect", "type": "related"},
+    {"source": "control-chart-evaluator", "target": "5-filters", "type": "related"}
+  ],
+  "config": {
+    "colors": {
+      "system": "#58a6ff",
+      "self": "#f97583",
+      "both": "#a371f7",
+      "meta": "#8b949e",
+      "root": "#f4d03f"
+    },
+    "nodeTypes": {
+      "root": {"size": 40, "shape": "star"},
+      "paradigm": {"size": 35, "shape": "hexagon"},
+      "collection": {"size": 25, "shape": "circle"},
+      "content": {"size": 15, "shape": "circle"}
+    },
+    "edgeTypes": {
+      "contains": {"style": "solid", "strength": 1.0},
+      "related": {"style": "dashed", "strength": 0.5},
+      "deepens": {"style": "solid", "strength": 0.8},
+      "applies": {"style": "dotted", "strength": 0.4},
+      "explores": {"style": "dotted", "strength": 0.4},
+      "inspires": {"style": "dashed", "strength": 0.3},
+      "contrasts": {"style": "dashed", "strength": 0.6}
+    }
+  }
+}

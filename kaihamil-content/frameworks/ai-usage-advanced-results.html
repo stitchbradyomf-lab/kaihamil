@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Usage Profile | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --explorer: #e8d5a3;
+            --operator: #d4a574;
+            --director: #c9a227;
+            --implementer: #3d8b37;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 { font-size: 1.5rem; font-weight: 300; margin-bottom: 10px; opacity: 0.9; }
+        .hero h1 strong { color: var(--gold); font-weight: 500; }
+        
+        /* Main Result Section */
+        .result-container {
+            max-width: 700px;
+            margin: -40px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .result-card {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Type Icon */
+        .type-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        /* Type Name */
+        .type-name {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        
+        .type-subtitle {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            margin-bottom: 40px;
+        }
+        
+        /* What You Do Section */
+        .section-card {
+            background: var(--bg-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .section-card h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-card p {
+            font-size: 1.1rem;
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        /* CTA Button */
+        .cta-container {
+            margin-top: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .cta-subtext {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+        
+        /* Mobile */
+        @media (max-width: 600px) {
+            .hero { padding: 80px 20px 50px; }
+            .result-card { padding: 40px 25px; }
+            .type-icon { font-size: 4rem; }
+            .section-card { padding: 25px 20px; }
+            .cta-button { width: 100%; padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Assessment Complete</span>
+        <h1>Your AI Usage <strong>Profile</strong></h1>
+    </header>
+    
+    <main class="result-container">
+        <div class="result-card">
+            <span class="type-icon" id="typeIcon">🔍</span>
+            <h2 class="type-name" id="typeName">The Explorer</h2>
+            <p class="type-subtitle" id="typeSubtitle">Primary Type</p>
+            
+            <div class="section-card">
+                <h3>🎯 What You Do</h3>
+                <p id="whatYouDo">You learn through open exploration and discovery. You treat AI as a conversation partner for surfacing what you don't know you don't know. The journey matters more than the destination.</p>
+            </div>
+            
+            <div class="section-card">
+                <h3>⚠️ What to Watch For</h3>
+                <p id="whatToWatch">Exploration without closure. You may never ship because the discovery process never ends. The endless "what if" can become a trap.</p>
+            </div>
+            
+            <div class="cta-container">
+                <a href="ai-usage-advanced-deepdive.html" class="cta-button">Learn More</a>
+                <p class="cta-subtext">See your position, evolution path, and personalized tools</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Based on behavioral research in human-AI interaction patterns</p>
+    </footer>
+    
+    <script>
+        // Type definitions
+        const typeData = {
+            explorer: {
+                icon: '🔍',
+                name: 'The Explorer',
+                whatYouDo: 'You learn through open exploration and discovery. You treat AI as a conversation partner for surfacing what you don\'t know you don\'t know. The journey matters more than the destination.',
+                whatToWatch: 'Exploration without closure. You may never ship because the discovery process never ends. The endless "what if" can become a trap.'
+            },
+            operator: {
+                icon: '🔧',
+                name: 'The Operator',
+                whatYouDo: 'You understand systems deeply and use AI to operate within them. You value thoroughness over speed, building sustainable workflows that last.',
+                whatToWatch: 'Perfectionism and over-engineering. You might spend more time optimizing the system than using it. The perfect setup that never launches.'
+            },
+            director: {
+                icon: '🎬',
+                name: 'The Director',
+                whatYouDo: 'You have strong vision and use AI to explore before committing. You\'re strategic about when to lead and when to learn.',
+                whatToWatch: 'Analysis paralysis. Too many options, not enough decisions. The endless comparison that delays action.'
+            },
+            implementer: {
+                icon: '⚡',
+                name: 'The Implementer',
+                whatYouDo: 'You know what you want and make it happen. You treat AI as an execution tool, moving fast and shipping often.',
+                whatToWatch: 'Missing better approaches by moving too fast. The quick fix that creates technical debt. Solutions before understanding.'
+            }
+        };
+        
+        // Get results from URL params or localStorage
+        function loadResults() {
+            const params = new URLSearchParams(window.location.search);
+            let primaryType = params.get('type') || localStorage.getItem('aiUsagePrimaryType') || 'explorer';
+            
+            // Handle hybrid types (e.g., "explorer-director")
+            if (primaryType.includes('-')) {
+                const types = primaryType.split('-');
+                primaryType = types[0];
+                const secondaryType = types[1];
+                document.getElementById('typeSubtitle').textContent = `Primary: ${typeData[primaryType].name} with ${typeData[secondaryType].name} tendencies`;
+            }
+            
+            const data = typeData[primaryType];
+            if (data) {
+                document.getElementById('typeIcon').textContent = data.icon;
+                document.getElementById('typeName').textContent = data.name;
+                document.getElementById('whatYouDo').textContent = data.whatYouDo;
+                document.getElementById('whatToWatch').textContent = data.whatToWatch;
+            }
+        }
+        
+        loadResults();
+    </script>
+</body>
+</html>

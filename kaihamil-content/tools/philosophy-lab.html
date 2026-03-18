@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hour Apart | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --accent: #2d5a4a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 strong {
+            color: var(--gold);
+        }
+        
+        .header p {
+            color: var(--brown-medium);
+            font-size: 1rem;
+        }
+        
+        /* Progress */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+        
+        .progress-dot.active {
+            background: var(--gold);
+        }
+        
+        /* Step containers */
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        /* Type selector cards */
+        .type-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .type-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .type-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .type-card.selected {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, var(--bg-card) 0%, #f5f0e8 100%);
+        }
+        
+        .type-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .type-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .type-card p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Philosophy cards */
+        .philosophy-cards {
+            display: grid;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .philosophy-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .philosophy-card:hover {
+            border-color: var(--gold);
+        }
+        
+        .philosophy-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--bg-card) 0%, #e8f4f0 100%);
+        }
+        
+        .philosophy-card .tradition {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        
+        .philosophy-card .quote {
+            font-style: italic;
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .philosophy-card .question {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Timer */
+        .timer-display {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .timer-display .time {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .timer-display .label {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .timer-controls button {
+            padding: 12px 24px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .timer-controls button:hover {
+            border-color: var(--gold);
+        }
+        
+        /* Mission card */
+        .mission-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #f5f0e8 100%);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .mission-card h3 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        
+        .mission-card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .mission-card .constraint {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        
+        /* Reflection form */
+        .reflection-form {
+            margin-top: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        /* Completion */
+        .completion-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .completion-card .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .completion-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .completion-card p {
+            color: var(--brown-medium);
+            margin-bottom: 25px;
+        }
+        
+        .next-steps {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .next-steps h4 {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        
+        .next-steps ul {
+            padding-left: 20px;
+        }
+        
+        .next-steps li {
+            margin-bottom: 8px;
+            color: var(--brown-medium);
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .timer-display .time {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>The <strong>Hour Apart</strong></h1>
+            <p id="header-subtitle">Pick a lens. See differently.</p>
+        </div>
+        
+        <!-- Progress -->
+        <div class="progress-bar">
+            <div class="progress-dot active" id="dot-1"></div>
+            <div class="progress-dot" id="dot-2"></div>
+            <div class="progress-dot" id="dot-3"></div>
+            <div class="progress-dot" id="dot-4"></div>
+        </div>
+        
+        <!-- Step 1: Select Type -->
+        <div class="step active" id="step-1">
+            <h2 style="text-align: center; margin-bottom: 25px; font-weight: 400;">Select your type</h2>
+            
+            <div class="type-grid">
+                <div class="type-card" data-type="explorer">
+                    <div class="type-icon">🔭</div>
+                    <h3>The Explorer</h3>
+                    <p>You see endless possibilities. Your growth edge: depth over breadth.</p>
+                </div>
+                
+                <div class="type-card" data-type="analyst">
+                    <div class="type-icon">🔬</div>
+                    <h3>The Analyst</h3>
+                    <p>You see clearly what others miss. Your growth edge: action over perfection.</p>
+                </div>
+                
+                <div class="type-card" data-type="designer">
+                    <div class="type-icon">🎨</div>
+                    <h3>The Designer</h3>
+                    <p>You envision what could be. Your growth edge: execution over vision.</p>
+                </div>
+                
+                <div class="type-card" data-type="builder">
+                    <div class="type-icon">🔨</div>
+                    <h3>The Builder</h3>
+                    <p>You make things real. Your growth edge: reflection over action.</p>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="btn-step-1" disabled>Continue</button>
+        </div>
+        
+        <!-- Step 2: Select Philosophy -->
+        <div class="step" id="step-2">
+            <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Three lenses</h2>
+            <p style="text-align: center; color: var(--brown-medium); margin-bottom: 25px;">Which resonates right now?</p>
+            
+            <div class="philosophy-cards" id="philosophy-cards">
+                <!-- Cards injected by JS based on type -->
+            </div>
+            
+            <button class="btn btn-primary" id="btn-step-2" disabled>Start 60-Minute Mission</button>
+        </div>
+        
+        <!-- Step 3: The Mission -->
+        <div class="step" id="step-3">
+            <h2 style="text-align: center; margin-bottom: 25px; font-weight: 400;">Your mission</h2>
+            
+            <div class="mission-card">
+                <h3>The Setup</h3>
+                <p>You have one hour. You're in a familiar environment. No phone for entertainment. No tasks to complete.</p>
+                
+                <div class="constraint" id="mission-constraint">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+            
+            <div class="timer-display">
+                <div class="time" id="timer">60:00</div>
+                <div class="label">minutes remaining</div>
+            </div>
+            
+            <div class="timer-controls">
+                <button id="btn-start">Start Timer</button>
+                <button id="btn-pause" style="display: none;">Pause</button>
+                <button id="btn-return" style="display: none;">I'm Back</button>
+            </div>
+            
+            <p style="text-align: center; color: var(--brown-medium); margin-top: 20px; font-size: 0.9rem;">
+                Leave this tab open. We'll be here when you return.
+            </p>
+        </div>
+        
+        <!-- Step 4: Reflection -->
+        <div class="step" id="step-4">
+            <h2 style="text-align: center; margin-bottom: 10px; font-weight: 400;">Welcome back</h2>
+            <p style="text-align: center; color: var(--brown-medium); margin-bottom: 25px;">A few questions before you go</p>
+            
+            <form class="reflection-form" id="reflection-form">
+                <div class="form-group">
+                    <label>What happened when you applied your chosen lens?</label>
+                    <textarea name="experience" placeholder="Describe what you noticed..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>What did you notice about your type's tendency?</label>
+                    <textarea name="type-observation" placeholder="Did your natural pattern show up? How?"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>One insight you'll carry forward:</label>
+                    <textarea name="insight" placeholder="A sentence or two..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Complete Lab</button>
+            </form>
+        </div>
+        
+        <!-- Step 5: Completion -->
+        <div class="step" id="step-5">
+            <div class="completion-card">
+                <div class="icon">✓</div>
+                <h2>Lab Complete</h2>
+                <p>You just practiced philosophy in the real world. That experience is yours now.</p>
+                
+                <div class="next-steps">
+                    <h4>What would you like to do next?</h4>
+                    <ul>
+                        <li>Take the full AI User Type Quiz for deeper insights</li>
+                        <li>Explore the 4-Week Type-Specific Course</li>
+                        <li>Try the Lab again with a different lens</li>
+                        <li>Share your experience with someone</li>
+                    </ul>
+                </div>
+                
+                <button class="btn btn-primary" style="margin-top: 20px;">Take the Full Quiz</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // State
+        let currentStep = 1;
+        let selectedType = null;
+        let selectedPhilosophy = null;
+        let timerInterval = null;
+        let timeRemaining = 3600; // 60 minutes in seconds
+        
+        // Philosophy content by type
+        const philosophies = {
+            explorer: [
+                {
+                    tradition: 'Stoic',
+                    quote: 'No person is free who is not master of themselves.',
+                    question: 'What\'s in your control about this moment? What\'s not?'
+                },
+                {
+                    tradition: 'Buddhist',
+                    quote: 'The monkey mind jumps from branch to branch. Practice returns to the breath.',
+                    question: 'Can you stay with the discomfort of "not knowing what\'s next"?'
+                },
+                {
+                    tradition: 'Taoist',
+                    quote: 'Nature does not hurry, yet everything is accomplished. Wu wei—not forcing.',
+                    question: 'Where are you swimming upstream? Where can you flow?'
+                }
+            ],
+            analyst: [
+                {
+                    tradition: 'Pragmatist',
+                    quote: 'Truth is what works. The test of belief is action.',
+                    question: 'What would you do if you only had 70% of the information you want?'
+                },
+                {
+                    tradition: 'Existentialist',
+                    quote: 'Existence precedes essence. You become through doing.',
+                    question: 'Who are you becoming through your actions right now?'
+                },
+                {
+                    tradition: 'Stoic',
+                    quote: 'You have power over your mind—not outside events.',
+                    question: 'What can you actually affect in the next hour? Start there.'
+                }
+            ],
+            designer: [
+                {
+                    tradition: 'Aristotelian',
+                    quote: 'Excellence is never an accident. It is the result of high intention.',
+                    question: 'What\'s the essence of what you\'re trying to create?'
+                },
+                {
+                    tradition: 'Buddhist',
+                    quote: 'Form is emptiness, emptiness is form. Constraints are possibilities.',
+                    question: 'What becomes possible because of your limitations?'
+                },
+                {
+                    tradition: 'Craftsman',
+                    quote: 'The satisfactions of manifesting oneself concretely in the world.',
+                    question: 'What can you make with just your hands and simple materials?'
+                }
+            ],
+            builder: [
+                {
+                    tradition: 'Taoist',
+                    quote: 'Do the difficult things while they are easy.',
+                    question: 'What small thing could you do now that removes future friction?'
+                },
+                {
+                    tradition: 'Stoic',
+                    quote: 'First say to yourself what you would be; then do what you have to do.',
+                    question: 'What\'s the "why" behind your next action?'
+                },
+                {
+                    tradition: 'Confucian',
+                    quote: 'Learning without reflection is wasted. Reflection without learning is dangerous.',
+                    question: 'What have you been too busy doing to properly think about?'
+                }
+            ]
+        };
+        
+        const missions = {
+            explorer: 'Let the moment show you what to do. Don\'t plan. Wander. Notice where your attention naturally goes.',
+            analyst: 'Create something small and share it immediately. No revisions. 70% quality, 100% done.',
+            designer: 'Make something useful with only 3 materials. No buying. No digital tools.',
+            builder: 'Spend the hour NOT working on your project. Just sit with it. Think. Plan. Refuse to execute.'
+        };
+        
+        // DOM Elements
+        const steps = document.querySelectorAll('.step');
+        const dots = document.querySelectorAll('.progress-dot');
+        
+        // Navigation
+        function showStep(n) {
+            steps.forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${n}`).classList.add('active');
+            
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i < n);
+            });
+            
+            currentStep = n;
+            saveState();
+        }
+        
+        // Step 1: Type selection
+        document.querySelectorAll('.type-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selectedType = card.dataset.type;
+                document.getElementById('btn-step-1').disabled = false;
+            });
+        });
+        
+        document.getElementById('btn-step-1').addEventListener('click', () => {
+            // Populate philosophy cards
+            const container = document.getElementById('philosophy-cards');
+            container.innerHTML = philosophies[selectedType].map((p, i) => `
+                <div class="philosophy-card" data-index="${i}">
+                    <div class="tradition">${p.tradition}</div>
+                    <div class="quote">"${p.quote}"</div>
+                    <div class="question">${p.question}</div>
+                </div>
+            `).join('');
+            
+            // Add click handlers
+            container.querySelectorAll('.philosophy-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    container.querySelectorAll('.philosophy-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    selectedPhilosophy = philosophies[selectedType][card.dataset.index];
+                    document.getElementById('btn-step-2').disabled = false;
+                });
+            });
+            
+            showStep(2);
+        });
+        
+        // Step 2: Philosophy selection
+        document.getElementById('btn-step-2').addEventListener('click', () => {
+            document.getElementById('mission-constraint').textContent = missions[selectedType];
+            showStep(3);
+        });
+        
+        // Step 3: Timer
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return `${m}:${s.toString().padStart(2, '0')}`;
+        }
+        
+        function updateTimer() {
+            document.getElementById('timer').textContent = formatTime(timeRemaining);
+        }
+        
+        document.getElementById('btn-start').addEventListener('click', () => {
+            document.getElementById('btn-start').style.display = 'none';
+            document.getElementById('btn-pause').style.display = 'inline-block';
+            document.getElementById('btn-return').style.display = 'inline-block';
+            
+            timerInterval = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    updateTimer();
+                    saveState();
+                } else {
+                    clearInterval(timerInterval);
+                    showStep(4);
+                }
+            }, 1000);
+        });
+        
+        document.getElementById('btn-pause').addEventListener('click', () => {
+            clearInterval(timerInterval);
+            document.getElementById('btn-pause').style.display = 'none';
+            document.getElementById('btn-start').style.display = 'inline-block';
+            document.getElementById('btn-start').textContent = 'Resume';
+        });
+        
+        document.getElementById('btn-return').addEventListener('click', () => {
+            clearInterval(timerInterval);
+            showStep(4);
+        });
+        
+        // Step 4: Reflection
+        document.getElementById('reflection-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showStep(5);
+            // Could send data to server here
+        });
+        
+        // State management
+        function saveState() {
+            localStorage.setItem('hourApart', JSON.stringify({
+                step: currentStep,
+                type: selectedType,
+                philosophy: selectedPhilosophy,
+                timeRemaining: timeRemaining,
+                timestamp: Date.now()
+            }));
+        }
+        
+        function loadState() {
+            const saved = localStorage.getItem('hourApart');
+            if (saved) {
+                const state = JSON.parse(saved);
+                // If less than 24 hours old, restore
+                if (Date.now() - state.timestamp < 24 * 60 * 60 * 1000) {
+                    currentStep = state.step;
+                    selectedType = state.type;
+                    selectedPhilosophy = state.philosophy;
+                    timeRemaining = state.timeRemaining || 3600;
+                    
+                    if (currentStep > 1) {
+                        // Restore UI state
+                        showStep(currentStep);
+                        updateTimer();
+                        
+                        if (selectedType) {
+                            document.querySelector(`[data-type="${selectedType}"]`)?.classList.add('selected');
+                            document.getElementById('btn-step-1').disabled = false;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Init
+        loadState();
+    </script>
+</body>
+</html>

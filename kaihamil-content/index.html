@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil | Agency through Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --sand: #e8ddd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+        }
+        
+        /* Navigation with Hamburger */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 200;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--brown-dark);
+            transition: all 0.3s;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--bg-card);
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 150;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            color: var(--ink-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.3s;
+        }
+        
+        .mobile-menu a:hover {
+            color: var(--terracotta);
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 140;
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Wave Hero Section */
+        .wave-hero {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        
+        .wave-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/hero-wave.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.9;
+            z-index: 0;
+        }
+        
+        .wave-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+        
+        .wave-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 20px;
+        }
+        
+        .wave-hero h1 strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .hero-subtext {
+            font-size: 1.2rem;
+            color: var(--ink-medium);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(61, 40, 23, 0.3);
+        }
+        
+        /* Split Section */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 60vh;
+        }
+        
+        /* System Side - Posts Style */
+        .system-side {
+            background: var(--bg-cream);
+            padding: 60px 40px;
+            border-right: 1px solid var(--border);
+        }
+        
+        .side-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .side-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+        
+        .side-subtitle {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+        }
+        
+        .access-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .access-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .access-card:hover {
+            border-color: var(--gold);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.1);
+        }
+        
+        .access-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .access-content {
+            flex: 1;
+        }
+        
+        .access-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            margin-bottom: 4px;
+        }
+        
+        .access-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Self Side - Wisdom Style */
+        .self-side {
+            background: var(--bg-warm);
+            padding: 60px 40px;
+        }
+        
+        .self-side .side-title {
+            color: var(--terracotta);
+        }
+        
+        .self-side .access-card {
+            background: var(--bg-paper);
+            border-left: 3px solid var(--terracotta);
+        }
+        
+        .self-side .access-card:hover {
+            border-color: var(--terracotta);
+            box-shadow: 0 5px 20px rgba(184, 122, 94, 0.1);
+        }
+        
+        .self-side .access-title {
+            color: var(--ink-dark);
+        }
+        
+        /* Footer */
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-brand { margin-bottom: 20px; }
+        .footer-brand h2 { 
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400; 
+            font-size: 1.5rem; 
+        }
+        .footer-brand h2 strong { font-weight: 600; }
+        .footer-brand p { opacity: 0.6; margin-top: 5px; }
+        .footer-brand a { color: inherit; text-decoration: none; }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        
+        .footer-nav a:hover { opacity: 1; }
+        
+        .footer-copyright {
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .split-section {
+                grid-template-columns: 1fr;
+            }
+            .system-side {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .wave-hero h1 { font-size: 2.2rem; }
+            .hero-subtext { font-size: 1rem; }
+            .side-title { font-size: 2rem; }
+            .system-side, .self-side { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation with Hamburger -->
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div class="menu-overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu">
+        <a href="posts/">✍️ Posts</a>
+        <a href="research/">🔬 Research</a>
+        <a href="openclaw/">👽 Operations</a>
+        <a href="about.html">About</a>
+        <a href="contact">Contact</a>
+    </div>
+    
+    <!-- Wave Hero Section -->
+    <section class="wave-hero">
+        <div class="wave-hero-content">
+            <h1>The <strong>Age of Intelligence</strong>.</h1>
+            <p class="hero-subtext">
+                AI is teaching us what intelligence actually looks like — 
+                not just artificial, but human. The question isn't whether you'll use AI.
+                It's whether you'll level up your own intelligence to meet it.
+            </p>
+            <a href="/tools/time-and-focus.html" class="cta-button">Find Your Focus</a>
+        </div>
+    </section>
+    
+    <!-- Split Section: System // Self -->
+    <section class="split-section">
+        <!-- System Side -->
+        <div class="system-side">
+            <div class="side-header">
+                <h2 class="side-title">System</h2>
+                <p class="side-subtitle">Doing things better</p>
+            </div>
+            
+            <div class="access-grid">
+                <a href="frameworks/" class="access-card">
+                    <div class="access-icon">◫</div>
+                    <div class="access-content">
+                        <div class="access-title">Frameworks</div>
+                        <div class="access-desc">Decision tools and systems</div>
+                    </div>
+                </a>
+                
+                <a href="tools/" class="access-card">
+                    <div class="access-icon">🛠️</div>
+                    <div class="access-content">
+                        <div class="access-title">Tools</div>
+                        <div class="access-desc">Practical implementations</div>
+                    </div>
+                </a>
+                
+                <a href="posts/" class="access-card">
+                    <div class="access-icon">⚡</div>
+                    <div class="access-content">
+                        <div class="access-title">System Posts</div>
+                        <div class="access-desc">Frameworks in action</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Self Side -->
+        <div class="self-side">
+            <div class="side-header">
+                <h2 class="side-title">Self</h2>
+                <p class="side-subtitle">Doing better things</p>
+            </div>
+            
+            <div class="access-grid">
+                <a href="wisdom/" class="access-card">
+                    <div class="access-icon">🕯️</div>
+                    <div class="access-content">
+                        <div class="access-title">Wisdom</div>
+                        <div class="access-desc">Philosophy and presence</div>
+                    </div>
+                </a>
+                
+                <a href="tools/free-hour.html" class="access-card">
+                    <div class="access-icon">🧘</div>
+                    <div class="access-content">
+                        <div class="access-title">Presence Tools</div>
+                        <div class="access-desc">Space for what matters</div>
+                    </div>
+                </a>
+                
+                <a href="posts/the-physics-of-love.html" class="access-card">
+                    <div class="access-icon">❤️</div>
+                    <div class="access-content">
+                        <div class="access-title">Love</div>
+                        <div class="access-desc">Connection and relationships</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <h2>kai <strong>hamil</strong></h2>
+            <p>System // Self</p>
+        </div>
+        <nav class="footer-nav">
+            <a href="https://kaihamil.substack.com">Substack</a>
+            <a href="about.html">About</a>
+            <a href="contact">Contact</a>
+        </nav>
+        <p class="footer-copyright">© 2026 Kai Hamil</p>
+    </footer>
+    
+    <script>
+        function toggleMenu() {
+            document.querySelector('.hamburger').classList.toggle('active');
+            document.querySelector('.mobile-menu').classList.toggle('active');
+            document.querySelector('.menu-overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

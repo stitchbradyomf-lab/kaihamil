@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Org Chart | Stitch Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --info: #58a6ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            color: var(--accent-gold);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { border-color: var(--accent-gold); }
+        h1 { font-size: 1.5rem; flex: 1; }
+        .diagram-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            border-color: var(--accent-gold);
+        }
+        .diagram-panel {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .diagram-panel.active { display: block; }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header h2 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-content { padding: 20px; }
+        p { color: var(--text-secondary); margin-bottom: 15px; }
+        code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Operations</a>
+            <h1>📊 Org Chart</h1>
+        </header>
+
+        <div class="diagram-tabs">
+            <button class="tab-btn active" onclick="showTab('hierarchy')">Hierarchy</button>
+            <button class="tab-btn" onclick="showTab('workflow')">Workflow</button>
+            <button class="tab-btn" onclick="showTab('sequence')">Sequence</button>
+            <button class="tab-btn" onclick="showTab('dataflow')">Data Flow</button>
+        </div>
+
+        <div id="hierarchy" class="diagram-panel active">
+            <div class="mermaid">
+graph TD
+    ROOT[Orchestrator<br/>Stitch]
+    
+    ROOT --> PLAN[Planner<br/>Research & Strategy]
+    ROOT --> EXEC[Executor<br/>Production]
+    ROOT --> CRIT[Critic<br/>Quality]
+    
+    PLAN --> R1[Researcher A<br/>Web]
+    PLAN --> R2[Researcher B<br/>Memory]
+    PLAN --> R3[Researcher C<br/>Files]
+    PLAN --> R4[Researcher D<br/>Academic]
+    PLAN --> SYN[Synthesizer<br/>Agentic RAG]
+    PLAN --> DREF[Deep Reflector<br/>CoD Loop]
+    
+    EXEC --> E1[Code Executor]
+    EXEC --> E2[Content Executor]
+    EXEC --> E3[Design Executor]
+    EXEC --> E4[Analysis Executor]
+    
+    CRIT --> FG[Fast Guardrails]
+    
+    ROOT -.-> MEM[Memory Manager]
+    PLAN -.-> MEM
+    EXEC -.-> MEM
+
+    classDef root fill:#f4d03f,stroke:#3d2817,stroke-width:3px,color:#3d2817
+    classDef manager fill:#58a6ff,stroke:#3d2817,stroke-width:2px,color:#fff
+    classDef worker fill:#21262d,stroke:#c9a227,stroke-width:1px,color:#c9d1d9
+    classDef quality fill:#d29922,stroke:#3d2817,stroke-width:2px,color:#fff
+    classDef support fill:#6e7681,stroke:#3d2817,stroke-width:1px,color:#fff
+
+    class ROOT root
+    class PLAN,EXEC,CRIT manager
+    class R1,R2,R3,R4,SYN,DREF,E1,E2,E3,E4 worker
+    class FG quality
+    class MEM support
+            </div>
+        </div>
+
+        <div id="workflow" class="diagram-panel">
+            <div class="mermaid">
+flowchart LR
+    K[Kyle Request] --> O[Orchestrator]
+    O --> P[Planner]
+    
+    P --> D[Research Team]
+    D -->|Raw Data| S[Synthesizer]
+    
+    S <-->|Chain of Debates| R[Deep Reflector]
+    
+    S -->|Structured Data| P
+    P -->|Briefing Artifact<br/>JSON| E[Executor]
+    
+    E --> F[Fast Guardrails]
+    F -->|Approved| O
+    O -->|Response| K2[Kyle]
+    
+    P -.-> M[(Memory)]
+    E -.-> M
+    O -.-> M
+            </div>
+        </div>
+
+        <div id="sequence" class="diagram-panel">
+            <div class="mermaid">
+sequenceDiagram
+    participant K as Kyle
+    participant O as Orchestrator
+    participant P as Planner
+    participant R1 as Researcher A
+    participant R2 as Researcher B
+    participant S as Synthesizer
+    participant D as Deep Reflector
+    participant E as Executor
+    participant F as Fast Guardrails
+
+    K->>O: "Plan Tokyo trip"
+    O->>P: Assign goal
+
+    par Parallel Research
+        P->>R1: Web search
+        P->>R2: Memory search
+    end
+
+    R1->>S: Raw data
+    R2->>S: Raw data
+
+    loop Chain of Debates
+        S->>D: Conflict found
+        D->>S: Resolution
+    end
+
+    S->>P: Structured data
+    P->>P: Create Briefing Artifact (JSON)
+    P->>E: Approved plan
+
+    E->>E: Execute (produce itinerary)
+    E->>F: Fast guardrails check
+    F->>O: Approved
+    O->>K: Final itinerary
+            </div>
+        </div>
+
+        <div id="dataflow" class="diagram-panel">
+            <div class="mermaid">
+flowchart TB
+    subgraph Input
+        REQ[Kyle Request]
+    end
+    
+    subgraph Orchestration
+        ORCH[Orchestrator<br/>Intent Classification]
+    end
+    
+    subgraph Research["🔬 Research Phase (Parallel)"]
+        WEB[Web Researcher]
+        MEM[Memory Researcher]
+        FILE[File Researcher]
+        ACAD[Academic Researcher]
+    end
+    
+    subgraph Synthesis["🧠 Synthesis Phase"]
+        SYN[Synthesizer]
+        CODEREF[Chain of Debates<br/>with Deep Reflector]
+        BRIEF[Briefing Artifact<br/>JSON Schema]
+    end
+    
+    subgraph Execution["⚡ Execution Phase"]
+        EXEC[Content/Code Executor]
+        GUARD[Fast Guardrails]
+    end
+    
+    subgraph Output
+        DELIVER[Final Output]
+    end
+    
+    subgraph Memory
+        DB[(Long-term Memory)]
+    end
+    
+    REQ --> ORCH
+    ORCH --> Research
+    
+    WEB --> SYN
+    MEM --> SYN
+    FILE --> SYN
+    ACAD --> SYN
+    
+    SYN <---> CODEREF
+    CODEREF --> BRIEF
+    BRIEF --> EXEC
+    
+    EXEC --> GUARD
+    GUARD --> ORCH
+    ORCH --> DELIVER
+    
+    ORCH -.-> DB
+    SYN -.-> DB
+    EXEC -.-> DB
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>📖 How to Read These Diagrams</h2>
+            </div>
+            <div class="section-content">
+                <p><strong>Hierarchy:</strong> Shows the 3-level structure — Root Coordinator manages Sub-Managers who manage Specialist Workers.</p>
+                <p><strong>Workflow:</strong> Simplified data flow from request through processing to output.</p>
+                <p><strong>Sequence:</strong> Step-by-step interaction between agents (Tokyo trip example).</p>
+                <p><strong>Data Flow:</strong> Detailed phases showing parallel research, synthesis with Chain of Debates, and execution.</p>
+                <p>Dashed lines (<code>-.-></code>) indicate memory logging. Solid lines indicate primary data flow.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize but don't auto-render (hidden diagrams fail)
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#21262d',
+                primaryTextColor: '#c9d1d9',
+                primaryBorderColor: '#30363d',
+                lineColor: '#8b949e',
+                secondaryColor: '#161b22',
+                tertiaryColor: '#0d1117',
+                fontFamily: 'Roboto, sans-serif'
+            }
+        });
+
+        // Render only the initially visible diagram
+        document.addEventListener('DOMContentLoaded', function() {
+            const activePanel = document.querySelector('.diagram-panel.active');
+            if (activePanel) {
+                const mermaidEl = activePanel.querySelector('.mermaid');
+                if (mermaidEl) {
+                    mermaid.init(undefined, mermaidEl);
+                }
+            }
+        });
+
+        function showTab(tabId) {
+            document.querySelectorAll('.diagram-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Render the now-visible diagram
+            const visiblePanel = document.getElementById(tabId);
+            const visibleMermaid = visiblePanel.querySelector('.mermaid');
+            if (visibleMermaid) {
+                // Check if already rendered (has svg child)
+                if (!visibleMermaid.querySelector('svg')) {
+                    mermaid.init(undefined, visibleMermaid);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

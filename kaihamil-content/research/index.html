@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #faf6f1;
+            color: #3d2817;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid #d4a574;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #3d2817;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #8b7355;
+            font-size: 1.1rem;
+        }
+        .info-box {
+            background: #fff3cd;
+            border: 1px solid #c9a227;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+        }
+        .info-box h3 {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        .info-box p {
+            color: #856404;
+            font-size: 0.95rem;
+        }
+        .research-grid {
+            display: grid;
+            gap: 20px;
+        }
+        .research-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(61, 40, 23, 0.1);
+            border-left: 4px solid #c9a227;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .research-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(61, 40, 23, 0.15);
+        }
+        .research-card a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 1.3rem;
+            color: #3d2817;
+            font-weight: 500;
+        }
+        .draft-badge {
+            background: #dc3545;
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .card-description {
+            color: #6b5344;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #8b7355;
+        }
+        .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        nav {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #d4a574;
+            text-align: center;
+        }
+        nav a {
+            color: #c9a227;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8b7355;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .research-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Research</h1>
+            <p class="subtitle">Raw research notes and first drafts — unreviewed</p>
+        </header>
+
+        <div class="info-box">
+            <h3>⚠️ Draft Content</h3>
+            <p>These are initial research collections and notes. They have not been personalized, fact-checked, or reviewed for publication. Use as starting points for deeper exploration.</p>
+        </div>
+
+        <div class="research-grid">
+            <div class="research-card">
+                <a href="marissa-interface-spec.html">
+                    <div class="card-header">
+                        <span class="card-title">👤 Marissa Interface Spec</span>
+                        <span class="draft-badge" style="background: #28a745;">Ready</span>
+                    </div>
+                    <p class="card-description">Designing the primary user experience for Kai Hamil's first and most important client. Three access tiers, voice-first interaction, and the North Star: Marissa's life satisfaction.</p>
+                    <div class="card-meta">
+                        <span>📅 Mar 12, 2026</span>
+                        <span>📊 Interface Design</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="common-cause-variation.html">
+                    <div class="card-header">
+                        <span class="card-title">📊 Common Cause Variation</span>
+                        <span class="draft-badge" style="background: #28a745;">Ready</span>
+                    </div>
+                    <p class="card-description">How to tell the difference between normal fluctuations and signals that require action. From manufacturing to management, this distinction prevents overreaction and missed opportunities.</p>
+                    <div class="card-meta">
+                        <span>📅 Mar 8, 2026</span>
+                        <span>📊 Systems Thinking</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="philosophy-of-not-scrolling.html">
+                    <div class="card-header">
+                        <span class="card-title">📵 The Philosophy of Not Scrolling</span>
+                        <span class="draft-badge" style="background: #28a745;">Ready</span>
+                    </div>
+                    <p class="card-description">From a WWE wrestling philosophy analogy to 90 minutes of presence in a Barnes & Noble parking lot. What happens when you choose wandering over doomscrolling.</p>
+                    <div class="card-meta">
+                        <span>📅 Mar 3, 2026</span>
+                        <span>📊 Personal Essay</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="assembly-to-agency-draft.html">
+                    <div class="card-header">
+                        <span class="card-title">💻 From Assembly to Agency</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Exploring the parallel evolution of computer code and human life organization — from assembly language instructions to agentic AI intent-based systems.</p>
+                    <div class="card-meta">
+                        <span>📅 Mar 1, 2026</span>
+                        <span>📊 Systems Thinking</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="knowledge-graph.html">
+                    <div class="card-header">
+                        <span class="card-title">🕸️ Knowledge Graph Visualizer</span>
+                        <span class="draft-badge" style="background: #28a745;">Interactive</span>
+                    </div>
+                    <p class="card-description">Interactive D3.js visualization of the RDF triple store. Explore entity relationships, filter by type, and navigate the semantic connections between content, frameworks, and concepts.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 24, 2026</span>
+                        <span>📊 Visualization</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="knowledge-graph-design-brief.html">
+                    <div class="card-header">
+                        <span class="card-title">🧠 Knowledge Graph Design Brief</span>
+                        <span class="draft-badge">System Design</span>
+                    </div>
+                    <p class="card-description">Semantic model architecture for the Kai Hamil content system. Entity types, relationship predicates, and RDF ontology for replicating thought patterns in agent form.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 22, 2026</span>
+                        <span>📊 System Design</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="future-of-work-4-day-week-open-source.html">
+                    <div class="card-header">
+                        <span class="card-title">💼 The Future of Work</span>
+                        <span class="draft-badge">Research</span>
+                    </div>
+                    <p class="card-description">4-day work week data, AI productivity gains (7.5+ hrs/week), and the emerging Open Source Society where contribution replaces money as value metric.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 21, 2026</span>
+                        <span>📊 Future of Work</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="amazon-digital-monetization.html">
+                    <div class="card-header">
+                        <span class="card-title">💰 Amazon & Digital Monetization</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Research on monetization opportunities: Amazon Influencer, KDP, Merch, online courses, SaaS micro-products, and content-to-commerce strategies.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 17, 2026</span>
+                        <span>📊 Business Research</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="truth-vs-happiness.html">
+                    <div class="card-header">
+                        <span class="card-title">🤔 Truth vs. Happiness</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Philosophical research: When knowing the truth conflicts with being happy. Psychology, philosophy, and practical frameworks.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 16, 2026</span>
+                        <span>📊 Philosophy Research</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="system-self-messaging-framework.html">
+                    <div class="card-header">
+                        <span class="card-title">🐟 System // Self Messaging Framework</span>
+                        <span class="draft-badge">Unreviewed</span>
+                    </div>
+                    <p class="card-description">The Fish Metaphor: Most people are fish swimming in water they can't see. Framework for helping people see the systems they're in and choose consciously.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 18, 2026</span>
+                        <span>📊 Framework Development</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="problem-first-content-mapping.html">
+                    <div class="card-header">
+                        <span class="card-title">🎯 Problem-First Content Mapping</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Content strategy: Meeting the audience where they are — in the pain, not the store. Problem prompts mapped to content assets.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 18, 2026</span>
+                        <span>📊 Content Strategy</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="real-problems-sales-pitch.html">
+                    <div class="card-header">
+                        <span class="card-title">💼 Real Problems, Real Sales Pitch</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Market research: Life/business problems that systems solve. Sales pitch templates for connecting with people through their pain points.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 18, 2026</span>
+                        <span>📊 Market Research</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="realtor-market-research.html">
+                    <div class="card-header">
+                        <span class="card-title">🏠 Realtor Market Research</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Specific problems for millennial realtors in Eastern US. Documented pain points: lead follow-up, decision fatigue, AI understanding gap.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 18, 2026</span>
+                        <span>📊 Market Research</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="meal-planning-project-scope.html">
+                    <div class="card-header">
+                        <span class="card-title">🍽️ Meal Planning Project Scope</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">The "Holy Grail" family automation: 6-phase project for meal planning, inventory tracking, and grocery optimization.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 18, 2026</span>
+                        <span>📊 Project Scope</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="research-card">
+                <a href="dental-lollipop-product.html">
+                    <div class="card-header">
+                        <span class="card-title">🍭 Dental Lollipop Product</span>
+                        <span class="draft-badge">Draft</span>
+                    </div>
+                    <p class="card-description">Product concept research: A lollipop that cleans teeth while satisfying sweet cravings. Market analysis, formulation ideas, and go-to-market considerations.</p>
+                    <div class="card-meta">
+                        <span>📅 Feb 16, 2026</span>
+                        <span>📊 Product Research</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../posts/index.html">Posts</a>
+            <a href="../products/index.html">Products</a>
+            <a href="../openclaw/index.html">Operations</a>
+        </nav>
+    </div>
+</body>
+</html>

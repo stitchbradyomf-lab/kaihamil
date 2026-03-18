@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Audit | Stitch Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --info: #58a6ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            color: var(--accent-gold);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { border-color: var(--accent-gold); }
+        h1 { font-size: 1.5rem; flex: 1; }
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header h2 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-content { padding: 20px; }
+        .issue-card {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--warning);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .issue-card.fixed { border-color: var(--success); }
+        .issue-card.pending { border-color: var(--warning); }
+        .issue-title {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .issue-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        .issue-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .issue-status.fixed { background: var(--success); color: #000; }
+        .issue-status.pending { background: var(--warning); color: #000; }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .color-swatch {
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .color-swatch .hex {
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .color-swatch .name {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        .summary-box {
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .summary-box h3 {
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+        p { color: var(--text-secondary); margin-bottom: 15px; }
+        ul { margin-left: 25px; color: var(--text-secondary); }
+        li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Operations</a>
+            <h1>🎨 Style Audit</h1>
+        </header>
+
+        <div class="summary-box">
+            <h3>✅ Audit Complete</h3>
+            <p><strong>Date:</strong> February 16, 2026<br>
+            <strong>Auditor:</strong> Stitch<br>
+            <strong>Status:</strong> Content site fixed, Squarespace pending</p>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>🎯 Standardized Color Palette</h2>
+            </div>
+            <div class="section-content">
+                <div class="color-grid">
+                    <div class="color-swatch" style="background: #faf6f1; color: #3d2817;">
+                        <div class="hex">#faf6f1</div>
+                        <div class="name">Warm Cream<br>Background</div>
+                    </div>
+                    <div class="color-swatch" style="background: #3d2817; color: #faf6f1;">
+                        <div class="hex">#3d2817</div>
+                        <div class="name">Dark Brown<br>Text</div>
+                    </div>
+                    <div class="color-swatch" style="background: #d4a574; color: #3d2817;">
+                        <div class="hex">#d4a574</div>
+                        <div class="name">Amber<br>Accents</div>
+                    </div>
+                    <div class="color-swatch" style="background: #c9a227; color: #3d2817;">
+                        <div class="hex">#c9a227</div>
+                        <div class="name">Gold<br>Highlights</div>
+                    </div>
+                    <div class="color-swatch" style="background: #f4d03f; color: #3d2817;">
+                        <div class="hex">#f4d03f</div>
+                        <div class="name">Bright Gold<br>CTA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>🔧 Fixes Applied (Content Site)</h2>
+            </div>
+            <div class="section-content">
+                <div class="issue-card fixed">
+                    <div class="issue-title">Font Family Standardization</div>
+                    <div class="issue-desc">Changed from mixed fonts (Inter, system) to Roboto across all pages</div>
+                    <span class="issue-status fixed">✓ FIXED</span>
+                </div>
+                <div class="issue-card fixed">
+                    <div class="issue-title">Color Palette Unification</div>
+                    <div class="issue-desc">Standardized brown/gold theme replacing blue accents</div>
+                    <span class="issue-status fixed">✓ FIXED</span>
+                </div>
+                <div class="issue-card fixed">
+                    <div class="issue-title">Navigation Consistency</div>
+                    <div class="issue-desc">Standardized to "kai hamil" lowercase with bold surname</div>
+                    <span class="issue-status fixed">✓ FIXED</span>
+                </div>
+                <div class="issue-card fixed">
+                    <div class="issue-title">Broken Links</div>
+                    <div class="issue-desc">Fixed 84 broken links across content.kaihamil.com</div>
+                    <span class="issue-status fixed">✓ FIXED</span>
+                </div>
+                <div class="issue-card fixed">
+                    <div class="issue-title">Footer Standardization</div>
+                    <div class="issue-desc">Unified footer design across all pages</div>
+                    <span class="issue-status fixed">✓ FIXED</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>⏳ Pending (Squarespace)</h2>
+            </div>
+            <div class="section-content">
+                <div class="issue-card pending">
+                    <div class="issue-title">Font Sync</div>
+                    <div class="issue-desc">Check if Squarespace supports Roboto font via Custom CSS</div>
+                    <span class="issue-status pending">⏳ PENDING</span>
+                </div>
+                <div class="issue-card pending">
+                    <div class="issue-title">Accent Color Match</div>
+                    <div class="issue-desc">Update Squarespace accent to #f4d03f to match content site</div>
+                    <span class="issue-status pending">⏳ PENDING</span>
+                </div>
+                <div class="issue-card pending">
+                    <div class="issue-title">Logo Casing</div>
+                    <div class="issue-desc">Decide: "Kai Hamil" vs "kai hamil" consistency</div>
+                    <span class="issue-status pending">⏳ PENDING</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>📋 Typography Standards</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Headlines:</strong> Roboto Light (300) or Regular (400)</li>
+                    <li><strong>Body:</strong> Roboto Regular (400)</li>
+                    <li><strong>Labels/Buttons:</strong> Roboto Medium (500)</li>
+                    <li><strong>Code:</strong> Roboto Mono (monospace)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

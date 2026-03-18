@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtor Memory Assistant | Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --success: #3d8b37;
+            --client: #e8d5a3;
+            --property: #d4a574;
+            --observation: #c9a227;
+            --task: #3d8b37;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .badge {
+            padding: 4px 12px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-left: 15px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* Demo Layout */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 1024px) {
+            .demo-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Input Section */
+        .input-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .voice-button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--gold), var(--amber));
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .voice-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+        
+        .voice-button.recording {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .transcription-area {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 120px;
+            margin-bottom: 20px;
+        }
+        
+        .transcription-area:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .transcription-label {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .extracted-data {
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .extracted-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .extracted-item:last-child { border-bottom: none; }
+        
+        .extracted-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .extracted-icon.client { background: var(--client); }
+        .extracted-icon.property { background: var(--property); }
+        .extracted-icon.observation { background: var(--observation); }
+        .extracted-icon.task { background: var(--task); color: white; }
+        
+        .extracted-content { flex: 1; }
+        .extracted-label {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+        }
+        .extracted-value {
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        /* Graph Section */
+        .graph-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        #graph-container {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #faf6f1, #f5f0e8);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        /* Query Section */
+        .query-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .query-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .query-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .query-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .query-chip {
+            padding: 8px 16px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .query-chip:hover {
+            border-color: var(--gold);
+            background: var(--gold-light);
+        }
+        
+        .query-results {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--bg-cream);
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .query-results.active { display: block; }
+        
+        .result-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .result-title { font-weight: 500; margin-bottom: 5px; }
+        .result-meta { font-size: 0.85rem; color: var(--brown-medium); }
+        
+        /* Demo Scenarios */
+        .demo-scenarios {
+            margin-top: 30px;
+            padding: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        
+        .scenario-button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .scenario-button:hover {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+        }
+        
+        .scenario-title { font-weight: 500; margin-bottom: 5px; }
+        .scenario-desc { font-size: 0.9rem; color: var(--brown-medium); }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <span class="badge">Prototype</span>
+    </nav>
+    
+    <header class="hero">
+        <h1>Realtor <strong>Memory Assistant</strong></h1>
+        <p>Never lose a client detail again. Capture conversations, connect insights, retrieve what matters — instantly.</p>
+    </header>
+    
+    <main class="container">
+        <div class="demo-grid">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2 class="section-title">🎤 Capture Conversation</h2>
+                
+                <button class="voice-button" id="voiceBtn" onclick="toggleRecording()">
+                    <span id="voiceIcon">🎤</span>
+                    <span id="voiceText">Tap to Record</span>
+                </button>
+                
+                <div class="transcription-label">Transcribed Text (editable)</div>
+                <div class="transcription-area" id="transcription" contenteditable="true">
+                    Just showed 123 Maple Street to the Johnsons. Kids loved the backyard, Sarah worried about the school district. Need to send them the GreatSchools ratings. Also mentioned the kitchen needs updating—might be a negotiation point. Follow up by Thursday.
+                </div>
+                
+                <div class="extracted-data">
+                    <div class="section-title" style="font-size: 1rem;">🔍 Extracted Intelligence</div>
+                    <div class="extracted-item">
+                        <div class="extracted-icon client">👤</div>
+                        <div class="extracted-content">
+                            <div class="extracted-label">Client</div>
+                            <div class="extracted-value">Johnson Family</div>
+                        </div>
+                    </div>
+                    <div class="extracted-item">
+                        <div class="extracted-icon property">🏠</div>
+                        <div class="extracted-content">
+                            <div class="extracted-label">Property</div>
+                            <div class="extracted-value">123 Maple Street</div>
+                        </div>
+                    </div>
+                    <div class="extracted-item">
+                        <div class="extracted-icon observation">💭</div>
+                        <div class="extracted-content">
+                            <div class="extracted-label">Key Observations</div>
+                            <div class="extracted-value">Kids loved backyard • School district concern • Kitchen needs updates</div>
+                        </div>
+                    </div>
+                    <div class="extracted-item">
+                        <div class="extracted-icon task">✓</div>
+                        <div class="extracted-content">
+                            <div class="extracted-label">Follow-up Task</div>
+                            <div class="extracted-value">Send GreatSchools ratings by Thursday</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Graph & Query Section -->
+            <div class="graph-section">
+                <h2 class="section-title">🕸️ Your Knowledge Graph</h2>
+                <div id="graph-container"></div>
+                
+                <div class="query-section">
+                    <div class="section-title" style="font-size: 1rem; margin-bottom: 15px;">💬 Ask Your Data</div>
+                    <input type="text" class="query-input" id="queryInput" placeholder="Who's looking for 4 bedrooms?" onkeypress="handleQuery(event)">
+                    <div class="query-suggestions">
+                        <span class="query-chip" onclick="runQuery('Who needs school district info?')">Who needs school district info?</span>
+                        <span class="query-chip" onclick="runQuery('Show me all Colonial buyers')">Show me all Colonial buyers</span>
+                        <span class="query-chip" onclick="runQuery('Who viewed 123 Maple?')">Who viewed 123 Maple?</span>
+                        <span class="query-chip" onclick="runQuery('What are my follow-ups for tomorrow?')">What are my follow-ups for tomorrow?</span>
+                    </div>
+                    <div class="query-results" id="queryResults"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Demo Scenarios -->
+        <div class="demo-scenarios">
+            <h2 class="section-title">📱 Try These Demo Scenarios</h2>
+            <button class="scenario-button" onclick="loadScenario('johnsons')">
+                <div class="scenario-title">Scenario 1: The Johnson Family</div>
+                <div class="scenario-desc">First-time buyers, 2 kids, concerned about schools, budget $650K</div>
+            </button>
+            <button class="scenario-button" onclick="loadScenario('smiths')">
+                <div class="scenario-title">Scenario 2: The Smiths (Empty Nesters)</div>
+                <div class="scenario-desc">Downsizing, want single-level, close to downtown, budget $800K</div>
+            </button>
+            <button class="scenario-button" onclick="loadScenario('patel')">
+                <div class="scenario-title">Scenario 3: The Patels (Investors)</div>
+                <div class="scenario-desc">Looking for rental properties, cash buyers, ROI-focused</div>
+            </button>
+        </div>
+    </main>
+    
+    <footer>
+        <p><strong>Demo Mode:</strong> This prototype simulates voice-to-text, entity extraction, and knowledge graph visualization.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">Production version integrates Whisper API, GPT-4 entity extraction, and persistent graph database.</p>
+    </footer>
+    
+    <script>
+        // Demo Data
+        const scenarios = {
+            johnsons: {
+                transcription: "Just showed 123 Maple Street to the Johnsons. Kids loved the backyard, Sarah worried about the school district. Need to send them the GreatSchools ratings. Also mentioned the kitchen needs updating—might be a negotiation point. Follow up by Thursday.",
+                extracted: {
+                    client: "Johnson Family",
+                    property: "123 Maple Street",
+                    observations: "Kids loved backyard • School district concern • Kitchen needs updates",
+                    task: "Send GreatSchools ratings by Thursday"
+                }
+            },
+            smiths: {
+                transcription: "Met the Smiths at 456 Oak Lane. Love the single-level layout but concerned about the HOA fees. They're comparing this to the condo downtown. Need to get them the HOA docs and schedule a second showing. Timeline is 60 days.",
+                extracted: {
+                    client: "Smith Family",
+                    property: "456 Oak Lane",
+                    observations: "Love single-level • Concerned about HOA fees • Comparing to downtown condo",
+                    task: "Send HOA docs and schedule second showing"
+                }
+            },
+            patel: {
+                transcription: "Showing to the Patels at 789 Pine Ave. They're investors—looking at rental potential. Asked about comparable rents in the area. Property is priced at $450K, needs about $30K in cosmetic updates. They want to see 2 more properties this weekend.",
+                extracted: {
+                    client: "Patel Family",
+                    property: "789 Pine Ave",
+                    observations: "Investor buyers • Rental potential focus • Cosmetic updates needed",
+                    task: "Send comparable rents and schedule 2 more showings"
+                }
+            }
+        };
+        
+        // Voice Recording Simulation
+        let isRecording = false;
+        
+        function toggleRecording() {
+            const btn = document.getElementById('voiceBtn');
+            const icon = document.getElementById('voiceIcon');
+            const text = document.getElementById('voiceText');
+            
+            if (!isRecording) {
+                isRecording = true;
+                btn.classList.add('recording');
+                icon.textContent = '⏹️';
+                text.textContent = 'Recording... (tap to stop)';
+                
+                // Simulate transcription after 3 seconds
+                setTimeout(() => {
+                    if (isRecording) {
+                        toggleRecording();
+                    }
+                }, 3000);
+            } else {
+                isRecording = false;
+                btn.classList.remove('recording');
+                icon.textContent = '🎤';
+                text.textContent = 'Tap to Record';
+            }
+        }
+        
+        // Load Scenario
+        function loadScenario(scenarioKey) {
+            const scenario = scenarios[scenarioKey];
+            document.getElementById('transcription').textContent = scenario.transcription;
+            
+            // Update extracted data display
+            const extractedContainer = document.querySelector('.extracted-data');
+            extractedContainer.innerHTML = `
+                <div class="section-title" style="font-size: 1rem;">🔍 Extracted Intelligence</div>
+                <div class="extracted-item">
+                    <div class="extracted-icon client">👤</div>
+                    <div class="extracted-content">
+                        <div class="extracted-label">Client</div>
+                        <div class="extracted-value">${scenario.extracted.client}</div>
+                    </div>
+                </div>
+                <div class="extracted-item">
+                    <div class="extracted-icon property">🏠</div>
+                    <div class="extracted-content">
+                        <div class="extracted-label">Property</div>
+                        <div class="extracted-value">${scenario.extracted.property}</div>
+                    </div>
+                </div>
+                <div class="extracted-item">
+                    <div class="extracted-icon observation">💭</div>
+                    <div class="extracted-content">
+                        <div class="extracted-label">Key Observations</div>
+                        <div class="extracted-value">${scenario.extracted.observations}</div>
+                    </div>
+                </div>
+                <div class="extracted-item">
+                    <div class="extracted-icon task">✓</div>
+                    <div class="extracted-content">
+                        <div class="extracted-label">Follow-up Task</div>
+                        <div class="extracted-value">${scenario.extracted.task}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Re-render graph with new data
+            renderGraph(scenarioKey);
+        }
+        
+        // D3 Graph Visualization
+        function renderGraph(scenarioKey = 'johnsons') {
+            const container = document.getElementById('graph-container');
+            container.innerHTML = '';
+            
+            const width = container.clientWidth;
+            const height = 400;
+            
+            const svg = d3.select('#graph-container')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+            
+            // Sample data based on scenario
+            const nodes = [
+                { id: 'You', type: 'agent', r: 25 },
+                { id: scenarioKey === 'johnsons' ? 'Johnsons' : scenarioKey === 'smiths' ? 'Smiths' : 'Patels', type: 'client', r: 30 },
+                { id: scenarioKey === 'johnsons' ? '123 Maple' : scenarioKey === 'smiths' ? '456 Oak' : '789 Pine', type: 'property', r: 25 },
+                { id: 'Schools', type: 'topic', r: 20 },
+                { id: 'Budget', type: 'topic', r: 20 },
+                { id: 'Timeline', type: 'topic', r: 20 }
+            ];
+            
+            const links = [
+                { source: 'You', target: nodes[1].id },
+                { source: nodes[1].id, target: nodes[2].id },
+                { source: nodes[1].id, target: 'Budget' },
+                { source: nodes[1].id, target: 'Timeline' },
+                { source: nodes[2].id, target: 'Schools' }
+            ];
+            
+            const simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(80))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2));
+            
+            // Draw links
+            svg.append('g')
+                .selectAll('line')
+                .data(links)
+                .join('line')
+                .attr('stroke', '#c9a227')
+                .attr('stroke-opacity', 0.6)
+                .attr('stroke-width', 2);
+            
+            // Draw nodes
+            const node = svg.append('g')
+                .selectAll('g')
+                .data(nodes)
+                .join('g')
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+            
+            const colorMap = {
+                agent: '#3d2817',
+                client: '#e8d5a3',
+                property: '#d4a574',
+                topic: '#c9a227'
+            };
+            
+            node.append('circle')
+                .attr('r', d => d.r)
+                .attr('fill', d => colorMap[d.type])
+                .attr('stroke', '#3d2817')
+                .attr('stroke-width', 2);
+            
+            node.append('text')
+                .text(d => d.id)
+                .attr('text-anchor', 'middle')
+                .attr('dy', d => d.r + 15)
+                .attr('font-size', '11px')
+                .attr('fill', '#3d2817');
+            
+            simulation.on('tick', () => {
+                svg.selectAll('line')
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+                
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+            
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+            
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+            
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+        
+        // Query Handling
+        function handleQuery(event) {
+            if (event.key === 'Enter') {
+                runQuery(event.target.value);
+            }
+        }
+        
+        function runQuery(query) {
+            const resultsDiv = document.getElementById('queryResults');
+            const input = document.getElementById('queryInput');
+            input.value = query;
+            
+            // Simulate query results
+            let results = '';
+            
+            if (query.toLowerCase().includes('school')) {
+                results = `
+                    <div class="result-item">
+                        <div class="result-title">Johnson Family</div>
+                        <div class="result-meta">Viewed 123 Maple • Concerned about school district • Follow-up: Send GreatSchools ratings by Thursday</div>
+                    </div>
+                `;
+            } else if (query.toLowerCase().includes('colonial') || query.toLowerCase().includes('4 bedroom')) {
+                results = `
+                    <div class="result-item">
+                        <div class="result-title">Johnson Family</div>
+                        <div class="result-meta">Looking for 4BR Colonial • Budget $650K • School district priority</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-title">Martinez Family</div>
+                        <div class="result-meta">Viewed 2 Colonials last week • Waiting on mortgage pre-approval</div>
+                    </div>
+                `;
+            } else if (query.toLowerCase().includes('123 maple')) {
+                results = `
+                    <div class="result-item">
+                        <div class="result-title">Johnson Family</div>
+                        <div class="result-meta">Viewed Feb 26 • Kids loved backyard • Kitchen needs updates</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-title">Chen Family</div>
+                        <div class="result-meta">Viewed Feb 20 • Too small for their needs • Passed</div>
+                    </div>
+                `;
+            } else {
+                results = `
+                    <div class="result-item">
+                        <div class="result-title">3 clients have follow-ups scheduled</div>
+                        <div class="result-meta">Johnson (Thursday) • Smith (Friday) • Patel (Weekend)</div>
+                    </div>
+                `;
+            }
+            
+            resultsDiv.innerHTML = results;
+            resultsDiv.classList.add('active');
+        }
+        
+        // Initialize
+        renderGraph();
+    </script>
+</body>
+</html>

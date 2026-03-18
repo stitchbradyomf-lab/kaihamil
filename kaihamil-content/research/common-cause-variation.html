@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Cause Variation | Research | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --system-blue: #58a6ff;
+            --system-blue-dim: #388bfd;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-primary) 80%, transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            color: var(--accent-gold); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent-gold); }
+        
+        /* Article Header */
+        .article-header {
+            padding: 140px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        
+        .article-meta {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--system-blue);
+            margin-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 500;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .article-content p {
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-primary);
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 60px 0 24px;
+            color: var(--text-primary);
+        }
+        
+        .article-content h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 40px 0 20px;
+            color: var(--system-blue);
+        }
+        
+        .article-content strong {
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+        
+        .article-content em {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        /* Concept Box */
+        .concept-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .concept-box h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-gold);
+        }
+        
+        .concept-box ul {
+            margin: 0;
+            padding-left: 24px;
+        }
+        
+        .concept-box li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .comparison-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comparison-card.common h4 { color: var(--success); }
+        .comparison-card.special h4 { color: var(--danger); }
+        
+        .comparison-card .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .comparison-card.common .icon { background: rgba(63, 185, 80, 0.2); }
+        .comparison-card.special .icon { background: rgba(248, 81, 73, 0.2); }
+        
+        .comparison-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: var(--text-secondary);
+        }
+        
+        .comparison-card ul {
+            margin: 12px 0 0 0;
+            padding-left: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .comparison-card li {
+            margin-bottom: 6px;
+        }
+        
+        /* Example Box */
+        .example-box {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(88, 166, 255, 0.05) 100%);
+            border-left: 4px solid var(--system-blue);
+            padding: 24px 28px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .example-box h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--system-blue);
+            margin-bottom: 12px;
+        }
+        
+        .example-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Action Box */
+        .action-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .action-box h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .action-box p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .action-box .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--system-blue);
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .action-box .btn:hover {
+            filter: brightness(1.1);
+        }
+        
+        /* Key Insight */
+        .key-insight {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.1) 0%, rgba(244, 208, 63, 0.05) 100%);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .key-insight h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+        }
+        
+        .key-insight p {
+            font-size: 1.15rem;
+            margin-bottom: 0;
+            color: var(--text-primary);
+        }
+        
+        /* Related Links */
+        .related-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 12px;
+        }
+        
+        .related-section h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .related-link {
+            display: block;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        
+        .related-link:hover {
+            border-color: var(--system-blue);
+            background: var(--bg-card);
+        }
+        
+        .related-link .title {
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .related-link .desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Footer Note */
+        .footer-note {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .article-header { padding: 100px 20px 40px; }
+            .article-content { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">System</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="article-header">
+        <p class="article-meta">Research // Systems Thinking</p>
+        <h1>Common Cause vs Special Cause Variation</h1>
+        <p class="article-subtitle">How to tell the difference between normal fluctuations and signals that require action. From manufacturing to management, this distinction prevents overreaction and missed opportunities.</p>
+    </header>
+    
+    <article class="article-content">
+        <p>A customer complains about slow service. A sales number drops from last month. A team member seems less engaged in meetings.</p>
+
+        <p>The instinctive response: fix it. Investigate, intervene, solve. But this reflex often creates more problems than it solves.</p>
+
+        <p><strong>The core skill is distinguishing two fundamentally different types of variation:</strong></p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card common">
+                <h4><span class="icon">◯</span> Common Cause</h4>
+                <p>Normal, inherent variation in a stable system. The system is working as designed.</p>
+                <ul>
+                    <li>Random fluctuations around a mean</li>
+                    <li>Present in all systems</li>
+                    <li>Not worth reacting to individually</li>
+                    <li>Reduce by improving the system</li>
+                </ul>
+            </div>
+            <div class="comparison-card special">
+                <h4><span class="icon">⚠</span> Special Cause</h4>
+                <p>External factors acting on the system. Something has changed.</p>
+                <ul>
+                    <li>Outside normal variation</li>
+                    <li>Traceable to a specific cause</li>
+                    <li>Warrants investigation</li>
+                    <li>Remove the cause, don't blame the system</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>The Cost of Confusion</h2>
+
+        <p>When you treat common cause as special cause, you overreact. You chase shadows. You "fix" things that aren't broken, introducing instability into a stable system. This is tampering.</p>
+
+        <p>When you treat special cause as common cause, you underreact. You miss signals. You let real problems fester because you assume they're just noise.</p>
+
+        <div class="example-box">
+            <h4>Example: The Overreacting Manager</h4>
+            <p>Monthly sales fluctuate between $95K and $105K around an average of $100K. This is common cause variation—the natural ebb and flow of business.</p>
+            <p>A manager sees the $95K month and demands explanations, launches initiatives, pressures the team. The next month, sales hit $103K. The manager claims the initiatives worked. In reality, they just reverted to the mean. The team is exhausted, confused, and losing trust.</p>
+        </div>
+
+        <h2>How to Tell the Difference</h2>
+
+        <p>W. Edwards Deming popularized control charts as the tool for this distinction. The principle: plot your data over time, calculate the natural variation range, and flag anything outside that range.</p>
+
+        <h3>The Control Limits</h3>
+
+        <div class="concept-box">
+            <h4>Upper and Lower Control Limits</h4>
+            <ul>
+                <li><strong>Upper Control Limit (UCL):</strong> Mean + 3 standard deviations</li>
+                <li><strong>Lower Control Limit (LCL):</strong> Mean - 3 standard deviations</li>
+                <li><strong>Zone of Normal Variation:</strong> Everything between UCL and LCL</li>
+            </ul>
+            <p style="margin-top: 16px;"><strong>Rule of thumb:</strong> About 99.7% of common cause variation falls within these limits. Anything outside is likely special cause.</p>
+        </div>
+
+        <h3>Additional Signals</h3>
+
+        <p>Points outside the limits aren't the only sign of special cause. Watch for:</p>
+
+        <ul>
+            <li><strong>Runs:</strong> 8 consecutive points above or below the center line</li>
+            <li><strong>Trends:</strong> 6 consecutive points steadily increasing or decreasing</li>
+            <li><strong>Cycles:</strong> Repeating patterns that suggest systematic influences</li>
+            <li><strong>Clustering:</strong> Too many points near the limits</li>
+        </ul>
+
+        <div class="example-box">
+            <h4>Example: The Signal in Support Tickets</h4>
+            <p>A support team's ticket volume hovers between 45-65 per day. One day, tickets spike to 85. Is this special cause?</p>
+            <p>Plot the last 20 days. The mean is 55, standard deviation is 6. UCL = 55 + 18 = 73. The 85 ticket day is above the upper control limit. This is special cause—something specific happened.</p>
+            <p>Investigation reveals a product update broke a key feature. Fix the feature, the spike disappears. Don't blame the support team for "falling behind."</p>
+        </div>
+
+        <h2>Applying This to Daily Life</h2>
+
+        <p>The framework applies far beyond manufacturing and support metrics:</p>
+
+        <h3>Personal Productivity</h3>
+
+        <p>Your daily deep work hours vary: some days 2 hours, some days 5, average 3.5. A day with only 1 hour isn't necessarily a crisis—it's within normal variation. But 5 days under 1.5 hours? That's a signal. Something changed.</p>
+
+        <h3>Health Metrics</h3>
+
+        <p>Your resting heart rate averages 62 bpm, varying between 58-66. One day it's 70. Normal fluctuation. But a week trending upward from 62 to 72? Pattern. Time to investigate sleep, stress, or illness.</p>
+
+        <h3>Relationships</h3>
+
+        <p>Conversations with your partner have normal variation—some deep, some surface. But 3 weeks of conflict, withdrawal, or disconnection? That's outside the normal range. Something shifted.</p>
+
+        <div class="key-insight">
+            <h4>Key Insight</h4>
+            <p>The question isn't "Is this good or bad?" It's "Is this within normal system behavior, or does it indicate something changed?" React to the former by improving the system. React to the latter by finding and addressing the specific cause.</p>
+        </div>
+
+        <h2>The AI Angle</h2>
+
+        <p>AI excels at pattern recognition across time series. You can use it to:</p>
+
+        <ol>
+            <li><strong>Generate control charts:</strong> Feed your data, get limits calculated automatically</li>
+            <li><strong>Flag anomalies:</strong> Identify points and patterns that deviate from baseline</li>
+            <li><strong>Distinguish signal from noise:</strong> Classify events before you emotionally react</li>
+        </ol>
+
+        <p>But the judgment call remains human. AI can tell you what's outside normal limits. You decide what to do about it.</p>
+
+        <h2>The Tool</h2>
+
+        <div class="action-box">
+            <h4>Try the Control Chart Evaluator</h4>
+            <p>Input your data series and see what's common cause, what's special cause, and what deserves your attention.</p>
+            <a href="/tools/control-chart-evaluator.html" class="btn">Open Evaluator →</a>
+        </div>
+
+        <div class="footer-note">
+            <p>This framework originates from Walter Shewhart's work on statistical process control at Bell Labs in the 1920s, later popularized by W. Edwards Deming. It's foundational to quality management, Six Sigma, and modern data science. The core insight—distinguishing signal from noise—has applications far beyond manufacturing.</p>
+        </div>
+
+        <div class="related-section">
+            <h4>Continue Exploring</h4>
+            <div class="related-grid">
+                <a href="/tools/control-chart-evaluator.html" class="related-link">
+                    <div class="title">Control Chart Evaluator</div>
+                    <div class="desc">Interactive tool to classify your data</div>
+                </a>
+                <a href="/frameworks/cause-effect.html" class="related-link">
+                    <div class="title">Cause & Effect</div>
+                    <div class="desc">Understand chains of causation</div>
+                </a>
+                <a href="/wisdom/uncertainty.html" class="related-link">
+                    <div class="title">When Everything Shifts</div>
+                    <div class="desc">Navigating uncertainty and change</div>
+                </a>
+                <a href="/frameworks/5-filters.html" class="related-link">
+                    <div class="title">5 Filters Framework</div>
+                    <div class="desc">Decision-making under uncertainty</div>
+                </a>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

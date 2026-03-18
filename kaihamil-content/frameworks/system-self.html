@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System // Self | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 40px 0 20px;
+        }
+        
+        p {
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .concept-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .concept-box h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        
+        .concept-box p {
+            margin: 0;
+        }
+        
+        .integration {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 35px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .integration h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .concept-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← All Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Core Philosophy</span>
+        <h1>System <strong>//</strong> Self</h1>
+        <p>The harmony between external infrastructure and internal clarity</p>
+    </header>
+    
+    <main class="container">
+        <h2>The Two Domains</h2>
+        <p>You can't optimize one without the other. A perfect productivity system doesn't matter if you're burned out. All the mindfulness in the world won't save you if your tools are fighting you.</p>
+        
+        <div class="concept-grid">
+            <div class="concept-box">
+                <h3>System</h3>
+                <p>The external. Workflows, automations, how you organize information and make decisions. The infrastructure that either supports you or drains you.</p>
+            </div>
+            <div class="concept-box">
+                <h3>Self</h3>
+                <p>The internal. Clarity, capacity, space to think and create and be present. The version of you that shows up when you're not fighting your tools.</p>
+            </div>
+        </div>
+        
+        <div class="integration">
+            <h3>⚖️ The Integration</h3>
+            <p>AI fits right in the middle. It's not coming for your job. It's coming for your busywork. The question is what you'll build in the space that opens up.</p>
+            <p style="margin-top: 20px; font-weight: 500; color: var(--brown-dark);">Agency through Automation — Automate what you have to do, so you have agency to do what you want to do.</p>
+        </div>
+        
+        <h2>How to Apply</h2>
+        <p>When evaluating any tool, system, or change: ask how it affects both domains. Does this improve my System without depleting my Self? Does it create space for my Self by optimizing my System?</p>
+        <p>The goal isn't productivity. It's presence. Systems are just how we get there.</p>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+    </footer>
+</body>
+</html>

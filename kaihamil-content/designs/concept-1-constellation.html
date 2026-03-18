@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 1: The Constellation | Kai Hamil Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 40px;
+            position: relative;
+        }
+        
+        .tagline {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--brown-dark);
+            max-width: 800px;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .tagline-accent {
+            color: var(--gold);
+            font-weight: 400;
+        }
+        
+        .sub-tagline {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            max-width: 500px;
+        }
+        
+        /* Constellation Container */
+        .constellation {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 100px;
+            min-height: 600px;
+        }
+        
+        /* Central Shape - Hexagon */
+        .center-shape {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 320px;
+            z-index: 1;
+        }
+        
+        .hexagon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-cream) 100%);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            border: 2px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(61, 40, 23, 0.1);
+        }
+        
+        .hex-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hex-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--brown-dark);
+            line-height: 1.4;
+        }
+        
+        .hex-sub {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-top: 10px;
+        }
+        
+        /* Constellation Lines SVG */
+        .constellation-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .constellation-lines line {
+            stroke: var(--border);
+            stroke-width: 1;
+            opacity: 0.6;
+        }
+        
+        /* Section Nodes */
+        .section-node {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .section-node:hover {
+            transform: scale(1.05);
+        }
+        
+        .node-outer {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--amber);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(61, 40, 23, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .section-node:hover .node-outer {
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.15);
+        }
+        
+        .node-label {
+            margin-top: 15px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        .node-desc {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            max-width: 150px;
+            margin-top: 5px;
+            line-height: 1.3;
+        }
+        
+        /* Node Positions - Constellation Layout */
+        .node-posts { top: 5%; left: 50%; transform: translateX(-50%); }
+        .node-research { top: 25%; right: 10%; }
+        .node-frameworks { bottom: 25%; right: 15%; }
+        .node-products { bottom: 5%; left: 50%; transform: translateX(-50%); }
+        .node-briefs { bottom: 25%; left: 15%; }
+        .node-diagrams { top: 25%; left: 10%; }
+        .node-library { top: 50%; right: 5%; transform: translateY(-50%); }
+        .node-operations { top: 50%; left: 5%; transform: translateY(-50%); }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tagline { font-size: 2rem; }
+            .constellation { min-height: 800px; }
+            .center-shape { width: 200px; height: 230px; }
+            .section-node { position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; transform: none !important; margin: 20px; }
+            .constellation-lines { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/about.html">About</a>
+            <a href="mailto:hello@kaihamil.com">Contact</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1 class="tagline">
+            See the <span class="tagline-accent">water</span> you're swimming in
+        </h1>
+        <p class="sub-tagline">
+            Frameworks and systems for understanding yourself and the world around you.
+        </p>
+    </header>
+    
+    <main class="constellation">
+        <!-- SVG Lines -->
+        <svg class="constellation-lines" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+            <!-- Connect to center hexagon -->
+            <line x1="600" y1="100" x2="600" y2="180" />
+            <line x1="950" y1="150" x2="750" y2="220" />
+            <line x1="950" y1="450" x2="750" y2="380" />
+            <line x1="600" y1="500" x2="600" y2="420" />
+            <line x1="250" y1="450" x2="450" y2="380" />
+            <line x1="250" y1="150" x2="450" y2="220" />
+            <line x1="1080" y1="300" x2="800" y2="300" />
+            <line x1="120" y1="300" x2="400" y2="300" />
+            <!-- Cross connections -->
+            <line x1="600" y1="100" x2="950" y1="150" opacity="0.3"/>
+            <line x1="950" y1="150" x2="1080" y1="300" opacity="0.3"/>
+            <line x1="1080" y1="300" x2="950" y1="450" opacity="0.3"/>
+            <line x1="950" y1="450" x2="600" y1="500" opacity="0.3"/>
+            <line x1="600" y1="500" x2="250" y1="450" opacity="0.3"/>
+            <line x1="250" y1="450" x2="120" y1="300" opacity="0.3"/>
+            <line x1="120" y1="300" x2="250" y1="150" opacity="0.3"/>
+            <line x1="250" y1="150" x2="600" y1="100" opacity="0.3"/>
+        </svg>
+        
+        <!-- Central Hexagon -->
+        <div class="center-shape">
+            <div class="hexagon">
+                <div class="hex-icon">◈</div>
+                <div class="hex-text">System // Self</div>
+                <div class="hex-sub">External infrastructure<br>Internal clarity</div>
+            </div>
+        </div>
+        
+        <!-- Section Nodes -->
+        <a href="/posts/" class="section-node node-posts">
+            <div class="node-outer">✍</div>
+            <div class="node-label">Posts</div>
+            <div class="node-desc">Essays & articles</div>
+        </a>
+        
+        <a href="/research/" class="section-node node-research">
+            <div class="node-outer">🔬</div>
+            <div class="node-label">Research</div>
+            <div class="node-desc">Raw notes & drafts</div>
+        </a>
+        
+        <a href="/frameworks/" class="section-node node-frameworks">
+            <div class="node-outer">◫</div>
+            <div class="node-label">Frameworks</div>
+            <div class="node-desc">Thinking tools</div>
+        </a>
+        
+        <a href="/products/" class="section-node node-products">
+            <div class="node-outer">⚡</div>
+            <div class="node-label">Products</div>
+            <div class="node-desc">Tools for action</div>
+        </a>
+        
+        <a href="/briefs/" class="section-node node-briefs">
+            <div class="node-outer">📋</div>
+            <div class="node-label">Briefs</div>
+            <div class="node-desc">Quick insights</div>
+        </a>
+        
+        <a href="/diagrams/" class="section-node node-diagrams">
+            <div class="node-outer">◈</div>
+            <div class="node-label">Diagrams</div>
+            <div class="node-desc">Visual thinking</div>
+        </a>
+        
+        <a href="/library/" class="section-node node-library">
+            <div class="node-outer">📚</div>
+            <div class="node-label">Library</div>
+            <div class="node-desc">Curated resources</div>
+        </a>
+        
+        <a href="/openclaw/" class="section-node node-operations">
+            <div class="node-outer">⚙</div>
+            <div class="node-label">Operations</div>
+            <div class="node-desc">Behind the scenes</div>
+        </a>
+    </main>
+    
+    <footer>
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

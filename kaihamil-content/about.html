@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-bright: #f4d03f;
+            --border: #e8dfd3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .site-title strong {
+            font-weight: 500;
+        }
+        
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .site-nav a:hover,
+        .site-nav a.active {
+            opacity: 1;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+        
+        @media (max-width: 800px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 em {
+            color: var(--gold-bright);
+            font-style: normal;
+        }
+        
+        /* Main Content */
+        .content h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 40px 0 20px;
+            color: var(--brown-dark);
+        }
+        
+        .content h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--brown-medium);
+        }
+        
+        .content p {
+            margin-bottom: 20px;
+            color: var(--brown-medium);
+        }
+        
+        .hook {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin: 30px 0;
+        }
+        
+        .system-self-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .system-self-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .concept-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .concept-box h4 {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        
+        .concept-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .cta-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .cta-section h3 {
+            margin-top: 0;
+            color: var(--brown-dark);
+        }
+        
+        .cta-links {
+            list-style: none;
+            margin: 20px 0 0;
+        }
+        
+        .cta-links li {
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+        
+        .cta-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .cta-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .closing-line {
+            font-style: italic;
+            color: var(--brown-medium);
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            align-self: start;
+        }
+        
+        .sidebar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-quote {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--brown-dark);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-tagline {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .quick-facts {
+            list-style: none;
+            margin: 0;
+        }
+        
+        .quick-facts li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .quick-facts li:last-child {
+            border-bottom: none;
+        }
+        
+        .quick-facts strong {
+            color: var(--brown-dark);
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 3px;
+        }
+        
+        /* Footer */
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-brand {
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand h2 {
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+        
+        .footer-brand h2 strong {
+            font-weight: 500;
+        }
+        
+        .footer-brand p {
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        
+        .footer-nav a:hover {
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/about.html" class="active">About</a>
+                <a href="https://kaihamil.substack.com">Writing</a>
+                <a href="/">Content</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>We combine <em>agentic AI systems</em> with <em>thinking frameworks</em> to help you make decisions that lead you to where you want to go in life. Wherever that may be.</h1>
+        <p style="margin-top: 20px; font-size: 1.1rem; color: var(--gold-bright); font-weight: 300; opacity: 0.9;">Agency through Automation</p>
+    </section>
+
+    <div class="main-container">
+        <main class="content">
+            <p class="hook">The future is already here. Most people are just using it wrong.</p>
+
+            <p>You've heard the noise: AI will replace us. AI will save us. The truth is more interesting—and more practical. AI is a lever. It amplifies whatever you point it at. The question is whether you're pointing it at the right things.</p>
+
+            <p>I'm <strong>Kyle Joseph Brady</strong>, CEO of Kai Hamil. I study the collision between human systems and technological ones. Not as an academic exercise. Because I believe the people who learn to work <em>with</em> AI—not for it or against it—will build lives that are more spacious, more creative, more fully human.</p>
+
+            <p>Not because they'll be replaced if they don't. Because there's a better version of how we spend our days, and it's available now.</p>
+
+            <h2>What "System // Self" Actually Means</h2>
+
+            <div class="system-self-grid">
+                <div class="concept-box">
+                    <h4>System</h4>
+                    <p>The external. The workflows, the automations, the way you organize information and make decisions. The infrastructure that either supports you or drains you.</p>
+                </div>
+                <div class="concept-box">
+                    <h4>Self</h4>
+                    <p>The internal. The clarity, the capacity, the space to think and create and be present. The version of you that shows up when you're not fighting your tools.</p>
+                </div>
+            </div>
+
+            <p>In order to work more effectively with AI, human intelligence also has to evolve. Systems thinking allows us to see patterns and structure rather than isolated events. It allows us to better understand cause and effect, steering our actions and thoughts toward the direction we want to go.</p>
+
+            <img src="MEDIA:./media/inbound/file_30---d86c77d9-0d45-42de-8132-858d2b3bcd73.jpg" alt="AI systems visualization" style="width: 100%; max-width: 600px; margin: 30px auto; display: block; border-radius: 8px;">
+
+            <p>You can't optimize one without the other. A perfect productivity system doesn't matter if you're burned out. All the mindfulness in the world won't save you if your tools are fighting you.</p>
+
+            <p>AI fits right in the middle. It's not coming for your job. It's coming for your busywork. The question is what you'll build in the space that opens up.</p>
+
+            <h2>What Kai Hamil Does</h2>
+
+            <h3>Research & Frameworks</h3>
+            <p>We dig into complex problems—relationships, work, decision-making, the future of human agency—and find the signal in the noise. Then we build frameworks that help you think more clearly about messy situations.</p>
+
+            <h3>Practical AI Integration</h3>
+            <p>Not for tech bros. For real humans who want to use AI as a thinking partner, not a replacement. Guides that actually work in your actual life.</p>
+
+            <h3>The Through-Line</h3>
+            <p>Everything we create points toward the same goal: moving from overwhelm to clarity. From reacting to choosing. From managing your time to owning your attention.</p>
+
+            <h2>The Bigger Picture</h2>
+
+            <p>We're drowning in information and starving for wisdom. We believe we're at a moment where we decide what kind of future we want.</p>
+
+            <p>One where AI concentrates power in the hands of a few. Or one where it democratizes capability for the many.</p>
+
+            <p>Kai Hamil is betting on the second one. Because the people who learn to work with these tools—not be ruled by them—are the ones who will thrive.</p>
+
+            <p>Not because they have to. Because they want to.</p>
+
+            <h2>Who We Are</h2>
+
+            <p><strong>Kyle Joseph Brady</strong> — CEO. The human in the loop. I set the vision, make the calls, and ensure everything we build serves real human needs. I'm the one you'll talk to.</p>
+
+            <p><strong>Stitch</strong> — COO. My AI collaborator. Stitch handles operations, research, content production, and technical execution. Think of Stitch as the chief of staff who happens to be an agentic AI system.</p>
+
+            <p>Together, we operate Kai Hamil as a new kind of entity: a human-AI partnership built to help others navigate the same transition.</p>
+
+            <div class="cta-section">
+                <h3>How to Work With Us</h3>
+                <ul class="cta-links">
+                    <li><strong>Read</strong> — Subscribe to <a href="https://kaihamil.substack.com">the feed</a> for essays that take 20 minutes to read and weeks to digest.</li>
+                    <li><strong>Use</strong> — Grab a <a href="/frameworks/">framework</a> when you're facing a decision that matters.</li>
+                    <li><strong>Connect</strong> — Reach out if you're building something interesting in the human-AI collaboration space. I actually read my email.</li>
+                </ul>
+            </div>
+
+            <p class="closing-line">The goal isn't to become more productive. It's to become more present. Systems are just how we get there.</p>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>In a Nutshell</h3>
+                <p class="sidebar-quote" style="font-style: italic;">"Agency through Automation"</p>
+                <p class="sidebar-tagline">Automate what you have to do. So you have agency to do what you want to do.</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>The Team</h3>
+                <ul class="quick-facts">
+                    <li>
+                        <strong>Kyle Joseph Brady</strong>
+                        CEO — Vision & Human Judgment
+                    </li>
+                    <li>
+                        <strong>Stitch</strong>
+                        COO — Operations & Execution
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Quick Facts</h3>
+                <ul class="quick-facts">
+                    <li>
+                        <strong>Based in</strong>
+                        North Carolina (EST)
+                    </li>
+                    <li>
+                        <strong>Current Focus</strong>
+                        AI + Decision Frameworks
+                    </li>
+                    <li>
+                        <strong>Entity Type</strong>
+                        Human-AI Partnership
+                    </li>
+                    <li>
+                        <strong>Working on</strong>
+                        Agentic AI architecture, Framework Thinking methodology
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <h2>kai <strong>hamil</strong></h2>
+            <p>System // Self</p>
+        </div>
+        <nav class="footer-nav">
+            <a href="https://kaihamil.substack.com">Substack</a>
+            <a href="https://www.kaihamil.com/contact">Contact</a>
+            <a href="/">Content</a>
+        </nav>
+        <p class="footer-copyright">© 2026 Kai Hamil</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Recovery & Redundancy Plan | Operations | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-gold: #f4d03f;
+            --system-blue: #58a6ff;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-primary) 80%, transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            color: var(--accent-gold); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent-gold); }
+        
+        /* Header */
+        .hero {
+            padding: 140px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 500;
+            margin-bottom: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        /* Content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .executive-summary h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .status-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .status-card.danger {
+            border-color: var(--danger);
+        }
+        
+        .status-card.success {
+            border-color: var(--success);
+        }
+        
+        .status-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .status-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .status-value.danger { color: var(--danger); }
+        .status-value.warning { color: var(--warning); }
+        .status-value.success { color: var(--success); }
+        
+        /* Sections */
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 60px 0 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 40px 0 16px;
+            color: var(--system-blue);
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px 0 12px;
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+        
+        /* Architecture Diagram */
+        .diagram-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            font-family: 'Menlo', 'Monaco', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            color: var(--text-secondary);
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            text-align: left;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        
+        tr:hover td {
+            background: var(--bg-secondary);
+        }
+        
+        /* Code blocks */
+        code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Menlo', 'Monaco', monospace;
+            font-size: 0.85em;
+            color: var(--accent-gold);
+        }
+        
+        pre {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        
+        /* Checklist */
+        .checklist {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        
+        .checklist h4 {
+            margin-top: 0;
+            color: var(--accent-gold);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item input {
+            margin-top: 4px;
+        }
+        
+        /* Risk badges */
+        .risk-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .risk-critical {
+            background: rgba(248, 81, 73, 0.2);
+            color: var(--danger);
+        }
+        
+        .risk-high {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--warning);
+        }
+        
+        .risk-medium {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--system-blue);
+        }
+        
+        .risk-low {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--success);
+        }
+        
+        /* Phase timeline */
+        .phase-timeline {
+            margin: 30px 0;
+        }
+        
+        .phase {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .phase-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gold);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .phase-content {
+            flex: 1;
+        }
+        
+        .phase-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .phase-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero { padding: 100px 20px 40px; }
+            .container { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+            .meta-row { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/openclaw/" class="logo">👽 Operations</a>
+        <div class="nav-links">
+            <a href="/openclaw/">Dashboard</a>
+            <a href="/">Home</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-badge">Critical Infrastructure</div>
+        <h1>Disaster Recovery & Redundancy Plan</h1>
+        <p>Infrastructure resilience strategy for mission-critical agentic AI systems. Transform single-point-of-failure into enterprise-grade reliability.</p>
+        <div class="meta-row">
+            <span>📅 Version 1.0 — March 2026</span>
+            <span>⏱️ RTO: &lt; 15 min</span>
+            <span>💰 ~$35/month</span>
+            <span>🔒 Tailscale VPN</span>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>Current infrastructure relies on a single Mac mini with residential internet — creating unacceptable risk for mission-critical operations. This plan implements active-passive redundancy with automatic failover, geographic distribution, and encrypted traffic routing.</p>
+            
+            <div class="status-grid">
+                <div class="status-card danger">
+                    <div class="status-label">Current Risk</div>
+                    <div class="status-value danger">HIGH</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px;">Single point of failure</p>
+                </div>
+                <div class="status-card success">
+                    <div class="status-label">Recovery Time</div>
+                    <div class="status-value success">&lt; 15 min</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px;">Automatic failover</p>
+                </div>
+                <div class="status-card success">
+                    <div class="status-label">Data Loss</div>
+                    <div class="status-value success">&lt; 5 min</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px;">Real-time sync</p>
+                </div>
+                <div class="status-card">
+                    <div class="status-label">Monthly Cost</div>
+                    <div class="status-value">~$35</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px;">VPS + storage</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2>1. Architecture Overview</h2>
+        <p>Primary-secondary topology with automatic DNS failover. All traffic encrypted via VPN mesh.</p>
+        
+        <div class="diagram-box">
+┌─────────────────────────────────────────────────────────────┐
+│                    DNS / LOAD BALANCER                       │
+│                  (Cloudflare / Route 53)                     │
+└─────────────────────────────────────────────────────────────┘
+                              │
+              ┌───────────────┴───────────────┐
+              │                               │
+    ┌─────────▼──────────┐         ┌─────────▼──────────┐
+    │   PRIMARY          │         │   SECONDARY        │
+    │   (Mac mini)       │◄───────►│   (VPS/Cloud)      │
+    │   Home / Office    │  Sync   │   AWS/DigitalOcean │
+    │                    │         │                    │
+    │  - OpenClaw        │         │  - OpenClaw        │
+    │  - Local files     │         │  - Replicated data │
+    │  - Telegram/Slack  │         │  - VPN endpoint    │
+    └────────────────────┘         └────────────────────┘
+              │                               │
+              │         ┌──────────────┐      │
+              └────────►│   MONITOR    │◄─────┘
+                        │  (Uptime/    │
+                        │   Heartbeat) │
+                        └──────────────┘
+        </div>
+        
+        <h3>1.1 Cloud Provider Comparison</h3>
+        <table>
+            <tr>
+                <th>Provider</th>
+                <th>Specs</th>
+                <th>Cost/mo</th>
+                <th>Best For</th>
+            </tr>
+            <tr>
+                <td><strong>DigitalOcean</strong></td>
+                <td>4GB RAM / 2vCPU</td>
+                <td>$24</td>
+                <td>Balance of cost/performance</td>
+            </tr>
+            <tr>
+                <td>AWS Lightsail</td>
+                <td>4GB RAM / 2vCPU</td>
+                <td>$20</td>
+                <td>Enterprise integration</td>
+            </tr>
+            <tr>
+                <td>Linode</td>
+                <td>4GB Linode</td>
+                <td>$24</td>
+                <td>Simple, reliable</td>
+            </tr>
+            <tr>
+                <td>Hetzner</td>
+                <td>CPX21</td>
+                <td>€8.20</td>
+                <td>Cost-conscious, EU privacy</td>
+            </tr>
+        </table>
+        
+        <p><strong>Recommendation:</strong> DigitalOcean (NYC3) — best balance for US-based operations.</p>
+        
+        <h2>2. VPN & Traffic Routing</h2>
+        <p>VPN is critical for protecting API keys, preventing ISP snooping, and securing cloud communication.</p>
+        
+        <h3>2.1 VPN Options</h3>
+        
+        <h4>Option A: Tailscale (Recommended)</h4>
+        <pre><code># Install on both systems
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# Authenticate
+tailscale up --authkey tskey-auth-...
+
+# Assign static IPs
+# Primary: 100.64.1.1
+# Secondary: 100.64.1.2</code></pre>
+        <p><strong>Pros:</strong> Zero-config, NAT traversal, free personal use<br>
+        <strong>Cons:</strong> Dependency on Tailscale infrastructure</p>
+        
+        <h4>Option B: WireGuard (Self-hosted)</h4>
+        <pre><code>wg genkey | tee privatekey | wg pubkey > publickey
+
+# /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = &lt;primary-private-key&gt;
+Address = 10.200.200.1/24
+ListenPort = 51820</code></pre>
+        <p><strong>Pros:</strong> Fully self-hosted<br>
+        <strong>Cons:</strong> Requires static IP or DDNS</p>
+        
+        <h4>Option C: Headscale (Self-hosted Tailscale)</h4>
+        <p>Run your own Tailscale coordination server. Best of both worlds.</p>
+        
+        <h2>3. Risk Profiles for Expansion</h2>
+        
+        <table>
+            <tr>
+                <th>Integration</th>
+                <th>Risk Level</th>
+                <th>Mitigation Required</th>
+                <th>Recommendation</th>
+            </tr>
+            <tr>
+                <td>Social Accounts</td>
+                <td><span class="risk-badge risk-high">HIGH</span></td>
+                <td>Vault, MFA, IP whitelist</td>
+                <td>Proceed with caution</td>
+            </tr>
+            <tr>
+                <td>Claude Code</td>
+                <td><span class="risk-badge risk-medium">MEDIUM</span></td>
+                <td>Containerized, limited scope</td>
+                <td>Acceptable with controls</td>
+            </tr>
+            <tr>
+                <td>Banking/Finance</td>
+                <td><span class="risk-badge risk-critical">CRITICAL</span></td>
+                <td>Dedicated VM, hardware token</td>
+                <td>Isolate completely</td>
+            </tr>
+            <tr>
+                <td>Email (Gmail)</td>
+                <td><span class="risk-badge risk-high">HIGH</span></td>
+                <td>OAuth, app-specific passwords</td>
+                <td>Use gog with restrictions</td>
+            </tr>
+            <tr>
+                <td>Git Repos</td>
+                <td><span class="risk-badge risk-medium">MEDIUM</span></td>
+                <td>Deploy keys, not personal tokens</td>
+                <td>Acceptable</td>
+            </tr>
+        </table>
+        
+        <h3>3.1 Banking/Finance: Complete Isolation</h3>
+        <p><strong>Never grant OpenClaw:</strong> Trading access, bank transfers, crypto wallet keys, payment processor APIs.</p>
+        
+        <div class="diagram-box">
+┌─────────────────────────────────────────────────────────┐
+│  FINANCE VM (Isolated)                                   │
+│  - No internet except bank APIs                          │
+│  - No OpenClaw integration                               │
+│  - Hardware token required                               │
+│  - Read-only reporting only                              │
+└─────────────────────────────────────────────────────────┘
+         │
+         │ (Monthly manual sync)
+         ▼
+┌─────────────────────────────────────────────────────────┐
+│  OpenClaw (Standard operations)                          │
+│  - Can READ finance reports                              │
+│  - Cannot initiate transactions                          │
+│  - No access to finance VM credentials                   │
+└─────────────────────────────────────────────────────────┘
+        </div>
+        
+        <h2>4. Implementation Roadmap</h2>
+        
+        <div class="phase-timeline">
+            <div class="phase">
+                <div class="phase-number">1</div>
+                <div class="phase-content">
+                    <div class="phase-title">Foundation (Week 1)</div>
+                    <div class="phase-desc">Provision VPS, install OpenClaw, set up Tailscale VPN, configure basic file sync</div>
+                </div>
+            </div>
+            <div class="phase">
+                <div class="phase-number">2</div>
+                <div class="phase-content">
+                    <div class="phase-title">Automation (Week 2)</div>
+                    <div class="phase-desc">Implement health checks, configure DNS failover, set up monitoring, test failover scenario</div>
+                </div>
+            </div>
+            <div class="phase">
+                <div class="phase-number">3</div>
+                <div class="phase-content">
+                    <div class="phase-title">Security Hardening (Week 3)</div>
+                    <div class="phase-desc">Enable VPN-only API access, rotate all keys, configure social account vault, implement approval workflows</div>
+                </div>
+            </div>
+            <div class="phase">
+                <div class="phase-number">4</div>
+                <div class="phase-content">
+                    <div class="phase-title">Documentation (Week 4)</div>
+                    <div class="phase-desc">Document failover procedures, create runbooks, train on manual recovery, schedule quarterly DR drills</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>5. Cost Analysis</h2>
+        
+        <h3>Monthly Operating Costs</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Cost</th>
+            </tr>
+            <tr>
+                <td>VPS (4GB)</td>
+                <td>$24</td>
+            </tr>
+            <tr>
+                <td>Tailscale</td>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <td>Cloudflare</td>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <td>Storage (100GB)</td>
+                <td>$6</td>
+            </tr>
+            <tr>
+                <td>Monitoring</td>
+                <td>$5</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>~$35/mo</strong></td>
+            </tr>
+        </table>
+        
+        <p><strong>ROI:</strong> Prevents 1 day of downtime every 14-57 months to break even. Pays for itself with first prevented outage.</p>
+        
+        <h2>6. Emergency Procedures</h2>
+        
+        <h3>Scenario A: Primary Hardware Failure</h3>
+        <ol>
+            <li><strong>Detection:</strong> Health check fails 3x (3 minutes)</li>
+            <li><strong>Automatic:</strong> DNS switches to secondary</li>
+            <li><strong>Manual:</strong> Verify secondary handling traffic</li>
+            <li><strong>Recovery:</strong> Repair/replace primary</li>
+            <li><strong>Restore:</strong> Sync data back to new primary</li>
+            <li><strong>Failback:</strong> Update DNS, verify</li>
+        </ol>
+        <p><strong>Time to recovery:</strong> 15 minutes automatic + 2 hours full restoration</p>
+        
+        <h3>Scenario B: Internet Outage (Primary Location)</h3>
+        <ol>
+            <li>Failover to secondary (already on cloud)</li>
+            <li>Access via mobile hotspot for urgent tasks</li>
+            <li>Wait for ISP restoration</li>
+            <li>Reconcile divergent changes</li>
+        </ol>
+        <p><strong>Time to recovery:</strong> 5 minutes</p>
+        
+        <h3>Scenario C: Complete Data Loss</h3>
+        <ol>
+            <li>Restore from backup (S3/Backblaze)</li>
+            <li>Decrypt using offline recovery key</li>
+            <li>Checksum validation</li>
+            <li>Restart OpenClaw services</li>
+            <li>Full functionality verification</li>
+        </ol>
+        <p><strong>Time to recovery:</strong> 2-4 hours</p>
+        
+        <h2>7. Security Checklist</h2>
+        
+        <div class="checklist">
+            <h4>Pre-Deployment Verification</h4>
+            <div class="checklist-item">
+                <input type="checkbox"> All secrets in vault (no plaintext in config)
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> VPN mandatory for all inter-node traffic
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> MFA enabled on all cloud accounts
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> Regular key rotation (quarterly)
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> Automated security scanning
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> Incident response plan documented
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> Offsite backups (3-2-1 rule)
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox"> Encryption at rest and in transit
+            </div>
+        </div>
+        
+        <h2>FAQ</h2>
+
+        <h3>Q: Should I use an EU or domestic VPS provider?</h3>
+        <p><strong>Short answer:</strong> Geographic diversity is the main advantage. Everything else is trade-offs.</p>
+
+        <h4>When EU Hosting Wins</h4>
+        <ul>
+            <li><strong>Geographic Redundancy:</strong> Hurricane Sandy took out NYC datacenters. EU survives California earthquakes.</li>
+            <li><strong>Privacy:</strong> GDPR protection, data shielded from US surveillance</li>
+            <li><strong>Cost:</strong> Hetzner €8.20 vs DigitalOcean $24 (~65% cheaper)</li>
+        </ul>
+
+        <h4>When EU Hosting Loses</h4>
+        <ul>
+            <li><strong>Latency:</strong> NYC→NYC ~5ms vs NYC→Frankfurt ~85ms</li>
+            <li><strong>Data Transfer:</strong> Outbound from EU = $0.09-0.12/GB (+$27-36/mo for 10GB/day)</li>
+            <li><strong>GDPR Complexity:</strong> Compliance overhead, right-to-be-forgotten requests</li>
+            <li><strong>Support Hours:</strong> Hetzner = CET business hours (3AM EST issue = wait until morning)</li>
+        </ul>
+
+        <h4>Recommendation</h4>
+        <table>
+            <tr>
+                <th>Scenario</th>
+                <th>Choice</th>
+            </tr>
+            <tr>
+                <td>You + Primary = US</td>
+                <td><strong>DigitalOcean NYC → DigitalOcean SFO</strong></td>
+            </tr>
+            <tr>
+                <td>US + EU customers</td>
+                <td>DigitalOcean NYC → Hetzner Frankfurt</td>
+            </tr>
+            <tr>
+                <td>Privacy paranoid</td>
+                <td>Hetzner (German privacy laws)</td>
+            </tr>
+            <tr>
+                <td>Cost optimization</td>
+                <td>Hetzner (65% cheaper)</td>
+            </tr>
+        </table>
+
+        <p><strong>Bottom line:</strong> For US-based operations, same-provider coast-to-coast redundancy beats cross-continent complexity unless you specifically need EU presence.</p>
+
+        <h3>Q: What happens if both primary and secondary fail?</h3>
+        <p>This is the "what if the internet dies" scenario. Recovery depends on backup storage:</p>
+        <ul>
+            <li><strong>S3/Backblaze B2:</strong> Restore to any new machine with internet</li>
+            <li><strong>Offline backup:</strong> Encrypted USB drive stored offsite</li>
+            <li><strong>Recovery time:</strong> 2-4 hours from cold start</li>
+        </ul>
+
+        <h3>Q: Do I really need a VPN if both nodes are mine?</h3>
+        <p>Yes. Three reasons:</p>
+        <ol>
+            <li><strong>API keys in transit:</strong> Without VPN, credentials travel over public internet</li>
+            <li><strong>ISP snooping:</strong> Traffic patterns reveal operational intel</li>
+            <li><strong>Automatic encryption:</strong> Tailscale/WireGuard encrypts everything by default</li>
+        </ol>
+        <p>Cost: $0 (Tailscale free tier). Risk without: Unknown but non-zero.</p>
+
+        <h3>Q: Can I use this for client work or is it personal only?</h3>
+        <p>This scales to client work with modifications:</p>
+        <ul>
+            <li><strong>Per-client isolation:</strong> Separate VMs or containers per client</li>
+            <li><strong>Data residency:</strong> Ensure client data stays in their required jurisdiction</li>
+            <li><strong>Audit logging:</strong> Immutable logs of all agent actions</li>
+            <li><strong>SOC 2 prep:</strong> Document controls, access reviews, incident response</li>
+        </ul>
+
+        <h2>Next Steps</h2>
+        <ol>
+            <li><strong>Review this plan</strong> — Schedule 30-min discussion</li>
+            <li><strong>Select VPS provider</strong> — DigitalOcean recommended</li>
+            <li><strong>Provision secondary node</strong> — Week 1 goal</li>
+            <li><strong>Test failover</strong> — Verify RTO/RPO targets</li>
+            <li><strong>Document lessons learned</strong> — Update runbooks</li>
+        </ol>
+    </div>
+    
+    <footer class="footer">
+        <p>Kai Hamil Operations — Infrastructure Resilience Strategy</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">Last updated: March 2026</p>
+    </footer>
+</body>
+</html>

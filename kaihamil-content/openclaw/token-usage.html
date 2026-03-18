@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Usage | Stitch Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --error: #f85149;
+            --info: #58a6ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            color: var(--accent-gold);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { border-color: var(--accent-gold); }
+        h1 { font-size: 1.5rem; flex: 1; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-header h2 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-content { padding: 20px; }
+        .model-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .model-row:last-child { border-bottom: none; }
+        .model-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .model-icon.kimi { background: rgba(88, 166, 255, 0.2); }
+        .model-icon.opus { background: rgba(244, 208, 63, 0.2); }
+        .model-info { flex: 1; }
+        .model-name { font-weight: 500; }
+        .model-desc { font-size: 0.85rem; color: var(--text-secondary); }
+        .model-usage {
+            text-align: right;
+            font-family: 'Roboto Mono', monospace;
+        }
+        .model-usage .tokens { color: var(--accent-gold); font-size: 1.2rem; }
+        .model-usage .cost { font-size: 0.8rem; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Operations</a>
+            <h1>💰 Token Usage</h1>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">225K+</div>
+                <div class="stat-label">Total Tokens (Feb 19-23)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$0.35</div>
+                <div class="stat-label">Estimated Cost</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Sessions Logged</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">45K</div>
+                <div class="stat-label">Avg/Session</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>📊 Usage by Model</h2>
+            </div>
+            <div class="section-content">
+                <div class="model-row">
+                    <div class="model-icon kimi">🌙</div>
+                    <div class="model-info">
+                        <div class="model-name">Kimi K2.5</div>
+                        <div class="model-desc">Fast, efficient — default for most tasks</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">152K</div>
+                        <div class="cost">~$0.23</div>
+                    </div>
+                </div>
+                <div class="model-row">
+                    <div class="model-icon opus">👑</div>
+                    <div class="model-info">
+                        <div class="model-name">Claude Opus 4.5</div>
+                        <div class="model-desc">Deep reasoning — complex analysis</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">73K</div>
+                        <div class="cost">~$0.12</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>📅 Recent Sessions</h2>
+            </div>
+            <div class="section-content">
+                <div class="model-row">
+                    <div class="model-info">
+                        <div class="model-name">Feb 23, 2026</div>
+                        <div class="model-desc">Research HTML conversions, Operations updates, Kanban sync</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">~45K</div>
+                        <div class="cost">~$0.07</div>
+                    </div>
+                </div>
+                <div class="model-row">
+                    <div class="model-info">
+                        <div class="model-name">Feb 22, 2026</div>
+                        <div class="model-desc">Knowledge Graph Design Brief, Daily Lunch & Learn</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">~35K</div>
+                        <div class="cost">~$0.05</div>
+                    </div>
+                </div>
+                <div class="model-row">
+                    <div class="model-info">
+                        <div class="model-name">Feb 21, 2026</div>
+                        <div class="model-desc">Future of Work research, Posts facelift, Concept 4 refinement</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">73K</div>
+                        <div class="cost">$0.11</div>
+                    </div>
+                </div>
+                <div class="model-row">
+                    <div class="model-info">
+                        <div class="model-name">Feb 20, 2026</div>
+                        <div class="model-desc">Slack integration, Design concepts</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">~30K</div>
+                        <div class="cost">~$0.05</div>
+                    </div>
+                </div>
+                <div class="model-row">
+                    <div class="model-info">
+                        <div class="model-name">Feb 19, 2026</div>
+                        <div class="model-desc">Deploy #10-11, V1 baseline tests, content reorganization</div>
+                    </div>
+                    <div class="model-usage">
+                        <div class="tokens">79K</div>
+                        <div class="cost">$0.12</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>⚙️ Configuration</h2>
+            </div>
+            <div class="section-content">
+                <p style="color: var(--text-secondary);">
+                    <strong>Morning Brief:</strong> Daily at 6:30 AM ET<br>
+                    <strong>Log Location:</strong> <code>~/.openclaw/metrics/session_log.jsonl</code><br>
+                    <strong>Default Model:</strong> Kimi K2.5 (moonshot/kimi-k2.5)<br>
+                    <strong>Complex Tasks:</strong> Claude Opus 4.5 (anthropic/claude-opus-4-5)<br>
+                    <strong>Status:</strong> Manual logging, automated tracking in progress
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

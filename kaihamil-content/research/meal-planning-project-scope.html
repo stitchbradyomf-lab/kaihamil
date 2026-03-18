@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planning Project Scope | Research | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .site-title strong { font-weight: 500; }
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .article-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        .article-title {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+        .article-meta {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 40px 0 20px;
+            color: var(--brown-dark);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--gold);
+        }
+        p { margin-bottom: 18px; color: var(--brown-medium); }
+        ul, ol {
+            margin: 15px 0 20px 25px;
+            color: var(--brown-medium);
+        }
+        li { margin-bottom: 8px; }
+        strong { color: var(--brown-dark); }
+        .phase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .phase-card h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/research/">Research</a>
+            </nav>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <span class="badge">PROJECT SCOPE</span>
+            <h1 class="article-title">Meal Planning Automation</h1>
+            <div class="article-meta">
+                <span>February 18, 2026</span> · <span>The "Holy Grail" Family Automation Project</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <h2>The Vision</h2>
+            
+            <p>Full food and meal planning automation — the most impactful family automation target. "Dinner is a daily crisis" is a universal pain point.</p>
+            
+            <p><strong>Goals:</strong></p>
+            <ul>
+                <li>Just-in-time inventory stocking</li>
+                <li>Smaller, more frequent grocery visits</li>
+                <li>Less food waste</li>
+                <li>Easier meal preparation</li>
+                <li>Limit takeout/restaurant costs</li>
+                <li>Reduce waste of food and money</li>
+            </ul>
+
+            <h2>Project Phases</h2>
+
+            <div class="phase-card">
+                <h4>Phase 1: Data Collection</h4>
+                <p>Establish baseline data on current state.</p>
+                <ul>
+                    <li>Current spending (groceries vs takeout)</li>
+                    <li>Food waste tracking (what gets thrown away)</li>
+                    <li>Time spent on meal decisions and prep</li>
+                    <li>Family preferences and dietary constraints</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h4>Phase 2: Recipe System</h4>
+                <p>Build the knowledge base.</p>
+                <ul>
+                    <li>Recipe database with family favorites</li>
+                    <li>Ingredient overlap optimization</li>
+                    <li>Prep time estimates</li>
+                    <li>Kid-friendly flags</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h4>Phase 3: Inventory Tracking</h4>
+                <p>Know what you have.</p>
+                <ul>
+                    <li>Pantry/fridge inventory system</li>
+                    <li>Expiration tracking</li>
+                    <li>Automatic depletion estimates</li>
+                    <li>Low stock alerts</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h4>Phase 4: Planning Engine</h4>
+                <p>Generate optimal meal plans.</p>
+                <ul>
+                    <li>Weekly meal plan generation</li>
+                    <li>Use existing inventory first</li>
+                    <li>Optimize for variety and nutrition</li>
+                    <li>Account for calendar (busy nights = easy meals)</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h4>Phase 5: Shopping Integration</h4>
+                <p>Automate procurement.</p>
+                <ul>
+                    <li>Auto-generate shopping lists</li>
+                    <li>Integrate with grocery delivery (Instacart, Amazon Fresh)</li>
+                    <li>Optimize delivery timing</li>
+                    <li>Price comparison</li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <h4>Phase 6: Feedback Loop</h4>
+                <p>Learn and improve.</p>
+                <ul>
+                    <li>Track what actually got made</li>
+                    <li>Rating system for meals</li>
+                    <li>Waste tracking (plan vs reality)</li>
+                    <li>Cost tracking over time</li>
+                </ul>
+            </div>
+
+            <h2>Validation Approach</h2>
+            
+            <p><strong>Before automation:</strong> 2-week manual pilot</p>
+            <ul>
+                <li>Paper-based meal planning</li>
+                <li>Manual inventory checks</li>
+                <li>Track all the data by hand</li>
+                <li>Validate the process before building the system</li>
+            </ul>
+
+            <h2>Success Metrics</h2>
+            
+            <ul>
+                <li><strong>Food waste:</strong> Reduce by 50%</li>
+                <li><strong>Takeout spending:</strong> Reduce by 30%</li>
+                <li><strong>Decision time:</strong> "What's for dinner?" resolved in &lt;1 minute</li>
+                <li><strong>Weekend recovery:</strong> Less time spent on grocery shopping</li>
+            </ul>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

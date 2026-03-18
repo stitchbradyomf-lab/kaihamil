@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results Design V1 — Simplified Quadrant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --q1-color: #8b6914;
+            --q2-color: #5a4a3a;
+            --q3-color: #2d5016;
+            --q4-color: #1e3a5f;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Result */
+        .result-hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            border-radius: 20px;
+            color: var(--bg-cream);
+            margin-bottom: 30px;
+        }
+        
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        
+        .result-type {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .result-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Mini Quadrant */
+        .quadrant-section {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .quadrant-title {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .quadrant-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+        
+        /* Axis labels */
+        .axis-top {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            font-weight: 500;
+        }
+        
+        .axis-bottom {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            font-weight: 500;
+        }
+        
+        .axis-left {
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .axis-right {
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        /* Grid */
+        .quadrant-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 2px;
+            background: var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .quadrant-cell {
+            background: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        
+        .quadrant-cell.q1 { background: linear-gradient(135deg, #f5f0e8, #faf6f1); }
+        .quadrant-cell.q2 { background: linear-gradient(135deg, #f5f0e8, #faf6f1); }
+        .quadrant-cell.q3 { background: linear-gradient(135deg, #f5f0e8, #faf6f1); }
+        .quadrant-cell.q4 { background: linear-gradient(135deg, #f5f0e8, #faf6f1); }
+        
+        .quadrant-cell.active {
+            background: white;
+            box-shadow: inset 0 0 0 3px var(--gold);
+        }
+        
+        .cell-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--brown-medium);
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+        
+        /* Position dot */
+        .position-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border: 3px solid var(--brown-dark);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .position-label {
+            position: absolute;
+            background: var(--brown-dark);
+            color: var(--gold);
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+            transform: translate(-50%, -150%);
+            white-space: nowrap;
+            z-index: 11;
+        }
+        
+        /* Quick Insight */
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .insight-title {
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .insight-text {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-secondary {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Result -->
+        <div class="result-hero">
+            <div class="result-icon">🔍</div>
+            <div class="result-type">The Explorer</div>
+            <div class="result-subtitle">Curious • Inquisitive • Discovery-First</div>
+        </div>
+        
+        <!-- Mini Quadrant -->
+        <div class="quadrant-section">
+            <div class="quadrant-title">Your Position</div>
+            <div class="quadrant-container">
+                <div class="axis-top">Directive →</div>
+                <div class="axis-bottom">← Inquisitive</div>
+                <div class="axis-left">Assistive</div>
+                <div class="axis-right">Execution</div>
+                
+                <div class="quadrant-grid">
+                    <div class="quadrant-cell q2">
+                        🎬
+                        <span class="cell-label">Guided</span>
+                    </div>
+                    <div class="quadrant-cell q1 active">
+                        ⚡
+                        <span class="cell-label">Delegated</span>
+                    </div>
+                    <div class="quadrant-cell q3">
+                        🔍
+                        <span class="cell-label">Collaborative</span>
+                    </div>
+                    <div class="quadrant-cell q4">
+                        🔄
+                        <span class="cell-label">Autonomous</span>
+                    </div>
+                </div>
+                
+                <!-- Position dot (example: 30% from left, 40% from top = Q3 area) -->
+                <div class="position-dot" style="left: 30%; top: 40%;"></div>
+                <div class="position-label" style="left: 30%; top: 40%;">You</div>
+            </div>
+        </div>
+        
+        <!-- Quick Insight -->
+        <div class="insight-card">
+            <div class="insight-title">💡 What This Means</div>
+            <div class="insight-text">
+                You treat AI as a conversation partner. You explore before committing, 
+                discover unknown unknowns, and value understanding over speed. Watch out for: 
+                never shipping because exploration never ends.
+            </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="cta-section">
+            <a href="#" class="cta-button">Take the Deep Assessment</a>
+            <div class="cta-secondary">8 questions • 5 min • Detailed report</div>
+        </div>
+        
+        <footer>
+            <p>Kai Hamil | System // Self</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+functionsDirectory = "/Users/openclaw-stitch/.openclaw/workspace/kaihamil-content/netlify/functions"
+functionsDirectoryOrigin = "default"
+headersOrigin = "config"
+redirectsOrigin = "config"
+plugins = []
+
+[build]
+publish = "/Users/openclaw-stitch/.openclaw/workspace/kaihamil-content"
+publishOrigin = "config"
+commandOrigin = "config"
+base = "/Users/openclaw-stitch/.openclaw/workspace/kaihamil-content"
+command = "echo 'Static site'"
+functions = "/Users/openclaw-stitch/.openclaw/workspace/kaihamil-content/netlify/functions"
+
+[build.environment]
+NODE_VERSION = "18"
+NETLIFY_IDENTITY_URL = "https://kaihamil.com/.netlify/identity"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[redirects]]
+from = "/private/*"
+to = "/login.html"
+status = 302.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+Role = ["admin"]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/private/*"
+to = "/login.html"
+status = 302.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/private/*"
+to = "/private/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+Role = ["admin"]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/private/*"
+to = "/login.html"
+status = 302.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

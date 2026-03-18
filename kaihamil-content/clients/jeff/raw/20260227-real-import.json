@@ -1,0 +1,142 @@
+{
+  "client_profile": {
+    "years_active": 4,
+    "total_transactions": 36,
+    "neighborhoods": [
+      "Hamilton",
+      "Princeton",
+      "Ewing",
+      "Pennington",
+      "Mercerville"
+    ],
+    "specialties": [
+      "first_time_buyers",
+      "luxury_homes"
+    ],
+    "deal_profile": {
+      "average_price": 594300,
+      "price_range_min": 147000,
+      "price_range_max": 1700000,
+      "primary_property_types": [
+        "single_family",
+        "colonial",
+        "cape_cod"
+      ]
+    }
+  },
+  "transactions": [
+    {
+      "id": "tx-036",
+      "listing_key": "L-PRIN-2025-001",
+      "address": "189 Moore St, Princeton, NJ 08540",
+      "price": 1600000,
+      "type": "buyer_representation",
+      "standard_status": "Closed",
+      "days_on_market": 39,
+      "date": "2025-12-18",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "square_feet": 2450,
+      "neighborhood": "Princeton",
+      "property_type": "colonial",
+      "client_type": null
+    },
+    {
+      "id": "tx-035",
+      "listing_key": "L-TREN-2025-001",
+      "address": "12 Margo Place, Trenton, NJ 08620",
+      "price": 505900,
+      "type": "seller_representation",
+      "standard_status": "Closed",
+      "days_on_market": 28,
+      "date": "2025-10-14",
+      "bedrooms": 4,
+      "bathrooms": 1.5,
+      "square_feet": 1423,
+      "neighborhood": "Trenton",
+      "property_type": "cape_cod",
+      "client_type": null
+    },
+    {
+      "id": "tx-034",
+      "listing_key": "L-PRIN-2025-001",
+      "address": "28 Amherst Way, Princeton Junction, NJ 08550",
+      "price": 970000,
+      "type": "buyer_representation",
+      "standard_status": "Closed",
+      "days_on_market": 22,
+      "date": "2025-09-04",
+      "bedrooms": 4,
+      "bathrooms": 2.5,
+      "square_feet": 2820,
+      "neighborhood": "Princeton Junction",
+      "property_type": "colonial",
+      "client_type": null
+    },
+    {
+      "id": "tx-033",
+      "listing_key": "L-PRIN-2024-001",
+      "address": "24 Mccomb Rd, Princeton, NJ 08540",
+      "price": 1050000,
+      "type": "buyer_representation",
+      "standard_status": "Closed",
+      "days_on_market": 6,
+      "date": "2024-06-17",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "square_feet": 2729,
+      "neighborhood": "Princeton",
+      "property_type": "townhome",
+      "client_type": null
+    },
+    {
+      "id": "tx-001",
+      "listing_key": "L-PRIN-2022-001",
+      "address": "66 Line Rd, Princeton Junction, NJ 08550",
+      "price": 595000,
+      "type": "seller_representation",
+      "standard_status": "Closed",
+      "days_on_market": 25,
+      "date": "2022-08-05",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "square_feet": 2988,
+      "neighborhood": "Princeton Junction",
+      "property_type": "colonial",
+      "client_type": null
+    },
+    {
+      "id": "tx-033",
+      "listing_key": "L-PRIN-2024-001",
+      "address": "7 Kimberly Ct, Princeton, NJ 08540",
+      "price": 1711500,
+      "type": "buyer_representation",
+      "standard_status": "Closed",
+      "days_on_market": 12,
+      "date": "2024-07-16",
+      "bedrooms": 3,
+      "bathrooms": 2.5,
+      "square_feet": null,
+      "neighborhood": "Princeton",
+      "property_type": "colonial",
+      "client_type": null
+    },
+    {
+      "id": "tx-001",
+      "listing_key": "L-ROBB-2025-001",
+      "address": "2346 Route 33 Unit 308, Robbinsville, NJ 08691",
+      "price": 383500,
+      "type": "seller_representation",
+      "standard_status": "Closed",
+      "days_on_market": 81,
+      "date": "2025-12-09",
+      "bedrooms": 2,
+      "bathrooms": 2.0,
+      "square_feet": 1319,
+      "neighborhood": "Robbinsville",
+      "property_type": "condo",
+      "client_type": null
+    }
+  ],
+  "imported_at": "2026-02-27T00:50:00"
+}

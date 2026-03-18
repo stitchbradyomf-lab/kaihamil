@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem-First Content Mapping | Research | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        .header-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .site-title strong { font-weight: 500; }
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        .article-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .article-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        .article-title {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+        .article-meta {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 40px 0 20px;
+            color: var(--brown-dark);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--gold);
+        }
+        p { margin-bottom: 18px; color: var(--brown-medium); }
+        blockquote {
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--brown-dark);
+            font-size: 1.1rem;
+        }
+        ul, ol {
+            margin: 15px 0 20px 25px;
+            color: var(--brown-medium);
+        }
+        li { margin-bottom: 8px; }
+        strong { color: var(--brown-dark); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            font-weight: 500;
+        }
+        tr:nth-child(even) { background: var(--bg-card); }
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .mantra-box {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .mantra-box blockquote {
+            border: none;
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/research/">Research</a>
+            </nav>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <span class="badge">CONTENT STRATEGY</span>
+            <h1 class="article-title">Problem-First Content Mapping</h1>
+            <div class="article-meta">
+                <span>February 18, 2026</span> · <span>Meeting the Audience Where They Are — In the Pain, Not the Store</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <h2>The Principle</h2>
+            
+            <p><strong>People don't search for solutions. They search for relief from problems.</strong></p>
+
+            <p>They're not typing "5 filters for decision making" — they're typing:</p>
+            <ul>
+                <li>"I can't decide what to do"</li>
+                <li>"How do I know if this is the right choice"</li>
+                <li>"I keep going back and forth"</li>
+            </ul>
+
+            <p><strong>Problem diagnostics is the most important work.</strong> Nothing worse than solving the wrong problem.</p>
+
+            <h2>Problem Prompts → Asset Mapping</h2>
+
+            <h3>Uncertainty & Decision-Making</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Prompt</th>
+                        <th>Asset</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>"I can't decide what to do"</td><td>5 Filters for Deciding Under Uncertainty</td><td>Post</td></tr>
+                    <tr><td>"How do I know if this is the right choice?"</td><td>5 Filters for Deciding Under Uncertainty</td><td>Post</td></tr>
+                    <tr><td>"I keep going back and forth on this decision"</td><td>5 Filters for Deciding Under Uncertainty</td><td>Post</td></tr>
+                    <tr><td>"What if I make the wrong choice?"</td><td>5 Filters for Deciding Under Uncertainty</td><td>Post</td></tr>
+                    <tr><td>"I'm paralyzed by too many options"</td><td>5 Filters for Deciding Under Uncertainty</td><td>Post</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Relationship Problems</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Prompt</th>
+                        <th>Asset</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>"Why does my partner always seem upset with me?"</td><td>The 5:1 Ratio / Physics of Love</td><td>Post</td></tr>
+                    <tr><td>"We fight about the same things over and over"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                    <tr><td>"I feel like I'm doing everything right but it's not working"</td><td>The 5:1 Ratio</td><td>Post</td></tr>
+                    <tr><td>"We've lost the spark"</td><td>The Physics of Love</td><td>Post</td></tr>
+                    <tr><td>"Why do small things turn into big fights?"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Cause & Effect Confusion</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Prompt</th>
+                        <th>Asset</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>"I keep trying things but nothing works"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                    <tr><td>"Why does this keep happening to me?"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                    <tr><td>"I fixed the problem but it came back"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                    <tr><td>"Am I treating the symptom or the disease?"</td><td>Thinking in Cause and Effect</td><td>Post</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Feeling Stuck / Overwhelmed</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Prompt</th>
+                        <th>Asset</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>"I work all day but nothing feels done"</td><td>System // Self Framework</td><td>Framework</td></tr>
+                    <tr><td>"I'm busy but not productive"</td><td>System // Self Framework</td><td>Framework</td></tr>
+                    <tr><td>"I can't get ahead no matter how hard I try"</td><td>The Fish Metaphor / Evolution Framework</td><td>Framework</td></tr>
+                    <tr><td>"I feel trapped in my situation"</td><td>The Fish Metaphor</td><td>Framework</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Career / Life Direction</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Prompt</th>
+                        <th>Asset</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>"Am I in the right career?"</td><td>Choosing Systems Consciously</td><td>Framework</td></tr>
+                    <tr><td>"I'm successful but not fulfilled"</td><td>The Fish Metaphor</td><td>Framework</td></tr>
+                    <tr><td>"I followed the path but I'm not happy"</td><td>"The game is the problem, not the dice"</td><td>Framework</td></tr>
+                    <tr><td>"What should I do with my life?"</td><td>Evolution Framework (Kelp to Cosmos)</td><td>Framework</td></tr>
+                </tbody>
+            </table>
+
+            <div class="mantra-box">
+                <blockquote>"My tools know what problems they're solving."</blockquote>
+                <p>Every piece of content should be findable by someone in pain, not someone shopping for solutions.</p>
+                <p>Meet them in the suffering. Diagnose accurately. Then offer the path forward.</p>
+            </div>
+
+            <h2>Problem-First Title Rewrites</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Current Title</th>
+                        <th>Problem-First Alternative</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>5 Filters for Deciding Under Uncertainty</td><td>"I Can't Decide": A Framework for When You Don't Have All the Answers</td></tr>
+                    <tr><td>Thinking in Cause and Effect</td><td>Why Does This Keep Happening? Finding the Real Problem</td></tr>
+                    <tr><td>The 5:1 Ratio</td><td>We Keep Fighting About the Same Things: The Math Behind Healthy Relationships</td></tr>
+                    <tr><td>System // Self</td><td>I Work All Day But Nothing's Done: The Infrastructure of a Life That Works</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Validated Search Terms (Market Research)</h2>
+            <p>These phrases were validated via search research — people actually search for these:</p>
+            <ul>
+                <li><strong>"I can't decide"</strong> — Active Reddit discussions (r/findapath, r/careeradvice)</li>
+                <li><strong>"Why does this keep happening to me?"</strong> — YouTube, Psychology Today content</li>
+                <li><strong>"I feel stuck"</strong> — Quora, BetterUp, Tony Robbins content, high volume indicator</li>
+                <li><strong>"Work all day nothing gets done"</strong> — Productivity content targeting this exact phrase</li>
+            </ul>
+
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

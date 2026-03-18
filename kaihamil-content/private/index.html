@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Dashboard | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-decoration: none;
+            color: var(--brown-dark);
+        }
+        
+        .logo strong {
+            font-weight: 500;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .logout-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+        
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .file-name {
+            font-weight: 500;
+        }
+        
+        .file-meta {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .file-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .file-link:hover {
+            text-decoration: underline;
+        }
+        
+        .note {
+            background: var(--bg-cream);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .note-date {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 8px;
+        }
+        
+        .note-content {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong> <span class="badge">Private</span></a>
+        <div class="user-info">
+            <span id="userEmail"></span>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Kyle's Private Dashboard</h1>
+        
+        <div class="section">
+            <h2>📝 Personal Notes</h2>
+            <ul class="file-list">
+                <li>
+                    <div>
+                        <div class="file-name">Mumford & Sons — Love & Relationships</div>
+                        <div class="file-meta">Feb 27, 2026 • Song lyrics as relationship maps</div>
+                    </div>
+                    <a href="/content-pipeline/personal-notes-mumford-sons-love.md" class="file-link">View →</a>
+                </li>
+                <li>
+                    <div>
+                        <div class="file-name">Problem Audit — Monetization Deep Dive</div>
+                        <div class="file-meta">Feb 28, 2026 • 5 Whys on capitalism</div>
+                    </div>
+                    <span class="file-meta">(Recorded in chat)</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>🚧 Works in Progress</h2>
+            <ul class="file-list">
+                <li>
+                    <div>
+                        <div class="file-name">Wisdom Traditions — 5 Remaining Explorations</div>
+                        <div class="file-meta">Purpose, Suffering, Ambition, Mortality, +1</div>
+                    </div>
+                    <span class="file-meta">Draft pending</span>
+                </li>
+                <li>
+                    <div>
+                        <div class="file-name">Life Portfolio Evaluation Tool</div>
+                        <div class="file-meta">Assessment for allocation rebalancing</div>
+                    </div>
+                    <span class="file-meta">Design phase</span>
+                </li>
+                <li>
+                    <div>
+                        <div class="file-name">Output Formatter (Agent Orchestrator)</div>
+                        <div class="file-meta">Phase 2B implementation</div>
+                    </div>
+                    <span class="file-meta">Scaffolded, awaiting review</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>💡 Quick Thoughts</h2>
+            <div class="note">
+                <div class="note-date">Feb 27, 2026</div>
+                <div class="note-content">
+                    System//Self as the Tao. Gap Analysis as the practice. The split is the suffering. 
+                    When external circumstances shift constantly, the only stable point is internal.
+                </div>
+            </div>
+            <div class="note">
+                <div class="note-date">Feb 27, 2026</div>
+                <div class="note-content">
+                    Mumford & Sons catalog maps relationship terrain with uncomfortable precision. 
+                    Not love songs—relationship archaeology.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Operations</h2>
+            <ul class="file-list">
+                <li>
+                    <div>
+                        <div class="file-name">Content Stack — System vs Self</div>
+                        <div class="file-meta">Complete asset inventory</div>
+                    </div>
+                    <a href="/content-pipeline/content-stack-system-self.md" class="file-link">View →</a>
+                </li>
+                <li>
+                    <div>
+                        <div class="file-name">Kanban Board</div>
+                        <div class="file-meta">Task tracking & priorities</div>
+                    </div>
+                    <a href="/KANBAN.md" class="file-link">View →</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Check auth
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                window.location.href = '/login.html';
+            } else {
+                document.getElementById('userEmail').textContent = user.email;
+            }
+        });
+        
+        netlifyIdentity.on('logout', () => {
+            window.location.href = '/';
+        });
+        
+        function logout() {
+            netlifyIdentity.logout();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 2: The Orbit | Kai Hamil Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --brown-light: #8b7355;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Full-screen hero with embedded navigation */
+        .hero-orbit {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background subtle gradient */
+        .hero-orbit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 30%, var(--gold-light) 0%, transparent 50%);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* Navigation integrated in hero */
+        .nav-orbit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo-orbit {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo-orbit strong { font-weight: 500; }
+        
+        .nav-orbit-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        
+        .nav-orbit-links a:hover { color: var(--gold); }
+        
+        /* Central content area */
+        .orbit-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 40px;
+        }
+        
+        /* Massive tagline at top of center */
+        .orbit-tagline {
+            text-align: center;
+            margin-bottom: 60px;
+            z-index: 5;
+        }
+        
+        .orbit-tagline h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--brown-dark);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+        
+        .orbit-tagline .highlight {
+            color: var(--gold);
+            font-weight: 400;
+            position: relative;
+        }
+        
+        .orbit-tagline .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--gold-light);
+            z-index: -1;
+            opacity: 0.6;
+        }
+        
+        .orbit-tagline p {
+            font-size: 1.3rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* The Orbital System */
+        .orbital-system {
+            position: relative;
+            width: 700px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Central core */
+        .orbit-core {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--bg-cream);
+            box-shadow: 0 20px 60px rgba(61, 40, 23, 0.3);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .orbit-core::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+        
+        .core-symbol {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .core-text {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        /* Orbit rings */
+        .orbit-ring {
+            position: absolute;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .ring-1 { width: 280px; height: 280px; }
+        .ring-2 { width: 450px; height: 450px; opacity: 0.6; }
+        .ring-3 { width: 600px; height: 600px; opacity: 0.3; }
+        
+        /* Orbit items positioned on rings */
+        .orbit-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+        }
+        
+        .orbit-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .orbit-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--amber);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 25px rgba(61, 40, 23, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .orbit-item:hover .orbit-icon {
+            border-color: var(--gold);
+            box-shadow: 0 12px 35px rgba(201, 162, 39, 0.2);
+        }
+        
+        .orbit-label {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            background: var(--bg-cream);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        
+        /* Ring 1 positions (close) */
+        .item-posts { top: 10%; left: 50%; transform: translateX(-50%); }
+        .item-research { bottom: 15%; left: 20%; }
+        .item-frameworks { bottom: 15%; right: 20%; }
+        
+        /* Ring 2 positions (middle) */
+        .item-products { top: 0; left: 50%; transform: translateX(-50%); }
+        .item-diagrams { top: 50%; right: 5%; transform: translateY(-50%); }
+        .item-briefs { bottom: 5%; left: 50%; transform: translateX(-50%); }
+        .item-library { top: 50%; left: 5%; transform: translateY(-50%); }
+        
+        /* Ring 3 positions (far) */
+        .item-operations { top: 10%; right: 10%; }
+        .item-feed { bottom: 10%; right: 15%; }
+        
+        /* Connection lines from items to center */
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            transform-origin: left center;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        /* Bottom section - stats or secondary info */
+        .orbit-footer {
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .orbit-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 30px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .copyright {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .orbit-tagline h1 { font-size: 2.5rem; }
+            .orbital-system { width: 100%; height: auto; min-height: 500px; }
+            .orbit-ring { display: none; }
+            .orbit-item { position: relative; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; transform: none !important; margin: 15px; }
+            .orbit-core { margin: 40px 0; }
+            .orbit-stats { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-orbit">
+        <nav class="nav-orbit">
+            <a href="/" class="logo-orbit">kai <strong>hamil</strong></a>
+            <div class="nav-orbit-links">
+                <a href="/about.html">About</a>
+                <a href="mailto:hello@kaihamil.com">Contact</a>
+            </div>
+        </nav>
+        
+        <div class="orbit-center">
+            <div class="orbit-tagline">
+                <h1>
+                    See the <span class="highlight">water</span><br>
+                    you're swimming in
+                </h1>
+                <p>Frameworks for understanding yourself and the systems around you.</p>
+            </div>
+            
+            <div class="orbital-system">
+                <!-- Rings -->
+                <div class="orbit-ring ring-1"></div>
+                <div class="orbit-ring ring-2"></div>
+                <div class="orbit-ring ring-3"></div>
+                
+                <!-- Core -->
+                <div class="orbit-core">
+                    <div class="core-symbol">◈</div>
+                    <div class="core-text">System // Self</div>
+                </div>
+                
+                <!-- Inner ring items -->
+                <a href="/posts/" class="orbit-item item-posts">
+                    <div class="orbit-icon">✍</div>
+                    <div class="orbit-label">Posts</div>
+                </a>
+                
+                <a href="/research/" class="orbit-item item-research">
+                    <div class="orbit-icon">🔬</div>
+                    <div class="orbit-label">Research</div>
+                </a>
+                
+                <a href="/frameworks/" class="orbit-item item-frameworks">
+                    <div class="orbit-icon">◫</div>
+                    <div class="orbit-label">Frameworks</div>
+                </a>
+                
+                <!-- Middle ring items -->
+                <a href="/products/" class="orbit-item item-products">
+                    <div class="orbit-icon">⚡</div>
+                    <div class="orbit-label">Products</div>
+                </a>
+                
+                <a href="/diagrams/" class="orbit-item item-diagrams">
+                    <div class="orbit-icon">◈</div>
+                    <div class="orbit-label">Diagrams</div>
+                </a>
+                
+                <a href="/briefs/" class="orbit-item item-briefs">
+                    <div class="orbit-icon">📋</div>
+                    <div class="orbit-label">Briefs</div>
+                </a>
+                
+                <a href="/library/" class="orbit-item item-library">
+                    <div class="orbit-icon">📚</div>
+                    <div class="orbit-label">Library</div>
+                </a>
+                
+                <!-- Outer ring items -->
+                <a href="/openclaw/" class="orbit-item item-operations">
+                    <div class="orbit-icon">⚙</div>
+                    <div class="orbit-label">Ops</div>
+                </a>
+                
+                <a href="/feed.html" class="orbit-item item-feed">
+                    <div class="orbit-icon">◉</div>
+                    <div class="orbit-label">Feed</div>
+                </a>
+            </div>
+        </div>
+        
+        <footer class="orbit-footer">
+            <div class="orbit-stats">
+                <div class="stat">
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">Frameworks</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Essays</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Questions</span>
+                </div>
+            </div>
+            <p class="copyright">© 2026 Kai Hamil · System // Self</p>
+        </footer>
+    </div>
+</body>
+</html>

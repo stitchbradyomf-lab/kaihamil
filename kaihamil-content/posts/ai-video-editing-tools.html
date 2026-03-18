@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Editing Tools: From Raw Footage to Finished Video | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-bright: #f4d03f;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .site-title strong { font-weight: 500; }
+        
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .article-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .article-header {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .article-title {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 50px 0 20px;
+        }
+        
+        .article-content h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 35px 0 15px;
+            color: var(--brown-medium);
+        }
+        
+        .article-content p {
+            margin-bottom: 20px;
+            color: var(--brown-medium);
+        }
+        
+        .recommendation-box {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        
+        .recommendation-box h3 {
+            color: var(--gold-bright);
+            margin-top: 0;
+        }
+        
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .tool-card h3 {
+            margin-top: 0;
+            color: var(--brown-dark);
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .pros-cons h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        
+        .pros h4 { color: var(--success); }
+        .cons h4 { color: var(--error); }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+        
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/posts/">Writing</a>
+            </nav>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <h1 class="article-title">AI Video Editing: From Raw Footage to Finished Video</h1>
+            <div class="article-meta">
+                <span>February 18, 2026</span>
+                <span>Tool Research</span>
+                <span>6 min read</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <p><strong>The promise:</strong> Drop a folder of footage, paste your script, and AI produces an edited video. No scrubbing timelines. No hunting for clips. Just words and intention.</p>
+
+            <p><strong>The reality:</strong> We're closer than you think—but not quite there yet. Current AI tools can get you 70-80% of the way. The final creative decisions still need human judgment.</p>
+
+            <div class="recommendation-box">
+                <h3>🎯 Bottom Line Up Front</h3>
+                <p><strong>Best tool for your workflow:</strong> Descript</p>
+                <p>Text-based editing, batch import, transcription-first workflow. Edit video by editing text. Users report 50% time savings on rough cuts.</p>
+                <p><strong>Cost:</strong> $12-24/month | <strong>Free trial available</strong></p>
+            </div>
+
+            <h2>How Descript Works</h2>
+
+            <p>Descript's breakthrough is simple: it treats video like a Word document.</p>
+
+            <ol>
+                <li><strong>Import:</strong> Drop your footage folder into Descript</li>
+                <li><strong>Transcribe:</strong> AI transcribes everything automatically (minutes for hours)</li>
+                <li><strong>Edit by text:</strong> Delete words in the transcript → video cuts automatically</li>
+                <li><strong>Polish:</strong> AI removes filler words, enhances audio, suggests cuts</li>
+                <li><strong>Export:</strong> Publish-ready video</li>
+            </ol>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Text-based editing:</strong> Edit video like editing a document</li>
+                <li><strong>Batch import:</strong> Drop entire folders of footage</li>
+                <li><strong>Underlord AI:</strong> Suggests cuts, applies templates</li>
+                <li><strong>Studio Sound:</strong> AI audio enhancement (removes background noise)</li>
+                <li><strong>Filler word removal:</strong> One-click "um" and "ah" deletion</li>
+                <li><strong>Auto-multicam:</strong> Intelligent camera switching</li>
+            </ul>
+
+            <h2>Alternatives Considered</h2>
+
+            <div class="tool-card">
+                <h3>Visla — Script-to-Video Assembly</h3>
+                <p>Upload footage + paste script → AI matches script segments to clips.</p>
+                <p><strong>Best for:</strong> When you have a clear script and want AI to do initial assembly.</p>
+                <p><strong>Trade-off:</strong> Less control than Descript, but more automated.</p>
+            </div>
+
+            <div class="tool-card">
+                <h3>Pictory — Repurposing Specialist</h3>
+                <p>Strong at turning long content into shorts. AI matches script to footage or stock.</p>
+                <p><strong>Best for:</strong> Repurposing existing content for social media.</p>
+                <p><strong>Trade-off:</strong> More focused on stock footage than precise editing.</p>
+            </div>
+
+            <div class="tool-card">
+                <h3>Vmaker AI — Auto-Editing Claims</h3>
+                <p>Claims "turn raw footage into publish-ready videos" with 24 AI features.</p>
+                <p><strong>Best for:</strong> Experimentation (less established than Descript).</p>
+                <p><strong>Trade-off:</strong> Fewer reviews, less proven workflow.</p>
+            </div>
+
+            <h2>Reality Check: What AI Can (and Can't) Do</h2>
+
+            <h3>✅ AI Handles Well</h3>
+            <ul>
+                <li>Automatic transcription</li>
+                <li>Removing filler words and dead air</li>
+                <li>Audio enhancement</li>
+                <li>Basic rough cuts from text</li>
+                <li>Auto-subtitles</li>
+                <li>Simple multicam switching</li>
+            </ul>
+
+            <h3>❌ Still Needs Human Judgment</h3>
+            <ul>
+                <li>Narrative flow and pacing</li>
+                <li>Emotional timing</li>
+                <li>Creative B-roll placement</li>
+                <li>Complex scene transitions</li>
+                <li>Understanding context and subtext</li>
+            </ul>
+
+            <h2>Expected Time Savings</h2>
+
+            <p>Based on user reports and workflow analysis:</p>
+
+            <table style="width: 100%; margin: 25px 0; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: var(--brown-dark); color: var(--bg-cream);">
+                        <th style="padding: 12px; text-align: left;">Task</th>
+                        <th style="padding: 12px; text-align: left;">Traditional</th>
+                        <th style="padding: 12px; text-align: left;">With Descript</th>
+                        <th style="padding: 12px; text-align: left;">Savings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 12px;">Rough cut (30min video)</td>
+                        <td style="padding: 12px;">3-4 hours</td>
+                        <td style="padding: 12px;">45-60 min</td>
+                        <td style="padding: 12px; color: #28a745; font-weight: 500;">70-80%</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 12px;">Filler word removal</td>
+                        <td style="padding: 12px;">30-45 min</td>
+                        <td style="padding: 12px;">1 click</td>
+                        <td style="padding: 12px; color: #28a745; font-weight: 500;">99%</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border);">
+                        <td style="padding: 12px;">Audio cleanup</td>
+                        <td style="padding: 12px;">20-30 min</td>
+                        <td style="padding: 12px;">Automatic</td>
+                        <td style="padding: 12px; color: #28a745; font-weight: 500;">100%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Recommendation</h2>
+
+            <p><strong>Start with Descript.</strong> It's the mature option with the exact workflow you described. The "edit by deleting text" paradigm is genuinely transformative for scripted content.</p>
+
+            <p><strong>Test protocol:</strong></p>
+            <ol>
+                <li>Download Descript (free trial)</li>
+                <li>Import your filmed snippets from yesterday</li>
+                <li>Check transcription accuracy for your voice/lighting</li>
+                <li>Try text-based editing—delete a sentence, watch the cut</li>
+                <li>Test "Underlord" AI features—ask it to "remove filler words"</li>
+            </ol>
+
+            <p><strong>If Descript works for your setup:</strong> You've found your tool. 2-3 hours of editing becomes 30-45 minutes of review.</p>
+
+            <p><strong>If transcription struggles:</strong> Try Visla for more automated assembly, or wait for transcription quality to improve (rapidly evolving).</p>
+
+            <h2>The Bigger Picture</h2>
+
+            <p>Truly autonomous editing—where AI understands narrative arc and makes creative pacing decisions—is 12-18 months away. Until then, AI-assisted (human-reviewed) is the practical path.</p>
+
+            <p>But that assistance is already substantial. The 70-80% time savings on routine editing tasks frees you for the creative work only you can do: the storytelling, the judgment calls, the final polish.</p>
+
+            <p>The future isn't AI replacing editors. It's AI handling the tedious 80% so editors can focus on the critical 20%.</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <nav class="footer-nav">
+            <a href="https://kaihamil.substack.com">Substack</a>
+            <a href="https://www.kaihamil.com/contact">Contact</a>
+            <a href="/">Content</a>
+        </nav>
+        <p style="opacity: 0.5; font-size: 0.85rem;">© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

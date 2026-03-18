@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Tasks | Stitch Operations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --error: #f85149;
+            --info: #58a6ff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            color: var(--accent-gold);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover { border-color: var(--accent-gold); }
+        h1 { font-size: 1.5rem; flex: 1; }
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .stat-pill strong { color: var(--accent-gold); }
+        .phase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .phase-header {
+            background: var(--bg-secondary);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .phase-header:hover { background: #1c2128; }
+        .phase-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .phase-title h2 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        .phase-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .badge-hours { background: var(--info); color: #fff; }
+        .badge-tasks { background: var(--accent-gold); color: #000; }
+        .badge-complete { background: var(--success); color: #000; }
+        .phase-status {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .phase-content {
+            padding: 0 20px 20px;
+            display: none;
+        }
+        .phase-content.active { display: block; }
+        .task-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .task-item:last-child { border-bottom: none; }
+        .task-check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .task-check.done {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        .task-content { flex: 1; }
+        .task-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .task-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .task-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+        }
+        .task-meta span {
+            color: var(--text-secondary);
+        }
+        .toggle-icon {
+            transition: transform 0.2s;
+            color: var(--text-secondary);
+        }
+        .toggle-icon.active { transform: rotate(180deg); }
+        .summary-card {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-amber));
+            color: #000;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .summary-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        .summary-item strong {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .summary-item span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Operations</a>
+            <h1>📋 Implementation Tasks</h1>
+            <div class="stats-bar">
+                <span class="stat-pill"><strong>35</strong> Total Tasks</span>
+                <span class="stat-pill"><strong>6</strong> Complete</span>
+                <span class="stat-pill"><strong>158</strong> Hours Est.</span>
+            </div>
+        </header>
+
+        <div class="summary-card">
+            <h3>📊 Project Overview — Updated Feb 23, 2026</h3>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <strong>9h ✅</strong>
+                    <span>Foundation (Done)</span>
+                </div>
+                <div class="summary-item">
+                    <strong>12h ✅</strong>
+                    <span>Phase 2A (Done)</span>
+                </div>
+                <div class="summary-item">
+                    <strong>18h</strong>
+                    <span>Phase 2B (Next)</span>
+                </div>
+                <div class="summary-item">
+                    <strong>33h</strong>
+                    <span>Research Team</span>
+                </div>
+                <div class="summary-item">
+                    <strong>18h</strong>
+                    <span>Executors</span>
+                </div>
+                <div class="summary-item">
+                    <strong>38h</strong>
+                    <span>Integration</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 1 - COMPLETE -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase1')">
+                <div class="phase-title">
+                    <span>🔧</span>
+                    <h2>Phase 1: Foundation</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-complete">✅ Complete</span>
+                    <span class="badge badge-hours">9 hours</span>
+                    <span class="phase-status">Feb 17</span>
+                    <span class="toggle-icon" id="icon-phase1">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase1">
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">Create Agent Directory Structure</div>
+                        <div class="task-desc">Set up ~/.openclaw/agents/ with orchestrator, planner, research, executor, critic directories</div>
+                        <div class="task-meta">
+                            <span>⏱️ 2h</span>
+                            <span>✅ Complete Feb 17</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">Define Briefing Artifact JSON Schema</div>
+                        <div class="task-desc">Version, request summary, constraints, approved data, output format, metadata</div>
+                        <div class="task-meta">
+                            <span>⏱️ 3h</span>
+                            <span>✅ Complete Feb 17</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">Create Agent Configuration Templates</div>
+                        <div class="task-desc">Role definition, goals, tools, memory permissions, output specs for each agent</div>
+                        <div class="task-meta">
+                            <span>⏱️ 4h</span>
+                            <span>✅ Complete Feb 17</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2A - COMPLETE -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase2a')">
+                <div class="phase-title">
+                    <span>🎯</span>
+                    <h2>Phase 2A: Core Orchestrator</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-complete">✅ Complete</span>
+                    <span class="badge badge-hours">12 hours</span>
+                    <span class="phase-status">Feb 17-18</span>
+                    <span class="toggle-icon" id="icon-phase2a">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase2a">
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">Implement Intent Classifier</div>
+                        <div class="task-desc">Parse Kyle's request, determine routing to appropriate sub-manager. 93% accuracy achieved.</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>✅ Complete Feb 17</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">Build Exception Handler</div>
+                        <div class="task-desc">Log exceptions, retry logic, escalation protocols, state recovery. Retry → Fallback → Escalate pattern.</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>✅ Complete Feb 17</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check done"></div>
+                    <div class="task-content">
+                        <div class="task-title">V1 Baseline Testing</div>
+                        <div class="task-desc">6 comprehensive tests: multi-source research, multi-format content, site health, org restructure, coordination, lookup</div>
+                        <div class="task-meta"><span>⏱️ 2h</span><span>✅ 6/6 Complete Feb 18-19</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 2B - IN PROGRESS -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase2b')">
+                <div class="phase-title">
+                    <span>🎯</span>
+                    <h2>Phase 2B: Orchestrator Expansion</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-tasks">3 tasks</span>
+                    <span class="badge badge-hours">18 hours</span>
+                    <span class="phase-status">Next Up</span>
+                    <span class="toggle-icon" id="icon-phase2b">▼</span>
+                </div>
+            </div>
+            <div class="phase-content active" id="phase2b">
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Create Final Output Formatter</div>
+                        <div class="task-desc">Telegram-compatible formatting, metadata inclusion, file attachments. Scaffolded, awaiting Kyle review.</div>
+                        <div class="task-meta"><span>⏱️ 2h</span><span>📋 Scaffolded Feb 18</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Implement Task Decomposer</div>
+                        <div class="task-desc">Work breakdown structure, dependency mapping, priority ranking</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Build Research Team Spawner</div>
+                        <div class="task-desc">Async task spawning, timeout management, error handling, result aggregation</div>
+                        <div class="task-meta"><span>⏱️ 8h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Implement Context Engineer</div>
+                        <div class="task-desc">Prune unnecessary data, structure to schema, validate JSON output</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase3')">
+                <div class="phase-title">
+                    <span>🔬</span>
+                    <h2>Phase 3: Research Team</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-tasks">7 tasks</span>
+                    <span class="badge badge-hours">33 hours</span>
+                    <span class="phase-status">Week 3</span>
+                    <span class="toggle-icon" id="icon-phase3">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase3">
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Web Researcher</div>
+                        <div class="task-desc">Brave Search API, web scraping, URL validation</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Memory Researcher</div>
+                        <div class="task-desc">Semantic search, file system search, memory directory traversal</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">File Researcher</div>
+                        <div class="task-desc">File system access, grep/search, metadata extraction</div>
+                        <div class="task-meta"><span>⏱️ 3h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Academic Researcher</div>
+                        <div class="task-desc">Google Scholar, arXiv API, PubMed integration</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Conflict Detector</div>
+                        <div class="task-desc">Identify contradictions in research findings, assign confidence scores</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Chain of Debates Loop</div>
+                        <div class="task-desc">Structured argument format, resolution criteria, fallback protocols</div>
+                        <div class="task-meta"><span>⏱️ 8h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Data Structurer</div>
+                        <div class="task-desc">JSON output, schema validation, metadata preservation</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase4')">
+                <div class="phase-title">
+                    <span>⚡</span>
+                    <h2>Phase 4: Executor Team</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-tasks">3 tasks</span>
+                    <span class="badge badge-hours">18 hours</span>
+                    <span class="phase-status">Week 3-4</span>
+                    <span class="toggle-icon" id="icon-phase4">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase4">
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Code Executor</div>
+                        <div class="task-desc">Template library, syntax validation, sandboxed execution</div>
+                        <div class="task-meta"><span>⏱️ 10h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Content Executor</div>
+                        <div class="task-desc">Voice matching, citation integration, format compliance</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Design Executor</div>
+                        <div class="task-desc">HTML/CSS templates, style consistency, responsive design</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase5')">
+                <div class="phase-title">
+                    <span>🔍</span>
+                    <h2>Phase 5: Critic System</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-tasks">2 tasks</span>
+                    <span class="badge badge-hours">13 hours</span>
+                    <span class="phase-status">Week 4</span>
+                    <span class="toggle-icon" id="icon-phase5">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase5">
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Fast Guardrails</div>
+                        <div class="task-desc">Lightweight model interface, safety checks, format validation</div>
+                        <div class="task-meta"><span>⏱️ 9h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Deep Reflector</div>
+                        <div class="task-desc">Quality analysis, revision request generator</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="phase-card">
+            <div class="phase-header" onclick="togglePhase('phase6')">
+                <div class="phase-title">
+                    <span>🔗</span>
+                    <h2>Phase 6: Memory & Integration</h2>
+                </div>
+                <div class="phase-meta">
+                    <span class="badge badge-tasks">6 tasks</span>
+                    <span class="badge badge-hours">38 hours</span>
+                    <span class="phase-status">Week 5</span>
+                    <span class="toggle-icon" id="icon-phase6">▼</span>
+                </div>
+            </div>
+            <div class="phase-content" id="phase6">
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Short-Term Context Store</div>
+                        <div class="task-desc">Session-level memory, auto-expiry, context window management</div>
+                        <div class="task-meta"><span>⏱️ 4h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Long-Term Persistence</div>
+                        <div class="task-desc">File-based storage, semantic search, versioning</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Knowledge Graph Implementation</div>
+                        <div class="task-desc">Entity extraction, relationship mapping, query interface. Design brief complete Feb 22.</div>
+                        <div class="task-meta"><span>⏱️ 8h</span><span>📋 Design Complete</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Inter-Agent Communication</div>
+                        <div class="task-desc">Message schema, handoff procedures, error handling</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">End-to-End Testing</div>
+                        <div class="task-desc">Simple tasks, complex workflows, error conditions</div>
+                        <div class="task-meta"><span>⏱️ 8h</span><span>👤 Stitch + Kyle</span></div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-check"></div>
+                    <div class="task-content">
+                        <div class="task-title">Monitoring Dashboard</div>
+                        <div class="task-desc">Task completion time, error rates, token usage, routing accuracy</div>
+                        <div class="task-meta"><span>⏱️ 6h</span><span>👤 Stitch</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePhase(phaseId) {
+            const content = document.getElementById(phaseId);
+            const icon = document.getElementById('icon-' + phaseId);
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+        // Open Phase 2B by default (current work)
+        document.getElementById('phase2b').classList.add('active');
+        document.getElementById('icon-phase2b').classList.add('active');
+    </script>
+</body>
+</html>

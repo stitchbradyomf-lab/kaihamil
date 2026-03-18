@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love & Relationships | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --love-warm: #c9a86c;
+            --love-deep: #b87a5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 40px; }
+        
+        .intro-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .intro-card h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .intro-card p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .tradition-section {
+            margin: 50px 0;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tradition-section:last-child { border-bottom: none; }
+        
+        .tradition-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tradition-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+        }
+        
+        .tradition-header h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .tradition-header .source {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%);
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .insight-box h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .insight-box p {
+            color: var(--brown-dark);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+        
+        .practice-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .practice-list li {
+            margin-bottom: 12px;
+            color: var(--brown-medium);
+            padding-left: 10px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--brown-medium);
+            border-left: 3px solid var(--border);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        
+        .connection-box {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .connection-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .connection-box p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/wisdom/">← Wisdom</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Love & <strong>Relationships</strong></h1>
+        <p>What remains when the infatuation fades? Ancient wisdom on connection, commitment, and choosing to stay.</p>
+    </header>
+    
+    <main class="container">
+        <div class="intro-card">
+            <h2>The Modern Trap</h2>
+            <p>We're told love is a feeling. When the feeling fades, we think something is wrong. We swipe again.</p>
+            <p>But every tradition that has lasted more than a few centuries treats love differently: not as emotion, but as practice. Not as discovery, but as cultivation. Not as finding the right person, but as becoming the right person.</p>
+            <p>This isn't romantic cynicism. It's the recognition that lasting connection requires something deeper than chemistry.</p>
+        </div>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🏛️</div>
+                <div>
+                    <h3>Ancient Greek</h3>
+                    <div class="source">Eros, Philia, Agape — Three Forms of Love</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Love isn't one thing. The Greeks distinguished Eros (passion), Philia (friendship), and Agape (unconditional love). Healthy relationships require all three — and they don't arrive simultaneously.</p>
+            </div>
+            
+            <p>Eros burns hot and fast. It's the drug, the obsession, the can't-stop-thinking-about-them phase. Modern culture treats this as "real love" — and panics when it fades.</p>
+            
+            <p>But Eros was always meant to transition into Philia: deep friendship, mutual respect, shared purpose. The person who knows your flaws and stays. The companion in life's work.</p>
+            
+            <p>Agape is the rarest: love that doesn't depend on what you receive. The parent's love for a difficult child. The choice to show up even when the other person is unloveable.</p>
+            
+            <div class="quote">
+                "The best relationships are ones where Eros becomes Philia, and both partners practice Agape."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Name which love you're experiencing.</strong> Eros without Philia is infatuation. Philia without Eros is friendship. Both without Agape is conditional.</li>
+                <li><strong>Cultivate Philia deliberately.</strong> Shared projects, intellectual exchange, mutual growth. Passion without friendship burns out.</li>
+                <li><strong>Practice Agape in small ways.</strong> Show up when you don't feel like it. Give without expecting return.</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🧠</div>
+                <div>
+                    <h3>Attachment Theory</h3>
+                    <div class="source">Bowlby, Ainsworth, Gottman — Science of Connection</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>How you love as an adult mirrors how you were loved as a child. Secure, anxious, avoidant, or disorganized — your attachment style predicts relationship outcomes more than "compatibility."</p>
+            </div>
+            
+            <p>The research is humbling. Gottman found he could predict divorce with 90% accuracy after watching a couple for 5 minutes — not from what they said, but from their micro-expressions, their tone, their physiological arousal.</p>
+            
+            <p>The key finding: successful couples have a 5:1 ratio of positive to negative interactions. Not conflict-free — conflict is inevitable. But they repair. They turn toward each other's bids for connection. They maintain fondness even in disagreement.</p>
+            
+            <div class="quote">
+                "The goal isn't to find someone with whom you never fight. It's to find someone with whom you can repair."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Know your attachment style.</strong> Anxious? Avoidant? Secure? Understanding your patterns is the first step to changing them.</li>
+                <li><strong>Turn toward bids.</strong> When your partner says "look at this bird," they're not talking about birds. They're asking for connection. Turn toward, not away.</li>
+                <li><strong>Maintain the 5:1 ratio.</strong> For every criticism, five appreciations. This isn't saccharine — it's structural.</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🕉️</div>
+                <div>
+                    <h3>Hindu & Yogic Traditions</h3>
+                    <div class="source">Kama Sutra, Bhakti — Sacred Union</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Love as spiritual practice. The relationship as a crucible for growth. Your partner as mirror, teacher, and path to the divine.</p>
+            </div>
+            
+            <p>The Kama Sutra isn't primarily a sex manual — it's a guide to the art of living, with extensive sections on courtship, marriage, and household management. Pleasure (kama) is one of the four aims of life, alongside virtue (dharma), prosperity (artha), and liberation (moksha).</p>
+            
+            <p>Bhakti yoga is the path of devotion — and traditionally, this devotion is practiced through relationship. The beloved becomes a gateway to the divine. The challenges of intimacy become opportunities for self-knowledge.</p>
+            
+            <div class="quote">
+                "In relationship, everything that is unresolved in you will surface. This is the gift — and the work."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Treat conflict as information.</strong> What is this conflict revealing about your own patterns? What are you projecting?</li>
+                <li><strong>See your partner as teacher.</strong> What are they here to teach you — about patience, about boundaries, about your own wounds?</li>
+                <li><strong>Sacralize the everyday.</strong> The shared meal. The morning ritual. These become the containers for connection.</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">☯️</div>
+                <div>
+                    <h3>Taoist</h3>
+                    <div class="source">Yin & Yang — Complementary Harmony</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Healthy relationships aren't 50/50. They're dynamic, flowing. Sometimes one leads, sometimes the other. The goal isn't equality of role but complementary harmony.</p>
+            </div>
+            
+            <p>The Taoist view sees relationship as ecosystem. Yang (active, directive) and Yin (receptive, nurturing) aren't fixed gender roles — they're energies that flow between partners depending on context, season, and need.</p>
+            
+            <p>Rigidity kills relationships. "I always do this, you always do that." Health is flexibility: the ability to shift, to compensate, to hold space when your partner cannot.</p>
+            
+            <div class="quote">
+                "The rigid tree breaks in the wind. The flexible grass bends and returns."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Notice the flows.</strong> Where is Yang needed? Where is Yin? Don't force the wrong energy.</li>
+                <li><strong>Compensate, don't compete.</strong> Your partner's weakness isn't a problem to solve — it's an opportunity for your strength.</li>
+                <li><strong>Embrace cyclicality.</strong> There are seasons in relationship. Closeness and distance. Intensity and rest. Don't panic when the pattern shifts.</li>
+            </ul>
+        </section>
+        
+        <div class="connection-box">
+            <h3>→ Connection: Stage 5 & Relationships</h3>
+            <p>Stage 5 relationships aren't about finding your soulmate. They're about conscious partnership: two people choosing to grow together, knowing that the work is never finished.</p>
+            <p>The script says: find the one, fall in love, live happily ever after. Stage 5 says: choose someone, choose again daily, build something that lasts through continuous repair.</p>
+            <p>This isn't settling. It's maturity. The recognition that lasting love is less about finding the perfect person and more about becoming someone capable of keeping promises.</p>
+        </div>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2>Questions to Sit With</h2>
+            <ul class="practice-list">
+                <li>Which form of love (Eros, Philia, Agape) is strongest in your current relationships? Which is weakest?</li>
+                <li>What is your attachment style — and how does it show up when you're stressed?</li>
+                <li>What is your partner here to teach you that you don't want to learn?</li>
+                <li>Where are you rigid where flexibility is needed?</li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Love is a practice, not a feeling</p>
+    </footer>
+</body>
+</html>

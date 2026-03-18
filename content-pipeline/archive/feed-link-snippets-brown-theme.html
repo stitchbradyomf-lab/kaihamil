@@ -1,0 +1,388 @@
+<!-- ============================================ -->
+<!-- SPLASHY LINK OPTIONS FOR KAIHAMIL.COM       -->
+<!-- Browns & Yellows / Roboto Font Theme        -->
+<!-- ============================================ -->
+
+<!-- OPTION 1: Bold Banner with Animated Underline -->
+<div class="feed-banner-v1">
+    <a href="https://content.kaihamil.com/feed.html" class="banner-link">
+        <span class="banner-label">the feed</span>
+        <span class="banner-text">Fresh essays & tools</span>
+        <span class="banner-arrow">→</span>
+    </a>
+</div>
+
+<style>
+.feed-banner-v1 {
+    margin: 2rem 0;
+}
+
+.feed-banner-v1 .banner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #faf6f1, #f5f0e8);
+    border: 2px solid #d4a574;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feed-banner-v1 .banner-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #c9a227;
+    transition: width 0.3s ease;
+}
+
+.feed-banner-v1 .banner-link:hover::before {
+    width: 100%;
+}
+
+.feed-banner-v1 .banner-link:hover {
+    border-color: #c9a227;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(61, 40, 23, 0.1);
+}
+
+.feed-banner-v1 .banner-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5c3d1e;
+    padding: 0.25rem 0.75rem;
+    background: #f4d03f;
+}
+
+.feed-banner-v1 .banner-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: #3d2817;
+    letter-spacing: 0.02em;
+}
+
+.feed-banner-v1 .banner-arrow {
+    font-size: 1.25rem;
+    color: #d4a574;
+    transition: transform 0.3s ease;
+}
+
+.feed-banner-v1 .banner-link:hover .banner-arrow {
+    transform: translateX(4px);
+    color: #c9a227;
+}
+</style>
+
+
+<!-- OPTION 2: Floating Card with Glow Effect -->
+<div class="feed-card-v2">
+    <a href="https://content.kaihamil.com/feed.html" class="card-link">
+        <div class="card-glow"></div>
+        <div class="card-content">
+            <span class="card-badge">✦ New</span>
+            <h3>the feed</h3>
+            <p>Essays on love, decision-making, and human connection. Plus tools for realtors and knowledge workers.</p>
+            <span class="card-cta">Explore the latest →</span>
+        </div>
+    </a>
+</div>
+
+<style>
+.feed-card-v2 {
+    margin: 2rem 0;
+    max-width: 400px;
+}
+
+.feed-card-v2 .card-link {
+    display: block;
+    position: relative;
+    background: #faf6f1;
+    border: 1px solid #e8dfd3;
+    padding: 2rem;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+
+.feed-card-v2 .card-glow {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, #d4a574, #c9a227, #f4d03f);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+    filter: blur(8px);
+}
+
+.feed-card-v2 .card-link:hover .card-glow {
+    opacity: 0.4;
+}
+
+.feed-card-v2 .card-link:hover {
+    transform: translateY(-4px);
+    border-color: #d4a574;
+}
+
+.feed-card-v2 .card-badge {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #c9a227;
+    margin-bottom: 1rem;
+}
+
+.feed-card-v2 h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+    color: #3d2817;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.feed-card-v2 p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #7a6b5a;
+    margin-bottom: 1.5rem;
+}
+
+.feed-card-v2 .card-cta {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #5c3d1e;
+    border-bottom: 1px solid #d4a574;
+    padding-bottom: 2px;
+    transition: all 0.3s ease;
+}
+
+.feed-card-v2 .card-link:hover .card-cta {
+    color: #c9a227;
+    border-color: #c9a227;
+}
+</style>
+
+
+<!-- OPTION 3: Minimal Inline with Animated Border -->
+<p class="feed-inline-v3">
+    <a href="https://content.kaihamil.com/feed.html">
+        <span class="feed-name">the feed</span>
+        <span class="feed-desc">— fresh essays & tools</span>
+    </a>
+</p>
+
+<style>
+.feed-inline-v3 {
+    margin: 1.5rem 0;
+}
+
+.feed-inline-v3 a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.feed-inline-v3 a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #d4a574, #c9a227);
+    transition: width 0.4s ease;
+}
+
+.feed-inline-v3 a:hover::after {
+    width: 100%;
+}
+
+.feed-inline-v3 .feed-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: #5c3d1e;
+    letter-spacing: 0.02em;
+}
+
+.feed-inline-v3 .feed-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: #7a6b5a;
+}
+</style>
+
+
+<!-- OPTION 4: Full-Width Ribbon -->
+<div class="feed-ribbon-v4">
+    <a href="https://content.kaihamil.com/feed.html" class="ribbon-link">
+        <div class="ribbon-content">
+            <span class="ribbon-title">the feed</span>
+            <span class="ribbon-divider">|</span>
+            <span class="ribbon-text">Latest essays, frameworks & tools</span>
+            <span class="ribbon-cta">View all →</span>
+        </div>
+    </a>
+</div>
+
+<style>
+.feed-ribbon-v4 {
+    margin: 2rem 0;
+    background: linear-gradient(135deg, #3d2817, #5c3d1e);
+}
+
+.feed-ribbon-v4 .ribbon-link {
+    display: block;
+    padding: 1.25rem 2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.feed-ribbon-v4 .ribbon-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.feed-ribbon-v4 .ribbon-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.feed-ribbon-v4 .ribbon-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    color: #f4d03f;
+}
+
+.feed-ribbon-v4 .ribbon-divider {
+    color: #d4a574;
+    opacity: 0.5;
+}
+
+.feed-ribbon-v4 .ribbon-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: #faf6f1;
+    flex: 1;
+}
+
+.feed-ribbon-v4 .ribbon-cta {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #d4a574;
+    transition: color 0.3s ease;
+}
+
+.feed-ribbon-v4 .ribbon-link:hover .ribbon-cta {
+    color: #f4d03f;
+}
+
+@media (max-width: 600px) {
+    .feed-ribbon-v4 .ribbon-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .feed-ribbon-v4 .ribbon-divider {
+        display: none;
+    }
+}
+</style>
+
+
+<!-- OPTION 5: Button with Gradient Text -->
+<div class="feed-button-v5">
+    <a href="https://content.kaihamil.com/feed.html" class="button-link">
+        <span class="button-text">the feed</span>
+    </a>
+</div>
+
+<style>
+.feed-button-v5 {
+    margin: 2rem 0;
+}
+
+.feed-button-v5 .button-link {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 2px solid #d4a574;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.feed-button-v5 .button-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.feed-button-v5 .button-link:hover::before {
+    left: 100%;
+}
+
+.feed-button-v5 .button-link:hover {
+    border-color: #c9a227;
+    background: rgba(212, 165, 116, 0.05);
+}
+
+.feed-button-v5 .button-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: lowercase;
+    background: linear-gradient(135deg, #5c3d1e, #c9a227);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+}
+</style>
+
+
+<!-- ============================================ -->
+<!-- ADD GOOGLE FONTS TO YOUR PAGE HEAD:         -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet"> -->
+<!-- ============================================ -->

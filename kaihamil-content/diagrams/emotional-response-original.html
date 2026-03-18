@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Architecture of Emotional Response</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; padding: 40px 20px; color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; font-size: 2.2rem; margin-bottom: 10px; color: #e8e8e8; text-transform: uppercase; letter-spacing: 3px; }
+        .subtitle { text-align: center; font-size: 1rem; color: #a0a0a0; margin-bottom: 40px; font-style: italic; }
+        .diagram-container { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; }
+        .main-flow { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .layer { position: relative; border-radius: 12px; padding: 18px 30px; text-align: center; transition: all 0.3s ease; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid transparent; }
+        .layer:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .layer-number { position: absolute; left: -15px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; background: #1a1a2e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; border: 2px solid currentColor; }
+        .layer-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+        .layer-function { font-size: 0.85rem; opacity: 0.9; }
+        /* Layer Colors - gradient from external to internal */
+        .layer-1 { background: linear-gradient(135deg, #00b4db, #0083b0); width: 320px; color: #fff; }
+        .layer-2 { background: linear-gradient(135deg, #11998e, #38ef7d); width: 340px; color: #1a1a2e; }
+        .layer-3 { background: linear-gradient(135deg, #f7971e, #ffd200); width: 360px; color: #1a1a2e; }
+        .layer-4 { background: linear-gradient(135deg, #fc4a1a, #f7b733); width: 380px; color: #1a1a2e; }
+        .layer-5 { background: linear-gradient(135deg, #eb3349, #f45c43); width: 400px; color: #fff; }
+        .layer-6 { background: linear-gradient(135deg, #8e2de2, #4a00e0); width: 420px; color: #fff; }
+        .layer-7 { background: linear-gradient(135deg, #ff0844, #ffb199); width: 460px; color: #1a1a2e; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,8,68,0.4); }
+        .layer-7 .layer-title { font-size: 1.3rem; }
+        .layer-8 { background: linear-gradient(135deg, #1a1a2e, #4a4a6a); width: 500px; color: #fff; border: 2px solid #6a6a8a; }
+        /* Arrows between layers */
+        .arrow { width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 15px solid #4a4a6a; opacity: 0.7; }
+        /* Input/Output labels */
+        .external-label { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .external-box { background: rgba(255,255,255,0.1); border: 2px dashed #5a5a7a; border-radius: 10px; padding: 15px 25px; text-align: center; }
+        .external-box .icon { font-size: 2rem; margin-bottom: 5px; }
+        .external-box .label { font-size: 0.9rem; color: #a0a0a0; }
+        .big-arrow { font-size: 2rem; color: #5a5a7a; }
+        /* Side annotations */
+        .annotations { display: flex; flex-direction: column; gap: 20px; max-width: 280px; }
+        .annotation { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 15px; border-left: 4px solid; }
+        .annotation-unconscious { border-color: #00b4db; }
+        .annotation-conscious { border-color: #f7971e; }
+        .annotation-controllable { border-color: #ff0844; }
+        .annotation h3 { font-size: 0.9rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .annotation p { font-size: 0.8rem; color: #b0b0b0; line-height: 1.5; }
+        /* Legend */
+        .legend { margin-top: 40px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #a0a0a0; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        /* Controllability indicator */
+        .control-bar { position: absolute; right: -40px; top: 50%; transform: translateY(-50%); width: 25px; height: 8px; background: #333; border-radius: 4px; overflow: hidden; }
+        .control-fill { height: 100%; border-radius: 4px; }
+        .control-low { width: 20%; background: #eb3349; }
+        .control-moderate { width: 50%; background: #f7971e; }
+        .control-high { width: 85%; background: #38ef7d; }
+        /* Footer */
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #3a3a5a; color: #6a6a8a; font-size: 0.85rem; }
+        .key-insight { background: rgba(255,8,68,0.15); border: 1px solid rgba(255,8,68,0.3); border-radius: 10px; padding: 20px; margin-top: 30px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .key-insight h3 { color: #ff0844; margin-bottom: 10px; font-size: 1rem; }
+        .key-insight p { font-size: 0.95rem; line-height: 1.6; color: #d0d0d0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Architecture of Emotional Response</h1>
+        <p class="subtitle">How External Events Become Internal Experiences</p>
+        <div class="diagram-container">
+            <!-- Left annotations -->
+            <div class="annotations">
+                <div class="annotation annotation-unconscious">
+                    <h3>⚡ Automatic Processing</h3>
+                    <p>Layers 1-4 operate below conscious awareness in milliseconds. You cannot directly control these—but you can influence what data enters them.</p>
+                </div>
+                <div class="annotation annotation-conscious">
+                    <h3>🧠 Cognitive Processing</h3>
+                    <p>Layers 5-6 involve conscious evaluation. You can learn to pause here and deliberately reappraise before emotion crystallizes.</p>
+                </div>
+                <div class="annotation annotation-controllable">
+                    <h3>🎯 Highest Leverage</h3>
+                    <p>Layer 7 (Mindset) is the "override filter" that skews ALL other processing. This is where intentional work yields the greatest returns.</p>
+                </div>
+            </div>
+            <!-- Main flow diagram -->
+            <div class="main-flow">
+                <!-- External input -->
+                <div class="external-label">
+                    <div class="external-box">
+                        <div class="icon">🌍</div>
+                        <div class="label">EXTERNAL EVENT</div>
+                    </div>
+                    <span class="big-arrow">→</span>
+                    <div class="external-box">
+                        <div class="icon">👁️👂</div>
+                        <div class="label">SENSORY INPUT</div>
+                    </div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 1 -->
+                <div class="layer layer-1">
+                    <div class="layer-number">1</div>
+                    <div class="layer-title">Sensory Transduction</div>
+                    <div class="layer-function">Physical energy → Neural signals</div>
+                    <div class="control-bar"><div class="control-fill control-moderate"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 2 -->
+                <div class="layer layer-2">
+                    <div class="layer-number">2</div>
+                    <div class="layer-title">Sensory Filtering & Gating</div>
+                    <div class="layer-function">11M bits/sec → 50 bits conscious awareness</div>
+                    <div class="control-bar"><div class="control-fill control-moderate"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 3 -->
+                <div class="layer layer-3">
+                    <div class="layer-number">3</div>
+                    <div class="layer-title">Schema Matching</div>
+                    <div class="layer-function">Pattern recognition against stored mental models</div>
+                    <div class="control-bar"><div class="control-fill control-low"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 4 -->
+                <div class="layer layer-4">
+                    <div class="layer-number">4</div>
+                    <div class="layer-title">Implicit Bias & Evaluation</div>
+                    <div class="layer-function">Automatic threat/reward assessment (~200ms)</div>
+                    <div class="control-bar"><div class="control-fill control-low"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 5 -->
+                <div class="layer layer-5">
+                    <div class="layer-number">5</div>
+                    <div class="layer-title">Primary Appraisal</div>
+                    <div class="layer-function">"Does this matter to me? What's at stake?"</div>
+                    <div class="control-bar"><div class="control-fill control-moderate"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 6 -->
+                <div class="layer layer-6">
+                    <div class="layer-number">6</div>
+                    <div class="layer-title">Secondary Appraisal</div>
+                    <div class="layer-function">"Can I cope? Do I have resources?"</div>
+                    <div class="control-bar"><div class="control-fill control-moderate"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 7 - THE BIG ONE -->
+                <div class="layer layer-7">
+                    <div class="layer-number">7</div>
+                    <div class="layer-title">★ Mindset Override Filter ★</div>
+                    <div class="layer-function">Growth/Fixed • Stress-Enhancing/Debilitating • Gratitude/Scarcity</div>
+                    <div class="control-bar"><div class="control-fill control-high"></div></div>
+                </div>
+                <div class="arrow"></div>
+                <!-- Layer 8 - Output -->
+                <div class="layer layer-8">
+                    <div class="layer-number">8</div>
+                    <div class="layer-title">Emotional Generation</div>
+                    <div class="layer-function">ANS activation → Felt experience → Behavioral impulse</div>
+                    <div class="control-bar"><div class="control-fill control-low"></div></div>
+                </div>
+                <!-- Output -->
+                <div class="arrow"></div>
+                <div class="external-box" style="margin-top: 10px;">
+                    <div class="icon">💭❤️😢😤</div>
+                    <div class="label">EMOTIONAL EXPERIENCE</div>
+                </div>
+            </div>
+            <!-- Right annotations -->
+            <div class="annotations">
+                <div class="annotation" style="border-color: #00b4db;">
+                    <h3>🍼 The Baby Test</h3>
+                    <p>A baby lacks Layer 3 schemas for "spilled milk = problem." Without interpretive context, no emotional charge exists. <strong>Emotions require meaning.</strong></p>
+                </div>
+                <div class="annotation" style="border-color: #f7971e;">
+                    <h3>🔄 Information Reversal</h3>
+                    <p>When triggering information is corrected (false lottery win, mistaken death notice), emotion must recalibrate. <strong>Emotion follows information.</strong></p>
+                </div>
+                <div class="annotation" style="border-color: #8e2de2;">
+                    <h3>📊 Same Event, Different Outcome</h3>
+                    <p>Spilled milk → tears (fixed mindset) OR eager cleanup (growth mindset) OR shrug (no relevance). <strong>Processing determines response.</strong></p>
+                </div>
+            </div>
+        </div>
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot" style="background: linear-gradient(135deg, #00b4db, #11998e);"></div>
+                <span>Automatic/Unconscious</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: linear-gradient(135deg, #f7971e, #eb3349);"></div>
+                <span>Conscious Evaluation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: linear-gradient(135deg, #ff0844, #ffb199);"></div>
+                <span>High-Leverage Control Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #38ef7d;"></div>
+                <span>High Controllability</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #f7971e;"></div>
+                <span>Moderate Controllability</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot" style="background: #eb3349;"></div>
+                <span>Low Controllability</span>
+            </div>
+        </div>
+        <!-- Key insight -->
+        <div class="key-insight">
+            <h3>The Core Insight</h3>
+            <p><strong>Emotions are not triggered by events—they are constructed through processing.</strong><br>
+            The same external stimulus, passing through different filters (schemas, appraisals, mindsets), produces entirely different emotional experiences. What is constructed can be reconstructed.</p>
+        </div>
+        <div class="footer">
+            Based on Lazarus Cognitive Appraisal Theory (1991), Stress Mindset Research (Crum et al., 2013-2017), and Emotion Regulation Science (Gross, Ochsner)
+        </div>
+    </div>
+</body>
+</html>

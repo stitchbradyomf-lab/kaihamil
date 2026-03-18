@@ -1,0 +1,209 @@
+@prefix kh: <http://kaihamil.com/ontology/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+
+# Client Profile
+kh:jeff rdf:type kh:Realtor ;
+    kh:name "Jeffrey Weber" ;
+    kh:yearsActive "5"^^xsd:integer ;
+    kh:totalTransactions "47"^^xsd:integer ;
+    kh:profileUrl "https://www.homes.com/real-estate-agents/jeffrey-weber/kgce42c/" ;
+    kh:activeInArea "Westfield" ;
+    kh:activeInArea "Cranford" ;
+    kh:activeInArea "Mountainside" ;
+    kh:activeInArea "Scotch Plains" ;
+    kh:specialty "first_time_buyers" ;
+    kh:specialty "luxury_homes" ;
+    .
+
+# Neighborhoods
+kh:area-westfield rdf:type kh:Neighborhood ;
+    kh:name "Westfield" ;
+    kh:servedBy kh:jeff ;
+    kh:transactionCount "18"^^xsd:integer ;
+    kh:averagePrice "685000"^^xsd:decimal ;
+    .
+
+kh:area-cranford rdf:type kh:Neighborhood ;
+    kh:name "Cranford" ;
+    kh:servedBy kh:jeff ;
+    kh:transactionCount "12"^^xsd:integer ;
+    kh:averagePrice "525000"^^xsd:decimal ;
+    .
+
+kh:area-mountainside rdf:type kh:Neighborhood ;
+    kh:name "Mountainside" ;
+    kh:servedBy kh:jeff ;
+    kh:transactionCount "9"^^xsd:integer ;
+    kh:averagePrice "720000"^^xsd:decimal ;
+    .
+
+kh:area-scotch-plains rdf:type kh:Neighborhood ;
+    kh:name "Scotch Plains" ;
+    kh:servedBy kh:jeff ;
+    kh:transactionCount "8"^^xsd:integer ;
+    kh:averagePrice "610000"^^xsd:decimal ;
+    .
+
+# Sample Transactions (These would be replaced with actual data)
+kh:tx-001 rdf:type kh:RealEstateTransaction ;
+    kh:representedBy kh:jeff ;
+    kh:listingKey "L-WEST-2024-001" ;
+    kh:propertyAddress "123 Maple Street, Westfield, NJ" ;
+    kh:salePrice "725000"^^xsd:decimal ;
+    kh:transactionType "buyer_representation" ;
+    kh:standardStatus "Closed" ;
+    kh:daysOnMarket "12"^^xsd:integer ;
+    kh:transactionDate "2024-01-15"^^xsd:date ;
+    kh:bedrooms "4"^^xsd:integer ;
+    kh:bathrooms "2.5"^^xsd:decimal ;
+    kh:squareFeet "2400"^^xsd:integer ;
+    kh:locatedIn kh:area-westfield ;
+    kh:propertyType "colonial" ;
+    kh:clientType "family_upgrading" ;
+    .
+
+kh:tx-002 rdf:type kh:RealEstateTransaction ;
+    kh:representedBy kh:jeff ;
+    kh:listingKey "L-CRAN-2024-002" ;
+    kh:propertyAddress "456 Oak Avenue, Cranford, NJ" ;
+    kh:salePrice "485000"^^xsd:decimal ;
+    kh:transactionType "seller_representation" ;
+    kh:standardStatus "Closed" ;
+    kh:daysOnMarket "8"^^xsd:integer ;
+    kh:transactionDate "2024-02-03"^^xsd:date ;
+    kh:bedrooms "3"^^xsd:integer ;
+    kh:bathrooms "2"^^xsd:decimal ;
+    kh:squareFeet "1800"^^xsd:integer ;
+    kh:locatedIn kh:area-cranford ;
+    kh:propertyType "cape_cod" ;
+    kh:clientType "empty_nester_downsizing" ;
+    .
+
+kh:tx-003 rdf:type kh:RealEstateTransaction ;
+    kh:representedBy kh:jeff ;
+    kh:listingKey "L-MOUN-2023-003" ;
+    kh:propertyAddress "789 Pine Road, Mountainside, NJ" ;
+    kh:salePrice "850000"^^xsd:decimal ;
+    kh:transactionType "buyer_representation" ;
+    kh:standardStatus "Closed" ;
+    kh:daysOnMarket "22"^^xsd:integer ;
+    kh:transactionDate "2023-11-20"^^xsd:date ;
+    kh:bedrooms "5"^^xsd:integer ;
+    kh:bathrooms "3.5"^^xsd:decimal ;
+    kh:squareFeet "3200"^^xsd:integer ;
+    kh:locatedIn kh:area-mountainside ;
+    kh:propertyType "colonial" ;
+    kh:clientType "luxury_buyer" ;
+    .
+
+kh:tx-004 rdf:type kh:RealEstateTransaction ;
+    kh:representedBy kh:jeff ;
+    kh:listingKey "L-SCOT-2023-004" ;
+    kh:propertyAddress "321 Elm Drive, Scotch Plains, NJ" ;
+    kh:salePrice "595000"^^xsd:decimal ;
+    kh:transactionType "buyer_representation" ;
+    kh:standardStatus "Closed" ;
+    kh:daysOnMarket "15"^^xsd:integer ;
+    kh:transactionDate "2023-12-10"^^xsd:date ;
+    kh:bedrooms "4"^^xsd:integer ;
+    kh:bathrooms "2.5"^^xsd:decimal ;
+    kh:squareFeet "2100"^^xsd:integer ;
+    kh:locatedIn kh:area-scotch-plains ;
+    kh:propertyType "split_level" ;
+    kh:clientType "first_time_buyer" ;
+    .
+
+kh:tx-005 rdf:type kh:RealEstateTransaction ;
+    kh:representedBy kh:jeff ;
+    kh:listingKey "L-WEST-2024-005" ;
+    kh:propertyAddress "555 Cedar Lane, Westfield, NJ" ;
+    kh:salePrice "920000"^^xsd:decimal ;
+    kh:transactionType "seller_representation" ;
+    kh:standardStatus "Closed" ;
+    kh:daysOnMarket "6"^^xsd:integer ;
+    kh:transactionDate "2024-01-05"^^xsd:date ;
+    kh:bedrooms "5"^^xsd:integer ;
+    kh:bathrooms "4"^^xsd:decimal ;
+    kh:squareFeet "3500"^^xsd:integer ;
+    kh:locatedIn kh:area-westfield ;
+    kh:propertyType "colonial" ;
+    kh:clientType "luxury_seller" ;
+    .
+
+# Expertise Profile (derived from transaction patterns)
+kh:jeff-expertise rdf:type kh:ExpertiseProfile ;
+    kh:belongsTo kh:jeff ;
+    kh:specializesInPriceRange "mid_market" ;
+    kh:specializesInPriceRange "luxury" ;
+    kh:entry_levelTransactions "8"^^xsd:integer ;
+    kh:mid_marketTransactions "25"^^xsd:integer ;
+    kh:luxuryTransactions "14"^^xsd:integer ;
+    kh:handlesPropertyType "colonial" ;
+    kh:handlesPropertyType "cape_cod" ;
+    kh:handlesPropertyType "ranch" ;
+    kh:handlesPropertyType "split_level" ;
+    kh:dominantPropertyType "colonial" ;
+    kh:topPerformingArea kh:area-westfield ;
+    .
+
+# Current Active Clients (for demo purposes)
+kh:client-johnson rdf:type kh:Client ;
+    kh:name "Johnson Family" ;
+    kh:representedBy kh:jeff ;
+    kh:clientStatus "active" ;
+    kh:lookingFor "4 bedroom colonial" ;
+    kh:preferredArea kh:area-westfield ;
+    kh:budgetRange "650000-750000" ;
+    kh:concern "school_district" ;
+    kh:lastContact "2024-02-26"^^xsd:date ;
+    kh:viewedProperty kh:property-123-maple ;
+    kh:priority "high" ;
+    .
+
+kh:client-smith rdf:type kh:Client ;
+    kh:name "Smith Family" ;
+    kh:representedBy kh:jeff ;
+    kh:clientStatus "active" ;
+    kh:lookingFor "single level ranch" ;
+    kh:preferredArea kh:area-cranford ;
+    kh:budgetRange "450000-550000" ;
+    kh:concern "hoa_fees" ;
+    kh:lastContact "2024-02-25"^^xsd:date ;
+    kh:viewedProperty kh:property-456-oak ;
+    kh:priority "medium" ;
+    .
+
+kh:client-patel rdf:type kh:Client ;
+    kh:name "Patel Family" ;
+    kh:representedBy kh:jeff ;
+    kh:clientStatus "active" ;
+    kh:lookingFor "investment property" ;
+    kh:preferredArea kh:area-westfield, kh:area-cranford ;
+    kh:budgetRange "400000-600000" ;
+    kh:concern "rental_yield" ;
+    kh:lastContact "2024-02-24"^^xsd:date ;
+    kh:priority "medium" ;
+    .
+
+# Property References
+kh:property-123-maple rdf:type kh:Property ;
+    kh:address "123 Maple Street, Westfield, NJ" ;
+    kh:locatedIn kh:area-westfield ;
+    kh:propertyType "colonial" ;
+    kh:bedrooms "4"^^xsd:integer ;
+    kh:bathrooms "2.5"^^xsd:decimal ;
+    kh:listingPrice "725000"^^xsd:decimal ;
+    kh:daysOnMarket "12"^^xsd:integer ;
+    .
+
+kh:property-456-oak rdf:type kh:Property ;
+    kh:address "456 Oak Avenue, Cranford, NJ" ;
+    kh:locatedIn kh:area-cranford ;
+    kh:propertyType "cape_cod" ;
+    kh:bedrooms "3"^^xsd:integer ;
+    kh:bathrooms "2"^^xsd:decimal ;
+    kh:listingPrice "525000"^^xsd:decimal ;
+    kh:daysOnMarket "8"^^xsd:integer ;
+    .

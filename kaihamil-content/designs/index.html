@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Site Design Concepts | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        h1 strong { font-weight: 500; color: var(--gold); }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--amber);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .brief {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .brief h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .brief ul {
+            margin-left: 25px;
+            color: var(--brown-medium);
+        }
+        
+        .brief li { margin-bottom: 8px; }
+        
+        .concepts {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .concept-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .concept-header {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .concept-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        
+        .concept-title span {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .view-btn {
+            padding: 10px 25px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn:hover {
+            background: #e8d5a3;
+            transform: scale(1.05);
+        }
+        
+        .concept-body {
+            padding: 30px;
+        }
+        
+        .concept-desc {
+            color: var(--brown-medium);
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature {
+            padding: 20px;
+            background: var(--bg-cream);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .feature h4 {
+            color: var(--gold);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .feature p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        .concept-visual {
+            height: 200px;
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Content Site <strong>Design Concepts</strong></h1>
+        <p class="subtitle">Three approaches to transforming content.kaihamil.com from storage to destination.</p>
+    </header>
+    
+    <div class="brief">
+        <h2>🎯 Design Brief</h2>
+        <ul>
+            <li><strong>Attention-grabbing:</strong> Splashy tagline and visual impact at first glance</li>
+            <li><strong>Unique composition:</strong> Sections arranged around a central shape (not table/row)</li>
+            <li><strong>Constellation concept:</strong> Root folders as icons against shape outline</li>
+            <li><strong>Visual hierarchy:</strong> Clear prominence at top, guided eye movement</li>
+            <li><strong>Clean aesthetic:</strong> Not busy — refined color palette (existing brown/amber/gold)</li>
+            <li><strong>Same palette:</strong> Keep #faf6f1 cream, #3d2817 brown, #c9a227 gold</li>
+        </ul>
+    </div>
+    
+    <main class="concepts">
+        <!-- Concept 1 -->
+        <div class="concept-card">
+            <div class="concept-header">
+                <h3 class="concept-title"><span>Concept 1:</span> The Constellation</h3>
+                <a href="concept-1-constellation.html" class="view-btn">View Live →</a>
+            </div>
+            <div class="concept-body">
+                <p class="concept-desc">
+                    Central hexagon with 8 section "stars" positioned around it like a constellation. 
+                    SVG connecting lines create the network effect. Tags arranged at top, 
+                    constellation in the center. Clean separation between hero and content.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h4>Shape</h4>
+                        <p>Hexagon center with radial node layout</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Movement</h4>
+                        <p>Eye flows from tagline → center hex → explore nodes</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Feel</h4>
+                        <p>Networked, connected, systematic</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Best For</h4>
+                        <p>Emphasizing interconnected frameworks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="concept-visual">◈ ✍ 🔬 ◫ ⚡ 📋 ◈ 📚 ⚙</div>
+        </div>
+        
+        <!-- Concept 2 -->
+        <div class="concept-card">
+            <div class="concept-header">
+                <h3 class="concept-title"><span>Concept 2:</span> The Orbit</h3>
+                <a href="concept-2-orbit.html" class="view-btn">View Live →</a>
+            </div>
+            <div class="concept-body">
+                <p class="concept-desc">
+                    Full-screen immersive experience with concentric orbit rings. 
+                    Central dark core (System // Self) with sections orbiting at different distances. 
+                    Massive tagline dominates the upper space. Stats strip at bottom.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h4>Shape</h4>
+                        <p>Circular center with 3 orbital rings</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Movement</h4>
+                        <p>Eye starts at dramatic tagline → explores orbital system</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Feel</h4>
+                        <p>Cosmic, expansive, gravitational</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Best For</h4>
+                        <p>Maximum visual impact, immersive first impression</p>
+                    </div>
+                </div>
+            </div>
+            <div class="concept-visual">◎ ○ ○ ✍ 🔬 ◫ ⚡ 📋</div>
+        </div>
+        
+        <!-- Concept 3 -->
+        <div class="concept-card">
+            <div class="concept-header">
+                <h3 class="concept-title"><span>Concept 3:</span> The Bloom</h3>
+                <a href="concept-3-bloom.html" class="view-btn">View Live →</a>
+            </div>
+            <div class="concept-body">
+                <p class="concept-desc">
+                    Diamond center with petal-like section cards radiating outward. 
+                    Large bold tagline at top. Featured content strip for highlighted essays. 
+                    Secondary grid for supporting sections. Most "site-like" of the three.
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h4>Shape</h4>
+                        <p>Diamond center with card-based "petals"</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Movement</h4>
+                        <p>Tagline → diamond → primary petals → featured → secondary</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Feel</h4>
+                        <p>Organic, structured, content-forward</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Best For</h4>
+                        <p>Balancing visual impact with content discoverability</p>
+                    </div>
+                </div>
+            </div>
+            <div class="concept-visual">◈ 🌸 ✍ 🔬 ◫ ⚡ 📋 ◈ 📚</div>
+        </div>
+        
+        <!-- Concept 4 -->
+        <div class="concept-card">
+            <div class="concept-header">
+                <h3 class="concept-title"><span>Concept 4:</span> The Surfer</h3>
+                <a href="concept-4-surfer.html" class="view-btn">View Live →</a>
+            </div>
+            <div class="concept-body">
+                <p class="concept-desc">
+                    Dynamic wave background with surfer riding the crest. 
+                    Underwater depth = Operations, white peaks = Products, 
+                    surfboard = Frameworks, surfer = Self. 
+                    Extends "seeing the water" into "riding the wave."
+                </p>
+                <div class="features">
+                    <div class="feature">
+                        <h4>Shape</h4>
+                        <p>SVG wave with depth gradient overlay</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Movement</h4>
+                        <p>Surfer balances → explore peaks → dive to depths</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Feel</h4>
+                        <p>Dynamic, active, intentional navigation</p>
+                    </div>
+                    <div class="feature">
+                        <h4>Best For</h4>
+                        <p>Reinforcing the core metaphor — moving from seeing to riding</p>
+                    </div>
+                </div>
+            </div>
+            <div class="concept-visual">🏄 🌊 ⚡ ✍ 🔬 🔧 ◫ ⚙️</div>
+        </div>
+    </main>
+    
+    <div class="brief" style="margin-top: 40px;">
+        <h2>📋 Design Process Documentation</h2>
+        <ul style="margin-left: 25px; color: var(--brown-medium);">
+            <li><a href="concept-4-task-plan.md" style="color: var(--gold);">Concept 4 Task Plan</a> — Implementation roadmap</li>
+            <li><a href="../research/site-design-evolution.md" style="color: var(--gold);">Site Design Evolution</a> — Full research document with metaphor explanations</li>
+        </ul>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--brown-medium);">
+            <strong>Note:</strong> Metaphor explanations live in research docs, not on the front page. 
+            The site itself remains abstract and interpretable.
+        </p>
+    </div>
+    
+    <footer>
+        <p>© 2026 Kai Hamil · System // Self</p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">Concepts ready for review. Click "View Live" to see full interactive versions.</p>
+    </footer>
+</body>
+</html>

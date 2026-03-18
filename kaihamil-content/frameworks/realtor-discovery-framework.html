@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtor Discovery Framework | Kai Hamil</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .framework-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.8;
+        }
+        .framework-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .framework-content h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .framework-content h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            color: #1a1a1a;
+        }
+        .question-box {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .question-box strong {
+            color: #1e40af;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        th {
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        tr:hover {
+            background: #f9fafb;
+        }
+        .solution-box {
+            background: #ecfdf5;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
+        .tier-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+        .tier-section h4 {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        .tier-section ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        .tier-section li {
+            margin: 0.5rem 0;
+        }
+        .highlight-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .meta {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="site-title">Kai Hamil</a>
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="https://www.kaihamil.com/about">About</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="/" class="active">Content</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="framework-content">
+            <p class="meta">Framework • February 8, 2026</p>
+            <h1>Realtor Discovery Framework</h1>
+            <p style="font-size: 1.125rem; color: #4b5563;">A comprehensive 20-question framework for identifying root cause problems in realtor businesses and mapping them to AI solutions.</p>
+
+            <h2>Phase 1: Business Model & Profitability Mapping</h2>
+
+            <div class="question-box">
+                <strong>Q1.</strong> "Walk me through your last 3 closed deals from first contact to close. How many hours did you personally spend on each, and what percentage was high-value (client-facing, negotiating, showing) versus administrative?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q2.</strong> "Of your annual revenue, what percentage goes to: lead generation costs, transaction coordination fees, assistant/team salaries, and software subscriptions? Which of these feels most out of control?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q3.</strong> "Describe your current commission structure and split with your brokerage. At what transaction volume do you hit diminishing returns where more deals = more chaos but not proportionally more profit?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q4.</strong> "What's your 'cost per transaction' when you factor in your time at your target hourly rate? Are there deal types (price range, buyer vs seller, first-time vs investor) that are profitable versus loss leaders?"
+            </div>
+
+            <h3>Potential Conclusions</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Root Cause</th>
+                    <th>Solution Direction</th>
+                </tr>
+                <tr>
+                    <td>60%+ time on admin despite having assistant</td>
+                    <td>Process fragmentation, assistant managing chaos not systems</td>
+                    <td class="solution-box"><strong>Workflow automation + AI coordinator</strong> that routes tasks intelligently</td>
+                </tr>
+                <tr>
+                    <td>High lead gen costs with low conversion</td>
+                    <td>Poor lead qualification, nurture gaps</td>
+                    <td class="solution-box"><strong>AI lead scoring + automated nurture sequences</strong> with smart handoff triggers</td>
+                </tr>
+                <tr>
+                    <td>Commission compression on low-price deals</td>
+                    <td>Fixed effort regardless of deal size</td>
+                    <td class="solution-box"><strong>Tiered service automation</strong> — self-service portal for low-margin clients</td>
+                </tr>
+                <tr>
+                    <td>Brokerage taking 30-50% with minimal value</td>
+                    <td>Not leveraging brokerage tools, duplicating effort</td>
+                    <td class="solution-box"><strong>Independent ops stack</strong> that reduces brokerage dependency</td>
+                </tr>
+            </table>
+
+            <h2>Phase 2: Client Lifecycle Friction Points</h2>
+
+            <div class="question-box">
+                <strong>Q5.</strong> "From the moment someone says 'I want to buy/sell' to closing, what are the top 3 moments where deals stall, clients ghost, or things fall apart? What do you do when that happens?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q6.</strong> "How do you currently manage client expectations around timelines, market conditions, and process steps? Where do misunderstandings typically happen?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q7.</strong> "What percentage of your past clients refer you or use you again? For those who don't, what do you think happened? Do you have visibility into why?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q8.</strong> "Describe your current 'pipeline' — how do you track where buyers/sellers are in the process? What falls through the cracks?"
+            </div>
+
+            <h3>Potential Conclusions</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Root Cause</th>
+                    <th>Solution Direction</th>
+                </tr>
+                <tr>
+                    <td>Ghosting after initial meeting</td>
+                    <td>No sustained value delivery during search period</td>
+                    <td class="solution-box"><strong>AI-powered market watch</strong> — automated personalized property alerts + market insights</td>
+                </tr>
+                <tr>
+                    <td>Deals stall during inspection/appraisal</td>
+                    <td>Client anxiety, information asymmetry</td>
+                    <td class="solution-box"><strong>Predictive deal timeline</strong> with milestone-based automated guidance</td>
+                </tr>
+                <tr>
+                    <td>Poor repeat/referral rates</td>
+                    <td>Transaction ends = relationship ends</td>
+                    <td class="solution-box"><strong>Post-close engagement system</strong> — home value tracking, local market insights, maintenance reminders</td>
+                </tr>
+                <tr>
+                    <td>Pipeline visibility gaps</td>
+                    <td>Reactive management, no early warning system</td>
+                    <td class="solution-box"><strong>Deal health dashboard</strong> with automated risk scoring and intervention triggers</td>
+                </tr>
+            </table>
+
+            <h2>Phase 3: Information & Documentation Chaos</h2>
+
+            <div class="question-box">
+                <strong>Q9.</strong> "How many different software tools/apps do you use in a typical transaction? Walk me through the data entry you do in each. Where are you entering the same information twice?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q10.</strong> "Where do client documents live? How do you track what's been signed, what's pending, and what's missing? How much time do you spend chasing signatures or docs?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q11.</strong> "Describe your current CMA (Comparative Market Analysis) process. How long does it take to prepare for a listing appointment? What parts feel mechanical versus strategic?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q12.</strong> "When you're showing properties, how do you capture client feedback, preferences, and next steps? What happens to that information?"
+            </div>
+
+            <h3>Potential Conclusions</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Root Cause</th>
+                    <th>Solution Direction</th>
+                </tr>
+                <tr>
+                    <td>8+ tools with duplicate data entry</td>
+                    <td>No integration layer, SaaS sprawl</td>
+                    <td class="solution-box"><strong>AI data router</strong> — single input, intelligent distribution to all systems</td>
+                </tr>
+                <tr>
+                    <td>Document chaos in email/Dropbox</td>
+                    <td>No centralized transaction file</td>
+                    <td class="solution-box"><strong>Smart transaction workspace</strong> with automated doc collection and status tracking</td>
+                </tr>
+                <tr>
+                    <td>2-3 hours per CMA</td>
+                    <td>Manual data gathering, templating</td>
+                    <td class="solution-box"><strong>Auto-CMA generator</strong> — pulls comps, generates narrative, creates presentation</td>
+                </tr>
+                <tr>
+                    <td>Lost client feedback</td>
+                    <td>Ad-hoc note-taking, no structured follow-up</td>
+                    <td class="solution-box"><strong>Voice-to-structured-data capture</strong> during showings with automated action items</td>
+                </tr>
+            </table>
+
+            <h2>Phase 4: Time & Attention Allocation</h2>
+
+            <div class="question-box">
+                <strong>Q13.</strong> "If you had an extra 10 hours per week, what would you do with them? What's the highest-value activity you're NOT doing because you're buried in low-value work?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q14.</strong> "How do you currently handle inquiries outside business hours? What's the experience like for someone who submits a form at 10pm on a Saturday?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q15.</strong> "Describe your 'listing launch' process — from signed agreement to live on MLS. What steps could happen faster or with less of your involvement?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q16.</strong> "What tasks do you currently delegate to an assistant or TC that still require your intervention or review? Why?"
+            </div>
+
+            <h3>Potential Conclusions</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Root Cause</th>
+                    <th>Solution Direction</th>
+                </tr>
+                <tr>
+                    <td>Wanting more time for "lead generation" or "relationship building"</td>
+                    <td>Admin consuming relationship time</td>
+                    <td class="solution-box"><strong>AI executive assistant</strong> — handles scheduling, follow-ups, routine communication</td>
+                </tr>
+                <tr>
+                    <td>Poor after-hours response = lost leads</td>
+                    <td>No coverage, missed opportunity window</td>
+                    <td class="solution-box"><strong>24/7 AI qualification bot</strong> — instant response, intelligent triage, seamless handoff</td>
+                </tr>
+                <tr>
+                    <td>Listing launch takes 3-7 days</td>
+                    <td>Sequential manual processes</td>
+                    <td class="solution-box"><strong>Parallel listing workflow</strong> — automated staging coordination, photography scheduling, description generation</td>
+                </tr>
+                <tr>
+                    <td>Review bottleneck on delegated tasks</td>
+                    <td>Trust/quality control issues</td>
+                    <td class="solution-box"><strong>AI quality checker</strong> — reviews work before it reaches you, flags exceptions</td>
+                </tr>
+            </table>
+
+            <h2>Phase 5: Competitive Positioning & Market Intelligence</h2>
+
+            <div class="question-box">
+                <strong>Q17.</strong> "How do you currently track competing listings, price reductions, and market shifts in your farm area? How quickly can you advise a seller to adjust strategy?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q18.</strong> "What information do buyers ask for that you struggle to provide quickly — neighborhood trends, school data, commute times, investment potential?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q19.</strong> "How do you stay top-of-mind with past clients? What do you wish you could tell them more regularly?"
+            </div>
+
+            <div class="question-box">
+                <strong>Q20.</strong> "If you were starting from scratch today with no reputation, what would you do differently to compete?"
+            </div>
+
+            <h3>Potential Conclusions</h3>
+            <table>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Root Cause</th>
+                    <th>Solution Direction</th>
+                </tr>
+                <tr>
+                    <td>Reactive market tracking</td>
+                    <td>No systematic competitive monitoring</td>
+                    <td class="solution-box"><strong>Market intelligence dashboard</strong> — automated alerts on comps, price changes, inventory shifts</td>
+                </tr>
+                <tr>
+                    <td>Generic buyer consultations</td>
+                    <td>Can't quickly assemble hyperlocal insights</td>
+                    <td class="solution-box"><strong>Hyperlocal knowledge engine</strong> — instant neighborhood reports, trend analysis, lifestyle scoring</td>
+                </tr>
+                <tr>
+                    <td>Inconsistent past client touchpoints</td>
+                    <td>No systematic nurture system</td>
+                    <td class="solution-box"><strong>Automated market updates</strong> — personalized home valuations, neighborhood news, relevant market signals</td>
+                </tr>
+            </table>
+
+            <h2>Solution Architecture: The "Realtor Operating System"</h2>
+
+            <div class="tier-section">
+                <h4>Tier 1: Foundation (All clients)</h4>
+                <ul>
+                    <li><strong>AI Executive Assistant</strong> — handles scheduling, routine email, follow-ups</li>
+                    <li><strong>Smart Lead Response</strong> — 24/7 qualification and routing</li>
+                    <li><strong>Unified Inbox</strong> — aggregates all client communication channels</li>
+                </ul>
+            </div>
+
+            <div class="tier-section">
+                <h4>Tier 2: Growth (Active transaction clients)</h4>
+                <ul>
+                    <li><strong>Transaction Command Center</strong> — automated document collection, milestone tracking, risk alerts</li>
+                    <li><strong>Auto-CMA Engine</strong> — 15-minute market analysis to 2-hour presentation</li>
+                    <li><strong>Showing Intelligence</strong> — voice-captured feedback, preference learning, automated next steps</li>
+                </ul>
+            </div>
+
+            <div class="tier-section">
+                <h4>Tier 3: Scale (High-volume or team clients)</h4>
+                <ul>
+                    <li><strong>Market Intelligence Platform</strong> — competitive tracking, pricing strategy, trend forecasting</li>
+                    <li><strong>Client Lifecycle Automation</strong> — nurture sequences, referral systems, repeat engagement</li>
+                    <li><strong>Custom Workflow Builder</strong> — their unique processes encoded into automated playbooks</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h3>The Equity/Free Pitch Structure</h3>
+                <p><strong>Phase 1 (Month 1-2):</strong> Deep discovery + build core system (free, your time)</p>
+                <p><strong>Phase 2 (Month 3-6):</strong> Iterate based on usage, add features (free, their feedback)</p>
+                <p><strong>Phase 3 (Month 6+):</strong> Either:</p>
+                <ul>
+                    <li><strong>Equity model:</strong> 1-5% of incremental profit attributed to system for 12-24 months</li>
+                    <li><strong>License model:</strong> Flat monthly fee once value is proven</li>
+                    <li><strong>Hybrid:</strong> Reduced fee + small equity component</li>
+                </ul>
+                <p><strong>Your protection:</strong> Retain IP on reusable components. They get bespoke UI/workflow, you get proven modules to resell.</p>
+            </div>
+
+            <p style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; text-align: center;">
+                <a href="index.html">← Back to Frameworks</a>
+            </p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h2>Kai <strong>Hamil</strong></h2>
+                    <p>System // Self</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="https://www.kaihamil.com/about">About us</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="https://www.kaihamil.com/services">Services</a>
+                </nav>
+                <nav class="footer-social">
+                    <a href="https://kaihamil.substack.com" target="_blank">Substack</a>
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                </nav>
+            </div>
+            <p class="footer-copyright"><a href="/">← Back to Content Home</a></p>
+        </footer>
+    </div>
+</body>
+</html>

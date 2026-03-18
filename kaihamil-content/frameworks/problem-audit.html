@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Problem Audit Framework | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --success: #3d8b37;
+            --warning: #c9a227;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Header */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 50px 0 20px;
+            color: var(--brown-dark);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--brown-medium);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            color: var(--brown-medium);
+        }
+        
+        /* The 3 Questions */
+        .questions-list {
+            margin: 30px 0;
+        }
+        
+        .question-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .question-number {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+        
+        .question-purpose {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Causal Layers */
+        .layers-grid {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .layer-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .layer-card.surface { border-color: var(--warning); }
+        .layer-card.contributing { border-color: var(--amber); }
+        .layer-card.root { border-color: var(--success); }
+        
+        .layer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .surface .layer-icon { background: rgba(201, 162, 39, 0.2); }
+        .contributing .layer-icon { background: rgba(212, 165, 116, 0.3); }
+        .root .layer-icon { background: rgba(61, 139, 55, 0.2); }
+        
+        .layer-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .layer-desc {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+        }
+        
+        .layer-questions {
+            list-style: none;
+        }
+        
+        .layer-questions li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .layer-questions li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        /* Closing Phase */
+        .closing-phase {
+            background: linear-gradient(135deg, var(--brown-dark), var(--brown-medium));
+            color: var(--bg-cream);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .closing-phase h2 {
+            color: var(--gold);
+            margin-top: 0;
+        }
+        
+        .closing-phase p {
+            color: var(--bg-cream);
+            opacity: 0.95;
+        }
+        
+        .closing-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            border-left: 4px solid var(--gold);
+            padding-left: 25px;
+            margin: 25px 0;
+            opacity: 1 !important;
+        }
+        
+        .closing-phase .question-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .closing-phase .question-text {
+            color: var(--bg-cream);
+        }
+        
+        .closing-phase .question-purpose {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Interactive Worksheet */
+        .worksheet {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .worksheet h3 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--brown-dark);
+        }
+        
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        /* Output Section */
+        .output-section {
+            display: none;
+            background: linear-gradient(135deg, var(--bg-card), var(--gold-light));
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        
+        .output-section.visible {
+            display: block;
+        }
+        
+        .output-section h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .problem-statement {
+            background: white;
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .action-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .action-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .action-list li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        /* Download Section */
+        .download-section {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .download-section h3 {
+            color: var(--gold);
+            margin-top: 0;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            .hero { padding: 80px 20px 40px; }
+            .hero h1 { font-size: 1.8rem; }
+            .question-item { padding-left: 60px; }
+            .closing-phase { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← All Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Free Framework</span>
+        <h1>The <strong>Problem Audit</strong></h1>
+        <p>A diagnostic system for identifying, validating, and solving the right problems. Not symptoms—roots.</p>
+    </header>
+    
+    <main class="container">
+        <h2>The Premise</h2>
+        <p>Most people solve symptoms. They treat the cough instead of the infection, the calendar overflow instead of the prioritization failure, the low revenue instead of the wrong market fit.</p>
+        <p>The Problem Audit is a causal identification system. It moves you from "what hurts" through "why it hurts" to "what would actually fix it."</p>
+        
+        <p style="font-weight: 500; color: var(--brown-dark); border-left: 3px solid var(--gold); padding-left: 20px; margin: 30px 0;">
+            Core Principle: The right problem, poorly solved, beats the wrong problem, perfectly solved.
+        </p>
+        
+        <h2>Phase 1: The Three Questions</h2>
+        <p>These questions function as triage. They reveal where your energy is going and whether it's going to the right place.</p>
+        
+        <div class="questions-list">
+            <div class="question-item">
+                <span class="question-number">1</span>
+                <div class="question-text">Are you solving the right problem?</div>
+                <div class="question-purpose">Surfaces whether your current focus is on a symptom or a root cause.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">2</span>
+                <div class="question-text">How do you know you're solving the right problem?</div>
+                <div class="question-purpose">Forces articulation of problem definition criteria—how you'd recognize the right problem if you saw it.</div>
+            </div>
+            
+            <div class="question-item">
+                <span class="question-number">3</span>
+                <div class="question-text">Is the problem really worth solving?</div>
+                <div class="question-purpose">Considers impact comparison against competing priorities.</div>
+            </div>
+        </div>
+        
+        <h2>Phase II: The Three Layers</h2>
+        <p>Apply this three-layer analysis to determine if you've found a root cause or just another symptom.</p>
+        
+        <div class="layers-grid">
+            <div class="layer-card surface">
+                <div class="layer-header">
+                    <div class="layer-icon">🌊</div>
+                    <div class="layer-title">Surface Problems (Symptoms)</div>
+                </div>
+                <div class="layer-desc">Immediate, visible, painful—but regenerating if solved alone.</div>
+                <ul class="layer-questions">
+                    <li>What specifically is not working?</li>
+                    <li>When did it start?</li>
+                    <li>Who is affected?</li>
+                </ul>
+            </div>
+            
+            <div class="layer-card contributing">
+                <div class="layer-header">
+                    <div class="layer-icon">⚙️</div>
+                    <div class="layer-title">Contributing Factors (Proximate Causes)</div>
+                </div>
+                <div class="layer-desc">Explanatory, conditional, systemic—improves outcomes but underlying dynamics persist.</div>
+                <ul class="layer-questions">
+                    <li>What conditions allow this symptom to exist?</li>
+                    <li>What systems or processes are involved?</li>
+                    <li>Is this a one-time failure or a pattern?</li>
+                </ul>
+            </div>
+            
+            <div class="layer-card root">
+                <div class="layer-header">
+                    <div class="layer-icon">🎯</div>
+                    <div class="layer-title">Root Causes (Fundamental Dynamics)</div>
+                </div>
+                <div class="layer-desc">Generative, upstream, structural—solving here eliminates the problem category entirely.</div>
+                <ul class="layer-questions">
+                    <li>What belief makes the contributing factors acceptable?</li>
+                    <li>What must be true at a fundamental level for this to resolve?</li>
+                    <li>What does this problem allow us to avoid?</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>Interactive Worksheet</h2>
+        <p>Apply the framework to your current challenge:</p>
+        
+        <div class="worksheet">
+            <h3>📝 Your Problem Audit</h3>
+            
+            <div class="input-group">
+                <label>What problem are you currently trying to solve?</label>
+                <textarea id="problemInput" placeholder="Describe the symptom or challenge you're facing..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>Ask "Why" five times:</label>
+                <textarea id="fiveWhys" placeholder="1. Why is this happening?&#10;2. Why is that?&#10;3. Keep asking until you hit a belief or assumption..."></textarea>
+            </div>
+            
+            <div class="input-group">
+                <label>What layer is this? (Surface / Contributing / Root)</label>
+                <textarea id="layerInput" placeholder="Be honest: are you treating a symptom or fixing a system?"></textarea>
+            </div>
+            
+            <button class="btn-primary" onclick="generateAudit()">Generate Audit Report</button>
+        </div>
+        
+        <div class="output-section" id="outputSection">
+            <h3>📋 Your Problem Audit Report</h3>
+            
+            <div class="problem-statement" id="problemStatement">
+                <!-- Generated content -->
+            </div>
+            
+            <h4>Recommended Actions:</h4>
+            <ul class="action-list" id="actionList">
+                <!-- Generated content -->
+            </ul>
+            
+            <button class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+        </div>
+        
+        <!-- Closing Phase -->
+        <div class="closing-phase">
+            <h2>The Closing Phase</h2>
+            <p class="closing-quote">None of this matters if your decision leaves you still treading water. Now is the time to choose the future you want.</p>
+            
+            <div class="questions-list">
+                <div class="question-item">
+                    <span class="question-number">4</span>
+                    <div class="question-text">How do you know when the problem has been solved?</div>
+                    <div class="question-purpose">Reveals whether you have clear understanding of your intended outcome.</div>
+                </div>
+                
+                <div class="question-item">
+                    <span class="question-number">5</span>
+                    <div class="question-text">What happens if you don't solve it?</div>
+                    <div class="question-purpose">Defines stakes and validates (or invalidates) urgency.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3>📥 Download the Framework</h3>
+            <p>Get the complete Problem Audit as a printable worksheet + detailed guide.</p>
+            <a href="#" class="download-btn" onclick="alert('PDF download coming soon!'); return false;">Download PDF</a>
+        </div>
+        
+        <h2>Integration with Other Frameworks</h2>
+        <p>The Problem Audit works seamlessly with:</p>
+        <ul style="margin: 20px 0; padding-left: 30px;">
+            <li style="margin-bottom: 10px;"><strong>5 Filters</strong> — Use for Question 3 to evaluate opportunity cost</li>
+            <li style="margin-bottom: 10px;"><strong>System // Self</strong> — Distinguishes external contributing factors from internal root causes</li>
+            <li style="margin-bottom: 10px;"><strong>Agency through Automation</strong> — Solution strategy for "have to" problems</li>
+        </ul>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">This framework is free to use and share. Attribution appreciated.</p>
+    </footer>
+    
+    <script>
+        function generateAudit() {
+            const problem = document.getElementById('problemInput').value || '[Your problem here]';
+            const fiveWhys = document.getElementById('fiveWhys').value || '[Analysis pending]';
+            const layer = document.getElementById('layerInput').value || 'Surface';
+            
+            const problemStatement = `The fundamental problem appears to be ${layer.toLowerCase() === 'root' ? 'a belief or system-level dynamic' : layer.toLowerCase() === 'contributing' ? 'a process or conditional factor' : 'a symptom requiring immediate relief'}, which manifests as "${problem}".`;
+            
+            document.getElementById('problemStatement').textContent = problemStatement;
+            
+            const actions = [
+                `Immediate (Surface): Address "${problem.split(' ').slice(0, 5).join(' ')}..." for temporary relief`,
+                `Short-term (Contributing): ${layer === 'Surface' ? 'Map the process that creates this symptom' : 'Redesign the conditional factors'}`,
+                `Long-term (Root): ${layer === 'Root' ? 'Work on the fundamental belief/identity shift' : 'Examine what this problem allows you to avoid'}`
+            ];
+            
+            const actionList = document.getElementById('actionList');
+            actionList.innerHTML = actions.map(a => `<li>${a}</li>`).join('');
+            
+            document.getElementById('outputSection').classList.add('visible');
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

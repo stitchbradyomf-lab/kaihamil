@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frameworks | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 50px 0 25px;
+            color: var(--brown-dark);
+        }
+        
+        /* Framework Cards */
+        .frameworks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .framework-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .framework-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.12);
+        }
+        
+        .framework-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--gold-light);
+            color: var(--brown-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            align-self: flex-start;
+        }
+        
+        .badge.diagnostic { background: #dbeafe; color: #1e40af; }
+        .badge.decision { background: #fef3c7; color: #92400e; }
+        .badge.professional { background: #d1fae5; color: #065f46; }
+        
+        .framework-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--brown-dark);
+        }
+        
+        .framework-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            flex: 1;
+            margin-bottom: 15px;
+        }
+        
+        .framework-meta {
+            font-size: 0.85rem;
+            color: var(--amber);
+            font-weight: 500;
+        }
+        
+        /* What is a Framework */
+        .about-frameworks {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .about-frameworks h2 {
+            margin-top: 0;
+        }
+        
+        .about-frameworks p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .frameworks-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Thinking <strong>Frameworks</strong></h1>
+        <p>Structured tools for solving complex problems. Research-backed, battle-tested, ready to apply.</p>
+    </header>
+    
+    <main class="container">
+        <h2>Diagnostic Frameworks</h2>
+        <div class="frameworks-grid">
+            <a href="problem-audit.html" class="framework-card">
+                <span class="badge diagnostic">Diagnostic</span>
+                <div class="framework-icon">🔍</div>
+                <h3>The Problem Audit</h3>
+                <p>5 questions to identify if you're solving symptoms or root causes. Distinguishes surface problems from structural issues.</p>
+                <span class="framework-meta">5 questions • 3 causal levels</span>
+            </a>
+            
+            <a href="cause-and-effect/" class="framework-card">
+                <span class="badge diagnostic">Diagnostic</span>
+                <div class="framework-icon">🔄</div>
+                <h3>Cause & Effect</h3>
+                <p>Break vicious cycles using Judea Pearl's 3-level causal model. Move from treating symptoms to redesigning systems.</p>
+                <span class="framework-meta">3 levels • Cycle breaker tool • 15 min</span>
+            </a>
+        </div>
+        
+        <h2>Decision Frameworks</h2>
+        <div class="frameworks-grid">
+            <a href="5-filters.html" class="framework-card">
+                <span class="badge decision">Decision</span>
+                <div class="framework-icon">◫</div>
+                <h3>The 5 Filters</h3>
+                <p>5-question framework for deciding under uncertainty. Applies Directional, Preferential, and Philosophical lenses to any choice.</p>
+                <span class="framework-meta">5 filters • Uncertainty navigation</span>
+            </a>
+            
+            <a href="system-self.html" class="framework-card">
+                <span class="badge decision">Decision</span>
+                <div class="framework-icon">⚖️</div>
+                <h3>System // Self</h3>
+                <p>Balance external infrastructure with internal clarity. The core philosophy behind everything at Kai Hamil.</p>
+                <span class="framework-meta">2 domains • Integration method</span>
+            </a>
+            
+            <a href="ai-usage-advanced.html" class="framework-card">
+                <span class="badge decision">Assessment</span>
+                <div class="framework-icon">🤖</div>
+                <h3>AI Usage Advanced</h3>
+                <p>8-question behavioral assessment for AI integration. Bar chart visualization and detailed type analysis.</p>
+                <span class="framework-meta">5 minutes • Behavioral</span>
+            </a>
+        </div>
+        
+        <h2>Professional Frameworks</h2>
+        <div class="frameworks-grid">
+            <a href="realtor-discovery-framework.html" class="framework-card">
+                <span class="badge professional">Professional</span>
+                <div class="framework-icon">🏠</div>
+                <h3>Realtor Discovery</h3>
+                <p>20-question diagnostic for identifying root cause problems in realtor businesses. Maps pain points to AI solutions.</p>
+                <span class="framework-meta">20 questions • 5 phases • AI mapping</span>
+            </a>
+        </div>
+        
+        <div class="about-frameworks">
+            <h2>What is a Framework?</h2>
+            <p>A framework is a thinking tool — a structured approach for navigating complexity. Unlike rigid systems, frameworks adapt to context while providing clarity. They help you see patterns, identify leverage points, and make better decisions faster.</p>
+            <p>Each framework here has been developed through research, tested in practice, and refined through iteration. Use them as starting points, not prescriptions.</p>
+            <p><strong>How to use:</strong> Start with a diagnostic framework to understand your situation, then apply a decision framework to navigate your next move.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><a href="/" style="color: var(--brown-medium);">← Back to Home</a></p>
+    </footer>
+</body>
+</html>

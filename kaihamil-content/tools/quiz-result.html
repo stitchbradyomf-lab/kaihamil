@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI User Type | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        .nav {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .nav a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 1.3rem;
+        }
+        
+        .nav a strong {
+            color: var(--brown-dark);
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 40px 0 30px;
+        }
+        
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .hero-type {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Position Sliders */
+        .position-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .position-label {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .axis-display {
+            margin-bottom: 25px;
+        }
+        
+        .axis-display:last-child {
+            margin-bottom: 0;
+        }
+        
+        .axis-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 10px;
+        }
+        
+        .axis-track {
+            height: 10px;
+            background: var(--bg-cream);
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .axis-track::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -3px;
+            bottom: -3px;
+            width: 2px;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+        
+        .axis-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            background: var(--gold);
+            border: 3px solid var(--brown-dark);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* One-liner insight */
+        .insight {
+            font-size: 1.15rem;
+            text-align: center;
+            color: var(--brown-dark);
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin: 30px 0;
+            line-height: 1.7;
+        }
+        
+        .insight em {
+            color: var(--gold);
+            font-style: normal;
+            font-weight: 500;
+        }
+        
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 20px 0 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .cta-note {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px 0;
+        }
+        
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--brown-medium);
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        /* Deep Dive Link */
+        .deep-dive {
+            text-align: center;
+            padding: 20px 0 40px;
+        }
+        
+        .deep-dive-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
+        }
+        
+        .deep-dive-link:hover {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+        }
+        
+        /* Mobile */
+        @media (max-width: 480px) {
+            .hero-type { font-size: 2rem; }
+            .hero-icon { font-size: 4rem; }
+            .position-bar { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="/">kai <strong>hamil</strong></a>
+        </nav>
+        
+        <!-- Hero -->
+        <div class="hero">
+            <span class="hero-icon" id="heroIcon">🔍</span>
+            <div class="hero-type" id="heroType">The Explorer</div>
+            <div class="hero-subtitle" id="heroSubtitle">Discovery-First AI User</div>
+        </div>
+        
+        <!-- Position Sliders -->
+        <div class="position-bar">
+            <div class="position-label">Your Position</div>
+            
+            <div class="axis-display">
+                <div class="axis-labels">
+                    <span>Inquisitive</span>
+                    <span>Directive</span>
+                </div>
+                <div class="axis-track">
+                    <div class="axis-marker" id="directiveMarker" style="left: 25%;"></div>
+                </div>
+            </div>
+            
+            <div class="axis-display">
+                <div class="axis-labels">
+                    <span>Assistive</span>
+                    <span>Execution</span>
+                </div>
+                <div class="axis-track">
+                    <div class="axis-marker" id="executionMarker" style="left: 35%;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- One-Liner -->
+        <div class="insight" id="insight">
+            You <em>explore before committing</em>, treating AI as a conversation partner 
+            for discovering what you don't know you don't know.
+        </div>
+        
+        <!-- CTA -->
+        <div class="cta">
+            <a href="/frameworks/problem-audit.html" class="cta-button" id="ctaButton">Get Your Full Report</a>
+            <div class="cta-note" id="ctaNote">8 questions • 5 minutes • Personalized recommendations</div>
+        </div>
+        
+        <!-- Deep Dive Link -->
+        <div class="deep-dive">
+            <a href="/frameworks/ai-usage-advanced-deepdive.html" class="deep-dive-link">See your position on the full quadrant →</a>
+        </div>
+        
+        <!-- Actions -->
+        <div class="actions">
+            <button class="action-btn" onclick="retakeQuiz()">🔄 Retake Quiz</button>
+            <button class="action-btn" onclick="shareResult()">📤 Share Result</button>
+        </div>
+        
+        <footer>
+            <p>Kai Hamil | System // Self</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Type data
+        const typeData = {
+            explorer: {
+                icon: '🔍',
+                name: 'The Explorer',
+                subtitle: 'Discovery-First AI User',
+                insight: 'You <em>explore before committing</em>, treating AI as a conversation partner for discovering what you don\'t know you don\'t know.',
+                ctaLink: '/frameworks/problem-audit.html',
+                ctaText: 'Start the Problem Audit',
+                ctaNote: 'Discover root causes and hidden patterns',
+                defaultPosition: { directive: 25, execution: 25 }
+            },
+            operator: {
+                icon: '🔧',
+                name: 'The Operator',
+                subtitle: 'System-First AI User',
+                insight: 'You <em>optimize and refine</em>, using AI to perfect systems and processes you already understand deeply.',
+                ctaLink: '/frameworks/',
+                ctaText: 'Explore Frameworks',
+                ctaNote: 'Multi-step workflows for your precision',
+                defaultPosition: { directive: 25, execution: 75 }
+            },
+            director: {
+                icon: '🎬',
+                name: 'The Director',
+                subtitle: 'Vision-First AI User',
+                insight: 'You <em>decide strategically</em>, using AI to explore options before committing to a clear direction.',
+                ctaLink: '/frameworks/5-filters.html',
+                ctaText: 'Try the 5 Filters',
+                ctaNote: 'Compare scenarios and decide with confidence',
+                defaultPosition: { directive: 75, execution: 25 }
+            },
+            implementer: {
+                icon: '⚡',
+                name: 'The Implementer',
+                subtitle: 'Action-First AI User',
+                insight: 'You <em>execute decisively</em>, treating AI as a tool to rapidly turn your vision into reality.',
+                ctaLink: '/products/',
+                ctaText: 'Browse Products',
+                ctaNote: 'One-shot execution prompts for your speed',
+                defaultPosition: { directive: 75, execution: 75 }
+            }
+        };
+        
+        // Load result from localStorage or URL params
+        function loadResult() {
+            const params = new URLSearchParams(window.location.search);
+            let type = params.get('type') || localStorage.getItem('aiUserType') || 'explorer';
+            
+            // Handle hybrid types
+            if (type.includes('-')) {
+                type = type.split('-')[0];
+            }
+            
+            const data = typeData[type] || typeData.explorer;
+            
+            // Get scores for positioning
+            const scores = JSON.parse(localStorage.getItem('aiUserScores') || '{}');
+            let directivePos = data.defaultPosition.directive;
+            let executionPos = data.defaultPosition.execution;
+            
+            if (scores.directive !== undefined && scores.execution !== undefined) {
+                directivePos = scores.directive;
+                executionPos = scores.execution;
+            }
+            
+            // Update display
+            document.getElementById('heroIcon').textContent = data.icon;
+            document.getElementById('heroType').textContent = data.name;
+            document.getElementById('heroSubtitle').textContent = data.subtitle;
+            document.getElementById('insight').innerHTML = data.insight;
+            document.getElementById('ctaButton').textContent = data.ctaText;
+            document.getElementById('ctaButton').href = data.ctaLink;
+            document.getElementById('ctaNote').textContent = data.ctaNote;
+            
+            // Update slider positions
+            document.getElementById('directiveMarker').style.left = directivePos + '%';
+            document.getElementById('executionMarker').style.left = executionPos + '%';
+        }
+        
+        function retakeQuiz() {
+            window.location.href = '/tools/ai-user-quiz.html';
+        }
+        
+        function shareResult() {
+            const type = localStorage.getItem('aiUserType') || 'explorer';
+            const data = typeData[type] || typeData.explorer;
+            const text = `I'm a ${data.name} AI user according to Kai Hamil. What's your type?`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My AI User Type',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text + ' ' + window.location.href);
+                alert('Result copied to clipboard!');
+            }
+        }
+        
+        // Load on page load
+        loadResult();
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --brown-light: #8b7355;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .header-title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .header-title strong {
+            font-weight: 500;
+            color: var(--gold);
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: var(--amber);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        .nav a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: var(--gold);
+        }
+        
+        .nav a.active {
+            color: var(--gold);
+        }
+        
+        /* Main Content */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        /* Featured Post */
+        .featured {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            color: var(--bg-cream);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .featured-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .featured-content h2 a {
+            color: var(--bg-cream);
+            text-decoration: none;
+        }
+        
+        .featured-content h2 a:hover {
+            color: var(--gold);
+        }
+        
+        .featured-meta {
+            color: var(--amber);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .featured-desc {
+            color: var(--bg-cream);
+            opacity: 0.9;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+        
+        .featured-cta {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .featured-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        
+        .featured-visual {
+            font-size: 8rem;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        /* Post Grid */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: var(--brown-dark);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.1);
+        }
+        
+        .post-header {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--bg-card) 100%);
+            padding: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .post-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .post-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+            line-height: 1.3;
+        }
+        
+        .post-meta {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .post-excerpt {
+            padding: 25px 30px;
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .post-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .post-tags {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .tag {
+            background: var(--bg-cream);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+        }
+        
+        .read-time {
+            font-size: 0.85rem;
+            color: var(--amber);
+            font-weight: 500;
+        }
+        
+        /* Category Filter */
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        /* Archive Link */
+        .archive-section {
+            text-align: center;
+            padding: 40px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+        
+        .archive-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .archive-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .featured {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+            
+            .featured-visual {
+                order: -1;
+                font-size: 5rem;
+            }
+            
+            .post-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <h1 class="header-title">kai <strong>hamil</strong></h1>
+        <p class="header-subtitle">Essays, frameworks, and thinking in progress</p>
+    </header>
+    
+    <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/posts/" class="active">Posts</a>
+        <a href="/research/">Research</a>
+        <a href="/frameworks/">Frameworks</a>
+        <a href="/products/">Products</a>
+        <a href="/about.html">About</a>
+    </nav>
+    
+    <main class="content">
+        <!-- Daily Observations -->
+        <h2 class="section-title">Daily Observations</h2>
+        <div class="post-grid">
+            <a href="/posts/one-dimensional-decision-trap.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🌡️</div>
+                    <h3 class="post-title">The Weatherman Strikes Again</h3>
+                    <div class="post-meta">March 11, 2026 · Observation</div>
+                </div>
+                <p class="post-excerpt">How putting too much faith in a single data point leads to shivering at soccer games and expensive trips to Burlington.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Decision-Making</span>
+                        <span class="tag">Context</span>
+                    </div>
+                    <span class="read-time">3 min</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Long-Form Essays -->
+        <h2 class="section-title">Long-Form Essays</h2>
+        <div class="post-grid">
+            <a href="/posts/the-physics-of-love.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">❤️</div>
+                    <h3 class="post-title">The Physics of Love</h3>
+                    <div class="post-meta">February 14, 2026 · Essay</div>
+                </div>
+                <p class="post-excerpt">Why human connection is the most powerful force in the universe. From neuroscience to ancient Greek philosophy to Interstellar.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Relationships</span>
+                        <span class="tag">Science</span>
+                    </div>
+                    <span class="read-time">25 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/5-filters-applied-openclaw.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🔧</div>
+                    <h3 class="post-title">5 Filters Applied: My OpenClaw Decisions</h3>
+                    <div class="post-meta">February 18, 2026 · Case Study</div>
+                </div>
+                <p class="post-excerpt">Eating my own cooking: applying the 5 Filters framework to my decision to build an agentic AI system as a non-engineer.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Frameworks</span>
+                        <span class="tag">AI</span>
+                    </div>
+                    <span class="read-time">12 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/5-filters-deciding-uncertainty.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🎯</div>
+                    <h3 class="post-title">5 Filters for Deciding Under Uncertainty</h3>
+                    <div class="post-meta">February 18, 2026 · Framework</div>
+                </div>
+                <p class="post-excerpt">A practical framework for making consequential decisions when you don't have complete information.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Decision-Making</span>
+                    </div>
+                    <span class="read-time">8 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/ai-video-editing-tools.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🎬</div>
+                    <h3 class="post-title">AI Video Editing: From Raw to Finished</h3>
+                    <div class="post-meta">February 18, 2026 · Tool Research</div>
+                </div>
+                <p class="post-excerpt">Research-based comparison of AI video editing tools. Descript's workflow, alternatives, and realistic time savings.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Tools</span>
+                        <span class="tag">Video</span>
+                    </div>
+                    <span class="read-time">6 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/ai-agent-architecture.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🤖</div>
+                    <h3 class="post-title">I Built an AI Agent System. Here's Why I Had to Throw Away the First Version.</h3>
+                    <div class="post-meta">February 17, 2026 · Systems Design</div>
+                </div>
+                <p class="post-excerpt">From a bottlenecked supervisor architecture to hierarchical delegation — 60% faster, 70% lighter, fewer hallucinations.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Systems</span>
+                        <span class="tag">Engineering</span>
+                    </div>
+                    <span class="read-time">8 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/thinking-in-cause-and-effect.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">🔄</div>
+                    <h3 class="post-title">Thinking in Cause and Effect</h3>
+                    <div class="post-meta">February 11, 2026 · Framework</div>
+                </div>
+                <p class="post-excerpt">The lost art of breaking vicious cycles. A research-backed framework for predictive decision-making.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Systems</span>
+                        <span class="tag">Frameworks</span>
+                    </div>
+                    <span class="read-time">15 min</span>
+                </div>
+            </a>
+            
+            <a href="/posts/the-51-ratio-math-saves-relationships.html" class="post-card">
+                <div class="post-header">
+                    <div class="post-icon">💕</div>
+                    <h3 class="post-title">The 5:1 Ratio: The Math That Saves Relationships</h3>
+                    <div class="post-meta">February 12, 2026 · Research</div>
+                </div>
+                <p class="post-excerpt">How one number predicts divorce with 94% accuracy. Gottman's Love Lab research meets practical application.</p>
+                <div class="post-footer">
+                    <div class="post-tags">
+                        <span class="tag">Relationships</span>
+                        <span class="tag">Research</span>
+                    </div>
+                    <span class="read-time">18 min</span>
+                </div>
+            </a>
+        </div>
+        
+        <!-- Archive -->
+        <div class="archive-section">
+            <a href="/briefs/" class="archive-link">View all posts in the archive →</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

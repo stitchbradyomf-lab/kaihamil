@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Chart Evaluator | Tools | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-gold: #f4d03f;
+            --system-blue: #58a6ff;
+            --system-blue-dim: #388bfd;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-primary) 80%, transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            color: var(--accent-gold); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover { color: var(--accent-gold); }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px 60px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Tool Layout */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .tool-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Input Panel */
+        .input-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .input-panel h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .input-help {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-family: 'Inter', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-bottom: 16px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--system-blue);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--system-blue);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            filter: brightness(1.1);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin-top: 8px;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+        }
+        
+        .sample-data {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .sample-data p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        /* Chart Panel */
+        .chart-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            min-height: 400px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 20px;
+        }
+        
+        .no-data {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        /* Results Panel */
+        .results-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+        
+        .results-panel h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .stat-value.mean { color: var(--system-blue); }
+        .stat-value.ucl { color: var(--danger); }
+        .stat-value.lcl { color: var(--danger); }
+        .stat-value.sd { color: var(--warning); }
+        
+        /* Signals Section */
+        .signals-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .signals-section h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .signal-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .signal {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .signal.common {
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+        }
+        
+        .signal.special {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+        }
+        
+        .signal-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .signal.common .signal-icon {
+            background: var(--success);
+            color: #000;
+        }
+        
+        .signal.special .signal-icon {
+            background: var(--danger);
+            color: #fff;
+        }
+        
+        .signal-text {
+            flex: 1;
+        }
+        
+        .signal-label {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .signal-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Interpretation */
+        .interpretation {
+            background: linear-gradient(135deg, rgba(244, 208, 63, 0.1) 0%, rgba(244, 208, 63, 0.05) 100%);
+            border: 1px solid var(--accent-gold);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        
+        .interpretation h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+        
+        .interpretation p {
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        /* Guide Section */
+        .guide-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .guide-section h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .guide-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .guide-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--system-blue);
+        }
+        
+        .guide-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Related Links */
+        .related-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 12px;
+        }
+        
+        .related-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .related-link {
+            display: block;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        
+        .related-link:hover {
+            border-color: var(--system-blue);
+            background: var(--bg-card);
+        }
+        
+        .related-link .title {
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .related-link .desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container { padding: 80px 20px 40px; }
+            .nav { padding: 15px 20px; }
+            .page-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">System</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Control Chart Evaluator</h1>
+            <p>Enter your data series to identify common cause vs special cause variation. Know what's normal fluctuation and what deserves your attention.</p>
+        </div>
+        
+        <div class="tool-grid">
+            <div class="input-panel">
+                <h3>Enter Your Data</h3>
+                <p class="input-help">Enter one value per line (or comma-separated). Use any metric: sales numbers, hours slept, ticket volume, etc.</p>
+                <textarea id="dataInput" placeholder="e.g.&#10;52&#10;48&#10;55&#10;51&#10;49&#10;53&#10;47&#10;50&#10;54&#10;46"></textarea>
+                <button class="btn" onclick="analyzeData()">Analyze Data</button>
+                <button class="btn btn-secondary" onclick="clearData()">Clear</button>
+                
+                <div class="sample-data">
+                    <p>Try sample data:</p>
+                    <button class="btn btn-secondary" onclick="loadSample('support')">Support Tickets (stable)</button>
+                    <button class="btn btn-secondary" onclick="loadSample('sales')">Sales (with spike)</button>
+                    <button class="btn btn-secondary" onclick="loadSample('sleep')">Sleep Hours (trending)</button>
+                </div>
+            </div>
+            
+            <div class="chart-panel">
+                <div class="chart-container">
+                    <canvas id="controlChart"></canvas>
+                    <div class="no-data" id="noDataMsg">Enter data to see control chart</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-panel" id="resultsPanel" style="display: none;">
+            <h3>Statistical Summary</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Mean (Average)</div>
+                    <div class="stat-value mean" id="statMean">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Upper Control Limit</div>
+                    <div class="stat-value ucl" id="statUCL">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Lower Control Limit</div>
+                    <div class="stat-value lcl" id="statLCL">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Std Deviation</div>
+                    <div class="stat-value sd" id="statSD">-</div>
+                </div>
+            </div>
+            
+            <div class="signals-section">
+                <h4>Signals Detected</h4>
+                <div class="signal-list" id="signalList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <div class="interpretation" id="interpretation">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>How to Interpret Your Results</h2>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <h4>Points Within Limits</h4>
+                    <p>If all points fall between the Upper and Lower Control Limits (UCL/LCL), your system is stable. The variation is "common cause"—normal fluctuation. Don't overreact to individual data points.</p>
+                </div>
+                <div class="guide-card">
+                    <h4>Points Outside Limits</h4>
+                    <p>Any point beyond the control limits is a "special cause" signal. Something specific happened. Investigate that point: What was different? Address the specific cause.</p>
+                </div>
+                <div class="guide-card">
+                    <h4>Runs (8+ Consecutive)</h4>
+                    <p>8 consecutive points above or below the mean suggests a shift in the system. The average has changed. Look for what changed around that time.</p>
+                </div>
+                <div class="guide-card">
+                    <h4>Trends (6+ Consecutive)</h4>
+                    <p>6 consecutive points steadily increasing or decreasing indicates a trend. Something is progressively changing. Investigate before it becomes a bigger issue.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="related-section">
+            <h3>Continue Exploring</h3>
+            <div class="related-grid">
+                <a href="/research/common-cause-variation.html" class="related-link">
+                    <div class="title">Common Cause Variation</div>
+                    <div class="desc">Deep dive into the framework</div>
+                </a>
+                <a href="/wisdom/uncertainty.html" class="related-link">
+                    <div class="title">When Everything Shifts</div>
+                    <div class="desc">Navigating uncertainty</div>
+                </a>
+                <a href="/frameworks/5-filters.html" class="related-link">
+                    <div class="title">5 Filters Framework</div>
+                    <div class="desc">Decision-making under uncertainty</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let chart = null;
+        
+        const sampleData = {
+            support: [45, 52, 48, 55, 51, 49, 53, 47, 50, 54, 46, 52, 48, 50, 85, 52, 49, 51, 48, 53],
+            sales: [102, 98, 105, 99, 103, 97, 101, 104, 100, 98, 102, 99, 95, 88, 92, 98, 101, 103, 99, 100],
+            sleep: [7.5, 7.2, 6.8, 6.5, 6.2, 6.0, 5.8, 5.5, 6.0, 6.2, 6.5, 6.8, 7.0, 7.2]
+        };
+        
+        function loadSample(type) {
+            document.getElementById('dataInput').value = sampleData[type].join('\n');
+            analyzeData();
+        }
+        
+        function clearData() {
+            document.getElementById('dataInput').value = '';
+            document.getElementById('resultsPanel').style.display = 'none';
+            document.getElementById('noDataMsg').style.display = 'flex';
+            if (chart) {
+                chart.destroy();
+                chart = null;
+            }
+        }
+        
+        function parseData(input) {
+            return input
+                .split(/[\n,]+/)
+                .map(v => parseFloat(v.trim()))
+                .filter(v => !isNaN(v));
+        }
+        
+        function calculateStats(data) {
+            const n = data.length;
+            const mean = data.reduce((a, b) => a + b, 0) / n;
+            
+            const squaredDiffs = data.map(v => Math.pow(v - mean, 2));
+            const variance = squaredDiffs.reduce((a, b) => a + b, 0) / n;
+            const stdDev = Math.sqrt(variance);
+            
+            const ucl = mean + (3 * stdDev);
+            const lcl = mean - (3 * stdDev);
+            
+            return { mean, stdDev, ucl, lcl };
+        }
+        
+        function detectSignals(data, mean, ucl, lcl) {
+            const signals = [];
+            const n = data.length;
+            
+            // Points outside limits
+            const outsidePoints = [];
+            data.forEach((v, i) => {
+                if (v > ucl || v < lcl) {
+                    outsidePoints.push(i + 1);
+                }
+            });
+            
+            if (outsidePoints.length > 0) {
+                signals.push({
+                    type: 'special',
+                    label: 'Points Outside Control Limits',
+                    desc: `Data points ${outsidePoints.join(', ')} are beyond normal variation. Special cause detected.`
+                });
+            }
+            
+            // Runs (8+ consecutive above/below mean)
+            let currentRun = 1;
+            let runDirection = data[0] > mean ? 'above' : 'below';
+            let maxRun = 1;
+            let runStart = 0;
+            
+            for (let i = 1; i < n; i++) {
+                const direction = data[i] > mean ? 'above' : 'below';
+                if (direction === runDirection) {
+                    currentRun++;
+                    if (currentRun > maxRun) {
+                        maxRun = currentRun;
+                        runStart = i - currentRun + 1;
+                    }
+                } else {
+                    currentRun = 1;
+                    runDirection = direction;
+                }
+            }
+            
+            if (maxRun >= 8) {
+                signals.push({
+                    type: 'special',
+                    label: 'Run Detected',
+                    desc: `${maxRun} consecutive points ${runDirection} the mean (starting at point ${runStart + 1}). System has shifted.`
+                });
+            }
+            
+            // Trends (6+ consecutive increasing/decreasing)
+            let trendLength = 1;
+            let trendDir = data[1] > data[0] ? 'up' : 'down';
+            let maxTrend = 1;
+            let trendStart = 0;
+            
+            for (let i = 2; i < n; i++) {
+                const dir = data[i] > data[i-1] ? 'up' : 'down';
+                if (dir === trendDir) {
+                    trendLength++;
+                    if (trendLength > maxTrend) {
+                        maxTrend = trendLength;
+                        trendStart = i - trendLength + 1;
+                    }
+                } else {
+                    trendLength = 2;
+                    trendDir = dir;
+                }
+            }
+            
+            if (maxTrend >= 6) {
+                signals.push({
+                    type: 'special',
+                    label: 'Trend Detected',
+                    desc: `${maxTrend} consecutive points trending ${trendDir} (starting at point ${trendStart + 1}). Progressive change occurring.`
+                });
+            }
+            
+            // If no special causes
+            if (signals.length === 0) {
+                signals.push({
+                    type: 'common',
+                    label: 'Common Cause Variation',
+                    desc: 'All points within control limits. No special signals detected. Variation is normal system behavior.'
+                });
+            }
+            
+            return signals;
+        }
+        
+        function getInterpretation(signals, data, mean, ucl, lcl) {
+            const specialSignals = signals.filter(s => s.type === 'special');
+            
+            if (specialSignals.length === 0) {
+                return {
+                    title: 'System is Stable',
+                    text: 'Your data shows common cause variation—normal fluctuation within predictable limits. This is good news: your system is stable. Resist the urge to "fix" individual data points. If you want better results, you need to improve the system itself, not react to normal variation.'
+                };
+            }
+            
+            const hasOutliers = specialSignals.some(s => s.label.includes('Outside'));
+            const hasRuns = specialSignals.some(s => s.label.includes('Run'));
+            const hasTrends = specialSignals.some(s => s.label.includes('Trend'));
+            
+            if (hasOutliers) {
+                return {
+                    title: 'Special Cause Detected',
+                    text: 'One or more data points fall outside normal variation. Something specific happened at those points. Investigate: What was different? Was there an external event, a change in process, or a one-time factor? Address the specific cause rather than changing the whole system.'
+                };
+            }
+            
+            if (hasRuns) {
+                return {
+                    title: 'System Shift Detected',
+                    text: 'Your system has shifted to a new level. The average has changed. This could be improvement or degradation depending on direction. Identify what changed around the time of the shift—it\'s likely a significant factor affecting your process.'
+                };
+            }
+            
+            if (hasTrends) {
+                return {
+                    title: 'Trend Detected',
+                    text: 'Your data shows a progressive trend. Something is changing over time—getting better or worse gradually. Investigate before it becomes more pronounced. Trends often indicate emerging issues or improvements that will become significant if left unaddressed.'
+                };
+            }
+        }
+        
+        function analyzeData() {
+            const input = document.getElementById('dataInput').value;
+            const data = parseData(input);
+            
+            if (data.length < 5) {
+                alert('Please enter at least 5 data points for meaningful analysis.');
+                return;
+            }
+            
+            const { mean, stdDev, ucl, lcl } = calculateStats(data);
+            const signals = detectSignals(data, mean, ucl, lcl);
+            const interpretation = getInterpretation(signals, data, mean, ucl, lcl);
+            
+            // Update stats
+            document.getElementById('statMean').textContent = mean.toFixed(2);
+            document.getElementById('statUCL').textContent = ucl.toFixed(2);
+            document.getElementById('statLCL').textContent = lcl.toFixed(2);
+            document.getElementById('statSD').textContent = stdDev.toFixed(2);
+            
+            // Update signals
+            const signalList = document.getElementById('signalList');
+            signalList.innerHTML = signals.map(s => `
+                <div class="signal ${s.type}">
+                    <div class="signal-icon">${s.type === 'common' ? '✓' : '!'}</div>
+                    <div class="signal-text">
+                        <div class="signal-label">${s.label}</div>
+                        <div class="signal-desc">${s.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update interpretation
+            document.getElementById('interpretation').innerHTML = `
+                <h4>${interpretation.title}</h4>
+                <p>${interpretation.text}</p>
+            `;
+            
+            // Show results
+            document.getElementById('resultsPanel').style.display = 'block';
+            document.getElementById('noDataMsg').style.display = 'none';
+            
+            // Render chart
+            renderChart(data, mean, ucl, lcl);
+        }
+        
+        function renderChart(data, mean, ucl, lcl) {
+            const ctx = document.getElementById('controlChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            const labels = data.map((_, i) => `Point ${i + 1}`);
+            const meanLine = data.map(() => mean);
+            const uclLine = data.map(() => ucl);
+            const lclLine = data.map(() => lcl);
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Data',
+                            data: data,
+                            borderColor: '#58a6ff',
+                            backgroundColor: 'rgba(88, 166, 255, 0.1)',
+                            pointBackgroundColor: data.map(v => {
+                                if (v > ucl || v < lcl) return '#f85149';
+                                return '#58a6ff';
+                            }),
+                            pointRadius: data.map(v => {
+                                if (v > ucl || v < lcl) return 6;
+                                return 4;
+                            }),
+                            borderWidth: 2,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Mean',
+                            data: meanLine,
+                            borderColor: '#f4d03f',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: 'UCL',
+                            data: uclLine,
+                            borderColor: '#f85149',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            fill: false
+                        },
+                        {
+                            label: 'LCL',
+                            data: lclLine,
+                            borderColor: '#f85149',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#c9d1d9',
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#8b949e'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#8b949e'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

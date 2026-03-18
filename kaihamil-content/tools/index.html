@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 50px 0 25px;
+            color: var(--brown-dark);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.12);
+        }
+        
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            align-self: flex-start;
+        }
+        
+        .badge.assessment { background: #dbeafe; color: #1e40af; }
+        .badge.utility { background: #d1fae5; color: #065f46; }
+        .badge.diagnostic { background: #fef3c7; color: #92400e; }
+        .badge.coming-soon { background: #f3f4f6; color: #6b7280; }
+        
+        .tool-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--brown-dark);
+        }
+        
+        .tool-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            flex: 1;
+            margin-bottom: 15px;
+        }
+        
+        .tool-meta {
+            font-size: 0.85rem;
+            color: var(--amber);
+            font-weight: 500;
+        }
+        
+        .about-tools {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .about-tools h2 {
+            margin-top: 0;
+        }
+        
+        .about-tools p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .tools-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Interactive <strong>Tools</strong></h1>
+        <p>Utilities, assessments, and diagnostics for thinking clearly and working effectively with AI.</p>
+    </header>
+    
+    <main class="container">
+        <h2>Assessments</h2>
+        <div class="tools-grid">
+            <a href="time-and-focus.html" class="tool-card">
+                <span class="badge assessment">Assessment</span>
+                <div class="tool-icon">⏳</div>
+                <h3>Time & Focus</h3>
+                <p>Identify where your attention goes and where it should go instead. Pinpoint automatable waste to reclaim presence and capacity.</p>
+                <span class="tool-meta">5 minutes • Waste analysis</span>
+            </a>
+            
+            <a href="ai-user-quiz.html" class="tool-card">
+                <span class="badge assessment">Assessment</span>
+                <div class="tool-icon">🎯</div>
+                <h3>AI User Type Quiz</h3>
+                <p>5-question assessment that plots your AI usage style on a 2x2 matrix. Visual quadrant results with personalized recommendations.</p>
+                <span class="tool-meta">3 minutes • Visual results</span>
+            </a>
+            
+            <a href="../frameworks/ai-usage-advanced.html" class="tool-card">
+                <span class="badge assessment">Advanced</span>
+                <div class="tool-icon">🔬</div>
+                <h3>AI Usage Behavior Profile</h3>
+                <p>8-question behavioral assessment based on specific actions, not abstract preferences. Bar chart visualization and detailed type analysis.</p>
+                <span class="tool-meta">5 minutes • Behavioral</span>
+            </a>
+            
+            <a href="../frameworks/problem-audit.html" class="tool-card">
+                <span class="badge diagnostic">Diagnostic</span>
+                <div class="tool-icon">🔍</div>
+                <h3>Problem Audit Worksheet</h3>
+                <p>Interactive diagnostic for identifying root causes vs. symptoms. 5-step worksheet with report generation.</p>
+                <span class="tool-meta">15 minutes • Framework</span>
+            </a>
+            
+            <a href="../frameworks/5-filters.html" class="tool-card">
+                <span class="badge diagnostic">Decision</span>
+                <div class="tool-icon">◫</div>
+                <h3>5 Filters Assessment</h3>
+                <p>Run any decision through 5 lenses with pass/fail/unclear scoring. Visual verdict and personalized recommendation.</p>
+                <span class="tool-meta">10 minutes • Decision tool</span>
+            </a>
+        </div>
+        
+        <h2>Utilities</h2>
+        <div class="tools-grid">
+            <a href="control-chart-evaluator.html" class="tool-card">
+                <span class="badge utility">Utility</span>
+                <div class="tool-icon">📊</div>
+                <h3>Control Chart Evaluator</h3>
+                <p>Input your data series to identify common cause vs special cause variation. Visual control charts with automatic signal detection.</p>
+                <span class="tool-meta">Interactive • Statistical analysis</span>
+            </a>
+            
+            <a href="script-reader.html" class="tool-card">
+                <span class="badge utility">Utility</span>
+                <div class="tool-icon">📜</div>
+                <h3>Script Reader / Teleprompter</h3>
+                <p>Clean teleprompter for filming videos. Speed control, text size adjustment, smooth scrolling. Optimized for mobile.</p>
+                <span class="tool-meta">Browser-based • Mobile-ready</span>
+            </a>
+            
+            <div class="tool-card" style="opacity: 0.6;">
+                <span class="badge coming-soon">Coming Soon</span>
+                <div class="tool-icon">🎲</div>
+                <h3>Decision Dice</h3>
+                <p>When you're stuck between options, let structured randomness break the tie. Configurable decision criteria.</p>
+                <span class="tool-meta">In development</span>
+            </div>
+            
+            <div class="tool-card" style="opacity: 0.6;">
+                <span class="badge coming-soon">Coming Soon</span>
+                <div class="tool-icon">⏱️</div>
+                <h3>Focus Timer</h3>
+                <p>Pomodoro-style timer with AI-generated session goals and reflection prompts. Track deep work patterns.</p>
+                <span class="tool-meta">In development</span>
+            </div>
+        </div>
+        
+        <h2>Wisdom Tools</h2>
+        <div class="tools-grid">
+            <a href="free-hour.html" class="tool-card">
+                <span class="badge" style="background: #fce7f3; color: #9d174d;">Wisdom</span>
+                <div class="tool-icon">⏳</div>
+                <h3>The Free Time Tool</h3>
+                <p>15-180 minutes of unstructured time. Describe your situation, choose a question that resonates, and let ancient wisdom guide your moment.</p>
+                <span class="tool-meta">Interactive • 2 minutes setup</span>
+            </a>
+            
+            <a href="philosophy-lab.html" class="tool-card">
+                <span class="badge" style="background: #fce7f3; color: #9d174d;">Wisdom</span>
+                <div class="tool-icon">🔮</div>
+                <h3>The Hour Apart</h3>
+                <p>Pick a lens. See differently. A 60-minute experiment in presence tailored to your AI User Type.</p>
+                <span class="tool-meta">Interactive • Timer included</span>
+            </a>
+            
+            <a href="parking-lot-philosophy.html" class="tool-card">
+                <span class="badge" style="background: #fce7f3; color: #9d174d;">Wisdom</span>
+                <div class="tool-icon">🚗</div>
+                <h3>Parking Lot Philosophy</h3>
+                <p>Philosophy in everyday moments. Unexpected insights from mundane situations. Practice presence anywhere.</p>
+                <span class="tool-meta">Interactive • Quick reflections</span>
+            </a>
+            
+            <a href="quiz-result.html" class="tool-card">
+                <span class="badge" style="background: #fce7f3; color: #9d174d;">Wisdom</span>
+                <div class="tool-icon">🎯</div>
+                <h3>Quiz Result</h3>
+                <p>Your AI Problem Solver type revealed. Personalized insights based on your Double Diamond profile.</p>
+                <span class="tool-meta">Results • Personalized</span>
+            </a>
+            
+            <div class="tool-card" style="opacity: 0.6;">
+                <span class="badge coming-soon">Coming Soon</span>
+                <div class="tool-icon">🎭</div>
+                <h3>The Frame Game</h3>
+                <p>Multi-dimensional perspective shifting. See your situation through temporal, second-order, and alternative self lenses. Beyond empathy to deep understanding.</p>
+                <span class="tool-meta">In development</span>
+            </div>
+        </div>
+        
+        <div class="about-tools">
+            <h2>About These Tools</h2>
+            <p>Each tool is designed with a specific purpose: to make the invisible visible. Whether it's your AI usage patterns, decision-making biases, or the root cause of a recurring problem—these utilities help you see what you couldn't see before.</p>
+            <p>All tools are free to use. Some require email capture for results (noted where applicable). No data is sold or shared.</p>
+            <p style="margin-top: 20px;"><strong>Have a tool idea?</strong> <a href="mailto:kyle@kaihamil.com" style="color: var(--gold);">Send it my way</a>. The best tools come from real friction points.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;"><a href="/" style="color: var(--brown-medium);">← Back to Home</a></p>
+    </footer>
+</body>
+</html>

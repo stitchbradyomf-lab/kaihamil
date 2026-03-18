@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 5 Filters | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --success: #3d8b37;
+            --warning: #c9a227;
+            --danger: #dc2626;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .hero p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 50px 0 20px;
+        }
+        
+        p {
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+        }
+        
+        .filter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .filter-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+        }
+        
+        .filter-card p {
+            margin-bottom: 10px;
+        }
+        
+        .question {
+            font-weight: 500;
+            color: var(--brown-dark);
+            font-style: italic;
+        }
+        
+        /* Interactive Worksheet */
+        .worksheet {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .worksheet h2 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .worksheet-intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .decision-input {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .decision-input label {
+            display: block;
+            font-weight: 500;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .decision-input textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .decision-input textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .filter-step {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .filter-step-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        .filter-step-question {
+            font-style: italic;
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+            padding-left: 52px;
+        }
+        
+        .response-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-left: 52px;
+        }
+        
+        .response-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .response-btn:hover {
+            border-color: var(--gold);
+        }
+        
+        .response-btn.selected.pass {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        .response-btn.selected.fail {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+        
+        .response-btn.selected.unclear {
+            background: var(--warning);
+            border-color: var(--warning);
+            color: var(--brown-dark);
+        }
+        
+        .filter-note {
+            padding-left: 52px;
+            margin-top: 15px;
+        }
+        
+        .filter-note textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .filter-note textarea::placeholder {
+            color: #999;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        /* Results Section */
+        .results-section {
+            display: none;
+            background: linear-gradient(135deg, var(--bg-card), var(--gold-light));
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        
+        .results-section.visible {
+            display: block;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .verdict {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .verdict.proceed { color: var(--success); }
+        .verdict.pause { color: var(--warning); }
+        .verdict.stop { color: var(--danger); }
+        
+        .score-bar {
+            background: white;
+            border-radius: 10px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .score-segment {
+            height: 100%;
+            transition: all 0.5s ease;
+        }
+        
+        .score-segment.pass { background: var(--success); }
+        .score-segment.fail { background: var(--danger); }
+        .score-segment.unclear { background: var(--warning); }
+        
+        .filter-results {
+            margin: 30px 0;
+        }
+        
+        .filter-result-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .filter-result-icon {
+            font-size: 1.5rem;
+        }
+        
+        .filter-result-content {
+            flex: 1;
+        }
+        
+        .filter-result-title {
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        .filter-result-status {
+            font-size: 0.85rem;
+            margin-top: 3px;
+        }
+        
+        .filter-result-status.pass { color: var(--success); }
+        .filter-result-status.fail { color: var(--danger); }
+        .filter-result-status.unclear { color: var(--warning); }
+        
+        .recommendation {
+            background: white;
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .recommendation h4 {
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            .worksheet { padding: 25px; }
+            .filter-step-question,
+            .response-options,
+            .filter-note { padding-left: 0; }
+            .filter-step-header { margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← All Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Decision Framework</span>
+        <h1>The <strong>5 Filters</strong></h1>
+        <p>A framework for deciding under uncertainty. Run any significant decision through these five lenses.</p>
+    </header>
+    
+    <main class="container">
+        <h2>The Framework</h2>
+        <p>When facing any significant decision, run it through these 5 filters. Each filter reveals a different dimension of the choice.</p>
+        
+        <div class="filter-card">
+            <h3>🧭 Filter 1: Directional</h3>
+            <p class="question">"Does this align with where I want to go?"</p>
+            <p>Tests strategic alignment. Will this decision move you toward your stated goals or away from them?</p>
+        </div>
+        
+        <div class="filter-card">
+            <h3>🎨 Filter 2: Preferential</h3>
+            <p class="question">"Do I actually want this, or do I just not want the alternative?"</p>
+            <p>Tests desire authenticity. Distinguishes between moving toward something vs. running away from something.</p>
+        </div>
+        
+        <div class="filter-card">
+            <h3>🧠 Filter 3: Epistemological</h3>
+            <p class="question">"How do I know what I think I know?"</p>
+            <p>Tests information quality. Are you working with facts, assumptions, or beliefs? What's the evidence?</p>
+        </div>
+        
+        <div class="filter-card">
+            <h3>⏰ Filter 4: Temporal</h3>
+            <p class="question">"How will I feel about this in 10 minutes? 10 months? 10 years?"</p>
+            <p>Tests time perspective. Reveals short-term vs. long-term tradeoffs and future regret potential.</p>
+        </div>
+        
+        <div class="filter-card">
+            <h3>🌊 Filter 5: Optionality</h3>
+            <p class="question">"Does this increase or decrease my future options?"</p>
+            <p>Tests reversibility and flexibility. Can you undo this? Does it open doors or close them?</p>
+        </div>
+        
+        <!-- Interactive Worksheet -->
+        <div class="worksheet">
+            <h2>🧪 Apply the Filters</h2>
+            <p class="worksheet-intro">Test your decision against all 5 filters. Be honest — the framework only works if you are.</p>
+            
+            <div class="decision-input">
+                <label>What decision are you evaluating?</label>
+                <textarea id="decisionText" placeholder="e.g., Should I take this job offer? Should we pivot the product? Should I end this relationship?"></textarea>
+            </div>
+            
+            <div class="filter-step" data-filter="1">
+                <div class="filter-step-header">
+                    <div class="filter-icon">🧭</div>
+                    <div class="filter-step-title">Filter 1: Directional</div>
+                </div>
+                <div class="filter-step-question">"Does this align with where I want to go?"</div>
+                <div class="response-options">
+                    <button class="response-btn" data-value="pass" onclick="selectResponse(1, 'pass')">✓ Yes, aligned</button>
+                    <button class="response-btn" data-value="fail" onclick="selectResponse(1, 'fail')">✗ Misaligned</button>
+                    <button class="response-btn" data-value="unclear" onclick="selectResponse(1, 'unclear')">? Unclear</button>
+                </div>
+                <div class="filter-note">
+                    <textarea id="note1" placeholder="Why? What's your long-term direction?"></textarea>
+                </div>
+            </div>
+            
+            <div class="filter-step" data-filter="2">
+                <div class="filter-step-header">
+                    <div class="filter-icon">🎨</div>
+                    <div class="filter-step-title">Filter 2: Preferential</div>
+                </div>
+                <div class="filter-step-question">"Do I actually want this, or do I just not want the alternative?"</div>
+                <div class="response-options">
+                    <button class="response-btn" data-value="pass" onclick="selectResponse(2, 'pass')">✓ Want this</button>
+                    <button class="response-btn" data-value="fail" onclick="selectResponse(2, 'fail')">✗ Running away</button>
+                    <button class="response-btn" data-value="unclear" onclick="selectResponse(2, 'unclear')">? Unclear</button>
+                </div>
+                <div class="filter-note">
+                    <textarea id="note2" placeholder="What's driving this decision? Fear or desire?"></textarea>
+                </div>
+            </div>
+            
+            <div class="filter-step" data-filter="3">
+                <div class="filter-step-header">
+                    <div class="filter-icon">🧠</div>
+                    <div class="filter-step-title">Filter 3: Epistemological</div>
+                </div>
+                <div class="filter-step-question">"How do I know what I think I know?"</div>
+                <div class="response-options">
+                    <button class="response-btn" data-value="pass" onclick="selectResponse(3, 'pass')">✓ Evidence-based</button>
+                    <button class="response-btn" data-value="fail" onclick="selectResponse(3, 'fail')">✗ Mostly assumptions</button>
+                    <button class="response-btn" data-value="unclear" onclick="selectResponse(3, 'unclear')">? Unclear</button>
+                </div>
+                <div class="filter-note">
+                    <textarea id="note3" placeholder="What evidence do you have? What are you assuming?"></textarea>
+                </div>
+            </div>
+            
+            <div class="filter-step" data-filter="4">
+                <div class="filter-step-header">
+                    <div class="filter-icon">⏰</div>
+                    <div class="filter-step-title">Filter 4: Temporal</div>
+                </div>
+                <div class="filter-step-question">"How will I feel about this in 10 minutes? 10 months? 10 years?"</div>
+                <div class="response-options">
+                    <button class="response-btn" data-value="pass" onclick="selectResponse(4, 'pass')">✓ Future-positive</button>
+                    <button class="response-btn" data-value="fail" onclick="selectResponse(4, 'fail')">✗ Short-term only</button>
+                    <button class="response-btn" data-value="unclear" onclick="selectResponse(4, 'unclear')">? Unclear</button>
+                </div>
+                <div class="filter-note">
+                    <textarea id="note4" placeholder="Will you regret this? Will future-you thank you?"></textarea>
+                </div>
+            </div>
+            
+            <div class="filter-step" data-filter="5">
+                <div class="filter-step-header">
+                    <div class="filter-icon">🌊</div>
+                    <div class="filter-step-title">Filter 5: Optionality</div>
+                </div>
+                <div class="filter-step-question">"Does this increase or decrease my future options?"</div>
+                <div class="response-options">
+                    <button class="response-btn" data-value="pass" onclick="selectResponse(5, 'pass')">✓ Increases options</button>
+                    <button class="response-btn" data-value="fail" onclick="selectResponse(5, 'fail')">✗ Closes doors</button>
+                    <button class="response-btn" data-value="unclear" onclick="selectResponse(5, 'unclear')">? Unclear</button>
+                </div>
+                <div class="filter-note">
+                    <textarea id="note5" placeholder="Is this reversible? What doors does it open/close?"></textarea>
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="generateResults()">Generate Assessment</button>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h3>Your Decision Assessment</h3>
+                <p id="decisionDisplay" style="font-style: italic; color: var(--brown-medium);"></p>
+                <div class="verdict" id="verdictText"></div>
+                <div class="score-bar" id="scoreBar"></div>
+                <p id="scoreText"></p>
+            </div>
+            
+            <div class="filter-results" id="filterResults"></div>
+            
+            <div class="recommendation" id="recommendation"></div>
+            
+            <button class="btn-primary" onclick="window.print()">Print / Save Assessment</button>
+        </div>
+        
+        <h2>How to Interpret Results</h2>
+        <p><strong>5 Passes:</strong> Green light. Proceed with confidence.</p>
+        <p><strong>4 Passes, 1 Unclear:</strong> Yellow light. Gather more information on the unclear filter.</p>
+        <p><strong>3 Passes or any Fails:</strong> Red light. Pause and reconsider. The cost of a wrong decision exceeds the cost of delay.</p>
+        <p style="margin-top: 20px; padding: 20px; background: var(--bg-card); border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0;">
+            <strong>Remember:</strong> The 5 Filters don't give you the answer — they ensure you've considered the right questions.
+        </p>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">This framework is free to use and share. Attribution appreciated.</p>
+    </footer>
+    
+    <script>
+        const responses = {};
+        
+        function selectResponse(filterNum, value) {
+            responses[filterNum] = value;
+            
+            // Update button styles
+            const step = document.querySelector(`.filter-step[data-filter="${filterNum}"]`);
+            const buttons = step.querySelectorAll('.response-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected', 'pass', 'fail', 'unclear');
+                if (btn.dataset.value === value) {
+                    btn.classList.add('selected', value);
+                }
+            });
+        }
+        
+        function generateResults() {
+            const decision = document.getElementById('decisionText').value || 'Your decision';
+            document.getElementById('decisionDisplay').textContent = `"${decision}"`;
+            
+            // Count responses
+            let passes = 0;
+            let fails = 0;
+            let unclear = 0;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (responses[i] === 'pass') passes++;
+                else if (responses[i] === 'fail') fails++;
+                else unclear++;
+            }
+            
+            // Determine verdict
+            const verdictEl = document.getElementById('verdictText');
+            const scoreText = document.getElementById('scoreText');
+            
+            if (fails > 0) {
+                verdictEl.textContent = 'PAUSE';
+                verdictEl.className = 'verdict stop';
+                scoreText.textContent = `Failed ${fails} filter${fails > 1 ? 's' : ''}. Reconsider before proceeding.`;
+            } else if (unclear > 0) {
+                verdictEl.textContent = 'GATHER INFO';
+                verdictEl.className = 'verdict pause';
+                scoreText.textContent = `${passes}/5 clear passes. Get clarity on the unclear filters.`;
+            } else if (passes === 5) {
+                verdictEl.textContent = 'PROCEED';
+                verdictEl.className = 'verdict proceed';
+                scoreText.textContent = 'All 5 filters passed. You\'ve done the work.';
+            } else {
+                verdictEl.textContent = 'INCOMPLETE';
+                verdictEl.className = 'verdict pause';
+                scoreText.textContent = 'Complete all 5 filters for an assessment.';
+            }
+            
+            // Build score bar
+            const scoreBar = document.getElementById('scoreBar');
+            scoreBar.innerHTML = '';
+            const total = passes + fails + unclear;
+            if (total > 0) {
+                if (passes > 0) {
+                    const passSeg = document.createElement('div');
+                    passSeg.className = 'score-segment pass';
+                    passSeg.style.width = (passes / 5 * 100) + '%';
+                    scoreBar.appendChild(passSeg);
+                }
+                if (unclear > 0) {
+                    const unclearSeg = document.createElement('div');
+                    unclearSeg.className = 'score-segment unclear';
+                    unclearSeg.style.width = (unclear / 5 * 100) + '%';
+                    scoreBar.appendChild(unclearSeg);
+                }
+                if (fails > 0) {
+                    const failSeg = document.createElement('div');
+                    failSeg.className = 'score-segment fail';
+                    failSeg.style.width = (fails / 5 * 100) + '%';
+                    scoreBar.appendChild(failSeg);
+                }
+            }
+            
+            // Build filter results
+            const filterData = [
+                { icon: '🧭', name: 'Directional', q: 'Does this align with where I want to go?' },
+                { icon: '🎨', name: 'Preferential', q: 'Do I actually want this?' },
+                { icon: '🧠', name: 'Epistemological', q: 'How do I know what I think I know?' },
+                { icon: '⏰', name: 'Temporal', q: 'How will I feel in 10 minutes/months/years?' },
+                { icon: '🌊', name: 'Optionality', q: 'Does this increase future options?' }
+            ];
+            
+            const resultsContainer = document.getElementById('filterResults');
+            resultsContainer.innerHTML = '<h4 style="margin-bottom: 15px;">Filter Breakdown:</h4>';
+            
+            filterData.forEach((filter, idx) => {
+                const response = responses[idx + 1] || 'unclear';
+                const statusText = response === 'pass' ? 'PASS' : response === 'fail' ? 'FAIL' : 'UNCLEAR';
+                const statusClass = response;
+                const note = document.getElementById(`note${idx + 1}`).value;
+                
+                const item = document.createElement('div');
+                item.className = 'filter-result-item';
+                item.innerHTML = `
+                    <div class="filter-result-icon">${filter.icon}</div>
+                    <div class="filter-result-content">
+                        <div class="filter-result-title">${filter.name}</div>
+                        <div class="filter-result-status ${statusClass}">${statusText}</div>
+                        ${note ? `<div style="margin-top: 8px; font-size: 0.9rem; color: var(--brown-medium);">${note}</div>` : ''}
+                    </div>
+                `;
+                resultsContainer.appendChild(item);
+            });
+            
+            // Build recommendation
+            const recEl = document.getElementById('recommendation');
+            let recText = '';
+            if (passes === 5) {
+                recText = 'All filters passed. You\'ve pressure-tested this decision. The work now is execution, not second-guessing.';
+            } else if (fails > 0) {
+                recText = `Failed ${fails} filter${fails > 1 ? 's' : ''}. This isn't necessarily a "no" — it's a "not yet." Address the failed filters before proceeding. What would need to change for this to pass all 5?`;
+            } else if (unclear > 0) {
+                recText = `You have ${unclear} unclear filter${unclear > 1 ? 's' : ''}. Don't decide from a place of uncertainty. Investigate the unclear areas before committing.`;
+            } else {
+                recText = 'Complete all 5 filters to receive a recommendation.';
+            }
+            recEl.innerHTML = `<h4>Recommendation</h4><p>${recText}</p>`;
+            
+            // Show results
+            document.getElementById('resultsSection').classList.add('visible');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

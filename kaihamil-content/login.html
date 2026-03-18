@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 50px 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .logo strong {
+            font-weight: 500;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 30px 0 15px;
+        }
+        
+        p {
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .login-button {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .login-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">kai <strong>hamil</strong></div>
+        <h1>Private Area</h1>
+        <p>This section contains personal notes, draft content, and works in progress.</p>
+        
+        <button class="login-button" onclick="login()">Sign In with Email</button>
+        
+        <div class="status" id="status"></div>
+        
+        <a href="/" class="back-link">← Back to public site</a>
+    </div>
+    
+    <script>
+        // Initialize Netlify Identity
+        netlifyIdentity.on('init', user => {
+            if (user) {
+                window.location.href = '/private/';
+            }
+        });
+        
+        netlifyIdentity.on('login', user => {
+            window.location.href = '/private/';
+        });
+        
+        function login() {
+            netlifyIdentity.open('login');
+        }
+        
+        // Check for errors
+        const params = new URLSearchParams(window.location.search);
+            if (params.get('error')) {
+            const status = document.getElementById('status');
+            status.textContent = 'Access denied. Please log in.';
+            status.className = 'status error';
+        }
+    </script>
+</body>
+</html>

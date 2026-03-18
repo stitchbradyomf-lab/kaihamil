@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambition | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 40px; }
+        
+        .intro-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .intro-card h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .intro-card p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .tradition-section {
+            margin: 50px 0;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tradition-section:last-child { border-bottom: none; }
+        
+        .tradition-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tradition-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+        }
+        
+        .tradition-header h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .tradition-header .source {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%);
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .insight-box h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .insight-box p {
+            color: var(--brown-dark);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+        
+        .practice-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .practice-list li {
+            margin-bottom: 12px;
+            color: var(--brown-medium);
+            padding-left: 10px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--brown-medium);
+            border-left: 3px solid var(--border);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        
+        .connection-box {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .connection-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .connection-box p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/wisdom/">← Wisdom</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1><strong>Ambition</strong></h1>
+        <p>The drive to achieve — and the wisdom to know what is worth achieving.</p>
+    </header>
+    
+    <main class="container">
+        <div class="intro-card">
+            <h2>The Double-Edged Drive</h2>
+            <p>Ambition built the modern world. It also hollows out those who serve it without question. The same drive that creates meaning can destroy it.</p>
+            <p>We live in an era of unprecedented opportunity — and unprecedented anxiety about making the most of it. FOMO, hustle culture, optimization. The ambition never rests.</p>
+            <p>But ambition without wisdom becomes compulsion. Achievement without meaning becomes accumulation. The question isn't whether to be ambitious — it's toward what, and why.</p>
+        </div>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🏛️</div>
+                <div>
+                    <h3>Aristotelian Virtue</h3>
+                    <div class="source">Greatness of Soul — Magnanimity</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>The great-souled person claims and deserves great honors — but not too great. They know their own worth without exaggeration or false humility. Ambition in proportion to capacity.</p>
+            </div>
+            
+            <p>Aristotle's "megalopsychia" (greatness of soul) is often mistranslated as pride, but it's more subtle. It's the virtue of accurately assessing your own excellence and claiming the honors that proportionally correspond.</p>
+            
+            <p>The key is proportion. Too little ambition is false humility. Too much is hubris. The great-souled person knows what they deserve and claims it — but doesn't reach beyond their measure.</p>
+            
+            <div class="quote">
+                "The magnanimous person is concerned with honors and dishonors, and will be moderately pleased with great honors conferred by good people, as though he were receiving what is proper to him."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Assess your proportion.</strong> Are your ambitions proportionate to your capacities? Or inflated/deflated by comparison?</li>
+                <li><strong>Claim your due.</strong> If you've done great things, claim great honors — without apology or arrogance.</li>
+                <li><strong>Check the motive.</strong> Are you pursuing this for the thing itself, or for the recognition?</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">☯️</div>
+                <div>
+                    <h3>Taoism</h3>
+                    <div class="source">Wu Wei — Effortless Action</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Ambition that forces against the current exhausts. Ambition that flows with nature accomplishes without depletion. The distinction between striving and allowing.</p>
+            </div>
+            
+            <p>The Taoist critique of ambition isn't that desire is wrong — it's that forced action (wei) creates resistance. Wu wei (effortless action) isn't laziness. It's action aligned with the natural flow.</p>
+            
+            <p>The ambitious person swimming upstream exhausts themselves against the current. The wise person finds the downstream path to the same destination — or recognizes when the destination itself is wrong.</p>
+            
+            <div class="quote">
+                "Nature does not hurry, yet everything is accomplished."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Notice the resistance.</strong> Where is your ambition forcing against reality? Where is there friction that might signal misalignment?</li>
+                <li><strong>Find the downstream path.</strong> Can you achieve your aim through allowing rather than forcing?</li>
+                <li><strong>Distinguish desire from compulsion.</strong> Is this what you want, or what you think you should want?</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🧘</div>
+                <div>
+                    <h3>Bhagavad Gita</h3>
+                    <div class="source">Nishkama Karma — Action Without Attachment</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Do your duty without attachment to results. Ambition for the fruits of action binds you. Action for its own sake, offered to the divine, liberates.</p>
+            </div>
+            
+            <p>Arjuna stands on the battlefield, paralyzed. Krishna teaches: you must act, but act without attachment to the fruits of action. Do your duty. The results are not yours to control.</p>
+            
+            <p>This is the Hindu response to the bind of ambition. Not "stop achieving" but "stop needing the achievement to validate you." Do great things because they need doing, not because they will make you great.</p>
+            
+            <div class="quote">
+                "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself to be the cause of the results of your activities, nor be attached to inaction."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Separate action from outcome.</strong> Can you commit fully to the work while releasing attachment to the results?</li>
+                <li><strong>Find duty beyond desire.</strong> What needs doing, regardless of whether you "want" to do it?</li>
+                <li><strong>Offer the work.</strong> Practice dedicating your achievements to something larger than yourself.</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">⚡</div>
+                <div>
+                    <h3>Protestant Work Ethic</h3>
+                    <div class="source">Calling & Vocation — Weber</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Work as calling, not just employment. The sacred obligation to use one's gifts fully. But also: the danger of work becoming identity, and busyness becoming virtue.</p>
+            </div>
+            
+            <p>Max Weber traced the spirit of capitalism to the Protestant notion of calling. Your work isn't just what you do — it's what you're called to do. The sacred obligation to use your gifts fully.</p>
+            
+            <p>This is powerful motivation. But it's also dangerous. When work becomes identity, rest becomes sin. Achievement becomes the measure of worth. The modern "hustle culture" is this ethic stripped of its theological container.</p>
+            
+            <div class="quote">
+                "The idea of duty in one's calling prowls about in our lives like the ghost of dead religious beliefs."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Recover calling without compulsion.</strong> What would you do even if not paid? But also: what are you doing only because paid?</li>
+                <li><strong>Distinguish work from worth.</strong> Your achievements are not your value. Practice believing this.</li>
+                <li><strong>Rest as resistance.</strong> In a culture that never stops, deliberate rest is a radical act.</li>
+            </ul>
+        </section>
+        
+        <div class="connection-box">
+            <h3>→ Connection: Stage 5 & Ambition</h3>
+            <p>Stage 5 is the era of self-directed ambition. No inherited ladder, no guaranteed next step. You must choose your direction — and keep choosing it, continuously.</p>
+            <p>This is terrifying and liberating. The script offered clarity but constraint. Stage 5 offers freedom but requires discernment. What is worth wanting? What will you sacrifice for it? What won't you sacrifice?</p>
+            <p>The wisdom traditions converge: ambition aligned with virtue, action without attachment to results, flow rather than force. These aren't constraints on achievement — they're the conditions for sustainable, meaningful achievement.</p>
+        </div>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2>Questions to Sit With</h2>
+            <ul class="practice-list">
+                <li>What are you ambitious for? Is it yours, or inherited?</li>
+                <li>Where is your ambition forcing against the current? Where is it flowing?</li>
+                <li>Can you imagine succeeding and still being unsatisfied? What would prevent that?</li>
+                <li>What would you do if you knew you couldn't fail — and what does that reveal?</li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Achievement without meaning is accumulation</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Flows | Operations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --info: #58a6ff;
+        }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .logo .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .back-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .page-header h1 strong {
+            color: var(--accent-gold);
+        }
+        
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        /* Flow Cards Grid */
+        .flows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .flow-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        
+        .flow-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .flow-card .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .flow-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+        
+        .flow-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .flow-card .meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .flow-card .meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge.mermaid {
+            background: rgba(244, 208, 63, 0.2);
+            color: var(--accent-gold);
+        }
+        
+        .badge.bpmn {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--info);
+        }
+        
+        /* Section */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-header h2 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .section-content p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .section-content ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .section-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div>
+                    <h1>UX Flows</h1>
+                    <div class="subtitle">User Journey Diagrams</div>
+                </div>
+            </div>
+            <a href="/openclaw/" class="back-link">← Operations Dashboard</a>
+        </header>
+        
+        <div class="page-header">
+            <h1>User Experience <strong>Flow Diagrams</strong></h1>
+            <p>Mermaid.JS representations of user pathways through Kai Hamil tools and experiences</p>
+        </div>
+        
+        <div class="flows-grid">
+            <a href="site-navigation-current.html" class="flow-card" style="border-color: var(--accent-gold);">
+                <div class="icon">🌐</div>
+                <h3>Complete Site Navigation</h3>
+                <p>Full map of all 78 pages across 12 sections. Current state baseline for restructuring into System // Self entry paths.</p>
+                <div class="meta">
+                    <span class="badge mermaid">Mermaid.JS</span>
+                    <span>📊 78 pages</span>
+                    <span>🔗 12 sections</span>
+                </div>
+            </a>
+            
+            <a href="user-flow-tools.html" class="flow-card">
+                <div class="icon">🗺️</div>
+                <h3>Tools & Assessment User Flow</h3>
+                <p>Journey map from homepage through assessment tools, wisdom tools, and completion states.</p>
+                <div class="meta">
+                    <span class="badge mermaid">Mermaid.JS</span>
+                    <span>📊 6 pathways</span>
+                    <span>🔗 15+ screens</span>
+                </div>
+            </a>
+            
+            <div class="flow-card" style="opacity: 0.5; cursor: not-allowed;">
+                <div class="icon">🎯</div>
+                <h3>System // Self Entry Flow</h3>
+                <p>Proposed restructure: "Solve a problem" vs "Gain wisdom" dual entry point design.</p>
+                <div class="meta">
+                    <span class="badge mermaid">Mermaid.JS</span>
+                    <span>Next: Kyle's redesign</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>📐 Notation Standards</h2>
+            </div>
+            <div class="section-content">
+                <p>All UX flows use <strong>Mermaid.JS</strong> flowchart notation for consistency and maintainability. This allows:</p>
+                <ul>
+                    <li>Version control of diagrams as code</li>
+                    <li>Easy updates without design tools</li>
+                    <li>Consistent rendering across documentation</li>
+                    <li>Interactive zoom/pan in HTML views</li>
+                </ul>
+                <p style="margin-top: 15px;">Future consideration: <code>BPMN 2.0</code> for more complex process workflows with swim lanes and decision gateways.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>🎨 Color Coding</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li><strong style="color: #c9a227;">Gold border</strong> — Entry points (Home, Tools Index)</li>
+                    <li><strong style="color: #1e40af;">Blue</strong> — Assessment flows (Quiz, Advanced Assessment)</li>
+                    <li><strong style="color: #9d174d;">Pink</strong> — Wisdom tools (Free Hour, Hour Apart)</li>
+                    <li><strong style="color: #065f46;">Green</strong> — Framework tools (5 Filters, Problem Audit)</li>
+                    <li><strong style="color: #15803d;">Light green</strong> — Completion states</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p><a href="/openclaw/">← Back to Operations</a> · <a href="/">Home</a></p>
+    </footer>
+</body>
+</html>

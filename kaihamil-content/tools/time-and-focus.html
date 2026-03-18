@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Focus Assessment | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+            --border: #e8dfd3;
+            --high-waste: #b87a5e;
+            --medium-waste: #c9a86c;
+            --low-waste: #6b8e6b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--sand);
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--terracotta);
+            transition: width 0.4s ease;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--ink-medium);
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+        
+        .question-container {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: var(--bg-warm);
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: var(--clay);
+            background: white;
+        }
+        
+        .option.selected {
+            border-color: var(--terracotta);
+            background: rgba(184, 122, 94, 0.1);
+        }
+        
+        .option input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--terracotta);
+        }
+        
+        .option-label {
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        
+        /* Time Grid for Q1 */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .time-card {
+            background: var(--bg-warm);
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .time-card:hover {
+            border-color: var(--clay);
+            background: white;
+        }
+        
+        .time-card.selected {
+            border-color: var(--terracotta);
+            background: rgba(184, 122, 94, 0.1);
+        }
+        
+        .time-card .emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .time-card .label {
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+        }
+        
+        /* Day Selector */
+        .day-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .day-card {
+            background: var(--bg-warm);
+            border: 2px solid var(--sand);
+            border-radius: 10px;
+            padding: 15px 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .day-card:hover {
+            border-color: var(--clay);
+            background: white;
+        }
+        
+        .day-card.selected {
+            border-color: var(--terracotta);
+            background: rgba(184, 122, 94, 0.1);
+        }
+        
+        /* Waste Category Cards */
+        .waste-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .waste-card {
+            background: var(--bg-warm);
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .waste-card:hover {
+            border-color: var(--clay);
+            background: white;
+        }
+        
+        .waste-card.selected {
+            border-color: var(--terracotta);
+            background: rgba(184, 122, 94, 0.1);
+        }
+        
+        .waste-card .emoji {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .waste-card .label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .waste-card .sublabel {
+            font-size: 0.8rem;
+            color: var(--ink-medium);
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 16px 36px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--terracotta);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--ink-dark);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink-medium);
+            border: 2px solid var(--sand);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--clay);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Results Page */
+        .results-container {
+            display: none;
+        }
+        
+        .results-container.active {
+            display: block;
+        }
+        
+        .waste-chart {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .waste-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .waste-label {
+            width: 200px;
+            font-size: 0.95rem;
+        }
+        
+        .waste-bar-container {
+            flex: 1;
+            height: 24px;
+            background: var(--sand);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+        
+        .waste-bar {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.6s ease;
+        }
+        
+        .waste-bar.high { background: var(--high-waste); }
+        .waste-bar.medium { background: var(--medium-waste); }
+        .waste-bar.low { background: var(--low-waste); }
+        
+        .waste-value {
+            width: 60px;
+            text-align: right;
+            font-weight: 500;
+        }
+        
+        .recommendation {
+            background: var(--bg-paper);
+            border-left: 4px solid var(--terracotta);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .recommendation h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .time-grid, .waste-grid { grid-template-columns: 1fr; }
+            .day-grid { grid-template-columns: repeat(4, 1fr); }
+            .question-container { padding: 25px; }
+            .container { padding: 80px 15px 40px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+    </nav>
+    
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+        
+        <div id="quizContainer">
+            <h1>Time & Focus Assessment</h1>
+            <p class="subtitle">Identify where your attention goes — and where it should go instead</p>
+            
+            <!-- Q1: Days of Distraction -->
+            <div class="question-container" id="q1">
+                <div class="question-number">Section 1 of 5</div>
+                <div class="question-text">Which days do you most often feel distracted by "have to do" tasks when you'd rather focus on what you want?</div>
+                <div class="day-grid">
+                    <div class="day-card" onclick="toggleDay(this, 'mon')">Mon</div>
+                    <div class="day-card" onclick="toggleDay(this, 'tue')">Tue</div>
+                    <div class="day-card" onclick="toggleDay(this, 'wed')">Wed</div>
+                    <div class="day-card" onclick="toggleDay(this, 'thu')">Thu</div>
+                    <div class="day-card" onclick="toggleDay(this, 'fri')">Fri</div>
+                    <div class="day-card" onclick="toggleDay(this, 'sat')">Sat</div>
+                    <div class="day-card" onclick="toggleDay(this, 'sun')">Sun</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" disabled>Back</button>
+                    <button class="btn btn-primary" onclick="nextQuestion(1)">Next →</button>
+                </div>
+            </div>
+            
+            <!-- Q2: Times of Day -->
+            <div class="question-container hidden" id="q2">
+                <div class="question-number">Section 1 of 5</div>
+                <div class="question-text">Select the time blocks where you experience the most distraction:</div>
+                <div class="time-grid">
+                    <div class="time-card" onclick="toggleTime(this, 'morning')">
+                        <span class="emoji">🌅</span>
+                        <span class="label">Morning</span>
+                        <span style="font-size: 0.8rem; color: var(--ink-medium);">6 AM - 12 PM</span>
+                    </div>
+                    <div class="time-card" onclick="toggleTime(this, 'workday')">
+                        <span class="emoji">💼</span>
+                        <span class="label">Workday</span>
+                        <span style="font-size: 0.8rem; color: var(--ink-medium);">9 AM - 6 PM</span>
+                    </div>
+                    <div class="time-card" onclick="toggleTime(this, 'evening')">
+                        <span class="emoji">🏠</span>
+                        <span class="label">Evening</span>
+                        <span style="font-size: 0.8rem; color: var(--ink-medium);">6 PM - 10 PM</span>
+                    </div>
+                    <div class="time-card" onclick="toggleTime(this, 'night')">
+                        <span class="emoji">🌙</span>
+                        <span class="label">Night</span>
+                        <span style="font-size: 0.8rem; color: var(--ink-medium);">10 PM - 12 AM</span>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextQuestion(2)">Next →</button>
+                </div>
+            </div>
+            
+            <!-- Q3: Mental Presence -->
+            <div class="question-container hidden" id="q3">
+                <div class="question-number">Section 2 of 5</div>
+                <div class="question-text">During family time, how often is your mind occupied by logistics or work tasks?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'presence', 1)">
+                        <input type="radio" name="presence">
+                        <span class="option-label">Almost always — I'm rarely fully present</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'presence', 2)">
+                        <input type="radio" name="presence">
+                        <span class="option-label">Often — maybe 50% of the time</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'presence', 3)">
+                        <input type="radio" name="presence">
+                        <span class="option-label">Sometimes — a few times per week</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'presence', 4)">
+                        <input type="radio" name="presence">
+                        <span class="option-label">Rarely — I'm mostly present with them</span>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion(3)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextQuestion(3)">Next →</button>
+                </div>
+            </div>
+            
+            <!-- Q4: Work Context Switching -->
+            <div class="question-container hidden" id="q4">
+                <div class="question-number">Section 3 of 5</div>
+                <div class="question-text">During focused work time, how often do you context-switch to messages, email, or logistics?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'context', 1)">
+                        <input type="radio" name="context">
+                        <span class="option-label">Constantly — I can't sustain focus for more than 10-15 minutes</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'context', 2)">
+                        <input type="radio" name="context">
+                        <span class="option-label">Frequently — every 30-45 minutes</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'context', 3)">
+                        <input type="radio" name="context">
+                        <span class="option-label">Sometimes — a few interruptions per focused session</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'context', 4)">
+                        <input type="radio" name="context">
+                        <span class="option-label">Rarely — I can protect focus when needed</span>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion(4)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextQuestion(4)">Next →</button>
+                </div>
+            </div>
+            
+            <!-- Q5: Waste Categories (Multi-select) -->
+            <div class="question-container hidden" id="q5">
+                <div class="question-number">Section 4 of 5</div>
+                <div class="question-text">Select the types of waste that drain your time and focus (choose all that apply):</div>
+                <div class="waste-grid">
+                    <div class="waste-card" onclick="toggleWaste(this, 'coordination')">
+                        <span class="emoji">📅</span>
+                        <span class="label">Coordination</span>
+                        <span class="sublabel">Scheduling, logistics, reminding</span>
+                    </div>
+                    <div class="waste-card" onclick="toggleWaste(this, 'information')">
+                        <span class="emoji">🔍</span>
+                        <span class="label">Information</span>
+                        <span class="sublabel">Searching, re-explaining, losing things</span>
+                    </div>
+                    <div class="waste-card" onclick="toggleWaste(this, 'decisions')">
+                        <span class="emoji">⚖️</span>
+                        <span class="label">Decision Fatigue</span>
+                        <span class="sublabel">"What's for dinner?" repeated choices</span>
+                    </div>
+                    <div class="waste-card" onclick="toggleWaste(this, 'communication')">
+                        <span class="emoji">💬</span>
+                        <span class="label">Communication</span>
+                        <span class="sublabel">Status updates, same questions</span>
+                    </div>
+                    <div class="waste-card" onclick="toggleWaste(this, 'ideas')">
+                        <span class="emoji">💡</span>
+                        <span class="label">Idea Capture</span>
+                        <span class="sublabel">Ideas with no system, open loops</span>
+                    </div>
+                    <div class="waste-card" onclick="toggleWaste(this, 'scrolling')">
+                        <span class="emoji">📱</span>
+                        <span class="label">Attention</span>
+                        <span class="sublabel">News, scrolling, low-value input</span>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion(5)">← Back</button>
+                    <button class="btn btn-primary" onclick="showResults()">See Results →</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Page -->
+        <div class="results-container" id="resultsContainer">
+            <h1>Your Time & Focus Profile</h1>
+            <p class="subtitle">Where automation can reclaim your attention</p>
+            
+            <div class="waste-chart">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 30px;">Waste Distribution</h3>
+                <div id="wasteChart"></div>
+            </div>
+            
+            <div class="recommendation" id="recommendation">
+                <h3>Your Critical Few</h3>
+                <p id="recText">Based on your responses, here are the highest-impact areas for automation...</p>
+            </div>
+            
+            <div class="nav-buttons" style="justify-content: center;">
+                <a href="/frameworks/" class="btn btn-primary" style="text-decoration: none;">Explore System Solutions →</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let answers = {
+            days: [],
+            times: [],
+            presence: 0,
+            context: 0,
+            waste: []
+        };
+        
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+        
+        function updateProgress() {
+            const progress = ((currentQuestion - 1) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function toggleDay(element, day) {
+            element.classList.toggle('selected');
+            if (answers.days.includes(day)) {
+                answers.days = answers.days.filter(d => d !== day);
+            } else {
+                answers.days.push(day);
+            }
+        }
+        
+        function toggleTime(element, time) {
+            element.classList.toggle('selected');
+            if (answers.times.includes(time)) {
+                answers.times = answers.times.filter(t => t !== time);
+            } else {
+                answers.times.push(time);
+            }
+        }
+        
+        function toggleWaste(element, waste) {
+            element.classList.toggle('selected');
+            if (answers.waste.includes(waste)) {
+                answers.waste = answers.waste.filter(w => w !== waste);
+            } else {
+                answers.waste.push(waste);
+            }
+        }
+        
+        function selectOption(element, category, value) {
+            const container = element.parentElement;
+            container.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            container.querySelectorAll('input').forEach(input => input.checked = false);
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+            answers[category] = value;
+        }
+        
+        function nextQuestion(qNum) {
+            document.getElementById('q' + qNum).classList.add('hidden');
+            document.getElementById('q' + (qNum + 1)).classList.remove('hidden');
+            currentQuestion++;
+            updateProgress();
+        }
+        
+        function prevQuestion(qNum) {
+            document.getElementById('q' + qNum).classList.add('hidden');
+            document.getElementById('q' + (qNum - 1)).classList.remove('hidden');
+            currentQuestion--;
+            updateProgress();
+        }
+        
+        function showResults() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            document.getElementById('resultsContainer').classList.add('active');
+            document.querySelector('.progress-bar').style.display = 'none';
+            generateChart();
+            generateRecommendation();
+        }
+        
+        function generateChart() {
+            const wasteCategories = {
+                'coordination': { label: 'Coordination Waste', weight: 0 },
+                'information': { label: 'Information Waste', weight: 0 },
+                'decisions': { label: 'Decision Fatigue', weight: 0 },
+                'communication': { label: 'Communication Waste', weight: 0 },
+                'ideas': { label: 'Idea Capture', weight: 0 },
+                'scrolling': { label: 'Attention Waste', weight: 0 }
+            };
+            
+            // Calculate weights based on selections and answers
+            answers.waste.forEach(w => wasteCategories[w].weight += 30);
+            
+            // Add weight based on presence score (inverse - lower presence = more waste)
+            if (answers.presence === 1) {
+                wasteCategories.coordination.weight += 20;
+                wasteCategories.decisions.weight += 15;
+            } else if (answers.presence === 2) {
+                wasteCategories.coordination.weight += 10;
+                wasteCategories.decisions.weight += 10;
+            }
+            
+            // Add weight based on context switching
+            if (answers.context === 1) {
+                wasteCategories.information.weight += 20;
+                wasteCategories.communication.weight += 15;
+            } else if (answers.context === 2) {
+                wasteCategories.information.weight += 10;
+                wasteCategories.communication.weight += 10;
+            }
+            
+            // Generate chart HTML
+            let chartHTML = '';
+            Object.entries(wasteCategories).forEach(([key, data]) => {
+                const percentage = Math.min(data.weight, 100);
+                const barClass = percentage > 60 ? 'high' : percentage > 30 ? 'medium' : 'low';
+                chartHTML += `
+                    <div class="waste-item">
+                        <div class="waste-label">${data.label}</div>
+                        <div class="waste-bar-container">
+                            <div class="waste-bar ${barClass}" style="width: ${percentage}%"></div>
+                        </div>
+                        <div class="waste-value">${percentage}%</div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('wasteChart').innerHTML = chartHTML;
+        }
+        
+        function generateRecommendation() {
+            let primaryWaste = [];
+            if (answers.waste.includes('coordination')) primaryWaste.push('coordination and scheduling');
+            if (answers.waste.includes('information')) primaryWaste.push('information retrieval');
+            if (answers.waste.includes('decisions')) primaryWaste.push('decision fatigue');
+            if (answers.waste.includes('communication')) primaryWaste.push('repetitive communication');
+            
+            const timeBlocks = answers.times.length > 0 ? answers.times.join(', ') : 'various times';
+            const days = answers.days.length > 0 ? answers.days.join(', ') : 'throughout the week';
+            
+            let recText = `Your assessment reveals significant opportunity in <strong>${primaryWaste.join(' and ')}</strong>. `;
+            recText += `These issues are most acute <strong>${timeBlocks}</strong> on <strong>${days}</strong>. `;
+            
+            if (answers.presence <= 2) {
+                recText += `Your mental presence during family time is compromised by logistical overhead — a prime candidate for automation. `;
+            }
+            
+            if (answers.context <= 2) {
+                recText += `Context-switching is fragmenting your deep work capacity. `;
+            }
+            
+            recText += `<br><br><strong>Next step:</strong> Explore the System frameworks designed to address these specific waste categories.`;
+            
+            document.getElementById('recText').innerHTML = recText;
+        }
+    </script>
+</body>
+</html>

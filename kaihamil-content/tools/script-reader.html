@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Script Reader | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --border: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* App Container */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header / Controls */
+        .controls {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            z-index: 100;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        button {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        button.active {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+            border-color: var(--accent-gold);
+        }
+
+        input[type="range"] {
+            width: 100px;
+            accent-color: var(--accent-gold);
+        }
+
+        select {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        /* Content Area */
+        .reader-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The Teleprompter Container - NO SCROLLBAR */
+        .reader-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Hidden scrollbar, JS controls scroll */
+            position: relative;
+            padding: 0 20px;
+        }
+
+        /* The Content that gets scrolled */
+        .scroll-content {
+            padding: 50vh 20px 50vh; /* Top padding = half viewport for center start */
+            will-change: transform;
+        }
+
+        /* Center Guide Line */
+        .reader-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent-gold) 20%, var(--accent-gold) 80%, transparent 100%);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Text Content */
+        .script-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+            transition: font-size 0.2s, line-height 0.2s;
+        }
+
+        .script-content.large {
+            font-size: 1.8rem;
+            line-height: 2;
+        }
+
+        .script-content.xlarge {
+            font-size: 2.2rem;
+            line-height: 2.2;
+        }
+
+        .script-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .script-content h1,
+        .script-content h2,
+        .script-content h3 {
+            color: var(--accent-gold);
+            font-weight: 500;
+            margin: 1.5em 0 0.5em;
+        }
+
+        .script-content h1 {
+            font-size: 1.3em;
+        }
+
+        .script-content h2 {
+            font-size: 1.2em;
+        }
+
+        .script-content h3 {
+            font-size: 1.1em;
+        }
+
+        .script-content em {
+            color: var(--accent-amber);
+            font-style: italic;
+        }
+
+        .script-content strong {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Scroll Indicator */
+        .scroll-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent-gold);
+            width: 0%;
+            transition: width 0.1s;
+            z-index: 20;
+        }
+
+        /* Input Mode Overlay */
+        .input-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-dark);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .input-overlay.hidden {
+            display: none;
+        }
+
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .input-header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+        }
+
+        .script-input {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: none;
+            outline: none;
+        }
+
+        .script-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: flex-end;
+        }
+
+        /* Auto-scroll indicator */
+        .autoscroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .autoscroll-indicator.active {
+            opacity: 1;
+        }
+
+        /* Mirror Mode for teleprompter rigs */
+        .mirror-mode .script-content {
+            transform: scaleX(-1);
+        }
+
+        /* Full width on mobile */
+        @media (max-width: 600px) {
+            .controls {
+                padding: 10px 12px;
+            }
+
+            .control-label {
+                font-size: 0.7rem;
+            }
+
+            button {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            input[type="range"] {
+                width: 80px;
+            }
+
+            .script-content {
+                font-size: 1.3rem;
+            }
+
+            .script-content.large {
+                font-size: 1.6rem;
+            }
+
+            .script-content.xlarge {
+                font-size: 2rem;
+            }
+
+            .reader-container {
+                padding: 30px 16px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress" id="scrollProgress"></div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <button id="editBtn" onclick="toggleInput()">✏️ Edit</button>
+            </div>
+            
+            <div class="control-group">
+                <span class="control-label">Size</span>
+                <select id="fontSize" onchange="changeFontSize()">
+                    <option value="normal">Normal</option>
+                    <option value="large" selected>Large</option>
+                    <option value="xlarge">XL</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">Auto</span>
+                <button id="autoScrollBtn" onclick="toggleAutoScroll()">▶️</button>
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">Speed</span>
+                <input type="range" id="scrollSpeed" min="1" max="10" value="3">
+            </div>
+
+            <div class="control-group">
+                <button id="mirrorBtn" onclick="toggleMirror()">↔️ Mirror</button>
+            </div>
+        </div>
+
+        <!-- Reader Area -->
+        <div class="reader-wrapper">
+            <div class="reader-container" id="reader">
+                <div class="scroll-content">
+                    <div class="script-content large" id="scriptContent">
+                        <h1>Tap "Edit" to paste your script</h1>
+                        <p>This is a teleprompter-style reader optimized for iPhone and iPad.</p>
+                        <p><strong>Features:</strong></p>
+                        <p>• Large, readable text<br>
+                        • Smooth teleprompter crawl<br>
+                        • Auto-scroll with adjustable speed<br>
+                        • Mirror mode for teleprompter rigs<br>
+                        • Progress indicator<br>
+                        • Center guide line</p>
+                        <p>Tap "Edit" above to paste your script content here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="autoscroll-indicator" id="autoScrollIndicator">
+                ▶️ Auto-scrolling...
+            </div>
+        </div>
+    </div>
+
+    <!-- Input Overlay -->
+    <div class="input-overlay hidden" id="inputOverlay">
+        <div class="input-header">
+            <h2>✏️ Edit Script</h2>
+            <button onclick="toggleInput()">✕ Close</button>
+        </div>
+        <textarea class="script-input" id="scriptInput" placeholder="Paste your script here...
+
+Supports basic formatting:
+- Line breaks create new paragraphs
+- **text** for bold
+- *text* for italic/amber color
+- ## Heading for sections"></textarea>
+        <div class="input-actions">
+            <button onclick="clearScript()">🗑️ Clear</button>
+            <button onclick="saveScript()" style="background: var(--accent-gold); color: var(--bg-dark); border-color: var(--accent-gold);">💾 Save & Close</button>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let isAutoScrolling = false;
+        let autoScrollInterval = null;
+        let isMirrorMode = false;
+        let currentScrollTop = 0; // Track scroll position manually
+
+        // Elements
+        const reader = document.getElementById('reader');
+        const scrollContent = reader.querySelector('.scroll-content');
+        const scriptContent = document.getElementById('scriptContent');
+        const scrollProgress = document.getElementById('scrollProgress');
+        const inputOverlay = document.getElementById('inputOverlay');
+        const scriptInput = document.getElementById('scriptInput');
+        const autoScrollIndicator = document.getElementById('autoScrollIndicator');
+        const scrollSpeedInput = document.getElementById('scrollSpeed');
+        const autoScrollBtn = document.getElementById('autoScrollBtn');
+
+        // Update progress based on current scroll position
+        function updateProgress() {
+            const maxScroll = scrollContent.scrollHeight - reader.clientHeight;
+            const progress = maxScroll > 0 ? (currentScrollTop / maxScroll) * 100 : 0;
+            scrollProgress.style.width = progress + '%';
+        }
+
+        // Font size change
+        function changeFontSize() {
+            const size = document.getElementById('fontSize').value;
+            scriptContent.className = 'script-content ' + size;
+        }
+
+        // Toggle input overlay
+        function toggleInput() {
+            inputOverlay.classList.toggle('hidden');
+            if (!inputOverlay.classList.contains('hidden')) {
+                // Pre-populate with current content (stripped of HTML)
+                scriptInput.value = stripHtml(scriptContent.innerHTML);
+                scriptInput.focus();
+            }
+        }
+
+        // Strip HTML tags
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        // Simple markdown-like parsing
+        function parseContent(text) {
+            // Escape HTML
+            text = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Headers: ## text
+            text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold: **text**
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic/color: *text*
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Line breaks to paragraphs
+            const paragraphs = text.split(/\n\n+/);
+            return paragraphs.map(p => {
+                if (p.trim().startsWith('<h')) return p;
+                return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+            }).join('\n');
+        }
+
+        // Reset scroll to top
+        function resetScroll() {
+            currentScrollTop = 0;
+            scrollContent.style.transform = `translateY(0px)`;
+            updateProgress();
+        }
+
+        // Save script
+        function saveScript() {
+            const text = scriptInput.value;
+            if (text.trim()) {
+                scriptContent.innerHTML = parseContent(text);
+                localStorage.setItem('scriptReaderContent', scriptContent.innerHTML);
+            }
+            stopAutoScroll(); // Stop any running scroll
+            resetScroll(); // Reset to top
+            toggleInput();
+        }
+
+        // Clear script
+        function clearScript() {
+            scriptInput.value = '';
+            scriptInput.focus();
+        }
+
+        // Manual scroll for non-auto mode (touch/drag)
+        let isDragging = false;
+        let startY = 0;
+        let startScrollTop = 0;
+
+        reader.addEventListener('touchstart', (e) => {
+            if (isAutoScrolling) return;
+            isDragging = true;
+            startY = e.touches[0].clientY;
+            startScrollTop = currentScrollTop;
+        }, { passive: true });
+
+        reader.addEventListener('touchmove', (e) => {
+            if (!isDragging || isAutoScrolling) return;
+            const deltaY = startY - e.touches[0].clientY;
+            currentScrollTop = Math.max(0, Math.min(startScrollTop + deltaY, scrollContent.scrollHeight - reader.clientHeight));
+            scrollContent.style.transform = `translateY(-${currentScrollTop}px)`;
+            updateProgress();
+        }, { passive: true });
+
+        reader.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Mouse drag support for desktop
+        reader.addEventListener('mousedown', (e) => {
+            if (isAutoScrolling) return;
+            isDragging = true;
+            startY = e.clientY;
+            startScrollTop = currentScrollTop;
+            reader.style.cursor = 'grabbing';
+        });
+
+        reader.addEventListener('mousemove', (e) => {
+            if (!isDragging || isAutoScrolling) return;
+            const deltaY = startY - e.clientY;
+            currentScrollTop = Math.max(0, Math.min(startScrollTop + deltaY, scrollContent.scrollHeight - reader.clientHeight));
+            scrollContent.style.transform = `translateY(-${currentScrollTop}px)`;
+            updateProgress();
+        });
+
+        reader.addEventListener('mouseup', () => {
+            isDragging = false;
+            reader.style.cursor = 'default';
+        });
+
+        reader.addEventListener('mouseleave', () => {
+            isDragging = false;
+            reader.style.cursor = 'default';
+        });
+
+        // Auto-scroll toggle
+        function toggleAutoScroll() {
+            if (isAutoScrolling) {
+                stopAutoScroll();
+            } else {
+                startAutoScroll();
+            }
+        }
+
+        function startAutoScroll() {
+            isAutoScrolling = true;
+            autoScrollBtn.textContent = '⏸️';
+            autoScrollBtn.classList.add('active');
+            autoScrollIndicator.classList.add('active');
+            
+            const maxScroll = scrollContent.scrollHeight - reader.clientHeight;
+            
+            autoScrollInterval = setInterval(() => {
+                const speed = parseInt(scrollSpeedInput.value);
+                currentScrollTop += speed * 0.3; // Increment scroll position
+                
+                // Apply transform for smooth performance
+                scrollContent.style.transform = `translateY(-${currentScrollTop}px)`;
+                updateProgress();
+                
+                // Stop at end
+                if (currentScrollTop >= maxScroll) {
+                    currentScrollTop = maxScroll;
+                    scrollContent.style.transform = `translateY(-${currentScrollTop}px)`;
+                    stopAutoScroll();
+                }
+            }, 16); // ~60fps
+        }
+
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+            autoScrollBtn.textContent = '▶️';
+            autoScrollBtn.classList.remove('active');
+            autoScrollIndicator.classList.remove('active');
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        }
+
+        // Update speed while scrolling (no restart needed, reads live)
+        scrollSpeedInput.addEventListener('input', () => {
+            // Speed is read live in the interval, no action needed
+        });
+
+        // Mirror mode
+        function toggleMirror() {
+            isMirrorMode = !isMirrorMode;
+            document.body.classList.toggle('mirror-mode');
+            document.getElementById('mirrorBtn').classList.toggle('active');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Space to toggle auto-scroll (when not in input)
+            if (e.code === 'Space' && inputOverlay.classList.contains('hidden')) {
+                e.preventDefault();
+                toggleAutoScroll();
+            }
+            // Escape to close input
+            if (e.code === 'Escape' && !inputOverlay.classList.contains('hidden')) {
+                toggleInput();
+            }
+        });
+
+        // Load saved script from localStorage
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('scriptReaderContent');
+            if (saved) {
+                scriptContent.innerHTML = saved;
+            }
+            resetScroll();
+        });
+    </script>
+</body>
+</html>

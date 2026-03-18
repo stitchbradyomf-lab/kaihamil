@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Kai Hamil</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .product-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .product-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+        .product-card .description {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        .product-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+        .product-card .cta {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: #f59e0b;
+            color: #1a1a1a;
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .coming-soon {
+            opacity: 0.6;
+        }
+        .coming-soon .cta {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="site-title">Kai Hamil</a>
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="https://www.kaihamil.com/about">About</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="/" class="active">Content</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-main" style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Products</h1>
+            <p style="color: #666; font-size: 1.125rem; margin-bottom: 2rem;">Tools, frameworks, and resources for real estate professionals and knowledge workers.</p>
+
+            <div class="products-grid">
+                <a href="ai-prompts-for-realtors.html" class="product-card">
+                    <span class="badge">Available Now</span>
+                    <h2>500+ AI Prompts for Realtors</h2>
+                    <p class="description">The complete prompt library that transforms how you create listings, social posts, emails, and client communications. Save 10+ hours per week.</p>
+                    <div class="price">$29</div>
+                    <span class="cta">View Product →</span>
+                </a>
+
+                <div class="product-card coming-soon">
+                    <span class="badge" style="background: #f3f4f6; color: #6b7280;">Coming Soon</span>
+                    <h2>Realtor AI Readiness Assessment</h2>
+                    <p class="description">Complete diagnostic tool for real estate professionals. 20 questions across 7 sections with scoring rubric and meeting guide.</p>
+                    <div class="price" style="color: #9ca3af;">Free</div>
+                    <span class="cta">Coming Soon</span>
+                </div>
+
+                <div class="product-card coming-soon">
+                    <span class="badge" style="background: #f3f4f6; color: #6b7280;">Coming Soon</span>
+                    <h2>Framework Thinking Templates</h2>
+                    <p class="description">Notion templates and worksheets for applying causal thinking, second-order effects analysis, and decision frameworks to your business.</p>
+                    <div class="price" style="color: #9ca3af;">$19</div>
+                    <span class="cta">Coming Soon</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; padding: 2rem; background: #f9fafb; border-radius: 12px;">
+                <h2 style="margin-bottom: 1rem;">Have a Product Idea?</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">I'm building tools based on real needs from real professionals. If you have a challenge that could be solved with a template, framework, or tool, let me know.</p>
+                <a href="mailto:kyle@kaihamil.com" style="color: #3b82f6; font-weight: 500;">Email me your idea →</a>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h2>Kai <strong>Hamil</strong></h2>
+                    <p>System // Self</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="https://www.kaihamil.com/about">About us</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="https://www.kaihamil.com/services">Services</a>
+                </nav>
+                <nav class="footer-social">
+                    <a href="https://kaihamil.substack.com" target="_blank">Substack</a>
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                </nav>
+            </div>
+            <p class="footer-copyright"><a href="/">← Back to Content Home</a></p>
+        </footer>
+    </div>
+</body>
+</html>

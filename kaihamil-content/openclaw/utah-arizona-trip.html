@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utah & Arizona Family Trip - April/May 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: #1a1a2e; color: #fff; overflow: hidden; height: 100vh; }
+        .carousel-container { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+        .slides-wrapper { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; }
+        .slide-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.35; z-index: 1; filter: brightness(0.8) saturate(1.2); }
+        .slide-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 20px; padding: 30px 40px; height: 100%; }
+        .hero-image { border-radius: 12px; overflow: hidden; margin-bottom: 15px; position: relative; max-height: 180px; }
+        .hero-image img { width: 100%; height: 180px; object-fit: cover; display: block; border-radius: 12px; }
+        .hero-image .hero-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px 14px 10px; font-size: 0.75rem; color: rgba(255,255,255,0.8); font-family: 'Montserrat', sans-serif; }
+        .day-header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 15px; }
+        .day-info { text-align: left; }
+        .day-number { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 700; color: #f39c12; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .day-date { font-size: 1.3rem; color: #ecf0f1; margin-top: 5px; }
+        .day-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 600; color: #3498db; text-align: right; }
+        .info-panel { background: rgba(0,0,0,0.7); border-radius: 15px; padding: 25px; overflow-y: auto; max-height: calc(100vh - 180px); }
+        .info-section { margin-bottom: 20px; }
+        .info-section:last-child { margin-bottom: 0; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; color: #f39c12; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: ''; width: 4px; height: 20px; background: #f39c12; border-radius: 2px; }
+        .info-content { font-size: 1rem; line-height: 1.6; color: #ecf0f1; }
+        .info-content ul { list-style: none; padding-left: 0; }
+        .info-content li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: flex-start; gap: 10px; }
+        .info-content li:last-child { border-bottom: none; }
+        .info-content li::before { content: '→'; color: #3498db; font-weight: bold; }
+        .accommodation-link { color: #3498db; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+        .accommodation-link:hover { color: #f39c12; text-decoration: underline; }
+        .map-panel { background: rgba(0,0,0,0.7); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; }
+        .map-header { padding: 15px 20px; background: rgba(52, 152, 219, 0.3); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; color: #3498db; }
+        .map-container { flex: 1; min-height: 300px; }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .route-info { padding: 12px 20px; background: rgba(0,0,0,0.5); font-size: 0.9rem; color: #bdc3c7; }
+        .nav-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100; background: rgba(0,0,0,0.5); padding: 15px 25px; border-radius: 30px; }
+        .nav-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+        .nav-dot:hover { background: rgba(255,255,255,0.5); transform: scale(1.2); }
+        .nav-dot.active { background: #f39c12; border-color: #fff; transform: scale(1.3); }
+        .nav-dot.pre-trip { background: rgba(155, 89, 182, 0.5); }
+        .nav-dot.pre-trip.active { background: #9b59b6; }
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; color: #fff; font-size: 1.5rem; cursor: pointer; z-index: 100; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .nav-arrow:hover { background: rgba(243, 156, 18, 0.8); transform: translateY(-50%) scale(1.1); }
+        .nav-arrow.prev { left: 20px; }
+        .nav-arrow.next { right: 20px; }
+        .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+        .cost-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .cost-badge { display: inline-flex; align-items: center; background: rgba(46, 204, 113, 0.15); color: #2ecc71; padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(46, 204, 113, 0.25); }
+        @media (max-width: 900px) { .slide-content { grid-template-columns: 1fr; padding: 20px; gap: 15px; } .day-header { flex-direction: column; gap: 10px; } .day-title { text-align: left; } .day-number { font-size: 2rem; } .info-panel, .map-panel { max-height: none; } .map-container { min-height: 250px; } .nav-dots { bottom: 20px; padding: 10px 20px; gap: 10px; } .nav-dot { width: 12px; height: 12px; } .nav-arrow { width: 40px; height: 40px; font-size: 1.2rem; } }
+        .touch-hint { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 0.85rem; z-index: 99; }
+        .trip-summary { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 14px 18px; border-radius: 12px; z-index: 50; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s; max-width: 220px; }
+        .trip-summary:hover { background: rgba(0,0,0,0.85); border-color: rgba(243, 156, 18, 0.4); }
+        .trip-summary-title { color: #f39c12; font-weight: 600; margin-bottom: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .trip-summary-row { display: flex; justify-content: space-between; padding: 3px 0; color: #bdc3c7; }
+        .trip-summary-row.total { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 4px; padding-top: 6px; color: #2ecc71; font-weight: 600; }
+        .trip-summary .toggle-hint { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 6px; }
+        .trip-summary.collapsed .trip-summary-details { display: none; }
+        .trip-summary.collapsed .toggle-hint::after { content: 'Click to expand'; }
+        .trip-summary:not(.collapsed) .toggle-hint::after { content: 'Click to collapse'; }
+        .nav-dot { position: relative; }
+        .nav-dot-label { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: 'Montserrat', sans-serif; }
+        .nav-dot:hover .nav-dot-label { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+            <!-- Day -2: April 26, 2026 - Marissa to Vegas -->
+            <div class="slide" data-day="-2">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day -2</div>
+                            <div class="day-date">Sunday, April 26, 2026</div>
+                        </div>
+                        <div class="day-title">Marissa Flies to Vegas</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1529154036614-a60975f5c760?w=800&q=80" alt="Las Vegas skyline at dusk">
+                            <div class="hero-caption">Las Vegas awaits</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Pre-trip travel day. Marissa flies from Philadelphia to Las Vegas ahead of the family to get settled.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Travel Details</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Depart: Philadelphia (PHL) - 3:56 PM</li>
+                                    <li>Arrive: Las Vegas (LAS)</li>
+                                    <li>Flight Reference: HGBFBP</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Checking in and relaxing after the flight.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Flight Route: PHL → LAS</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d12714088.24896!2d-105.5!3d38.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x89c6c62c94f7b5e3%3A0x8f7bce3c0d1a3bf5!2sPhiladelphia%20International%20Airport%2C%20Philadelphia%2C%20PA!3m2!1d39.8729!2d-75.2437!4m5!1s0x80c8c422a1d347d7%3A0x70c7d73c8f8afe55!2sHarry%20Reid%20International%20Airport%2C%20Las%20Vegas%2C%20NV!3m2!1d36.084!2d-115.1537!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">✈️ ~4.5 hour flight</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day -1: April 27, 2026 - Marissa Working -->
+            <div class="slide" data-day="-1">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day -1</div>
+                            <div class="day-date">Monday, April 27, 2026</div>
+                        </div>
+                        <div class="day-title">Marissa Working in Vegas</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80" alt="Wynn Las Vegas resort">
+                            <div class="hero-caption">Wynn Las Vegas</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Marissa handles work responsibilities from the Wynn while the family maintains normal routine back home.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Marissa: Remote work day from Wynn</li>
+                                    <li>Kids: Regular school day in Philadelphia</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Location: Wynn Las Vegas</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.4!2d-115.1667!3d36.1269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c43d4a564c13%3A0xb1c5c8a8c3b1a3b1!2sWynn%20Las%20Vegas!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🏨 No travel - Working day</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 0: April 28, 2026 - Kyle & Kids Arrive -->
+            <div class="slide" data-day="0">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 0</div>
+                            <div class="day-date">Tuesday, April 28, 2026</div>
+                        </div>
+                        <div class="day-title">Kyle & Kids Arrive - Family Reunites!</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Airport arrivals">
+                            <div class="hero-caption">Family reunites in Vegas!</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>The whole family comes together! Kyle and the kids fly from Philadelphia to Las Vegas to join Marissa at the Wynn.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Travel Details</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Morning: Work / school in Philadelphia</li>
+                                    <li>Depart: Philadelphia (PHL) - 3:56 PM</li>
+                                    <li>Arrive: Las Vegas (LAS)</li>
+                                    <li>Uber to Wynn Las Vegas</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Transportation: $1,668</span>
+                                    <span class="cost-badge">Meals: $100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Family reunion! Everyone together for the adventure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Flight Route: PHL → LAS</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d12714088.24896!2d-105.5!3d38.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x89c6c62c94f7b5e3%3A0x8f7bce3c0d1a3bf5!2sPhiladelphia%20International%20Airport%2C%20Philadelphia%2C%20PA!3m2!1d39.8729!2d-75.2437!4m5!1s0x80c8c422a1d347d7%3A0x70c7d73c8f8afe55!2sHarry%20Reid%20International%20Airport%2C%20Las%20Vegas%2C%20NV!3m2!1d36.084!2d-115.1537!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">✈️ ~4.5 hour flight + 🚗 Uber to Wynn ($300)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 1: April 29, 2026 - Vegas Pool Day -->
+            <div class="slide" data-day="1">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 1</div>
+                            <div class="day-date">Wednesday, April 29, 2026</div>
+                        </div>
+                        <div class="day-title">Vegas Pool Day</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Luxury pool">
+                            <div class="hero-caption">Pool day at the Wynn</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>A relaxing day to recover from travel and enjoy the Wynn's luxurious pool facilities before hitting the road.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Activities</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Chill Vegas day at the pool</li>
+                                    <li>Family time at the Wynn</li>
+                                    <li>Explore the resort</li>
+                                    <li>Prepare for road trip adventure</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Activities: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Last night in Vegas before the Utah adventure!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Location: Wynn Las Vegas</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.4!2d-115.1667!3d36.1269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c43d4a564c13%3A0xb1c5c8a8c3b1a3b1!2sWynn%20Las%20Vegas!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🏊 No driving today - Pool day!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional days abbreviated for file size -->
+        </div>
+
+        <!-- Trip Budget Summary -->
+        <div class="trip-summary" id="tripSummary" onclick="this.classList.toggle('collapsed')">
+            <div class="trip-summary-title">Trip Budget</div>
+            <div class="trip-summary-details">
+                <div class="trip-summary-row"><span>Lodging</span><span>$3,048</span></div>
+                <div class="trip-summary-row"><span>Transport</span><span>$2,248</span></div>
+                <div class="trip-summary-row"><span>Activities</span><span>$1,188</span></div>
+                <div class="trip-summary-row"><span>Meals</span><span>$1,200</span></div>
+                <div class="trip-summary-row total"><span>Estimated Total</span><span>$7,684</span></div>
+            </div>
+            <div class="toggle-hint"></div>
+        </div>
+
+        <!-- Navigation -->
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous slide">‹</button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next slide">›</button>
+        <div class="nav-dots" id="navDots"></div>
+        <div class="touch-hint" id="touchHint">← Swipe to navigate →</div>
+    </div>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const navDots = document.getElementById('navDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const touchHint = document.getElementById('touchHint');
+
+        // Create dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            const dayNum = parseInt(slide.dataset.day);
+            if (dayNum < 0) dot.classList.add('pre-trip');
+            dot.addEventListener('click', () => goToSlide(index));
+            const label = document.createElement('span');
+            label.className = 'nav-dot-label';
+            label.textContent = `Day ${slide.dataset.day}`;
+            dot.appendChild(label);
+            navDots.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.nav-dot');
+
+        function updateSlide() {
+            slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+            updateSlide();
+        }
+
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlide(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        slidesWrapper.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        slidesWrapper.addEventListener('touchend', (e) => {
+            const diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+        }, { passive: true });
+
+        updateSlide();
+    </script>
+</body>
+</html>

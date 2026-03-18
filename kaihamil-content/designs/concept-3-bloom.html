@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept 3: The Bloom | Kai Hamil Content</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+        }
+        
+        /* Clean top bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+        }
+        
+        .brand {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        .brand strong { font-weight: 500; }
+        
+        .top-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Hero with dramatic tagline */
+        .hero-bloom {
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 100px 20px 60px;
+            text-align: center;
+            position: relative;
+        }
+        
+        /* Giant stylized tagline */
+        .mega-tagline {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--brown-dark);
+            max-width: 900px;
+        }
+        
+        .mega-tagline .line1 {
+            display: block;
+            font-weight: 300;
+        }
+        
+        .mega-tagline .line2 {
+            display: block;
+            color: var(--gold);
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Decorative underline on gold text */
+        .mega-tagline .line2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -10px;
+            right: -10px;
+            height: 12px;
+            background: var(--gold-light);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        
+        .tagline-sub {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            max-width: 450px;
+        }
+        
+        /* The Bloom Layout */
+        .bloom-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            position: relative;
+        }
+        
+        /* Central abstract shape - diamond with inner pattern */
+        .bloom-center {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 60px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .diamond-shape {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            transform: rotate(45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(61, 40, 23, 0.2);
+        }
+        
+        .diamond-inner {
+            transform: rotate(-45deg);
+            text-align: center;
+            color: var(--bg-cream);
+        }
+        
+        .diamond-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .diamond-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        /* Decorative rings around diamond */
+        .bloom-center::before,
+        .bloom-center::after {
+            content: '';
+            position: absolute;
+            border: 1px solid var(--border);
+            transform: rotate(45deg);
+        }
+        
+        .bloom-center::before {
+            width: 170px;
+            height: 170px;
+            opacity: 0.6;
+        }
+        
+        .bloom-center::after {
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+        }
+        
+        /* Radial sections - arranged like flower petals */
+        .petals-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+        
+        /* First row - 3 items centered */
+        .petals-grid::before {
+            content: '';
+            grid-column: 1;
+        }
+        
+        .petal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .petal:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.1);
+        }
+        
+        .petal-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--bg-cream), var(--bg-card));
+            border: 2px solid var(--amber);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .petal:hover .petal-icon {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+        }
+        
+        .petal-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--brown-dark);
+        }
+        
+        .petal-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            line-height: 1.4;
+        }
+        
+        /* Connecting lines between petals (visual only) */
+        .connection-svg {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 100px;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+        
+        /* Featured section - horizontal strip */
+        .featured-strip {
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            border-radius: 20px;
+            color: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .featured-content h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .featured-content p {
+            color: var(--amber);
+            font-size: 0.95rem;
+        }
+        
+        .featured-cta {
+            padding: 12px 30px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .featured-cta:hover {
+            background: var(--gold-light);
+            transform: scale(1.05);
+        }
+        
+        /* Bottom grid - secondary items */
+        .secondary-grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .secondary-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-item:hover {
+            border-color: var(--amber);
+        }
+        
+        .secondary-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .secondary-text {
+            flex: 1;
+        }
+        
+        .secondary-title {
+            font-weight: 500;
+            color: var(--brown-dark);
+            margin-bottom: 3px;
+        }
+        
+        .secondary-desc {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .petals-grid { grid-template-columns: repeat(2, 1fr); }
+            .petals-grid::before { display: none; }
+            .secondary-grid { grid-template-columns: 1fr; }
+            .featured-strip { flex-direction: column; text-align: center; }
+        }
+        
+        @media (max-width: 500px) {
+            .petals-grid { grid-template-columns: 1fr; }
+            .mega-tagline { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="brand">kai <strong>hamil</strong></div>
+        <nav class="top-links">
+            <a href="/about.html">About</a>
+            <a href="mailto:hello@kaihamil.com">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="hero-bloom">
+        <h1 class="mega-tagline">
+            <span class="line1">See the water</span>
+            <span class="line2">you're swimming in</span>
+        </h1>
+        <p class="tagline-sub">Frameworks and systems for understanding yourself and the world around you.</p>
+    </section>
+    
+    <main class="bloom-container">
+        <!-- Central Diamond -->
+        <div class="bloom-center">
+            <div class="diamond-shape">
+                <div class="diamond-inner">
+                    <div class="diamond-icon">◈</div>
+                    <div class="diamond-text">System<br>//<br>Self</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Primary Petals -->
+        <div class="petals-grid">
+            <a href="/posts/" class="petal">
+                <div class="petal-icon">✍</div>
+                <div class="petal-title">Posts</div>
+                <div class="petal-desc">Essays and articles on frameworks, relationships, and thinking.</div>
+            </a>
+            
+            <a href="/research/" class="petal">
+                <div class="petal-icon">🔬</div>
+                <div class="petal-title">Research</div>
+                <div class="petal-desc">Raw notes, drafts, and unreviewed explorations.</div>
+            </a>
+            
+            <a href="/frameworks/" class="petal">
+                <div class="petal-icon">◫</div>
+                <div class="petal-title">Frameworks</div>
+                <div class="petal-desc">Practical tools for decisions, thinking, and understanding.</div>
+            </a>
+            
+            <a href="/products/" class="petal">
+                <div class="petal-icon">⚡</div>
+                <div class="petal-title">Products</div>
+                <div class="petal-desc">Tools and prompts designed for action.</div>
+            </a>
+        </div>
+        
+        <!-- Featured CTA -->
+        <div class="featured-strip">
+            <div class="featured-content">
+                <h3>The Physics of Love</h3>
+                <p>Why human connection is the most powerful force in the universe.</p>
+            </div>
+            <a href="/posts/the-physics-of-love.html" class="featured-cta">Read Essay →</a>
+        </div>
+        
+        <!-- Secondary Items -->
+        <div class="secondary-grid">
+            <a href="/diagrams/" class="secondary-item">
+                <div class="secondary-icon">◈</div>
+                <div class="secondary-text">
+                    <div class="secondary-title">Diagrams</div>
+                    <div class="secondary-desc">Visual thinking tools</div>
+                </div>
+            </a>
+            
+            <a href="/briefs/" class="secondary-item">
+                <div class="secondary-icon">📋</div>
+                <div class="secondary-text">
+                    <div class="secondary-title">Briefs</div>
+                    <div class="secondary-desc">Quick insights and updates</div>
+                </div>
+            </a>
+            
+            <a href="/library/" class="secondary-item">
+                <div class="secondary-icon">📚</div>
+                <div class="secondary-text">
+                    <div class="secondary-title">Library</div>
+                    <div class="secondary-desc">Curated resources and tools</div>
+                </div>
+            </a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

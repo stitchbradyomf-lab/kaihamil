@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeff's Portfolio Intelligence | Realtor Memory Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --success: #3d8b37;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2rem; font-weight: 300; margin-bottom: 10px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* Stats Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Query Interface */
+        .query-section {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .query-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .query-input-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .query-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .query-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .query-button {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .query-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        /* Suggested Questions */
+        .suggested-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .suggested-q {
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .suggested-q:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-color: var(--gold);
+        }
+        
+        /* Results Area */
+        .results-area {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            min-height: 200px;
+        }
+        
+        .results-placeholder {
+            text-align: center;
+            color: var(--brown-medium);
+            padding: 40px 0;
+        }
+        
+        .result-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-address {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .result-details {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        .result-stat {
+            background: var(--bg-cream);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, var(--gold-light), var(--bg-cream));
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
+        }
+        
+        .insight-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .query-input-container { flex-direction: column; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+    </nav>
+    
+    <header class="hero">
+        <h1>Jeff's <strong>Portfolio Intelligence</strong></h1>
+        <p>Ask questions about your real estate transactions. Get instant insights.</p>
+    </header>
+    
+    <div class="container">
+        <!-- Stats Dashboard -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="totalTransactions">36</div>
+                <div class="stat-label">Total Transactions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="activeAreas">5</div>
+                <div class="stat-label">Active Areas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgPrice">$847K</div>
+                <div class="stat-label">Avg Sale Price</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="yearsActive">4</div>
+                <div class="stat-label">Years Active</div>
+            </div>
+        </div>
+        
+        <!-- Query Interface -->
+        <div class="query-section">
+            <div class="query-title">🔍 Ask About Your Portfolio</div>
+            <div class="query-input-container">
+                <input type="text" class="query-input" id="queryInput" placeholder="e.g., 'How many Colonials have I sold in Princeton?'" />
+                <button class="query-button" onclick="executeQuery()">Ask</button>
+            </div>
+            <div class="suggested-questions">
+                <span class="suggested-q" onclick="setQuery('How many properties have I sold in Princeton?')">Princeton sales?</span>
+                <span class="suggested-q" onclick="setQuery('What is my average days on market?')">Avg days on market?</span>
+                <span class="suggested-q" onclick="setQuery('Show me all buyer representations over $1M')">Buyers over $1M?</span>
+                <span class="suggested-q" onclick="setQuery('What property types do I sell most?')">Top property types?</span>
+                <span class="suggested-q" onclick="setQuery('Which area has my highest average sale price?')">Highest price area?</span>
+            </div>
+        </div>
+        
+        <!-- Results Area -->
+        <div class="results-area" id="resultsArea">
+            <div class="results-placeholder">
+                <p>Ask a question above to explore your portfolio data</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Try: "Show me all Colonials in Princeton" or "What was my fastest sale?"</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Jeff's real transaction data (from imported RDF)
+        const transactions = [
+            { id: 'tx-036', address: '189 Moore St, Princeton, NJ 08540', price: 1600000, type: 'buyer_representation', date: '2025-12-18', daysOnMarket: 39, bedrooms: 3, bathrooms: 2.5, sqft: 2450, area: 'Princeton', propertyType: 'colonial' },
+            { id: 'tx-035', address: '12 Margo Place, Trenton, NJ 08620', price: 505900, type: 'seller_representation', date: '2025-10-14', daysOnMarket: 28, bedrooms: 4, bathrooms: 1.5, sqft: 1423, area: 'Trenton', propertyType: 'cape_cod' },
+            { id: 'tx-034', address: '28 Amherst Way, Princeton Junction, NJ 08550', price: 970000, type: 'buyer_representation', date: '2025-09-04', daysOnMarket: 22, bedrooms: 4, bathrooms: 2.5, sqft: 2820, area: 'Princeton Junction', propertyType: 'colonial' },
+            { id: 'tx-033', address: '24 Mccomb Rd, Princeton, NJ 08540', price: 1050000, type: 'buyer_representation', date: '2024-06-17', daysOnMarket: 6, bedrooms: 3, bathrooms: 2.5, sqft: 2500, area: 'Princeton', propertyType: 'colonial' },
+            { id: 'tx-032', address: '9 Pennant Ln, Pennington, NJ 08534', price: 750000, type: 'buyer_representation', date: '2024-05-30', daysOnMarket: 10, bedrooms: 3, bathrooms: 2.5, sqft: 2100, area: 'Pennington', propertyType: 'townhouse' },
+            { id: 'tx-031', address: '136 Lexington Ave, Ewing, NJ 08618', price: 340000, type: 'seller_representation', date: '2024-04-10', daysOnMarket: 19, bedrooms: 3, bathrooms: 1.5, sqft: 1450, area: 'Ewing', propertyType: 'ranch' },
+            { id: 'tx-030', address: '3 Bromley Way, Hamilton, NJ 08690', price: 485000, type: 'buyer_representation', date: '2024-03-15', daysOnMarket: 12, bedrooms: 4, bathrooms: 2.5, sqft: 1950, area: 'Hamilton', propertyType: 'colonial' }
+        ];
+        
+        // Query patterns
+        const queryPatterns = [
+            {
+                patterns: ['how many', 'count', 'number of'],
+                handler: (query) => handleCountQuery(query)
+            },
+            {
+                patterns: ['average', 'avg', 'mean'],
+                handler: (query) => handleAverageQuery(query)
+            },
+            {
+                patterns: ['show me', 'list', 'what', 'which'],
+                handler: (query) => handleListQuery(query)
+            },
+            {
+                patterns: ['highest', 'most expensive', 'top'],
+                handler: (query) => handleHighestQuery(query)
+            },
+            {
+                patterns: ['fastest', 'quickest', 'shortest'],
+                handler: (query) => handleFastestQuery(query)
+            }
+        ];
+        
+        function setQuery(text) {
+            document.getElementById('queryInput').value = text;
+            executeQuery();
+        }
+        
+        function executeQuery() {
+            const query = document.getElementById('queryInput').value.toLowerCase().trim();
+            if (!query) return;
+            
+            // Find matching pattern
+            for (const pattern of queryPatterns) {
+                if (pattern.patterns.some(p => query.includes(p))) {
+                    pattern.handler(query);
+                    return;
+                }
+            }
+            
+            // Default: try list query
+            handleListQuery(query);
+        }
+        
+        function handleCountQuery(query) {
+            let filtered = transactions;
+            let description = "transactions";
+            
+            // Filter by area
+            if (query.includes('princeton')) {
+                filtered = filtered.filter(t => t.area.toLowerCase().includes('princeton'));
+                description = "Princeton transactions";
+            } else if (query.includes('hamilton')) {
+                filtered = filtered.filter(t => t.area.toLowerCase().includes('hamilton'));
+                description = "Hamilton transactions";
+            } else if (query.includes('pennington')) {
+                filtered = filtered.filter(t => t.area.toLowerCase().includes('pennington'));
+                description = "Pennington transactions";
+            } else if (query.includes('ewing')) {
+                filtered = filtered.filter(t => t.area.toLowerCase().includes('ewing'));
+                description = "Ewing transactions";
+            }
+            
+            // Filter by property type
+            if (query.includes('colonial')) {
+                filtered = filtered.filter(t => t.propertyType === 'colonial');
+                description = "Colonial " + description;
+            } else if (query.includes('ranch')) {
+                filtered = filtered.filter(t => t.propertyType === 'ranch');
+                description = "Ranch " + description;
+            } else if (query.includes('cape')) {
+                filtered = filtered.filter(t => t.propertyType === 'cape_cod');
+                description = "Cape Cod " + description;
+            }
+            
+            // Filter by representation type
+            if (query.includes('buyer')) {
+                filtered = filtered.filter(t => t.type === 'buyer_representation');
+                description = "buyer representation " + description;
+            } else if (query.includes('seller')) {
+                filtered = filtered.filter(t => t.type === 'seller_representation');
+                description = "seller representation " + description;
+            }
+            
+            // Filter by price
+            if (query.includes('over $1m') || query.includes('over 1m') || query.includes('million')) {
+                filtered = filtered.filter(t => t.price > 1000000);
+                description = "transactions over $1M";
+            }
+            
+            const count = filtered.length;
+            
+            let html = `
+                <div style="text-align: center; padding: 30px 0;">
+                    <div style="font-size: 4rem; font-weight: 700; color: var(--gold);">${count}</div>
+                    <div style="font-size: 1.3rem; margin-top: 10px;">${description}</div>
+                </div>
+            `;
+            
+            if (count > 0) {
+                html += `<div style="margin-top: 20px;"><strong>Properties:</strong></div>`;
+                html += filtered.map(t => `
+                    <div class="result-item">
+                        <div class="result-address">${t.address}</div>
+                        <div class="result-details">
+                            <span class="result-stat">$${(t.price/1000000).toFixed(2)}M</span>
+                            <span class="result-stat">${t.bedrooms}bd/${t.bathrooms}ba</span>
+                            <span class="result-stat">${t.daysOnMarket} DOM</span>
+                            <span class="result-stat">${t.type === 'buyer_representation' ? 'Buyer' : 'Seller'} rep</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('resultsArea').innerHTML = html;
+        }
+        
+        function handleAverageQuery(query) {
+            let values = [];
+            let label = "";
+            
+            if (query.includes('price') || query.includes('sale')) {
+                values = transactions.map(t => t.price);
+                label = "average sale price";
+            } else if (query.includes('day') || query.includes('market')) {
+                values = transactions.map(t => t.daysOnMarket);
+                label = "average days on market";
+            } else if (query.includes('square') || query.includes('sqft')) {
+                values = transactions.map(t => t.sqft);
+                label = "average square footage";
+            }
+            
+            // Filter by area if specified
+            if (query.includes('princeton')) {
+                values = transactions.filter(t => t.area.toLowerCase().includes('princeton')).map(t => t.price);
+                label = "average sale price in Princeton";
+            }
+            
+            if (values.length === 0) {
+                values = transactions.map(t => t.price);
+                label = "average sale price";
+            }
+            
+            const avg = values.reduce((a, b) => a + b, 0) / values.length;
+            
+            let displayValue;
+            if (label.includes('price')) {
+                displayValue = `$${(avg/1000).toFixed(0)}K`;
+            } else if (label.includes('day')) {
+                displayValue = `${avg.toFixed(1)} days`;
+            } else if (label.includes('square')) {
+                displayValue = `${avg.toFixed(0)} sqft`;
+            } else {
+                displayValue = avg.toFixed(1);
+            }
+            
+            document.getElementById('resultsArea').innerHTML = `
+                <div style="text-align: center; padding: 30px 0;">
+                    <div style="font-size: 4rem; font-weight: 700; color: var(--gold);">${displayValue}</div>
+                    <div style="font-size: 1.3rem; margin-top: 10px;">${label}</div>
+                    <div style="font-size: 0.9rem; color: var(--brown-medium); margin-top: 10px;">Based on ${values.length} transactions</div>
+                </div>
+            `;
+        }
+        
+        function handleListQuery(query) {
+            let filtered = transactions;
+            let title = "All Transactions";
+            
+            if (query.includes('princeton')) {
+                filtered = filtered.filter(t => t.area.toLowerCase().includes('princeton'));
+                title = "Princeton Transactions";
+            } else if (query.includes('colonial')) {
+                filtered = filtered.filter(t => t.propertyType === 'colonial');
+                title = "Colonial Properties";
+            } else if (query.includes('buyer')) {
+                filtered = filtered.filter(t => t.type === 'buyer_representation');
+                title = "Buyer Representations";
+            } else if (query.includes('over $1m') || query.includes('over 1m') || query.includes('million')) {
+                filtered = filtered.filter(t => t.price > 1000000);
+                title = "Transactions Over $1M";
+            }
+            
+            let html = `<div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;">${title} (${filtered.length})</div>`;
+            
+            html += filtered.map(t => `
+                <div class="result-item">
+                    <div class="result-address">${t.address}</div>
+                    <div class="result-details">
+                        <span class="result-stat" style="background: var(--gold); color: white;">$${(t.price/1000000).toFixed(2)}M</span>
+                        <span class="result-stat">${t.bedrooms}bd/${t.bathalls}ba</span>
+                        <span class="result-stat">${t.sqft.toLocaleString()} sqft</span>
+                        <span class="result-stat">${t.daysOnMarket} days on market</span>
+                        <span class="result-stat">${t.type === 'buyer_representation' ? 'Buyer' : 'Seller'} rep</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Add insight if applicable
+            if (query.includes('princeton') && query.includes('colonial')) {
+                const avgPrice = filtered.reduce((a, t) => a + t.price, 0) / filtered.length;
+                html += `
+                    <div class="insight-box">
+                        <div class="insight-title">💡 Pattern Detected</div>
+                        <p>You've specialized in Princeton Colonials. Average price point: $${(avgPrice/1000000).toFixed(2)}M. Consider marketing yourself as the "Princeton Colonial Specialist."</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('resultsArea').innerHTML = html;
+        }
+        
+        function handleHighestQuery(query) {
+            let sorted = [...transactions].sort((a, b) => b.price - a.price);
+            const top = sorted[0];
+            
+            document.getElementById('resultsArea').innerHTML = `
+                <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;">Highest Sale Price</div>
+                <div class="result-item" style="background: linear-gradient(135deg, var(--gold-light), var(--bg-cream)); border-radius: 12px;">
+                    <div class="result-address">${top.address}</div>
+                    <div class="result-details">
+                        <span class="result-stat" style="background: var(--gold); color: white; font-size: 1.1rem;">$${(top.price/1000000).toFixed(2)}M</span>
+                        <span class="result-stat">${top.bedrooms}bd/${top.bathrooms}ba</span>
+                        <span class="result-stat">${top.sqft.toLocaleString()} sqft</span>
+                        <span class="result-stat">${top.area}</span>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <strong>Top 3 by price:</strong>
+                    ${sorted.slice(0, 3).map((t, i) => `
+                        <div style="margin-top: 10px; padding: 10px; background: var(--bg-cream); border-radius: 8px;">
+                            ${i + 1}. ${t.address} — $${(t.price/1000000).toFixed(2)}M
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        function handleFastestQuery(query) {
+            let sorted = [...transactions].sort((a, b) => a.daysOnMarket - b.daysOnMarket);
+            const fastest = sorted[0];
+            
+            document.getElementById('resultsArea').innerHTML = `
+                <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 20px;">Fastest Sale</div>
+                <div class="result-item" style="background: linear-gradient(135deg, var(--success), #2d5a3a); color: white; border-radius: 12px;">
+                    <div class="result-address" style="color: white;">${fastest.address}</div>
+                    <div class="result-details" style="color: rgba(255,255,255,0.9);">
+                        <span class="result-stat" style="background: white; color: var(--success); font-weight: 700;">${fastest.daysOnMarket} DAYS</span>
+                        <span class="result-stat" style="background: rgba(255,255,255,0.2); color: white;">$${(fastest.price/1000000).toFixed(2)}M</span>
+                        <span class="result-stat" style="background: rgba(255,255,255,0.2); color: white;">${fastest.area}</span>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <strong>Fastest 3 sales:</strong>
+                    ${sorted.slice(0, 3).map((t, i) => `
+                        <div style="margin-top: 10px; padding: 10px; background: var(--bg-cream); border-radius: 8px;">
+                            ${i + 1}. ${t.address} — ${t.daysOnMarket} days
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // Enter key support
+        document.getElementById('queryInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') executeQuery();
+        });
+    </script>
+</body>
+</html>

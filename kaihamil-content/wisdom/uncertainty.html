@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Everything Shifts | Self | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--ink-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--terracotta); }
+        
+        /* Article Header */
+        .article-header {
+            padding: 140px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--sand) 100%);
+        }
+        
+        .article-meta {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--terracotta);
+            margin-bottom: 20px;
+        }
+        
+        .article-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
+        
+        .article-subtitle {
+            font-size: 1.2rem;
+            color: var(--ink-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        /* Article Content */
+        .article-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .article-content p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+        
+        .article-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin: 50px 0 25px;
+            color: var(--ink-dark);
+        }
+        
+        .article-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 40px 0 20px;
+            color: var(--terracotta);
+        }
+        
+        .article-content ul {
+            margin: 25px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        
+        .article-content strong {
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .article-content em {
+            font-style: italic;
+        }
+        
+        /* AI Prompt Box */
+        .prompt-box {
+            background: var(--bg-paper);
+            border-left: 4px solid var(--terracotta);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .prompt-box h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--terracotta);
+        }
+        
+        .prompt-box p {
+            font-style: italic;
+            color: var(--ink-medium);
+            margin: 0;
+        }
+        
+        /* Related Links */
+        .related-section {
+            background: var(--sand);
+            padding: 40px;
+            margin-top: 60px;
+            border-radius: 12px;
+        }
+        
+        .related-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .related-link {
+            color: var(--terracotta);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .related-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer Note */
+        .footer-note {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--sand);
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+            font-style: italic;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .article-header { padding: 100px 20px 40px; }
+            .article-content { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">System</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="article-header">
+        <p class="article-meta">Navigating Uncertainty & Change</p>
+        <h1>When Everything Shifts</h1>
+        <p class="article-subtitle">The ground doesn't just shift anymore. It never stops moving. Here's how to stop fighting change and start working with it.</p>
+    </header>
+    
+    <article class="article-content">
+        <p>Your project gets cancelled on Thursday afternoon. The AI tool you've been mastering is obsolete by Monday. Your partner's mood darkens without warning. The plan you spent months building evaporates in a single meeting.</p>
+
+        <p>Change doesn't ask permission. It arrives unannounced and rearranges your furniture while you're still sitting in it.</p>
+
+        <p>This isn't new. Humans have been dealing with change since we climbed down from trees. What's new is the <em>velocity</em>. AI didn't just accelerate change—it made it the background radiation of modern life. The ground doesn't just shift; it never stops moving.</p>
+
+        <h2>Why We Suffer</h2>
+
+        <p>The suffering isn't caused by change itself. It's caused by our relationship to it.</p>
+
+        <p>We build mental models of how things <em>should</em> be: stable jobs, predictable relationships, steady progress. When reality diverges from our map, we don't update the map. We fight reality.</p>
+
+        <p>This pattern shows up everywhere:</p>
+
+        <ul>
+            <li>The manager clinging to last year's strategy while the market moves on</li>
+            <li>The partner trying to fix a relationship that has already ended</li>
+            <li>The professional mourning skills that AI just made obsolete</li>
+            <li>All of us, refreshing the news, hoping today's chaos is temporary</li>
+        </ul>
+
+        <p>The clinging is human. But it's optional.</p>
+
+        <h2>What Actually Works</h2>
+
+        <p>Across cultures and centuries, humans who navigated change well did three things differently. Not because they were special, but because they understood something fundamental about how reality operates.</p>
+
+        <h3>1. They Distinguished Signal from Noise</h3>
+
+        <p>Not every change requires a response. Some changes are weather—you dress for them and continue your day. Others are climate shifts—you need to fundamentally adapt.</p>
+
+        <p><strong>The pattern:</strong> Before reacting, ask: Is this a single event or a trend? Is it within my control limits or outside them? Will this matter in a year?</p>
+
+        <p><strong>The practice:</strong> When change arrives, pause. Classify it. Most of what feels like catastrophe is just weather.</p>
+
+        <h3>2. They Held Plans Lightly</h3>
+
+        <p>The most adaptable people don't abandon planning. They abandon <em>attachment</em> to plans. They build, they execute, they hold the outcomes loosely.</p>
+
+        <p><strong>The pattern:</strong> Commit to direction, not destination. Build optionality. Create structures that bend without breaking.</p>
+
+        <p><strong>The practice:</strong> For every plan you make, identify three ways it could change. Not to be pessimistic—to be prepared. The goal isn't predicting the future. It's being ready for multiple futures.</p>
+
+        <h3>3. They Found Ground in Self, Not Circumstance</h3>
+
+        <p>When external circumstances shift constantly, the only stable point is internal. Not in a woo-woo way—in a practical, operational way. Your values, your capacity to respond, your clarity about what matters.</p>
+
+        <p><strong>The pattern:</strong> When everything external moves, return to what you control: your attention, your actions, your integrity.</p>
+
+        <p><strong>The practice:</strong> Build anchors—routines, relationships, practices—that persist regardless of external circumstances. These become your reference points when the external world goes chaotic.</p>
+
+        <h2>AI as Practice Partner</h2>
+
+        <p>Here's where it gets practical. You don't need to become a Buddhist monk or Stoic philosopher to work with change better. You need a practice partner that helps you:</p>
+
+        <div class="prompt-box">
+            <h4>Daily Check-In</h4>
+            <p>"Help me review what changed today and classify it: Is this weather (temporary, not requiring major response) or climate (trend, requiring adaptation)?"</p>
+        </div>
+
+        <p>Use this to build the mental habit of distinguishing signal from noise. Over time, you'll internalize the pattern.</p>
+
+        <div class="prompt-box">
+            <h4>Scenario Planning</h4>
+            <p>"I'm planning [specific project/decision]. Help me identify three ways this could change in the next 3 months, and what I would do in each case."</p>
+        </div>
+
+        <p>This builds optionality without anxiety. You're not predicting; you're preparing.</p>
+
+        <div class="prompt-box">
+            <h4>Stability Audit</h4>
+            <p>"External circumstances are chaotic right now. Help me identify what's stable in my life—routines, relationships, values—that I can use as reference points."</p>
+        </div>
+
+        <p>When you feel untethered, this grounds you in what actually persists.</p>
+
+        <div class="prompt-box">
+            <h4>Emotional Processing</h4>
+            <p>"This change is affecting me emotionally. Help me distinguish: What part of my reaction is about the change itself, and what part is about my attachment to how things were?"</p>
+        </div>
+
+        <p>This separates the event from the story you're telling about it. Often, releasing the story releases the suffering.</p>
+
+        <h2>The Connection to Systems</h2>
+
+        <p>This isn't just philosophy. It's operational.</p>
+
+        <p>The <a href="/research/common-cause-variation.html">Common Cause Variation</a> framework helps you distinguish normal fluctuation from genuine system shifts. The <a href="/tools/control-chart-evaluator.html">Control Chart Evaluator</a> gives you a structured way to classify events before reacting to them.</p>
+
+        <p>These System tools operationalize the pattern: <em>don't treat weather like climate</em>.</p>
+
+        <h2>The Invitation</h2>
+
+        <p>Change isn't going to slow down. AI guarantees that. The question isn't whether you'll face disruption—it's whether you'll face it with flexibility or fragility.</p>
+
+        <p>The patterns work. They've worked for humans across millennia. Not because any tradition has a monopoly on truth, but because they all converged on the same insight:</p>
+
+        <p><strong>You can't stop the waves. But you can learn to surf.</strong></p>
+
+        <div class="footer-note">
+            <p>This exploration draws on patterns from Stoic philosophy, Buddhist practice, Taoist wisdom, and modern complexity theory. The traditions call it different names—amor fati, anicca, wu wei—but the insight is universal: resistance to change creates suffering; working with change creates possibility.</p>
+        </div>
+
+        <div class="related-section">
+            <h4>Continue Exploring</h4>
+            <div class="related-links">
+                <a href="/research/common-cause-variation.html" class="related-link">Common Cause Variation</a>
+                <span>•</span>
+                <a href="/tools/control-chart-evaluator.html" class="related-link">Control Chart Evaluator</a>
+                <span>•</span>
+                <a href="/frameworks/5-filters.html" class="related-link">5 Filters Framework</a>
+                <span>•</span>
+                <a href="/wisdom/purpose.html" class="related-link">Purpose & Work</a>
+            </div>
+        </div>
+    </article>
+</body>
+</html>

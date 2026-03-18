@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortality | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 40px; }
+        
+        .intro-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .intro-card h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .intro-card p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+        
+        .tradition-section {
+            margin: 50px 0;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tradition-section:last-child { border-bottom: none; }
+        
+        .tradition-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tradition-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+        }
+        
+        .tradition-header h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .tradition-header .source {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%);
+            border-left: 4px solid var(--gold);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .insight-box h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .insight-box p {
+            color: var(--brown-dark);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+        
+        .practice-list {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        
+        .practice-list li {
+            margin-bottom: 12px;
+            color: var(--brown-medium);
+            padding-left: 10px;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--brown-medium);
+            border-left: 3px solid var(--border);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-size: 1.1rem;
+        }
+        
+        .connection-box {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .connection-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .connection-box p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/wisdom/">← Wisdom</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1><strong>Mortality</strong></h1>
+        <p>You will die. The question is whether you'll truly live first.</p>
+    </header>
+    
+    <main class="container">
+        <div class="intro-card">
+            <h2>The Denial We Live In</h2>
+            <p>Modern culture hides death. We speak in euphemisms. We sequester the dying in hospitals. We treat aging as failure and death as defeat.</p>
+            <p>But denial has a cost. When we act as if we have infinite time, we make infinite procrastination possible. When death is unthinkable, life becomes unlived — postponed for a future that may never come.</p>
+            <p>The wisdom traditions take a different approach. Memento mori: remember you will die. Not to induce anxiety, but to awaken urgency. To clarify priorities. To strip away the trivial.</p>
+        </div>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🏛️</div>
+                <div>
+                    <h3>Stoicism</h3>
+                    <div class="source">Memento Mori — The Good Death</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Death is not an end but a limit that gives shape to life. The Stoics practiced contemplating mortality not to be morbid, but to appreciate the present and prioritize what matters.</p>
+            </div>
+            
+            <p>Seneca wrote letters about death constantly. Not because he was morbid, but because he understood: the person who has learned how to die has unlearned how to be a slave. Fear of death is the ultimate control mechanism.</p>
+            
+            <p>The Stoics practiced "negative visualization" — imagining the loss of what they loved. This wasn't pessimism. It was appreciation engineering. When you imagine your partner dead, you appreciate them more while they're here.</p>
+            
+            <div class="quote">
+                "Let us prepare our minds as if we'd come to the very end of life. Let us persuade ourselves of this every day, and we shall have no disquieting thoughts."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Morning meditation on mortality.</strong> Upon waking: "I may not live to see tonight. How do I want to spend this day?"</li>
+                <li><strong>Negative visualization.</strong> Imagine losing what you love — not to be morbid, but to deepen appreciation.</li>
+                <li><strong>Contemplate your deathbed.</strong> What will matter then? Work backward to what matters now.</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">🧘</div>
+                <div>
+                    <h3>Tibetan Buddhism</h3>
+                    <div class="source">Bardo — The In-Between States</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Death is not an end but a transition. The Bardo Thodol (Tibetan Book of the Dead) maps the states between death and rebirth. Preparation for death is continuous practice for this transition.</p>
+            </div>
+            
+            <p>Tibetan Buddhism takes death seriously as an opportunity. The moment of death, properly prepared for, can be a moment of liberation. The dissolution of ego that meditation prepares you for is the same dissolution that happens in death.</p>
+            
+            <p>This isn't metaphysical speculation. It's practical: daily meditation is death practice. Learning to let go of thoughts, to witness without attachment, to remain present through dissolution — these are the skills that serve you at death.</p>
+            
+            <div class="quote">
+                "If you die before you die, you won't die when you die."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Practice dying daily.</strong> In meditation, practice the dissolution of self. Witness thoughts arise and pass without attachment.</li>
+                <li><strong>Read the Bardo Thodol.</strong> Not as literal truth, but as a map of psychological states. What dissolves when the ego dissolves?</li>
+                <li><strong>Practice non-attachment to identity.</strong> Who are you when you stop being your job, your roles, your history?</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">☠️</div>
+                <div>
+                    <h3>Mexican Day of the Dead</h3>
+                    <div class="source">Día de los Muertos — Celebration, Not Fear</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Death as celebration. The dead remain part of the community, honored and remembered. Death is not separation but continuation of relationship.</p>
+            </div>
+            
+            <p>The Mexican approach to death is radically different from the Anglo-American denial. Skeletons are decorated, celebrated, laughed with. Death is a character (La Catrina), elegant and ever-present.</p>
+            
+            <p>This cultural frame changes experience. Death is not the unspeakable. It's the natural. Grief is not hidden but expressed, communally, with color and music and remembrance.</p>
+            
+            <div class="quote">
+                "Our dead are never dead to us, until we have forgotten them."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Honor your dead.</strong> Create an altar. Tell stories. Keep relationship alive across the boundary of death.</li>
+                <li><strong>Normalize death conversation.</strong> Talk about mortality with loved ones while everyone is healthy. Remove the taboo.</li>
+                <li><strong>Celebrate rather than mourn.</strong> What would a celebration of a life well lived look like, rather than grief at its end?</li>
+            </ul>
+        </section>
+        
+        <section class="tradition-section">
+            <div class="tradition-header">
+                <div class="tradition-icon">⏳</div>
+                <div>
+                    <h3>Heidegger</h3>
+                    <div class="source">Being-Toward-Death — Authentic Existence</div>
+                </div>
+            </div>
+            
+            <div class="insight-box">
+                <h4>The Pattern</h4>
+                <p>Being-toward-death (Sein-zum-Tode): authentic existence requires acknowledging your own mortality. Most people live in "the they" — inauthentic existence, doing what everyone does, denying death.</p>
+            </div>
+            
+            <p>Heidegger makes a technical distinction: we all know intellectually that we will die, but we don't own this knowledge existentially. We live as if death happens to others. Authentic existence requires confronting that it will happen to me.</p>
+            
+            <p>This confrontation produces anxiety (Angst), but this anxiety isn't pathological. It's the appropriate response to the groundlessness of existence. Through this anxiety, we can choose authentically — not just doing what "they" do, but choosing our own path.</p>
+            
+            <div class="quote">
+                "If I take death into my life, acknowledge it, and face it squarely, I will free myself from the anxiety of death and the pettiness of life — and only then will I be free to become myself."
+            </div>
+            
+            <h4>Practices</h4>
+            <ul class="practice-list">
+                <li><strong>Distinguish knowing from owning.</strong> You know you'll die. But have you felt it? Sat with it? Let it change your choices?</li>
+                <li><strong>Notice "the they."</strong> Where are you living inauthentically, doing what everyone does, avoiding your own path?</li>
+                <li><strong>Let death inform choice.</strong> The finite nature of time means every choice is a non-choice. What are you choosing?</li>
+            </ul>
+        </section>
+        
+        <div class="connection-box">
+            <h3>→ Connection: Stage 5 & Mortality</h3>
+            <p>Stage 5 is the era without inherited scripts. You must write your own. But without a sense of finitude — without memento mori — there is no urgency to the writing.</p>
+            <p>The recognition of death is what makes life serious. Not grim. Serious. Worth doing well. Worth doing now rather than someday.</p>
+            <p>Stage 5 agency requires this: the willingness to live as if time is limited, because it is. To choose what matters, because you cannot choose everything. To live now, because later is not guaranteed.</p>
+        </div>
+        
+        <div class="intro-card" style="margin-top: 40px;">
+            <h2>Questions to Sit With</h2>
+            <ul class="practice-list">
+                <li>If you knew you had one year to live, what would you stop doing? What would you start?</li>
+                <li>What are you postponing for "someday" that you could do now?</li>
+                <li>How would your relationships change if you truly internalized that everyone you love will die?</li>
+                <li>What does "a good death" look like to you? Are you living toward it?</li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Memento mori, memento vivere</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrams | Kai Hamil</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .diagrams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .diagram-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .diagram-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .diagram-preview {
+            height: 120px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .diagram-card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+        .diagram-card .description {
+            color: #4b5563;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        .diagram-card .meta {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrapper">
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="/" class="site-title">Kai Hamil</a>
+                <nav class="site-nav">
+                    <a href="/">Home</a>
+                    <a href="https://www.kaihamil.com/about">About</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="/" class="active">Content</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-main" style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Diagrams</h1>
+            <p style="color: #666; font-size: 1.125rem; margin-bottom: 2rem;">Visual thinking, frameworks, and conceptual models</p>
+
+            <div class="diagrams-grid">
+                <a href="emotional-response.html" class="diagram-card">
+                    <div class="diagram-preview">🧠</div>
+                    <h2>Emotional Response Architecture</h2>
+                    <p class="description">8-layer model showing how external events become internal experiences. Based on Lazarus Cognitive Appraisal Theory with intervention points at each stage.</p>
+                    <span class="meta">8 layers • Intervention points • Appraisal theory</span>
+                </a>
+
+                <a href="utah-arizona-trip.html" class="diagram-card">
+                    <div class="diagram-preview">🏜️</div>
+                    <h2>Utah & Arizona Family Trip</h2>
+                    <p class="description">Interactive 8-day itinerary through Utah and Arizona. Day-by-day breakdown with maps, accommodations, activities, and budget tracking.</p>
+                    <span class="meta">8 days • Interactive • April/May 2026</span>
+                </a>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <h2>Kai <strong>Hamil</strong></h2>
+                    <p>System // Self</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="https://www.kaihamil.com/about">About us</a>
+                    <a href="https://www.kaihamil.com/contact">Contact</a>
+                    <a href="https://www.kaihamil.com/services">Services</a>
+                </nav>
+                <nav class="footer-social">
+                    <a href="https://kaihamil.substack.com" target="_blank">Substack</a>
+                    <a href="https://instagram.com" target="_blank">Instagram</a>
+                </nav>
+            </div>
+            <p class="footer-copyright"><a href="/">← Back to Content Home</a></p>
+        </footer>
+    </div>
+</body>
+</html>

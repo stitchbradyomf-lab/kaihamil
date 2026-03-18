@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI User Type Assessment | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --explorer: #8b6914;
+            --analyst: #5a4a3a;
+            --designer: #2d5016;
+            --builder: #1e3a5f;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 50px;
+        }
+        
+        .question-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: var(--amber);
+            background: white;
+        }
+        
+        .option.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .option input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--gold);
+        }
+        
+        .option-label {
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        
+        /* Icon cards for Q1-4 */
+        .icon-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .icon-card {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .icon-card:hover {
+            border-color: var(--amber);
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        .icon-card.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .icon-card .emoji {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .icon-card .label {
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+        }
+        
+        .icon-card .sublabel {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            line-height: 1.4;
+        }
+        
+        /* Position Sliders */
+        .position-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .position-label {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .axis-display {
+            margin-bottom: 25px;
+        }
+        
+        .axis-display:last-child {
+            margin-bottom: 0;
+        }
+        
+        .axis-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 10px;
+        }
+        
+        .axis-track {
+            height: 10px;
+            background: var(--bg-cream);
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .axis-track::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -3px;
+            bottom: -3px;
+            width: 2px;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+        
+        .axis-marker {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            background: var(--gold);
+            border: 3px solid var(--brown-dark);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .icon-card {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .icon-card:hover {
+            border-color: var(--amber);
+            background: white;
+            transform: translateY(-2px);
+        }
+        
+        .icon-card.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .icon-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .icon-card .label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .icon-card .sublabel {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Validator options */
+        .validator-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .validator-options .option {
+            padding: 24px;
+        }
+        
+        .validator-options .option-label {
+            font-size: 1.1rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--brown-medium);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .results-container {
+            display: none;
+            padding: 40px 0;
+        }
+        
+        .type-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .type-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .type-name {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .type-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+        }
+        
+        .type-description {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .type-description h3 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .type-description p {
+            color: var(--brown-medium);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .type-description p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .watch-for {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .watch-for h3 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .watch-for p {
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .tension-message {
+            background: rgba(184, 122, 94, 0.1);
+            border: 2px solid var(--terracotta);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+        
+        .tension-message h3 {
+            font-size: 1.1rem;
+            color: var(--terracotta);
+            margin-bottom: 12px;
+        }
+        
+        .tension-message p {
+            color: var(--brown-medium);
+            line-height: 1.7;
+        }
+        
+        .quadrant-mini {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            position: relative;
+        }
+        
+        .quadrant-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .q-cell {
+            background: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .q-cell.active {
+            background: var(--gold);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--brown-dark);
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 80px 15px 40px; }
+            .question-container { padding: 24px; }
+            .question-text { font-size: 1.1rem; }
+            h1 { font-size: 1.6rem; }
+            .type-name { font-size: 2rem; }
+            .icon-cards { 
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .icon-card {
+                padding: 15px 10px;
+            }
+            .icon-card .emoji {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+            .icon-card .label {
+                font-size: 0.9rem;
+                margin-bottom: 4px;
+            }
+            .icon-card .sublabel {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+    </nav>
+    
+    <div class="container">
+        <!-- Quiz Section -->
+        <div id="quizSection">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
+            </div>
+            
+            <h1>AI User Type Assessment</h1>
+            <p class="subtitle">Based on the Double Diamond framework</p>
+            
+            <div id="questionContainer" class="question-container">
+                <!-- Questions injected by JS -->
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" style="visibility: hidden;">← Back</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-container">
+            <div class="type-header">
+                <div class="type-icon" id="resultIcon">🔍</div>
+                <h2 class="type-name" id="resultType">The Explorer</h2>
+                <p class="type-subtitle" id="resultSubtitle">Discover First AI User</p>
+            </div>
+            
+            <!-- Position Sliders (v2 style) -->
+            <div class="position-bar">
+                <div class="position-label">Your Position</div>
+                
+                <div class="axis-display">
+                    <div class="axis-labels">
+                        <span>Problem Space</span>
+                        <span>Solution Space</span>
+                    </div>
+                    <div class="axis-track">
+                        <div class="axis-marker" id="problemMarker" style="left: 25%;"></div>
+                    </div>
+                </div>
+                
+                <div class="axis-display">
+                    <div class="axis-labels">
+                        <span>Diverge</span>
+                        <span>Converge</span>
+                    </div>
+                    <div class="axis-track">
+                        <div class="axis-marker" id="convergeMarker" style="left: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="type-description">
+                <h3>How You Work With AI</h3>
+                <p id="typeBehavior">Description of behavior...</p>
+            </div>
+            
+            <div class="watch-for">
+                <h3>What to Watch For</h3>
+                <p id="watchForText">Downsides and risks...</p>
+            </div>
+            
+            <div class="tension-message" id="tensionMessage" style="display: none;">
+                <h3>Pattern Tension</h3>
+                <p id="tensionText">Tension description...</p>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="/tools/ai-usage-advanced-deepdive.html" class="cta-button">View Deep Dive →</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: "When I open an AI tool, I'm usually...",
+                useIcons: true,
+                options: [
+                    { 
+                        icon: "❓", 
+                        label: "Exploring", 
+                        sublabel: "Trying to understand something unclear",
+                        value: "problem", 
+                        axis: "ps" 
+                    },
+                    { 
+                        icon: "🎯", 
+                        label: "Building", 
+                        sublabel: "Trying to create something specific",
+                        value: "solution", 
+                        axis: "ps" 
+                    }
+                ]
+            },
+            {
+                id: 2,
+                text: "In my current work, I spend most time...",
+                useIcons: true,
+                options: [
+                    { 
+                        icon: "🔍", 
+                        label: "Investigating", 
+                        sublabel: "Figuring out what's actually going on",
+                        value: "problem", 
+                        axis: "ps" 
+                    },
+                    { 
+                        icon: "⚡", 
+                        label: "Executing", 
+                        sublabel: "Building or delivering on plans",
+                        value: "solution", 
+                        axis: "ps" 
+                    }
+                ]
+            },
+            {
+                id: 3,
+                text: "I want AI to help me...",
+                useIcons: true,
+                options: [
+                    { 
+                        icon: "🌐", 
+                        label: "Expand", 
+                        sublabel: "Generate possibilities and explore broadly",
+                        value: "diverge", 
+                        axis: "dc" 
+                    },
+                    { 
+                        icon: "🎯", 
+                        label: "Focus", 
+                        sublabel: "Narrow to the best option and decide",
+                        value: "converge", 
+                        axis: "dc" 
+                    }
+                ]
+            },
+            {
+                id: 4,
+                text: "When working with AI, I prefer to...",
+                useIcons: true,
+                options: [
+                    { 
+                        icon: "💡", 
+                        label: "Discover", 
+                        sublabel: "Start open-ended and see where it leads",
+                        value: "diverge", 
+                        axis: "dc" 
+                    },
+                    { 
+                        icon: "📋", 
+                        label: "Decide", 
+                        sublabel: "Start with a clear goal and reach it",
+                        value: "converge", 
+                        axis: "dc" 
+                    }
+                ]
+            },
+            {
+                id: 5,
+                text: "At the end of a great AI session, I feel most satisfied when I've...",
+                useIcons: false,
+                options: [
+                    { text: "Discovered something I didn't know before", value: "explorer", type: "explorer" },
+                    { text: "Pinpointed exactly what's wrong or needed", value: "analyst", type: "analyst" },
+                    { text: "Generated multiple ways to approach something", value: "designer", type: "designer" },
+                    { text: "Actually completed or shipped something tangible", value: "builder", type: "builder" }
+                ]
+            }
+        ];
+        
+        const typeData = {
+            explorer: {
+                icon: '🔍',
+                name: 'The Explorer',
+                subtitle: 'Discover First AI User',
+                behavior: 'You start with curiosity, not certainty. When you open an AI tool, you\'re looking to surface what you don\'t know you don\'t know. You treat AI as a conversation partner for exploration, asking open-ended questions and following threads where they lead. You\'re comfortable with ambiguity and often discover the real problem halfway through what you thought was the solution.',
+                watchFor: 'Exploration without boundaries can become endless. You may find yourself in rabbit holes, having fascinating conversations that don\'t actually move your work forward. The risk: lots of discovery, little delivery. Watch for the moment when exploration becomes procrastination in disguise.',
+                quadrant: 'q1',
+                position: { x: 25, y: 25 }
+            },
+            analyst: {
+                icon: '🔬',
+                name: 'The Analyst',
+                subtitle: 'Define First AI User',
+                behavior: 'You use AI to diagnose before you solve. When something\'s not working, your instinct is to understand why—deeply, precisely, thoroughly. You ask AI to help you pinpoint root causes, surface hidden patterns, and clarify murky situations. You won\'t commit to a solution until you\'re certain you\'ve defined the real problem.',
+                watchFor: 'Analysis can become paralysis. Your need for certainty before action can stall projects indefinitely. The risk: perfect understanding of a problem that never gets solved. Watch for when additional analysis stops yielding new insights and becomes a way to avoid committing to a path.',
+                quadrant: 'q3',
+                position: { x: 25, y: 75 }
+            },
+            designer: {
+                icon: '🏗️',
+                name: 'The Designer',
+                subtitle: 'Develop First AI User',
+                behavior: 'You know what you want to achieve and use AI to generate and evaluate paths forward. Before you build, you explore the solution space—sketching approaches, stress-testing ideas, anticipating edge cases. You treat AI as a brainstorming partner and thought partner for refining your vision into something buildable.',
+                watchFor: 'Design without deadline becomes infinite refinement. You may generate so many approaches that you never commit to one. The risk: elegant plans that never see production. Watch for when you\'re designing to avoid the messiness of real-world implementation.',
+                quadrant: 'q2',
+                position: { x: 75, y: 25 }
+            },
+            builder: {
+                icon: '⚡',
+                name: 'The Builder',
+                subtitle: 'Deliver First AI User',
+                behavior: 'You know what you want and you want it now. You use AI as an execution tool—turning your vision into reality rapidly and decisively. You give clear instructions, expect clear outputs, and measure success by what ships. You\'re happiest when AI helps you do what you already knew you wanted to do, only faster.',
+                watchFor: 'Speed can sacrifice wisdom. Your bias toward action may lead you to build the wrong thing beautifully. The risk: efficient execution of flawed ideas. Watch for when you\'re shipping so fast that you never pause to question whether you\'re building what actually needs to exist.',
+                quadrant: 'q4',
+                position: { x: 75, y: 75 }
+            }
+        };
+        
+        let currentQuestion = 0;
+        let answers = {};
+        
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const isValidator = q.id === 5;
+            
+            let optionsHtml;
+            if (q.useIcons) {
+                optionsHtml = `<div class="icon-cards">` + q.options.map((opt, idx) => `
+                    <div class="icon-card" onclick="selectIconOption(${idx})">
+                        <span class="emoji">${opt.icon}</span>
+                        <span class="label">${opt.label}</span>
+                        <span class="sublabel">${opt.sublabel}</span>
+                    </div>
+                `).join('') + `</div>`;
+            } else {
+                optionsHtml = `<div class="validator-options">` + q.options.map((opt, idx) => `
+                    <label class="option" onclick="selectOption(${idx})">
+                        <input type="radio" name="q${q.id}" value="${opt.value}">
+                        <span class="option-label">${opt.text}</span>
+                    </label>
+                `).join('') + `</div>`;
+            }
+            
+            document.getElementById('questionContainer').innerHTML = `
+                <div class="question-number">Question ${q.id} of 5</div>
+                <div class="question-text">${q.text}</div>
+                ${optionsHtml}
+            `;
+            
+            // Restore selection if exists
+            if (answers[q.id] !== undefined) {
+                if (q.useIcons) {
+                    const cards = document.querySelectorAll('.icon-card');
+                    cards[answers[q.id]].classList.add('selected');
+                } else {
+                    const options = document.querySelectorAll('.option');
+                    options[answers[q.id]].classList.add('selected');
+                    options[answers[q.id]].querySelector('input').checked = true;
+                }
+            }
+            
+            // Update progress
+            document.getElementById('progressBar').style.width = `${(currentQuestion + 1) * 20}%`;
+            
+            // Update nav buttons
+            document.getElementById('prevBtn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').textContent = currentQuestion === 4 ? 'See Results' : 'Next →';
+            document.getElementById('nextBtn').disabled = answers[q.id] === undefined;
+        }
+        
+        function selectIconOption(idx) {
+            const cards = document.querySelectorAll('.icon-card');
+            cards.forEach((card, i) => {
+                card.classList.toggle('selected', i === idx);
+            });
+            
+            answers[questions[currentQuestion].id] = idx;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function selectOption(idx) {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.toggle('selected', i === idx);
+                if (i === idx) opt.querySelector('input').checked = true;
+            });
+            
+            answers[questions[currentQuestion].id] = idx;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < 4) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+        
+        function calculateType() {
+            // Q1-4 scoring
+            let problemScore = 0;
+            let divergeScore = 0;
+            
+            if (answers[1] === 0) problemScore++;
+            if (answers[2] === 0) problemScore++;
+            if (answers[3] === 0) divergeScore++;
+            if (answers[4] === 0) divergeScore++;
+            
+            const isProblem = problemScore >= 1;
+            const isDiverge = divergeScore >= 1;
+            
+            let calculatedType;
+            if (isProblem && isDiverge) calculatedType = 'explorer';
+            else if (isProblem && !isDiverge) calculatedType = 'analyst';
+            else if (!isProblem && isDiverge) calculatedType = 'designer';
+            else calculatedType = 'builder';
+            
+            // Q5 validator
+            const validatorTypes = ['explorer', 'analyst', 'designer', 'builder'];
+            const validatorType = validatorTypes[answers[5]];
+            
+            return { calculatedType, validatorType };
+        }
+        
+        function showResults() {
+            const { calculatedType, validatorType } = calculateType();
+            const type = typeData[calculatedType];
+            const aligned = calculatedType === validatorType;
+            
+            // Store results
+            localStorage.setItem('aiUserType', calculatedType);
+            localStorage.setItem('aiUserTypeAligned', aligned);
+            localStorage.setItem('aiUserValidatorType', validatorType);
+            
+            // Update display
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            document.getElementById('resultIcon').textContent = type.icon;
+            document.getElementById('resultType').textContent = type.name;
+            document.getElementById('resultSubtitle').textContent = type.subtitle;
+            document.getElementById('typeBehavior').textContent = type.behavior;
+            document.getElementById('watchForText').textContent = type.watchFor;
+            
+            // Set slider positions based on type
+            document.getElementById('problemMarker').style.left = type.position.x + '%';
+            document.getElementById('convergeMarker').style.left = type.position.y + '%';
+            
+            // Only show tension if Q5 differs from Q1-4
+            const tensionMessage = document.getElementById('tensionMessage');
+            if (!aligned) {
+                const validatorData = typeData[validatorType];
+                tensionMessage.style.display = 'block';
+                document.getElementById('tensionText').textContent = 
+                    `You tend to work as a ${type.name} but feel most satisfied when acting as a ${validatorData.name}. ` +
+                    `Consider how you can combine these approaches: use your natural ${type.name.toLowerCase().replace('the ', '')} ` +
+                    `strengths early in projects, then shift toward ${validatorData.name.toLowerCase().replace('the ', '')} ` +
+                    `modes when it's time to deliver results.`;
+            } else {
+                tensionMessage.style.display = 'none';
+            }
+        }
+        
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>

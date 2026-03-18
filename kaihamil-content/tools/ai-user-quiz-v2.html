@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI User Type Assessment | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --explorer: #8b6914;
+            --analyst: #5a4a3a;
+            --architect: #2d5016;
+            --builder: #1e3a5f;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 50px;
+        }
+        
+        .question-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: var(--bg-cream);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option:hover {
+            border-color: var(--amber);
+            background: white;
+        }
+        
+        .option.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .option input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--gold);
+        }
+        
+        .option-label {
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        
+        .validator-options .option {
+            padding: 24px;
+        }
+        
+        .validator-options .option-label {
+            font-size: 1.1rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--brown-medium);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .results-container {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .type-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        
+        .type-name {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .type-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+        }
+        
+        .alignment-message {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .alignment-message h3 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        
+        .alignment-message p {
+            color: var(--brown-medium);
+            line-height: 1.7;
+        }
+        
+        .quadrant-mini {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+            position: relative;
+        }
+        
+        .quadrant-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .q-cell {
+            background: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 8px;
+        }
+        
+        .q-cell.active {
+            background: var(--gold);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: var(--brown-dark);
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 80px 15px 40px; }
+            .question-container { padding: 24px; }
+            .question-text { font-size: 1.1rem; }
+            h1 { font-size: 1.6rem; }
+            .type-name { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+    </nav>
+    
+    <div class="container">
+        <!-- Quiz Section -->
+        <div id="quizSection">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 20%;"></div>
+            </div>
+            
+            <h1>AI User Type Assessment</h1>
+            <p class="subtitle">Based on the Double Diamond framework</p>
+            
+            <div id="questionContainer" class="question-container">
+                <!-- Questions injected by JS -->
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" style="visibility: hidden;">← Back</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-container">
+            <div class="type-icon" id="resultIcon">🔍</div>
+            <h2 class="type-name" id="resultType">The Explorer</h2>
+            <p class="type-subtitle" id="resultSubtitle">Discover First AI User</p>
+            
+            <div class="quadrant-mini">
+                <div class="quadrant-grid">
+                    <div class="q-cell" id="q1">Explorer</div>
+                    <div class="q-cell" id="q2">Architect</div>
+                    <div class="q-cell" id="q3">Analyst</div>
+                    <div class="q-cell" id="q4">Builder</div>
+                </div>
+                <div class="user-dot" id="userDot"></div>
+            </div>
+            
+            <div class="alignment-message" id="alignmentMessage">
+                <h3>Pattern Analysis</h3>
+                <p id="alignmentText">Analysis text here...</p>
+            </div>
+            
+            <a href="/tools/quiz-result.html" class="cta-button">View Your Full Profile →</a>
+        </div>
+    </div>
+    
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: "When I open an AI tool, I'm usually...",
+                options: [
+                    { text: "Trying to understand something unclear", value: "problem", axis: "ps" },
+                    { text: "Trying to create or build something specific", value: "solution", axis: "ps" }
+                ]
+            },
+            {
+                id: 2,
+                text: "In my current work, I spend most time...",
+                options: [
+                    { text: "Figuring out what's actually going on", value: "problem", axis: "ps" },
+                    { text: "Building or executing on a plan", value: "solution", axis: "ps" }
+                ]
+            },
+            {
+                id: 3,
+                text: "I want AI to help me...",
+                options: [
+                    { text: "Generate possibilities and explore broadly", value: "diverge", axis: "dc" },
+                    { text: "Narrow to the best option and decide", value: "converge", axis: "dc" }
+                ]
+            },
+            {
+                id: 4,
+                text: "I feel most satisfied when an AI session ends with...",
+                options: [
+                    { text: "New ideas I hadn't considered", value: "diverge", axis: "dc" },
+                    { text: "A clear decision or finished output", value: "converge", axis: "dc" }
+                ]
+            },
+            {
+                id: 5,
+                text: "I feel most satisfied after an AI session when I've...",
+                options: [
+                    { text: "Discovered something I didn't know before", value: "explorer", type: "explorer" },
+                    { text: "Pinpointed exactly what's wrong", value: "analyst", type: "analyst" },
+                    { text: "Generated multiple ways to solve something", value: "architect", type: "architect" },
+                    { text: "Actually completed or shipped something", value: "builder", type: "builder" }
+                ]
+            }
+        ];
+        
+        const typeData = {
+            explorer: {
+                icon: '🔍',
+                name: 'The Explorer',
+                subtitle: 'Discover First AI User',
+                description: 'You explore before committing, treating AI as a conversation partner for discovering what you don\'t know you don\'t know.',
+                quadrant: 'q1',
+                position: { x: 25, y: 25 }
+            },
+            analyst: {
+                icon: '🔬',
+                name: 'The Analyst',
+                subtitle: 'Define First AI User',
+                description: 'You diagnose before solving, using AI to pinpoint exactly what\'s wrong before committing to solutions.',
+                quadrant: 'q3',
+                position: { x: 25, y: 75 }
+            },
+            architect: {
+                icon: '🏗️',
+                name: 'The Architect',
+                subtitle: 'Develop First AI User',
+                description: 'You design before building, using AI to generate and evaluate multiple solution paths before execution.',
+                quadrant: 'q2',
+                position: { x: 75, y: 25 }
+            },
+            builder: {
+                icon: '⚡',
+                name: 'The Builder',
+                subtitle: 'Deliver First AI User',
+                description: 'You execute decisively, treating AI as a tool to rapidly turn your vision into reality.',
+                quadrant: 'q4',
+                position: { x: 75, y: 75 }
+            }
+        };
+        
+        let currentQuestion = 0;
+        let answers = {};
+        
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            const isValidator = q.id === 5;
+            
+            let optionsHtml = q.options.map((opt, idx) => `
+                <label class="option ${isValidator ? '' : ''}" onclick="selectOption(${idx})">
+                    <input type="radio" name="q${q.id}" value="${opt.value}" ${isValidator ? '' : ''}>
+                    <span class="option-label">${opt.text}</span>
+                </label>
+            `).join('');
+            
+            document.getElementById('questionContainer').innerHTML = `
+                <div class="question-number">Question ${q.id} of 5</div>
+                <div class="question-text">${q.text}</div>
+                <div class="options ${isValidator ? 'validator-options' : ''}">${optionsHtml}</div>
+            `;
+            
+            // Restore selection if exists
+            if (answers[q.id] !== undefined) {
+                const options = document.querySelectorAll('.option');
+                options[answers[q.id]].classList.add('selected');
+                options[answers[q.id]].querySelector('input').checked = true;
+            }
+            
+            // Update progress
+            document.getElementById('progressBar').style.width = `${(currentQuestion + 1) * 20}%`;
+            
+            // Update nav buttons
+            document.getElementById('prevBtn').style.visibility = currentQuestion === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').textContent = currentQuestion === 4 ? 'See Results' : 'Next →';
+            document.getElementById('nextBtn').disabled = answers[q.id] === undefined;
+        }
+        
+        function selectOption(idx) {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.toggle('selected', i === idx);
+                if (i === idx) opt.querySelector('input').checked = true;
+            });
+            
+            answers[questions[currentQuestion].id] = idx;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < 4) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+        
+        function calculateType() {
+            // Q1-4 scoring
+            let problemScore = 0;
+            let divergeScore = 0;
+            
+            if (answers[1] === 0) problemScore++;
+            if (answers[2] === 0) problemScore++;
+            if (answers[3] === 0) divergeScore++;
+            if (answers[4] === 0) divergeScore++;
+            
+            const isProblem = problemScore >= 1; // 0-1 = Problem, 2 = Solution
+            const isDiverge = divergeScore >= 1; // 0-1 = Diverge, 2 = Converge
+            
+            let calculatedType;
+            if (isProblem && isDiverge) calculatedType = 'explorer';
+            else if (isProblem && !isDiverge) calculatedType = 'analyst';
+            else if (!isProblem && isDiverge) calculatedType = 'architect';
+            else calculatedType = 'builder';
+            
+            // Q5 validator
+            const validatorTypes = ['explorer', 'analyst', 'architect', 'builder'];
+            const validatorType = validatorTypes[answers[5]];
+            
+            return { calculatedType, validatorType };
+        }
+        
+        function showResults() {
+            const { calculatedType, validatorType } = calculateType();
+            const type = typeData[calculatedType];
+            const aligned = calculatedType === validatorType;
+            
+            // Store results
+            localStorage.setItem('aiUserType', calculatedType);
+            localStorage.setItem('aiUserTypeAligned', aligned);
+            localStorage.setItem('aiUserValidatorType', validatorType);
+            
+            // Update display
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            document.getElementById('resultIcon').textContent = type.icon;
+            document.getElementById('resultType').textContent = type.name;
+            document.getElementById('resultSubtitle').textContent = type.subtitle;
+            
+            // Highlight quadrant
+            document.querySelectorAll('.q-cell').forEach(cell => cell.classList.remove('active'));
+            document.getElementById(type.quadrant).classList.add('active');
+            
+            // Position dot
+            const dot = document.getElementById('userDot');
+            dot.style.left = type.position.x + '%';
+            dot.style.top = type.position.y + '%';
+            
+            // Alignment message
+            const alignmentText = document.getElementById('alignmentText');
+            if (aligned) {
+                alignmentText.innerHTML = `
+                    <strong>Consistent pattern detected.</strong> Your behaviors and satisfaction signals both point to 
+                    <strong>${type.name}</strong>. This is your dominant AI usage pattern—you naturally operate and feel 
+                    fulfilled in the <strong>${calculatedType === 'explorer' || calculatedType === 'analyst' ? 'Problem' : 'Solution'}</strong> 
+                    space with a tendency to <strong>${calculatedType === 'explorer' || calculatedType === 'architect' ? 'diverge' : 'converge'}</strong>.
+                `;
+            } else {
+                const validatorData = typeData[validatorType];
+                alignmentText.innerHTML = `
+                    <strong>Interesting tension detected.</strong> Your behaviors suggest <strong>${type.name}</strong>, 
+                    but you feel most satisfied when <strong>${validatorData.subtitle.toLowerCase().replace(' ai user', '')}</strong>. 
+                    Consider: are you operating as <strong>${type.name}</strong> out of necessity while actually preferring 
+                    <strong>${validatorData.name}</strong>? You might benefit from adding more ${validatorType === 'builder' || validatorType === 'architect' ? 'solution-focused' : 'problem-exploring'} 
+                    time to your AI usage.
+                `;
+            }
+        }
+        
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>

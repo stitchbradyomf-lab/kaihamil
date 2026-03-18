@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Filters Applied: My OpenClaw Decisions | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --success: #28a745;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .site-title strong { font-weight: 500; }
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        .article-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .article-header {
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+        }
+        .article-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 50px 0 20px;
+            color: var(--brown-dark);
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 35px 0 15px;
+            color: var(--brown-medium);
+        }
+        p { margin-bottom: 20px; color: var(--brown-medium); }
+        blockquote {
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--brown-dark);
+        }
+        ul, ol {
+            margin: 15px 0 20px 25px;
+            color: var(--brown-medium);
+        }
+        li { margin-bottom: 10px; }
+        strong { color: var(--brown-dark); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+        }
+        tr:nth-child(even) { background: var(--bg-card); }
+        .verdict {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .verdict.strong { background: var(--success); color: white; }
+        .decision-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--gold);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .summary-box {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        .summary-box h2 { color: var(--gold); margin-top: 0; }
+        .summary-box p { color: var(--bg-cream); }
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/posts/">Writing</a>
+            </nav>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <h1 class="article-title">5 Filters Applied: My OpenClaw Decisions</h1>
+            <div class="article-meta">
+                <span>February 18, 2026</span>
+                <span>Case Study</span>
+                <span>12 min read</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <p>I wrote a framework called <a href="5-filters-deciding-uncertainty.html">5 Filters for Deciding Under Uncertainty</a>. Then I realized: I should eat my own cooking.</p>
+
+            <p>Over the past two weeks, I've been building an agentic AI system using OpenClaw on a Mac mini. I'm not a software engineer. Multiple YouTube videos warned me not to do this unless I was a "hardcore network admin with full confidence in my own coding capabilities."</p>
+
+            <p>I did it anyway. Let me apply the 5 Filters to the decisions I've made.</p>
+
+            <h2>The Context</h2>
+
+            <p>I work at a large company with software engineers. My manager recently recommended we read a textbook on agentic design patterns. Instead of just reading, I decided to build.</p>
+
+            <p><strong>Participatory learning beats theoretical study</strong> — but was that the right call?</p>
+
+            <h2>Decision 1: Buy the Mac Mini</h2>
+
+            <div class="decision-box">
+                <h3>Filter 1 — Optionality: ✅ HIGH</h3>
+                <p>Creates dedicated AI experimentation environment. Portable, low-cost entry point (~$600). Can repurpose or resell if needed.</p>
+
+                <h3>Filter 2 — Reversibility: ✅ EASILY REVERSIBLE</h3>
+                <p>Can sell the Mac mini (high resale value). Total sunk cost: ~$600 + time. No contractual obligations.</p>
+
+                <h3>Filter 3 — Information Value: ✅ HIGH</h3>
+                <p>Could NOT have learned this from reading. Real constraints (ports, memory, processing) vs theoretical knowledge.</p>
+
+                <h3>Filter 4 — Premortem</h3>
+                <ul>
+                    <li>Mac mini underpowered → Start small, scale if needed</li>
+                    <li>Can't figure out setup → Engineering colleagues, community support</li>
+                    <li>Project abandoned → $600 is course tuition; acceptable loss</li>
+                </ul>
+
+                <h3>Filter 5 — 10-10-10</h3>
+                <ul>
+                    <li><strong>10 minutes:</strong> Excitement, some anxiety ("Can I actually do this?")</li>
+                    <li><strong>10 months:</strong> Either working system OR learning experience that informed understanding</li>
+                    <li><strong>10 years:</strong> Understood AI agents by building them. Career differentiation.</li>
+                </ul>
+
+                <p><span class="verdict strong">✅ STRONG DECISION</span></p>
+            </div>
+
+            <h2>Decision 2: Use OpenClaw (Unverified, Open Source)</h2>
+
+            <div class="decision-box">
+                <h3>Filter 1 — Optionality: ✅ HIGH</h3>
+                <p>Open source = no vendor lock-in. Can modify, extend, fork. Community vs. corporate dependency.</p>
+
+                <h3>Filter 2 — Reversibility: ✅ REVERSIBLE (with caveats)</h3>
+                <p>Can uninstall, switch platforms. Time invested is real sunk cost. Data portability: building in standard formats.</p>
+
+                <h3>Filter 3 — Information Value: ✅ VERY HIGH</h3>
+                <p>Textbook: "Agents can be orchestrated." Building: "Orchestration fails when context windows overflow."</p>
+
+                <h3>Filter 4 — Premortem</h3>
+                <ul>
+                    <li>Security vulnerabilities → Regular backups, isolated environment</li>
+                    <li>Community disappears → Open source = have the code</li>
+                    <li>Months wasted on setup → Time-box, get to "hello world" quickly</li>
+                </ul>
+
+                <p><span class="verdict strong">✅ STRONG DECISION</span></p>
+            </div>
+
+            <h2>Decision 3: Build Instead of Read</h2>
+
+            <div class="decision-box">
+                <h3>Filter 1 — Optionality: ✅ HIGHEST</h3>
+                <p>Reading gives knowledge. Building gives capability. Capability > Knowledge in uncertainty.</p>
+
+                <h3>Filter 2 — Reversibility: ✅ FULLY REVERSIBLE</h3>
+                <p>Time spent building is "wasted" only if you learn nothing. You always learn something when building.</p>
+
+                <h3>Filter 3 — Information Value: ✅ MAXIMUM</h3>
+                <p>Textbook: "Agents can be orchestrated." Building: "Orchestration fails when context windows overflow."</p>
+
+                <h3>Filter 5 — 10-10-10</h3>
+                <ul>
+                    <li><strong>10 minutes:</strong> "Should I just read the book?"</li>
+                    <li><strong>10 months:</strong> I've built something; colleagues are still planning to read the book</li>
+                    <li><strong>10 years:</strong> I have intuition; they have theory. Both matter, but intuition is rarer.</li>
+                </ul>
+
+                <p><span class="verdict strong">✅ OPTIMAL DECISION</span></p>
+            </div>
+
+            <h2>Decisions Not Yet Made</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Open Question</th>
+                        <th>Key Filter</th>
+                        <th>Suggested Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>How much access to grant the system?</td>
+                        <td>Reversibility</td>
+                        <td>Start scoped, expand gradually</td>
+                    </tr>
+                    <tr>
+                        <td>Share with engineering team?</td>
+                        <td>Information Value</td>
+                        <td>Share selectively with one trusted engineer</td>
+                    </tr>
+                    <tr>
+                        <td>How much time to invest?</td>
+                        <td>10-10-10</td>
+                        <td>Set explicit boundaries</td>
+                    </tr>
+                    <tr>
+                        <td>Productize or keep personal?</td>
+                        <td>Optionality</td>
+                        <td>Defer. Use personally for 3+ months first.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>The Honest Assessment</h2>
+
+            <p>When I looked at this analysis, my first reaction was: "This feels generous."</p>
+
+            <p>I haven't done a formal premortem. I'm two weeks in. The current state is messier than this framework suggests.</p>
+
+            <p>But here's what the framework revealed: <strong>I'm more confident about the 10-year possibility than the 10-minute one.</strong> The 10-month horizon is the sweet spot — concrete enough to plan, far enough to show real results.</p>
+
+            <div class="summary-box">
+                <h2>The Meta-Point</h2>
+                <p>The 5 Filters assume you're making decisions under uncertainty. That's exactly what I'm doing with agentic AI — nobody knows how this evolves.</p>
+                <p>In uncertainty:</p>
+                <ul style="color: var(--bg-cream);">
+                    <li><strong>Optionality > Optimization</strong> (building capability, not optimizing known processes)</li>
+                    <li><strong>Reversibility matters</strong> (low commitment, high learning)</li>
+                    <li><strong>Information is valuable</strong> (building reveals what reading can't)</li>
+                    <li><strong>10-year thinking wins</strong> (early in a transformative domain)</li>
+                </ul>
+                <p><strong>My manager's team is reading textbooks. In 10 months, I'll have built something. In 10 years, I'll have intuition they can't match.</strong></p>
+            </div>
+
+            <p>The framework validates my approach: <strong>keep building, stay scoped, defer productization, and trust that participatory learning outperforms theoretical study in uncertainty.</strong></p>
+
+            <p>The fish are reading about the ocean. I'm building a submarine. 🌊</p>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>What Kind of AI User Are You? | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-bright: #f4d03f;
+            --border: #e8dfd3;
+            --q1-color: #8b6914;
+            --q2-color: #5a4a3a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            min-height: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            overflow-x: hidden;
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header / Progress */
+        .quiz-header {
+            padding: 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .quiz-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+            min-width: 45px;
+        }
+
+        /* Question Area */
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .question-number {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--brown-medium);
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--brown-dark);
+            margin-bottom: clamp(16px, 4vw, 30px);
+        }
+
+        /* Options Container */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        @media (max-width: 600px) {
+            .options-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                flex: none;
+            }
+        }
+
+        /* Option Cards */
+        .option-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: clamp(16px, 4vw, 30px) clamp(16px, 4vw, 24px);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            min-height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .option-card {
+                padding: 16px 20px;
+                flex-direction: row;
+                text-align: left;
+                gap: 16px;
+            }
+        }
+
+        .option-card:hover,
+        .option-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(61, 40, 23, 0.1);
+        }
+
+        .option-card.option-a:hover {
+            border-color: var(--q1-color);
+        }
+
+        .option-card.option-b:hover {
+            border-color: var(--q2-color);
+        }
+
+        .option-card.selected {
+            transform: scale(0.98);
+        }
+
+        .option-card.option-a.selected {
+            border-color: var(--q1-color);
+            background: linear-gradient(135deg, #faf6f1 0%, #fff 100%);
+        }
+
+        .option-card.option-b.selected {
+            border-color: var(--q2-color);
+            background: linear-gradient(135deg, #f5f3f0 0%, #fff 100%);
+        }
+
+        /* Option Letter Badge */
+        .option-badge {
+            width: clamp(36px, 10vw, 48px);
+            height: clamp(36px, 10vw, 48px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 600px) {
+            .option-badge {
+                margin-bottom: 0;
+            }
+        }
+
+        .option-a .option-badge {
+            background: var(--border);
+            color: var(--q1-color);
+        }
+
+        .option-b .option-badge {
+            background: var(--border);
+            color: var(--q2-color);
+        }
+
+        .option-card:hover .option-badge {
+            transform: scale(1.1);
+        }
+
+        .option-a:hover .option-badge {
+            background: var(--q1-color);
+            color: white;
+        }
+
+        .option-b:hover .option-badge {
+            background: var(--q2-color);
+            color: white;
+        }
+
+        /* Icon */
+        .option-icon {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .option-icon {
+                margin-bottom: 0;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Option Label */
+        .option-label {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--brown-dark);
+        }
+
+        @media (max-width: 600px) {
+            .option-label {
+                margin-bottom: 4px;
+            }
+        }
+
+        /* Option Description */
+        .option-description {
+            font-size: clamp(0.875rem, 2.5vw, 0.95rem);
+            line-height: 1.5;
+            color: var(--brown-medium);
+        }
+
+        /* Navigation */
+        .quiz-nav {
+            padding: 20px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--brown-dark);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .nav-btn {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .nav-btn.primary {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-color: var(--gold);
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--gold-bright);
+        }
+
+        /* Results Screen */
+        .results-screen {
+            display: none;
+            flex-direction: column;
+            padding: 40px 20px;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .results-screen.active {
+            display: flex;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .result-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+        }
+
+        .result-subtitle {
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .result-description {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .result-description h3 {
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .result-description p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--brown-medium);
+            margin-bottom: 12px;
+        }
+
+        .result-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 14px 28px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+            background: var(--gold-bright);
+            transform: translateY(-1px);
+        }
+
+        .cta-btn.secondary {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--brown-dark);
+        }
+
+        .cta-btn.secondary:hover {
+            border-color: var(--gold);
+        }
+
+        /* Email Capture */
+        .email-capture {
+            display: none;
+            flex-direction: column;
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .email-capture.active {
+            display: flex;
+        }
+
+        .email-capture h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .email-capture p {
+            color: var(--brown-medium);
+            margin-bottom: 24px;
+        }
+
+        .email-input {
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Hide quiz when showing results or email */
+        .quiz-content.hidden {
+            display: none;
+        }
+
+        /* Touch feedback for mobile */
+        @media (hover: none) {
+            .option-card:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Animation for question transition - only opacity, no transform */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .question-area.animating {
+            animation: fadeIn 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Progress Header -->
+        <div class="quiz-header">
+            <div class="quiz-title">What Kind of AI User Are You?</div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+                </div>
+                <div class="progress-text" id="progressText">1 / 5</div>
+            </div>
+        </div>
+
+        <!-- Quiz Content -->
+        <div class="quiz-content" id="quizContent">
+            <div class="question-area" id="questionArea">
+                <div class="question-number" id="questionNumber">Question 1 of 5</div>
+                <div class="question-text" id="questionText">
+                    When facing a challenge, what's your first instinct?
+                </div>
+                
+                <div class="options-container">
+                    <div class="option-card option-a" onclick="selectOption('A')" id="optionA">
+                        <div class="option-badge">A</div>
+                        <div class="option-icon">🎯</div>
+                        <div class="option-label">Find the Solution</div>
+                        <div class="option-description">
+                            Find someone who's solved this and copy their approach
+                        </div>
+                    </div>
+                    
+                    <div class="option-card option-b" onclick="selectOption('B')" id="optionB">
+                        <div class="option-badge">B</div>
+                        <div class="option-icon">🔍</div>
+                        <div class="option-label">Understand First</div>
+                        <div class="option-description">
+                            Step back and understand why this challenge exists in the first place
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Capture -->
+        <div class="email-capture" id="emailCapture">
+            <h2>📧 Get Your Full Results</h2>
+            <p>Enter your email to receive your detailed quadrant profile and personalized recommendations.</p>
+            <input type="email" class="email-input" id="emailInput" placeholder="your@email.com">
+            <button class="cta-btn" onclick="submitEmail()">Get My Results</button>
+            <button class="nav-btn" onclick="skipEmail()" style="margin-top: 12px;">Skip →</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="results-screen" id="resultsScreen">
+            <div class="result-icon" id="resultIcon">🔍</div>
+            <div class="result-title" id="resultTitle">Collaborative Discovery</div>
+            <div class="result-subtitle" id="resultSubtitle">
+                You seek understanding before action
+            </div>
+            
+            <div class="result-description">
+                <h3>Your Profile</h3>
+                <p id="resultDescription">
+                    You suspect you're solving symptoms, not root causes. You value frameworks and diagnostic tools. You want to understand before acting, and you see AI as a thinking partner, not a replacement.
+                </p>
+                <h3>Recommended Next Step</h3>
+                <p>
+                    Take the <strong>Problem Audit</strong> — it's built exactly for your approach. We'll diagnose what's really going on and map the path forward.
+                </p>
+            </div>
+            
+            <div class="result-cta">
+                <a href="/problem-audit" class="cta-btn">Take the Problem Audit</a>
+                <a href="/frameworks" class="cta-btn secondary">Explore Frameworks</a>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="quiz-nav" id="quizNav">
+            <button class="nav-btn" onclick="prevQuestion()" id="prevBtn" disabled>← Back</button>
+            <button class="nav-btn primary" onclick="console.log('Next button clicked'); nextQuestion();" id="nextBtn" disabled>Next →</button>
+        </div>
+    </div>
+
+    <script>
+        // Question data
+        const questions = [
+            {
+                text: "When facing a challenge, what's your first instinct?",
+                optionA: {
+                    icon: "🎯",
+                    label: "Find the Solution",
+                    description: "Find someone who's solved this and copy their approach",
+                    axis: "directive"
+                },
+                optionB: {
+                    icon: "🔍",
+                    label: "Understand First",
+                    description: "Step back and understand why this challenge exists in the first place",
+                    axis: "inquisitive"
+                }
+            },
+            {
+                text: "How do you prefer AI to engage with your work?",
+                optionA: {
+                    icon: "🤝",
+                    label: "Guide My Thinking",
+                    description: "Show me options, explain trade-offs, support my decision-making",
+                    axis: "assistive"
+                },
+                optionB: {
+                    icon: "⚡",
+                    label: "Handle It For Me",
+                    description: "Analyze the situation and implement the best solution",
+                    axis: "execution"
+                }
+            },
+            {
+                text: "You have a recurring problem that's draining your energy. What do you want most?",
+                optionA: {
+                    icon: "🔧",
+                    label: "Fix It Fast",
+                    description: "A reliable way to handle it faster or automatically",
+                    axis: "directive"
+                },
+                optionB: {
+                    icon: "🔄",
+                    label: "Redesign It",
+                    description: "To understand why it keeps happening and redesign the system",
+                    axis: "inquisitive"
+                }
+            },
+            {
+                text: "When learning something new, you prefer to:",
+                optionA: {
+                    icon: "📚",
+                    label: "Apply Immediately",
+                    description: "Get the proven method and start applying it right away",
+                    axis: "directive"
+                },
+                optionB: {
+                    icon: "🧠",
+                    label: "Understand Deeply",
+                    description: "Understand the underlying principles before implementing",
+                    axis: "inquisitive"
+                }
+            },
+            {
+                text: "For a high-stakes decision, you want AI to:",
+                optionA: {
+                    icon: "📊",
+                    label: "Inform My Choice",
+                    description: "Present analysis and recommendations; I make the final call",
+                    axis: "assistive"
+                },
+                optionB: {
+                    icon: "✅",
+                    label: "Decide & Execute",
+                    description: "Make the decision and execute; I review the outcome",
+                    axis: "execution"
+                }
+            }
+        ];
+
+        // Quadrant definitions
+        const quadrants = {
+            q1: {
+                name: "Guided Implementation",
+                icon: "🎯",
+                subtitle: "You want proven solutions you can implement with confidence",
+                description: "You prefer to understand the 'why' behind recommendations while retaining control of implementation. You value skill-building and want AI as a tutor, not a replacement."
+            },
+            q2: {
+                name: "Delegated Execution",
+                icon: "⚡",
+                subtitle: "You know what you want and need it handled reliably",
+                description: "You're clear on desired outcomes and value speed over process. You want results without the learning curve, and you're comfortable handing off implementation completely."
+            },
+            q3: {
+                name: "Collaborative Discovery",
+                icon: "🔍",
+                subtitle: "You seek understanding before action",
+                description: "You suspect you're solving symptoms, not root causes. You value frameworks and diagnostic tools. You want to understand before acting, and you see AI as a thinking partner."
+            },
+            q4: {
+                name: "Autonomous Transformation",
+                icon: "🔄",
+                subtitle: "You're ready to fundamentally redesign how something works",
+                description: "You're willing to question fundamental assumptions and redesign systems entirely. You value transformation over optimization and want end-to-end solution design."
+            }
+        };
+
+        // State
+        let currentQuestion = 0;
+        let answers = [];
+        let selectedOption = null;
+
+        // Initialize
+        function renderQuestion() {
+            console.log('>>> renderQuestion called for Q', currentQuestion);
+            
+            const q = questions[currentQuestion];
+            if (!q) {
+                console.error('>>> ERROR: No question found at index', currentQuestion);
+                return;
+            }
+            
+            // Get elements with null checks
+            const questionNumber = document.getElementById('questionNumber');
+            const questionText = document.getElementById('questionText');
+            const optionA = document.getElementById('optionA');
+            const optionB = document.getElementById('optionB');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            console.log('>>> Elements found:', {
+                questionNumber: !!questionNumber,
+                questionText: !!questionText,
+                optionA: !!optionA,
+                optionB: !!optionB
+            });
+            
+            if (!questionNumber || !questionText || !optionA || !optionB) {
+                console.error('>>> ERROR: Required elements not found in DOM');
+                return;
+            }
+            
+            // Update content
+            questionNumber.textContent = `Question ${currentQuestion + 1} of 5`;
+            questionText.textContent = q.text;
+            
+            // Update Option A
+            const iconA = optionA.querySelector('.option-icon');
+            const labelA = optionA.querySelector('.option-label');
+            const descA = optionA.querySelector('.option-description');
+            if (iconA) iconA.textContent = q.optionA.icon;
+            if (labelA) labelA.textContent = q.optionA.label;
+            if (descA) descA.textContent = q.optionA.description;
+            
+            // Update Option B
+            const iconB = optionB.querySelector('.option-icon');
+            const labelB = optionB.querySelector('.option-label');
+            const descB = optionB.querySelector('.option-description');
+            if (iconB) iconB.textContent = q.optionB.icon;
+            if (labelB) labelB.textContent = q.optionB.label;
+            if (descB) descB.textContent = q.optionB.description;
+            
+            // Reset selection
+            optionA.classList.remove('selected');
+            optionB.classList.remove('selected');
+            selectedOption = null;
+            
+            // Update progress
+            const progress = ((currentQuestion + 1) / 5) * 100;
+            if (progressFill) progressFill.style.width = progress + '%';
+            if (progressText) progressText.textContent = `${currentQuestion + 1} / 5`;
+            
+            // Update nav
+            if (prevBtn) prevBtn.disabled = currentQuestion === 0;
+            if (nextBtn) {
+                nextBtn.textContent = currentQuestion === 4 ? 'See Results' : 'Next →';
+                nextBtn.disabled = true;
+            }
+            
+            // Restore previous answer if exists
+            if (answers[currentQuestion]) {
+                selectOption(answers[currentQuestion].choice);
+            }
+            
+            console.log('>>> renderQuestion complete');
+        }
+
+        function selectOption(choice) {
+            console.log('selectOption called:', choice);
+            selectedOption = choice;
+
+            // Visual feedback
+            const optionA = document.getElementById('optionA');
+            const optionB = document.getElementById('optionB');
+            
+            if (choice === 'A') {
+                optionA.classList.add('selected');
+                optionB.classList.remove('selected');
+            } else {
+                optionB.classList.add('selected');
+                optionA.classList.remove('selected');
+            }
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+            
+            console.log('Selection complete:', selectedOption);
+        }
+
+        // Add touch event listeners for better mobile support
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, attaching touch handlers');
+            const optionA = document.getElementById('optionA');
+            const optionB = document.getElementById('optionB');
+            
+            if (!optionA || !optionB) {
+                console.error('Option elements not found!');
+                return;
+            }
+            
+            // Touch events for mobile
+            optionA.addEventListener('touchstart', function(e) {
+                console.log('Touchstart on option A');
+                e.preventDefault();
+                selectOption('A');
+            }, {passive: false});
+            
+            optionB.addEventListener('touchstart', function(e) {
+                console.log('Touchstart on option B');
+                e.preventDefault();
+                selectOption('B');
+            }, {passive: false});
+            
+            // Also ensure click works
+            optionA.addEventListener('click', function(e) {
+                console.log('Click on option A');
+                selectOption('A');
+            });
+            
+            optionB.addEventListener('click', function(e) {
+                console.log('Click on option B');
+                selectOption('B');
+            });
+            
+            console.log('Touch handlers attached successfully');
+        });
+
+        function nextQuestion() {
+            console.log('>>> nextQuestion called');
+            console.log('    selectedOption:', selectedOption);
+            console.log('    currentQuestion:', currentQuestion);
+            
+            if (!selectedOption) {
+                console.log('>>> BLOCKED: No option selected');
+                return;
+            }
+
+            // Store answer with axis info
+            const q = questions[currentQuestion];
+            const selected = selectedOption === 'A' ? q.optionA : q.optionB;
+            answers[currentQuestion] = {
+                choice: selectedOption,
+                axis: selected.axis,
+                question: currentQuestion + 1
+            };
+
+            console.log('>>> Stored answer:', answers[currentQuestion]);
+
+            if (currentQuestion < 4) {
+                currentQuestion++;
+                console.log('>>> Advancing to question', currentQuestion);
+                renderQuestion();
+                console.log('>>> renderQuestion complete');
+            } else {
+                console.log('>>> Showing email capture');
+                showEmailCapture();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showEmailCapture() {
+            document.getElementById('quizContent').classList.add('hidden');
+            document.getElementById('quizNav').style.display = 'none';
+            document.getElementById('emailCapture').classList.add('active');
+            
+            // Auto-save results even without email
+            saveResults(null);
+        }
+
+        function submitEmail() {
+            const email = document.getElementById('emailInput').value;
+            if (email && email.includes('@')) {
+                saveResults(email);
+                showResults();
+            } else {
+                alert('Please enter a valid email address');
+            }
+        }
+
+        function skipEmail() {
+            showResults();
+        }
+
+        function calculateQuadrant() {
+            let directive = 0, inquisitive = 0;
+            let assistive = 0, execution = 0;
+            
+            answers.forEach(a => {
+                if (a.axis === 'directive') directive++;
+                if (a.axis === 'inquisitive') inquisitive++;
+                if (a.axis === 'assistive') assistive++;
+                if (a.axis === 'execution') execution++;
+            });
+            
+            const approach = directive >= inquisitive ? 'directive' : 'inquisitive';
+            const authority = assistive >= execution ? 'assistive' : 'execution';
+            
+            if (approach === 'directive' && authority === 'assistive') return 'q1';
+            if (approach === 'directive' && authority === 'execution') return 'q2';
+            if (approach === 'inquisitive' && authority === 'assistive') return 'q3';
+            return 'q4';
+        }
+
+        function showResults() {
+            // Calculate quadrant and position
+            const quadrant = calculateQuadrant();
+            
+            const basePositions = {
+                q1: { x: 75, y: 25 },
+                q2: { x: 75, y: 75 },
+                q3: { x: 25, y: 25 },
+                q4: { x: 25, y: 75 }
+            };
+            
+            const base = basePositions[quadrant];
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            
+            const result = {
+                quadrant: quadrant,
+                position: { x: base.x + offsetX, y: base.y + offsetY },
+                answers: answers,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('aiUserTypeResult', JSON.stringify(result));
+            
+            // Redirect to visual results page
+            window.location.href = '/tools/quiz-result.html';
+        }
+
+        function saveResults(email) {
+            const result = {
+                timestamp: new Date().toISOString(),
+                email: email,
+                quadrant: calculateQuadrant(),
+                answers: answers,
+                userAgent: navigator.userAgent,
+                source: document.referrer || 'direct'
+            };
+            
+            // Store locally for now
+            localStorage.setItem('aiUserTypeResult', JSON.stringify(result));
+            
+            // TODO: Send to backend API
+            console.log('Results to save:', result);
+            
+            // Future: fetch('/api/survey-results', { method: 'POST', body: JSON.stringify(result) })
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('quizContent').classList.contains('hidden')) return;
+            
+            if (e.key === 'ArrowLeft') selectOption('A');
+            if (e.key === 'ArrowRight') selectOption('B');
+            if (e.key === 'Enter' && selectedOption) nextQuestion();
+        });
+
+        // Initialize first question
+        renderQuestion();
+        console.log('Quiz initialized');
+    </script>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Lot Philosophy | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --system: #2d5a4a;
+            --self: #b87a5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .hero h1 strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .hero p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        .situation-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .situation-card h3 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .situation-text {
+            font-size: 1.1rem;
+            color: var(--brown-dark);
+            font-style: italic;
+        }
+        
+        .selector-prompt {
+            text-align: center;
+            margin: 30px 0;
+            color: var(--brown-medium);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .philosophy-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .philosophy-card.system {
+            border-left: 4px solid var(--system);
+        }
+        
+        .philosophy-card.self {
+            border-left: 4px solid var(--self);
+        }
+        
+        .philosophy-card.both {
+            border-left: 4px solid var(--gold);
+        }
+        
+        .philosophy-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--brown-dark);
+        }
+        
+        .philosophy-card .thinker {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            margin-bottom: 10px;
+        }
+        
+        .philosophy-card .question {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        .philosophy-card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .tag.system {
+            background: rgba(45, 90, 74, 0.1);
+            color: var(--system);
+        }
+        
+        .tag.self {
+            background: rgba(184, 122, 94, 0.1);
+            color: var(--self);
+        }
+        
+        .tag.both {
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--gold);
+        }
+        
+        .null-option {
+            background: linear-gradient(135deg, #f5f0e8 0%, #ebe5db 100%);
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.2s;
+        }
+        
+        .null-option:hover {
+            border-color: var(--brown-medium);
+            background: linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%);
+        }
+        
+        .null-option h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--brown-medium);
+        }
+        
+        .null-option p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .result-panel {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .result-panel.visible {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .result-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .result-title h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .result-title .subtitle {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .core-question {
+            background: var(--bg-cream);
+            border-left: 4px solid var(--gold);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--brown-dark);
+        }
+        
+        .practices-list {
+            margin: 20px 0;
+        }
+        
+        .practices-list h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+        
+        .practices-list ul {
+            list-style: none;
+        }
+        
+        .practices-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .practices-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .practices-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        .trap-box {
+            background: rgba(184, 122, 94, 0.05);
+            border: 1px solid rgba(184, 122, 94, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .trap-box h4 {
+            font-size: 0.85rem;
+            color: var(--self);
+            margin-bottom: 8px;
+        }
+        
+        .trap-box p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .integration-prompt {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        
+        .integration-prompt h4 {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .integration-prompt p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            margin-top: 20px;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:hover {
+            border-color: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.system { background: var(--system); }
+        .legend-dot.self { background: var(--self); }
+        .legend-dot.both { background: var(--gold); }
+        
+        @media (max-width: 600px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/wisdom/">← Wisdom</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>Parking Lot <strong>Philosophy</strong></h1>
+            <p>90 minutes. No obligations. Which lens do you need?</p>
+        </div>
+        
+        <div class="situation-card">
+            <h3>Your Situation</h3>
+            <p class="situation-text">
+                "I'm sitting in the parking lot in front of Barnes & Noble in a shopping center that also includes Home Depot, Dick's Sporting Goods, Five Below, and a few other random stores and restaurants. I have an hour and a half until I have to pick up my daughter. I have my iPad ready beside me. I have zero mind-altering substances and don't really feel like spending any money. There's nothing that I particularly need. I already had dinner."
+            </p>
+        </div>
+        
+        <p class="selector-prompt">
+            Click the philosophy that resonates. One will likely jump out.
+        </p>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot system"></div>
+                <span>System (external focus)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot self"></div>
+                <span>Self (internal focus)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot both"></div>
+                <span>Both</span>
+            </div>
+        </div>
+        
+        <div class="philosophy-grid" id="philosophyGrid">
+            <div class="philosophy-card system" onclick="showPhilosophy('virtue')">
+                <h4>Virtue Ethics</h4>
+                <div class="thinker">Aristotle</div>
+                <div class="question">"What would a flourishing person do?"</div>
+                <span class="tag system">Character</span>
+            </div>
+            
+            <div class="philosophy-card system" onclick="showPhilosophy('duty')">
+                <h4>Duty Ethics</h4>
+                <div class="thinker">Kant</div>
+                <div class="question">"What obligations exist?"</div>
+                <span class="tag system">Responsibility</span>
+            </div>
+            
+            <div class="philosophy-card system" onclick="showPhilosophy('utility')">
+                <h4>Utilitarianism</h4>
+                <div class="thinker">Mill / Bentham</div>
+                <div class="question">"What maximizes good?"</div>
+                <span class="tag system">Impact</span>
+            </div>
+            
+            <div class="philosophy-card self" onclick="showPhilosophy('stoic')">
+                <h4>Stoicism</h4>
+                <div class="thinker">Marcus Aurelius / Epictetus</div>
+                <div class="question">"What can I simply let be?"</div>
+                <span class="tag self">Acceptance</span>
+            </div>
+            
+            <div class="philosophy-card self" onclick="showPhilosophy('taoist')">
+                <h4>Taoism</h4>
+                <div class="thinker">Lao Tzu / Zhuangzi</div>
+                <div class="question">"How can I flow with this moment?"</div>
+                <span class="tag self">Effortless</span>
+            </div>
+            
+            <div class="philosophy-card self" onclick="showPhilosophy('buddhist')">
+                <h4>Buddhist Ethics</h4>
+                <div class="thinker">Various traditions</div>
+                <div class="question">"Can I experience without grasping?"</div>
+                <span class="tag self">Impermanence</span>
+            </div>
+            
+            <div class="philosophy-card self" onclick="showPhilosophy('existential')">
+                <h4>Existentialism</h4>
+                <div class="thinker">Sartre / Camus</div>
+                <div class="question">"What do I choose to create?"</div>
+                <span class="tag self">Meaning</span>
+            </div>
+            
+            <div class="philosophy-card both" onclick="showPhilosophy('pragmatist')">
+                <h4>Pragmatism</h4>
+                <div class="thinker">William James / Dewey</div>
+                <div class="question">"What actually works for me?"</div>
+                <span class="tag both">Experiment</span>
+            </div>
+        </div>
+        
+        <div class="null-option" onclick="showPhilosophy('null')">
+            <h4>The Null Option</h4>
+            <p>Sit. Breathe. Let the 90 minutes pass without record or outcome.<br>Notice what arises. Notice your resistance to simply being.</p>
+        </div>
+        
+        <div class="result-panel" id="resultPanel">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon">🌿</div>
+                <div class="result-title">
+                    <h3 id="resultTitle">Virtue Ethics</h3>
+                    <div class="subtitle" id="resultSubtitle">Aristotle — Character Formation</div>
+                </div>
+            </div>
+            
+            <div class="core-question" id="coreQuestion">
+                "What would a flourishing person do with this time?"
+            </div>
+            
+            <div class="practices-list">
+                <h4>Practices for This Moment</h4>
+                <ul id="practicesList">
+                    <li>Reflective person → Journal ideas or frameworks on the iPad</li>
+                    <li>Curious person → Walk through Barnes & Noble and browse</li>
+                    <li>Present father → Write something thoughtful for your daughter</li>
+                    <li>Healthy person → Walk laps around the shopping center</li>
+                </ul>
+            </div>
+            
+            <div class="trap-box">
+                <h4>⚠️ The Trap</h4>
+                <p id="trapText">Becoming performative — "I should want to journal" rather than actually wanting to. Virtue ethics becomes another productivity hack.</p>
+            </div>
+            
+            <div class="integration-prompt">
+                <h4>Integration Question</h4>
+                <p id="integrationText">Which virtue will you carry with you when you pick up your daughter?</p>
+            </div>
+            
+            <button class="back-btn" onclick="showSelector()">← Try another philosophy</button>
+        </div>
+    </div>
+    
+    <script>
+        const philosophies = {
+            virtue: {
+                icon: '🌿',
+                title: 'Virtue Ethics',
+                subtitle: 'Aristotle — Character Formation',
+                question: '"What would a flourishing person do with this time?"',
+                practices: [
+                    'Reflective person → Journal ideas or frameworks on the iPad',
+                    'Curious person → Walk through Barnes & Noble and browse',
+                    'Present father → Write something thoughtful for your daughter',
+                    'Healthy person → Walk laps around the shopping center'
+                ],
+                trap: 'Becoming performative — "I should want to journal" rather than actually wanting to. Virtue ethics becomes another productivity hack.',
+                integration: 'Which virtue will you carry with you when you pick up your daughter?'
+            },
+            duty: {
+                icon: '⚖️',
+                title: 'Duty Ethics',
+                subtitle: 'Kant — Rational Obligation',
+                question: '"What duties exist right now?"',
+                practices: [
+                    'Ensure you don\'t compromise your duty — set alarm, plan departure time',
+                    'Read something intellectually meaningful (respect your rational nature)',
+                    'Write a clear plan for tomorrow',
+                    'Study a topic you genuinely care about (not just "should" care about)'
+                ],
+                trap: 'Rigidity — treating all moments as optimization problems. Duty becomes the inability to simply exist without purpose.',
+                integration: 'How will fulfilling your duty with full presence honor your rational nature?'
+            },
+            utility: {
+                icon: '📊',
+                title: 'Utilitarianism',
+                subtitle: 'Mill / Bentham — Greatest Good',
+                question: '"What use of this time produces the most overall value?"',
+                practices: [
+                    'Personal utility → Rest and recharge mentally',
+                    'Family utility → Plan something meaningful for the weekend',
+                    'Future utility → Outline an idea for a project',
+                    'Social utility → Write a helpful note to someone in your network'
+                ],
+                trap: 'Calculus paralysis — spending the whole 90 minutes calculating which option maximizes utility, then doing nothing.',
+                integration: 'What ripple effects from this hour might you never see but matter anyway?'
+            },
+            stoic: {
+                icon: '🏛️',
+                title: 'Stoicism',
+                subtitle: 'Marcus Aurelius / Epictetus — Inner Stability',
+                question: '"What can I simply let be?"',
+                practices: [
+                    'Sit quietly and observe the environment without agenda',
+                    'Notice your thoughts without reacting or judging',
+                    'Take a slow walk around the plaza — no destination',
+                    'Practice gratitude for ordinary life in this ordinary moment'
+                ],
+                trap: 'Suppression — "I shouldn\'t feel restless" becomes another way to judge yourself. Stoicism becomes emotional avoidance.',
+                integration: 'What aspect of this moment will you still have, regardless of what happens next?'
+            },
+            taoist: {
+                icon: '☯️',
+                title: 'Taoism',
+                subtitle: 'Lao Tzu / Zhuangzi — Effortless Action',
+                question: '"How can I flow with this moment?"',
+                practices: [
+                    'Wu Wei — do without doing, let the right action emerge',
+                    'Observe the natural flow of the parking lot: people coming and going',
+                    'Notice what draws your attention without forcing focus',
+                    'Allow the moment to unfold without imposing your will on it'
+                ],
+                trap: 'Forced effortlessness — trying so hard to "go with the flow" that you create new tension. The paradox of willed wu wei.',
+                integration: 'Where in your life are you swimming against the current right now?'
+            },
+            buddhist: {
+                icon: '🪷',
+                title: 'Buddhist Ethics',
+                subtitle: 'Various traditions — Non-attachment',
+                question: '"Can I experience without grasping?"',
+                practices: [
+                    'Recognize the impermanence — this 90 minutes will never exist again',
+                    'Notice cravings (to be productive, to be entertained) without acting on them',
+                    'Simply observe: sounds, sensations, thoughts arising and passing',
+                    'Practice metta (loving-kindness) for strangers in the parking lot'
+                ],
+                trap: 'Spiritual bypass — using "non-attachment" to avoid engaging with life\'s challenges or responsibilities.',
+                integration: 'What are you holding onto in this moment that you could release?'
+            },
+            existential: {
+                icon: '💫',
+                title: 'Existentialism',
+                subtitle: 'Sartre / Camus — Radical Freedom',
+                question: '"What do I choose to create?"',
+                practices: [
+                    'Write a strange idea that has no practical purpose',
+                    'Observe people and invent their inner lives',
+                    'Sketch a concept or map a connection',
+                    'Do nothing and embrace the absurdity of time passing',
+                    'Recognize: the meaning exists only because you choose something'
+                ],
+                trap: 'Burden — "I must create meaning or I\'m failing." Existentialism becomes performance anxiety in philosophical dress.',
+                integration: 'What would you do if you knew this moment had no inherent meaning except what you give it?'
+            },
+            pragmatist: {
+                icon: '🔧',
+                title: 'Pragmatism',
+                subtitle: 'William James / Dewey — What Works',
+                question: '"What actually works for me right now?"',
+                practices: [
+                    'Experiment: try something for 10 minutes, evaluate, adjust',
+                    'Notice what your body is asking for — rest? movement? stimulation?',
+                    'Test a hypothesis: "I think I want to read" — try it, see if it\'s true',
+                    'Value truth by its practical consequences for this specific moment'
+                ],
+                trap: 'Short-termism — "what works" becomes "what feels good immediately" without considering longer patterns.',
+                integration: 'What belief about yourself would you test if this moment were an experiment?'
+            },
+            null: {
+                icon: '○',
+                title: 'The Null Option',
+                subtitle: 'Permission to Simply Be',
+                question: '"What if I do nothing?"',
+                practices: [
+                    'Sit in your car. Breathe. Let the 90 minutes pass.',
+                    'Notice your resistance to non-productivity — where does it come from?',
+                    'Watch the sky change. Listen to sounds. Feel the seat against your body.',
+                    'No journaling. No reading. No optimizing. Just existence.',
+                    'If boredom arises, let it. See what\'s on the other side.'
+                ],
+                trap: 'The meta-trap — feeling guilty about "not being productive enough" even in your permission to rest.',
+                integration: 'What would your life look like if you gave yourself this permission more often?'
+            }
+        };
+        
+        function showPhilosophy(key) {
+            const p = philosophies[key];
+            document.getElementById('resultIcon').textContent = p.icon;
+            document.getElementById('resultTitle').textContent = p.title;
+            document.getElementById('resultSubtitle').textContent = p.subtitle;
+            document.getElementById('coreQuestion').textContent = p.question;
+            document.getElementById('trapText').textContent = p.trap;
+            document.getElementById('integrationText').textContent = p.integration;
+            
+            const list = document.getElementById('practicesList');
+            list.innerHTML = p.practices.map(practice => `<li>${practice}</li>`).join('');
+            
+            document.getElementById('philosophyGrid').style.display = 'none';
+            document.querySelector('.null-option').style.display = 'none';
+            document.querySelector('.selector-prompt').style.display = 'none';
+            document.querySelector('.legend').style.display = 'none';
+            document.getElementById('resultPanel').classList.add('visible');
+            
+            document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function showSelector() {
+            document.getElementById('philosophyGrid').style.display = 'grid';
+            document.querySelector('.null-option').style.display = 'block';
+            document.querySelector('.selector-prompt').style.display = 'block';
+            document.querySelector('.legend').style.display = 'flex';
+            document.getElementById('resultPanel').classList.remove('visible');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

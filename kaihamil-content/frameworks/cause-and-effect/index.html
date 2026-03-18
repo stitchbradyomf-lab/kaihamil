@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cause & Effect Framework | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --level1: #e8d5a3;
+            --level2: #d4a574;
+            --level3: #c9a227;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+        
+        .meta {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        /* The Framework Visualization */
+        .framework-visual {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .level {
+            border-radius: 12px;
+            padding: 20px 30px;
+            color: var(--brown-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .level:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .level-3 {
+            background: linear-gradient(135deg, var(--level3), var(--gold));
+            width: 60%;
+            font-weight: 600;
+        }
+        
+        .level-2 {
+            background: linear-gradient(135deg, var(--level2), var(--amber));
+            width: 80%;
+        }
+        
+        .level-1 {
+            background: linear-gradient(135deg, var(--level1), #f0e6d3);
+            width: 100%;
+        }
+        
+        .level-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .level-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .pyramid-arrow {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin: 10px 0;
+        }
+        
+        /* Expandable Details */
+        .level-details {
+            display: none;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 15px;
+            text-align: left;
+        }
+        
+        .level-details.active {
+            display: block;
+        }
+        
+        .level-details h4 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .level-details ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .level-details li {
+            margin-bottom: 8px;
+            color: var(--brown-medium);
+        }
+        
+        /* The Cycle Breaker Tool */
+        .worksheet {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .worksheet h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .worksheet > p {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+        }
+        
+        .step p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .step textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .step textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        /* When to Use */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .use-case {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .use-case h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .use-case p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* Download Section */
+        .download-section {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .download-section h2 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .download-section p {
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: var(--bg-cream);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .use-cases { grid-template-columns: 1fr; }
+            .level-3, .level-2 { width: 100%; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← All Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Diagnostic Tool</span>
+        <h1>Cause & <strong>Effect</strong></h1>
+        <p>Stop treating symptoms. Start redesigning systems. A 3-level framework for breaking vicious cycles.</p>
+        <span class="meta">15 min to apply • Based on Judea Pearl's causal inference research</span>
+    </header>
+    
+    <main class="container">
+        <!-- The Framework -->
+        <h2>The 3-Level Causal Model</h2>
+        <p>Most people stay trapped at Level 1, treating symptoms that keep returning. This framework shows you how to ascend to Level 3 — where you redesign the structure that creates problems in the first place.</p>
+        
+        <div class="framework-visual">
+            <div class="pyramid">
+                <div class="level level-3" onclick="toggleDetails('level3')">
+                    <div class="level-title">🔧 Level 3: Structure</div>
+                    <div class="level-desc">Redesign the system. Change the conditions that create problems.</div>
+                    <div class="level-details" id="level3">
+                        <h4>What this looks like:</h4>
+                        <ul>
+                            <li>Changing beliefs or identity-level patterns</li>
+                            <li>Redesigning workflows or relationships</li>
+                            <li>Addressing root causes, not triggers</li>
+                            <li>One-time fixes that prevent recurrence</li>
+                        </ul>
+                        <p><strong>Example:</strong> Instead of forcing yourself to wake up earlier (Level 1), redesign your evening routine and environment so early sleep happens naturally.</p>
+                    </div>
+                </div>
+                
+                <div class="pyramid-arrow">↑</div>
+                
+                <div class="level level-2" onclick="toggleDetails('level2')">
+                    <div class="level-title">⚡ Level 2: Intervention</div>
+                    <div class="level-desc">Change patterns. Modify the behaviors and processes that produce outcomes.</div>
+                    <div class="level-details" id="level2">
+                        <h4>What this looks like:</h4>
+                        <ul>
+                            <li>Implementing new habits or procedures</li>
+                            <li>Changing responses to triggers</li>
+                            <li>Process improvements</li>
+                            <li>Requires ongoing maintenance</li>
+                        </ul>
+                        <p><strong>Example:</strong> Using a calendar blocking system to protect focus time, or establishing a weekly review ritual.</p>
+                    </div>
+                </div>
+                
+                <div class="pyramid-arrow">↑</div>
+                
+                <div class="level level-1" onclick="toggleDetails('level1')">
+                    <div class="level-title">🩹 Level 1: Association</div>
+                    <div class="level-desc">Treat symptoms. React to problems as they appear with quick fixes.</div>
+                    <div class="level-details" id="level1">
+                        <h4>What this looks like:</h4>
+                        <ul>
+                            <li>Putting out fires as they arise</li>
+                            <li>Symptom management</li>
+                            <li>Crisis response</li>
+                            <li>Problems keep returning</li>
+                        </ul>
+                        <p><strong>Example:</strong> Drinking coffee to compensate for poor sleep, or working weekends to catch up on delayed projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- The Cycle Breaker -->
+        <div class="worksheet">
+            <h2>The Cycle Breaker</h2>
+            <p>Apply the framework to your current challenge:</p>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <h3>Map Your Current Cycle</h3>
+                <p>What recurring problem drains your energy? Describe the symptom and when it appears.</p>
+                <textarea placeholder="Example: I'm always exhausted by Wednesday, reaching for coffee and pushing through..." id="step1"></textarea>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <h3>Ask "Why" Five Times</h3>
+                <p>Trace backward from the symptom to find contributing factors and root causes.</p>
+                <textarea placeholder="1. Why am I exhausted? Poor sleep.&#10;2. Why poor sleep? Scrolling late.&#10;3. Why scrolling? Avoiding tomorrow's stress...&#10;4. Keep asking until you hit a belief or structural issue..." id="step2"></textarea>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <h3>Identify Your Level</h3>
+                <p>Are you currently solving at Level 1, 2, or 3? Be honest.</p>
+                <textarea placeholder="Currently solving at Level: ___&#10;Evidence: ___" id="step3"></textarea>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <h3>Design Your Level 3 Solution</h3>
+                <p>What would change if you addressed the root? What system redesign would make this problem impossible?</p>
+                <textarea placeholder="If I [structural change], then [problem] would be impossible because..." id="step4"></textarea>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">5</span>
+                <h3>Commit to One Action</h3>
+                <p>What's the smallest structural change you can implement this week?</p>
+                <textarea placeholder="This week I will: ___" id="step5"></textarea>
+            </div>
+            
+            <button class="btn" onclick="generateSummary()" style="margin-top: 20px;">Generate Summary</button>
+        </div>
+        
+        <!-- When to Use -->
+        <h2>When to Use This Framework</h2>
+        <div class="use-cases">
+            <div class="use-case">
+                <h3>🔄 Recurring Problems</h3>
+                <p>The same issue keeps coming back despite your best efforts to solve it.</p>
+            </div>
+            <div class="use-case">
+                <h3>😤 Chronic Frustration</h3>
+                <p>You're working harder but not seeing results. Energy is high, impact is low.</p>
+            </div>
+            <div class="use-case">
+                <h3>🎯 Before Big Decisions</h3>
+                <p>About to invest time or money in a solution? Check which level it operates at.</p>
+            </div>
+            <div class="use-case">
+                <h3>🔥 Cascade Failures</h3>
+                <p>One problem triggers another in a chain. Need to find the upstream source.</p>
+            </div>
+        </div>
+        
+        <!-- Download -->
+        <div class="download-section">
+            <h2>📥 Take It With You</h2>
+            <p>Download the Cause & Effect framework as a printable worksheet + pocket reference card.</p>
+            <a href="#" class="btn" onclick="alert('PDF coming soon!'); return false;">Download PDF</a>
+            <a href="#" class="btn" onclick="window.print(); return false;">Print This Page</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Framework based on Judea Pearl's research on causal inference</p>
+    </footer>
+    
+    <script>
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('active');
+        }
+        
+        function generateSummary() {
+            const steps = [
+                document.getElementById('step1').value,
+                document.getElementById('step2').value,
+                document.getElementById('step3').value,
+                document.getElementById('step4').value,
+                document.getElementById('step5').value
+            ];
+            
+            if (steps.every(s => !s)) {
+                alert('Fill in at least one step to generate a summary!');
+                return;
+            }
+            
+            let summary = "=== CAUSE & EFFECT FRAMEWORK SUMMARY ===\n\n";
+            summary += "Your Cycle:\n" + (steps[0] || "[Not filled]") + "\n\n";
+            summary += "Root Cause Analysis:\n" + (steps[1] || "[Not filled]") + "\n\n";
+            summary += "Current Level: " + (steps[2] || "[Not filled]") + "\n\n";
+            summary += "Level 3 Solution:\n" + (steps[3] || "[Not filled]") + "\n\n";
+            summary += "This Week's Commitment:\n" + (steps[4] || "[Not filled]") + "\n\n";
+            summary += "Generated from kaihamil.com/frameworks/cause-and-effect/";
+            
+            navigator.clipboard.writeText(summary).then(() => {
+                alert('Summary copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

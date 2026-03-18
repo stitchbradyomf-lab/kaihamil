@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph Design Brief | Research | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        .site-header {
+            background: var(--brown-dark);
+            padding: 15px 0;
+        }
+        .header-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .site-title {
+            color: var(--bg-cream);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        .site-title strong { font-weight: 500; }
+        .site-nav a {
+            color: var(--amber);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .article-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        .article-title {
+            font-size: 2rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+        .article-meta {
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin: 40px 0 20px;
+            color: var(--brown-dark);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--gold);
+        }
+        p { margin-bottom: 18px; color: var(--brown-medium); }
+        blockquote {
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            color: var(--brown-dark);
+            font-size: 1.1rem;
+        }
+        ul, ol {
+            margin: 15px 0 20px 25px;
+            color: var(--brown-medium);
+        }
+        li { margin-bottom: 8px; }
+        strong { color: var(--brown-dark); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            font-weight: 500;
+        }
+        tr:nth-child(even) { background: var(--bg-card); }
+        .site-footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .principle-box {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        .principle-box blockquote {
+            border: none;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+        }
+        .entity-grid {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .entity-type {
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="https://www.kaihamil.com">Home</a>
+                <a href="/research/">Research</a>
+            </nav>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <span class="badge">SYSTEM DESIGN</span>
+            <h1 class="article-title">Knowledge Graph Design Brief</h1>
+            <div class="article-meta">
+                <span>February 22, 2026</span> · <span>Semantic Model for Kai Hamil Content System</span>
+            </div>
+        </header>
+
+        <div class="article-content">
+            <h2>Executive Summary</h2>
+            <p>This document proposes a semantic knowledge graph architecture to store the relationships between all content, concepts, decisions, and operations in the Kai Hamil ecosystem. The graph enables RAG (Retrieval-Augmented Generation) constrained to Kyle's actual thought patterns, replicating his mindset in agent form.</p>
+
+            <p><strong>Core Philosophy:</strong> Every entity is connected. Abstractions (frameworks) link to implementations (products). Decisions link to outcomes. Content links to the thinking that produced it. Transparency is achieved through auditable relationship chains.</p>
+
+            <div class="principle-box">
+                <p><strong>Foundational Design Principle:</strong></p>
+                <blockquote>Systems serve presence. The infrastructure we build — automations, agents, workflows, knowledge graphs — exists to create space for physical presence with other humans. Digital scaled communication, record-keeping, content production: these should happen without consuming the attention they enable.</blockquote>
+                <p style="text-align: right; font-size: 0.9rem;">— Does this system increase or decrease Kyle's capacity for presence?</p>
+            </div>
+
+            <h2>Entity Types (Nodes)</h2>
+
+            <h3>Content Layer</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entity</th>
+                        <th>Description</th>
+                        <th>Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Post</strong></td><td>Published essays</td><td>"Physics of Love", "5 Filters"</td></tr>
+                    <tr><td><strong>Research</strong></td><td>Raw notes, drafts</td><td>Future of Work, Open Source Society</td></tr>
+                    <tr><td><strong>Framework</strong></td><td>Thinking tools</td><td>5 Filters, System // Self, 5:1 Ratio</td></tr>
+                    <tr><td><strong>Brief</strong></td><td>Quick insights</td><td>Morning briefs, session summaries</td></tr>
+                    <tr><td><strong>Idea</strong></td><td>Captured concepts</td><td>Dental lollipop, meal planning</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Operations Layer</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entity</th>
+                        <th>Description</th>
+                        <th>Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Decision</strong></td><td>Documented choice</td><td>Mac Mini, OpenClaw adoption</td></tr>
+                    <tr><td><strong>Task</strong></td><td>Kanban-tracked work</td><td>Deploy #14, V1 baseline testing</td></tr>
+                    <tr><td><strong>Metric</strong></td><td>Measurable data</td><td>Token usage, deploy frequency</td></tr>
+                    <tr><td><strong>Agent</strong></td><td>Automated system</td><td>Stitch, orchestrator, executor</td></tr>
+                    <tr><td><strong>Deploy</strong></td><td>Published change</td><td>Deploy #14 (research HTML)</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Relationship Types (Edges)</h2>
+
+            <h3>Implementation Relationships</h3>
+            <ul>
+                <li><strong>implements</strong> — Product implements Framework</li>
+                <li><strong>builds_on</strong> — Post builds_on Post</li>
+                <li><strong>deploys</strong> — Deploy deploys Content</li>
+                <li><strong>documents</strong> — Post documents Decision</li>
+                <li><strong>captures</strong> — Memory captures Session</li>
+            </ul>
+
+            <h3>Causal Relationships</h3>
+            <ul>
+                <li><strong>caused_by</strong> — Outcome caused_by Decision</li>
+                <li><strong>blocks</strong> — Friction blocks Goal</li>
+                <li><strong>resolves</strong> — Framework resolves Friction</li>
+                <li><strong>enables</strong> — Framework enables Goal</li>
+            </ul>
+
+            <h2>Use Cases</h2>
+            <ul>
+                <li><strong>RAG-Enabled Responses:</strong> "What did I decide about X?" — trace from question to documented decision</li>
+                <li><strong>Framework Recommendation:</strong> Map friction to proven solutions</li>
+                <li><strong>Content Discovery:</strong> Follow idea evolution from origin to current form</li>
+                <li><strong>Progress Tracking:</strong> Goal → Tasks → Blockers → Next steps</li>
+                <li><strong>Pattern Recognition:</strong> Identify recurring frictions, successful frameworks</li>
+            </ul>
+
+            <h2>Implementation Phases</h2>
+            <ol>
+                <li><strong>Bootstrap:</strong> Define entity types, create initial triples from existing content</li>
+                <li><strong>Populate:</strong> Backfill all posts, link decisions to outcomes, map concepts</li>
+                <li><strong>Query:</strong> SPARQL endpoint, RAG integration, concept visualization</li>
+                <li><strong>Evolve:</strong> ML patterns, predictive recommendations, automated summarization</li>
+            </ol>
+
+            <h2>Success Criteria</h2>
+            <ul>
+                <li>Can answer "What did Kyle decide about X?" from graph alone</li>
+                <li>Can trace idea evolution (origin → development → current form)</li>
+                <li>Can identify patterns (recurring frictions, successful frameworks)</li>
+                <li>Supports RAG with high relevance and accuracy</li>
+                <li>Is auditable — any claim can be traced to source</li>
+            </ul>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <p>© 2026 Kai Hamil · System // Self</p>
+    </footer>
+</body>
+</html>

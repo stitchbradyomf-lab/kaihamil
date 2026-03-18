@@ -1,0 +1,30 @@
+[build]
+  publish = "."
+  command = "echo 'Static site'"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Identity configuration
+[context.production.environment]
+  NETLIFY_IDENTITY_URL = "https://kaihamil.com/.netlify/identity"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Redirects for protected routes
+[[redirects]]
+  from = "/private/*"
+  to = "/private/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+[[redirects]]
+  from = "/private/*"
+  to = "/login.html"
+  status = 302

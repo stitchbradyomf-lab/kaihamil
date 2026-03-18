@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Kyle Joseph Brady | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--ink-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--terracotta); }
+        
+        /* Header */
+        .page-header {
+            padding: 140px 40px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--sand) 100%);
+        }
+        
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .page-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--ink-medium);
+            font-weight: 300;
+        }
+        
+        /* Main Content */
+        .content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .content p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+        
+        .content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 50px 0 25px;
+            color: var(--ink-dark);
+        }
+        
+        .content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 40px 0 20px;
+            color: var(--terracotta);
+        }
+        
+        .content strong {
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .content em {
+            font-style: italic;
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--bg-paper);
+            border-left: 4px solid var(--terracotta);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--sand);
+            padding: 50px 40px;
+            margin-top: 60px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .cta-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 25px;
+            color: var(--ink-medium);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold-warm);
+            color: var(--ink-dark);
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--terracotta);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer Note */
+        .footer-note {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--sand);
+            text-align: center;
+        }
+        
+        .footer-note p {
+            font-size: 0.95rem;
+            color: var(--ink-medium);
+            font-style: italic;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .page-header { padding: 100px 20px 40px; }
+            .content { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="https://content.kaihamil.com/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="https://content.kaihamil.com/">Home</a>
+            <a href="https://content.kaihamil.com/frameworks/">System</a>
+            <a href="https://content.kaihamil.com/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="page-header">
+        <h1>Kyle Joseph Brady</h1>
+        <p class="subtitle">Building systems that serve presence</p>
+    </header>
+    
+    <article class="content">
+        <p>I've spent nearly two decades at Bloomberg LP building systems that process hundreds of millions of data points across global markets. At that scale, investigating every individual error isn't an option—you learn to design systems that self-correct, to elevate your thinking from individual problems to architectures that deliver results.</p>
+
+        <p>But the expertise isn't what changed my life. COVID did.</p>
+
+        <div class="highlight-box">
+            <p><strong>2020 was the best year of my life.</strong></p>
+        </div>
+
+        <p>I know how that sounds. But when the world stopped commuting, something clicked. For the first time, I was <em>present</em>—really present—with my wife and young children. I saw what I'd been missing. I saw what I'd been optimizing <em>away</em> in the name of career: mornings with my kids, afternoons in the yard, the ordinary moments that turn out to be the whole point.</p>
+
+        <p>I thought about the counterfactual. Five days a week, 8 to 5, in an office. Barely seeing my kids. Arranging endless help for sports logistics. Building a career while my family grew up in the margins.</p>
+
+        <p>The culture shift to hybrid and remote work lit a spark in me. I knew I could never go all the way back.</p>
+
+        <h2>I'm not naive about the trade-offs.</h2>
+
+        <p>Leading a global team at Bloomberg, I've seen firsthand how co-location strengthens relationships. The bonds between colleagues who share an office are different—deeper, faster—than those built across time zones and video calls. Big companies benefit from being together. I understand why they're pulling people back.</p>
+
+        <p>But I also see what's coming.</p>
+
+        <h2>The future of work isn't about location. It's about elevation.</h2>
+
+        <p>AI is going to handle most of the time-consuming digital labor: typing, data orchestration, troubleshooting—the tasks that currently fill our days and drain our focus. Advanced methods are emerging that will let people work at a fundamentally higher level. Before long, even big companies will be forced to embrace this shift—or lose to competitors who do.</p>
+
+        <p>The question won't be "are you in the office?" It'll be "can you think at the level the work now requires?"</p>
+
+        <p>People will need new skills. They'll need to see problems differently. And they'll need to stop optimizing for career metrics that made sense in the old world but don't translate to the new one.</p>
+
+        <h2>That's where Kai Hamil comes in.</h2>
+
+        <p>I'm not here to help you climb the ladder faster. I'm here to help you ask whether you're leaning it against the right wall.</p>
+
+        <p>I have a wife I adore. Three kids who are growing up whether I'm present or not. Friends and neighbors I actually see. A dog. Property that needs tending. Photography when the light is right. Food worth making. Coffee worth the ritual.</p>
+
+        <p>I've designed my life so the systems serve presence—not the other way around. The same thinking that works at enterprise scale works at personal scale too.</p>
+
+        <h2>The AI Revolution is a reset.</h2>
+
+        <p>Those who try to apply the old model will struggle. Those who learn to think differently—about work, about time, about what a life can actually be—will flourish.</p>
+
+        <p>I'm building the blueprint. Not for career optimization. For <em>life</em> optimization.</p>
+
+        <div class="cta-section">
+            <h3>Built for good, not greed</h3>
+            <p>The future needs people who give a damn about getting it right.</p>
+            <a href="https://content.kaihamil.com/wisdom/" class="cta-button">Explore the Frameworks</a>
+        </div>
+
+        <div class="footer-note">
+            <p>Connect with Kyle on <a href="https://linkedin.com/in/kylebrady" style="color: var(--terracotta);" target="_blank">LinkedIn</a> or reach out via <a href="mailto:kyle@kaihamil.com" style="color: var(--terracotta);">kyle@kaihamil.com</a></p>
+        </div>
+    </article>
+</body>
+</html>

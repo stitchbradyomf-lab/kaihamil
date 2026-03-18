@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil | Ride the Wave</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --brown-light: #8b7355;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(250, 246, 241, 0.95), transparent);
+        }
+        
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero Section with Wave Backdrop */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../images/hero-wave.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.9;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero h1 strong {
+            font-weight: 500;
+            color: var(--gold);
+        }
+        
+        .hero-subtext {
+            font-size: 1.3rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(61, 40, 23, 0.3);
+        }
+        
+        /* Animated Current Lines */
+        .current-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .current-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.6), transparent);
+            animation: flow 6s linear infinite;
+        }
+        
+        @keyframes flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        /* Root Folders Section */
+        .folders-section {
+            background: var(--bg-cream);
+            padding: 60px 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .folders-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        .folder-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .folder-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.15);
+        }
+        
+        .folder-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .folder-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--brown-dark);
+        }
+        
+        .folder-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            line-height: 1.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-subtext { font-size: 1.1rem; }
+            .folders-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 500px) {
+            .hero h1 { font-size: 2.2rem; }
+            .folders-grid { grid-template-columns: 1fr; }
+            .nav-links a { margin-left: 15px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/about.html">About</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="current-lines">
+            <div class="current-line" style="top: 25%; width: 150px; animation-delay: 0s;"></div>
+            <div class="current-line" style="top: 45%; width: 200px; animation-delay: 1.5s;"></div>
+            <div class="current-line" style="top: 65%; width: 120px; animation-delay: 3s;"></div>
+            <div class="current-line" style="top: 80%; width: 180px; animation-delay: 4.5s;"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>The wave is <strong>cresting</strong>.</h1>
+            <p class="hero-subtext">
+                AI isn't coming. It's here. The question isn't whether you'll use it —<br>
+                it's whether you'll <strong>catch the wave</strong> or <em>get pulled out to sea</em>.
+            </p>
+            <a href="/tools/ai-user-quiz.html" class="cta-button">What kind of AI user are you?</a>
+        </div>
+    </section>
+    
+    <section class="folders-section">
+        <div class="folders-grid">
+            <a href="/posts/" class="folder-card">
+                <span class="folder-icon">✍</span>
+                <div class="folder-title">Posts</div>
+                <div class="folder-desc">Essays on frameworks, thinking, and understanding</div>
+            </a>
+            
+            <a href="/research/" class="folder-card">
+                <span class="folder-icon">🔬</span>
+                <div class="folder-title">Research</div>
+                <div class="folder-desc">Raw notes, drafts, and explorations</div>
+            </a>
+            
+            <a href="/frameworks/" class="folder-card">
+                <span class="folder-icon">◫</span>
+                <div class="folder-title">Frameworks</div>
+                <div class="folder-desc">Tools for decisions and clarity</div>
+            </a>
+            
+            <a href="/products/" class="folder-card">
+                <span class="folder-icon">⚡</span>
+                <div class="folder-title">Products</div>
+                <div class="folder-desc">Actionable tools and prompts</div>
+            </a>
+        </div>
+    </section>
+</body>
+</html>

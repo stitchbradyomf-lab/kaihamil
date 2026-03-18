@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Briefs | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #faf6f1;
+            --color-bg-warm: #f5f0e8;
+            --color-cream: #fffdf9;
+            --color-brown-dark: #3d2817;
+            --color-brown: #5c3d1e;
+            --color-brown-light: #8b5a2b;
+            --color-amber: #d4a574;
+            --color-gold: #c9a227;
+            --color-gold-bright: #f4d03f;
+            --color-text: #3d2817;
+            --color-text-muted: #7a6b5a;
+            --color-border: #e8dfd3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .site-header {
+            background: var(--color-cream);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.5rem 2rem;
+        }
+
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--color-brown-dark);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .site-title strong {
+            font-weight: 700;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .site-nav a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .site-nav a:hover {
+            color: var(--color-brown);
+        }
+
+        .page-header {
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-bg) 100%);
+            padding: 3rem 2rem;
+            border-bottom: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--color-brown-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--color-text-muted);
+        }
+
+        .site-main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .brief-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .brief-card {
+            background: var(--color-cream);
+            border: 1px solid var(--color-border);
+            padding: 1.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .brief-card:hover {
+            border-color: var(--color-amber);
+            transform: translateX(4px);
+        }
+
+        .brief-date {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brief-date .day {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--color-brown-dark);
+        }
+
+        .brief-date .weekday {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .brief-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .brief-stats .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .brief-stats .stat-value {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 400;
+            color: var(--color-brown);
+        }
+
+        .brief-stats .stat-label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .brief-arrow {
+            color: var(--color-amber);
+            font-size: 1.25rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-muted);
+        }
+
+        .empty-state h2 {
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--color-border);
+            padding: 2rem;
+            text-align: center;
+            background: var(--color-bg-warm);
+        }
+
+        .site-footer p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        @media (max-width: 600px) {
+            .brief-stats {
+                display: none;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="site-title">kai <strong>hamil</strong></a>
+            <nav class="site-nav">
+                <a href="/">home</a>
+                <a href="/feed.html">the feed</a>
+                <a href="/briefs/">briefs</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>daily briefs</h1>
+        <p>Morning updates — emails, tasks, token usage, and progress</p>
+    </div>
+
+    <main class="site-main">
+        <div class="brief-list" id="brief-list">
+            <!-- Briefs will be listed here -->
+        </div>
+
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <h2>No briefs yet</h2>
+            <p>Daily briefs will appear here as they're generated.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>content.kaihamil.com — daily briefs archive</p>
+    </footer>
+
+    <script>
+        // Static briefs data - update manually when adding new briefs
+        const briefs = [
+            {
+                filename: "2026-02-15.html",
+                displayDate: "February 15, 2026",
+                weekday: "Sunday",
+                tokens: "482",
+                emails: "0",
+                tasks: "1"
+            }
+        ];
+
+        function renderBriefs() {
+            const container = document.getElementById('brief-list');
+            const emptyState = document.getElementById('empty-state');
+
+            if (!briefs || briefs.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            container.innerHTML = briefs.map(brief => `
+                <a href="${brief.filename}" class="brief-card">
+                    <div class="brief-date">
+                        <span class="day">${brief.displayDate}</span>
+                        <span class="weekday">${brief.weekday}</span>
+                    </div>
+                    <div class="brief-stats">
+                        <div class="stat">
+                            <span class="stat-value">${brief.tokens || '—'}</span>
+                            <span class="stat-label">tokens</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${brief.emails || '0'}</span>
+                            <span class="stat-label">emails</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${brief.tasks || '—'}</span>
+                            <span class="stat-label">tasks</span>
+                        </div>
+                    </div>
+                    <span class="brief-arrow">→</span>
+                </a>
+            `).join('');
+        }
+
+        renderBriefs();
+    </script>
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI Usage Assessment | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --explorer: #e8d5a3;
+            --operator: #d4a574;
+            --director: #c9a227;
+            --implementer: #3d8b37;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 { font-size: 2.5rem; font-weight: 300; margin-bottom: 15px; }
+        .hero h1 strong { color: var(--gold); }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        /* Intro */
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .intro p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        /* Assessment Container */
+        .assessment-container {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        /* Progress Bar */
+        .progress-section {
+            padding: 20px 30px;
+            background: var(--bg-cream);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* Question Section */
+        .question-section {
+            padding: 40px;
+            min-height: 400px;
+        }
+        
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .question-context {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 3px solid var(--amber);
+        }
+        
+        .response-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .response-btn {
+            padding: 20px 25px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+            line-height: 1.5;
+        }
+        
+        .response-btn:hover {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+            transform: translateX(5px);
+        }
+        
+        .response-btn.selected {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+        }
+        
+        /* Results Section */
+        .results-section {
+            display: none;
+            padding: 40px;
+        }
+        
+        .results-section.active {
+            display: block;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .profile-type {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        
+        .profile-subtitle {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto 30px;
+            padding: 0;
+        }
+        
+        @media (max-width: 600px) {
+            .chart-container {
+                margin: 0 -20px 30px;
+                width: calc(100% + 40px);
+            }
+        }
+        
+        /* Profile Details */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-card {
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .profile-card h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .profile-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* Action Steps */
+        .action-section {
+            background: linear-gradient(135deg, var(--bg-cream), rgba(201, 162, 39, 0.1));
+            border-radius: 12px;
+            padding: 30px;
+        }
+        
+        .action-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .action-list {
+            list-style: none;
+        }
+        
+        .action-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .action-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Type Descriptions */
+        .type-descriptions {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .type-descriptions h3 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .type-card {
+            background: var(--bg-cream);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .type-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .type-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 600px) {
+            .container { padding: 40px 20px; }
+            .question-section { padding: 30px 20px; }
+            .profile-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .profile-type { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Advanced Assessment</span>
+        <h1>AI Usage <strong>Behavior Profile</strong></h1>
+        <p>Discover your AI interaction patterns through specific behavioral scenarios. No abstract questions—just real actions.</p>
+    </header>
+    
+    <main class="container">
+        <div class="intro">
+            <p>This assessment observes <em>what you actually do</em> with AI, not what you think you do. Each question presents four specific actions. Choose the one that most closely matches your behavior.</p>
+        </div>
+        
+        <div class="assessment-container">
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span>Question <span id="currentQuestion">1</span> of 8</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Question Section -->
+            <div class="question-section" id="questionSection">
+                <div class="question-number">Section A: Problem Solving</div>
+                <div class="question-text" id="questionText">Your workflow breaks. You need to understand why. You:</div>
+                <div class="question-context" id="questionContext">The method you choose reveals whether you explore, systematize, decide, or execute.</div>
+                <div class="response-options" id="responseOptions">
+                    <button class="response-btn" onclick="answer('explorer')">Ask ChatGPT what went wrong, read the answer, implement the fix</button>
+                    <button class="response-btn" onclick="answer('operator')">Search your saved prompts for a debugging template, run it systematically</button>
+                    <button class="response-btn" onclick="answer('director')">Ask ChatGPT to compare 3 possible root causes, then decide which to investigate</button>
+                    <button class="response-btn" onclick="answer('implementer')">Configure an agentic skill that automatically logs errors and identifies patterns</button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <div class="results-header">
+                    <div class="profile-type" id="profileType">The Explorer</div>
+                    <div class="profile-subtitle" id="profileSubtitle">Primary Type with Director secondary</div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+                
+                <div class="profile-grid">
+                    <div class="profile-card">
+                        <h4>🎯 Behavioral Signature</h4>
+                        <p id="behaviorSignature">You learn through open exploration and discovery. You treat AI as a conversation partner for surfacing what you don't know you don't know.</p>
+                    </div>
+                    <div class="profile-card">
+                        <h4>⚠️ Friction Points</h4>
+                        <p id="frictionPoints">Exploration without closure. You may never ship because the discovery process never ends.</p>
+                    </div>
+                    <div class="profile-card">
+                        <h4>📈 Evolution Path</h4>
+                        <p id="evolutionPath">Add structure to your exploration. Set time-boxed discovery phases with explicit decision points.</p>
+                    </div>
+                    <div class="profile-card">
+                        <h4>🛠️ Recommended Tools</h4>
+                        <p id="recommendedTools">Conversation starters, discovery prompts, brainstorming frameworks. Notion for capturing insights.</p>
+                    </div>
+                </div>
+                
+                <div class="action-section">
+                    <h4>Next Steps for Your Type</h4>
+                    <ul class="action-list" id="actionList">
+                        <li>Set a 20-minute timer for exploration, then force a decision</li>
+                        <li>Create a "parking lot" document for ideas to explore later</li>
+                        <li>Practice the 5 Filters framework before diving into new topics</li>
+                    </ul>
+                </div>
+                
+                <div class="type-descriptions">
+                    <h3>Understanding All Four Types</h3>
+                    
+                    <div class="type-card">
+                        <h4>🔍 The Explorer (Low Directive, Low Execution)</h4>
+                        <p>Curious first, decisive second. Uses AI to discover unknown unknowns. Comfortable with ambiguity. Risk: never shipping because exploration never ends. Best tools: Open-ended prompts, discovery modes, brainstorming frameworks.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <h4>🔧 The Operator (Low Directive, High Execution)</h4>
+                        <p>Understands systems deeply, uses AI to operate within them. Methodical and thorough. Risk: perfectionism and over-engineering. Best tools: Multi-step workflows, validation frameworks, documentation generators.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <h4>🎬 The Director (High Directive, Low Execution)</h4>
+                        <p>Strong vision, uses AI to explore before committing. Strategic about when to lead and learn. Risk: analysis paralysis. Best tools: Scenario comparisons, pros/cons generators, research synthesizers.</p>
+                    </div>
+                    
+                    <div class="type-card">
+                        <h4>⚡ The Implementer (High Directive, High Execution)</h4>
+                        <p>Knows what they want and makes it happen. Treats AI as execution tool. Risk: missing better approaches by moving too fast. Best tools: One-shot prompts, templates, quality checkers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Based on behavioral research in human-AI interaction patterns</p>
+    </footer>
+    
+    <script>
+        // Question bank with provocative scenarios
+        const questionBank = [
+            {
+                section: "When Things Break",
+                text: "It's 2 PM. Your client's website just crashed during their biggest sale of the year. You have 10 minutes to diagnose before they call panicking. You:",
+                options: [
+                    { text: "Ask ChatGPT what went wrong, read the explanation, then fix it", type: "explorer", originalPosition: 0 },
+                    { text: "Run your systematic debugging checklist that always finds the root cause", type: "operator", originalPosition: 1 },
+                    { text: "Have AI compare 3 possible causes, then you decide which to investigate first", type: "director", originalPosition: 2 },
+                    { text: "Trigger your automated monitoring system that already diagnosed and is deploying a fix", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "High-Stakes Communication",
+                text: "You need to tell a difficult client their project is 2 weeks behind. One email could salvage the relationship—or destroy it. You:",
+                options: [
+                    { text: "Talk through different approaches with AI until the wording feels exactly right", type: "explorer", originalPosition: 0 },
+                    { text: "Open your 'Crisis Communication' template and fill in the variables systematically", type: "operator", originalPosition: 1 },
+                    { text: "Generate diplomatic, direct, and collaborative versions—then choose and refine", type: "director", originalPosition: 2 },
+                    { text: "Say the goal in one sentence, let AI draft, make 2 edits, and send immediately", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "New Tool Temptation",
+                text: "A colleague swears this new AI tool will 'change everything.' You have 20 minutes to evaluate before your next meeting. You:",
+                options: [
+                    { text: "Start experimenting—poke buttons, test limits, see what breaks", type: "explorer", originalPosition: 0 },
+                    { text: "Read the docs cover-to-cover, noting API limits and edge cases first", type: "operator", originalPosition: 1 },
+                    { text: "Test it against your current tools on the same task, then decide", type: "director", originalPosition: 2 },
+                    { text: "Spin up a real project with it immediately—best way to know is to build", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "Captured Wisdom",
+                text: "You just spent an hour crafting the perfect prompt. It worked beautifully. Now it's time to save it for later. You:",
+                options: [
+                    { text: "You'll remember the gist when you need it—no need to write it down", type: "explorer", originalPosition: 0 },
+                    { text: "Add it to your library with tags, use cases, and version history", type: "operator", originalPosition: 1 },
+                    { text: "Create variations: minimal, detailed, and creative versions for different contexts", type: "director", originalPosition: 2 },
+                    { text: "Turn it into a reusable command you can trigger with one click", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "The Weekly Grind",
+                text: "That report you hate doing—it takes 30 minutes every Friday, and it's due in an hour. You've been putting it off all week. You:",
+                options: [
+                    { text: "Let AI handle it, tweaking the approach based on this week's specific needs", type: "explorer", originalPosition: 0 },
+                    { text: "Follow your documented SOP, noting any issues to improve the process", type: "operator", originalPosition: 1 },
+                    { text: "Try 3 different AI approaches, compare results, then choose the best output", type: "director", originalPosition: 2 },
+                    { text: "Build an automation so you never have to do this manually again", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "Section C: Validation",
+                text: "AI gives you an answer you're unsure about. You:",
+                options: [
+                    { text: "Ask follow-up questions to understand the reasoning behind it", type: "explorer", originalPosition: 0 },
+                    { text: "Cross-check with 2-3 other sources using specific validation prompts", type: "operator", originalPosition: 1 },
+                    { text: "Ask AI to argue against its own answer, then decide which position is stronger", type: "director", originalPosition: 2 },
+                    { text: "Test it immediately in production—if it works, move on; if not, iterate", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "Leveling Up",
+                text: "You have 3 hours this weekend to get better at using AI. You're:",
+                options: [
+                    { text: "Playing with a new tool, seeing what it can do through open exploration", type: "explorer", originalPosition: 0 },
+                    { text: "Running controlled tests on prompt variations and documenting results", type: "operator", originalPosition: 1 },
+                    { text: "Studying how experts use AI, then adapting their approaches to your needs", type: "director", originalPosition: 2 },
+                    { text: "Building something real that solves a problem—best way to learn is doing", type: "implementer", originalPosition: 3 }
+                ]
+            },
+            {
+                section: "The Next Big Thing",
+                text: "Claude 4 just dropped and everyone's raving. Your Monday morning starts in 30 minutes. You:",
+                options: [
+                    { text: "Cancel your first meeting—you need to play with this and see what it can do", type: "explorer", originalPosition: 0 },
+                    { text: "Run your standard test suite against it, measuring speed and accuracy", type: "operator", originalPosition: 1 },
+                    { text: "Read what experts say it's best at, then test those claims yourself", type: "director", originalPosition: 2 },
+                    { text: "Rebuild your most-used workflow with it immediately—strike while it's hot", type: "implementer", originalPosition: 3 }
+                ]
+            }
+        ];
+        
+        // Shuffle and prepare questions with rotated options
+        function prepareQuestions() {
+            // Shuffle question order
+            const shuffled = [...questionBank].sort(() => Math.random() - 0.5).slice(0, 8);
+            
+            // For each question, rotate options
+            return shuffled.map((q, index) => {
+                // Rotate options by index positions (different rotation per question)
+                const rotation = index % 4;
+                const rotatedOptions = [...q.options];
+                for (let i = 0; i < rotation; i++) {
+                    rotatedOptions.push(rotatedOptions.shift());
+                }
+                
+                return {
+                    section: q.section,
+                    text: q.text,
+                    options: rotatedOptions
+                };
+            });
+        }
+        
+        const questions = prepareQuestions();
+        
+        const profiles = {
+            explorer: {
+                name: "The Explorer",
+                signature: "You learn through open exploration and discovery. You treat AI as a conversation partner for surfacing what you don't know you don't know.",
+                friction: "Exploration without closure. You may never ship because the discovery process never ends.",
+                evolution: "Add structure to your exploration. Set time-boxed discovery phases with explicit decision points.",
+                tools: "Conversation starters, discovery prompts, brainstorming frameworks. Notion for capturing insights.",
+                actions: [
+                    "Set a 20-minute timer for exploration, then force a decision",
+                    "Create a 'parking lot' document for ideas to explore later",
+                    "Practice the 5 Filters framework before diving into new topics"
+                ]
+            },
+            operator: {
+                name: "The Operator",
+                signature: "You understand systems deeply and use AI to operate within them. You're methodical, thorough, and focused on getting the mechanics right.",
+                friction: "Perfectionism slowing delivery. Over-engineering simple tasks.",
+                evolution: "Ship at 80% completeness. Build 'good enough' versions, then iterate.",
+                tools: "Multi-step workflows, validation frameworks, documentation generators. Obsidian for system maps.",
+                actions: [
+                    "Set 'ship by' deadlines before you start building",
+                    "Practice the 'minimum viable' constraint—what's the smallest version that works?",
+                    "Use the 5 Filters to evaluate when perfectionism is worth the cost"
+                ]
+            },
+            director: {
+                name: "The Director",
+                signature: "You have strong vision and opinions, but you use AI to explore possibilities before committing. You're strategic about when to lead and when to learn.",
+                friction: "Analysis paralysis. Not trusting AI's execution enough.",
+                evolution: "Set decision deadlines. Move from 'explore then decide' to 'decide while exploring'.",
+                tools: "Scenario comparison prompts, pros/cons generators, research synthesizers. Decision journals.",
+                actions: [
+                    "Use the 5 Filters framework for any decision taking more than 10 minutes",
+                    "Set a 'decision by' time before you start researching",
+                    "Practice 'satisficing'—good enough is often optimal"
+                ]
+            },
+            implementer: {
+                name: "The Implementer",
+                signature: "You know what you want and you make it happen. You treat AI as a tool to execute your vision with speed and precision.",
+                friction: "Missing better approaches by moving too fast. Not leveraging AI's ability to surface alternatives.",
+                evolution: "Add exploration checkpoints. Before executing, ask: 'What am I missing?'",
+                tools: "One-shot execution prompts, templates and checklists, quality checkers before publish.",
+                actions: [
+                    "Before executing, ask AI for 3 alternative approaches",
+                    "Build 'pause points' into your workflow for reflection",
+                    "Use the Cause & Effect framework to check you're solving the right problem"
+                ]
+            }
+        };
+        
+        const hybridProfiles = {
+            "explorer-operator": { name: "The Curator", description: "Explores broadly, then systematizes what works." },
+            "director-implementer": { name: "The Architect", description: "Strategizes carefully, then executes decisively." },
+            "explorer-director": { name: "The Strategist", description: "Discovers possibilities, then directs resources." },
+            "operator-implementer": { name: "The Engineer", description: "Builds robust systems, then automates them." }
+        };
+        
+        let currentQuestion = 0;
+        const scores = { explorer: 0, operator: 0, director: 0, implementer: 0 };
+        
+        function updateProgress() {
+            const percent = Math.round((currentQuestion / questions.length) * 100);
+            document.getElementById('currentQuestion').textContent = currentQuestion + 1;
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+        
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.querySelector('.question-number').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = q.text;
+            
+            // Clear previous context
+            const contextEl = document.getElementById('questionContext');
+            if (contextEl) contextEl.style.display = 'none';
+            
+            const optionsContainer = document.getElementById('responseOptions');
+            optionsContainer.innerHTML = '';
+            
+            // Clear any previous selections
+            optionsContainer.querySelectorAll('.response-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            q.options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = option.text;
+                btn.onclick = function() {
+                    // Clear all selections first
+                    optionsContainer.querySelectorAll('.response-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    // Select this one
+                    this.classList.add('selected');
+                    // Small delay for visual feedback before advancing
+                    setTimeout(() => answer(option.type), 200);
+                };
+                optionsContainer.appendChild(btn);
+            });
+            
+            updateProgress();
+        }
+        
+        function answer(type) {
+            scores[type]++;
+            
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            // Determine primary and secondary types
+            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const primary = sorted[0][0];
+            const secondary = sorted[1][0];
+            
+            // Check for hybrid
+            const primaryScore = sorted[0][1];
+            const secondaryScore = sorted[1][1];
+            let resultType = primary;
+            
+            if (primaryScore === secondaryScore) {
+                // It's a tie - store hybrid
+                resultType = `${primary}-${secondary}`;
+            }
+            
+            // Calculate weighted position for deep dive page
+            const total = scores.explorer + scores.operator + scores.director + scores.implementer;
+            const explorerPct = scores.explorer / total;
+            const operatorPct = scores.operator / total;
+            const directorPct = scores.director / total;
+            const implementerPct = scores.implementer / total;
+            
+            // Calculate X, Y position (0-100 scale)
+            const directiveScore = Math.round(((directorPct + implementerPct) - (explorerPct + operatorPct)) * 50 + 50);
+            const executionScore = Math.round(((operatorPct + implementerPct) - (explorerPct + directorPct)) * 50 + 50);
+            
+            // Store results in localStorage
+            localStorage.setItem('aiUsagePrimaryType', resultType);
+            localStorage.setItem('aiUsageScores', JSON.stringify({
+                directive: directiveScore,
+                execution: executionScore,
+                explorer: scores.explorer,
+                operator: scores.operator,
+                director: scores.director,
+                implementer: scores.implementer
+            }));
+            
+            // Redirect to results page (Step 1: Conclusion)
+            window.location.href = `ai-usage-advanced-results.html?type=${resultType}`;
+        }
+        
+        function renderQuadrant(xPos, yPos, primary, secondary) {
+            const container = document.getElementById('resultsChart');
+            const isMobile = window.innerWidth < 600;
+            
+            // Clear and set base styles
+            container.innerHTML = '';
+            container.style.height = isMobile ? '280px' : '320px';
+            container.style.position = 'relative';
+            container.style.background = 'linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%)';
+            container.style.borderRadius = '12px';
+            container.style.border = '2px solid #e8dfd3';
+            container.style.maxWidth = '100%';
+            container.style.overflow = 'hidden';
+            
+            // Ensure position is within bounds
+            const safeX = Math.max(15, Math.min(85, xPos));
+            const safeY = Math.max(15, Math.min(85, 100 - yPos));
+            
+            // Determine which quadrant is active based on position
+            const isTopHalf = safeY < 50;
+            const isRightHalf = safeX > 50;
+            
+            // Build static HTML - no template conditionals
+            let html = '';
+            
+            // Axis labels
+            html += '<div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:11px;color:#6b5344;font-weight:500;">Directive →</div>';
+            html += '<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:11px;color:#6b5344;font-weight:500;">← Inquisitive</div>';
+            html += '<div style="position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:11px;color:#6b5344;font-weight:500;white-space:nowrap;">Assistive</div>';
+            html += '<div style="position:absolute;right:8px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:11px;color:#6b5344;font-weight:500;white-space:nowrap;">Execution</div>';
+            
+            // Crosshair lines
+            html += '<div style="position:absolute;left:50%;top:12%;bottom:12%;width:2px;background:#e8dfd3;transform:translateX(-50%);"></div>';
+            html += '<div style="position:absolute;top:50%;left:12%;right:12%;height:2px;background:#e8dfd3;transform:translateY(-50%);"></div>';
+            
+            // All 4 quadrants - all visible, all same styling
+            // Top-left: Explorer
+            html += '<div style="position:absolute;top:20%;left:20%;transform:translate(-50%,-50%);text-align:center;">';
+            html += '<div style="font-size:20px;margin-bottom:2px;">🔍</div>';
+            html += '<div style="font-size:11px;font-weight:600;color:#6b5344;">Explorer</div>';
+            html += '</div>';
+            
+            // Top-right: Director
+            html += '<div style="position:absolute;top:20%;right:20%;transform:translate(50%,-50%);text-align:center;">';
+            html += '<div style="font-size:20px;margin-bottom:2px;">🎬</div>';
+            html += '<div style="font-size:11px;font-weight:600;color:#6b5344;">Director</div>';
+            html += '</div>';
+            
+            // Bottom-left: Operator
+            html += '<div style="position:absolute;bottom:20%;left:20%;transform:translate(-50%,50%);text-align:center;">';
+            html += '<div style="font-size:20px;margin-bottom:2px;">🔧</div>';
+            html += '<div style="font-size:11px;font-weight:600;color:#6b5344;">Operator</div>';
+            html += '</div>';
+            
+            // Bottom-right: Implementer
+            html += '<div style="position:absolute;bottom:20%;right:20%;transform:translate(50%,50%);text-align:center;">';
+            html += '<div style="font-size:20px;margin-bottom:2px;">⚡</div>';
+            html += '<div style="font-size:11px;font-weight:600;color:#6b5344;">Implementer</div>';
+            html += '</div>';
+            
+            // Position dot (the only dynamic part)
+            html += '<div style="position:absolute;left:' + safeX + '%;top:' + safeY + '%;transform:translate(-50%,-50%);width:20px;height:20px;background:#c9a227;border:3px solid #3d2817;border-radius:50%;z-index:10;box-shadow:0 3px 10px rgba(0,0,0,0.3);"></div>';
+            html += '<div style="position:absolute;left:' + safeX + '%;top:' + safeY + '%;transform:translate(-50%,-160%);font-size:11px;font-weight:700;color:#3d2817;background:#fff;padding:3px 8px;border-radius:4px;border:1px solid #c9a227;white-space:nowrap;z-index:11;">You</div>';
+            
+            container.innerHTML = html;
+        }
+        
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utah & Arizona Family Trip - April/May 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: #1a1a2e; color: #fff; overflow: hidden; height: 100vh; }
+        .carousel-container { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+        .slides-wrapper { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; }
+        .slide-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0.35; z-index: 1; filter: brightness(0.8) saturate(1.2); }
+        .slide-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; gap: 20px; padding: 30px 40px; height: 100%; }
+        .hero-image { border-radius: 12px; overflow: hidden; margin-bottom: 15px; position: relative; max-height: 180px; }
+        .hero-image img { width: 100%; height: 180px; object-fit: cover; display: block; border-radius: 12px; }
+        .hero-image .hero-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px 14px 10px; font-size: 0.75rem; color: rgba(255,255,255,0.8); font-family: 'Montserrat', sans-serif; }
+        .day-header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 15px; }
+        .day-info { text-align: left; }
+        .day-number { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 700; color: #f39c12; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .day-date { font-size: 1.3rem; color: #ecf0f1; margin-top: 5px; }
+        .day-title { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; font-weight: 600; color: #3498db; text-align: right; }
+        .info-panel { background: rgba(0,0,0,0.7); border-radius: 15px; padding: 25px; overflow-y: auto; max-height: calc(100vh - 180px); }
+        .info-section { margin-bottom: 20px; }
+        .info-section:last-child { margin-bottom: 0; }
+        .section-title { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; color: #f39c12; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: ''; width: 4px; height: 20px; background: #f39c12; border-radius: 2px; }
+        .info-content { font-size: 1rem; line-height: 1.6; color: #ecf0f1; }
+        .info-content ul { list-style: none; padding-left: 0; }
+        .info-content li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: flex-start; gap: 10px; }
+        .info-content li:last-child { border-bottom: none; }
+        .info-content li::before { content: '→'; color: #3498db; font-weight: bold; }
+        .accommodation-link { color: #3498db; text-decoration: none; font-weight: 600; transition: color 0.3s; }
+        .accommodation-link:hover { color: #f39c12; text-decoration: underline; }
+        .map-panel { background: rgba(0,0,0,0.7); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; }
+        .map-header { padding: 15px 20px; background: rgba(52, 152, 219, 0.3); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.9rem; color: #3498db; }
+        .map-container { flex: 1; min-height: 300px; }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .route-info { padding: 12px 20px; background: rgba(0,0,0,0.5); font-size: 0.9rem; color: #bdc3c7; }
+        .nav-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100; background: rgba(0,0,0,0.5); padding: 15px 25px; border-radius: 30px; }
+        .nav-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; border: 2px solid transparent; }
+        .nav-dot:hover { background: rgba(255,255,255,0.5); transform: scale(1.2); }
+        .nav-dot.active { background: #f39c12; border-color: #fff; transform: scale(1.3); }
+        .nav-dot.pre-trip { background: rgba(155, 89, 182, 0.5); }
+        .nav-dot.pre-trip.active { background: #9b59b6; }
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background: rgba(0,0,0,0.5); border: none; border-radius: 50%; color: #fff; font-size: 1.5rem; cursor: pointer; z-index: 100; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .nav-arrow:hover { background: rgba(243, 156, 18, 0.8); transform: translateY(-50%) scale(1.1); }
+        .nav-arrow.prev { left: 20px; }
+        .nav-arrow.next { right: 20px; }
+        .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+        .cost-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .cost-badge { display: inline-flex; align-items: center; background: rgba(46, 204, 113, 0.15); color: #2ecc71; padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(46, 204, 113, 0.25); }
+        @media (max-width: 900px) { .slide-content { grid-template-columns: 1fr; padding: 20px; gap: 15px; } .day-header { flex-direction: column; gap: 10px; } .day-title { text-align: left; } .day-number { font-size: 2rem; } .info-panel, .map-panel { max-height: none; } .map-container { min-height: 250px; } .nav-dots { bottom: 20px; padding: 10px 20px; gap: 10px; } .nav-dot { width: 12px; height: 12px; } .nav-arrow { width: 40px; height: 40px; font-size: 1.2rem; } }
+        .touch-hint { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 0.85rem; z-index: 99; }
+        .trip-summary { position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 14px 18px; border-radius: 12px; z-index: 50; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: all 0.3s; max-width: 220px; }
+        .trip-summary:hover { background: rgba(0,0,0,0.85); border-color: rgba(243, 156, 18, 0.4); }
+        .trip-summary-title { color: #f39c12; font-weight: 600; margin-bottom: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .trip-summary-row { display: flex; justify-content: space-between; padding: 3px 0; color: #bdc3c7; }
+        .trip-summary-row.total { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 4px; padding-top: 6px; color: #2ecc71; font-weight: 600; }
+        .trip-summary .toggle-hint { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-align: center; margin-top: 6px; }
+        .trip-summary.collapsed .trip-summary-details { display: none; }
+        .trip-summary.collapsed .toggle-hint::after { content: 'Click to expand'; }
+        .trip-summary:not(.collapsed) .toggle-hint::after { content: 'Click to collapse'; }
+        .nav-dot { position: relative; }
+        .nav-dot-label { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; font-family: 'Montserrat', sans-serif; }
+        .nav-dot:hover .nav-dot-label { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+            <!-- Day -2: April 26, 2026 - Marissa to Vegas -->
+            <div class="slide" data-day="-2">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day -2</div>
+                            <div class="day-date">Sunday, April 26, 2026</div>
+                        </div>
+                        <div class="day-title">Marissa Flies to Vegas</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1529154036614-a60975f5c760?w=800&q=80" alt="Las Vegas skyline at dusk">
+                            <div class="hero-caption">Las Vegas awaits</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Pre-trip travel day. Marissa flies from Philadelphia to Las Vegas ahead of the family to get settled.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Travel Details</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Depart: Philadelphia (PHL) - 3:56 PM</li>
+                                    <li>Arrive: Las Vegas (LAS)</li>
+                                    <li>Flight Reference: HGBFBP</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Checking in and relaxing after the flight.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Flight Route: PHL → LAS</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d12714088.24896!2d-105.5!3d38.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x89c6c62c94f7b5e3%3A0x8f7bce3c0d1a3bf5!2sPhiladelphia%20International%20Airport%2C%20Philadelphia%2C%20PA!3m2!1d39.8729!2d-75.2437!4m5!1s0x80c8c422a1d347d7%3A0x70c7d73c8f8afe55!2sHarry%20Reid%20International%20Airport%2C%20Las%20Vegas%2C%20NV!3m2!1d36.084!2d-115.1537!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">✈️ ~4.5 hour flight</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day -1: April 27, 2026 - Marissa Working -->
+            <div class="slide" data-day="-1">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day -1</div>
+                            <div class="day-date">Monday, April 27, 2026</div>
+                        </div>
+                        <div class="day-title">Marissa Working in Vegas</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?w=800&q=80" alt="Wynn Las Vegas resort">
+                            <div class="hero-caption">Wynn Las Vegas</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Marissa handles work responsibilities from the Wynn while the family maintains normal routine back home.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Marissa: Remote work day from Wynn</li>
+                                    <li>Kids: Regular school day in Philadelphia</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Location: Wynn Las Vegas</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.4!2d-115.1667!3d36.1269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c43d4a564c13%3A0xb1c5c8a8c3b1a3b1!2sWynn%20Las%20Vegas!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🏨 No travel - Working day</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 0: April 28, 2026 - Kyle & Kids Arrive -->
+            <div class="slide" data-day="0">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 0</div>
+                            <div class="day-date">Tuesday, April 28, 2026</div>
+                        </div>
+                        <div class="day-title">Kyle & Kids Arrive - Family Reunites!</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" alt="Airport arrivals">
+                            <div class="hero-caption">Family reunites in Vegas!</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>The whole family comes together! Kyle and the kids fly from Philadelphia to Las Vegas to join Marissa at the Wynn.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Travel Details</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Morning: Work / school in Philadelphia</li>
+                                    <li>Depart: Philadelphia (PHL) - 3:56 PM</li>
+                                    <li>Arrive: Las Vegas (LAS)</li>
+                                    <li>Uber to Wynn Las Vegas</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Transportation: $1,668</span>
+                                    <span class="cost-badge">Meals: $100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Family reunion! Everyone together for the adventure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Flight Route: PHL → LAS</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d12714088.24896!2d-105.5!3d38.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e4!4m5!1s0x89c6c62c94f7b5e3%3A0x8f7bce3c0d1a3bf5!2sPhiladelphia%20International%20Airport%2C%20Philadelphia%2C%20PA!3m2!1d39.8729!2d-75.2437!4m5!1s0x80c8c422a1d347d7%3A0x70c7d73c8f8afe55!2sHarry%20Reid%20International%20Airport%2C%20Las%20Vegas%2C%20NV!3m2!1d36.084!2d-115.1537!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">✈️ ~4.5 hour flight + 🚗 Uber to Wynn ($300)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 1: April 29, 2026 - Vegas Pool Day -->
+            <div class="slide" data-day="1">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 1</div>
+                            <div class="day-date">Wednesday, April 29, 2026</div>
+                        </div>
+                        <div class="day-title">Vegas Pool Day</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80" alt="Luxury pool">
+                            <div class="hero-caption">Pool day at the Wynn</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>A relaxing day to recover from travel and enjoy the Wynn's luxurious pool facilities before hitting the road.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Activities</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Chill Vegas day at the pool</li>
+                                    <li>Family time at the Wynn</li>
+                                    <li>Explore the resort</li>
+                                    <li>Prepare for road trip adventure</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Activities: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Wynn Las Vegas</strong></p>
+                                <p>Last night in Vegas before the Utah adventure!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Location: Wynn Las Vegas</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.4!2d-115.1667!3d36.1269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c43d4a564c13%3A0xb1c5c8a8c3b1a3b1!2sWynn%20Las%20Vegas!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🏊 No driving today - Pool day!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2: April 30, 2026 - Drive to Utah / Snow Canyon -->
+            <div class="slide" data-day="2">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 2</div>
+                            <div class="day-date">Thursday, April 30, 2026</div>
+                        </div>
+                        <div class="day-title">Drive to Utah / Snow Canyon</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1513451713350-dee890297c4a?w=800&q=80" alt="Red rock desert road Utah">
+                            <div class="hero-caption">Snow Canyon State Park</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>The road trip begins! Pick up the rental car and head northeast through stunning desert landscapes to Utah.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Morning: Pick up rental car (Sixt Fullsize SUV)</li>
+                                    <li>2 hours drive to St. George area</li>
+                                    <li>Afternoon: Hiking at Snow Canyon State Park</li>
+                                    <li>1 hour drive to Springdale</li>
+                                    <li>Check into accommodation</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $714.50</span>
+                                    <span class="cost-badge">Transport: $580</span>
+                                    <span class="cost-badge">Meals: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong><a href="https://www.airbnb.com/rooms/899307717773917655?source_impression_id=p3_1767368591_P39abc1iJ70L3R8d" target="_blank" class="accommodation-link">Cable Mountain Lodge - Springdale, UT</a></strong></p>
+                                <p>Gateway to Zion National Park</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Route: Las Vegas → Snow Canyon → Springdale</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d824366.8!2d-114.5!3d37.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x80c8c43d4a564c13%3A0xb1c5c8a8c3b1a3b1!2sWynn%20Las%20Vegas%2C%20Las%20Vegas%2C%20NV!3m2!1d36.1269443!2d-115.1666588!4m5!1s0x80ca513e0c3b7969%3A0xc1bc21b2f8ed8dd1!2sSnow%20Canyon%20State%20Park%2C%20Ivins%2C%20UT!3m2!1d37.2005773!2d-113.6473753!4m5!1s0x80caead08b15ffff%3A0x5040b6a58278540!2sSpringdale%2C%20UT!3m2!1d37.1896758!2d-112.9985397!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 ~3 hours total driving (via Snow Canyon)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3: May 1, 2026 - Zion National Park -->
+            <div class="slide" data-day="3">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1465056836900-8f1e940b3a85?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 3</div>
+                            <div class="day-date">Friday, May 1, 2026</div>
+                        </div>
+                        <div class="day-title">Zion National Park</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1462651567147-aa679fd1cfaf?w=800&q=80" alt="Zion National Park towering cliffs">
+                            <div class="hero-caption">Zion National Park</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>A full day exploring the majestic red cliffs and canyons of Zion National Park. One of America's most stunning national parks!</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Activities</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Full day in Zion National Park</li>
+                                    <li>Zion Canyon shuttle system</li>
+                                    <li>Family-friendly hikes and viewpoints</li>
+                                    <li>Explore Springdale town</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $714.50</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong><a href="https://www.airbnb.com/rooms/899307717773917655?source_impression_id=p3_1767368591_P39abc1iJ70L3R8d" target="_blank" class="accommodation-link">Cable Mountain Lodge - Springdale, UT</a></strong></p>
+                                <p>Second night at our Zion base</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Springdale, UT (Zion Gateway)</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12700!2d-112.9985!3d37.1897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80caead08b15ffff%3A0x5040b6a58278540!2sSpringdale%2C%20UT%2084767!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🥾 Minimal driving - Park shuttle day from Springdale</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4: May 2, 2026 - Drive to Arizona / Horseshoe Bend -->
+            <div class="slide" data-day="4">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 4</div>
+                            <div class="day-date">Saturday, May 2, 2026</div>
+                        </div>
+                        <div class="day-title">Drive to Arizona / Horseshoe Bend</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?w=800&q=80" alt="Horseshoe Bend at sunset">
+                            <div class="hero-caption">Horseshoe Bend sunset</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Journey into Arizona through breathtaking desert scenery, ending with a sunset at the iconic Horseshoe Bend.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>2.5 hour drive from Springdale to Page, AZ</li>
+                                    <li><em>(*Bonus) Checkerboard Mesa - 15 min from Zion, unique cross-hatched rock pattern</em></li>
+                                    <li><em>(*Bonus) Red Canyon / Dixie National Forest - hoodoos without the Bryce crowds</em></li>
+                                    <li><em>(*Bonus) Belly of the Dragon - fun drainage tunnel walk, kids love it</em></li>
+                                    <li><em>(*Bonus) Wahweap Overlook - first stunning view of Lake Powell</em></li>
+                                    <li>Check into Airbnb</li>
+                                    <li>Rest and explore Page</li>
+                                    <li>Evening: Sunset at Horseshoe Bend 🌅</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $477</span>
+                                    <span class="cost-badge">Meals: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong><a href="https://www.airbnb.com/rooms/1074256885430846830?adults=2&check_in=2026-05-02&check_out=2026-05-04&children=3" target="_blank" class="accommodation-link">Cactus Cowboy Airbnb - Page, AZ</a></strong></p>
+                                <p>Base for exploring Lake Powell & Antelope Canyon</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Route: Springdale, UT → Page, AZ</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d824366.8!2d-112.5!3d37.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x80caead08b15ffff%3A0x5040b6a58278540!2sSpringdale%2C%20UT!3m2!1d37.1896758!2d-112.9985397!4m5!1s0x87346cd4f65519a1%3A0x9a2c40afb1bc5ab3!2sPage%2C%20AZ!3m2!1d36.9147309!2d-111.4558329!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 ~2.5 hours driving</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5: May 3, 2026 - Slot Canyons & Lake Powell -->
+            <div class="slide" data-day="5">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1527549993586-dff825b37782?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 5</div>
+                            <div class="day-date">Sunday, May 3, 2026</div>
+                        </div>
+                        <div class="day-title">Slot Canyons & Lake Powell</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1527549993586-dff825b37782?w=800&q=80" alt="Antelope Canyon light beams">
+                            <div class="hero-caption">Lower Antelope Canyon</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>An action-packed day with the famous light beams of Lower Antelope Canyon and boating on beautiful Lake Powell!</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Activities</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>10:30 AM: Lower Antelope Canyon tour (Ken's Tours)</li>
+                                    <li>Afternoon: Lake Powell pontoon boat rental</li>
+                                    <li>Swimming and water activities</li>
+                                    <li>Optional: Return to Horseshoe Bend</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $477</span>
+                                    <span class="cost-badge">Activities: $988</span>
+                                    <span class="cost-badge">Meals: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong><a href="https://www.airbnb.com/rooms/1074256885430846830?adults=2&check_in=2026-05-02&check_out=2026-05-04&children=3" target="_blank" class="accommodation-link">Cactus Cowboy Airbnb - Page, AZ</a></strong></p>
+                                <p>Second night in Page</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Page, AZ → Wahweap Marina → Lower Antelope Canyon</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d25000!2d-111.5!3d36.93!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x87346cd4f65519a1%3A0x9a2c40afb1bc5ab3!2sPage%2C%20AZ!3m2!1d36.9147309!2d-111.4558329!4m5!1s0x87346c8f84a3f46d%3A0x5c87e5a5a5a5a5a5!2sWahweap%20Marina%2C%20Page%2C%20AZ!3m2!1d36.9983!2d-111.4867!4m5!1s0x87346e12e7f0e2f5%3A0x994a8cf37ae7c597!2sLower%20Antelope%20Canyon%2C%20Page%2C%20AZ!3m2!1d36.8619!2d-111.3743!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 Short local drives from Page, AZ (wake & sleep here)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 6: May 4, 2026 - Kanab -->
+            <div class="slide" data-day="6">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1507041957456-9c397ce39c97?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 6</div>
+                            <div class="day-date">Monday, May 4, 2026</div>
+                        </div>
+                        <div class="day-title">Coral Pink Sand Dunes & Kanab</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80" alt="Coral Pink Sand Dunes">
+                            <div class="hero-caption">Coral Pink Sand Dunes</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Drive through stunning red rock country to Kanab, Utah's "Little Hollywood", with a stop at the magical Coral Pink Sand Dunes.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>75 min drive from Page to Kanab</li>
+                                    <li><em>(*Bonus) Toadstool Hoodoos Trail - 1.8 mile easy hike, alien rock formations</em></li>
+                                    <li><em>(*Bonus) Big Water Visitor Center - dinosaur tracks, Grand Staircase info</em></li>
+                                    <li><em>(*Bonus) Paria Movie Set - historic Old West town, quick photo stop</em></li>
+                                    <li>Coral Pink Sand Dunes State Park</li>
+                                    <li>Play in the pink/orange sand!</li>
+                                    <li><em>(*Bonus) Moqui Cave - natural history museum, cool in summer</em></li>
+                                    <li>Dinner at Wild Thyme restaurant 🍽️</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $477</span>
+                                    <span class="cost-badge">Meals: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong><a href="https://www.airbnb.com/rooms/41482085?adults=2&check_in=2026-05-04&check_out=2026-05-05&children=3" target="_blank" class="accommodation-link">Timber & Tin Airbnb - Kanab, UT</a></strong></p>
+                                <p>One night in charming Kanab</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Route: Page, AZ → Kanab, UT (via Sand Dunes)</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m34!1m12!1m3!1d200000!2d-112.0!3d37.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m19!3e0!4m5!1s0x87346cd4f65519a1%3A0x9a2c40afb1bc5ab3!2sPage%2C%20AZ!3m2!1d36.9147309!2d-111.4558329!4m5!1s0x80caf66f4e8a7001%3A0x6e0f5a7d4f8c8a0f!2sCoral%20Pink%20Sand%20Dunes%20State%20Park%2C%20Utah!3m2!1d37.0393!2d-112.7308!4m5!1s0x80caf46b75cb75ab%3A0xce15c42e4a888997!2sKanab%2C%20UT!3m2!1d37.0474855!2d-112.5263145!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 ~1.5 hours total driving</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 7: May 5, 2026 - St. George -->
+            <div class="slide" data-day="7">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 7</div>
+                            <div class="day-date">Tuesday, May 5, 2026</div>
+                        </div>
+                        <div class="day-title">Kanab Area & St. George</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1502786129293-79981df4e689?w=800&q=80" alt="St. George Utah red cliffs">
+                            <div class="hero-caption">Red cliffs near St. George</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Final full day of adventure! Enjoy morning time near Kanab before driving to St. George for the last night.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Morning: Time near Kanab (explore town, last views)</li>
+                                    <li><em>(*Bonus) Best Friends Animal Sanctuary - free tours, visit animals</em></li>
+                                    <li><em>(*Bonus) Johnson Canyon Trail - easy slot canyon hike, less crowded than Antelope</em></li>
+                                    <li>90 min drive to St. George</li>
+                                    <li><em>(*Bonus) Grafton Ghost Town - historic pioneer town, film location</em></li>
+                                    <li><em>(*Bonus) Rockville Bridge - historic steel bridge over Virgin River</em></li>
+                                    <li>Settle into hotel</li>
+                                    <li>Rest before travel day</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Lodging: $188</span>
+                                    <span class="cost-badge">Meals: $200</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Accommodation</div>
+                            <div class="info-content">
+                                <p><strong>Staybridge Suites - St. George, UT</strong></p>
+                                <p>Convenient location for early departure tomorrow</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Route: Kanab, UT → St. George, UT</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d200000!2d-113.2!3d37.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x80caf46b75cb75ab%3A0xce15c42e4a888997!2sKanab%2C%20UT!3m2!1d37.0474855!2d-112.5263145!4m5!1s0x80ca44d0984f4d29%3A0x1baa7d18c036f8e4!2sSt.%20George%2C%20UT!3m2!1d37.0965278!2d-113.5684164!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 ~1.5 hours driving</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 8: May 6, 2026 - Fly Home -->
+            <div class="slide" data-day="8">
+                <div class="slide-background" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=80');"></div>
+                <div class="slide-content">
+                    <div class="day-header">
+                        <div class="day-info">
+                            <div class="day-number">Day 8</div>
+                            <div class="day-date">Wednesday, May 6, 2026</div>
+                        </div>
+                        <div class="day-title">Fly Home ✈️</div>
+                    </div>
+                    <div class="info-panel">
+                        <div class="hero-image">
+                            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80" alt="Desert highway">
+                            <div class="hero-caption">Heading home — what a trip!</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Overview</div>
+                            <div class="info-content">
+                                <p>Adventure complete! Drive back to Las Vegas for the flight home, filled with incredible memories of Utah and Arizona.</p>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Schedule</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Morning: 2 hour drive from St. George to Las Vegas</li>
+                                    <li>Return rental car</li>
+                                    <li>1:00 PM: American Airlines flight to Philadelphia</li>
+                                    <li>Evening: Arrive home! 🏠</li>
+                                </ul>
+                                <div class="cost-row">
+                                    <span class="cost-badge">Meals: $100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Trip Highlights</div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>✨ Zion National Park</li>
+                                    <li>✨ Horseshoe Bend sunset</li>
+                                    <li>✨ Lower Antelope Canyon</li>
+                                    <li>✨ Lake Powell boating</li>
+                                    <li>✨ Coral Pink Sand Dunes</li>
+                                    <li>✨ Quality family time!</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Safe Travels!</div>
+                            <div class="info-content">
+                                <p>What an incredible journey through the American Southwest! 🌵🏜️🌄</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-panel">
+                        <div class="map-header">📍 Route: St. George, UT → Las Vegas (LAS)</div>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d400000!2d-114.3!3d36.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x80ca44d0984f4d29%3A0x1baa7d18c036f8e4!2sSt.%20George%2C%20UT!3m2!1d37.0965278!2d-113.5684164!4m5!1s0x80c8c422a1d347d7%3A0x70c7d73c8f8afe55!2sHarry%20Reid%20International%20Airport%2C%20Las%20Vegas%2C%20NV!3m2!1d36.084!2d-115.1537!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="route-info">🚗 ~2 hours to airport + ✈️ Flight home to Philadelphia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trip Budget Summary -->
+        <div class="trip-summary" id="tripSummary" onclick="this.classList.toggle('collapsed')">
+            <div class="trip-summary-title">Trip Budget</div>
+            <div class="trip-summary-details">
+                <div class="trip-summary-row"><span>Lodging</span><span>$3,048</span></div>
+                <div class="trip-summary-row"><span>Transport</span><span>$2,248</span></div>
+                <div class="trip-summary-row"><span>Activities</span><span>$1,188</span></div>
+                <div class="trip-summary-row"><span>Meals</span><span>$1,200</span></div>
+                <div class="trip-summary-row total"><span>Estimated Total</span><span>$7,684</span></div>
+            </div>
+            <div class="toggle-hint"></div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous slide">‹</button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next slide">›</button>
+
+        <!-- Navigation Dots -->
+        <div class="nav-dots" id="navDots"></div>
+
+        <!-- Touch Hint (mobile) -->
+        <div class="touch-hint" id="touchHint">← Swipe to navigate →</div>
+    </div>
+
+    <script>
+        // Carousel State
+        let currentSlide = 0;
+        const slidesWrapper = document.getElementById('slidesWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const navDots = document.getElementById('navDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const touchHint = document.getElementById('touchHint');
+
+        // Create navigation dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot';
+            const dayNum = parseInt(slide.dataset.day);
+            if (dayNum < 0) {
+                dot.classList.add('pre-trip');
+            }
+            dot.addEventListener('click', () => goToSlide(index));
+
+            // Add tooltip
+            const dayNames = {
+                '-2': 'Day -2: Marissa Arrives',
+                '-1': 'Day -1: Marissa Working',
+                '0': 'Day 0: Family Reunites',
+                '1': 'Day 1: Vegas Pool',
+                '2': 'Day 2: Snow Canyon',
+                '3': 'Day 3: Zion NP',
+                '4': 'Day 4: Horseshoe Bend',
+                '5': 'Day 5: Antelope Canyon',
+                '6': 'Day 6: Kanab',
+                '7': 'Day 7: St. George',
+                '8': 'Day 8: Fly Home'
+            };
+
+            // Add visual tooltip label
+            const label = document.createElement('span');
+            label.className = 'nav-dot-label';
+            label.textContent = dayNames[slide.dataset.day] || `Slide ${index + 1}`;
+            dot.appendChild(label);
+
+            dot.title = dayNames[slide.dataset.day] || `Slide ${index + 1}`;
+            navDots.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.nav-dot');
+
+        // Update active states
+        function updateSlide() {
+            slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Navigation functions
+        function goToSlide(index) {
+            currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+            updateSlide();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'Home') goToSlide(0);
+            if (e.key === 'End') goToSlide(totalSlides - 1);
+        });
+
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slidesWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        slidesWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left = next
+                } else {
+                    prevSlide(); // Swipe right = prev
+                }
+            }
+        }
+
+        // Hide touch hint after first interaction
+        let hintHidden = false;
+        function hideHint() {
+            if (!hintHidden) {
+                touchHint.style.opacity = '0';
+                setTimeout(() => touchHint.style.display = 'none', 500);
+                hintHidden = true;
+            }
+        }
+
+        slidesWrapper.addEventListener('touchstart', hideHint, { once: true });
+        document.addEventListener('keydown', hideHint, { once: true });
+        navDots.addEventListener('click', hideHint, { once: true });
+
+        // Hide hint on desktop
+        if (!('ontouchstart' in window)) {
+            touchHint.style.display = 'none';
+        }
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

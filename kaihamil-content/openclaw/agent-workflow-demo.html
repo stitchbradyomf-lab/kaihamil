@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Operating System | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(248, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-cta {
+            background: var(--terracotta);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover {
+            background: var(--ink-dark);
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 40px 80px;
+            background: linear-gradient(180deg, #fff 0%, var(--bg-warm) 100%);
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../images/hero-wave.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(184, 122, 94, 0.1);
+            color: var(--terracotta);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+        
+        .hero h1 strong {
+            font-weight: 600;
+            color: var(--terracotta);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--ink-medium);
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: var(--terracotta);
+            color: white;
+            padding: 20px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(184, 122, 94, 0.3);
+        }
+        
+        .hero-cta:hover {
+            background: var(--ink-dark);
+            transform: translateY(-3px);
+        }
+        
+        .hero-meta {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-meta-item {
+            text-align: center;
+        }
+        
+        .hero-meta-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--terracotta);
+        }
+        
+        .hero-meta-label {
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+        }
+        
+        /* Workflow Demo */
+        .workflow-section {
+            padding: 100px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: var(--ink-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .workflow-diagram {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 25px;
+            margin-bottom: 15px;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            border-left: 4px solid var(--terracotta);
+            transition: all 0.3s;
+        }
+        
+        .workflow-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .workflow-icon {
+            font-size: 2rem;
+            width: 60px;
+            text-align: center;
+        }
+        
+        .workflow-content {
+            flex: 1;
+        }
+        
+        .workflow-agent {
+            font-size: 0.8rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+        }
+        
+        .workflow-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .workflow-desc {
+            font-size: 0.95rem;
+            color: var(--ink-medium);
+        }
+        
+        .workflow-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--clay);
+            margin: 10px 0;
+        }
+        
+        /* Pricing */
+        .pricing-section {
+            padding: 100px 40px;
+            background: var(--bg-paper);
+            border-top: 1px solid var(--sand);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 50px auto 0;
+        }
+        
+        .pricing-card {
+            background: var(--bg-warm);
+            border: 2px solid var(--sand);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--terracotta);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(184, 122, 94, 0.15);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .pricing-tier {
+            font-size: 0.85rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--ink-medium);
+        }
+        
+        .pricing-desc {
+            color: var(--ink-medium);
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .pricing-features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            list-style: none;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--sand);
+            font-size: 0.95rem;
+        }
+        
+        .pricing-features li:before {
+            content: '✓';
+            color: var(--terracotta);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .pricing-cta {
+            display: inline-block;
+            background: var(--terracotta);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .pricing-cta:hover {
+            background: var(--ink-dark);
+        }
+        
+        /* Governance */
+        .governance-section {
+            padding: 100px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .governance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-paper);
+            border: 2px solid var(--sand);
+            padding: 20px 40px;
+            border-radius: 16px;
+            margin: 30px 0;
+        }
+        
+        .governance-badge-icon {
+            font-size: 2rem;
+        }
+        
+        .governance-badge-text {
+            text-align: left;
+        }
+        
+        .governance-badge-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .governance-badge-subtitle {
+            font-size: 0.85rem;
+            color: var(--ink-medium);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--ink-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-warm);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold-warm);
+            color: var(--ink-dark);
+            padding: 20px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--ink-medium);
+            border-top: 1px solid var(--sand);
+        }
+        
+        footer h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        footer h2 strong {
+            font-weight: 600;
+        }
+        
+        @media (max-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.featured {
+                transform: none;
+            }
+            .hero-meta {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .workflow-step { flex-direction: column; text-align: center; }
+            .nav { padding: 15px 20px; }
+            .nav-cta { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <a href="#pricing" class="nav-cta">See Pricing</a>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Done-With-You Implementation</div>
+            <h1>The <strong>Agent Operating System</strong></h1>
+            <p class="hero-subtitle">Hierarchical AI agents that automate what you have to do—so you have agency to do what you want to do. Built on Singapore's world-first AI governance framework.</p>
+            <a href="mailto:kyle@kaihamil.com?subject=Agent%20OS%20Inquiry" class="hero-cta">Start Your Implementation</a>
+            
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <div class="hero-meta-number">10-15</div>
+                    <div class="hero-meta-label">Hours Saved/Week</div>
+                </div>
+                <div class="hero-meta-item">
+                    <div class="hero-meta-number">3x</div>
+                    <div class="hero-meta-label">Faster Research</div>
+                </div>
+                <div class="hero-meta-item">
+                    <div class="hero-meta-number">1-2</div>
+                    <div class="hero-meta-label">Week Payback</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="workflow-section">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>Your intent flows through specialized agents—each with clear responsibility, identity, and oversight. The result: execution without the overhead.</p>
+        </div>
+        
+        <div class="workflow-diagram">
+            <div class="workflow-step">
+                <div class="workflow-icon">👤</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">You</div>
+                    <div class="workflow-title">Set the Intention</div>
+                    <div class="workflow-desc">"Research workshop monetization and create a publishable report"</div>
+                </div>
+            </div>
+            
+            <div class="workflow-arrow">↓</div>
+            
+            <div class="workflow-step">
+                <div class="workflow-icon">🎯</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">Stitch — Orchestrator</div>
+                    <div class="workflow-title">Assess & Route</div>
+                    <div class="workflow-desc">Breaks complex request into sub-tasks, delegates to specialist agents</div>
+                </div>
+            </div>
+            
+            <div class="workflow-arrow">↓</div>
+            
+            <div class="workflow-step">
+                <div class="workflow-icon">🔬</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">Kim — Junior Research Analyst (Kimi)</div>
+                    <div class="workflow-title">Execute Heavy Lifting</div>
+                    <div class="workflow-desc">Web search, data gathering, content generation—cost-effective at scale</div>
+                </div>
+            </div>
+            
+            <div class="workflow-arrow">↓</div>
+            
+            <div class="workflow-step">
+                <div class="workflow-icon">✓</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">Roger — Senior Research Associate (Opus)</div>
+                    <div class="workflow-title">Critique & Validate</div>
+                    <div class="workflow-desc">Quality assurance, synthesis, ensures output meets your intentions</div>
+                </div>
+            </div>
+            
+            <div class="workflow-arrow">↓</div>
+            
+            <div class="workflow-step">
+                <div class="workflow-icon">✨</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">Connie — Content Publisher</div>
+                    <div class="workflow-title">Transform & Publish</div>
+                    <div class="workflow-desc">Markdown → Production HTML, site-compliant, ready to deploy</div>
+                </div>
+            </div>
+            
+            <div class="workflow-arrow">↓</div>
+            
+            <div class="workflow-step" style="border-left-color: var(--gold-warm);">
+                <div class="workflow-icon">🚀</div>
+                <div class="workflow-content">
+                    <div class="workflow-agent">Output</div>
+                    <div class="workflow-title">Published Research + Time Saved</div>
+                    <div class="workflow-desc">You review and approve. Hours of manual work completed in minutes.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing-section" id="pricing">
+        <div class="section-header">
+            <h2>Implementation Tiers</h2>
+            <p>Choose the scope that matches your automation needs. All tiers include Singapore MGF compliance and 30-day success guarantee.</p>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-tier">Foundation</div>
+                <div class="pricing-price">$2,500</div>
+                <div class="pricing-desc">2 weeks • Single agent deployment</div>
+                <ul class="pricing-features">
+                    <li>1 agent (Research or Content)</li>
+                    <li>Basic identity framework</li>
+                    <li>2 workflow automations</li>
+                    <li>Singapore MGF compliance docs</li>
+                    <li>30-day email support</li>
+                </ul>
+                <a href="mailto:kyle@kaihamil.com?subject=Foundation%20Tier%20Inquiry" class="pricing-cta">Get Started</a>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Professional</div>
+                <div class="pricing-price">$5,000</div>
+                <div class="pricing-desc">4 weeks • Multi-agent system</div>
+                <ul class="pricing-features">
+                    <li>3+ agents (Research + Content + Orchestrator)</li>
+                    <li>Full governance framework</li>
+                    <li>5+ workflow automations</li>
+                    <li>Custom tool integration</li>
+                    <li>60-day priority support</li>
+                    <li>Quarterly optimization review</li>
+                </ul>
+                <a href="mailto:kyle@kaihamil.com?subject=Professional%20Tier%20Inquiry" class="pricing-cta">Most Popular</a>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="pricing-tier">Enterprise</div>
+                <div class="pricing-price">$10,000</div>
+                <div class="pricing-desc">8 weeks • Full architecture</div>
+                <ul class="pricing-features">
+                    <li>All agent types + custom development</li>
+                    <li>Full system integration</li>
+                    <li>Unlimited workflows</li>
+                    <li>Family/team onboarding</li>
+                    <li>90-day white-glove support</li>
+                    <li>1-year optimization partnership</li>
+                </ul>
+                <a href="mailto:kyle@kaihamil.com?subject=Enterprise%20Tier%20Inquiry" class="pricing-cta">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="governance-section">
+        <div class="section-header">
+            <h2>Governance You Can Trust</h2>
+            <p>Every implementation follows the Singapore Model AI Governance Framework—the world's first comprehensive standard for agentic AI.</p>
+        </div>
+        
+        <div class="governance-badge">
+            <div class="governance-badge-icon">🛡️</div>
+            <div class="governance-badge-text">
+                <div class="governance-badge-title">Singapore MGF Compliant</div>
+                <div class="governance-badge-subtitle">Risk assessment • Human oversight • Audit trails • Accountability</div>
+            </div>
+        </div>
+        
+        <p style="color: var(--ink-medium); margin-top: 30px;">Identity tokens. Supervision chains. Permission boundaries. Failsafe mechanisms. Your agents work within guardrails that protect your interests.</p>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Ready to Reclaim Your Attention?</h2>
+        <p>Join professionals who are replacing coordination overhead with presence and capacity. The wave is cresting—catch it with systems that serve your life.</p>
+        <a href="mailto:kyle@kaihamil.com?subject=Agent%20OS%20Consultation" class="cta-button">Schedule Your Consultation</a>
+    </section>
+    
+    <footer>
+        <h2>kai <strong>hamil</strong></h2>
+        <p style="margin-bottom: 10px;">System // Self</p>
+        <p style="font-size: 0.9rem; opacity: 0.7;">Agency through Automation</p>
+        <p style="margin-top: 20px;"><a href="/" style="color: var(--ink-medium);">← Back to Home</a></p>
+    </footer>
+</body>
+</html>

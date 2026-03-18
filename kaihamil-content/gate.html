@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Gate | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(248, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 20px 60px;
+        }
+        
+        .gate-card {
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+        
+        .gate-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--ink-medium);
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--ink-medium);
+            margin-bottom: 8px;
+        }
+        
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--sand);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background: var(--bg-warm);
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--terracotta);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: var(--ink-dark);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* States */
+        .state {
+            display: none;
+        }
+        
+        .state.active {
+            display: block;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .return-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: var(--terracotta);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .return-link:hover {
+            text-decoration: underline;
+        }
+        
+        .tier-info {
+            background: rgba(201, 162, 39, 0.1);
+            border-left: 3px solid var(--gold-warm);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tier-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .tier-info ul {
+            margin-left: 20px;
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+        }
+        
+        .tier-info li {
+            margin-bottom: 5px;
+        }
+        
+        .error-message {
+            color: #dc2626;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .gate-card { padding: 40px 30px; }
+            h1 { font-size: 1.7rem; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+    </nav>
+    
+    <div class="container">
+        <!-- STATE 1: Email Entry -->
+        <div class="gate-card state active" id="stateEntry">
+            <div class="gate-icon">🔐</div>
+            <h1>Unlock Deeper Content</h1>
+            <p class="subtitle">Enter your email to access frameworks, research, and advanced tools.</p>
+            
+            <div class="tier-info">
+                <h3>Tier 2 Access Includes:</h3>
+                <ul>
+                    <li>Complete decision frameworks</li>
+                    <li>Research library & deep dives</li>
+                    <li>Second Order Effects analyzer</li>
+                    <li>Agent architecture documentation</li>
+                    <li>Email newsletter access</li>
+                </ul>
+            </div>
+            
+            <form id="gateForm">
+                <div class="form-group">
+                    <label for="userName">What should we call you?</label>
+                    <input type="text" id="userName" name="name" placeholder="First name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userEmail">Your best email address</label>
+                    <input type="email" id="userEmail" name="email" placeholder="you@example.com" required>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">
+                    Request Access
+                    <span class="loading" id="loading"></span>
+                </button>
+                <p class="error-message" id="errorMsg">Something went wrong. Please try again.</p>
+            </form>
+            
+            <a href="/" class="return-link">← Return to homepage</a>
+        </div>
+        
+        <!-- STATE 2: Email Sent -->
+        <div class="gate-card state" id="stateSent">
+            <div class="success-icon">📧</div>
+            <h1>Check Your Email</h1>
+            <p class="subtitle">We've sent a verification link to <strong id="sentEmail"></strong>. Click it to unlock access.</p>
+            
+            <div style="background: var(--bg-warm); padding: 20px; border-radius: 12px; margin: 30px 0;">
+                <p style="font-size: 0.9rem; color: var(--ink-medium);">
+                    <strong>Didn't receive it?</strong><br>
+                    Check spam/junk folders, or <a href="#" onclick="resendEmail()" style="color: var(--terracotta);">click here to resend</a>.
+                </p>
+            </div>
+            
+            <a href="/" class="return-link">← Return to homepage</a>
+        </div>
+        
+        <!-- STATE 3: Already Verified -->
+        <div class="gate-card state" id="stateVerified">
+            <div class="success-icon">✅</div>
+            <h1>Welcome Back, <span id="verifiedName"></span></h1>
+            <p class="subtitle">You're already on the allowlist. Full access granted.</p>
+            
+            <a href="/frameworks/" class="btn" style="text-decoration: none; display: inline-block; text-align: center; margin-top: 20px;">Explore Frameworks →</a>
+            
+            <a href="/" class="return-link">← Return to homepage</a>
+        </div>
+    </div>
+    
+    <script>
+        // Check if already verified on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const verifiedEmail = localStorage.getItem('kh_verified_email');
+            const verifiedName = localStorage.getItem('kh_verified_name');
+            
+            if (verifiedEmail && verifiedName) {
+                // Check if still on allowlist (async)
+                checkAllowlist(verifiedEmail).then(isAllowed => {
+                    if (isAllowed) {
+                        showState('stateVerified');
+                        document.getElementById('verifiedName').textContent = verifiedName;
+                    }
+                });
+            }
+        });
+        
+        // Form submission
+        document.getElementById('gateForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value.trim();
+            const email = document.getElementById('userEmail').value.trim().toLowerCase();
+            const btn = document.getElementById('submitBtn');
+            const loading = document.getElementById('loading');
+            const errorMsg = document.getElementById('errorMsg');
+            
+            // Show loading
+            btn.disabled = true;
+            loading.style.display = 'inline-block';
+            errorMsg.style.display = 'none';
+            
+            try {
+                // Check if already on allowlist
+                const isAllowed = await checkAllowlist(email);
+                
+                if (isAllowed) {
+                    // Already verified - grant access
+                    localStorage.setItem('kh_verified_email', email);
+                    localStorage.setItem('kh_verified_name', name);
+                    showState('stateVerified');
+                    document.getElementById('verifiedName').textContent = name;
+                } else {
+                    // New user - send verification email
+                    const success = await requestAccess(name, email);
+                    
+                    if (success) {
+                        document.getElementById('sentEmail').textContent = email;
+                        showState('stateSent');
+                    } else {
+                        throw new Error('Request failed');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.style.display = 'block';
+                btn.disabled = false;
+                loading.style.display = 'none';
+            }
+        });
+        
+        // Check if email is on allowlist
+        async function checkAllowlist(email) {
+            try {
+                // In production, this calls the Netlify Function
+                const response = await fetch('/.netlify/functions/check-allowlist', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                return data.allowed;
+            } catch (error) {
+                console.error('Allowlist check failed:', error);
+                // Fallback: check localStorage only
+                return localStorage.getItem('kh_verified_email') === email;
+            }
+        }
+        
+        // Request access (send verification email)
+        async function requestAccess(name, email) {
+            try {
+                // In production, this calls the Netlify Function
+                const response = await fetch('/.netlify/functions/request-access', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email })
+                });
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                return data.success;
+            } catch (error) {
+                console.error('Request access failed:', error);
+                // For demo/development, simulate success
+                console.log('Simulating email send to:', email);
+                return true;
+            }
+        }
+        
+        // Resend email
+        function resendEmail() {
+            const email = document.getElementById('sentEmail').textContent;
+            const name = localStorage.getItem('kh_pending_name') || 'User';
+            requestAccess(name, email);
+            alert('Verification email resent!');
+        }
+        
+        // Show specific state
+        function showState(stateId) {
+            document.querySelectorAll('.state').forEach(s => s.classList.remove('active'));
+            document.getElementById(stateId).classList.add('active');
+        }
+        
+        // Store pending name for resend
+        document.getElementById('userName').addEventListener('change', function() {
+            localStorage.setItem('kh_pending_name', this.value);
+        });
+    </script>
+</body>
+</html>

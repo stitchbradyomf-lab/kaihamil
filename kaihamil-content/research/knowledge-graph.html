@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --entity-post: #e8d5a3;
+            --entity-framework: #d4a574;
+            --entity-research: #c9a227;
+            --entity-product: #3d8b37;
+            --entity-concept: #8b5a2b;
+            --entity-person: #6b5344;
+            --relation-uses: #c9a227;
+            --relation-references: #6b5344;
+            --relation-related: #8b5a2b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { color: var(--gold); }
+        
+        .hero p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* Graph Section */
+        .graph-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+        
+        .graph-header {
+            padding: 20px 25px;
+            background: var(--bg-cream);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .graph-header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .graph-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover {
+            border-color: var(--gold);
+            background: var(--bg-cream);
+        }
+        
+        .control-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        #graph-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            background: linear-gradient(135deg, #faf6f1 0%, #f5f0e8 100%);
+        }
+        
+        /* Legend */
+        .legend {
+            padding: 20px 25px;
+            background: var(--bg-cream);
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.post { background: var(--entity-post); }
+        .legend-dot.framework { background: var(--entity-framework); }
+        .legend-dot.research { background: var(--entity-research); }
+        .legend-dot.product { background: var(--entity-product); }
+        .legend-dot.concept { background: var(--entity-concept); }
+        .legend-dot.person { background: var(--entity-person); }
+        .legend-dot.wisdom { background: #9b6b4a; }
+        .legend-dot.tradition { background: #c9a86c; }
+        
+        /* Entity Details Panel */
+        .details-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+            display: none;
+        }
+        
+        .details-panel.visible {
+            display: block;
+        }
+        
+        .details-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .details-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .details-title {
+            flex: 1;
+        }
+        
+        .details-title h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .details-title .type {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .details-content p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+        }
+        
+        .details-relations h4 {
+            margin: 20px 0 10px;
+            font-size: 1rem;
+        }
+        
+        .relation-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .relation-tag {
+            padding: 6px 12px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        /* Triples Table */
+        .triples-section {
+            margin: 40px 0;
+        }
+        
+        .triples-section h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .triples-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .triples-table th,
+        .triples-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .triples-table th {
+            background: var(--bg-cream);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .triples-table tr:hover {
+            background: var(--bg-cream);
+        }
+        
+        .triples-table td {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .subject { color: var(--brown-dark); font-weight: 500; }
+        .predicate { color: var(--gold); }
+        .object { color: var(--brown-medium); }
+        
+        /* Info Section */
+        .info-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .info-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .info-section p {
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-card {
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .info-card h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+        
+        .info-card ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .info-card li {
+            padding: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .info-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            #graph-container { height: 400px; }
+            .graph-header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/research/">← Research</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">RDF Triple Store</span>
+        <h1>Knowledge <strong>Graph</strong></h1>
+        <p>Visualizing the connections between content, concepts, and ideas. Semantic relationships as navigable structure.</p>
+    </header>
+    
+    <main class="container">
+        <!-- Graph Visualization -->
+        <div class="graph-section">
+            <div class="graph-header">
+                <h2>🕸️ Entity Relationship Graph</h2>
+                <div class="graph-controls">
+                    <button class="control-btn active" onclick="filterNodes('all')">All</button>
+                    <button class="control-btn" onclick="filterNodes('framework')">Frameworks</button>
+                    <button class="control-btn" onclick="filterNodes('product')">Products</button>
+                    <button class="control-btn" onclick="filterNodes('wisdom')">Wisdom</button>
+                    <button class="control-btn" onclick="filterNodes('research')">Research</button>
+                    <button class="control-btn" onclick="filterNodes('person')">People</button>
+                    <button class="control-btn" onclick="resetZoom()">Reset View</button>
+                </div>
+            </div>
+            <div id="graph-container"></div>
+            <div class="legend">
+                <div class="legend-item"><div class="legend-dot framework"></div> Framework</div>
+                <div class="legend-item"><div class="legend-dot product"></div> Product</div>
+                <div class="legend-item"><div class="legend-dot post"></div> Post</div>
+                <div class="legend-item"><div class="legend-dot wisdom"></div> Wisdom</div>
+                <div class="legend-item"><div class="legend-dot research"></div> Research</div>
+                <div class="legend-item"><div class="legend-dot concept"></div> Concept</div>
+                <div class="legend-item"><div class="legend-dot person"></div> Person</div>
+                <div class="legend-item"><div class="legend-dot tradition"></div> Tradition</div>
+            </div>
+        </div>
+        
+        <!-- Entity Details Panel -->
+        <div class="details-panel" id="detailsPanel">
+            <div class="details-header">
+                <div class="details-icon" id="detailsIcon">📄</div>
+                <div class="details-title">
+                    <h3 id="detailsName">Select an entity</h3>
+                    <span class="type" id="detailsType">Click any node in the graph</span>
+                </div>
+            </div>
+            <div class="details-content">
+                <p id="detailsDescription">Click on any node in the graph above to see its relationships and properties.</p>
+                <div class="details-relations" id="detailsRelations" style="display:none;">
+                    <h4>Relationships</h4>
+                    <div class="relation-list" id="relationList"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Triples Table -->
+        <div class="triples-section">
+            <h2>📋 RDF Triples (Sample)</h2>
+            <table class="triples-table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Predicate</th>
+                        <th>Object</th>
+                    </tr>
+                </thead>
+                <tbody id="triplesTableBody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Info Section -->
+        <div class="info-section">
+            <h2>About the Knowledge Graph</h2>
+            <p>This is an initial visualization of the Kai Hamil content ecosystem using RDF triples. Each node represents an entity (post, framework, concept, person), and edges represent semantic relationships.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>Entity Types</h4>
+                    <ul>
+                        <li>Frameworks (thinking tools - System)</li>
+                        <li>Products (quizzes, toolkits - System)</li>
+                        <li>Posts (essays, articles)</li>
+                        <li>Wisdom (explorations - Self)</li>
+                        <li>Traditions (philosophy sources - Self)</li>
+                        <li>Research (investigations)</li>
+                        <li>Concepts (ideas, patterns)</li>
+                        <li>People (authors, researchers)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Relationship Types</h4>
+                    <ul>
+                        <li>evolvesTo (version progression)</li>
+                        <li>implements (puts into practice)</li>
+                        <li>deepDiveOf (extends/elaborates)</li>
+                        <li>drawsFrom (wisdom source)</li>
+                        <li>entryPointFor (gateway to)</li>
+                        <li>relatedTo (semantic connection)</li>
+                        <li>references (cites/mentions)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>Use Cases</h4>
+                    <ul>
+                        <li>Content discovery</li>
+                        <li>Related content surfacing</li>
+                        <li>Gaps identification</li>
+                        <li>RAG constraint</li>
+                        <li>Agent memory structure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Knowledge Graph powered by RDF triples</p>
+    </footer>
+    
+    <script>
+        // Initial triples data - Updated March 3, 2026
+        const triples = [
+            // ===== PEOPLE =====
+            { subject: "Kyle Joseph Brady", predicate: "created", object: "Kai Hamil", type: "person" },
+            { subject: "Kyle Joseph Brady", predicate: "experienced", object: "COVID Awakening", type: "person" },
+            { subject: "Kyle Joseph Brady", predicate: "authored", object: "The Physics of Love", type: "person" },
+            { subject: "Kyle Joseph Brady", predicate: "authored", object: "When the Script Stops Working", type: "person" },
+            { subject: "Kyle Joseph Brady", predicate: "developed", object: "System // Self", type: "person" },
+            { subject: "Judea Pearl", predicate: "created", object: "Causal Inference", type: "person" },
+            { subject: "Gottman", predicate: "created", object: "5:1 Ratio", type: "person" },
+            { subject: "Munger", predicate: "inspired", object: "5 Filters", type: "person" },
+            
+            // ===== CORE THESIS =====
+            { subject: "KH Core Thesis", predicate: "states", object: "Assembly to Agency", type: "concept" },
+            { subject: "Assembly to Agency", predicate: "describes", object: "Life Script Evolution", type: "research" },
+            { subject: "Life Script Evolution", predicate: "contains", object: "Stage 1: Inheritance", type: "research" },
+            { subject: "Life Script Evolution", predicate: "contains", object: "Stage 2: Institutional Gateway", type: "research" },
+            { subject: "Life Script Evolution", predicate: "contains", object: "Stage 3: Meritocratic Expansion", type: "research" },
+            { subject: "Life Script Evolution", predicate: "contains", object: "Stage 4: Portfolio Transition", type: "research" },
+            { subject: "Life Script Evolution", predicate: "contains", object: "Stage 5: Agency Era", type: "research" },
+            { subject: "Stage 5: Agency Era", predicate: "requires", object: "System // Self", type: "concept" },
+            { subject: "COVID Awakening", predicate: "ledTo", object: "Presence Priority", type: "concept" },
+            { subject: "Presence Priority", predicate: "informs", object: "System // Self", type: "concept" },
+            
+            // ===== SYSTEM - FRAMEWORKS =====
+            { subject: "System // Self", predicate: "bridges", object: "System Side", type: "framework" },
+            { subject: "System // Self", predicate: "bridges", object: "Self Side", type: "framework" },
+            { subject: "System // Self", predicate: "enables", object: "Agency through Automation", type: "framework" },
+            { subject: "5 Filters", predicate: "implements", object: "Decision Framework", type: "framework" },
+            { subject: "5 Filters", predicate: "relatedTo", object: "Problem Audit", type: "framework" },
+            { subject: "5 Filters", predicate: "inspiredBy", object: "Munger", type: "framework" },
+            { subject: "Problem Audit", predicate: "implements", object: "Causal Inference", type: "framework" },
+            { subject: "Problem Audit", predicate: "uses", object: "5 Whys", type: "framework" },
+            { subject: "Cause & Effect", predicate: "references", object: "Judea Pearl", type: "framework" },
+            { subject: "Cause & Effect", predicate: "implements", object: "Causal Hierarchy", type: "framework" },
+            { subject: "Gap Analysis", predicate: "implements", object: "Decision Framework", type: "framework" },
+            { subject: "Gap Analysis", predicate: "supports", object: "Stage 5: Agency Era", type: "framework" },
+            { subject: "Double Diamond", predicate: "categorizes", object: "AI Problem Solver Types", type: "framework" },
+            { subject: "Double Diamond", predicate: "intersects", object: "Convergence-Divergence Axis", type: "framework" },
+            { subject: "Double Diamond", predicate: "intersects", object: "Problem-Solution Axis", type: "framework" },
+            { subject: "Double Diamond", predicate: "supports", object: "Problem Solving", type: "framework" },
+            { subject: "Double Diamond", predicate: "defines", object: "Explorer", type: "framework" },
+            { subject: "Double Diamond", predicate: "defines", object: "Analyst", type: "framework" },
+            { subject: "Double Diamond", predicate: "defines", object: "Designer", type: "framework" },
+            { subject: "Double Diamond", predicate: "defines", object: "Builder", type: "framework" },
+            
+            // ===== DOUBLE DIAMOND AXES =====
+            { subject: "Convergence-Divergence Axis", predicate: "contains", object: "Divergent Thinking", type: "concept" },
+            { subject: "Convergence-Divergence Axis", predicate: "contains", object: "Convergent Thinking", type: "concept" },
+            { subject: "Problem-Solution Axis", predicate: "contains", object: "Problem Space", type: "concept" },
+            { subject: "Problem-Solution Axis", predicate: "contains", object: "Solution Space", type: "concept" },
+            
+            // ===== AI USER TYPE QUIZ CHAIN =====
+            { subject: "AI User Quiz v1", predicate: "evolvesTo", object: "AI User Quiz v2", type: "product" },
+            { subject: "AI User Quiz v2", predicate: "evolvesTo", object: "AI User Quiz v3", type: "product" },
+            { subject: "AI User Quiz v3", predicate: "implements", object: "Double Diamond", type: "product" },
+            { subject: "AI User Quiz v3", predicate: "categorizes", object: "Explorer", type: "product" },
+            { subject: "AI User Quiz v3", predicate: "categorizes", object: "Analyst", type: "product" },
+            { subject: "AI User Quiz v3", predicate: "categorizes", object: "Designer", type: "product" },
+            { subject: "AI User Quiz v3", predicate: "categorizes", object: "Builder", type: "product" },
+            { subject: "Advanced AI Assessment", predicate: "deepDiveOf", object: "AI User Quiz v3", type: "product" },
+            { subject: "Advanced AI Assessment", predicate: "explores", object: "AI Problem Solver Types", type: "product" },
+            
+            // ===== SYSTEM - TOOLS/PRODUCTS =====
+            { subject: "Control Chart Evaluator", predicate: "implements", object: "Statistical Process Control", type: "tool" },
+            { subject: "Realtor Toolkit", predicate: "implements", object: "AI Prompts for Realtors", type: "product" },
+            { subject: "Realtor Toolkit", predicate: "includes", object: "AI Readiness Assessment", type: "product" },
+            { subject: "Jeff Portfolio Intelligence", predicate: "implements", object: "Knowledge Graph", type: "product" },
+            { subject: "Jeff Portfolio Intelligence", predicate: "demonstrates", object: "KGaaS Concept", type: "product" },
+            
+            // ===== POSTS/CONTENT =====
+            { subject: "The Physics of Love", predicate: "references", object: "Gottman", type: "post" },
+            { subject: "The Physics of Love", predicate: "references", object: "Attachment Theory", type: "post" },
+            { subject: "The Physics of Love", predicate: "references", object: "Interstellar", type: "post" },
+            { subject: "The Physics of Love", predicate: "explores", object: "Love & Relationships", type: "post" },
+            { subject: "When Everything Shifts", predicate: "explores", object: "Uncertainty & Change", type: "post" },
+            { subject: "When Everything Shifts", predicate: "bridges", object: "Common Cause Variation", type: "post" },
+            { subject: "Common Cause Variation", predicate: "implements", object: "Statistical Process Control", type: "post" },
+            
+            // ===== SELF - WISDOM PAGES =====
+            { subject: "When the Script Stops Working", predicate: "entryPointFor", object: "Stage 5: Agency Era", type: "wisdom" },
+            { subject: "When the Script Stops Working", predicate: "explores", object: "Life Script Evolution", type: "wisdom" },
+            { subject: "When the Script Stops Working", predicate: "relatedTo", object: "Assembly to Agency", type: "wisdom" },
+            { subject: "Uncertainty Exploration", predicate: "explores", object: "Uncertainty & Change", type: "wisdom" },
+            { subject: "Uncertainty Exploration", predicate: "drawsFrom", object: "Stoicism", type: "wisdom" },
+            { subject: "Uncertainty Exploration", predicate: "drawsFrom", object: "Buddhism", type: "wisdom" },
+            { subject: "Uncertainty Exploration", predicate: "drawsFrom", object: "Taoism", type: "wisdom" },
+            { subject: "Purpose Exploration", predicate: "explores", object: "Purpose & Work", type: "wisdom" },
+            { subject: "Purpose Exploration", predicate: "drawsFrom", object: "Aristotle", type: "wisdom" },
+            { subject: "Purpose Exploration", predicate: "drawsFrom", object: "Japanese Philosophy", type: "wisdom" },
+            
+            // ===== SELF - WISDOM TRADITIONS =====
+            { subject: "Uncertainty & Change", predicate: "drawsFrom", object: "Stoicism", type: "experience" },
+            { subject: "Uncertainty & Change", predicate: "drawsFrom", object: "Buddhism", type: "experience" },
+            { subject: "Uncertainty & Change", predicate: "drawsFrom", object: "Taoism", type: "experience" },
+            { subject: "Love & Relationships", predicate: "drawsFrom", object: "Ancient Greek", type: "experience" },
+            { subject: "Love & Relationships", predicate: "drawsFrom", object: "Attachment Theory", type: "experience" },
+            { subject: "Purpose & Work", predicate: "drawsFrom", object: "Aristotle", type: "experience" },
+            { subject: "Purpose & Work", predicate: "drawsFrom", object: "Ikigai", type: "experience" },
+            
+            // ===== TRADITIONS =====
+            { subject: "Stoicism", predicate: "teaches", object: "Amor Fati", type: "tradition" },
+            { subject: "Stoicism", predicate: "teaches", object: "Dichotomy of Control", type: "tradition" },
+            { subject: "Buddhism", predicate: "teaches", object: "Impermanence", type: "tradition" },
+            { subject: "Buddhism", predicate: "teaches", object: "Non-Attachment", type: "tradition" },
+            { subject: "Taoism", predicate: "teaches", object: "Wu Wei", type: "tradition" },
+            { subject: "Ancient Greek", predicate: "classifies", object: "7 Types of Love", type: "tradition" },
+            { subject: "Japanese Philosophy", predicate: "teaches", object: "Ikigai", type: "tradition" },
+            { subject: "Aristotle", predicate: "teaches", object: "Eudaimonia", type: "tradition" },
+            
+            // ===== RESEARCH =====
+            { subject: "Assembly to Agency", predicate: "documents", object: "Code Evolution Parallel", type: "research" },
+            { subject: "Code Evolution Parallel", predicate: "maps", object: "Assembly Language Era", type: "research" },
+            { subject: "Code Evolution Parallel", predicate: "maps", object: "High-Level Language Era", type: "research" },
+            { subject: "Code Evolution Parallel", predicate: "maps", object: "Agentic AI Era", type: "research" },
+            { subject: "Future of Work", predicate: "references", object: "4-Day Week", type: "research" },
+            { subject: "Future of Work", predicate: "references", object: "Open Source Society", type: "research" },
+            { subject: "Knowledge Graph", predicate: "implements", object: "RDF", type: "research" },
+            { subject: "Knowledge Graph", predicate: "uses", object: "Semantic Web", type: "research" },
+            { subject: "Agent Architecture", predicate: "references", object: "Agentic Design Patterns", type: "research" },
+            { subject: "Agent Architecture", predicate: "implements", object: "Hierarchical Multi-Agent", type: "research" },
+            { subject: "KGaaS Concept", predicate: "enables", object: "Personal Data Ownership", type: "research" },
+            
+            // ===== CONCEPTS =====
+            { subject: "Causal Inference", predicate: "relatedTo", object: "Systems Thinking", type: "concept" },
+            { subject: "Decision Framework", predicate: "relatedTo", object: "Cognitive Bias", type: "concept" },
+            { subject: "5 Whys", predicate: "implements", object: "Root Cause Analysis", type: "concept" },
+            { subject: "Agency through Automation", predicate: "implements", object: "System // Self", type: "concept" },
+            { subject: "Statistical Process Control", predicate: "appliesTo", object: "Personal Life", type: "concept" },
+            { subject: "Things Change", predicate: "expressedAs", object: "Impermanence", type: "concept" },
+            { subject: "Explorer", predicate: "focusesOn", object: "Problem Discovery", type: "concept" },
+            { subject: "Explorer", predicate: "occupies", object: "Problem Space + Divergent", type: "concept" },
+            { subject: "Analyst", predicate: "focusesOn", object: "Problem Definition", type: "concept" },
+            { subject: "Analyst", predicate: "occupies", object: "Problem Space + Convergent", type: "concept" },
+            { subject: "Designer", predicate: "focusesOn", object: "Solution Discovery", type: "concept" },
+            { subject: "Designer", predicate: "occupies", object: "Solution Space + Divergent", type: "concept" },
+            { subject: "Builder", predicate: "focusesOn", object: "Solution Delivery", type: "concept" },
+            { subject: "Builder", predicate: "occupies", object: "Solution Space + Convergent", type: "concept" },
+            
+            // ===== PROBLEM SOLVING → CONTINUOUS IMPROVEMENT =====
+            { subject: "Problem Solving", predicate: "requires", object: "Problem Definition", type: "concept" },
+            { subject: "Problem Solving", predicate: "requires", object: "Solution Development", type: "concept" },
+            { subject: "Problem Solving", predicate: "combinedWith", object: "Causal Inference", type: "concept" },
+            { subject: "Problem Solving", predicate: "combinedWith", object: "Root Cause Analysis", type: "concept" },
+            { subject: "Problem Solving", predicate: "enables", object: "Continuous Improvement", type: "concept" },
+            { subject: "Continuous Improvement", predicate: "characterizes", object: "Highly Effective Systems", type: "concept" },
+            { subject: "Continuous Improvement", predicate: "implements", object: "PDCA Cycle", type: "concept" },
+            { subject: "Continuous Improvement", predicate: "relatedTo", object: "Kaizen", type: "concept" },
+            { subject: "Continuous Improvement", predicate: "relatedTo", object: "Statistical Process Control", type: "concept" },
+            { subject: "Highly Effective Systems", predicate: "exhibits", object: "Feedback Loops", type: "concept" },
+            { subject: "Highly Effective Systems", predicate: "exhibits", object: "Adaptive Capacity", type: "concept" },
+            { subject: "Highly Effective Systems", predicate: "exhibits", object: "Reflective Practice", type: "concept" },
+            
+            // ===== SYSTEMS THINKING CONNECTIONS =====
+            { subject: "Systems Thinking", predicate: "enables", object: "Problem Solving", type: "concept" },
+            { subject: "Systems Thinking", predicate: "relatedTo", object: "Feedback Loops", type: "concept" },
+            { subject: "Reflective Practice", predicate: "bridges", object: "Self Side", type: "concept" },
+            { subject: "Problem Solving", predicate: "bridges", object: "System Side", type: "concept" },
+            
+            // ===== DEMING =====
+            { subject: "W. Edwards Deming", predicate: "created", object: "PDCA Cycle", type: "person" },
+            { subject: "W. Edwards Deming", predicate: "influenced", object: "Continuous Improvement", type: "person" },
+            { subject: "System Side", predicate: "contains", object: "Frameworks", type: "concept" },
+            { subject: "System Side", predicate: "contains", object: "Tools", type: "concept" },
+            { subject: "Self Side", predicate: "contains", object: "Wisdom Traditions", type: "concept" },
+            { subject: "Self Side", predicate: "contains", object: "Personal Exploration", type: "concept" }
+        ];
+        
+        // Build nodes and links
+        const nodeMap = new Map();
+        const links = [];
+        
+        triples.forEach(t => {
+            if (!nodeMap.has(t.subject)) {
+                nodeMap.set(t.subject, { id: t.subject, type: t.type, radius: t.type === 'concept' ? 25 : 30 });
+            }
+            if (!nodeMap.has(t.object)) {
+                nodeMap.set(t.object, { id: t.object, type: 'concept', radius: 25 });
+            }
+            links.push({ source: t.subject, target: t.object, predicate: t.predicate });
+        });
+        
+        const nodes = Array.from(nodeMap.values());
+        
+        // Color scale - System vs Self distinction
+        const colorScale = {
+            // System side (practical, tools, frameworks)
+            framework: '#2d5a4a',    // Deep green - System
+            tool: '#3d8b37',          // Green - System
+            product: '#1e5a3a',       // Dark green - System
+            
+            // Self side (exploration, wisdom, experience)
+            post: '#c4a484',          // Warm clay - Self
+            wisdom: '#9b6b4a',        // Warm brown - Self (wisdom pages)
+            experience: '#b87a5e',    // Terracotta - Self
+            tradition: '#c9a86c',     // Gold-warm - Self
+            
+            // Bridge/Research
+            research: '#8b6914',      // Ochre - Bridge
+            concept: '#5a5048',       // Brown - Bridge
+            person: '#6b5344'         // Medium brown
+        };
+        
+        // Setup D3
+        const container = document.getElementById('graph-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        
+        const svg = d3.select('#graph-container')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .attr('viewBox', [0, 0, width, height]);
+        
+        // Add zoom
+        const g = svg.append('g');
+        const zoom = d3.zoom()
+            .scaleExtent([0.1, 4])
+            .on('zoom', (event) => g.attr('transform', event.transform));
+        svg.call(zoom);
+        
+        // Simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(d => d.radius + 10));
+        
+        // Draw links
+        const link = g.append('g')
+            .selectAll('line')
+            .data(links)
+            .join('line')
+            .attr('stroke', '#c9a227')
+            .attr('stroke-opacity', 0.6)
+            .attr('stroke-width', 1.5);
+        
+        // Draw nodes
+        const node = g.append('g')
+            .selectAll('g')
+            .data(nodes)
+            .join('g')
+            .attr('cursor', 'pointer')
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
+        
+        // Node circles
+        node.append('circle')
+            .attr('r', d => d.radius)
+            .attr('fill', d => colorScale[d.type] || '#8b5a2b')
+            .attr('stroke', '#3d2817')
+            .attr('stroke-width', 2);
+        
+        // Node labels
+        node.append('text')
+            .text(d => d.id.length > 15 ? d.id.substring(0, 12) + '...' : d.id)
+            .attr('text-anchor', 'middle')
+            .attr('dy', d => d.radius + 15)
+            .attr('font-size', '11px')
+            .attr('fill', '#3d2817')
+            .attr('font-weight', '500');
+        
+        // Click handler
+        node.on('click', (event, d) => {
+            showDetails(d);
+        });
+        
+        // Update positions
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            node.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+        
+        // Drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        // Show details
+        function showDetails(d) {
+            const panel = document.getElementById('detailsPanel');
+            const name = document.getElementById('detailsName');
+            const type = document.getElementById('detailsType');
+            const desc = document.getElementById('detailsDescription');
+            const relations = document.getElementById('detailsRelations');
+            const list = document.getElementById('relationList');
+            
+            panel.classList.add('visible');
+            name.textContent = d.id;
+            type.textContent = d.type;
+            
+            // Get related triples
+            const related = triples.filter(t => t.subject === d.id || t.object === d.id);
+            
+            if (related.length > 0) {
+                desc.textContent = `This ${d.type} has ${related.length} relationship${related.length > 1 ? 's' : ''} in the knowledge graph.`;
+                relations.style.display = 'block';
+                list.innerHTML = related.map(t => {
+                    if (t.subject === d.id) {
+                        return `<span class="relation-tag">${t.predicate} → ${t.object}</span>`;
+                    } else {
+                        return `<span class="relation-tag">${t.subject} → ${t.predicate}</span>`;
+                    }
+                }).join('');
+            } else {
+                desc.textContent = `This ${d.type} is a leaf node with no documented relationships yet.`;
+                relations.style.display = 'none';
+            }
+            
+            // Scroll to panel
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Filter nodes
+        function filterNodes(type) {
+            // Update button states
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (type === 'all') {
+                node.style('opacity', 1);
+                link.style('opacity', 0.6);
+            } else {
+                node.style('opacity', d => d.type === type ? 1 : 0.2);
+                link.style('opacity', 0.1);
+            }
+        }
+        
+        // Reset zoom
+        function resetZoom() {
+            svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+            node.style('opacity', 1);
+            link.style('opacity', 0.6);
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.control-btn').classList.add('active');
+        }
+        
+        // Populate triples table
+        const tbody = document.getElementById('triplesTableBody');
+        tbody.innerHTML = triples.map(t => `
+            <tr>
+                <td class="subject">${t.subject}</td>
+                <td class="predicate">${t.predicate}</td>
+                <td class="object">${t.object}</td>
+            </tr>
+        `).join('');
+    </script>
+</body>
+</html>

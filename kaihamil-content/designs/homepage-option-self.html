@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil | Navigate Your Life</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+            --accent-self: #8b6914;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+            letter-spacing: -0.02em;
+        }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-paper);
+            border: 1px solid var(--sand);
+            padding: 10px 18px;
+            border-radius: 24px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .theme-toggle span { color: var(--ink-medium); }
+        .theme-toggle .active { font-weight: 500; color: var(--ink-dark); }
+        
+        /* Hero - Self Theme */
+        .hero-self {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--sand) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-self::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201,168,108,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-self::after {
+            content: '';
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184,122,94,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-eyebrow {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--terracotta);
+            margin-bottom: 30px;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--ink-dark);
+        }
+        
+        .hero-title em {
+            font-style: italic;
+            color: var(--terracotta);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--ink-medium);
+            max-width: 650px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background: var(--ink-dark);
+            color: var(--bg-paper);
+            padding: 18px 40px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-cta:hover {
+            background: var(--terracotta);
+            transform: translateY(-2px);
+        }
+        
+        /* Journey Section */
+        .journey-section {
+            padding: 100px 40px;
+            background: var(--bg-paper);
+        }
+        
+        .journey-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .journey-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .journey-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .journey-header p {
+            color: var(--ink-medium);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Horizontal Journey Steps */
+        .journey-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+        }
+        
+        .journey-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--sand), transparent);
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-paper);
+            border: 2px solid var(--sand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--terracotta);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            color: var(--ink-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .step-link {
+            color: var(--terracotta);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .step-link:hover {
+            border-bottom-color: var(--terracotta);
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            padding: 100px 40px;
+            background: var(--bg-warm);
+            text-align: center;
+        }
+        
+        .quote-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--ink-dark);
+            margin-bottom: 30px;
+        }
+        
+        .quote-attribution {
+            color: var(--terracotta);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Philosophy Teaser */
+        .philosophy-teaser {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, var(--ink-dark) 0%, #3d3329 100%);
+            color: var(--bg-paper);
+            text-align: center;
+        }
+        
+        .philosophy-teaser h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-teaser h2 em {
+            color: var(--gold-warm);
+            font-style: italic;
+        }
+        
+        .philosophy-teaser p {
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-weight: 300;
+        }
+        
+        .philosophy-link {
+            color: var(--gold-warm);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold-warm);
+            padding-bottom: 3px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--bg-paper);
+            color: var(--ink-medium);
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .journey-steps {
+                flex-direction: column;
+                gap: 60px;
+            }
+            .journey-steps::before { display: none; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <span>System</span>
+            <span>/</span>
+            <span class="active">Self</span>
+        </div>
+    </nav>
+    
+    <header class="hero-self">
+        <div class="hero-content">
+            <p class="hero-eyebrow">An invitation to intentional living</p>
+            <h1 class="hero-title">How to Live<br><em>Your Best Life</em></h1>
+            <p class="hero-subtitle">In the age of unlimited information, we navigate by feel, by values, by the quiet knowing of what matters. Tools and frameworks help, but only you can chart your course.</p>
+            <a href="#journey" class="hero-cta">Begin Your Journey</a>
+        </div>
+    </header>
+    
+    <section id="journey" class="journey-section">
+        <div class="journey-content">
+            <div class="journey-header">
+                <h2>The Path of Orientation</h2>
+                <p>Three stages of discovering who you are, who you're becoming, and how to bridge the distance.</p>
+            </div>
+            
+            <div class="journey-steps">
+                <div class="step">
+                    <div class="step-number">I</div>
+                    <h3>Where You Stand</h3>
+                    <p>Discovering your current reality. Understanding where your energy goes, how your choices are made, and how far you've come.</p>
+                    <a href="/frameworks/ai-usage-advanced.html" class="step-link">Explore your position →</a>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">II</div>
+                    <h3>Your North Star</h3>
+                    <p>Stability. Hope. Wonder. The philosophy of agency through automation, of living intentionally in the unstructured future.</p>
+                    <a href="/philosophy/system-self.html" class="step-link">Discover the philosophy →</a>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">III</div>
+                    <h3>The Way Forward</h3>
+                    <p>Map to better navigate the journey ahead. Dodge obstacles, make better decisions, and do more things that support the life you want.</p>
+                    <a href="/frameworks/" class="step-link">Find your path →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="quote-section">
+        <div class="quote-content">
+            <blockquote>
+                "We're all swimming in something we barely understand. The old maps don't work anymore. Here's how to build your own."
+            </blockquote>
+            <p class="quote-attribution">— THE KAI HAMIL INVITATION</p>
+        </div>
+    </section>
+    
+    <section class="philosophy-teaser">
+        <h2>System // <em>Self</em></h2>
+        <p>The split is the suffering. You and your systems are one continuous thing. When they work together, you thrive. When they fight, you suffer. The work is integration.</p>
+        <a href="/philosophy/system-self.html" class="philosophy-link">Read the full philosophy →</a>
+    </section>
+    
+    <footer>
+        <p>Maps for navigating the human experience in the age of AI</p>
+    </footer>
+    
+    <script>
+        function toggleTheme() {
+            window.location.href = 'homepage-option-system.html';
+        }
+    </script>
+</body>
+</html>

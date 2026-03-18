@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Free Time Tool | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --accent: #2d5a4a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { font-weight: 500; }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+        
+        /* Step containers */
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .hero h1 strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .hero p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        /* Context input */
+        .context-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .context-card h3 {
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .context-card textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            background: white;
+        }
+        
+        .context-card textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .context-card textarea::placeholder {
+            color: #aaa;
+        }
+        
+        .context-hint {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-top: 10px;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--brown-medium);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .btn-center {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Questions grid */
+        .questions-intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .questions-intro h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .questions-intro p {
+            color: var(--brown-medium);
+        }
+        
+        .question-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .question-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 25px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .question-card:hover {
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+        
+        .question-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--bg-card) 0%, #e8f4f0 100%);
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            color: var(--brown-dark);
+            margin-bottom: 5px;
+        }
+        
+        .question-source {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        /* Philosophy detail */
+        .philosophy-detail {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .philosophy-detail h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+            color: var(--brown-dark);
+        }
+        
+        .philosophy-detail .source {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-detail .thinking {
+            margin-bottom: 20px;
+        }
+        
+        .philosophy-detail .thinking h4 {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        
+        .philosophy-detail .thinking p {
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+        
+        .philosophy-detail .prompt-box {
+            background: linear-gradient(135deg, var(--bg-cream) 0%, #f5f0e8 100%);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .philosophy-detail .prompt-box h4 {
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .philosophy-detail .prompt-box p {
+            font-size: 1.05rem;
+            font-style: italic;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        /* Story link */
+        .story-link {
+            background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe3 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .story-link p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+        
+        .story-link a {
+            color: var(--gold);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .story-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* User context display */
+        .your-context {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            font-style: italic;
+            color: var(--brown-medium);
+        }
+        
+        .your-context strong {
+            color: var(--brown-dark);
+            font-style: normal;
+        }
+        
+        /* Back button */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .back-link:hover {
+            color: var(--gold);
+        }
+        
+        .back-link svg {
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 600px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <a href="/" class="logo"><strong>Kai</strong> Hamil</a>
+        <div class="nav-links">
+            <a href="/tools/">Tools</a>
+            <a href="/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        
+        <!-- STEP 1: Context Input -->
+        <div class="step active" id="step-1">
+            <div class="hero">
+                <h1>The <strong>Free Time</strong> Tool</h1>
+                <p>How do you want to spend your time?</p>
+            </div>
+            
+            <div class="context-card">
+                <h3>How much time do you have?</h3>
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <input type="number" id="time-available" min="15" max="180" value="60" style="width: 80px; padding: 12px; border: 2px solid var(--border); border-radius: 8px; font-size: 1.2rem; text-align: center; font-family: inherit;">
+                    <span style="color: var(--brown-medium);">minutes (15-180)</span>
+                </div>
+                
+                <h3 style="margin-top: 20px;">Your Situation</h3>
+                <textarea id="user-context" placeholder="Describe your situation...
+
+Example: I'm in a shopping center parking lot with my phone. I don't want to spend money or scroll social media."></textarea>
+                <p class="context-hint">Optional: Add constraints, location, mood, or what you're trying to avoid.</p>
+            </div>
+            
+            <div class="btn-center">
+                <button class="btn btn-primary" onclick="showQuestions()">Show Me Approaches →</button>
+            </div>
+        </div>
+        
+        <!-- STEP 2: Question Selection -->
+        <div class="step" id="step-2">
+            <a href="#" class="back-link" onclick="goBack(1); return false;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Edit situation
+            </a>
+            
+            <div id="context-display" class="your-context"></div>
+            
+            <div class="questions-intro">
+                <h2>How do you want to think about this?</h2>
+                <p>Choose the question that resonates.</p>
+            </div>
+            
+            <div class="question-list" id="question-list">
+                <!-- Questions injected by JS -->
+            </div>
+        </div>
+        
+        <!-- STEP 3: Philosophy Detail -->
+        <div class="step" id="step-3">
+            <a href="#" class="back-link" onclick="goBack(2); return false;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Choose a different approach
+            </a>
+            
+            <div id="philosophy-content">
+                <!-- Content injected by JS -->
+            </div>
+            
+            <div class="story-link">
+                <p>See how this tool helped Kyle turn a mundane Tuesday into an enlightened experience.</p>
+                <a href="/wisdom/philosophy-of-not-scrolling.html">Read the Story →</a>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        // Philosophy data
+        const approaches = [
+            {
+                question: "What would a flourishing person do with this hour?",
+                source: "Virtue Ethics — Aristotle",
+                thinking: `
+                    <p>Aristotle believed the good life isn't about pleasure or duty—it's about becoming excellent. Every action either builds or erodes your character.</p>
+                    <p>A flourishing person (<em>eudaimonia</em>) doesn't ask "what do I feel like doing?" but "what would the best version of me choose?"</p>
+                `,
+                prompt: "Imagine someone you deeply respect. What would they do with this hour? What virtue might they practice—patience, curiosity, courage, generosity?",
+                keywords: ["excellence", "character", "virtue", "becoming"]
+            },
+            {
+                question: "What's within my control right now?",
+                source: "Stoicism — Epictetus, Marcus Aurelius",
+                thinking: `
+                    <p>The Stoics divided everything into two categories: what's up to us (our judgments, intentions, desires) and what's not (external events, other people, outcomes).</p>
+                    <p>Peace comes from focusing entirely on what you can control—your response to this moment—and releasing attachment to everything else.</p>
+                `,
+                prompt: "In this hour, what's truly within your control? Your attention. Your attitude. Your choices. What would it mean to master just those?",
+                keywords: ["control", "acceptance", "inner peace", "focus"]
+            },
+            {
+                question: "Where can I stop forcing and start flowing?",
+                source: "Taoism — Lao Tzu",
+                thinking: `
+                    <p>The Tao teaches <em>wu wei</em>—effortless action. Not laziness, but alignment. Like water finding its way downhill without struggle.</p>
+                    <p>When you stop fighting the moment and start moving with it, surprising things happen. The hour reveals itself.</p>
+                `,
+                prompt: "What if you didn't plan this hour at all? What if you wandered? What does the moment seem to be inviting?",
+                keywords: ["flow", "effortless", "natural", "letting go"]
+            },
+            {
+                question: "What matters most in this exact moment?",
+                source: "Buddhist Ethics — Mindfulness Tradition",
+                thinking: `
+                    <p>Buddhism asks us to see clearly—without the fog of craving or aversion. This moment is the only one you have. The past is memory, the future imagination.</p>
+                    <p>Suffering often comes from wanting the moment to be different. What if you fully arrived in this one?</p>
+                `,
+                prompt: "Right now, what do you actually notice? The temperature, sounds, sensations. What arises when you stop reaching for the next thing?",
+                keywords: ["presence", "awareness", "now", "clarity"]
+            },
+            {
+                question: "What action creates the most good?",
+                source: "Utilitarianism — John Stuart Mill",
+                thinking: `
+                    <p>Mill argued that the right action is the one that produces the greatest well-being for the greatest number. Happiness matters—yours and others'.</p>
+                    <p>An hour is a resource. How might you invest it to maximize genuine benefit—for yourself, for others, for the world?</p>
+                `,
+                prompt: "If you optimized this hour for real good (not just productivity), what would you do? Who might benefit from your attention or action?",
+                keywords: ["impact", "benefit", "others", "maximize"]
+            },
+            {
+                question: "What would I do if no one were watching?",
+                source: "Duty Ethics — Immanuel Kant",
+                thinking: `
+                    <p>Kant believed in acting from duty, not desire. The test: could your action become a universal law? Would you will everyone to act this way?</p>
+                    <p>Strip away social pressure, performance, and approval-seeking. What remains is closer to your authentic will.</p>
+                `,
+                prompt: "If this hour were invisible—no one would ever know how you spent it—what would you choose? What does that reveal about your true values?",
+                keywords: ["duty", "principle", "authenticity", "integrity"]
+            },
+            {
+                question: "What choice would I be proud of later?",
+                source: "Existentialism — Sartre, Camus",
+                thinking: `
+                    <p>Existentialists say you are radically free—and radically responsible. There's no script. You create meaning through your choices.</p>
+                    <p>The weight of freedom is that you can't blame anyone else. But the gift is that you can choose who you're becoming.</p>
+                `,
+                prompt: "Tonight, looking back on this hour, what would make you feel alive? What would feel like you chose, rather than drifted?",
+                keywords: ["freedom", "choice", "meaning", "responsibility"]
+            },
+            {
+                question: "What's the simplest thing that might work?",
+                source: "Pragmatism — William James, John Dewey",
+                thinking: `
+                    <p>Pragmatists care less about abstract truth and more about what works. An idea is valuable if it produces results in lived experience.</p>
+                    <p>Don't overthink. Experiment. Try something. See what happens. Adjust.</p>
+                `,
+                prompt: "Forget the perfect use of time. What's one small experiment you could run in this hour? What might you learn by just trying something?",
+                keywords: ["practical", "experiment", "results", "action"]
+            }
+        ];
+        
+        let userContext = '';
+        let timeAvailable = 60;
+        let selectedApproach = null;
+        
+        function showQuestions() {
+            userContext = document.getElementById('user-context').value.trim();
+            timeAvailable = parseInt(document.getElementById('time-available').value) || 60;
+            
+            // Clamp to 15-180
+            timeAvailable = Math.max(15, Math.min(180, timeAvailable));
+            
+            // Display context if provided
+            const contextDisplay = document.getElementById('context-display');
+            let contextHtml = `<strong>Time available:</strong> ${timeAvailable} minutes`;
+            if (userContext) {
+                contextHtml += `<br><strong>Your situation:</strong> "${userContext}"`;
+            }
+            contextDisplay.innerHTML = contextHtml;
+            contextDisplay.style.display = 'block';
+            
+            // Build question list
+            const list = document.getElementById('question-list');
+            list.innerHTML = approaches.map((a, i) => `
+                <div class="question-card" onclick="selectApproach(${i})">
+                    <div class="question-text">"${a.question}"</div>
+                    <div class="question-source">${a.source}</div>
+                </div>
+            `).join('');
+            
+            showStep(2);
+        }
+        
+        function selectApproach(index) {
+            selectedApproach = approaches[index];
+            
+            const content = document.getElementById('philosophy-content');
+            content.innerHTML = `
+                <div class="philosophy-detail">
+                    <h2>"${selectedApproach.question}"</h2>
+                    <div class="source">${selectedApproach.source}</div>
+                    
+                    <div class="thinking">
+                        <h4>The Thinking Behind It</h4>
+                        ${selectedApproach.thinking}
+                    </div>
+                    
+                    <div class="prompt-box">
+                        <h4>Your Prompt</h4>
+                        <p>${selectedApproach.prompt}</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="startTimer()">Start My Hour →</button>
+                        <button class="btn btn-secondary" onclick="goBack(2)">Try Another Approach</button>
+                    </div>
+                </div>
+            `;
+            
+            showStep(3);
+        }
+        
+        function startTimer() {
+            // Pass time to The Hour Apart or start a simple timer
+            window.location.href = `/tools/philosophy-lab.html?minutes=${timeAvailable}`;
+        }
+        
+        function showStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${n}`).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+        
+        function goBack(step) {
+            showStep(step);
+        }
+    </script>
+</body>
+</html>

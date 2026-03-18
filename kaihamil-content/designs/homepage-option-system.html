@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil | Navigate the AI Age</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --accent-system: #2d5a4a;
+            --accent-self: #8b6914;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* SYSTEM THEME STYLING */
+        .theme-system {
+            --accent-primary: var(--accent-system);
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .theme-toggle span { font-size: 0.85rem; color: var(--brown-medium); }
+        .theme-toggle .active { font-weight: 600; color: var(--brown-dark); }
+        
+        /* Hero - System Theme */
+        .hero-system {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--accent-system) 100%);
+            color: var(--bg-cream);
+            padding: 140px 40px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-system::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .hero-content { position: relative; z-index: 1; }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-title strong {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+        
+        /* Three Paths Grid */
+        .paths-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .paths-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .paths-intro h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .paths-intro p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .paths-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .path-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent-system);
+        }
+        
+        .path-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .path-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--accent-system);
+        }
+        
+        .path-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .path-cta {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--accent-system);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        /* Philosophy Section */
+        .philosophy-section {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 80px 40px;
+        }
+        
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .philosophy-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+        
+        .philosophy-content h2 strong {
+            color: var(--accent-system);
+        }
+        
+        .philosophy-content p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .philosophy-link {
+            color: var(--accent-system);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid var(--accent-system);
+            padding-bottom: 2px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        footer p { font-size: 0.9rem; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .paths-grid { grid-template-columns: 1fr; }
+            .nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body class="theme-system">
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <span class="active">System</span>
+            <span>/</span>
+            <span>Self</span>
+        </div>
+    </nav>
+    
+    <header class="hero-system">
+        <div class="hero-content">
+            <span class="hero-badge">Maps for the Unstructured Future</span>
+            <h1 class="hero-title">Ride the AI Wave.<br>Don't <strong>Drown</strong> in It.</h1>
+            <p class="hero-subtitle">The old maps don't work. The information flood changed everything. We're building navigation tools for humans who want to thrive in the unstructured future.</p>
+        </div>
+    </header>
+    
+    <section class="paths-section">
+        <div class="paths-intro">
+            <h2>Three Stages of <strong>Orientation</strong></h2>
+            <p>Navigate your path through the unstructured future. Each stage builds on the last, creating a complete system for living intentionally.</p>
+        </div>
+        
+        <div class="paths-grid">
+            <a href="/frameworks/ai-usage-advanced.html" class="path-card">
+                <div class="path-icon">📍</div>
+                <h3>Where Am I Now?</h3>
+                <p>Assess your current position. Understand how you use AI, how you allocate your time, and where you stand on the journey.</p>
+                <span class="path-cta">Start Assessment →</span>
+            </a>
+            
+            <a href="/philosophy/system-self.html" class="path-card">
+                <div class="path-icon">🎯</div>
+                <h3>Where Am I Going?</h3>
+                <p>System//Self philosophy — the balanced state where you and your systems work as one continuous thing.</p>
+                <span class="path-cta">Explore Philosophy →</span>
+            </a>
+            
+            <a href="/frameworks/" class="path-card">
+                <div class="path-icon">🧭</div>
+                <h3>How Do I Get There?</h3>
+                <p>Frameworks and tools for the journey. Close the gap between where you are and where you want to be.</p>
+                <span class="path-cta">Browse Frameworks →</span>
+            </a>
+        </div>
+    </section>
+    
+    <section class="philosophy-section">
+        <div class="philosophy-content">
+            <h2>System // <strong>Self</strong></h2>
+            <p>You and your systems are one continuous thing. The split is the suffering. In the age of unlimited information, the skill isn't knowing more — it's navigating better. We're here to help you build your own navigation system.</p>
+            <a href="/philosophy/system-self.html" class="philosophy-link">Read the philosophy →</a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2026 Kai Hamil. Maps for navigating the unstructured future of AI.</p>
+    </footer>
+    
+    <script>
+        function toggleTheme() {
+            // This would toggle between System and Self themes
+            // For demo purposes, this links to the Self version
+            window.location.href = 'homepage-option-self.html';
+        }
+    </script>
+</body>
+</html>

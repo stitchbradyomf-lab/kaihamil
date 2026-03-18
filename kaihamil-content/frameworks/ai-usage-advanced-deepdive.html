@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your AI Profile: Deep Dive | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --explorer: #8b6914;
+            --operator: #5a4a3a;
+            --director: #2d5016;
+            --implementer: #1e3a5f;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            z-index: 100;
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 300; color: var(--brown-dark); text-decoration: none; }
+        .logo strong { font-weight: 500; }
+        .nav-links a { color: var(--brown-medium); text-decoration: none; margin-left: 25px; font-size: 0.9rem; }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 { font-size: 2rem; font-weight: 300; margin-bottom: 10px; }
+        .hero h1 strong { color: var(--gold); font-weight: 500; }
+        .hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: var(--brown-dark);
+        }
+        
+        h2 strong { color: var(--gold); font-weight: 500; }
+        
+        .section-intro {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+        }
+        
+        /* Quadrant Section */
+        .quadrant-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .quadrant-grid {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            aspect-ratio: 1;
+        }
+        
+        /* Axis Labels */
+        .axis-label {
+            position: absolute;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+        
+        .axis-top { top: -35px; left: 50%; transform: translateX(-50%); }
+        .axis-bottom { bottom: -35px; left: 50%; transform: translateX(-50%); }
+        .axis-left { left: -70px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+        .axis-right { right: -70px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+        
+        /* Grid */
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .quadrant {
+            background: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .quadrant.active {
+            background: linear-gradient(135deg, var(--bg-card), var(--gold-light));
+            border: 3px solid var(--gold);
+        }
+        
+        .quadrant-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        .quadrant-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin-bottom: 3px;
+        }
+        
+        .quadrant-desc {
+            font-size: 0.7rem;
+            color: var(--brown-medium);
+            line-height: 1.3;
+        }
+        
+        .q1.active { border-color: var(--explorer); background: rgba(232, 213, 163, 0.3); }
+        .q2.active { border-color: var(--operator); background: rgba(212, 165, 116, 0.3); }
+        .q3.active { border-color: var(--director); background: rgba(201, 162, 39, 0.2); }
+        .q4.active { border-color: var(--implementer); background: rgba(61, 139, 55, 0.2); }
+        
+        /* User Dot */
+        .user-position {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: var(--gold);
+            border: 4px solid var(--brown-dark);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        .user-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brown-dark);
+            color: var(--bg-cream);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* Profile Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .info-card h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-card p, .info-card ul {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .info-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+        
+        /* Accordion Section */
+        .accordion-section {
+            margin: 40px 0;
+        }
+        
+        .accordion-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            border-color: var(--gold);
+            background: white;
+        }
+        
+        .accordion-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        .accordion-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .accordion-header.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        
+        .accordion-content.open {
+            max-height: 2000px;
+            padding-top: 20px;
+        }
+        
+        /* Type Cards in Accordion */
+        .type-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .type-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .type-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        .type-card.explorer { border-left-color: var(--explorer); }
+        .type-card.operator { border-left-color: var(--operator); }
+        .type-card.director { border-left-color: var(--director); }
+        .type-card.implementer { border-left-color: var(--implementer); }
+        
+        /* Next Steps Section */
+        .next-steps {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .next-steps h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .next-steps ul {
+            list-style: none;
+        }
+        
+        .next-steps li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .next-steps li:last-child {
+            border-bottom: none;
+        }
+        
+        .next-steps li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+        
+        .back-link:hover {
+            color: var(--gold);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container { padding: 40px 20px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .quadrant-section { padding: 25px; }
+            .axis-left { left: -55px; }
+            .axis-right { right: -55px; }
+            .next-steps { padding: 30px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← Frameworks</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Deep Dive</span>
+        <h1>Your Complete <strong>Profile</strong></h1>
+        <p>Understand your position, growth path, and the tools that match your style.</p>
+    </header>
+    
+    <main class="container">
+        <a href="ai-usage-advanced-results.html" class="back-link">← Back to Your Result</a>
+        
+        <!-- Quadrant Visualization -->
+        <section class="quadrant-section">
+            <h2>Your <strong>Position</strong></h2>
+            <p class="section-intro">The 2x2 map shows where you fall on two axes: how directive you are (x-axis) and how much you focus on execution vs assistance (y-axis).</p>
+            
+            <div class="quadrant-grid">
+                <span class="axis-label axis-top">Directive →</span>
+                <span class="axis-label axis-bottom">Inquisitive →</span>
+                <span class="axis-label axis-left">Assistive</span>
+                <span class="axis-label axis-right">Execution</span>
+                
+                <div class="grid-lines">
+                    <div class="quadrant q1" id="q1">
+                        <span class="quadrant-icon">🔍</span>
+                        <span class="quadrant-name">Explorer</span>
+                        <span class="quadrant-desc">Discover<br>First</span>
+                    </div>
+                    <div class="quadrant q2" id="q2">
+                        <span class="quadrant-icon">🔧</span>
+                        <span class="quadrant-name">Operator</span>
+                        <span class="quadrant-desc">Systematize<br>Everything</span>
+                    </div>
+                    <div class="quadrant q3" id="q3">
+                        <span class="quadrant-icon">🎬</span>
+                        <span class="quadrant-name">Director</span>
+                        <span class="quadrant-desc">Decide<br>Strategically</span>
+                    </div>
+                    <div class="quadrant q4" id="q4">
+                        <span class="quadrant-icon">⚡</span>
+                        <span class="quadrant-name">Implementer</span>
+                        <span class="quadrant-desc">Ship<br>Immediately</span>
+                    </div>
+                </div>
+                
+                <div class="user-position" id="userPosition" style="left: 25%; top: 25%;">
+                    <span class="user-label">You</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Info Cards -->
+        <div class="cards-grid">
+            <div class="info-card">
+                <h3>📈 Evolution Path</h3>
+                <p id="evolutionPath">Add structure to your exploration. Set time-boxed discovery phases with explicit decision points. Practice moving from "what if" to "what's next."</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>🛠️ Recommended Tools</h3>
+                <ul id="recommendedTools">
+                    <li>Conversation starters for open discovery</li>
+                    <li>Brainstorming frameworks</li>
+                    <li>Notion for capturing insights</li>
+                    <li>Timer apps for bounded exploration</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="next-steps">
+            <h3>Next Steps for Your Type</h3>
+            <ul id="nextSteps">
+                <li>Set a 20-minute timer for exploration, then force a decision</li>
+                <li>Create a "parking lot" document for ideas to explore later</li>
+                <li>Practice the 5 Filters framework before diving into new topics</li>
+                <li>Find an Implementer collaborator to balance your exploration</li>
+            </ul>
+        </div>
+        
+        <!-- Explore Other Types Accordion -->
+        <div class="accordion-section">
+            <div class="accordion-header" onclick="toggleAccordion()">
+                <h3>Explore Other Types</h3>
+                <span class="accordion-icon" id="accordionIcon">▼</span>
+            </div>
+            <div class="accordion-content" id="accordionContent">
+                <div class="type-card explorer">
+                    <h4>🔍 The Explorer</h4>
+                    <p>Curious first, decisive second. Uses AI to discover unknown unknowns. Comfortable with ambiguity. <strong>Risk:</strong> never shipping because exploration never ends. <strong>Best tools:</strong> Open-ended prompts, discovery modes, brainstorming frameworks.</p>
+                </div>
+                
+                <div class="type-card operator">
+                    <h4>🔧 The Operator</h4>
+                    <p>Understands systems deeply, uses AI to operate within them. Methodical and thorough. <strong>Risk:</strong> perfectionism and over-engineering. <strong>Best tools:</strong> Multi-step workflows, validation frameworks, documentation generators.</p>
+                </div>
+                
+                <div class="type-card director">
+                    <h4>🎬 The Director</h4>
+                    <p>Strong vision, uses AI to explore before committing. Strategic about when to lead and learn. <strong>Risk:</strong> analysis paralysis. <strong>Best tools:</strong> Scenario comparisons, pros/cons generators, research synthesizers.</p>
+                </div>
+                
+                <div class="type-card implementer">
+                    <h4>⚡ The Implementer</h4>
+                    <p>Knows what they want and makes it happen. Treats AI as execution tool. <strong>Risk:</strong> missing better approaches by moving too fast. <strong>Best tools:</strong> One-shot prompts, templates, quality checkers.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Kai Hamil | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">Based on behavioral research in human-AI interaction patterns</p>
+    </footer>
+    
+    <script>
+        // Type data
+        const typeData = {
+            explorer: {
+                quadrant: 'q1',
+                position: { x: 25, y: 25 },
+                evolutionPath: 'Add structure to your exploration. Set time-boxed discovery phases with explicit decision points. Practice moving from "what if" to "what\'s next."',
+                tools: [
+                    'Conversation starters for open discovery',
+                    'Brainstorming frameworks',
+                    'Notion for capturing insights',
+                    'Timer apps for bounded exploration'
+                ],
+                nextSteps: [
+                    'Set a 20-minute timer for exploration, then force a decision',
+                    'Create a "parking lot" document for ideas to explore later',
+                    'Practice the 5 Filters framework before diving into new topics',
+                    'Find an Implementer collaborator to balance your exploration'
+                ]
+            },
+            operator: {
+                quadrant: 'q2',
+                position: { x: 25, y: 75 },
+                evolutionPath: 'Trust that done is better than perfect. Set "good enough" standards. Practice shipping at 80% complete.',
+                tools: [
+                    'Multi-step workflow templates',
+                    'Validation and testing frameworks',
+                    'Documentation generators',
+                    'Process optimization prompts'
+                ],
+                nextSteps: [
+                    'Set a deadline before you start, not after',
+                    'Create a "ship it" checklist with minimum requirements',
+                    'Practice the 5 Filters to eliminate unnecessary features',
+                    'Find an Explorer collaborator to spark new ideas'
+                ]
+            },
+            director: {
+                quadrant: 'q3',
+                position: { x: 75, y: 25 },
+                evolutionPath: 'Set decision deadlines. Practice "satisficing" — choosing the good enough option over the perfect one.',
+                tools: [
+                    'Scenario comparison frameworks',
+                    'Pros/cons generators',
+                    'Research synthesizers',
+                    'Decision journals'
+                ],
+                nextSteps: [
+                    'Limit yourself to 3 options maximum',
+                    'Set a "decision by" time for every choice',
+                    'Practice the 5 Filters to clarify what matters',
+                    'Find an Operator collaborator to execute your vision'
+                ]
+            },
+            implementer: {
+                quadrant: 'q4',
+                position: { x: 75, y: 75 },
+                evolutionPath: 'Pause before executing. Ask "is there a better way?" Build exploration into your process.',
+                tools: [
+                    'One-shot prompt templates',
+                    'Quality checkers and validators',
+                    'Code review prompts',
+                    'Alternative approach generators'
+                ],
+                nextSteps: [
+                    'Add a 5-minute "consider alternatives" step before building',
+                    'Practice the 5 Filters to question your assumptions',
+                    'Create a "lessons learned" log for rushed decisions',
+                    'Find a Director collaborator to provide strategic vision'
+                ]
+            }
+        };
+        
+        // Accordion toggle
+        function toggleAccordion() {
+            const header = document.querySelector('.accordion-header');
+            const content = document.getElementById('accordionContent');
+            const icon = document.getElementById('accordionIcon');
+            
+            header.classList.toggle('open');
+            content.classList.toggle('open');
+            
+            if (content.classList.contains('open')) {
+                icon.textContent = '▲';
+            } else {
+                icon.textContent = '▼';
+            }
+        }
+        
+        // Load results
+        function loadResults() {
+            const params = new URLSearchParams(window.location.search);
+            let primaryType = params.get('type') || localStorage.getItem('aiUsagePrimaryType') || 'explorer';
+            
+            // Get scores for positioning
+            const scores = JSON.parse(localStorage.getItem('aiUsageScores') || '{}');
+            
+            // Handle hybrid types
+            if (primaryType.includes('-')) {
+                primaryType = primaryType.split('-')[0];
+            }
+            
+            const data = typeData[primaryType];
+            if (data) {
+                // Highlight quadrant
+                document.querySelectorAll('.quadrant').forEach(q => q.classList.remove('active'));
+                document.getElementById(data.quadrant).classList.add('active');
+                
+                // Position user dot
+                const dot = document.getElementById('userPosition');
+                
+                // Use actual scores if available, otherwise use default position
+                let x = data.position.x;
+                let y = data.position.y;
+                
+                if (scores.directive !== undefined && scores.execution !== undefined) {
+                    // Map scores (0-100) to percentage position
+                    x = scores.directive;
+                    y = 100 - scores.execution; // Invert Y so high execution is at bottom
+                }
+                
+                dot.style.left = x + '%';
+                dot.style.top = y + '%';
+                
+                // Update content
+                document.getElementById('evolutionPath').textContent = data.evolutionPath;
+                
+                const toolsList = document.getElementById('recommendedTools');
+                toolsList.innerHTML = data.tools.map(t => `<li>${t}</li>`).join('');
+                
+                const stepsList = document.getElementById('nextSteps');
+                stepsList.innerHTML = data.nextSteps.map(s => `<li>${s}</li>`).join('');
+            }
+        }
+        
+        loadResults();
+    </script>
+</body>
+</html>

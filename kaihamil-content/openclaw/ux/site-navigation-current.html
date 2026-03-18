@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Navigation: Current State | Operations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-gold: #f4d03f;
+            --accent-amber: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --info: #58a6ff;
+        }
+        
+        body {
+            font-family: 'Roboto', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .logo .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .back-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover { text-decoration: underline; }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .page-header h1 strong {
+            color: var(--accent-gold);
+        }
+        
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+        
+        .badge.current {
+            background: rgba(244, 208, 63, 0.2);
+            color: var(--accent-gold);
+        }
+        
+        /* Diagram */
+        .diagram-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+        
+        .diagram-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .diagram-controls h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        
+        .zoom-controls button {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+        
+        .zoom-controls button:hover {
+            border-color: var(--accent-gold);
+        }
+        
+        #diagram {
+            min-height: 800px;
+            transform-origin: top left;
+            transition: transform 0.2s;
+        }
+        
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            min-width: 120px;
+        }
+        
+        .stat-box .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        
+        .stat-box .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.home { background: #f4d03f; }
+        .legend-color.system { background: #58a6ff; }
+        .legend-color.self { background: #f97583; }
+        .legend-color.ops { background: #8b949e; }
+        .legend-color.content { background: #3fb950; }
+        
+        /* Section */
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .section-header {
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-header h2 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .section-content {
+            padding: 20px;
+        }
+        
+        .section-content ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .section-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Site Navigation</h1>
+                <div class="subtitle">Current State Map</div>
+            </div>
+            <a href="/openclaw/ux/" class="back-link">← UX Flows</a>
+        </header>
+        
+        <div class="page-header">
+            <h1>Complete Site <strong>Navigation Map</strong> <span class="badge current">Current State</span></h1>
+            <p>Every page and navigation path on content.kaihamil.com as of March 5, 2026</p>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="value">78</div>
+                <div class="label">Total Pages</div>
+            </div>
+            <div class="stat-box">
+                <div class="value">12</div>
+                <div class="label">Sections</div>
+            </div>
+            <div class="stat-box">
+                <div class="value">9</div>
+                <div class="label">Tools</div>
+            </div>
+            <div class="stat-box">
+                <div class="value">8</div>
+                <div class="label">Wisdom Pages</div>
+            </div>
+            <div class="stat-box">
+                <div class="value">7</div>
+                <div class="label">Frameworks</div>
+            </div>
+        </div>
+        
+        <div class="diagram-wrapper">
+            <div class="diagram-controls">
+                <h2>🗺️ Full Site Structure</h2>
+                <div class="zoom-controls">
+                    <button onclick="zoom(0.6)">50%</button>
+                    <button onclick="zoom(0.8)">75%</button>
+                    <button onclick="zoom(1)">100%</button>
+                    <button onclick="zoom(1.2)">125%</button>
+                </div>
+            </div>
+            
+            <div id="diagram">
+                <pre class="mermaid">
+flowchart TB
+    %% ═══════════════════════════════════════════
+    %% HOME / ENTRY POINTS
+    %% ═══════════════════════════════════════════
+    
+    HOME[/"🏠 HOME<br>content.kaihamil.com"/]
+    
+    %% Hero CTA
+    HOME -->|"Hero CTA"| QUIZ_ENTRY["AI User Quiz"]
+    
+    %% Main Grid Navigation
+    HOME --> POSTS_IDX
+    HOME --> PRODUCTS_IDX
+    HOME --> FRAMEWORKS_IDX
+    HOME --> RESEARCH_IDX
+    HOME --> TOOLS_IDX
+    HOME --> DIAGRAMS_IDX
+    HOME --> LIBRARY["📚 Library<br>(placeholder)"]
+    HOME --> OPS_IDX
+    
+    %% Nav Bar
+    HOME -->|"Nav: About"| ABOUT
+    HOME -->|"Feed link"| FEED
+    
+    %% ═══════════════════════════════════════════
+    %% POSTS (System-leaning content)
+    %% ═══════════════════════════════════════════
+    
+    subgraph POSTS ["✍️ POSTS"]
+        POSTS_IDX[/"Posts Index"/]
+        POST_1["5 Filters Applied to OpenClaw"]
+        POST_2["AI Video Editing Tools"]
+        POST_3["Thinking in Cause & Effect"]
+        POST_4["The 5:1 Ratio"]
+        POST_5["AI Agent Architecture"]
+        POST_6["What I'm Building"]
+        POST_7["The Physics of Love"]
+        POST_8["5 Filters: Deciding in Uncertainty"]
+        
+        POSTS_IDX --> POST_1 & POST_2 & POST_3 & POST_4
+        POSTS_IDX --> POST_5 & POST_6 & POST_7 & POST_8
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% PRODUCTS
+    %% ═══════════════════════════════════════════
+    
+    subgraph PRODUCTS ["⚡ PRODUCTS"]
+        PRODUCTS_IDX[/"Products Index"/]
+        PROD_1["AI Prompts for Realtors"]
+        
+        PRODUCTS_IDX --> PROD_1
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% FRAMEWORKS (System side)
+    %% ═══════════════════════════════════════════
+    
+    subgraph FRAMEWORKS ["◫ FRAMEWORKS"]
+        FRAMEWORKS_IDX[/"Frameworks Index"/]
+        FW_5FILTERS["5 Filters Assessment"]
+        FW_PROBLEM["Problem Audit"]
+        FW_CAUSE["Cause & Effect"]
+        FW_REALTOR["Realtor Discovery"]
+        FW_SYSSELF["System // Self"]
+        FW_ADV["AI Usage Advanced"]
+        FW_DEEPDIVE["AI Profile Deep Dive"]
+        
+        FRAMEWORKS_IDX --> FW_5FILTERS & FW_PROBLEM & FW_CAUSE
+        FRAMEWORKS_IDX --> FW_REALTOR & FW_SYSSELF & FW_ADV
+        FW_ADV --> FW_DEEPDIVE
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% TOOLS
+    %% ═══════════════════════════════════════════
+    
+    subgraph TOOLS ["🛠️ TOOLS"]
+        TOOLS_IDX[/"Tools Index"/]
+        
+        %% Assessments
+        QUIZ_ENTRY["AI User Quiz v1"]
+        QUIZ_V2["AI User Quiz v2"]
+        QUIZ_V3["AI User Quiz v3<br>(Double Diamond)"]
+        QUIZ_RESULT["Quiz Result Page"]
+        
+        %% Wisdom Tools
+        FREE_HOUR["The Free Time Tool"]
+        HOUR_APART["The Hour Apart"]
+        PARKING_LOT["Parking Lot Philosophy"]
+        
+        %% Utilities
+        SCRIPT_READER["Script Reader"]
+        
+        TOOLS_IDX --> QUIZ_ENTRY & QUIZ_V2 & QUIZ_V3
+        TOOLS_IDX --> FREE_HOUR & HOUR_APART & PARKING_LOT
+        TOOLS_IDX --> SCRIPT_READER
+        TOOLS_IDX --> FW_ADV
+        TOOLS_IDX --> FW_5FILTERS
+        TOOLS_IDX --> FW_PROBLEM
+        
+        QUIZ_V3 --> QUIZ_RESULT
+        QUIZ_V3 --> FW_DEEPDIVE
+        FREE_HOUR --> HOUR_APART
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% WISDOM (Self side)
+    %% ═══════════════════════════════════════════
+    
+    subgraph WISDOM ["🕯️ WISDOM"]
+        WISDOM_IDX[/"Wisdom Index"/]
+        W_UNCERTAINTY["Uncertainty"]
+        W_PURPOSE["Purpose"]
+        W_LOVE["Love"]
+        W_SUFFERING["Suffering"]
+        W_MORTALITY["Mortality"]
+        W_AMBITION["Ambition"]
+        W_SCRIPT["When the Script Stops"]
+        W_SCROLL["Philosophy of Not Scrolling"]
+        
+        WISDOM_IDX --> W_UNCERTAINTY & W_PURPOSE & W_LOVE & W_SUFFERING
+        WISDOM_IDX --> W_MORTALITY & W_AMBITION & W_SCRIPT & W_SCROLL
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% RESEARCH
+    %% ═══════════════════════════════════════════
+    
+    subgraph RESEARCH ["🔬 RESEARCH"]
+        RESEARCH_IDX[/"Research Index"/]
+        R_KG["Knowledge Graph"]
+        R_KG_BRIEF["KG Design Brief"]
+        R_ASSEMBLY["Assembly to Agency"]
+        R_SYSSELF_MSG["System/Self Messaging"]
+        R_PROBLEM_MAP["Problem-First Mapping"]
+        R_DENTAL["Dental Lollipop"]
+        R_REALTOR["Realtor Research"]
+        R_FUTURE["Future of Work"]
+        R_TRUTH["Truth vs Happiness"]
+        R_MEAL["Meal Planning"]
+        R_AMAZON["Amazon Monetization"]
+        R_PITCH["Real Problems Pitch"]
+        R_SCROLL["Philosophy of Not Scrolling"]
+        
+        RESEARCH_IDX --> R_KG & R_KG_BRIEF & R_ASSEMBLY
+        RESEARCH_IDX --> R_SYSSELF_MSG & R_PROBLEM_MAP
+        RESEARCH_IDX --> R_DENTAL & R_REALTOR & R_FUTURE
+        RESEARCH_IDX --> R_TRUTH & R_MEAL & R_AMAZON
+        RESEARCH_IDX --> R_PITCH & R_SCROLL
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% DIAGRAMS / VISUALS
+    %% ═══════════════════════════════════════════
+    
+    subgraph DIAGRAMS ["📊 DIAGRAMS"]
+        DIAGRAMS_IDX[/"Diagrams Index"/]
+        D_EMOTIONAL["Emotional Response"]
+        D_TRIP["Utah-Arizona Trip"]
+        
+        DIAGRAMS_IDX --> D_EMOTIONAL & D_TRIP
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% OPERATIONS (Internal)
+    %% ═══════════════════════════════════════════
+    
+    subgraph OPERATIONS ["👽 OPERATIONS"]
+        OPS_IDX[/"Operations Dashboard"/]
+        OPS_BASELINE["Baseline Dashboard"]
+        OPS_ARCH["Agent Architecture"]
+        OPS_ORG["Org Chart"]
+        OPS_TASKS["Implementation Tasks"]
+        OPS_STYLE["Style Audit"]
+        OPS_DEPLOY["Deploy History"]
+        OPS_TOKENS["Token Usage"]
+        
+        OPS_UX_IDX[/"UX Flows Index"/]
+        OPS_UX_TOOLS["Tools User Flow"]
+        OPS_UX_SITE["Site Navigation<br>(this page)"]
+        
+        OPS_IDX --> OPS_BASELINE & OPS_ARCH & OPS_ORG
+        OPS_IDX --> OPS_TASKS & OPS_STYLE & OPS_DEPLOY & OPS_TOKENS
+        OPS_IDX --> OPS_UX_IDX
+        OPS_UX_IDX --> OPS_UX_TOOLS & OPS_UX_SITE
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% ABOUT
+    %% ═══════════════════════════════════════════
+    
+    subgraph ABOUT_SECTION ["👤 ABOUT"]
+        ABOUT[/"About Page"/]
+        ABOUT_KYLE["Kyle Joseph Brady Bio"]
+        
+        ABOUT --> ABOUT_KYLE
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% OTHER PAGES
+    %% ═══════════════════════════════════════════
+    
+    FEED[/"📰 Feed<br>(System // Self)"/]
+    LOGIN["🔐 Login"]
+    
+    %% ═══════════════════════════════════════════
+    %% INTERNAL / STAGING
+    %% ═══════════════════════════════════════════
+    
+    subgraph INTERNAL ["🔧 INTERNAL (not public nav)"]
+        DESIGNS[/"Designs Index"/]
+        PROTOTYPES[/"Prototypes"/]
+        PRIVATE[/"Private"/]
+        CLIENTS[/"Clients (Jeff)"/]
+        
+        DESIGNS --> D_HOMEPAGE_SYS["Homepage: System"]
+        DESIGNS --> D_HOMEPAGE_SELF["Homepage: Self"]
+        DESIGNS --> D_QUIZ_V1["Quiz Results v1"]
+        DESIGNS --> D_QUIZ_V2["Quiz Results v2"]
+        DESIGNS --> D_QUIZ_V3["Quiz Results v3"]
+        
+        PROTOTYPES --> P_JEFF["Jeff Portfolio Intelligence"]
+        PROTOTYPES --> P_REALTOR["Realtor Memory"]
+    end
+    
+    %% ═══════════════════════════════════════════
+    %% CROSS-LINKS
+    %% ═══════════════════════════════════════════
+    
+    %% Quiz → Deep Dive
+    QUIZ_RESULT -.-> FW_DEEPDIVE
+    
+    %% Free Hour → Wisdom story
+    FREE_HOUR -.-> W_SCROLL
+    
+    %% Hour Apart → Quiz
+    HOUR_APART -.-> QUIZ_V3
+    
+    %% ═══════════════════════════════════════════
+    %% STYLING
+    %% ═══════════════════════════════════════════
+    
+    classDef home fill:#f4d03f,stroke:#c9a227,color:#000,stroke-width:3px
+    classDef system fill:#1e3a5f,stroke:#58a6ff,color:#fff
+    classDef self fill:#5f1e3a,stroke:#f97583,color:#fff
+    classDef ops fill:#21262d,stroke:#8b949e,color:#c9d1d9
+    classDef content fill:#0d4429,stroke:#3fb950,color:#fff
+    classDef internal fill:#2d2d2d,stroke:#6e7681,color:#8b949e
+    
+    class HOME home
+    class FRAMEWORKS_IDX,FW_5FILTERS,FW_PROBLEM,FW_CAUSE,FW_REALTOR,FW_SYSSELF,FW_ADV,FW_DEEPDIVE,TOOLS_IDX,QUIZ_ENTRY,QUIZ_V2,QUIZ_V3,QUIZ_RESULT,SCRIPT_READER system
+    class WISDOM_IDX,W_UNCERTAINTY,W_PURPOSE,W_LOVE,W_SUFFERING,W_MORTALITY,W_AMBITION,W_SCRIPT,W_SCROLL,FREE_HOUR,HOUR_APART,PARKING_LOT self
+    class OPS_IDX,OPS_BASELINE,OPS_ARCH,OPS_ORG,OPS_TASKS,OPS_STYLE,OPS_DEPLOY,OPS_TOKENS,OPS_UX_IDX,OPS_UX_TOOLS,OPS_UX_SITE ops
+    class POSTS_IDX,POST_1,POST_2,POST_3,POST_4,POST_5,POST_6,POST_7,POST_8,PRODUCTS_IDX,PROD_1,RESEARCH_IDX,R_KG,R_KG_BRIEF,R_ASSEMBLY,R_SYSSELF_MSG,R_PROBLEM_MAP,R_DENTAL,R_REALTOR,R_FUTURE,R_TRUTH,R_MEAL,R_AMAZON,R_PITCH,R_SCROLL,DIAGRAMS_IDX,D_EMOTIONAL,D_TRIP,ABOUT,ABOUT_KYLE,FEED content
+    class DESIGNS,PROTOTYPES,PRIVATE,CLIENTS,D_HOMEPAGE_SYS,D_HOMEPAGE_SELF,D_QUIZ_V1,D_QUIZ_V2,D_QUIZ_V3,P_JEFF,P_REALTOR,LOGIN,LIBRARY internal
+                </pre>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color home"></div>
+                    <span>Home / Entry</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color system"></div>
+                    <span>System (Solve Problems)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color self"></div>
+                    <span>Self (Gain Wisdom)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color content"></div>
+                    <span>Content / About</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ops"></div>
+                    <span>Operations (Internal)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>📋 Current Navigation Issues</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li><strong>No clear System/Self split:</strong> Home grid shows all 8 sections without hierarchy</li>
+                    <li><strong>Multiple quiz versions:</strong> v1, v2, v3 all accessible - unclear which is canonical</li>
+                    <li><strong>Library placeholder:</strong> Links to <code>/library/</code> but no index exists</li>
+                    <li><strong>Frameworks vs Tools overlap:</strong> Advanced Assessment in both sections</li>
+                    <li><strong>Wisdom tools buried:</strong> Free Hour/Hour Apart mixed with assessments in Tools</li>
+                    <li><strong>Research disclaimer needed:</strong> Raw explorations mixed with validated content</li>
+                    <li><strong>No clear conversion path:</strong> Users can browse but no funnel to capture</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h2>🎯 Proposed Restructure: System // Self Entry</h2>
+            </div>
+            <div class="section-content">
+                <ul>
+                    <li><strong>Two entry questions:</strong>
+                        <ul>
+                            <li>"I want to solve a problem" → System path (Frameworks, Assessments)</li>
+                            <li>"I want to gain wisdom" → Self path (Wisdom, Philosophy Tools)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Quiz as bridge:</strong> "What kind of AI user are you?" spans both sides</li>
+                    <li><strong>Consolidate tools:</strong> System tools vs Self tools</li>
+                    <li><strong>Archive old versions:</strong> Single canonical quiz (v3)</li>
+                    <li><strong>Research behind gate:</strong> Disclaimer + separate from polished content</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p><a href="/openclaw/ux/">← UX Flows</a> · <a href="/openclaw/">Operations</a> · <a href="/">Home</a></p>
+    </footer>
+    
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                curve: 'basis',
+                padding: 15,
+                nodeSpacing: 30,
+                rankSpacing: 50
+            }
+        });
+        
+        let currentZoom = 1;
+        function zoom(level) {
+            currentZoom = level;
+            document.getElementById('diagram').style.transform = `scale(${level})`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When the Script Stops Working | Kai Hamil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-warm: #f8f5f0;
+            --bg-paper: #fdfcfa;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --clay: #c4a484;
+            --terracotta: #b87a5e;
+            --sand: #e8ddd3;
+            --gold-warm: #c9a86c;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            line-height: 1.8;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--bg-warm), transparent);
+            z-index: 100;
+        }
+        
+        .logo { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            color: var(--ink-dark); 
+            text-decoration: none; 
+        }
+        
+        .nav-links a {
+            color: var(--ink-medium);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--terracotta); }
+        
+        .hero {
+            padding: 140px 40px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--sand) 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--ink-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .timeline-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .timeline-intro h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-intro p {
+            color: var(--ink-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .era {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--bg-paper);
+            border-radius: 16px;
+            border: 1px solid var(--sand);
+            position: relative;
+        }
+        
+        .era::before {
+            content: attr(data-year);
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            background: var(--terracotta);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .era-code h3, .era-life h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--terracotta);
+        }
+        
+        .era-code h3::before {
+            content: 'Code: ';
+            color: var(--ink-medium);
+            font-weight: 400;
+        }
+        
+        .era-life h3::before {
+            content: 'Life: ';
+            color: var(--ink-medium);
+            font-weight: 400;
+        }
+        
+        .era p {
+            font-size: 0.95rem;
+            color: var(--ink-medium);
+            line-height: 1.7;
+        }
+        
+        .era-gold .era-code h3, .era-gold .era-life h3 {
+            color: var(--gold-warm);
+        }
+        
+        .era-gold::before {
+            background: var(--gold-warm);
+        }
+        
+        .gap-section {
+            background: linear-gradient(135deg, var(--sand) 0%, var(--bg-paper) 100%);
+            padding: 60px 40px;
+            margin: 60px 0;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px dashed var(--terracotta);
+        }
+        
+        .gap-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--terracotta);
+        }
+        
+        .gap-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--ink-medium);
+        }
+        
+        .content-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .content-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .empathy-block {
+            background: var(--bg-paper);
+            border-left: 4px solid var(--gold-warm);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .empathy-block p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        
+        .empathy-block p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cta-section {
+            background: var(--sand);
+            padding: 60px 40px;
+            margin-top: 60px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .cta-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 25px;
+            color: var(--ink-medium);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold-warm);
+            color: var(--ink-dark);
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--terracotta);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .era {
+                grid-template-columns: 1fr;
+            }
+            .hero { padding: 100px 20px 60px; }
+            .timeline-container, .content-section { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="https://content.kaihamil.com/" class="logo">kai hamil</a>
+        <div class="nav-links">
+            <a href="https://content.kaihamil.com/">Home</a>
+            <a href="https://content.kaihamil.com/frameworks/">System</a>
+            <a href="https://content.kaihamil.com/wisdom/">Self</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>When the Script Stops Working</h1>
+        <p>If you're feeling like the old rules don't apply anymore... you're not alone. And you're not wrong.</p>
+    </header>
+    
+    <section class="timeline-container">
+        <div class="timeline-intro">
+            <h2>How We Got Here</h2>
+            <p>For decades, advances in how we program computers have quietly reshaped how society expects us to live. Here's what that progression actually looks like...</p>
+        </div>
+        
+        <div class="era" data-year="1950s-1970s">
+            <div class="era-code">
+                <h3>Assembly Language</h3>
+                <p>Programmers manually controlled every memory address and processor cycle. Explicit instruction for every action. No abstraction, no shortcuts. Brutally precise but impossibly rigid.</p>
+            </div>
+            <div class="era-life">
+                <h3>Inherited Destiny</h3>
+                <p>You did what your father did. You lived where you were born. Marriage, work, geography... all predetermined by birth. Following the script wasn't optional; it was survival.</p>
+            </div>
+        </div>
+        
+        <div class="era era-gold" data-year="1980s-2000s">
+            <div class="era-code">
+                <h3>High-Level Languages</h3>
+                <p>C, Python, JavaScript. Programmers declare intent ("add these numbers") and the system handles execution. Abstraction layers hide complexity. Focus shifts from how to what.</p>
+            </div>
+            <div class="era-life">
+                <h3>Meritocratic Path</h3>
+                <p>School → College → Career → House → Retirement. The script loosens slightly; you choose your major, your employer, your suburb. But the sequence remains. Follow the steps, get the reward.</p>
+            </div>
+        </div>
+        
+        <div class="gap-section">
+            <h2>The Gap We're In Now</h2>
+            <p>Code has moved forward. Life hasn't caught up.</p>
+            <p><strong>Code, 2025:</strong> Agentic AI. Set a goal, survey the environment, proceed. Intent-based, continuously adaptive.</p>
+            <p><strong>Life, 2025:</strong> Still trying to follow the 1990s script. Except the script is fraying. College doesn't guarantee jobs. Careers don't guarantee security. Retirement seems mythical. The ladder is gone, but no one gave us a map for climbing without one.</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <h2>If You're Reading This...</h2>
+        
+        <div class="empathy-block">
+            <p>You probably did everything right. You followed the steps. You got the degree, took the job, showed up every day. You believed that if you were competent and worked hard, things would work out.</p>
+            
+            <p>And now you're looking around wondering why it doesn't feel like it's supposed to. The promotions are slower. The housing market is impossible. The idea of retiring at 65 feels like a joke your parents told that you didn't get.</p>
+            
+            <p>Maybe you've tried optimizing. Read the productivity books. Tried the morning routines. Downloaded the apps that promise to fix everything. But the anxiety stays. The sense that you're missing something... stays.</p>
+        </div>
+        
+        <div class="empathy-block">
+            <p>Here's what no one tells you: <strong>the script was written for a different operating system.</strong></p>
+            
+            <p>Your parents followed instructions and it worked because the world they navigated was running on assembly. Explicit steps led to predictable outcomes. Do X, get Y. The script was trustworthy because the environment was stable.</p>
+            
+            <p>That environment is gone. The economy, technology, work itself... everything shifted to a higher level of abstraction. But the life advice? Still written in assembly language. Still assuming that following steps leads to predictable results.</p>
+        </div>
+        
+        <div class="empathy-block">
+            <p>You're not failing. You're trying to run outdated code on new hardware.</p>
+            
+            <p>The confusion you feel isn't a personal flaw. It's the cognitive dissonance of being told to follow a map while standing in territory the map doesn't cover. Of course you feel lost. Anyone would.</p>
+            
+            <p>The people who seem to be thriving? They've stopped looking for the script. They've started operating on intent instead. Setting goals and navigating, rather than following steps and hoping. They're playing a different game.</p>
+        </div>
+        
+        <div class="empathy-block">
+            <p>This is scary. No question.</p>
+            
+            <p>The script, for all its problems, had clarity. Milestones you could hit. Validation you could receive. A cohort moving through life with you, all checking the same boxes. That safety was real, even if the promises were fraying.</p>
+            
+            <p>Letting go of it means stepping into uncertainty. It means no one can tell you if you're doing it right because there is no "it" anymore. It means building your own compass and learning to trust it.</p>
+            
+            <p>But it also means freedom. The script was someone else's design for a life. When you stop following it, you get to ask... what do <em>you</em> actually want? What would <em>your</em> life look like if you weren't optimizing for someone else's definition of success?</p>
+        </div>
+        
+        <div class="empathy-block">
+            <p><strong>Kai Hamil exists because of this exact moment.</strong></p>
+            
+            <p>Not to give you a new script. (Please. You don't need another one of those.) But to give you what actually helps when scripts stop working: frameworks for thinking, tools for navigating, and a reminder that you're not broken... the old code is.</p>
+            
+            <p>The transition from instruction-following to intention-setting isn't automatic. It requires new skills. Goal articulation. Environment sensing. Constraint wisdom. The ability to inspect your own progress rather than waiting for external validation.</p>
+            
+            <p>We've been building those frameworks. Testing them. Refining them. Not because we have all the answers, but because we recognize the question: <em>how do you live well when the old rules don't apply?</em></p>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <h3>You don't have to figure this out alone</h3>
+        <p>The gap between where society is and where the advice left us is real. But it's bridgeable. One framework at a time. One insight at a time. One honest conversation with yourself at a time.</p>
+        <a href="https://content.kaihamil.com/wisdom/" class="cta-button">Explore the Frameworks</a>
+    </section>
+</body>
+</html>

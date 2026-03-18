@@ -1,0 +1,199 @@
+<!-- Option 1: Prominent Button Link -->
+<a href="https://content.kaihamil.com/feed.html" class="content-feed-link">
+    <span class="pulse-dot"></span>
+    Latest Essays & Tools
+</a>
+
+<style>
+.content-feed-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.content-feed-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(37, 99, 235, 0.4);
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+}
+</style>
+
+
+<!-- Option 2: Card Promo Box -->
+<div class="content-feed-card">
+    <div class="feed-badge">Updated Feb 14</div>
+    <h3>📝 Latest from Kai</h3>
+    <p>Fresh essays on love, decision-making, and human connection—plus new tools for realtors.</p>
+    <a href="https://content.kaihamil.com/feed.html" class="feed-cta">
+        View Latest Updates →
+    </a>
+</div>
+
+<style>
+.content-feed-card {
+    max-width: 400px;
+    padding: 2rem;
+    background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feed-badge {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    background: #f59e0b;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.content-feed-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+}
+
+.content-feed-card p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.feed-cta {
+    display: inline-flex;
+    padding: 0.875rem 1.5rem;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.feed-cta:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+</style>
+
+
+<!-- Option 3: Minimal Inline Link with Arrow -->
+<p class="latest-link">
+    <a href="https://content.kaihamil.com/feed.html">
+        Latest essays & tools →
+    </a>
+</p>
+
+<style>
+.latest-link a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 2px;
+    transition: all 0.2s;
+}
+
+.latest-link a:hover {
+    color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+</style>
+
+
+<!-- Option 4: Banner Alert (Full Width) -->
+<div class="feed-banner">
+    <div class="banner-content">
+        <span class="banner-label">New</span>
+        <span class="banner-text">Fresh essays and tools published</span>
+        <a href="https://content.kaihamil.com/feed.html" class="banner-link">
+            Check it out →
+        </a>
+    </div>
+</div>
+
+<style>
+.feed-banner {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.banner-label {
+    padding: 0.25rem 0.75rem;
+    background: #f59e0b;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+}
+
+.banner-text {
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.banner-link {
+    margin-left: auto;
+    color: #60a5fa;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.banner-link:hover {
+    color: #93c5fd;
+}
+
+@media (max-width: 600px) {
+    .banner-link {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+</style>
+
+
+<!-- Option 5: Text Only (No CSS Required) -->
+<p>
+    <strong>Latest updates:</strong> 
+    <a href="https://content.kaihamil.com/feed.html" style="color: #2563eb; font-weight: 600;">
+        Essays, frameworks, and tools →
+    </a>
+</p>
