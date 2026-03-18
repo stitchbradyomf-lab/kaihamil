@@ -17,6 +17,17 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Valé subdomain serves vale/index.html
+[[redirects]]
+  from = "https://vale.kaihamil.com/*"
+  to = "/vale/index.html"
+  status = 200
+
+[[redirects]]
+  from = "https://vale.kaihamil.com"
+  to = "/vale/index.html"
+  status = 200
+
 # Redirects for protected routes
 [[redirects]]
   from = "/private/*"
