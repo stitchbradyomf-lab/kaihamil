@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Process Mapping | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --terracotta: #b87a5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.8;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .hero {
+            max-width: 800px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        
+        .content p {
+            margin-bottom: 1.5em;
+            font-size: 1.05rem;
+            color: var(--ink-medium);
+        }
+        
+        .content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin: 2.5em 0 0.8em;
+        }
+        
+        .content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+            margin: 1.5em 0 0.5em;
+        }
+        
+        .pullquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--gold);
+            border-left: 3px solid var(--gold);
+            padding-left: 25px;
+            margin: 2em 0;
+            line-height: 1.5;
+        }
+        
+        /* Phase Cards */
+        .phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 2em 0;
+        }
+        
+        .phase-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .phase-card.active {
+            border: 2px solid var(--gold);
+            background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 30%);
+        }
+        
+        .phase-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .phase-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .phase-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            line-height: 1.5;
+        }
+        
+        .phase-years {
+            font-size: 0.8rem;
+            color: var(--terracotta);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* Questions */
+        .question-grid {
+            display: grid;
+            gap: 15px;
+            margin: 1.5em 0;
+        }
+        
+        .question {
+            background: var(--bg-warm);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .question-text {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .question-hint {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        /* Zoom Levels */
+        .zoom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+        }
+        
+        .zoom-table th,
+        .zoom-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .zoom-table th {
+            background: var(--bg-warm);
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .zoom-table td {
+            color: var(--ink-medium);
+        }
+        
+        /* Related */
+        .related {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 3em 0 0;
+        }
+        
+        .related h3 {
+            margin-top: 0;
+            color: var(--ink-dark);
+        }
+        
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .related-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .related-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--gold);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .phases { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <a href="/frameworks/" class="nav-link">← Frameworks</a>
+    </nav>
+    
+    <header class="hero">
+        <h1>Life Process Mapping</h1>
+        <p class="tagline">Zoom out to see patterns. Map the stages. Navigate the transition.</p>
+    </header>
+    
+    <article class="content">
+        <p>Most decisions feel urgent because we're zoomed in too close. When you only see today, every setback feels catastrophic. Every opportunity feels like the last one.</p>
+        
+        <p>Life Process Mapping is the practice of zooming out - expanding your time horizon to see where you are in a larger arc. Not to diminish today's importance, but to place it in context.</p>
+        
+        <div class="pullquote">
+            You can't read the label from inside the jar.
+        </div>
+        
+        <h2>The Three Phases</h2>
+        
+        <p>Any major life transition - career change, business launch, relationship evolution - follows a predictable pattern:</p>
+        
+        <div class="phases">
+            <div class="phase-card">
+                <div class="phase-number">1</div>
+                <div class="phase-title">Foundation</div>
+                <div class="phase-desc">Preparation. Building habits. Making the decision to invest before the opportunity appears.</div>
+                <div class="phase-years">~Year 1</div>
+            </div>
+            
+            <div class="phase-card active">
+                <div class="phase-number">2</div>
+                <div class="phase-title">Movement</div>
+                <div class="phase-desc">Development. Building the actual thing. Iterating through failure and feedback.</div>
+                <div class="phase-years">Years 2-3</div>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-number">3</div>
+                <div class="phase-title">Transition</div>
+                <div class="phase-desc">The exit. The shift. What you've been building becomes the new default.</div>
+                <div class="phase-years">Years 4-5</div>
+            </div>
+        </div>
+        
+        <h2>The Zoom Levels</h2>
+        
+        <p>Different decisions require different time horizons:</p>
+        
+        <table class="zoom-table">
+            <tr>
+                <th>Zoom Level</th>
+                <th>Time Horizon</th>
+                <th>Good For</th>
+            </tr>
+            <tr>
+                <td>Day</td>
+                <td>Today</td>
+                <td>Task prioritization, energy management</td>
+            </tr>
+            <tr>
+                <td>Week</td>
+                <td>7 days</td>
+                <td>Project sprints, routine adjustments</td>
+            </tr>
+            <tr>
+                <td>Quarter</td>
+                <td>90 days</td>
+                <td>Goals, experiments, habit formation</td>
+            </tr>
+            <tr>
+                <td>Year</td>
+                <td>12 months</td>
+                <td>Major initiatives, skill development</td>
+            </tr>
+            <tr>
+                <td>Arc</td>
+                <td>3-5 years</td>
+                <td>Career transitions, life chapters</td>
+            </tr>
+            <tr>
+                <td>Lifetime</td>
+                <td>Decades</td>
+                <td>Legacy, values, what matters</td>
+            </tr>
+        </table>
+        
+        <h2>How to Use This Framework</h2>
+        
+        <h3>Step 1: Identify Your Current Phase</h3>
+        
+        <p>Where are you in the Foundation → Movement → Transition arc? Be honest. Foundation isn't lesser than Movement - it's necessary.</p>
+        
+        <h3>Step 2: Name the Transition</h3>
+        
+        <p>What are you actually transitioning toward? Not the vague version. The specific one.</p>
+        
+        <div class="question-grid">
+            <div class="question">
+                <div class="question-text">What does "success" look like at the end of this arc?</div>
+                <div class="question-hint">Not society's version. Yours.</div>
+            </div>
+            <div class="question">
+                <div class="question-text">What are you transitioning FROM?</div>
+                <div class="question-hint">Be specific about what you're leaving behind.</div>
+            </div>
+            <div class="question">
+                <div class="question-text">What would you regret not attempting?</div>
+                <div class="question-hint">The 5-year version of "what would I regret tomorrow?"</div>
+            </div>
+        </div>
+        
+        <h3>Step 3: Set Anti-Goals</h3>
+        
+        <p>What do you want to ELIMINATE from your life by the end of this arc? Sometimes the clearest direction comes from knowing what you refuse to tolerate.</p>
+        
+        <p>Anti-goals might include:</p>
+        <ul style="margin: 1em 0 1.5em 2em; color: var(--ink-medium);">
+            <li>Eliminate dependence on one income source</li>
+            <li>Eliminate the Sunday dread</li>
+            <li>Eliminate being at the mercy of someone else's mood</li>
+            <li>Eliminate the feeling of "is this all there is?"</li>
+        </ul>
+        
+        <h3>Step 4: Match Decisions to Zoom Level</h3>
+        
+        <p>When facing a decision, ask: "What zoom level does this require?"</p>
+        
+        <p>A bad day doesn't require Arc-level thinking. A career pivot doesn't fit in a Week-level frame.</p>
+        
+        <h2>The Performative Trap</h2>
+        
+        <p>Warning: Foundation phases often feel performative. You're doing things that don't yet connect to visible results. You're taking advice from others because you don't yet know your own way.</p>
+        
+        <p>This is normal. Foundation is necessarily borrowed - you're building on patterns that worked for others until you discover what works for you.</p>
+        
+        <p>The trap is staying there. Foundation should have a time limit. At some point, you must move into Movement, even if you don't feel ready.</p>
+        
+        <div class="pullquote">
+            The foundation exists to support the building, not to be admired as foundation.
+        </div>
+        
+        <h2>Integration with System // Self</h2>
+        
+        <p>Life Process Mapping lives on the <strong>Self</strong> side of the <a href="/frameworks/system-self.html" style="color: var(--gold);">System // Self</a> paradigm. It's not about optimizing your life (System). It's about understanding where you are so you can align with where you're meant to go (Self).</p>
+        
+        <p>The framework provides structure. But the answers come from looking inward.</p>
+        
+        <div class="related">
+            <h3>Related</h3>
+            <div class="related-links">
+                <a href="/posts/looking-inward.html">Looking Inward (Post)</a>
+                <a href="/wisdom/purpose.html">Purpose</a>
+                <a href="/wisdom/uncertainty.html">Uncertainty</a>
+                <a href="/research/assembly-to-agency-draft.html">Assembly to Agency</a>
+                <a href="/frameworks/problem-audit.html">Problem Audit</a>
+            </div>
+        </div>
+    </article>
+    
+    <footer class="footer">
+        <a href="/">Home</a>
+        <a href="/frameworks/">Frameworks</a>
+        <a href="/about.html">About</a>
+    </footer>
+</body>
+</html>

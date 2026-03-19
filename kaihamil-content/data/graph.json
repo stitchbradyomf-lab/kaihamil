@@ -592,6 +592,22 @@
       "branch": "meta",
       "url": "/prototypes/realtor-memory.html",
       "description": "Client relationship memory"
+    },
+    {
+      "id": "life-process-mapping",
+      "label": "Life Process Mapping",
+      "type": "content",
+      "branch": "self",
+      "url": "/frameworks/life-process-mapping.html",
+      "description": "Zoom out to see patterns. Map life stages and transitions."
+    },
+    {
+      "id": "post-looking-inward",
+      "label": "Looking Inward",
+      "type": "content",
+      "branch": "self",
+      "url": "/posts/looking-inward.html",
+      "description": "To find what you're meant to do externally, look inside."
     }
   ],
   "edges": [
@@ -741,7 +757,21 @@
     {"source": "common-cause-variation", "target": "control-chart-evaluator", "type": "deepens"},
     {"source": "common-cause-variation", "target": "uncertainty", "type": "related"},
     {"source": "common-cause-variation", "target": "cause-effect", "type": "related"},
-    {"source": "control-chart-evaluator", "target": "5-filters", "type": "related"}
+    {"source": "control-chart-evaluator", "target": "5-filters", "type": "related"},
+    
+    {"source": "frameworks", "target": "life-process-mapping", "type": "contains"},
+    {"source": "life-process-mapping", "target": "purpose", "type": "related"},
+    {"source": "life-process-mapping", "target": "uncertainty", "type": "related"},
+    {"source": "life-process-mapping", "target": "assembly-agency", "type": "related"},
+    {"source": "life-process-mapping", "target": "system-self-framework", "type": "related"},
+    {"source": "life-process-mapping", "target": "problem-audit", "type": "related"},
+    {"source": "life-process-mapping", "target": "post-looking-inward", "type": "applies"},
+    
+    {"source": "post-looking-inward", "target": "life-process-mapping", "type": "related"},
+    {"source": "post-looking-inward", "target": "system-self-framework", "type": "related"},
+    {"source": "post-looking-inward", "target": "assembly-agency", "type": "related"},
+    {"source": "post-looking-inward", "target": "purpose", "type": "related"},
+    {"source": "post-looking-inward", "target": "uncertainty", "type": "related"}
   ],
   "config": {
     "colors": {
