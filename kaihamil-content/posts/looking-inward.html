@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looking Inward | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.8;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .post-header {
+            max-width: 700px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .post-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .post-subtitle {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+        }
+        
+        .post-meta {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .post-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        
+        .post-content p {
+            margin-bottom: 1.5em;
+            font-size: 1.05rem;
+            color: var(--ink-medium);
+        }
+        
+        .post-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin: 2em 0 0.8em;
+        }
+        
+        .pullquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--gold);
+            border-left: 3px solid var(--gold);
+            padding-left: 25px;
+            margin: 2em 0;
+            line-height: 1.5;
+        }
+        
+        .timeline {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin: 2em 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-year {
+            font-weight: 600;
+            color: var(--gold);
+            min-width: 80px;
+        }
+        
+        .timeline-desc {
+            color: var(--ink-medium);
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--gold);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .post-title { font-size: 2rem; }
+            .pullquote { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai hamil</a>
+        <a href="/posts/" class="nav-link">← Posts</a>
+    </nav>
+    
+    <header class="post-header">
+        <h1 class="post-title">Looking Inward</h1>
+        <p class="post-subtitle">To find what you are meant to do externally, you may only be able to discover it by looking inside.</p>
+        <p class="post-meta">March 19, 2026</p>
+    </header>
+    
+    <article class="post-content">
+        <p>I read my New Year's Eve journal entry yesterday. December 31, 2025. It referenced a five-year journey I began in November 2024.</p>
+        
+        <p>During that time, we were living primarily out of our basement while the kitchen was gutted and the first floor was renovated. I adopted a habit of waking up early - between 5 and 6 AM - and starting my morning with quiet journaling, listening to a vinyl record, then stretching, straightening up, and taking the dog out back for a morning walk through the woods.</p>
+        
+        <h2>The Five-Year Plan</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-year">Year 1</span>
+                <span class="timeline-desc">Foundation. New habits. Making the decision to invest in preparing for the opportunity.</span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-year">Years 2-3</span>
+                <span class="timeline-desc">Movement and development. Building the actual thing.</span>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-year">Years 4-5</span>
+                <span class="timeline-desc">Exit strategy. The transition.</span>
+            </div>
+        </div>
+        
+        <p>I decided immediately that year one would be foundation setting. New habits, reducing previous habits (like whiskey), and demonstrating the qualities that I believed I should have. In other words: taking a lot of advice from online gurus.</p>
+        
+        <p>I did this consistently throughout the entirety of the home renovation project, ending sometime in February 2025.</p>
+        
+        <h2>The Performative Stage</h2>
+        
+        <p>When referring back to this initial stage a year later, I described it as <em>performative</em>.</p>
+        
+        <p>I now recognize it as potentially anti-agency - yielding the decision of what I should do to the knowledgeable outsiders. Sound familiar?</p>
+        
+        <p>That's not to say it wasn't extremely valuable. But it very much wasn't my sustainable way. And I guess I knew that, given the temporary nature of the basement living.</p>
+        
+        <p>Regardless, it was my start. It was the time I intentionally told myself that I was going to escape the monotony and limitations of relying fully on a high paying job - two of them in the household, in fact - rather than align with my internal self and do the things that only I can do. Perform the craft that only I can make.</p>
+        
+        <h2>The Anti-Goal</h2>
+        
+        <p>I have an anti-goal for 2026: <strong>Eliminate the low points that I experienced in 2025.</strong></p>
+        
+        <p>My stability is paramount. Without it, my entire foundation remains at risk. My business - my life! - as I'm turning 41, cannot be dependent on the mood of somebody else. That's definitely not agency.</p>
+        
+        <h2>The Lost Keys</h2>
+        
+        <p>And so I zoom out to this five-year time horizon, and I see where I am - on the precipice of launching a real business - and I appreciate so much more about the benefit of the decisions I made and the patience I've had for those decisions to ultimately pay off.</p>
+        
+        <p>Launching a new business isn't simply having a good idea. Not a sustainable, scalable one anyway. No amount of brainstorming or market research would prepare me to be where I am by itself.</p>
+        
+        <div class="pullquote">
+            Starting a business should be a discovery process. Struggling and reflecting and aligning your actions against what comes naturally to you.
+        </div>
+        
+        <p>Brute force and outsourced AI thinking will only get you so far.</p>
+        
+        <p>It's like when you're looking for your keys. You can check every physical space and once in a while you'll get lucky. Depends how big your space is, I guess.</p>
+        
+        <p>But if you stop and collect your thoughts, you retrace your steps and recall exactly that you ran straight to the bathroom after work, and probably put them on the side table by the toilet. Then you go back there to find them underneath a stray hand towel.</p>
+        
+        <p>Would've taken hours and sheer luck to have found them physically.</p>
+        
+        <h2>System // Self</h2>
+        
+        <p>This is the System // Self philosophy in practice.</p>
+        
+        <p>The recognition that to find what you are meant to do externally may only be able to be discovered by looking inside.</p>
+        
+        <div class="pullquote">
+            To find what you are meant to do externally, look inside.
+        </div>
+    </article>
+    
+    <footer class="footer">
+        <a href="/">Home</a>
+        <a href="/posts/">Posts</a>
+        <a href="/about.html">About</a>
+    </footer>
+</body>
+</html>
