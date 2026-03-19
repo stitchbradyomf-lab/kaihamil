@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capabilities | Valé OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover { color: var(--gold); }
+        
+        .hero {
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 0%, var(--bg-cream) 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--brown-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-alt {
+            background: var(--bg-warm);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+        
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--ink-dark);
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+        
+        .telegram-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        
+        .telegram-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--ink-dark);
+            margin-bottom: 20px;
+        }
+        
+        .telegram-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .telegram-benefit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+        }
+        
+        .telegram-benefit::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .chat-examples {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .chat-example {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .chat-example:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .chat-you {
+            font-style: italic;
+            color: var(--ink-medium);
+            margin-bottom: 8px;
+        }
+        
+        .chat-vale {
+            color: var(--brown-dark);
+            padding-left: 20px;
+            border-left: 3px solid var(--gold);
+        }
+        
+        .cron-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .cron-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .cron-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .cron-icon {
+            font-size: 1.5rem;
+        }
+        
+        .cron-title {
+            font-weight: 500;
+            color: var(--ink-dark);
+        }
+        
+        .cron-time {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .cron-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+        
+        .morning-brief {
+            background: var(--ink-dark);
+            color: var(--amber);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+        
+        .morning-brief-header {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .tier-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .tier-table th {
+            background: var(--bg-warm);
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--ink-dark);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tier-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        .tier-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .tier-table .check {
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .industry-packs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .industry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .industry-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .industry-icon {
+            font-size: 2rem;
+        }
+        
+        .industry-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink-dark);
+        }
+        
+        .industry-skills {
+            list-style: none;
+        }
+        
+        .industry-skills li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .industry-skills li:last-child {
+            border-bottom: none;
+        }
+        
+        .industry-skills strong {
+            color: var(--ink-dark);
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-warm);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+            margin: 0 10px;
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+        
+        .cta-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--brown-dark);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .cta-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            color: var(--amber);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .footer-link:hover { opacity: 1; }
+        
+        .footer-copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .telegram-section { padding: 25px; }
+            .cta-button, .cta-secondary { 
+                display: block; 
+                margin: 10px auto; 
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+        <div class="nav-links">
+            <a href="capabilities.html" class="nav-link">Capabilities</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="setup.html" class="nav-link">Get Started</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>What Your <strong>Valé</strong> Can Do</h1>
+        <p>Not an app. Not a tool. A complete AI-powered operations layer that connects to your existing life and business — running 24/7 in your pocket via Telegram.</p>
+    </section>
+    
+    <!-- Telegram Access -->
+    <section class="section">
+        <div class="telegram-section">
+            <h3>📱 Your Valé Lives in Telegram</h3>
+            <p style="color: var(--brown-medium); margin-bottom: 25px;">Every client gets their own private Telegram bot. No new app to learn — just message your Valé like you'd message a friend.</p>
+            
+            <div class="telegram-benefits">
+                <span class="telegram-benefit">Works on phone, tablet, desktop</span>
+                <span class="telegram-benefit">Push notifications for alerts</span>
+                <span class="telegram-benefit">Voice messages supported</span>
+                <span class="telegram-benefit">File sharing built in</span>
+                <span class="telegram-benefit">Fast, reliable, encrypted</span>
+                <span class="telegram-benefit">Works offline (messages queue)</span>
+            </div>
+            
+            <div class="chat-examples">
+                <div class="chat-example">
+                    <div class="chat-you">"Where's the Smith contract?"</div>
+                    <div class="chat-vale">Found it. Here's the link: [drive link]</div>
+                </div>
+                <div class="chat-example">
+                    <div class="chat-you">"What's on my calendar tomorrow?"</div>
+                    <div class="chat-vale">You have 3 meetings: [list]</div>
+                </div>
+                <div class="chat-example">
+                    <div class="chat-you">"What did I promise John last week?"</div>
+                    <div class="chat-vale">On March 12, you told him you'd send comps by EOW. That's overdue — want me to draft a message?</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Built-in Skills -->
+    <section class="section section-alt">
+        <h2 class="section-title">Built-In Skills (All Tiers)</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">Apple Notes</h3>
+                <p class="feature-desc">Create, read, and search notes. Auto-file meeting notes. Sync across all your devices instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3 class="feature-title">Apple Reminders</h3>
+                <p class="feature-desc">Create reminders with due dates, location-based triggers, and recurring tasks. Never forget a follow-up.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Calendar & Contacts</h3>
+                <p class="feature-desc">Full calendar visibility. Create and modify events. Contact lookup and availability checking.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌤️</div>
+                <h3 class="feature-title">Weather</h3>
+                <p class="feature-desc">Current conditions anywhere. Multi-day forecasts. Perfect for planning events and showings.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 class="feature-title">Web Search</h3>
+                <p class="feature-desc">Real-time information lookup. Research assistance and fact-checking on demand.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3 class="feature-title">Browser Automation</h3>
+                <p class="feature-desc">Check websites, fill forms, monitor pages for changes, capture screenshots, automated login flows.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Automated Workflows -->
+    <section class="section">
+        <h2 class="section-title">Automated Workflows</h2>
+        <div class="cron-grid">
+            <div class="cron-card">
+                <div class="cron-header">
+                    <span class="cron-icon">☀️</span>
+                    <div>
+                        <div class="cron-title">Morning Brief</div>
+                        <div class="cron-time">Daily at 7:00 AM</div>
+                    </div>
+                </div>
+                <p class="cron-desc">Your day at a glance: calendar overview, priority tasks, overdue follow-ups, key emails, and weather for outdoor events.</p>
+            </div>
+            <div class="cron-card">
+                <div class="cron-header">
+                    <span class="cron-icon">🔧</span>
+                    <div>
+                        <div class="cron-title">Weekly Ops Check</div>
+                        <div class="cron-time">Sundays at 8:00 PM</div>
+                    </div>
+                </div>
+                <p class="cron-desc">Tests all integrations, email sync, calendar access, file storage, and bot responsiveness. Alerts only if issues found.</p>
+            </div>
+            <div class="cron-card">
+                <div class="cron-header">
+                    <span class="cron-icon">🌐</span>
+                    <div>
+                        <div class="cron-title">Website Testing</div>
+                        <div class="cron-time">Daily at 6:00 AM</div>
+                    </div>
+                </div>
+                <p class="cron-desc">Verifies your website loads, contact forms work, and listing feeds are active. Silent unless issues found.</p>
+            </div>
+            <div class="cron-card">
+                <div class="cron-header">
+                    <span class="cron-icon">🔄</span>
+                    <div>
+                        <div class="cron-title">Custom Automations</div>
+                        <div class="cron-time">Your schedule</div>
+                    </div>
+                </div>
+                <p class="cron-desc">Tailored to your business: listing alerts, policy renewals, closing countdowns, market reports, and more.</p>
+            </div>
+        </div>
+        
+        <div class="morning-brief">
+            <div class="morning-brief-header">☀️ Sample Morning Brief</div>
+Good morning! Here's your Wednesday, March 18:
+
+📅 TODAY'S SCHEDULE
+• 9:00 AM - Buyer consultation (Sarah Chen) - Coffee shop on Main
+• 11:30 AM - Showing at 1234 Oak St
+• 2:00 PM - Listing appointment (call)
+
+⚡ PRIORITY ACTIONS
+• Follow up with John Smith (3 days overdue)
+• Send comps to Maria Garcia (promised yesterday)
+
+📧 NEEDS ATTENTION
+• Email from lender re: Thompson loan (urgent)
+
+🌤️ Weather: 72°F, partly cloudy - good for showings!
+        </div>
+    </section>
+    
+    <!-- Industry Skill Packs -->
+    <section class="section section-alt">
+        <h2 class="section-title">Industry Skill Packs</h2>
+        <p style="text-align: center; color: var(--brown-medium); margin: -15px auto 35px; max-width: 600px;">Specialized capabilities for your profession. One pack included with Growth tier; all packs included with Scale.</p>
+        
+        <div class="industry-packs">
+            <div class="industry-card">
+                <div class="industry-header">
+                    <span class="industry-icon">🏠</span>
+                    <span class="industry-title">Realtor Pack</span>
+                </div>
+                <ul class="industry-skills">
+                    <li><strong>Listing Tracker</strong>Monitor MLS for new listings matching client criteria</li>
+                    <li><strong>Transaction Timeline</strong>Track all dates and deadlines per deal</li>
+                    <li><strong>Showing Feedback</strong>Collect and organize buyer feedback automatically</li>
+                    <li><strong>CMA Assistant</strong>Pull comps and format professional reports</li>
+                    <li><strong>Open House Prep</strong>Weather, checklist, and follow-up sequences</li>
+                </ul>
+            </div>
+            
+            <div class="industry-card">
+                <div class="industry-header">
+                    <span class="industry-icon">🛡️</span>
+                    <span class="industry-title">Insurance Pack</span>
+                </div>
+                <ul class="industry-skills">
+                    <li><strong>Policy Organizer</strong>All policies per client in one view</li>
+                    <li><strong>Renewal Pipeline</strong>Automated outreach sequences at 60/30/15 days</li>
+                    <li><strong>Claims Tracker</strong>Status monitoring across carriers</li>
+                    <li><strong>Quote Follow-up</strong>Automated nurture for pending quotes</li>
+                    <li><strong>Compliance Log</strong>Audit-ready interaction history</li>
+                </ul>
+            </div>
+            
+            <div class="industry-card">
+                <div class="industry-header">
+                    <span class="industry-icon">💰</span>
+                    <span class="industry-title">Mortgage Pack</span>
+                </div>
+                <ul class="industry-skills">
+                    <li><strong>Loan File Manager</strong>100+ documents organized per MISMO standards</li>
+                    <li><strong>Document Hunter</strong>"You're missing W-2s for Smith" — automatic alerts</li>
+                    <li><strong>Pipeline Dashboard</strong>All loans, statuses, and next actions at a glance</li>
+                    <li><strong>Rate Monitor</strong>Alerts on significant market rate changes</li>
+                    <li><strong>Closing Coordinator</strong>Multi-party deadline tracking</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Capabilities by Tier -->
+    <section class="section">
+        <h2 class="section-title">Capabilities by Tier</h2>
+        <div style="overflow-x: auto;">
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>Starter</th>
+                        <th>Growth</th>
+                        <th>Scale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Private Telegram Bot</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓ Multi-user</td>
+                    </tr>
+                    <tr>
+                        <td>Apple Notes & Reminders</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Calendar & Contacts</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Weather & Web Search</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Browser Automation</td>
+                        <td>Basic</td>
+                        <td class="check">Full</td>
+                        <td class="check">Full</td>
+                    </tr>
+                    <tr>
+                        <td>Morning Brief</td>
+                        <td class="check">✓</td>
+                        <td class="check">Enhanced</td>
+                        <td class="check">Team briefs</td>
+                    </tr>
+                    <tr>
+                        <td>Website Testing</td>
+                        <td>—</td>
+                        <td class="check">✓</td>
+                        <td class="check">Comprehensive</td>
+                    </tr>
+                    <tr>
+                        <td>Industry Skill Pack</td>
+                        <td>—</td>
+                        <td class="check">1 included</td>
+                        <td class="check">All included</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Cron Jobs</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Skills</td>
+                        <td>—</td>
+                        <td>1</td>
+                        <td>3+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Security -->
+    <section class="section section-alt">
+        <h2 class="section-title">Security & Privacy</h2>
+        <div class="features-grid" style="max-width: 900px; margin: 0 auto;">
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3 class="feature-title">Isolated Infrastructure</h3>
+                <p class="feature-desc">Your Valé runs on its own dedicated server. Your data never mixes with other clients — complete isolation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">End-to-End Encryption</h3>
+                <p class="feature-desc">Telegram's encryption in transit. All data encrypted at rest. No passwords stored in plaintext.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3 class="feature-title">Full Audit Logging</h3>
+                <p class="feature-desc">Every action is logged. Complete transparency into what your Valé does and when.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="section-title">Ready to Meet Your Valé?</h2>
+        <p style="color: var(--brown-medium); margin-bottom: 30px;">See our packages or start the setup process today.</p>
+        <a href="pricing.html" class="cta-button">See Pricing</a>
+        <a href="setup.html" class="cta-secondary">Begin Setup</a>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-brand">Valé<strong>OS</strong></div>
+        <div>
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="capabilities.html" class="footer-link">Capabilities</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+            <a href="setup.html" class="footer-link">Get Started</a>
+        </div>
+        <p class="footer-copyright">© 2026 Kai Hamil. All rights reserved.</p>
+    </footer>
+</body>
+</html>

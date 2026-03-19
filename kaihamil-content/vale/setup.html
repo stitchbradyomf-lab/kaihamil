@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started | Valé OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover { color: var(--gold); }
+        
+        .hero {
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 0%, var(--bg-cream) 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--brown-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section-wide {
+            max-width: 1000px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-alt {
+            background: var(--bg-warm);
+        }
+        
+        .quiz-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .quiz-intro p {
+            color: var(--brown-medium);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+        
+        .quiz-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+        
+        .quiz-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .quiz-section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .quiz-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink-dark);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+        }
+        
+        .question:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question-label {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .question-hint {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            border-color: var(--gold);
+            background: var(--bg-card);
+        }
+        
+        .option input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+        }
+        
+        .option-text {
+            font-size: 0.95rem;
+            color: var(--brown-dark);
+        }
+        
+        .option-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-left: auto;
+        }
+        
+        .slider-container {
+            padding: 15px 0;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--border);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        textarea, input[type="text"], select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: var(--bg-warm);
+            color: var(--ink-dark);
+            transition: all 0.2s ease;
+        }
+        
+        textarea:focus, input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: var(--bg-card);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-option:hover {
+            border-color: var(--gold);
+        }
+        
+        .checkbox-option input {
+            accent-color: var(--gold);
+        }
+        
+        .time-inputs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .time-input {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .time-input input, .time-input select {
+            width: auto;
+            min-width: 80px;
+        }
+        
+        .emoji-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .emoji-option {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-warm);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .emoji-option:hover, .emoji-option.selected {
+            border-color: var(--gold);
+            background: var(--gold-light);
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .submit-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 50px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .submit-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+        
+        .next-steps {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+        
+        .next-steps h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--ink-dark);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            color: var(--ink-dark);
+            margin-bottom: 5px;
+        }
+        
+        .step-content p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            color: var(--amber);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .footer-link:hover { opacity: 1; }
+        
+        .footer-copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .quiz-card { padding: 25px 20px; }
+            .checkbox-grid { grid-template-columns: 1fr; }
+            .time-inputs { flex-direction: column; align-items: stretch; }
+            .time-input { justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+        <div class="nav-links">
+            <a href="capabilities.html" class="nav-link">Capabilities</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="setup.html" class="nav-link">Get Started</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>Configure Your <strong>Valé</strong></h1>
+        <p>Answer a few questions to help us build your perfect AI assistant. This takes about 10 minutes.</p>
+    </section>
+    
+    <form class="section section-wide" action="mailto:kyle@kaihamil.com" method="post" enctype="text/plain">
+        
+        <!-- Section 1: Mode & Purpose -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">1</span>
+                <span class="quiz-section-title">Mode & Purpose</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What's the primary focus for your Valé?</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="focus" value="personal">
+                        <span class="option-text">Personal Life</span>
+                        <span class="option-desc">Family, health, home, personal admin</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="focus" value="work">
+                        <span class="option-text">Work</span>
+                        <span class="option-desc">Job responsibilities, meetings, tasks</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="focus" value="business">
+                        <span class="option-text">Business</span>
+                        <span class="option-desc">Entrepreneurship, clients, operations</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="focus" value="general">
+                        <span class="option-text">General</span>
+                        <span class="option-desc">All-purpose, balanced across domains</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">In one sentence, what do you most want your Valé to help with?</label>
+                <p class="question-hint">Example: "Keep me on top of my calendar and remind me of follow-ups I forget."</p>
+                <textarea name="main_goal" placeholder="Type your answer..."></textarea>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What's your biggest organizational pain point right now?</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="dropping">
+                        <span class="option-text">Too many things falling through the cracks</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="calendar">
+                        <span class="option-text">Calendar chaos / scheduling conflicts</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="email">
+                        <span class="option-text">Email overwhelm</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="tasks">
+                        <span class="option-text">Task management / prioritization</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="scattered">
+                        <span class="option-text">Information scattered across too many places</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain_point" value="followups">
+                        <span class="option-text">Forgetting follow-ups and commitments</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Communication Style -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">2</span>
+                <span class="quiz-section-title">Communication Style</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">How formal should your Valé be?</label>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>👋 Casual</span>
+                        <span>📋 Professional</span>
+                    </div>
+                    <input type="range" name="formality" min="1" max="5" value="3" class="slider">
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">How proactive should your Valé be?</label>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>Only when asked</span>
+                        <span>Surface things before I ask</span>
+                    </div>
+                    <input type="range" name="proactivity" min="1" max="5" value="3" class="slider">
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">How detailed should responses be?</label>
+                <div class="slider-container">
+                    <div class="slider-labels">
+                        <span>Just the answer</span>
+                        <span>Full context and reasoning</span>
+                    </div>
+                    <input type="range" name="detail" min="1" max="5" value="3" class="slider">
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Pick the tone that fits best:</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="tone" value="warm">
+                        <span class="option-text">Warm & Friendly</span>
+                        <span class="option-desc">Like a helpful colleague</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="tone" value="direct">
+                        <span class="option-text">Direct & Efficient</span>
+                        <span class="option-desc">No fluff, just results</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="tone" value="calm">
+                        <span class="option-text">Calm & Supportive</span>
+                        <span class="option-desc">Reassuring, low-pressure</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="tone" value="energetic">
+                        <span class="option-text">Energetic & Motivating</span>
+                        <span class="option-desc">Upbeat, encouraging</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="tone" value="neutral">
+                        <span class="option-text">Neutral & Professional</span>
+                        <span class="option-desc">Polished, business-appropriate</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Any personality traits you want your Valé to have?</label>
+                <p class="question-hint">Examples: "Sense of humor", "Doesn't sugarcoat things", "Remembers personal details"</p>
+                <textarea name="personality" placeholder="Optional..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Section 3: Integrations -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">3</span>
+                <span class="quiz-section-title">Integrations & Tools</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Which tools should your Valé connect to?</label>
+                <p class="question-hint">Select all that apply</p>
+                
+                <p style="font-weight: 500; color: var(--ink-dark); margin: 15px 0 10px; font-size: 0.9rem;">Communication</p>
+                <div class="checkbox-grid">
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="gmail"> Gmail / Google Workspace</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="outlook"> Outlook / Microsoft 365</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="slack"> Slack</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="telegram"> Telegram</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="discord"> Discord</label>
+                </div>
+                
+                <p style="font-weight: 500; color: var(--ink-dark); margin: 20px 0 10px; font-size: 0.9rem;">Calendar & Tasks</p>
+                <div class="checkbox-grid">
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="gcal"> Google Calendar</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="outlook-cal"> Outlook Calendar</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="apple-cal"> Apple Calendar</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="reminders"> Apple Reminders</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="notion"> Notion</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="todoist"> Todoist</label>
+                </div>
+                
+                <p style="font-weight: 500; color: var(--ink-dark); margin: 20px 0 10px; font-size: 0.9rem;">Files & Documents</p>
+                <div class="checkbox-grid">
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="gdrive"> Google Drive</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="dropbox"> Dropbox</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="onedrive"> OneDrive</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="notes"> Apple Notes</label>
+                </div>
+                
+                <p style="font-weight: 500; color: var(--ink-dark); margin: 20px 0 10px; font-size: 0.9rem;">Other</p>
+                <div class="checkbox-grid">
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="web"> Web search</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="browser"> Browser automation</label>
+                    <label class="checkbox-option"><input type="checkbox" name="tools" value="weather"> Weather</label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Any other tools not listed?</label>
+                <input type="text" name="other_tools" placeholder="Optional...">
+            </div>
+        </div>
+        
+        <!-- Section 4: Schedule -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">4</span>
+                <span class="quiz-section-title">Schedule & Availability</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What timezone are you in?</label>
+                <select name="timezone">
+                    <option value="">Select timezone...</option>
+                    <option value="America/New_York">Eastern (New York)</option>
+                    <option value="America/Chicago">Central (Chicago)</option>
+                    <option value="America/Denver">Mountain (Denver)</option>
+                    <option value="America/Los_Angeles">Pacific (Los Angeles)</option>
+                    <option value="America/Phoenix">Arizona (Phoenix)</option>
+                    <option value="Europe/London">UK (London)</option>
+                    <option value="Europe/Paris">Central Europe (Paris)</option>
+                    <option value="Asia/Singapore">Singapore</option>
+                    <option value="Asia/Tokyo">Japan (Tokyo)</option>
+                    <option value="Australia/Sydney">Australia (Sydney)</option>
+                </select>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What are your typical working hours?</label>
+                <div class="time-inputs">
+                    <div class="time-input">
+                        <span>Start:</span>
+                        <input type="text" name="work_start" placeholder="9:00 AM" style="width: 100px;">
+                    </div>
+                    <div class="time-input">
+                        <span>End:</span>
+                        <input type="text" name="work_end" placeholder="6:00 PM" style="width: 100px;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Would you like a daily morning brief?</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="morning_brief" value="daily">
+                        <span class="option-text">Yes, every day</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="morning_brief" value="weekdays">
+                        <span class="option-text">Yes, weekdays only</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="morning_brief" value="no">
+                        <span class="option-text">No thanks</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Are there times your Valé should NOT contact you?</label>
+                <p class="question-hint">Examples: "After 9pm", "During focus blocks", "Weekends unless urgent"</p>
+                <textarea name="quiet_hours" placeholder="Optional..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Section 5: Memory & Privacy -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">5</span>
+                <span class="quiz-section-title">Memory & Privacy</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What should your Valé remember long-term?</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="memory" value="full">
+                        <span class="option-text">Everything relevant</span>
+                        <span class="option-desc">Full memory</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="memory" value="work">
+                        <span class="option-text">Work/task context only</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="memory" value="minimal">
+                        <span class="option-text">Minimal — just current tasks</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="memory" value="ask">
+                        <span class="option-text">Ask me before storing anything personal</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Are there things your Valé should NEVER store or reference?</label>
+                <p class="question-hint">Examples: Financial account numbers, health conditions, family details</p>
+                <textarea name="never_store" placeholder="Optional..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Section 6: Your Profile -->
+        <div class="quiz-card">
+            <div class="quiz-section-header">
+                <span class="quiz-section-number">6</span>
+                <span class="quiz-section-title">Your Profile</span>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Your name (what should Valé call you)?</label>
+                <input type="text" name="user_name" placeholder="First name or nickname" required>
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Your role/title (optional)</label>
+                <input type="text" name="user_role" placeholder="e.g., Realtor, Business Owner, Marketing Manager">
+            </div>
+            
+            <div class="question">
+                <label class="question-label">What should your Valé be named?</label>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="vale_name" value="vale" checked>
+                        <span class="option-text">Valé</span>
+                        <span class="option-desc">Default</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="vale_name" value="custom">
+                        <span class="option-text">Custom name</span>
+                    </label>
+                </div>
+                <input type="text" name="custom_vale_name" placeholder="Enter custom name..." style="margin-top: 10px;">
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Pick an emoji/avatar for your Valé:</label>
+                <div class="emoji-grid">
+                    <div class="emoji-option" data-value="⚡">⚡</div>
+                    <div class="emoji-option" data-value="🤖">🤖</div>
+                    <div class="emoji-option" data-value="🧠">🧠</div>
+                    <div class="emoji-option" data-value="🌟">🌟</div>
+                    <div class="emoji-option" data-value="🎯">🎯</div>
+                    <div class="emoji-option" data-value="🦊">🦊</div>
+                    <div class="emoji-option" data-value="🌿">🌿</div>
+                    <div class="emoji-option" data-value="✨">✨</div>
+                </div>
+                <input type="hidden" name="vale_emoji" value="⚡">
+            </div>
+            
+            <div class="question">
+                <label class="question-label">Anything else your Valé should know about you from day one?</label>
+                <p class="question-hint">Examples: "I have three kids", "I travel frequently", "I'm a morning person"</p>
+                <textarea name="about_you" placeholder="Optional..."></textarea>
+            </div>
+        </div>
+        
+        <!-- Submit -->
+        <div class="submit-section">
+            <button type="submit" class="submit-button">Submit & Schedule Setup Call</button>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="next-steps">
+            <h3>What Happens Next</h3>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Discovery Call</h4>
+                        <p>We'll review your responses together and answer any questions.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Chaos Audit</h4>
+                        <p>We map your current tools, workflows, and where information lives.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Build & Configure</h4>
+                        <p>Your Valé is created with these exact settings on dedicated infrastructure.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Training</h4>
+                        <p>Learn how to work with your Valé through hands-on sessions.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Go Live</h4>
+                        <p>Start using your personal operating system. We're here for ongoing support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <footer class="footer">
+        <div class="footer-brand">Valé<strong>OS</strong></div>
+        <div>
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="capabilities.html" class="footer-link">Capabilities</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+            <a href="setup.html" class="footer-link">Get Started</a>
+        </div>
+        <p class="footer-copyright">© 2026 Kai Hamil. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Emoji selection
+        document.querySelectorAll('.emoji-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.emoji-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                document.querySelector('input[name="vale_emoji"]').value = this.dataset.value;
+            });
+        });
+        // Set default selected
+        document.querySelector('.emoji-option').classList.add('selected');
+    </script>
+</body>
+</html>

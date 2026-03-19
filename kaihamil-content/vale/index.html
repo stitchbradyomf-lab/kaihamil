@@ -410,8 +410,12 @@
 <body>
     <!-- Navigation -->
     <nav class="nav">
-        <a href="/" class="logo">Valé<span>OS</span></a>
-        <a href="https://kaihamil.com" class="nav-link">by Kai Hamil</a>
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+        <div style="display: flex; gap: 25px; align-items: center;">
+            <a href="capabilities.html" class="nav-link">Capabilities</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="setup.html" class="nav-link">Get Started</a>
+        </div>
     </nav>
     
     <!-- Hero -->
@@ -499,52 +503,38 @@
         </div>
     </section>
     
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <h2 class="section-title">Simple Pricing</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="price-tier">Starter</div>
-                <div class="price-amount">$447</div>
-                <div class="price-period">per month</div>
-                <div class="price-setup">$1,500 one-time setup</div>
-                <ul class="price-features">
-                    <li>Dedicated Valé agent</li>
-                    <li>Private Telegram bot</li>
-                    <li>Daily morning briefs</li>
-                    <li>Core integrations</li>
-                    <li>Email support</li>
-                </ul>
-                <a href="mailto:kyle@kaihamil.com?subject=Valé Starter" class="price-cta">Get Started</a>
+    <!-- Ownership Model -->
+    <section class="features" id="pricing">
+        <h2 class="section-title">You Buy It. You Own It.</h2>
+        <p style="text-align: center; max-width: 600px; margin: -30px auto 50px; color: var(--brown-medium); font-size: 1.1rem;">
+            The best part? It's not a subscription. It's yours. But if you need help doing more, we offer that too.
+        </p>
+        
+        <div class="features-grid" style="max-width: 800px; margin: 0 auto;">
+            <div class="feature-card">
+                <div class="feature-icon">🏠</div>
+                <div class="feature-title">Solo</div>
+                <div class="feature-desc">For individuals ready to reclaim their time. Core integrations, private bot, full documentation.</div>
             </div>
-            <div class="price-card featured">
-                <div class="price-tier">Growth</div>
-                <div class="price-amount">$797</div>
-                <div class="price-period">per month</div>
-                <div class="price-setup">$2,500 one-time setup</div>
-                <ul class="price-features">
-                    <li>Everything in Starter</li>
-                    <li>Web dashboard access</li>
-                    <li>Weekly optimization calls</li>
-                    <li>Custom automations</li>
-                    <li>Priority support</li>
-                </ul>
-                <a href="mailto:kyle@kaihamil.com?subject=Valé Growth" class="price-cta">Get Started</a>
+            
+            <div class="feature-card" style="border: 2px solid var(--gold);">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Professional</div>
+                <div class="feature-desc">For power users with complex workflows. Dashboard, custom automations, advanced integrations.</div>
             </div>
-            <div class="price-card">
-                <div class="price-tier">Scale</div>
-                <div class="price-amount">$1,397</div>
-                <div class="price-period">per month</div>
-                <div class="price-setup">$4,500 one-time setup</div>
-                <ul class="price-features">
-                    <li>Everything in Growth</li>
-                    <li>Team access (up to 5)</li>
-                    <li>Advanced integrations</li>
-                    <li>Dedicated account manager</li>
-                    <li>SLA guarantee</li>
-                </ul>
-                <a href="mailto:kyle@kaihamil.com?subject=Valé Scale" class="price-cta">Get Started</a>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <div class="feature-title">Team</div>
+                <div class="feature-desc">For small teams and families. Multi-user access, multiple agent personas, shared workflows.</div>
             </div>
+        </div>
+        
+        <!-- Action Links -->
+        <div style="text-align: center; margin-top: 50px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <a href="capabilities.html" class="cta-button" style="background: var(--brown-dark); color: var(--amber);">Learn More</a>
+            <a href="pricing.html" class="cta-button">See Pricing</a>
+            <a href="setup.html" class="cta-button" style="background: var(--brown-dark); color: var(--amber);">Begin Setup</a>
         </div>
     </section>
     

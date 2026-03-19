@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | Valé OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover { color: var(--gold); }
+        
+        .hero {
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, #fff 0%, var(--bg-cream) 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--brown-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .ownership-banner {
+            background: var(--ink-dark);
+            color: var(--amber);
+            text-align: center;
+            padding: 25px 20px;
+        }
+        
+        .ownership-banner h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        
+        .ownership-banner p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .section-alt {
+            background: var(--bg-warm);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        
+        .price-card.featured {
+            border: 2px solid var(--gold);
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.2);
+        }
+        
+        .price-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .price-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .price-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .price-tier {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 5px;
+        }
+        
+        .price-best-for {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+        }
+        
+        .price-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .price-period {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .price-setup {
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+            margin-top: 10px;
+        }
+        
+        .price-section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold);
+            margin: 20px 0 12px;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+        
+        .price-features li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .price-features li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .price-cta {
+            display: block;
+            text-align: center;
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+        }
+        
+        .price-cta:hover {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .price-card.featured .price-cta {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .price-card.featured .price-cta:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        .api-note {
+            text-align: center;
+            padding: 20px;
+            color: var(--ink-medium);
+            font-size: 0.9rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        .comparison-table th {
+            background: var(--bg-warm);
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--ink-dark);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table th:not(:first-child) {
+            text-align: center;
+        }
+        
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--brown-medium);
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table td:not(:first-child) {
+            text-align: center;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .check {
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .addon-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .addon-name {
+            font-weight: 500;
+            color: var(--ink-dark);
+        }
+        
+        .addon-price {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .why-vale {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .why-card h3 {
+            font-size: 1.1rem;
+            color: var(--ink-dark);
+            margin-bottom: 10px;
+        }
+        
+        .why-card p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .faq-question {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+            line-height: 1.7;
+        }
+        
+        .guarantee-box {
+            background: linear-gradient(135deg, var(--gold-light), var(--bg-card));
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 700px;
+            margin: 40px auto 0;
+        }
+        
+        .guarantee-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .guarantee-box p {
+            color: var(--brown-medium);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--bg-warm);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+        }
+        
+        .cta-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            color: var(--amber);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .footer-link:hover { opacity: 1; }
+        
+        .footer-copyright {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .price-amount { font-size: 2.8rem; }
+            .comparison-table { font-size: 0.85rem; }
+            .comparison-table th, .comparison-table td { padding: 10px 8px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+        <div class="nav-links">
+            <a href="capabilities.html" class="nav-link">Capabilities</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="setup.html" class="nav-link">Get Started</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>Simple, <strong>Transparent</strong> Pricing</h1>
+        <p>One-time setup fee. Predictable monthly cost. No surprises.*</p>
+    </section>
+    
+    <div class="ownership-banner">
+        <h2>You Buy It. You Own It.</h2>
+        <p>Your Valé runs on dedicated infrastructure that belongs to you. Not rented software — a real asset.</p>
+    </div>
+    
+    <!-- Pricing Cards -->
+    <section class="section">
+        <div class="pricing-grid">
+            <!-- Starter -->
+            <div class="price-card">
+                <div class="price-header">
+                    <div class="price-icon">🌱</div>
+                    <div class="price-tier">Starter</div>
+                    <div class="price-best-for">Solo operators who want AI-powered organization</div>
+                    <div class="price-amount">$447</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-setup">$1,500 one-time setup</div>
+                </div>
+                
+                <div class="price-section-title">What You Get</div>
+                <ul class="price-features">
+                    <li>Your own dedicated AI instance</li>
+                    <li>Private Telegram bot</li>
+                    <li>Web dashboard at yourname.kaihamil.com</li>
+                    <li>Apple Notes & Reminders integration</li>
+                    <li>Calendar & Contacts access</li>
+                    <li>Weather + Web search</li>
+                    <li>Basic browser automation</li>
+                    <li>File migration (up to 500 files)</li>
+                </ul>
+                
+                <div class="price-section-title">Automations</div>
+                <ul class="price-features">
+                    <li>Daily morning brief</li>
+                    <li>Weekly ops health check</li>
+                    <li>2 custom cron jobs</li>
+                </ul>
+                
+                <div class="price-section-title">Support</div>
+                <ul class="price-features">
+                    <li>One 30-min monthly check-in</li>
+                    <li>Email support (48hr response)</li>
+                    <li>Quarterly system tune-up</li>
+                </ul>
+                
+                <a href="setup.html" class="price-cta">Get Started</a>
+            </div>
+            
+            <!-- Growth -->
+            <div class="price-card featured">
+                <div class="price-header">
+                    <div class="price-icon">🌿</div>
+                    <div class="price-tier">Growth</div>
+                    <div class="price-best-for">Busy professionals with complex workflows</div>
+                    <div class="price-amount">$797</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-setup">$2,500 one-time setup</div>
+                </div>
+                
+                <div class="price-section-title">Everything in Starter, Plus</div>
+                <ul class="price-features">
+                    <li>Enhanced AI (larger context, faster)</li>
+                    <li>Full dashboard with 30-day activity log</li>
+                    <li>Full browser automation</li>
+                    <li>1 Industry Skill Pack included</li>
+                    <li>File migration (up to 2,000 files)</li>
+                    <li>Proactive alerts & follow-up tracking</li>
+                    <li>1 custom skill development</li>
+                </ul>
+                
+                <div class="price-section-title">Automations</div>
+                <ul class="price-features">
+                    <li>Enhanced morning brief with insights</li>
+                    <li>Daily website/flow testing</li>
+                    <li>5 custom cron jobs</li>
+                </ul>
+                
+                <div class="price-section-title">Support</div>
+                <ul class="price-features">
+                    <li>Two 30-min monthly check-ins</li>
+                    <li>Priority email support (24hr)</li>
+                    <li>Weekly agent activity review</li>
+                    <li>One new automation per quarter</li>
+                </ul>
+                
+                <a href="setup.html" class="price-cta">Get Started</a>
+            </div>
+            
+            <!-- Scale -->
+            <div class="price-card">
+                <div class="price-header">
+                    <div class="price-icon">🌳</div>
+                    <div class="price-tier">Scale</div>
+                    <div class="price-best-for">Small teams (2-5 people) or high-volume businesses</div>
+                    <div class="price-amount">$1,397</div>
+                    <div class="price-period">/month</div>
+                    <div class="price-setup">$4,500 one-time setup</div>
+                </div>
+                
+                <div class="price-section-title">Everything in Growth, Plus</div>
+                <ul class="price-features">
+                    <li>High-performance infrastructure</li>
+                    <li>Custom domain (ops.yourbusiness.com)</li>
+                    <li>90-day activity log + reporting</li>
+                    <li>All Industry Skill Packs included</li>
+                    <li>3+ custom skill developments</li>
+                    <li>Multi-user access (up to 5 members)</li>
+                    <li>API access to your data</li>
+                    <li>Unlimited file migration</li>
+                </ul>
+                
+                <div class="price-section-title">Automations</div>
+                <ul class="price-features">
+                    <li>Team morning briefs (per-person)</li>
+                    <li>Comprehensive website testing</li>
+                    <li>Unlimited custom cron jobs</li>
+                    <li>Weekly performance reports</li>
+                </ul>
+                
+                <div class="price-section-title">Support</div>
+                <ul class="price-features">
+                    <li>Weekly check-in call</li>
+                    <li>Up to 4 hrs/week human ops support</li>
+                    <li>Same-day priority support</li>
+                    <li>Quarterly strategic ops review</li>
+                </ul>
+                
+                <a href="setup.html" class="price-cta">Get Started</a>
+            </div>
+        </div>
+        
+        <p class="api-note">*Ongoing API credit usage is subject to overages and personal billing.</p>
+    </section>
+    
+    <!-- Comparison Table -->
+    <section class="section section-alt">
+        <h2 class="section-title">Compare Plans</h2>
+        <div style="overflow-x: auto;">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Starter</th>
+                        <th>Growth</th>
+                        <th>Scale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Setup Fee (one-time)</td>
+                        <td>$1,500</td>
+                        <td>$2,500</td>
+                        <td>$4,500</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td>$447</td>
+                        <td>$797</td>
+                        <td>$1,397</td>
+                    </tr>
+                    <tr>
+                        <td>Setup Time</td>
+                        <td>2 weeks</td>
+                        <td>3 weeks</td>
+                        <td>4 weeks</td>
+                    </tr>
+                    <tr>
+                        <td>AI Instance</td>
+                        <td class="check">✓</td>
+                        <td class="check">Enhanced</td>
+                        <td class="check">High-Perf</td>
+                    </tr>
+                    <tr>
+                        <td>Telegram Bot</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">Multi-user</td>
+                    </tr>
+                    <tr>
+                        <td>Activity Log</td>
+                        <td>7 days</td>
+                        <td>30 days</td>
+                        <td>90 days</td>
+                    </tr>
+                    <tr>
+                        <td>Industry Skill Pack</td>
+                        <td>—</td>
+                        <td class="check">1 included</td>
+                        <td class="check">All included</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Skills</td>
+                        <td>—</td>
+                        <td>1</td>
+                        <td>3+</td>
+                    </tr>
+                    <tr>
+                        <td>Custom Cron Jobs</td>
+                        <td>2</td>
+                        <td>5</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Files Migrated</td>
+                        <td>500</td>
+                        <td>2,000</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Team Members</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Up to 5</td>
+                    </tr>
+                    <tr>
+                        <td>Human Support</td>
+                        <td>Minimal</td>
+                        <td>~2 hrs/mo</td>
+                        <td>~4 hrs/week</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Add-ons -->
+    <section class="section">
+        <h2 class="section-title">Add-Ons</h2>
+        <div class="addons-grid">
+            <div class="addon-card">
+                <span class="addon-name">Additional team member</span>
+                <span class="addon-price">+$147/month</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">Extra automation build</span>
+                <span class="addon-price">$200 each</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">Emergency same-day support</span>
+                <span class="addon-price">$250</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">Custom integration</span>
+                <span class="addon-price">$300-800</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">CRM setup & migration</span>
+                <span class="addon-price">$500-1,500</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">Additional training session</span>
+                <span class="addon-price">$175/hr</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">Custom domain (Starter/Growth)</span>
+                <span class="addon-price">+$50/month</span>
+            </div>
+            <div class="addon-card">
+                <span class="addon-name">API access (Starter/Growth)</span>
+                <span class="addon-price">+$100/month</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Valé -->
+    <section class="section section-alt">
+        <h2 class="section-title">How Valé Compares</h2>
+        <div class="why-vale">
+            <div class="why-card">
+                <h3>US-Based VA</h3>
+                <p>$1,500-3,000/mo<br>40 hrs/week max, requires training</p>
+            </div>
+            <div class="why-card">
+                <h3>Overseas VA</h3>
+                <p>$500-1,000/mo<br>Requires heavy management from you</p>
+            </div>
+            <div class="why-card">
+                <h3>Ops Consultant</h3>
+                <p>$5,000-15,000 project<br>Strategy, then they disappear</p>
+            </div>
+            <div class="why-card">
+                <h3>Generic AI Tools</h3>
+                <p>$20-100/mo<br>No memory, starts over each time</p>
+            </div>
+            <div class="why-card" style="border: 2px solid var(--gold);">
+                <h3>Valé OS</h3>
+                <p>$447-1,397/mo<br>24/7, learns your business, yours forever</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guarantee -->
+    <section class="section">
+        <div class="guarantee-box">
+            <h3>🎯 The "Actually Organized" Promise</h3>
+            <p>If after 30 days you can't find any document in under 60 seconds, we'll rebuild your system at no additional cost — or refund your setup fee, your choice.</p>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="section section-alt">
+        <h2 class="section-title">Common Questions</h2>
+        <div class="faq-section">
+            <div class="faq-item">
+                <div class="faq-question">What does "dedicated AI instance" mean?</div>
+                <div class="faq-answer">Your Valé runs on its own isolated server. Your data never mixes with other clients. It's like having your own private assistant that only knows your business.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What tools do I need?</div>
+                <div class="faq-answer">Just your existing email, calendar, and file storage (Google Drive, Dropbox, etc.). We connect to what you already use. No new software to learn.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Is my data safe?</div>
+                <div class="faq-answer">Yes. Your instance is completely isolated — separate server, separate database, separate everything. We use encrypted connections, and you can revoke access anytime.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What if the AI makes a mistake?</div>
+                <div class="faq-answer">All actions are logged. Valé organizes and alerts — it doesn't make decisions for you. For anything important, it asks before acting. You're always in control.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What's the commitment?</div>
+                <div class="faq-answer">3-month minimum, then month-to-month. 30-day cancellation notice. Your data is yours — we provide a full export if you leave.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How much of my time does setup take?</div>
+                <div class="faq-answer">About 6-9 hours over 2-3 weeks. After that, you interact with your Valé as needed (usually a few minutes per day), plus monthly check-in calls.</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2 class="section-title">Ready to Get Started?</h2>
+        <p style="color: var(--brown-medium); margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">Book a free 30-minute Chaos Assessment. No pitch — just clarity on what's possible for your business.</p>
+        <a href="setup.html" class="cta-button">Begin Setup</a>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-brand">Valé<strong>OS</strong></div>
+        <div>
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="capabilities.html" class="footer-link">Capabilities</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+            <a href="setup.html" class="footer-link">Get Started</a>
+        </div>
+        <p class="footer-copyright">© 2026 Kai Hamil. All rights reserved.</p>
+    </footer>
+</body>
+</html>
