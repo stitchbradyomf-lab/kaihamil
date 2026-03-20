@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Pal — Share the groove</title>
+    <meta name="description" content="A pen-pal style vinyl sharing program. Records travel. Stories grow. Join us.">
+    <link rel="icon" type="image/jpeg" href="assets/groove-pal-icon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf6f1;
+            --bg-dark: #1a1a1a;
+            --card: #fffdf9;
+            --gold: #c9a227;
+            --gold-warm: #d4a04a;
+            --brown: #3d2817;
+            --brown-medium: #6b5344;
+            --cream: #faf6f1;
+            --terracotta: #b87a5e;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--brown);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem;
+            color: var(--brown);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .intro {
+            max-width: 600px;
+            font-size: 1.15rem;
+            color: var(--brown-medium);
+            margin-bottom: 50px;
+            line-height: 1.8;
+        }
+        
+        .intro strong {
+            color: var(--brown);
+        }
+        
+        /* CTA */
+        .cta-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--brown);
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+        
+        .cta-note {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: var(--card);
+            padding: 80px 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            color: var(--brown);
+            margin-bottom: 50px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+            margin-bottom: 10px;
+        }
+        
+        .step-desc {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+        }
+        
+        /* The Difference */
+        .difference {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .difference-content {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .difference blockquote {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            color: var(--brown);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .difference p {
+            color: var(--brown-medium);
+            font-size: 1rem;
+        }
+        
+        /* Preview Link */
+        .preview {
+            background: var(--bg-dark);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .preview-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 15px;
+        }
+        
+        .preview-desc {
+            color: rgba(250, 246, 241, 0.7);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        
+        .preview-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-link:hover {
+            color: var(--cream);
+            border-color: var(--cream);
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .footer-tagline {
+            font-style: italic;
+            margin-top: 10px;
+            color: var(--brown-medium);
+        }
+        
+        @media (max-width: 600px) {
+            .logo { font-size: 2.5rem; }
+            .intro { font-size: 1rem; }
+            .section-title { font-size: 1.6rem; }
+            .difference blockquote { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <img src="assets/groove-pal-icon.jpg" alt="Groove Pal" class="logo-icon">
+        <h1 class="logo">Groove Pal</h1>
+        <p class="tagline">A pal to whom you send your groove</p>
+        
+        <p class="intro">
+            A <strong>pen-pal style vinyl sharing program</strong> that promotes experiencing and sharing analog activities with others. 
+            We track the journey of each record and enable conversations about the listening experience — 
+            <strong>bringing people together over shared non-screen time experiences.</strong>
+        </p>
+        
+        <div class="cta-section">
+            <a href="#notify" class="cta-button">Join the Waitlist</a>
+            <p class="cta-note">Launching soon — $35 to join</p>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">📦</div>
+                <h3 class="step-title">Join & Receive</h3>
+                <p class="step-desc">Pay $35 to become a Pal. Receive a welcome vinyl and 10 QR stickers to start your journey.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🎵</div>
+                <h3 class="step-title">Listen & Share</h3>
+                <p class="step-desc">Play the record. Log your favorite track, who you listened with, and a memory. Attach a sticker.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">✉️</div>
+                <h3 class="step-title">Send It Forward</h3>
+                <p class="step-desc">Mail it to another Pal. The record travels. The story grows. Share 3, get 1 free.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Difference -->
+    <section class="difference">
+        <div class="difference-content">
+            <blockquote>"In a world of infinite scroll and instant everything, we choose to be slow."</blockquote>
+            <p>Every friction is a feature. The wait makes the arrival meaningful. The physicality makes the connection real. Records travel. Stories grow.</p>
+        </div>
+    </section>
+    
+    <!-- Preview -->
+    <section class="preview">
+        <h3 class="preview-title">See a Record's Journey</h3>
+        <p class="preview-desc">Watch how a single vinyl travels across strangers, collecting stories along the way.</p>
+        <a href="journey-prototype.html" class="preview-link">View "Kind of Blue" Journey →</a>
+    </section>
+    
+    <!-- Waitlist Form Placeholder -->
+    <section id="notify" style="padding: 60px 20px; text-align: center; background: var(--card);">
+        <h2 class="section-title">Get Notified at Launch</h2>
+        <p style="color: var(--brown-medium); margin-bottom: 25px;">We're almost ready. Drop your email and be first to join.</p>
+        <!-- Replace with actual form -->
+        <form style="max-width: 400px; margin: 0 auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <input type="email" placeholder="your@email.com" style="flex: 1; min-width: 200px; padding: 14px 20px; border: 1px solid #ddd; border-radius: 50px; font-size: 1rem;">
+            <button type="submit" style="background: var(--gold); color: var(--brown); border: none; padding: 14px 25px; border-radius: 50px; font-weight: 600; cursor: pointer;">Notify Me</button>
+        </form>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>A <a href="https://kaihamil.com">Kai Hamil</a> project</p>
+        <p class="footer-tagline">"Music, mail, and meaning."</p>
+    </footer>
+</body>
+</html>
