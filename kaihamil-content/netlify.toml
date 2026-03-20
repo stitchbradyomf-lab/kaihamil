@@ -21,6 +21,21 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Groove Pal domain routing
+[[redirects]]
+  from = "/"
+  to = "/products/groove-pal/index.html"
+  status = 200
+  force = true
+  conditions = {Host = ["groovepal.com", "www.groovepal.com"]}
+
+[[redirects]]
+  from = "/*"
+  to = "/products/groove-pal/:splat"
+  status = 200
+  force = true
+  conditions = {Host = ["groovepal.com", "www.groovepal.com"]}
+
 # Valé subdomain - specific pages first
 [[redirects]]
   from = "/setup"
