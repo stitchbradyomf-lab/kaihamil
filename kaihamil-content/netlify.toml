@@ -1,10 +1,13 @@
 [build]
   publish = "."
-  command = "echo 'Static site'"
+  command = "npm install @netlify/functions @netlify/blobs"
   functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
+
+[functions]
+  node_bundler = "esbuild"
 
 # Identity configuration
 [context.production.environment]
