@@ -316,6 +316,33 @@
             text-decoration: underline;
         }
         
+        /* Groove Pal Hero Link - Matches Valé style */
+        .groove-hero-link {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .groove-hero-link img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .groove-hero-cta {
+            font-size: 0.9rem;
+            color: #ff6b00;
+            font-weight: 500;
+        }
+        
+        .groove-hero-link:hover .groove-hero-cta {
+            text-decoration: underline;
+        }
+        
         .access-icon {
             font-size: 1.5rem;
             margin-bottom: 10px;
@@ -484,10 +511,9 @@
             </div>
             
             <div class="access-grid">
-                <a href="https://www.groovepal.com" class="access-card" style="border: 2px solid var(--terracotta);">
-                    <img src="products/groove-pal/assets/hero-logo.jpg" alt="Groove Pal" style="width: 100px; height: auto;">
-                    <div class="access-title large" style="color: var(--terracotta);">Groove Pal</div>
-                    <div class="access-desc">Vinyl sharing network. Check it →</div>
+                <a href="https://www.groovepal.com" class="groove-hero-link">
+                    <img src="products/groove-pal/assets/hero-logo.jpg" alt="Groove Pal">
+                    <span class="groove-hero-cta">Check it →</span>
                 </a>
                 
                 <a href="tools/time-and-focus.html" class="access-card">
