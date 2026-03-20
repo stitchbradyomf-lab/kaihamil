@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-left: 25px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .substack-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold-light);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--brown-dark);
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        .substack-badge:hover {
+            background: var(--gold);
+        }
+        
+        .feed {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-color: var(--gold);
+        }
+        
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .post-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--ink-dark);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .post-excerpt {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 600px) {
+            .nav { padding: 15px 20px; }
+            .hero h1 { font-size: 2rem; }
+            .post-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">Kai <span>Hamil</span></a>
+        <div>
+            <a href="/tools/" class="nav-link">Tools</a>
+            <a href="/wisdom/" class="nav-link">Wisdom</a>
+            <a href="/feed/" class="nav-link">Writing</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <h1>Writing</h1>
+        <p>Essays on systems thinking, AI agency, and living intentionally in the age of intelligence.</p>
+        <a href="https://kylejosephbrady.substack.com" target="_blank" class="substack-badge">
+            📧 Subscribe on Substack →
+        </a>
+    </section>
+    
+    <section class="feed" id="feed">
+        <div class="loading">Loading posts...</div>
+    </section>
+    
+    <footer class="footer">
+        <p>Writing by <a href="/about/kyle-joseph-brady.html">Kyle Joseph Brady</a></p>
+        <p style="margin-top: 10px;"><a href="https://kylejosephbrady.substack.com">View all on Substack</a></p>
+    </footer>
+    
+    <script>
+        // Fetch and render Substack RSS
+        async function loadFeed() {
+            const feedUrl = 'https://kylejosephbrady.substack.com/feed';
+            const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+            
+            try {
+                const response = await fetch(proxyUrl);
+                const data = await response.json();
+                
+                if (data.status === 'ok' && data.items) {
+                    renderPosts(data.items);
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Feed error:', error);
+                showError();
+            }
+        }
+        
+        function renderPosts(posts) {
+            const feed = document.getElementById('feed');
+            
+            const html = posts.slice(0, 12).map(post => {
+                const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Strip HTML from description
+                const excerpt = post.description
+                    .replace(/<[^>]*>/g, '')
+                    .substring(0, 200) + '...';
+                
+                return `
+                    <a href="${post.link}" target="_blank" class="post-card">
+                        <div class="post-date">${date}</div>
+                        <h2 class="post-title">${post.title}</h2>
+                        <p class="post-excerpt">${excerpt}</p>
+                        <span class="read-more">Read on Substack →</span>
+                    </a>
+                `;
+            }).join('');
+            
+            feed.innerHTML = html;
+        }
+        
+        function showError() {
+            const feed = document.getElementById('feed');
+            feed.innerHTML = `
+                <div class="loading">
+                    <p>Couldn't load feed. <a href="https://kylejosephbrady.substack.com" target="_blank">View directly on Substack →</a></p>
+                </div>
+            `;
+        }
+        
+        loadFeed();
+    </script>
+</body>
+</html>
