@@ -103,6 +103,7 @@ We find meaning in small things. We don't lecture about it.
 **A pal to whom you send your groove.**
 
 ### Alternates
+- **Send a groove. Make a pal.**
 - Music, mail, and meaning.
 - The vinyl sharing network.
 - Records travel. Stories grow.
