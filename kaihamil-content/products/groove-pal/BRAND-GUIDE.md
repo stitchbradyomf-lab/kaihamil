@@ -4,6 +4,20 @@
 
 ---
 
+## Elevator Pitch
+
+Welcome to Groove Pal — a pen-pal style vinyl record sharing program and platform that promotes experiencing and sharing analog activities with others. The platform tracks the journey of a record and enables sharing a conversation about the listening experience, bringing people together over shared non-screen time experiences.
+
+---
+
+## Icon
+
+**Primary icon:** Stacked vinyl records with warm gold/orange label and musical note
+- Location: `assets/groove-pal-icon.png`
+- Use for: App icon, favicon, social profiles, QR sticker branding
+
+---
+
 ## Brand Essence
 
 ### What We Are
