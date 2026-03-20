@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Your Listen — Kind of Blue | Groove Pal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1a1a;
+            --bg-card: #242424;
+            --bg-input: #2a2a2a;
+            --gold: #d4a04a;
+            --gold-dim: #a67c32;
+            --cream: #f5f0e6;
+            --cream-dim: #b8b0a0;
+            --accent: #5b8a72;
+            --orange: #ff6b00;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--cream);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+        
+        .header a {
+            text-decoration: none;
+        }
+        
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+        
+        /* Album Mini */
+        .album-mini {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .album-mini-cover {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--cream);
+            text-align: center;
+        }
+        
+        .album-mini-info h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+        }
+        
+        .album-mini-info .artist {
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+        
+        .album-mini-info .id {
+            font-size: 0.7rem;
+            color: var(--cream-dim);
+            font-family: monospace;
+        }
+        
+        /* Form */
+        .form-section {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--cream);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-sublabel {
+            font-size: 0.75rem;
+            color: var(--cream-dim);
+            font-weight: 400;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--bg-card);
+            border-radius: 10px;
+            color: var(--cream);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23b8b0a0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+        
+        select option {
+            background: var(--bg);
+            color: var(--cream);
+        }
+        
+        /* Listen counts */
+        .listen-counts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .listen-count {
+            background: var(--bg-input);
+            border: 1px solid var(--bg-card);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .listen-count label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--cream-dim);
+            margin-bottom: 8px;
+        }
+        
+        .listen-count input {
+            width: 60px;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        /* Location row */
+        .location-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+        }
+        
+        /* Radio/checkbox group */
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .option-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: var(--bg-input);
+            border: 1px solid var(--bg-card);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .option-group input[type="radio"],
+        .option-group input[type="checkbox"] {
+            width: auto;
+            accent-color: var(--gold);
+        }
+        
+        .option-group label:has(input:checked) {
+            border-color: var(--gold);
+            background: rgba(212, 160, 74, 0.1);
+        }
+        
+        /* Conditional field */
+        .conditional {
+            margin-top: 10px;
+            padding-left: 20px;
+            display: none;
+        }
+        
+        .conditional.show {
+            display: block;
+        }
+        
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--cream);
+            transform: translateY(-2px);
+        }
+        
+        /* View journey link */
+        .view-journey {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .view-journey a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .view-journey a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--cream-dim);
+            font-size: 0.75rem;
+        }
+        
+        /* Ethos note */
+        .ethos-note {
+            background: var(--bg-card);
+            border-left: 3px solid var(--gold-dim);
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: var(--cream-dim);
+            font-style: italic;
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .listen-counts { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <a href="/">
+                <div class="logo">GROOVE PAL</div>
+            </a>
+        </header>
+        
+        <!-- Album Mini -->
+        <div class="album-mini">
+            <div class="album-mini-cover">
+                Kind of<br>Blue
+            </div>
+            <div class="album-mini-info">
+                <h2>Kind of Blue</h2>
+                <div class="artist">Miles Davis</div>
+                <div class="id">GP-0047</div>
+            </div>
+        </div>
+        
+        <!-- Ethos Note -->
+        <div class="ethos-note">
+            Take your time. The only thing that matters is that you listened.
+        </div>
+        
+        <!-- Form -->
+        <form id="logForm">
+            <!-- Name -->
+            <div class="form-section">
+                <label class="form-label">Your first name</label>
+                <input type="text" name="name" placeholder="Sarah" required>
+            </div>
+            
+            <!-- Location -->
+            <div class="form-section">
+                <label class="form-label">Where are you?</label>
+                <div class="location-row">
+                    <input type="text" name="city" placeholder="City" required>
+                    <input type="text" name="state" placeholder="State" maxlength="2" required style="text-transform: uppercase;">
+                </div>
+            </div>
+            
+            <!-- Listen counts -->
+            <div class="form-section">
+                <label class="form-label">
+                    How many times did you listen?
+                    <span class="form-sublabel">— Best guess is fine</span>
+                </label>
+                <div class="listen-counts">
+                    <div class="listen-count">
+                        <label>Side A</label>
+                        <input type="number" name="side_a" min="0" max="99" value="1">
+                    </div>
+                    <div class="listen-count">
+                        <label>Side B</label>
+                        <input type="number" name="side_b" min="0" max="99" value="1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Favorite track -->
+            <div class="form-section">
+                <label class="form-label">Favorite track</label>
+                <select name="favorite_track" required>
+                    <option value="">Select a track...</option>
+                    <option value="So What">So What</option>
+                    <option value="Freddie Freeloader">Freddie Freeloader</option>
+                    <option value="Blue in Green">Blue in Green</option>
+                    <option value="All Blues">All Blues</option>
+                    <option value="Flamenco Sketches">Flamenco Sketches</option>
+                </select>
+            </div>
+            
+            <!-- Listened with -->
+            <div class="form-section">
+                <label class="form-label">Who did you listen with?</label>
+                <div class="option-group">
+                    <label>
+                        <input type="radio" name="listened_with_type" value="solo" checked>
+                        Solo
+                    </label>
+                    <label>
+                        <input type="radio" name="listened_with_type" value="someone">
+                        With someone
+                    </label>
+                </div>
+                <div class="conditional" id="withWhom">
+                    <input type="text" name="listened_with" placeholder="my roommate, my dad, etc.">
+                </div>
+            </div>
+            
+            <!-- Note -->
+            <div class="form-section">
+                <label class="form-label">
+                    Anything you want to share?
+                    <span class="form-sublabel">— Optional. A sentence or two is perfect.</span>
+                </label>
+                <textarea name="note" placeholder="That bass line on So What is so good..."></textarea>
+            </div>
+            
+            <!-- Submit -->
+            <button type="submit" class="submit-btn">Log My Listen</button>
+        </form>
+        
+        <!-- View journey link -->
+        <div class="view-journey">
+            <a href="journey-prototype.html">← View this record's journey</a>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Your entry will be added to this record's story.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Show/hide "with whom" field
+        document.querySelectorAll('input[name="listened_with_type"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const withWhom = document.getElementById('withWhom');
+                if (e.target.value === 'someone') {
+                    withWhom.classList.add('show');
+                } else {
+                    withWhom.classList.remove('show');
+                }
+            });
+        });
+        
+        // Form submit (placeholder)
+        document.getElementById('logForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Log entry:', data);
+            alert('Thanks for logging! (This is a prototype — no data saved yet)');
+        });
+    </script>
+</body>
+</html>
