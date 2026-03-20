@@ -26,24 +26,28 @@
   from = "/setup"
   to = "/vale/setup.html"
   status = 200
+  force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
 [[redirects]]
   from = "/pricing"
   to = "/vale/pricing.html"
   status = 200
+  force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
 [[redirects]]
   from = "/capabilities"
   to = "/vale/capabilities.html"
   status = 200
+  force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
 [[redirects]]
   from = "/thank-you"
   to = "/vale/thank-you.html"
   status = 200
+  force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
 # Valé subdomain - root goes to index
@@ -51,6 +55,15 @@
   from = "/"
   to = "/vale/index.html"
   status = 200
+  force = true
+  conditions = {Host = ["vale.kaihamil.com"]}
+
+# Valé subdomain - catch-all for any other paths
+[[redirects]]
+  from = "/*"
+  to = "/vale/:splat"
+  status = 200
+  force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
 # Redirects for protected routes
