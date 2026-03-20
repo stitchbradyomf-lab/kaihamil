@@ -6,6 +6,11 @@ export default async function handler(request: Request, context: Context) {
 
   // Groove Pal domain routing
   if (host === "groovepal.com" || host === "www.groovepal.com") {
+    // Skip if already has /products/groove-pal prefix (avoid double rewrite)
+    if (url.pathname.startsWith("/products/groove-pal")) {
+      return context.next();
+    }
+    
     // Rewrite to groove-pal content
     const newPath = url.pathname === "/" 
       ? "/products/groove-pal/index.html"
