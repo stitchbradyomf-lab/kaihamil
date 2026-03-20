@@ -2,6 +2,11 @@
   publish = "."
   command = "npm install @netlify/functions @netlify/blobs"
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
+
+[[edge_functions]]
+  path = "/*"
+  function = "router"
 
 [build.environment]
   NODE_VERSION = "18"
