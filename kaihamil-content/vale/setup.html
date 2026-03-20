@@ -495,7 +495,9 @@
         <p>Answer a few questions to help us build your perfect AI assistant. This takes about 10 minutes.</p>
     </section>
     
-    <form class="section section-wide" action="mailto:kyle@kaihamil.com" method="post" enctype="text/plain">
+    <form class="section section-wide" name="vale-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/vale/thank-you.html">
+        <input type="hidden" name="form-name" value="vale-intake">
+        <p style="display:none"><input name="bot-field"></p>
         
         <!-- Section 1: Mode & Purpose -->
         <div class="quiz-card">
