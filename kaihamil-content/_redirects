@@ -1,2 +1,2 @@
-/private/*  /login.html  302!  Role=admin
-/private/*  /login.html  302!
+# Valé subdomain routing
+/  /vale/index.html  200!  conditions[Host]=vale.kaihamil.com

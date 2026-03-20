@@ -246,8 +246,8 @@
         .access-grid {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-width: 400px;
+            gap: 12px;
+            max-width: 380px;
             margin: 0 auto;
         }
         
@@ -255,44 +255,90 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 25px 20px;
+            padding: 20px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
         
         .access-card:hover {
-            border-color: var(--gold);
-            transform: translateX(5px);
-            box-shadow: 0 5px 20px rgba(201, 162, 39, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .access-card.featured {
+            background: var(--gold-light);
+            border: 2px solid var(--gold);
+        }
+        
+        .access-card.coming-soon {
+            background: var(--bg-warm);
+            border: 2px dashed var(--terracotta);
+            cursor: default;
+        }
+        
+        /* Valé Hero Link - Standalone */
+        .vale-hero-link {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .vale-hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+        
+        .vale-hero-title strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .vale-hero-desc {
+            font-size: 0.95rem;
+            color: var(--brown-medium);
+            margin-bottom: 12px;
+        }
+        
+        .vale-hero-cta {
+            font-size: 0.9rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .vale-hero-link:hover .vale-hero-cta {
+            text-decoration: underline;
         }
         
         .access-icon {
-            font-size: 1.8rem;
-            width: 50px;
-            text-align: center;
-        }
-        
-        .access-content {
-            flex: 1;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
         
         .access-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 500;
             color: var(--brown-dark);
             margin-bottom: 4px;
         }
         
+        .access-title.large {
+            font-size: 1.2rem;
+        }
+        
         .access-desc {
             font-size: 0.85rem;
             color: var(--brown-medium);
+            line-height: 1.5;
         }
         
-        /* Self Side - Wisdom Style */
+        /* Self Side */
         .self-side {
             background: var(--bg-warm);
             padding: 60px 40px;
@@ -303,17 +349,12 @@
         }
         
         .self-side .access-card {
-            background: var(--bg-paper);
-            border-left: 3px solid var(--terracotta);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
         }
         
         .self-side .access-card:hover {
-            border-color: var(--terracotta);
-            box-shadow: 0 5px 20px rgba(184, 122, 94, 0.1);
-        }
-        
-        .self-side .access-title {
-            color: var(--ink-dark);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
         
         /* Footer */
@@ -395,16 +436,13 @@
         <a href="contact">Contact</a>
     </div>
     
-    <!-- Wave Hero Section -->
-    <section class="wave-hero">
+    <!-- Clean Hero Section -->
+    <section class="wave-hero" style="min-height: 45vh; padding: 120px 20px 40px;">
         <div class="wave-hero-content">
-            <h1>The <strong>Age of Intelligence</strong>.</h1>
-            <p class="hero-subtext">
-                AI is teaching us what intelligence actually looks like — 
-                not just artificial, but human. The question isn't whether you'll use AI.
-                It's whether you'll level up your own intelligence to meet it.
+            <h1 style="font-size: 4rem; margin-bottom: 10px;">kai <strong>hamil</strong></h1>
+            <p class="hero-subtext" style="font-size: 1.5rem; margin-bottom: 0; opacity: 0.7;">
+                System // Self
             </p>
-            <a href="/tools/time-and-focus.html" class="cta-button">Find Your Focus</a>
         </div>
     </section>
     
@@ -418,28 +456,22 @@
             </div>
             
             <div class="access-grid">
+                <a href="https://vale.kaihamil.com/vale" class="vale-hero-link">
+                    <div class="vale-hero-title">Valé<strong>OS</strong></div>
+                    <div class="vale-hero-desc">Your personal operating system in the cloud</div>
+                    <span class="vale-hero-cta">Learn more →</span>
+                </a>
+                
+                <a href="tools/ai-user-quiz-v3.html" class="access-card">
+                    <div class="access-icon">🤖</div>
+                    <div class="access-title">What Kind of AI User Are You?</div>
+                    <div class="access-desc">Find your problem-solving style</div>
+                </a>
+                
                 <a href="frameworks/" class="access-card">
                     <div class="access-icon">◫</div>
-                    <div class="access-content">
-                        <div class="access-title">Frameworks</div>
-                        <div class="access-desc">Decision tools and systems</div>
-                    </div>
-                </a>
-                
-                <a href="tools/" class="access-card">
-                    <div class="access-icon">🛠️</div>
-                    <div class="access-content">
-                        <div class="access-title">Tools</div>
-                        <div class="access-desc">Practical implementations</div>
-                    </div>
-                </a>
-                
-                <a href="posts/" class="access-card">
-                    <div class="access-icon">⚡</div>
-                    <div class="access-content">
-                        <div class="access-title">System Posts</div>
-                        <div class="access-desc">Frameworks in action</div>
-                    </div>
+                    <div class="access-title">Frameworks</div>
+                    <div class="access-desc">Decision tools and systems</div>
                 </a>
             </div>
         </div>
@@ -452,28 +484,22 @@
             </div>
             
             <div class="access-grid">
+                <div class="access-card coming-soon">
+                    <div class="access-icon" style="font-size: 2rem;">◉</div>
+                    <div class="access-title large">Coming Soon</div>
+                    <div class="access-desc">Something analog. Something patient.</div>
+                </div>
+                
+                <a href="tools/time-and-focus.html" class="access-card">
+                    <div class="access-icon">🎯</div>
+                    <div class="access-title">Find Your Focus</div>
+                    <div class="access-desc">Where does your time actually go?</div>
+                </a>
+                
                 <a href="wisdom/" class="access-card">
                     <div class="access-icon">🕯️</div>
-                    <div class="access-content">
-                        <div class="access-title">Wisdom</div>
-                        <div class="access-desc">Philosophy and presence</div>
-                    </div>
-                </a>
-                
-                <a href="tools/free-hour.html" class="access-card">
-                    <div class="access-icon">🧘</div>
-                    <div class="access-content">
-                        <div class="access-title">Presence Tools</div>
-                        <div class="access-desc">Space for what matters</div>
-                    </div>
-                </a>
-                
-                <a href="posts/the-physics-of-love.html" class="access-card">
-                    <div class="access-icon">❤️</div>
-                    <div class="access-content">
-                        <div class="access-title">Love</div>
-                        <div class="access-desc">Connection and relationships</div>
-                    </div>
+                    <div class="access-title">Wisdom</div>
+                    <div class="access-desc">Philosophy and presence</div>
                 </a>
             </div>
         </div>

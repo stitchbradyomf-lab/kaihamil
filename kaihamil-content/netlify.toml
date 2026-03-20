@@ -19,14 +19,11 @@
 
 # Valé subdomain serves vale/index.html
 [[redirects]]
-  from = "https://vale.kaihamil.com/*"
+  from = "/*"
   to = "/vale/index.html"
   status = 200
-
-[[redirects]]
-  from = "https://vale.kaihamil.com"
-  to = "/vale/index.html"
-  status = 200
+  force = true
+  conditions = {Host = ["vale.kaihamil.com"]}
 
 # Redirects for protected routes
 [[redirects]]
