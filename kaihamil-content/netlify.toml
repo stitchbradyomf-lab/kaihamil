@@ -1,6 +1,7 @@
 [build]
   publish = "."
   command = "echo 'Static site'"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
