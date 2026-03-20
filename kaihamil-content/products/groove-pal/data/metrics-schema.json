@@ -1,0 +1,90 @@
+{
+  "$schema": "Groove Pal Community Metrics Schema",
+  "version": "1.0",
+  "description": "Track record journeys for community interest, not business optimization",
+  
+  "record": {
+    "id": "GP-0047",
+    "album": "Kind of Blue",
+    "artist": "Miles Davis",
+    "year": 1959,
+    "added": "2025-09-01"
+  },
+  
+  "journey_metrics": {
+    "total_listeners": 4,
+    "total_miles": 847,
+    "total_days_in_circulation": 189,
+    "average_days_per_stop": 47,
+    "current_location": {
+      "city": "Asheville",
+      "state": "NC"
+    }
+  },
+  
+  "route": [
+    { "city": "Brooklyn", "state": "NY", "arrived": "2025-09-01", "departed": "2025-10-13", "days_held": 42 },
+    { "city": "Philadelphia", "state": "PA", "arrived": "2025-10-15", "departed": "2025-12-12", "days_held": 58 },
+    { "city": "Durham", "state": "NC", "arrived": "2025-12-14", "departed": "2026-02-03", "days_held": 51 },
+    { "city": "Asheville", "state": "NC", "arrived": "2026-02-05", "departed": null, "days_held": 38 }
+  ],
+  
+  "legs": [
+    { "from": "Brooklyn, NY", "to": "Philadelphia, PA", "miles": 97 },
+    { "from": "Philadelphia, PA", "to": "Durham, NC", "miles": 394 },
+    { "from": "Durham, NC", "to": "Asheville, NC", "miles": 213 }
+  ],
+  
+  "favorite_tracks": {
+    "So What": 1,
+    "Blue in Green": 1,
+    "All Blues": 1,
+    "Flamenco Sketches": 1,
+    "Freddie Freeloader": 0
+  },
+  
+  "listening_log": [
+    {
+      "listener": "Marcus T.",
+      "location": { "city": "Brooklyn", "state": "NY" },
+      "date": "2025-09",
+      "favorite_track": "Blue in Green",
+      "listened_with": "my dad",
+      "note": "My dad's copy. That piano intro on Blue in Green still gets me every time."
+    },
+    {
+      "listener": "Elena R.",
+      "location": { "city": "Philadelphia", "state": "PA" },
+      "date": "2025-11",
+      "favorite_track": "So What",
+      "listened_with": "my roommate",
+      "note": "First jazz record I've actually listened to all the way through. That bass line on So What is so good."
+    },
+    {
+      "listener": "James K.",
+      "location": { "city": "Durham", "state": "NC" },
+      "date": "2026-01",
+      "favorite_track": "Flamenco Sketches",
+      "listened_with": "my wife",
+      "note": "Flamenco Sketches is perfect late-night music. We made it through the whole B side without checking our phones once."
+    },
+    {
+      "listener": "Sarah M.",
+      "location": { "city": "Asheville", "state": "NC" },
+      "date": "2026-03",
+      "favorite_track": "All Blues",
+      "listened_with": "my neighbor",
+      "note": "All Blues has this shuffle that makes you want to just sit there. Good porch music."
+    }
+  ],
+  
+  "community_aggregate": {
+    "description": "Aggregate stats across all records (example)",
+    "total_records_in_circulation": 47,
+    "total_unique_listeners": 183,
+    "total_miles_traveled": 28450,
+    "states_reached": ["NY", "PA", "NC", "VA", "GA", "FL", "TN", "OH", "IL", "CA", "TX", "CO", "WA", "OR"],
+    "most_popular_track_all_time": "So What",
+    "average_days_per_stop_global": 41
+  }
+}

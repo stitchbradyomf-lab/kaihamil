@@ -17,6 +17,7 @@
             --cream-dim: #b8b0a0;
             --accent: #5b8a72;
             --vinyl: #1f1f1f;
+            --orange: #ff6b00;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,6 +40,10 @@
         .header {
             text-align: center;
             padding: 40px 0 30px;
+        }
+        
+        .header a {
+            text-decoration: none;
         }
         
         .logo {
@@ -66,17 +71,6 @@
             overflow: hidden;
         }
         
-        .album-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--gold-dim) 0%, transparent 60%);
-            opacity: 0.05;
-        }
-        
         .album-cover {
             width: 200px;
             height: 200px;
@@ -98,25 +92,24 @@
         
         .album-cover-text .title {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 5px;
         }
         
         .album-cover-text .artist {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0.8;
         }
         
         .album-info h1 {
             font-family: 'DM Serif Display', serif;
             font-size: 1.8rem;
-            color: var(--cream);
             margin-bottom: 5px;
         }
         
         .album-info .artist {
-            font-size: 1.1rem;
             color: var(--gold);
+            font-size: 1.1rem;
             margin-bottom: 15px;
         }
         
@@ -124,84 +117,171 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--cream-dim);
         }
         
-        .album-meta span {
+        .qr-badge {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 60px;
+            height: 60px;
+            background: var(--cream);
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--bg);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .qr-badge .code {
+            font-family: monospace;
+            font-size: 0.7rem;
         }
         
         /* Journey Stats */
         .journey-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
             margin-bottom: 30px;
         }
         
         .stat {
             background: var(--bg-card);
             border-radius: 12px;
-            padding: 20px 15px;
+            padding: 15px 10px;
             text-align: center;
         }
         
         .stat-value {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: var(--gold);
         }
         
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--cream-dim);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-top: 5px;
+            margin-top: 4px;
         }
         
-        /* Journey Path */
+        /* Route info */
+        .route-info {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .route-header {
+            font-size: 0.75rem;
+            color: var(--cream-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .route-stops {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .route-stop {
+            background: var(--bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--cream);
+        }
+        
+        .route-stop.current {
+            background: var(--accent);
+            color: var(--cream);
+        }
+        
+        /* Favorite Tracks Distribution */
+        .track-dist {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .track-dist-header {
+            font-size: 0.75rem;
+            color: var(--cream-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .track-bar {
+            margin-bottom: 12px;
+        }
+        
+        .track-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+        
+        .track-bar-label .name {
+            color: var(--cream);
+        }
+        
+        .track-bar-label .count {
+            color: var(--cream-dim);
+        }
+        
+        .track-bar-fill {
+            height: 8px;
+            background: var(--bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .track-bar-fill span {
+            display: block;
+            height: 100%;
+            background: var(--gold);
+            border-radius: 4px;
+        }
+        
+        /* Section */
         .journey-section {
             margin-bottom: 30px;
         }
         
         .section-title {
             font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--cream);
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--bg-card);
         }
         
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--gold-dim), transparent);
-        }
-        
-        /* Guestbook Entries */
+        /* Guestbook entries */
         .guestbook {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 0;
         }
         
         .entry {
             background: var(--bg-entry);
             border-radius: 16px;
             padding: 25px;
-            position: relative;
             border-left: 3px solid var(--gold-dim);
-        }
-        
-        .entry:hover {
-            border-left-color: var(--gold);
         }
         
         .entry-header {
@@ -249,6 +329,12 @@
             font-weight: 500;
         }
         
+        .entry-date .days {
+            font-size: 0.7rem;
+            color: var(--cream-dim);
+            opacity: 0.7;
+        }
+        
         .favorite-track {
             background: rgba(212, 160, 74, 0.1);
             border-radius: 8px;
@@ -293,16 +379,6 @@
             line-height: 1.7;
         }
         
-        .memory::before {
-            content: '"';
-            font-family: 'DM Serif Display', serif;
-            font-size: 2rem;
-            color: var(--gold-dim);
-            line-height: 0;
-            vertical-align: -0.4em;
-            margin-right: 5px;
-        }
-        
         /* Journey Line */
         .journey-line {
             display: flex;
@@ -318,10 +394,38 @@
             margin: 0 10px;
         }
         
-        /* CTA */
-        .cta-section {
+        .journey-line .distance {
+            font-size: 0.7rem;
+            color: var(--cream-dim);
+            opacity: 0.6;
+            margin-left: 10px;
+        }
+        
+        /* Ethos callout */
+        .ethos {
             background: linear-gradient(135deg, var(--bg-card), var(--bg));
             border: 1px solid var(--gold-dim);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .ethos p {
+            font-size: 0.95rem;
+            color: var(--cream-dim);
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .ethos p strong {
+            color: var(--cream);
+            font-style: normal;
+        }
+        
+        /* CTA */
+        .cta-section {
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 30px;
             text-align: center;
@@ -371,34 +475,11 @@
             text-decoration: none;
         }
         
-        /* QR Badge */
-        .qr-badge {
-            position: absolute;
-            bottom: -10px;
-            right: -10px;
-            width: 60px;
-            height: 60px;
-            background: var(--cream);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            color: var(--bg);
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        
-        .qr-badge .code {
-            font-family: monospace;
-            font-size: 0.7rem;
-        }
-        
         @media (max-width: 480px) {
             .container { padding: 15px; }
             .album-cover { width: 160px; height: 160px; }
             .album-info h1 { font-size: 1.5rem; }
-            .journey-stats { gap: 10px; }
+            .journey-stats { grid-template-columns: repeat(2, 1fr); }
             .stat { padding: 15px 10px; }
             .stat-value { font-size: 1.4rem; }
             .entry { padding: 20px; }
@@ -409,8 +490,10 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">GROOVE PAL</div>
-            <div class="tagline">A pal to whom you send your groove</div>
+            <a href="/">
+                <div class="logo">GROOVE PAL</div>
+                <div class="tagline">Send a groove. Make a pal.</div>
+            </a>
         </header>
         
         <!-- Album Hero -->
@@ -432,7 +515,7 @@
                 <div class="artist">Miles Davis</div>
                 <div class="album-meta">
                     <span>🎵 1959</span>
-                    <span>💿 Columbia Records</span>
+                    <span>💿 Columbia</span>
                     <span>⏱ 45:44</span>
                 </div>
             </div>
@@ -449,14 +532,71 @@
                 <div class="stat-label">Miles</div>
             </div>
             <div class="stat">
-                <div class="stat-value">6</div>
-                <div class="stat-label">Months</div>
+                <div class="stat-value">189</div>
+                <div class="stat-label">Days</div>
             </div>
+            <div class="stat">
+                <div class="stat-value">47</div>
+                <div class="stat-label">Avg Days</div>
+            </div>
+        </section>
+        
+        <!-- Route -->
+        <section class="route-info">
+            <div class="route-header">Route</div>
+            <div class="route-stops">
+                <span class="route-stop">Brooklyn, NY</span>
+                <span class="route-stop">Philadelphia, PA</span>
+                <span class="route-stop">Durham, NC</span>
+                <span class="route-stop current">Asheville, NC</span>
+            </div>
+        </section>
+        
+        <!-- Favorite Tracks Distribution -->
+        <section class="track-dist">
+            <div class="track-dist-header">Favorite Tracks</div>
+            
+            <div class="track-bar">
+                <div class="track-bar-label">
+                    <span class="name">So What</span>
+                    <span class="count">1</span>
+                </div>
+                <div class="track-bar-fill"><span style="width: 25%"></span></div>
+            </div>
+            
+            <div class="track-bar">
+                <div class="track-bar-label">
+                    <span class="name">Blue in Green</span>
+                    <span class="count">1</span>
+                </div>
+                <div class="track-bar-fill"><span style="width: 25%"></span></div>
+            </div>
+            
+            <div class="track-bar">
+                <div class="track-bar-label">
+                    <span class="name">All Blues</span>
+                    <span class="count">1</span>
+                </div>
+                <div class="track-bar-fill"><span style="width: 25%"></span></div>
+            </div>
+            
+            <div class="track-bar">
+                <div class="track-bar-label">
+                    <span class="name">Flamenco Sketches</span>
+                    <span class="count">1</span>
+                </div>
+                <div class="track-bar-fill"><span style="width: 25%"></span></div>
+            </div>
+        </section>
+        
+        <!-- Ethos -->
+        <section class="ethos">
+            <p>This page exists for the community — not for likes or shares. <strong>The experience is the point.</strong> Sit down, slow down, listen all the way through. If you feel like sharing, we're here.</p>
         </section>
         
         <!-- Guestbook -->
         <section class="journey-section">
-            <h2 class="section-title">The Journey</h2>
+            <h2 class="section-title">Listening Log</h2>
             
             <div class="guestbook">
                 <!-- Entry 1 -->
@@ -472,6 +612,7 @@
                         <div class="entry-date">
                             <div class="leg">Origin</div>
                             <div>Sep 2025</div>
+                            <div class="days">42 days</div>
                         </div>
                     </div>
                     <div class="favorite-track">
@@ -484,11 +625,12 @@
                     <div class="listened-with">
                         Listened with <strong>my dad</strong> on a Sunday morning
                     </div>
-                    <p class="memory">This was my father's favorite record. He passed it to me, now I pass it forward. Take care of it — there's a lifetime of Sunday mornings in these grooves.</p>
+                    <p class="memory">My dad's copy. That piano intro on Blue in Green still gets me every time. Passed along in good shape — enjoy.</p>
                 </article>
                 
                 <div class="journey-line">
                     Brooklyn <span class="arrow">→</span> Philadelphia
+                    <span class="distance">97 mi</span>
                 </div>
                 
                 <!-- Entry 2 -->
@@ -504,6 +646,7 @@
                         <div class="entry-date">
                             <div class="leg">Leg 2</div>
                             <div>Nov 2025</div>
+                            <div class="days">58 days</div>
                         </div>
                     </div>
                     <div class="favorite-track">
@@ -516,11 +659,12 @@
                     <div class="listened-with">
                         Listened with <strong>my roommate</strong> while painting
                     </div>
-                    <p class="memory">I'd never really listened to jazz before this. Something about knowing this exact record traveled from someone's father to my apartment made me actually sit with it. I get it now.</p>
+                    <p class="memory">First jazz record I've actually listened to all the way through. That bass line on So What is so good. Played it three times before sending it on.</p>
                 </article>
                 
                 <div class="journey-line">
                     Philadelphia <span class="arrow">→</span> Durham
+                    <span class="distance">394 mi</span>
                 </div>
                 
                 <!-- Entry 3 -->
@@ -536,6 +680,7 @@
                         <div class="entry-date">
                             <div class="leg">Leg 3</div>
                             <div>Jan 2026</div>
+                            <div class="days">51 days</div>
                         </div>
                     </div>
                     <div class="favorite-track">
@@ -548,11 +693,12 @@
                     <div class="listened-with">
                         Listened with <strong>my wife</strong> after the kids went to bed
                     </div>
-                    <p class="memory">We used to listen to jazz on our first dates. Haven't made time for it in years. This record reminded us why we fell in love. Thank you, Marcus's dad.</p>
+                    <p class="memory">Flamenco Sketches is perfect late-night music. We made it through the whole B side without checking our phones once. That's rare these days.</p>
                 </article>
                 
                 <div class="journey-line">
                     Durham <span class="arrow">→</span> Asheville
+                    <span class="distance">213 mi</span>
                 </div>
                 
                 <!-- Entry 4 (current) -->
@@ -568,6 +714,7 @@
                         <div class="entry-date">
                             <div class="leg" style="color: var(--accent);">Current</div>
                             <div>Mar 2026</div>
+                            <div class="days">38 days</div>
                         </div>
                     </div>
                     <div class="favorite-track">
@@ -580,22 +727,22 @@
                     <div class="listened-with">
                         Listened with <strong>my neighbor</strong> on the porch at sunset
                     </div>
-                    <p class="memory">Reading these entries before I even dropped the needle changed how I listened. This isn't just an album anymore — it's carrying stories. Mine will be part of it now too.</p>
+                    <p class="memory">All Blues has this shuffle that makes you want to just sit there. My neighbor had never heard it. Good porch music.</p>
                 </article>
             </div>
         </section>
         
         <!-- CTA -->
         <section class="cta-section">
-            <h2>Join the Journey</h2>
-            <p>Get a welcome vinyl, 10 QR stickers, and become part of a community that believes music is meant to be shared.</p>
-            <a href="#" class="cta-button">Join Groove Pal — $35</a>
+            <h2>Start a Journey</h2>
+            <p>Get a welcome vinyl and 10 QR stickers. Listen, log, send it forward.</p>
+            <a href="index.html#notify" class="cta-button">Join Groove Pal — $35</a>
         </section>
         
         <!-- Footer -->
         <footer class="footer">
             <p>A <a href="https://kaihamil.com">Kai Hamil</a> project</p>
-            <p style="margin-top: 10px; font-style: italic;">"A pal to whom you send your groove"</p>
+            <p style="margin-top: 10px; font-style: italic;">"Send a groove. Make a pal."</p>
         </footer>
     </div>
 </body>
