@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Valé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --green: #4a7c59;
+            --red: #c44;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .auth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .auth-subtitle {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 25px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--ink-dark);
+            background: white;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        .btn:disabled {
+            background: var(--border);
+            color: var(--brown-medium);
+            cursor: not-allowed;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .divider span {
+            padding: 0 15px;
+        }
+        
+        .magic-link-btn {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            color: var(--brown-dark);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .magic-link-btn:hover {
+            border-color: var(--gold);
+        }
+        
+        .message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .message.success {
+            background: #e8f5e9;
+            color: var(--green);
+        }
+        
+        .message.error {
+            background: #ffebee;
+            color: var(--red);
+        }
+        
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .footer-text a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+    </nav>
+    
+    <div class="container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="auth-title">Welcome</h1>
+                <p class="auth-subtitle">Sign in to continue your Valé setup</p>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="login">Sign In</div>
+                <div class="tab" data-tab="register">Create Account</div>
+            </div>
+            
+            <div id="message"></div>
+            
+            <!-- Login Form -->
+            <div class="tab-content active" id="login-form">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
+                
+                <div class="divider"><span>or</span></div>
+                
+                <button class="magic-link-btn" id="magicLinkLogin">
+                    ✉️ Send me a magic link
+                </button>
+                
+                <p class="footer-text">
+                    <a href="#" id="forgotPassword">Forgot password?</a>
+                </p>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="tab-content" id="register-form">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" required placeholder="At least 8 characters" minlength="8">
+                    </div>
+                    <button type="submit" class="btn">Create Account & Pay $100</button>
+                </form>
+                
+                <p class="footer-text">
+                    By creating an account, you agree to our Terms of Service.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + '-form').classList.add('active');
+            });
+        });
+        
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.innerHTML = `<div class="message ${type}">${text}</div>`;
+        }
+        
+        // Initialize Netlify Identity
+        if (window.netlifyIdentity) {
+            netlifyIdentity.on('init', user => {
+                if (user) {
+                    // Already logged in, redirect to dashboard
+                    window.location.href = '/vale/configure.html';
+                }
+            });
+            
+            netlifyIdentity.on('login', user => {
+                // Redirect after login
+                window.location.href = '/vale/configure.html';
+            });
+            
+            netlifyIdentity.on('error', err => {
+                showMessage(err.message || 'An error occurred', 'error');
+            });
+        }
+        
+        // Login form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            
+            try {
+                await netlifyIdentity.gotrue.login(email, password);
+            } catch (err) {
+                showMessage(err.message || 'Login failed', 'error');
+            }
+        });
+        
+        // Register form
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = e.target.name.value;
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            
+            try {
+                await netlifyIdentity.gotrue.signup(email, password, { full_name: name });
+                showMessage('Check your email to confirm your account, then complete payment.', 'success');
+                
+                // Store quiz data to associate with account later
+                localStorage.setItem('vale_pending_email', email);
+                localStorage.setItem('vale_pending_name', name);
+                
+            } catch (err) {
+                showMessage(err.message || 'Registration failed', 'error');
+            }
+        });
+        
+        // Magic link
+        document.getElementById('magicLinkLogin').addEventListener('click', () => {
+            const email = document.querySelector('#login-form input[name="email"]').value;
+            if (!email) {
+                showMessage('Enter your email first', 'error');
+                return;
+            }
+            
+            netlifyIdentity.gotrue.requestPasswordRecovery(email)
+                .then(() => {
+                    showMessage('Check your email for the magic link!', 'success');
+                })
+                .catch(err => {
+                    showMessage(err.message || 'Failed to send magic link', 'error');
+                });
+        });
+        
+        // Forgot password
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#login-form input[name="email"]').value;
+            if (!email) {
+                showMessage('Enter your email first', 'error');
+                return;
+            }
+            
+            netlifyIdentity.gotrue.requestPasswordRecovery(email)
+                .then(() => {
+                    showMessage('Password reset email sent!', 'success');
+                })
+                .catch(err => {
+                    showMessage(err.message || 'Failed to send reset email', 'error');
+                });
+        });
+        
+        // Check for redirect from quiz with pre-filled data
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('email')) {
+            document.querySelector('#register-form input[name="email"]').value = urlParams.get('email');
+            document.querySelector('.tab[data-tab="register"]').click();
+        }
+        if (urlParams.get('name')) {
+            document.querySelector('#register-form input[name="name"]').value = urlParams.get('name');
+        }
+    </script>
+</body>
+</html>

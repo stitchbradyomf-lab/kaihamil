@@ -433,19 +433,24 @@
             <div class="question-card">
                 <div class="options" id="pain-options">
                     <label class="option">
+                        <input type="radio" name="pain" value="build">
+                        <div class="option-radio"></div>
+                        <span class="option-text">I want to build something but don't know where to start</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pain" value="content">
+                        <div class="option-radio"></div>
+                        <span class="option-text">I have ideas but struggle to ship content consistently</span>
+                    </label>
+                    <label class="option">
                         <input type="radio" name="pain" value="dropping">
                         <div class="option-radio"></div>
                         <span class="option-text">Things keep falling through the cracks</span>
                     </label>
                     <label class="option">
-                        <input type="radio" name="pain" value="overwhelm">
+                        <input type="radio" name="pain" value="manual">
                         <div class="option-radio"></div>
-                        <span class="option-text">Email and messages are overwhelming</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="pain" value="calendar">
-                        <div class="option-radio"></div>
-                        <span class="option-text">Calendar chaos — always double-booked or rushed</span>
+                        <span class="option-text">Too much manual, repetitive work</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="pain" value="scattered">
@@ -453,9 +458,9 @@
                         <span class="option-text">Information is scattered everywhere</span>
                     </label>
                     <label class="option">
-                        <input type="radio" name="pain" value="manual">
+                        <input type="radio" name="pain" value="overwhelm">
                         <div class="option-radio"></div>
-                        <span class="option-text">Too much manual, repetitive work</span>
+                        <span class="option-text">Email, messages, and notifications are overwhelming</span>
                     </label>
                     <label class="option">
                         <input type="radio" name="pain" value="other">
@@ -671,11 +676,12 @@
             
             // Pain-specific
             const painMap = {
+                'build': 'Project scaffolding and build partner for your ideas',
+                'content': 'Content pipeline — from ideas to published, consistently',
                 'dropping': 'Proactive reminders for follow-ups and commitments',
-                'overwhelm': 'Email triage and priority surfacing',
-                'calendar': 'Smart calendar management and conflict prevention',
-                'scattered': 'Unified information access across all your tools',
                 'manual': 'Automation of repetitive tasks and workflows',
+                'scattered': 'Unified information access across all your tools',
+                'overwhelm': 'Email triage and priority surfacing',
                 'other': 'Custom solution designed for your specific needs'
             };
             
@@ -705,11 +711,17 @@
             `).join('');
         }
         
-        // Checkout (placeholder)
+        // Checkout - redirect to login/register with pre-filled data
         document.getElementById('checkout-btn').addEventListener('click', () => {
-            // Store answers and redirect to payment
-            console.log('Answers:', answers);
-            alert('Checkout coming soon! For now, email kyle@kaihamil.com to get started.');
+            // Store quiz answers in localStorage for retrieval after auth
+            localStorage.setItem('vale_quiz_answers', JSON.stringify(answers));
+            
+            // Redirect to login with pre-filled email/name
+            const params = new URLSearchParams();
+            if (answers.name) params.set('name', answers.name);
+            if (answers.email) params.set('email', answers.email);
+            
+            window.location.href = 'login.html?' + params.toString();
         });
     </script>
 </body>

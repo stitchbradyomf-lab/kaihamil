@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Your Valé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --green: #4a7c59;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--gold); }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .logout-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .logout-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        /* Auth gate */
+        .auth-gate {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .auth-gate h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .auth-gate p {
+            color: var(--brown-medium);
+            margin-bottom: 25px;
+        }
+        
+        .auth-gate .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        /* Main content */
+        .main-content {
+            display: none;
+        }
+        
+        .main-content.visible {
+            display: block;
+        }
+        
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            color: var(--brown-medium);
+            font-size: 1.05rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        .progress-bar {
+            background: var(--border);
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: var(--gold);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .quiz-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 25px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--ink-dark);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+        }
+        
+        .question:last-child {
+            margin-bottom: 0;
+        }
+        
+        .question-label {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .question-hint {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            border-color: var(--gold);
+            background: var(--bg-card);
+        }
+        
+        .option input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--ink-dark);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-option:hover {
+            border-color: var(--gold-light);
+        }
+        
+        .checkbox-option input {
+            accent-color: var(--gold);
+        }
+        
+        .slider-container {
+            padding: 10px 0;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 10px;
+        }
+        
+        .slider {
+            width: 100%;
+            accent-color: var(--gold);
+        }
+        
+        .emoji-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .emoji-option {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--bg-warm);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .emoji-option:hover {
+            border-color: var(--gold-light);
+        }
+        
+        .emoji-option.selected {
+            border-color: var(--gold);
+            background: var(--gold-light);
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .submit-button {
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-button:hover {
+            background: var(--brown-dark);
+            color: var(--gold);
+        }
+        
+        .submit-note {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Success state */
+        .success-card {
+            background: var(--bg-card);
+            border: 2px solid var(--green);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 600px;
+            margin: 60px auto;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .success-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .success-card p {
+            color: var(--brown-medium);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav { padding: 15px 20px; }
+            .checkbox-grid { grid-template-columns: 1fr; }
+            .quiz-card { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Valé<span>OS</span></a>
+        <div class="user-info">
+            <span id="userEmail"></span>
+            <button class="logout-btn" id="logoutBtn">Sign Out</button>
+        </div>
+    </nav>
+    
+    <!-- Auth Gate -->
+    <div class="auth-gate" id="authGate">
+        <div>
+            <h2>Sign in to continue</h2>
+            <p>You need to be logged in to configure your Valé.</p>
+            <a href="login.html" class="btn">Sign In →</a>
+        </div>
+    </div>
+    
+    <!-- Main Content (hidden until auth) -->
+    <div class="main-content" id="mainContent">
+        <section class="hero">
+            <h1>Configure Your Valé</h1>
+            <p>Tell us everything. The more we know, the better your Valé will serve you.</p>
+        </section>
+        
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <form id="configForm">
+                <!-- Section 1: Core Purpose -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">1</span>
+                        <span class="section-title">Core Purpose</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">What's the primary focus for your Valé?</label>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="focus" value="personal" required>
+                                <span>Personal Life — Family, health, home, personal admin</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="focus" value="work">
+                                <span>Work — Job responsibilities, meetings, tasks</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="focus" value="business">
+                                <span>Business — Entrepreneurship, clients, operations</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="focus" value="creative">
+                                <span>Creative — Content, projects, building things</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="focus" value="hybrid">
+                                <span>Hybrid — Multiple areas, work-life blend</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">In your own words, what do you most want your Valé to help with?</label>
+                        <p class="question-hint">Be specific. "Help me publish my newsletter every week" is better than "help with content"</p>
+                        <textarea name="main_goal" placeholder="Type your answer..." required></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">What does "success" look like 30 days from now?</label>
+                        <textarea name="success_30_days" placeholder="Example: My website is live, I've sent 4 newsletters, and I'm not stressed about what to write next..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 2: Current Tools -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">2</span>
+                        <span class="section-title">Your Current Tools</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Which tools do you already use? (Select all that apply)</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="google_calendar"> Google Calendar</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="gmail"> Gmail</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="google_docs"> Google Docs</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="notion"> Notion</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="slack"> Slack</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="outlook"> Outlook</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="apple_notes"> Apple Notes</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="apple_reminders"> Apple Reminders</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="todoist"> Todoist</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="asana"> Asana</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="trello"> Trello</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="substack"> Substack</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="wordpress"> WordPress</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="shopify"> Shopify</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="quickbooks"> QuickBooks</label>
+                            <label class="checkbox-option"><input type="checkbox" name="tools" value="other"> Other</label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Any other tools or systems we should know about?</label>
+                        <textarea name="other_tools" placeholder="CRM, industry-specific software, spreadsheets, etc."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 3: Communication -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">3</span>
+                        <span class="section-title">Communication Style</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">How do you want your Valé to communicate?</label>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span>👋 Casual & friendly</span>
+                                <span>📋 Professional & formal</span>
+                            </div>
+                            <input type="range" name="formality" min="1" max="5" value="3" class="slider">
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">How proactive should your Valé be?</label>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span>Only when I ask</span>
+                                <span>Surface things before I ask</span>
+                            </div>
+                            <input type="range" name="proactivity" min="1" max="5" value="4" class="slider">
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">What time zone are you in?</label>
+                        <select name="timezone" required>
+                            <option value="">Select timezone...</option>
+                            <option value="America/New_York">Eastern (ET)</option>
+                            <option value="America/Chicago">Central (CT)</option>
+                            <option value="America/Denver">Mountain (MT)</option>
+                            <option value="America/Los_Angeles">Pacific (PT)</option>
+                            <option value="America/Phoenix">Arizona (no DST)</option>
+                            <option value="Pacific/Honolulu">Hawaii</option>
+                            <option value="Europe/London">UK (GMT/BST)</option>
+                            <option value="Europe/Paris">Central Europe</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">When should your Valé NOT disturb you?</label>
+                        <p class="question-hint">Example: "After 9pm", "During family dinner 6-7pm", "Weekends unless urgent"</p>
+                        <textarea name="quiet_hours" placeholder="Let us know your boundaries..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 4: Users -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">4</span>
+                        <span class="section-title">Who Will Use This?</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">How many people will use this Valé?</label>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="users" value="1" required>
+                                <span>Just me</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="users" value="2">
+                                <span>Me and one other person (partner, assistant)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="users" value="team">
+                                <span>Small team (3-5 people)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="users" value="family">
+                                <span>Family household</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">If multiple users, describe the use case:</label>
+                        <textarea name="multi_user_desc" placeholder="Example: My spouse and I want shared calendar visibility but separate task lists..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Section 5: Personality -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">5</span>
+                        <span class="section-title">Your Valé's Personality</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">What should your Valé be named?</label>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="vale_name_type" value="vale" checked>
+                                <span>Valé (default)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="vale_name_type" value="custom">
+                                <span>Custom name</span>
+                            </label>
+                        </div>
+                        <input type="text" name="custom_name" placeholder="Enter custom name..." style="margin-top: 10px;">
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Pick an emoji for your Valé:</label>
+                        <div class="emoji-grid">
+                            <div class="emoji-option selected" data-value="⚡">⚡</div>
+                            <div class="emoji-option" data-value="🤖">🤖</div>
+                            <div class="emoji-option" data-value="🧠">🧠</div>
+                            <div class="emoji-option" data-value="🌟">🌟</div>
+                            <div class="emoji-option" data-value="🎯">🎯</div>
+                            <div class="emoji-option" data-value="🦊">🦊</div>
+                            <div class="emoji-option" data-value="🌿">🌿</div>
+                            <div class="emoji-option" data-value="✨">✨</div>
+                            <div class="emoji-option" data-value="🔮">🔮</div>
+                            <div class="emoji-option" data-value="🎨">🎨</div>
+                        </div>
+                        <input type="hidden" name="vale_emoji" value="⚡">
+                    </div>
+                </div>
+                
+                <!-- Section 6: About You -->
+                <div class="quiz-card">
+                    <div class="section-header">
+                        <span class="section-number">6</span>
+                        <span class="section-title">About You</span>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Your name (what should Valé call you?)</label>
+                        <input type="text" name="user_name" placeholder="First name or nickname" required>
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Your role or title (optional)</label>
+                        <input type="text" name="user_role" placeholder="e.g., Realtor, Business Owner, Writer, Consultant">
+                    </div>
+                    
+                    <div class="question">
+                        <label class="question-label">Anything else your Valé should know about you from day one?</label>
+                        <p class="question-hint">Context that would help: family situation, work schedule, ongoing projects, pet peeves, preferences...</p>
+                        <textarea name="about_you" placeholder="The more context, the better..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Submit -->
+                <div class="submit-section">
+                    <button type="submit" class="submit-button">Submit Configuration</button>
+                    <p class="submit-note">We'll review your answers and send your personalized quote within 48 hours.</p>
+                </div>
+            </form>
+            
+            <!-- Success State -->
+            <div class="success-card" id="successCard" style="display: none;">
+                <div class="success-icon">✅</div>
+                <h2>Configuration Received!</h2>
+                <p>We're reviewing your answers now.</p>
+                <p>Expect your personalized quote within <strong>48 hours</strong>.</p>
+                <p style="margin-top: 20px; font-size: 0.9rem;">We've also emailed a copy to <span id="confirmEmail"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+        let currentUser = null;
+        
+        // Check auth state
+        if (window.netlifyIdentity) {
+            netlifyIdentity.on('init', user => {
+                if (user) {
+                    showMainContent(user);
+                } else {
+                    showAuthGate();
+                }
+            });
+            
+            netlifyIdentity.on('login', user => {
+                showMainContent(user);
+            });
+            
+            netlifyIdentity.on('logout', () => {
+                window.location.href = 'login.html';
+            });
+        }
+        
+        function showAuthGate() {
+            document.getElementById('authGate').style.display = 'flex';
+            document.getElementById('mainContent').classList.remove('visible');
+        }
+        
+        function showMainContent(user) {
+            currentUser = user;
+            document.getElementById('authGate').style.display = 'none';
+            document.getElementById('mainContent').classList.add('visible');
+            document.getElementById('userEmail').textContent = user.email;
+            
+            // Pre-fill name if available
+            if (user.user_metadata && user.user_metadata.full_name) {
+                document.querySelector('input[name="user_name"]').value = user.user_metadata.full_name;
+            }
+        }
+        
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            netlifyIdentity.logout();
+        });
+        
+        // Emoji selection
+        document.querySelectorAll('.emoji-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                document.querySelectorAll('.emoji-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                document.querySelector('input[name="vale_emoji"]').value = this.dataset.value;
+            });
+        });
+        
+        // Progress tracking
+        const form = document.getElementById('configForm');
+        const progressFill = document.getElementById('progressFill');
+        const totalSections = 6;
+        
+        function updateProgress() {
+            const filledSections = document.querySelectorAll('.quiz-card input:checked, .quiz-card textarea:not(:placeholder-shown)').length;
+            const progress = Math.min((filledSections / 15) * 100, 100);
+            progressFill.style.width = progress + '%';
+        }
+        
+        form.addEventListener('input', updateProgress);
+        
+        // Form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = {
+                email: currentUser.email,
+                submitted: new Date().toISOString(),
+                config: Object.fromEntries(formData)
+            };
+            
+            // Get checkbox values as array
+            data.config.tools = formData.getAll('tools');
+            
+            try {
+                const response = await fetch('/.netlify/functions/vale-config', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + currentUser.token.access_token
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    form.style.display = 'none';
+                    document.getElementById('successCard').style.display = 'block';
+                    document.getElementById('confirmEmail').textContent = currentUser.email;
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Something went wrong. Please try again or email kyle@kaihamil.com');
+            }
+        });
+    </script>
+</body>
+</html>
