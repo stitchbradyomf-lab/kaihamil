@@ -213,10 +213,194 @@ WHERE {
 
 ---
 
+---
+
+## Groove Pal — Record Journey Analytics
+
+### Q11: Which genres spend the most time in the South?
+**Query Type:** Aggregation with geographic filtering
+**Expected Pattern:**
+```sparql
+SELECT ?genre (SUM(?days) as ?totalDays)
+WHERE {
+  ?visit gp:record ?record .
+  ?visit gp:location ?location .
+  ?visit gp:daysSpent ?days .
+  ?location gp:region "south" .
+  ?record gp:copyOf ?album .
+  ?album gp:hasGenre ?genre .
+}
+GROUP BY ?genre
+ORDER BY DESC(?totalDays)
+```
+**Business Value:** Understand regional music preferences for targeted distribution
+**Status:** ⬜ Not yet tested
+
+### Q12: Where does jazz travel vs hip-hop?
+**Query Type:** Genre-location correlation
+**Expected Pattern:**
+```sparql
+SELECT ?genre ?city ?state (COUNT(?visit) as ?visits)
+WHERE {
+  ?visit gp:record ?record .
+  ?visit gp:location ?location .
+  ?location gp:city ?city .
+  ?location gp:state ?state .
+  ?record gp:copyOf ?album .
+  ?album gp:hasGenre ?genre .
+  FILTER (?genre IN (gp:jazz, gp:hip-hop))
+}
+GROUP BY ?genre ?city ?state
+ORDER BY ?genre DESC(?visits)
+```
+**Business Value:** Map genre distribution patterns geographically
+**Status:** ⬜ Not yet tested
+
+### Q13: What is the average journey length for Stevie Wonder albums?
+**Query Type:** Artist-specific aggregation
+**Expected Pattern:**
+```sparql
+SELECT ?album (AVG(?totalDays) as ?avgDays) (AVG(?totalMiles) as ?avgMiles)
+WHERE {
+  ?record gp:copyOf ?album .
+  ?album gp:byArtist gp:stevie-wonder .
+  ?record gp:totalDays ?totalDays .
+  ?record gp:totalMiles ?totalMiles .
+}
+GROUP BY ?album
+```
+**Business Value:** Measure artist engagement and record "stickiness"
+**Status:** ⬜ Not yet tested
+
+### Q14: Which cities have the longest average hold times?
+**Query Type:** Location performance analysis
+**Expected Pattern:**
+```sparql
+SELECT ?city ?state (AVG(?days) as ?avgDays)
+WHERE {
+  ?visit gp:location ?location .
+  ?visit gp:daysSpent ?days .
+  ?location gp:city ?city .
+  ?location gp:state ?state .
+}
+GROUP BY ?city ?state
+ORDER BY DESC(?avgDays)
+LIMIT 20
+```
+**Business Value:** Identify cities where records "settle" longest
+**Status:** ⬜ Not yet tested
+
+### Q15: Which records are stuck in one location too long?
+**Query Type:** Anomaly detection
+**Expected Pattern:**
+```sparql
+SELECT ?record ?album ?location ?days
+WHERE {
+  ?visit gp:record ?record .
+  ?visit gp:location ?location .
+  ?visit gp:daysSpent ?days .
+  ?visit gp:departed ?departed .
+  ?record gp:copyOf ?album .
+  FILTER (?days > 90 && !BOUND(?departed))
+}
+ORDER BY DESC(?days)
+```
+**Business Value:** Find records needing follow-up (reminder to send forward)
+**Status:** ⬜ Not yet tested
+
+### Q16: What's the flow pattern after NYC?
+**Query Type:** Sequence analysis
+**Expected Pattern:**
+```sparql
+SELECT ?nextCity ?nextState (COUNT(*) as ?count)
+WHERE {
+  ?visit1 gp:record ?record .
+  ?visit1 gp:location gp:new-york-ny .
+  ?visit2 gp:record ?record .
+  ?visit2 gp:location ?nextLocation .
+  ?visit2 gp:arrived ?arrived2 .
+  ?visit1 gp:departed ?departed1 .
+  ?nextLocation gp:city ?nextCity .
+  ?nextLocation gp:state ?nextState .
+  FILTER (?arrived2 > ?departed1)
+}
+GROUP BY ?nextCity ?nextState
+ORDER BY DESC(?count)
+```
+**Business Value:** Understand record flow patterns for network optimization
+**Status:** ⬜ Not yet tested
+
+### Q17: Which artists have the widest geographic reach?
+**Query Type:** Artist geographic spread
+**Expected Pattern:**
+```sparql
+SELECT ?artist (COUNT(DISTINCT ?state) as ?statesReached)
+WHERE {
+  ?record gp:copyOf ?album .
+  ?album gp:byArtist ?artist .
+  ?visit gp:record ?record .
+  ?visit gp:location ?location .
+  ?location gp:state ?state .
+}
+GROUP BY ?artist
+ORDER BY DESC(?statesReached)
+```
+**Business Value:** Identify artists with broad community appeal
+**Status:** ⬜ Not yet tested
+
+### Q18: What's the most popular track across all records?
+**Query Type:** Track preference aggregation
+**Expected Pattern:**
+```sparql
+SELECT ?track (COUNT(*) as ?votes)
+WHERE {
+  ?log gp:favoriteTrack ?track .
+}
+GROUP BY ?track
+ORDER BY DESC(?votes)
+LIMIT 20
+```
+**Business Value:** Surface crowd favorites for playlist/curation
+**Status:** ⬜ Not yet tested
+
+### Q19: Which records are out of circulation and why?
+**Query Type:** Status audit
+**Expected Pattern:**
+```sparql
+SELECT ?record ?album ?status ?lastLocation
+WHERE {
+  ?record gp:status ?status .
+  ?record gp:copyOf ?album .
+  OPTIONAL { ?record gp:currentLocation ?lastLocation }
+  FILTER (?status IN ("lost", "retired", "paused"))
+}
+```
+**Business Value:** Track attrition and identify patterns
+**Status:** ⬜ Not yet tested
+
+### Q20: Seasonal patterns — do records move faster in certain months?
+**Query Type:** Temporal analysis
+**Expected Pattern:**
+```sparql
+SELECT ?month (AVG(?days) as ?avgDays) (COUNT(*) as ?visits)
+WHERE {
+  ?visit gp:departed ?departed .
+  ?visit gp:daysSpent ?days .
+  BIND(MONTH(?departed) as ?month)
+}
+GROUP BY ?month
+ORDER BY ?month
+```
+**Business Value:** Identify seasonal engagement patterns
+**Status:** ⬜ Not yet tested
+
+---
+
 ## Related Files
 - `/data/graph.json` — Main knowledge graph
 - `/data/allowlist.json` — User access tracking
 - `/openclaw/knowledge-graph-schema.md` — Graph structure documentation
+- `/products/groove-pal/design/knowledge-graph-schema.md` — Groove Pal schema
 
 ---
 
