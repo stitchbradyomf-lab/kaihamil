@@ -21,9 +21,15 @@ export default async function handler(request: Request, context: Context) {
 
   // Valé subdomain routing
   if (host === "vale.kaihamil.com") {
-    const newPath = url.pathname === "/"
+    // Strip /vale/ prefix if present (avoid double path)
+    let pathname = url.pathname;
+    if (pathname.startsWith("/vale/")) {
+      pathname = pathname.slice(5); // Remove "/vale"
+    }
+    
+    const newPath = pathname === "/" || pathname === ""
       ? "/vale/index.html"
-      : `/vale${url.pathname}`;
+      : `/vale${pathname}`;
     
     return context.rewrite(newPath);
   }
