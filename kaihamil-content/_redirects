@@ -4,3 +4,4 @@
 
 # Valé subdomain routing  
 /  /vale/index.html  200!  Host=vale.kaihamil.com
+/vale/*  /:splat  301!  Host=vale.kaihamil.com
