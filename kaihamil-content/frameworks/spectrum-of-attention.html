@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Spectrum of Attention</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root {
+–consume: #1a3a5c;
+–produce: #8b3a1a;
+–consume-light: #2d5a8a;
+–produce-light: #c45a2a;
+–capture-gold: #c9a84c;
+–bg: #0d0d0f;
+–text: #e8e4dc;
+–text-muted: #8a8578;
+–grain-opacity: 0.04;
+}
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+overflow-x: hidden;
+min-height: 100vh;
+}
+
+/* Film grain overlay */
+body::after {
+content: ‘’;
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.5’/%3E%3C/svg%3E”);
+opacity: var(–grain-opacity);
+pointer-events: none;
+z-index: 1000;
+}
+
+.container {
+max-width: 1400px;
+margin: 0 auto;
+padding: 60px 40px 100px;
+}
+
+/* ── HEADER ── */
+.header {
+text-align: center;
+margin-bottom: 80px;
+opacity: 0;
+animation: fadeUp 1.2s ease-out 0.2s forwards;
+}
+
+.header-eyebrow {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–text-muted);
+margin-bottom: 20px;
+}
+
+.header h1 {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(36px, 5vw, 64px);
+font-weight: 900;
+line-height: 1.1;
+margin-bottom: 16px;
+background: linear-gradient(135deg, var(–consume-light) 0%, var(–text) 40%, var(–text) 60%, var(–produce-light) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.header .subtitle {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: clamp(16px, 2vw, 22px);
+color: var(–text-muted);
+font-weight: 400;
+}
+
+/* ── NARRATIVE PROLOGUE ── */
+.prologue {
+max-width: 680px;
+margin: 0 auto 90px;
+text-align: center;
+opacity: 0;
+animation: fadeUp 1.2s ease-out 0.6s forwards;
+}
+
+.prologue p {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: 17px;
+line-height: 1.8;
+color: var(–text-muted);
+}
+
+.prologue .camera-icon {
+display: inline-block;
+width: 40px;
+height: 40px;
+border: 2px solid var(–capture-gold);
+border-radius: 50%;
+position: relative;
+margin-bottom: 24px;
+}
+
+.prologue .camera-icon::after {
+content: ‘’;
+position: absolute;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+width: 14px; height: 14px;
+border: 2px solid var(–capture-gold);
+border-radius: 50%;
+}
+
+/* ── MAIN SPECTRUM ── */
+.spectrum-section {
+position: relative;
+margin-bottom: 100px;
+opacity: 0;
+animation: fadeUp 1.2s ease-out 1s forwards;
+}
+
+.spectrum-labels {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+margin-bottom: 20px;
+padding: 0 10px;
+}
+
+.spectrum-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 13px;
+letter-spacing: 3px;
+text-transform: uppercase;
+}
+
+.spectrum-label.left { color: var(–consume-light); }
+.spectrum-label.right { color: var(–produce-light); }
+
+.spectrum-bar-wrap {
+position: relative;
+height: 6px;
+border-radius: 3px;
+background: linear-gradient(90deg, var(–consume) 0%, #1a2a3c 20%, #2a2a2a 45%, #3a2a1a 70%, var(–produce) 100%);
+margin-bottom: 12px;
+overflow: visible;
+}
+
+.spectrum-bar-wrap::before {
+content: ‘’;
+position: absolute;
+top: -4px; left: -4px; right: -4px; bottom: -4px;
+border-radius: 7px;
+background: linear-gradient(90deg, rgba(45,90,138,0.3), rgba(196,90,42,0.3));
+filter: blur(8px);
+z-index: -1;
+}
+
+.spectrum-arrow {
+text-align: center;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+color: var(–text-muted);
+letter-spacing: 6px;
+margin-bottom: 60px;
+}
+
+/* ── NODE GRID ── */
+.nodes-container {
+position: relative;
+display: grid;
+grid-template-columns: repeat(9, 1fr);
+gap: 0;
+padding: 0 10px;
+}
+
+.node {
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+padding: 20px 8px;
+position: relative;
+opacity: 0;
+transform: translateY(30px);
+}
+
+.node.visible {
+animation: nodeReveal 0.8s ease-out forwards;
+}
+
+.node-pip {
+width: 14px;
+height: 14px;
+border-radius: 50%;
+margin-bottom: 16px;
+position: relative;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.node:hover .node-pip {
+transform: scale(1.5);
+}
+
+.node-pip::after {
+content: ‘’;
+position: absolute;
+top: -6px; left: -6px; right: -6px; bottom: -6px;
+border-radius: 50%;
+border: 1px solid;
+opacity: 0.3;
+}
+
+.node-name {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px;
+font-weight: 700;
+margin-bottom: 8px;
+line-height: 1.2;
+}
+
+.node-desc {
+font-size: 12px;
+line-height: 1.5;
+color: var(–text-muted);
+max-width: 140px;
+}
+
+/* ── NODE COLORS ── */
+.node[data-pos=“1”] .node-pip { background: #1a4a7a; box-shadow: 0 0 20px rgba(26,74,122,0.4); }
+.node[data-pos=“1”] .node-pip::after { border-color: #1a4a7a; }
+.node[data-pos=“1”] .node-name { color: #4a8abf; }
+
+.node[data-pos=“2”] .node-pip { background: #1e5a8c; box-shadow: 0 0 20px rgba(30,90,140,0.4); }
+.node[data-pos=“2”] .node-pip::after { border-color: #1e5a8c; }
+.node[data-pos=“2”] .node-name { color: #5a9acf; }
+
+.node[data-pos=“3”] .node-pip { background: #2a6a94; box-shadow: 0 0 20px rgba(42,106,148,0.4); }
+.node[data-pos=“3”] .node-pip::after { border-color: #2a6a94; }
+.node[data-pos=“3”] .node-name { color: #6aaad0; }
+
+.node[data-pos=“4”] .node-pip { background: #3a7a6a; box-shadow: 0 0 20px rgba(58,122,106,0.4); }
+.node[data-pos=“4”] .node-pip::after { border-color: #3a7a6a; }
+.node[data-pos=“4”] .node-name { color: #6ab0a0; }
+
+.node[data-pos=“5”] .node-pip { background: var(–capture-gold); box-shadow: 0 0 30px rgba(201,168,76,0.5); width: 20px; height: 20px; }
+.node[data-pos=“5”] .node-pip::after { border-color: var(–capture-gold); top: -8px; left: -8px; right: -8px; bottom: -8px; }
+.node[data-pos=“5”] .node-name { color: var(–capture-gold); font-size: 22px; }
+
+.node[data-pos=“6”] .node-pip { background: #8a6a3a; box-shadow: 0 0 20px rgba(138,106,58,0.4); }
+.node[data-pos=“6”] .node-pip::after { border-color: #8a6a3a; }
+.node[data-pos=“6”] .node-name { color: #bfa06a; }
+
+.node[data-pos=“7”] .node-pip { background: #9a5a3a; box-shadow: 0 0 20px rgba(154,90,58,0.4); }
+.node[data-pos=“7”] .node-pip::after { border-color: #9a5a3a; }
+.node[data-pos=“7”] .node-name { color: #cf8a5a; }
+
+.node[data-pos=“8”] .node-pip { background: #aa4a2a; box-shadow: 0 0 20px rgba(170,74,42,0.4); }
+.node[data-pos=“8”] .node-pip::after { border-color: #aa4a2a; }
+.node[data-pos=“8”] .node-name { color: #df7a4a; }
+
+.node[data-pos=“9”] .node-pip { background: #c43a1a; box-shadow: 0 0 30px rgba(196,58,26,0.5); width: 20px; height: 20px; }
+.node[data-pos=“9”] .node-pip::after { border-color: #c43a1a; top: -8px; left: -8px; right: -8px; bottom: -8px; }
+.node[data-pos=“9”] .node-name { color: #e86a4a; font-size: 20px; }
+
+/* ── CAPTURE HIGHLIGHT ── */
+.node[data-pos=“5”]::before {
+content: ‘’;
+position: absolute;
+top: -10px; left: -10px; right: -10px; bottom: -10px;
+border: 1px solid rgba(201,168,76,0.15);
+border-radius: 12px;
+background: rgba(201,168,76,0.03);
+}
+
+/* ── ZONE BRACKETS ── */
+.zone-indicators {
+display: grid;
+grid-template-columns: repeat(9, 1fr);
+gap: 0;
+padding: 0 10px;
+margin-top: 10px;
+}
+
+.zone-bar {
+height: 3px;
+border-radius: 1.5px;
+margin: 0 4px;
+}
+
+.zone-consume { background: linear-gradient(90deg, var(–consume-light), rgba(45,90,138,0.2)); }
+.zone-threshold { background: transparent; }
+.zone-produce { background: linear-gradient(90deg, rgba(196,90,42,0.2), var(–produce-light)); }
+
+.zone-labels {
+display: flex;
+justify-content: space-between;
+padding: 16px 10px 0;
+}
+
+.zone-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+
+.zone-label.left { color: rgba(90,154,207,0.5); }
+.zone-label.center { color: rgba(201,168,76,0.5); text-align: center; flex: 1; }
+.zone-label.right { color: rgba(223,122,74,0.5); }
+
+/* ── DIMENSIONS FOOTER ── */
+.dimensions {
+margin-top: 100px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 40px;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
+opacity: 0;
+animation: fadeUp 1.2s ease-out 2.5s forwards;
+}
+
+.dimension {
+padding: 30px;
+border: 1px solid rgba(232,228,220,0.08);
+border-radius: 8px;
+background: rgba(232,228,220,0.02);
+transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.dimension:hover {
+border-color: rgba(232,228,220,0.15);
+background: rgba(232,228,220,0.04);
+}
+
+.dimension-icon {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 3px;
+text-transform: uppercase;
+color: var(–capture-gold);
+margin-bottom: 12px;
+}
+
+.dimension h3 {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px;
+font-weight: 700;
+margin-bottom: 8px;
+}
+
+.dimension p {
+font-size: 14px;
+line-height: 1.7;
+color: var(–text-muted);
+}
+
+/* ── CLOSING ── */
+.closing {
+text-align: center;
+margin-top: 100px;
+opacity: 0;
+animation: fadeUp 1.2s ease-out 3s forwards;
+}
+
+.closing p {
+font-family: ‘Playfair Display’, serif;
+font-style: italic;
+font-size: 20px;
+color: var(–text-muted);
+line-height: 1.8;
+max-width: 600px;
+margin: 0 auto;
+}
+
+.closing .rule {
+width: 60px;
+height: 1px;
+background: linear-gradient(90deg, var(–consume-light), var(–capture-gold), var(–produce-light));
+margin: 30px auto 0;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nodeReveal {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+.container { padding: 40px 20px 80px; }
+.nodes-container {
+grid-template-columns: repeat(3, 1fr);
+gap: 10px 0;
+}
+.zone-indicators { grid-template-columns: repeat(3, 1fr); }
+.dimensions { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-eyebrow">A Framework for Time & Attention</div>
+    <h1>The Spectrum of Attention</h1>
+    <div class="subtitle">From consuming the world to producing within it</div>
+  </div>
+
+  <div class="prologue">
+    <div class="camera-icon"></div>
+    <p>The sunset hit the warehouse glass and demanded to be seen. In reaching for the camera, a realization: photography lives at the exact threshold between taking in the world and making something new. Every frame is both consumption and creation — a selective act of attention made permanent.</p>
+  </div>
+
+  <div class="spectrum-section">
+    <div class="spectrum-labels">
+      <span class="spectrum-label left">Consuming</span>
+      <span class="spectrum-label right">Producing</span>
+    </div>
+    <div class="spectrum-bar-wrap"></div>
+    <div class="spectrum-arrow">— — — — — — — — → </div>
+
+```
+<div class="nodes-container" id="nodes">
+
+  <div class="node" data-pos="1">
+    <div class="node-pip"></div>
+    <div class="node-name">Awareness</div>
+    <div class="node-desc">Almost unintentional. The peripheral hum of existence before focus arrives.</div>
+  </div>
+
+  <div class="node" data-pos="2">
+    <div class="node-pip"></div>
+    <div class="node-name">Passive</div>
+    <div class="node-desc">The game on in the background. Intake without directed effort.</div>
+  </div>
+
+  <div class="node" data-pos="3">
+    <div class="node-pip"></div>
+    <div class="node-name">Active</div>
+    <div class="node-desc">Reading with a pen. Watching with intention. Energy given to the intake.</div>
+  </div>
+
+  <div class="node" data-pos="4">
+    <div class="node-pip"></div>
+    <div class="node-name">Curation</div>
+    <div class="node-desc">Choosing what deserves your gaze. The first creative act — selective attention.</div>
+  </div>
+
+  <div class="node" data-pos="5">
+    <div class="node-pip"></div>
+    <div class="node-name">Capture</div>
+    <div class="node-desc">The threshold. Taking something from the world and making it yours. Photography lives here.</div>
+  </div>
+
+  <div class="node" data-pos="6">
+    <div class="node-pip"></div>
+    <div class="node-name">Derivative</div>
+    <div class="node-desc">Based on something else. Remixed, reframed, reinterpreted. New content born from existing form.</div>
+  </div>
+
+  <div class="node" data-pos="7">
+    <div class="node-pip"></div>
+    <div class="node-name">Innovation</div>
+    <div class="node-desc">Recombination that shifts the field. Something familiar made genuinely new.</div>
+  </div>
+
+  <div class="node" data-pos="8">
+    <div class="node-pip"></div>
+    <div class="node-name">Art</div>
+    <div class="node-desc">Expression beyond utility. A produced thing that changes the one who encounters it.</div>
+  </div>
+
+  <div class="node" data-pos="9">
+    <div class="node-pip"></div>
+    <div class="node-name">Epiphany</div>
+    <div class="node-desc">Entirely original thought. The kind that rearranges everything beneath it.</div>
+  </div>
+
+</div>
+
+<div class="zone-indicators">
+  <div class="zone-bar zone-consume"></div>
+  <div class="zone-bar zone-consume"></div>
+  <div class="zone-bar zone-consume"></div>
+  <div class="zone-bar zone-consume"></div>
+  <div class="zone-bar zone-threshold"></div>
+  <div class="zone-bar zone-produce"></div>
+  <div class="zone-bar zone-produce"></div>
+  <div class="zone-bar zone-produce"></div>
+  <div class="zone-bar zone-produce"></div>
+</div>
+
+<div class="zone-labels">
+  <span class="zone-label left">Existing content</span>
+  <span class="zone-label center">⬥ threshold ⬥</span>
+  <span class="zone-label right">New content</span>
+</div>
+```
+
+  </div>
+
+  <div class="dimensions">
+    <div class="dimension">
+      <div class="dimension-icon">Resource I</div>
+      <h3>Time</h3>
+      <p>How you spend it. The finite, non-renewable substrate of every activity on this spectrum. Each position demands a different allocation.</p>
+    </div>
+    <div class="dimension">
+      <div class="dimension-icon">Resource II</div>
+      <h3>Attention</h3>
+      <p>Where you direct it. The qualitative axis — not just duration but intensity. The difference between having something on and being fully in it.</p>
+    </div>
+  </div>
+
+  <div class="closing">
+    <p>A map for finding equilibrium.<br>The two resources you fully control —<br>how you spend your time,<br>and where you direct your attention.</p>
+    <div class="rule"></div>
+  </div>
+
+</div>
+
+<script>
+  // Staggered reveal of spectrum nodes on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const nodes = entry.target.querySelectorAll('.node');
+        nodes.forEach((node, i) => {
+          setTimeout(() => {
+            node.classList.add('visible');
+          }, i * 120);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(document.getElementById('nodes'));
+</script>
+
+</body>
+</html>
