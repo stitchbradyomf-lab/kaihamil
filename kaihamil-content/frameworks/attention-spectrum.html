@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Attention Spectrum | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf6f1;
+            --card: #fffdf9;
+            --brown: #3d2817;
+            --brown-medium: #6b5344;
+            --gold: #c9a227;
+            --consume: #4a7c8c;
+            --produce: #b87a5e;
+            --center: #7a6b5a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--brown);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--brown);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        .resources {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .resource {
+            text-align: center;
+            padding: 20px 30px;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .resource-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--brown);
+        }
+        
+        .resource-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-top: 5px;
+        }
+        
+        /* The Spectrum */
+        .spectrum-container {
+            position: relative;
+            margin: 80px 0;
+            padding: 0 20px;
+        }
+        
+        .spectrum-line {
+            position: relative;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                var(--consume) 0%, 
+                var(--center) 50%, 
+                var(--produce) 100%
+            );
+            border-radius: 4px;
+            margin: 100px 0;
+        }
+        
+        .pole-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .pole {
+            text-align: center;
+            max-width: 200px;
+        }
+        
+        .pole-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+        
+        .pole-left .pole-name { color: var(--consume); }
+        .pole-right .pole-name { color: var(--produce); }
+        
+        .pole-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            margin-top: 5px;
+        }
+        
+        /* Nodes on spectrum */
+        .nodes {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+        }
+        
+        .node {
+            position: absolute;
+            transform: translateX(-50%);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .node:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+        
+        .node-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 4px solid;
+            margin: 0 auto 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .node-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .node-example {
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            max-width: 120px;
+            margin: 5px auto 0;
+        }
+        
+        /* Alternating above/below */
+        .node.above {
+            top: -80px;
+        }
+        
+        .node.below {
+            top: 40px;
+        }
+        
+        /* Color coding */
+        .consume-zone .node-dot { border-color: var(--consume); }
+        .consume-zone .node-label { color: var(--consume); }
+        
+        .produce-zone .node-dot { border-color: var(--produce); }
+        .produce-zone .node-label { color: var(--produce); }
+        
+        .center-zone .node-dot { border-color: var(--gold); background: var(--gold); }
+        .center-zone .node-label { color: var(--gold); }
+        
+        /* Legend / Key */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .legend-color.consume { background: var(--consume); }
+        .legend-color.produce { background: var(--produce); }
+        .legend-color.center { background: var(--gold); }
+        
+        /* Detailed breakdown */
+        .breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 80px;
+        }
+        
+        .side {
+            padding: 30px;
+            border-radius: 16px;
+        }
+        
+        .side-consume {
+            background: linear-gradient(135deg, rgba(74, 124, 140, 0.1) 0%, rgba(74, 124, 140, 0.05) 100%);
+            border-left: 4px solid var(--consume);
+        }
+        
+        .side-produce {
+            background: linear-gradient(135deg, rgba(184, 122, 94, 0.1) 0%, rgba(184, 122, 94, 0.05) 100%);
+            border-left: 4px solid var(--produce);
+        }
+        
+        .side h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .side-consume h3 { color: var(--consume); }
+        .side-produce h3 { color: var(--produce); }
+        
+        .tier {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .tier:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .tier-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .tier-desc {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            margin-bottom: 8px;
+        }
+        
+        .tier-examples {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        /* Center highlight */
+        .center-section {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(201, 162, 39, 0.05) 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+            border: 2px solid var(--gold);
+        }
+        
+        .center-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+        
+        .center-section p {
+            font-size: 1.1rem;
+            color: var(--brown);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Quote */
+        .quote {
+            text-align: center;
+            margin: 80px 0;
+            padding: 40px;
+        }
+        
+        .quote blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--brown);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .quote cite {
+            display: block;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--brown-medium);
+            font-style: normal;
+        }
+        
+        /* Footer nav */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin-top: 60px;
+        }
+        
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 800px) {
+            h1 { font-size: 2rem; }
+            .breakdown { grid-template-columns: 1fr; }
+            .resources { flex-direction: column; align-items: center; }
+            .node-label { font-size: 0.9rem; }
+            .node-example { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The Attention Spectrum</h1>
+            <p class="subtitle">A framework for understanding how you spend your two finite resources</p>
+        </header>
+        
+        <div class="resources">
+            <div class="resource">
+                <div class="resource-icon">⏱️</div>
+                <div class="resource-label">Time</div>
+                <div class="resource-desc">How you spend it</div>
+            </div>
+            <div class="resource">
+                <div class="resource-icon">👁️</div>
+                <div class="resource-label">Attention</div>
+                <div class="resource-desc">Where you direct it</div>
+            </div>
+        </div>
+        
+        <!-- Main Spectrum Visualization -->
+        <div class="spectrum-container">
+            <div class="pole-labels">
+                <div class="pole pole-left">
+                    <div class="pole-name">CONSUMING</div>
+                    <div class="pole-desc">Taking in what exists</div>
+                </div>
+                <div class="pole pole-right">
+                    <div class="pole-name">PRODUCING</div>
+                    <div class="pole-desc">Creating what's new</div>
+                </div>
+            </div>
+            
+            <div class="spectrum-line">
+                <div class="nodes">
+                    <!-- Consume side -->
+                    <div class="node above consume-zone" style="left: 5%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Awareness</div>
+                        <div class="node-example">Background noise, peripheral vision</div>
+                    </div>
+                    
+                    <div class="node below consume-zone" style="left: 18%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Passive</div>
+                        <div class="node-example">TV on while cooking, music while driving</div>
+                    </div>
+                    
+                    <div class="node above consume-zone" style="left: 32%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Active</div>
+                        <div class="node-example">Reading a book, taking notes</div>
+                    </div>
+                    
+                    <!-- Center -->
+                    <div class="node below center-zone" style="left: 50%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Capture</div>
+                        <div class="node-example">Photography, curation, selection</div>
+                    </div>
+                    
+                    <!-- Produce side -->
+                    <div class="node above produce-zone" style="left: 65%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Derivative</div>
+                        <div class="node-example">Remixes, adaptations, commentary</div>
+                    </div>
+                    
+                    <div class="node below produce-zone" style="left: 78%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Art</div>
+                        <div class="node-example">Original expression, craft</div>
+                    </div>
+                    
+                    <div class="node above produce-zone" style="left: 88%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Innovation</div>
+                        <div class="node-example">New methods, inventions</div>
+                    </div>
+                    
+                    <div class="node below produce-zone" style="left: 97%;">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Epiphany</div>
+                        <div class="node-example">Paradigm shifts, first principles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color consume"></div>
+                <span>Consuming — Existing content flows in</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color center"></div>
+                <span>Capture — The pivot point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color produce"></div>
+                <span>Producing — New content flows out</span>
+            </div>
+        </div>
+        
+        <!-- Center Section: Capture -->
+        <div class="center-section">
+            <h3>📷 Capture: The Inflection Point</h3>
+            <p>
+                Photography lives at the center. You choose where to look (consuming), 
+                then make something original that represents your selective focus in that moment (producing). 
+                Every photograph is a completely unique point in time and perspective — 
+                both reception and creation in a single act.
+            </p>
+        </div>
+        
+        <!-- Detailed Breakdown -->
+        <div class="breakdown">
+            <div class="side side-consume">
+                <h3>← Consuming</h3>
+                
+                <div class="tier">
+                    <div class="tier-name">Awareness</div>
+                    <div class="tier-desc">Almost unintentional. Little to no interpretation.</div>
+                    <div class="tier-examples">Ambient sound, passing scenery, peripheral information</div>
+                </div>
+                
+                <div class="tier">
+                    <div class="tier-name">Passive Consumption</div>
+                    <div class="tier-desc">Low focused energy. Background engagement.</div>
+                    <div class="tier-examples">Game on while cooking, podcast during commute, scrolling</div>
+                </div>
+                
+                <div class="tier">
+                    <div class="tier-name">Active Consumption</div>
+                    <div class="tier-desc">High focused energy. Deliberate attention.</div>
+                    <div class="tier-examples">Reading with marginalia, studying, deep listening</div>
+                </div>
+            </div>
+            
+            <div class="side side-produce">
+                <h3>Producing →</h3>
+                
+                <div class="tier">
+                    <div class="tier-name">Derivative</div>
+                    <div class="tier-desc">Based on something else. New content, familiar foundation.</div>
+                    <div class="tier-examples">Covers, remixes, commentary, response pieces</div>
+                </div>
+                
+                <div class="tier">
+                    <div class="tier-name">Art</div>
+                    <div class="tier-desc">Original expression. Craft and intention.</div>
+                    <div class="tier-examples">Compositions, designs, writing, performances</div>
+                </div>
+                
+                <div class="tier">
+                    <div class="tier-name">Innovation</div>
+                    <div class="tier-desc">New methods, processes, or inventions.</div>
+                    <div class="tier-examples">Tools, frameworks, systems, products</div>
+                </div>
+                
+                <div class="tier">
+                    <div class="tier-name">Epiphany</div>
+                    <div class="tier-desc">Entirely original thought that changes everything beneath it.</div>
+                    <div class="tier-examples">Paradigm shifts, first principles, foundational insights</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Closing Quote -->
+        <div class="quote">
+            <blockquote>
+                "Time and attention — the two resources over which you have full control. 
+                How you spend your time, and where you direct your attention. 
+                This framework becomes the plot to consider decision-making 
+                and finding equilibrium within your life."
+            </blockquote>
+            <cite>— Kyle Brady, March 2026</cite>
+        </div>
+        
+        <footer>
+            <a href="../index.html">Home</a>
+            <a href="../frameworks/">All Frameworks</a>
+            <a href="../tools/">Tools</a>
+        </footer>
+    </div>
+</body>
+</html>
