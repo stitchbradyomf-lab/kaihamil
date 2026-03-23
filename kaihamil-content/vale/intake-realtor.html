@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valé for Realtors — Intake</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf6f1;
+            --card: #fffdf9;
+            --gold: #c9a227;
+            --brown: #3d2817;
+            --brown-medium: #6b5344;
+            --border: #e8dfd3;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--brown);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--brown);
+            margin-bottom: 10px;
+        }
+        
+        .logo strong { color: var(--gold); }
+        
+        .subtitle {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: var(--border);
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: var(--gold);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-label {
+            font-size: 0.85rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .question-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .question-number {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            margin-bottom: 8px;
+        }
+        
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--brown);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+        }
+        
+        .option.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .option input {
+            margin-right: 12px;
+            accent-color: var(--gold);
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .other-input {
+            margin-top: 10px;
+            padding: 12px 16px;
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            display: none;
+        }
+        
+        .other-input.visible {
+            display: block;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        
+        .btn-back {
+            background: transparent;
+            color: var(--brown-medium);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-back:hover {
+            border-color: var(--brown);
+            color: var(--brown);
+        }
+        
+        .btn-next {
+            background: var(--gold);
+            color: var(--brown);
+        }
+        
+        .btn-next:hover {
+            background: var(--brown);
+            color: var(--gold);
+        }
+        
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-submit {
+            background: var(--brown);
+            color: var(--gold);
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            background: var(--gold);
+            color: var(--brown);
+        }
+        
+        /* Results */
+        .results {
+            display: none;
+            text-align: center;
+        }
+        
+        .results.active {
+            display: block;
+        }
+        
+        .results-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .results h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .results p {
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+        }
+        
+        .gap-score {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .gap-score h3 {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            margin-bottom: 10px;
+        }
+        
+        .gap-meter {
+            background: var(--border);
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .gap-fill {
+            background: linear-gradient(90deg, var(--gold), #e8a54a);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .gap-label {
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+        
+        .contact-info {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: left;
+            margin-top: 30px;
+        }
+        
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .error {
+            color: #c44;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .question-text { font-size: 1.2rem; }
+            .container { padding: 20px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">Valé<strong>OS</strong></h1>
+            <p class="subtitle">Realtor Intake Assessment</p>
+        </header>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+        
+        <!-- Section 1: Workflow Today -->
+        <div class="section active" data-section="1">
+            <p class="section-label">Section 1 of 3 — Your Workflow Today</p>
+            
+            <div class="question-card">
+                <p class="question-number">Question 1 of 9</p>
+                <p class="question-text">What takes up most of your non-client-facing time?</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q1" value="lead-followup"> Lead follow-up and nurturing</label>
+                    <label class="option"><input type="radio" name="q1" value="listing-prep"> Listing prep (photos, descriptions, marketing)</label>
+                    <label class="option"><input type="radio" name="q1" value="transaction-coord"> Transaction coordination / paperwork</label>
+                    <label class="option"><input type="radio" name="q1" value="prospecting"> Prospecting and outreach</label>
+                    <label class="option"><input type="radio" name="q1" value="scheduling"> Scheduling and calendar management</label>
+                    <label class="option"><input type="radio" name="q1" value="other"> Other</label>
+                </div>
+                <input type="text" class="other-input" id="q1-other" placeholder="Please specify...">
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 2 of 9</p>
+                <p class="question-text">How do you currently keep track of client details and history?</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q2" value="crm"> CRM system</label>
+                    <label class="option"><input type="radio" name="q2" value="notes-spreadsheet"> Notes app / spreadsheet</label>
+                    <label class="option"><input type="radio" name="q2" value="email"> Email threads</label>
+                    <label class="option"><input type="radio" name="q2" value="memory"> Memory / mental notes</label>
+                    <label class="option"><input type="radio" name="q2" value="none"> I don't — it's a problem</label>
+                </div>
+                <input type="text" class="other-input" id="q2-crm" placeholder="Which CRM do you use?">
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 3 of 9</p>
+                <p class="question-text">What's the one task you wish you could hand off entirely?</p>
+                <textarea class="text-input" name="q3" placeholder="Describe the task that drains you most..."></textarea>
+            </div>
+            
+            <div class="nav-buttons">
+                <div></div>
+                <button class="btn btn-next" onclick="nextSection()">Continue →</button>
+            </div>
+        </div>
+        
+        <!-- Section 2: AI Usage Today -->
+        <div class="section" data-section="2">
+            <p class="section-label">Section 2 of 3 — AI Usage Today</p>
+            
+            <div class="question-card">
+                <p class="question-number">Question 4 of 9</p>
+                <p class="question-text">How often do you use AI tools (ChatGPT, etc.) in your work?</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q4" value="daily"> Daily</label>
+                    <label class="option"><input type="radio" name="q4" value="few-times-week"> A few times a week</label>
+                    <label class="option"><input type="radio" name="q4" value="occasionally"> Occasionally</label>
+                    <label class="option"><input type="radio" name="q4" value="rarely"> Rarely / never</label>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 5 of 9</p>
+                <p class="question-text">What do you currently use AI for?</p>
+                <p style="font-size: 0.9rem; color: var(--brown-medium); margin-bottom: 15px;">Check all that apply</p>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q5" value="listings"> Writing listing descriptions</label>
+                    <label class="option"><input type="checkbox" name="q5" value="emails"> Drafting emails / messages</label>
+                    <label class="option"><input type="checkbox" name="q5" value="research"> Research (market data, neighborhoods)</label>
+                    <label class="option"><input type="checkbox" name="q5" value="social"> Social media content</label>
+                    <label class="option"><input type="checkbox" name="q5" value="nothing"> Nothing yet</label>
+                    <label class="option"><input type="checkbox" name="q5" value="other"> Other</label>
+                </div>
+                <input type="text" class="other-input" id="q5-other" placeholder="What else do you use AI for?">
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 6 of 9</p>
+                <p class="question-text">What's frustrating about AI tools you've tried?</p>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q6" value="no-context"> Have to re-explain context every time</label>
+                    <label class="option"><input type="checkbox" name="q6" value="generic"> Output is generic / needs heavy editing</label>
+                    <label class="option"><input type="checkbox" name="q6" value="dont-know"> Don't know what to ask for</label>
+                    <label class="option"><input type="checkbox" name="q6" value="setup-time"> Takes too long to set up</label>
+                    <label class="option"><input type="checkbox" name="q6" value="not-useful"> Haven't found them useful</label>
+                    <label class="option"><input type="checkbox" name="q6" value="other"> Other</label>
+                </div>
+                <input type="text" class="other-input" id="q6-other" placeholder="What else frustrates you?">
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="prevSection()">← Back</button>
+                <button class="btn btn-next" onclick="nextSection()">Continue →</button>
+            </div>
+        </div>
+        
+        <!-- Section 3: Future State -->
+        <div class="section" data-section="3">
+            <p class="section-label">Section 3 of 3 — Future State</p>
+            
+            <div class="question-card">
+                <p class="question-number">Question 7 of 9</p>
+                <p class="question-text">If an AI assistant could remember everything about your clients and business, what would you want it to handle?</p>
+                <p style="font-size: 0.9rem; color: var(--brown-medium); margin-bottom: 15px;">Select your top 3</p>
+                <div class="options">
+                    <label class="option"><input type="checkbox" name="q7" value="followup-emails" data-max="3"> Draft personalized follow-up emails</label>
+                    <label class="option"><input type="checkbox" name="q7" value="client-reminders" data-max="3"> Remind me when to reach out to past clients</label>
+                    <label class="option"><input type="checkbox" name="q7" value="listing-prep" data-max="3"> Prepare for listing appointments with client history</label>
+                    <label class="option"><input type="checkbox" name="q7" value="social-content" data-max="3"> Generate social content from my listings</label>
+                    <label class="option"><input type="checkbox" name="q7" value="transaction-tracking" data-max="3"> Track transaction milestones and deadlines</label>
+                    <label class="option"><input type="checkbox" name="q7" value="neighborhood-research" data-max="3"> Research neighborhoods for buyer clients</label>
+                    <label class="option"><input type="checkbox" name="q7" value="calendar" data-max="3"> Manage my calendar and scheduling</label>
+                    <label class="option"><input type="checkbox" name="q7" value="other" data-max="3"> Other</label>
+                </div>
+                <input type="text" class="other-input" id="q7-other" placeholder="What else would you want?">
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 8 of 9</p>
+                <p class="question-text">What would "working well" look like for you?</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q8" value="conversational"> I talk/text it like an assistant and it just handles things</label>
+                    <label class="option"><input type="radio" name="q8" value="background"> It runs in the background and alerts me when needed</label>
+                    <label class="option"><input type="radio" name="q8" value="prep"> It prepares things for my review before client meetings</label>
+                    <label class="option"><input type="radio" name="q8" value="reduce-screen"> It reduces my screen time, not adds to it</label>
+                </div>
+            </div>
+            
+            <div class="question-card">
+                <p class="question-number">Question 9 of 9</p>
+                <p class="question-text">If this existed and worked, what would you pay monthly?</p>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q9" value="0"> $0 — I'd need to see it first</label>
+                    <label class="option"><input type="radio" name="q9" value="50-100"> $50-100/month</label>
+                    <label class="option"><input type="radio" name="q9" value="100-250"> $100-250/month</label>
+                    <label class="option"><input type="radio" name="q9" value="250+"> $250+/month if it actually saved me time</label>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn btn-back" onclick="prevSection()">← Back</button>
+                <button class="btn btn-next btn-submit" onclick="submitForm()">See My Results →</button>
+            </div>
+        </div>
+        
+        <!-- Results -->
+        <div class="results" id="results">
+            <div class="results-icon">📊</div>
+            <h2>Thanks for sharing!</h2>
+            <p>Here's what we learned about your AI opportunity gap.</p>
+            
+            <div class="gap-score">
+                <h3>Your AI Opportunity Gap</h3>
+                <div class="gap-meter">
+                    <div class="gap-fill" id="gap-fill"></div>
+                </div>
+                <p class="gap-label" id="gap-label">Calculating...</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Want to explore what Valé could do for you?</h3>
+                <input type="text" id="contact-name" placeholder="Your name">
+                <input type="email" id="contact-email" placeholder="Your email">
+                <input type="tel" id="contact-phone" placeholder="Phone (optional)">
+                <button class="btn btn-submit" onclick="submitContact()">Request a Demo</button>
+                <p class="error" id="contact-error"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 3;
+        const responses = {};
+        
+        function updateProgress() {
+            const progress = ((currentSection - 1) / totalSections) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+        
+        function showSection(num) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelector(`[data-section="${num}"]`).classList.add('active');
+            currentSection = num;
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+        
+        function nextSection() {
+            if (currentSection < totalSections) {
+                collectResponses();
+                showSection(currentSection + 1);
+            }
+        }
+        
+        function prevSection() {
+            if (currentSection > 1) {
+                showSection(currentSection - 1);
+            }
+        }
+        
+        function collectResponses() {
+            // Collect all form data
+            document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+                responses[input.name] = input.value;
+            });
+            
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
+                if (!responses[input.name]) responses[input.name] = [];
+                if (!responses[input.name].includes(input.value)) {
+                    responses[input.name].push(input.value);
+                }
+            });
+            
+            document.querySelectorAll('textarea').forEach(input => {
+                if (input.value.trim()) {
+                    responses[input.name] = input.value.trim();
+                }
+            });
+            
+            // Collect "other" inputs
+            document.querySelectorAll('.other-input').forEach(input => {
+                if (input.value.trim()) {
+                    responses[input.id] = input.value.trim();
+                }
+            });
+        }
+        
+        function calculateGap() {
+            // Current AI usage (q5) vs Desired AI usage (q7)
+            const currentUse = responses.q5 ? responses.q5.length : 0;
+            const desiredUse = responses.q7 ? responses.q7.length : 0;
+            const frustrations = responses.q6 ? responses.q6.length : 0;
+            
+            // Gap score: higher = more opportunity
+            // Max current use = 5, max desired = 3, max frustrations = 5
+            let gap = 0;
+            
+            // Low current use = opportunity
+            if (currentUse <= 1) gap += 30;
+            else if (currentUse <= 2) gap += 20;
+            else if (currentUse <= 3) gap += 10;
+            
+            // High desired use = opportunity
+            gap += desiredUse * 15;
+            
+            // Frustrations = opportunity (they've tried but failed)
+            gap += frustrations * 8;
+            
+            // Willingness to pay
+            if (responses.q9 === '250+') gap += 20;
+            else if (responses.q9 === '100-250') gap += 15;
+            else if (responses.q9 === '50-100') gap += 10;
+            
+            return Math.min(100, gap);
+        }
+        
+        async function submitForm() {
+            collectResponses();
+            
+            const gapScore = calculateGap();
+            responses.gapScore = gapScore;
+            responses.submittedAt = new Date().toISOString();
+            responses.userType = 'realtor';
+            
+            // Show results
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('results').classList.add('active');
+            document.getElementById('progress').style.width = '100%';
+            
+            // Animate gap score
+            setTimeout(() => {
+                document.getElementById('gap-fill').style.width = gapScore + '%';
+                
+                let label = '';
+                if (gapScore >= 70) label = 'High opportunity — Valé could transform your workflow';
+                else if (gapScore >= 50) label = 'Moderate opportunity — Room to leverage AI more effectively';
+                else if (gapScore >= 30) label = 'Some opportunity — Targeted improvements possible';
+                else label = 'Already optimized — You\'re ahead of most!';
+                
+                document.getElementById('gap-label').textContent = label;
+            }, 300);
+            
+            // Save to backend
+            try {
+                await fetch('/.netlify/functions/vale-intake', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(responses)
+                });
+            } catch (e) {
+                console.log('Failed to save intake:', e);
+            }
+        }
+        
+        async function submitContact() {
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const errorEl = document.getElementById('contact-error');
+            
+            if (!name || !email) {
+                errorEl.textContent = 'Please enter your name and email';
+                errorEl.style.display = 'block';
+                return;
+            }
+            
+            responses.contactName = name;
+            responses.contactEmail = email;
+            responses.contactPhone = phone;
+            
+            try {
+                const res = await fetch('/.netlify/functions/vale-intake', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(responses)
+                });
+                
+                if (res.ok) {
+                    document.querySelector('.contact-info').innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">✅</div>
+                            <h3>We'll be in touch!</h3>
+                            <p style="color: var(--brown-medium); margin-top: 10px;">
+                                Thanks ${name}. We'll reach out within 24 hours to schedule a demo.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Failed');
+                }
+            } catch (e) {
+                errorEl.textContent = 'Something went wrong. Please try again.';
+                errorEl.style.display = 'block';
+            }
+        }
+        
+        // Handle "other" field visibility
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', function() {
+                // Show "other" input if "other" is selected
+                if (this.value === 'other' || this.value === 'crm') {
+                    const otherId = this.name + '-' + this.value;
+                    const otherInput = document.getElementById(otherId) || 
+                                      document.getElementById(this.name.replace('q', 'q') + '-other');
+                    if (otherInput) {
+                        otherInput.classList.toggle('visible', this.checked);
+                    }
+                }
+                
+                // Limit q7 to 3 selections
+                if (this.name === 'q7' && this.dataset.max) {
+                    const checked = document.querySelectorAll('input[name="q7"]:checked');
+                    if (checked.length > 3) {
+                        this.checked = false;
+                    }
+                }
+                
+                // Update option styling
+                this.closest('.option').classList.toggle('selected', this.checked);
+            });
+        });
+        
+        updateProgress();
+    </script>
+</body>
+</html>
