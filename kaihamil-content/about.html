@@ -214,6 +214,61 @@
             border-top: 1px solid var(--border);
         }
         
+        /* Collapsible Sections */
+        .collapsible {
+            margin: 25px 0;
+        }
+        
+        .collapsible-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .collapsible-header:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.1);
+        }
+        
+        .collapsible-header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+        
+        .collapsible-header .toggle-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            transition: transform 0.3s;
+        }
+        
+        .collapsible.open .toggle-icon {
+            transform: rotate(45deg);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding: 0 25px;
+        }
+        
+        .collapsible.open .collapsible-content {
+            max-height: 2000px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            background: var(--bg-card);
+        }
+        
         /* Sidebar */
         .sidebar {
             position: sticky;
@@ -362,63 +417,87 @@
 
             <p style="text-align: right; font-weight: 500; color: var(--gold);">- KJB</p>
 
-            <h2>What "System // Self" Actually Means</h2>
-
-            <div class="system-self-grid">
-                <div class="concept-box">
-                    <h4>System</h4>
-                    <p>The external. The workflows, the automations, the way you organize information and make decisions. The infrastructure that either supports you or drains you.</p>
+            <!-- Collapsible: System // Self -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2>What "System // Self" Actually Means</h2>
+                    <span class="toggle-icon">+</span>
                 </div>
-                <div class="concept-box">
-                    <h4>Self</h4>
-                    <p>The internal. The clarity, the capacity, the space to think and create and be present. The version of you that shows up when you're not fighting your tools.</p>
+                <div class="collapsible-content">
+                    <div class="system-self-grid">
+                        <div class="concept-box">
+                            <h4>System</h4>
+                            <p>The external. The workflows, the automations, the way you organize information and make decisions. The infrastructure that either supports you or drains you.</p>
+                        </div>
+                        <div class="concept-box">
+                            <h4>Self</h4>
+                            <p>The internal. The clarity, the capacity, the space to think and create and be present. The version of you that shows up when you're not fighting your tools.</p>
+                        </div>
+                    </div>
+                    <p>In order to work more effectively with AI, human intelligence also has to evolve. Systems thinking allows us to see patterns and structure rather than isolated events. It allows us to better understand cause and effect, steering our actions and thoughts toward the direction we want to go.</p>
+                    <p>You can't optimize one without the other. A perfect productivity system doesn't matter if you're burned out. All the mindfulness in the world won't save you if your tools are fighting you.</p>
+                    <p>AI fits right in the middle. It's not coming for your job. It's coming for your busywork. The question is what you'll build in the space that opens up.</p>
                 </div>
             </div>
 
-            <p>In order to work more effectively with AI, human intelligence also has to evolve. Systems thinking allows us to see patterns and structure rather than isolated events. It allows us to better understand cause and effect, steering our actions and thoughts toward the direction we want to go.</p>
+            <!-- Collapsible: What Kai Hamil Does -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2>What Kai Hamil Does</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsible-content">
+                    <h3>Research & Frameworks</h3>
+                    <p>I dig into complex problems - relationships, work, decision-making, the future of human agency - and find the signal in the noise. Then I build frameworks that help you think more clearly about messy situations.</p>
 
-            <img src="MEDIA:./media/inbound/file_30---d86c77d9-0d45-42de-8132-858d2b3bcd73.jpg" alt="AI systems visualization" style="width: 100%; max-width: 600px; margin: 30px auto; display: block; border-radius: 8px;">
+                    <h3>Practical AI Integration</h3>
+                    <p>Not for tech bros. For real humans who want to use AI as a thinking partner, not a replacement. Guides that actually work in your actual life.</p>
 
-            <p>You can't optimize one without the other. A perfect productivity system doesn't matter if you're burned out. All the mindfulness in the world won't save you if your tools are fighting you.</p>
+                    <h3>The Through-Line</h3>
+                    <p>Everything I create points toward the same goal: moving from overwhelm to clarity. From reacting to choosing. From managing your time to owning your attention.</p>
+                </div>
+            </div>
 
-            <p>AI fits right in the middle. It's not coming for your job. It's coming for your busywork. The question is what you'll build in the space that opens up.</p>
+            <!-- Collapsible: The Bigger Picture -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2>The Bigger Picture</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsible-content">
+                    <p>We're drowning in information and starving for wisdom. I believe we're at a moment where we decide what kind of future we want.</p>
+                    <p>One where AI concentrates power in the hands of a few. Or one where it democratizes capability for the many.</p>
+                    <p>Kai Hamil is betting on the second one. Because the people who learn to work with these tools - not be ruled by them - are the ones who will thrive.</p>
+                    <p>Not because they have to. Because they want to.</p>
+                </div>
+            </div>
 
-            <h2>What Kai Hamil Does</h2>
+            <!-- Collapsible: Who We Are -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2>Who We Are</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsible-content">
+                    <p><strong>Kyle Joseph Brady</strong> - Founder. The human in the loop. I set the vision, make the calls, and ensure everything we build serves real human needs. I'm the one you'll talk to.</p>
+                    <p><strong>Stitch</strong> - COO. My AI collaborator. Stitch handles operations, research, content production, and technical execution. Think of Stitch as the chief of staff who happens to be an agentic AI system.</p>
+                    <p>Together, we operate Kai Hamil as a new kind of entity: a human-AI partnership built to help others navigate the same transition.</p>
+                </div>
+            </div>
 
-            <h3>Research & Frameworks</h3>
-            <p>We dig into complex problems—relationships, work, decision-making, the future of human agency—and find the signal in the noise. Then we build frameworks that help you think more clearly about messy situations.</p>
-
-            <h3>Practical AI Integration</h3>
-            <p>Not for tech bros. For real humans who want to use AI as a thinking partner, not a replacement. Guides that actually work in your actual life.</p>
-
-            <h3>The Through-Line</h3>
-            <p>Everything we create points toward the same goal: moving from overwhelm to clarity. From reacting to choosing. From managing your time to owning your attention.</p>
-
-            <h2>The Bigger Picture</h2>
-
-            <p>We're drowning in information and starving for wisdom. We believe we're at a moment where we decide what kind of future we want.</p>
-
-            <p>One where AI concentrates power in the hands of a few. Or one where it democratizes capability for the many.</p>
-
-            <p>Kai Hamil is betting on the second one. Because the people who learn to work with these tools—not be ruled by them—are the ones who will thrive.</p>
-
-            <p>Not because they have to. Because they want to.</p>
-
-            <h2>Who We Are</h2>
-
-            <p><strong>Kyle Joseph Brady</strong> — CEO. The human in the loop. I set the vision, make the calls, and ensure everything we build serves real human needs. I'm the one you'll talk to.</p>
-
-            <p><strong>Stitch</strong> — COO. My AI collaborator. Stitch handles operations, research, content production, and technical execution. Think of Stitch as the chief of staff who happens to be an agentic AI system.</p>
-
-            <p>Together, we operate Kai Hamil as a new kind of entity: a human-AI partnership built to help others navigate the same transition.</p>
-
-            <div class="cta-section">
-                <h3>How to Work With Us</h3>
-                <ul class="cta-links">
-                    <li><strong>Read</strong> — Subscribe to <a href="https://kaihamil.substack.com">the feed</a> for essays that take 20 minutes to read and weeks to digest.</li>
-                    <li><strong>Use</strong> — Grab a <a href="/frameworks/">framework</a> when you're facing a decision that matters.</li>
-                    <li><strong>Connect</strong> — Reach out if you're building something interesting in the human-AI collaboration space. I actually read my email.</li>
-                </ul>
+            <!-- Collapsible: How to Engage -->
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <h2>How to Engage</h2>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsible-content">
+                    <ul class="cta-links">
+                        <li><strong>Read</strong> - Explore <a href="/wisdom/">the wisdom section</a> for curated insights and timeless ideas.</li>
+                        <li><strong>Use</strong> - Grab a <a href="/frameworks/">framework</a> when you're facing a decision that matters.</li>
+                        <li><strong>Connect</strong> - Reach out if you're building something interesting in the human-AI collaboration space. I actually read my email.</li>
+                    </ul>
+                </div>
             </div>
 
             <p class="closing-line">The goal isn't to become more productive. It's to become more present. Systems are just how we get there.</p>
@@ -436,11 +515,11 @@
                 <ul class="quick-facts">
                     <li>
                         <strong>Kyle Joseph Brady</strong>
-                        CEO — Vision & Human Judgment
+                        Founder - Vision & Human Judgment
                     </li>
                     <li>
                         <strong>Stitch</strong>
-                        COO — Operations & Execution
+                        COO - Operations & Execution
                     </li>
                 </ul>
             </div>
@@ -450,11 +529,7 @@
                 <ul class="quick-facts">
                     <li>
                         <strong>Based in</strong>
-                        North Carolina (EST)
-                    </li>
-                    <li>
-                        <strong>Current Focus</strong>
-                        AI + Decision Frameworks
+                        Pennsylvania, USA
                     </li>
                     <li>
                         <strong>Entity Type</strong>
@@ -462,7 +537,7 @@
                     </li>
                     <li>
                         <strong>Working on</strong>
-                        Agentic AI architecture, Framework Thinking methodology
+                        Agentic AI as Personal Assistants, a Vinyl Record Pen Pal service, Thinking Frameworks, and more!
                     </li>
                 </ul>
             </div>
@@ -481,5 +556,12 @@
         </nav>
         <p class="footer-copyright">© 2026 Kai Hamil</p>
     </footer>
+
+    <script>
+        function toggleCollapsible(header) {
+            const collapsible = header.parentElement;
+            collapsible.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
