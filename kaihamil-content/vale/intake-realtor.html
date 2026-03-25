@@ -617,7 +617,7 @@
             
             // Save to backend
             try {
-                await fetch('/.netlify/functions/vale-intake', {
+                await fetch('https://content.kaihamil.com/.netlify/functions/vale-intake', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(responses)
@@ -644,7 +644,7 @@
             responses.contactPhone = phone;
             
             try {
-                const res = await fetch('/.netlify/functions/vale-intake', {
+                const res = await fetch('https://content.kaihamil.com/.netlify/functions/vale-intake', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(responses)
