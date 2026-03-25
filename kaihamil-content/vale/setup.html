@@ -567,38 +567,17 @@
             </div>
             
             <div class="pricing-card">
-                <div class="price">$100</div>
-                <div class="price-note">Deposit to start your custom setup</div>
-                
-                <p style="font-size: 0.9rem; opacity: 0.8; margin: 15px 0; line-height: 1.6;">
-                    After your deposit, you'll complete the full configuration form. Based on your needs, we'll recommend the right tier:
-                </p>
-                
-                <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0; font-size: 0.85rem;">
-                    <div style="text-align: center;">
-                        <div style="color: var(--gold); font-weight: 600;">Personal</div>
-                        <div style="opacity: 0.7;">from $2,999</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="color: var(--gold); font-weight: 600;">Professional</div>
-                        <div style="opacity: 0.7;">from $4,999</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="color: var(--gold); font-weight: 600;">Business</div>
-                        <div style="opacity: 0.7;">from $9,999</div>
-                    </div>
-                </div>
+                <div class="price" style="font-size: 2.5rem;">What's Next?</div>
+                <div class="price-note">We'll review your responses and reach out</div>
                 
                 <ul class="commitment-list">
                     <li><span class="icon">⏱️</span> First contact within 48 hours</li>
-                    <li><span class="icon">✅</span> Functional system in 7 days</li>
+                    <li><span class="icon">📋</span> Personalized plan based on your needs</li>
+                    <li><span class="icon">✅</span> Functional system in 7 days once we start</li>
                     <li><span class="icon">🔧</span> Tweaking and customization for first 30 days</li>
-                    <li><span class="icon">🤝</span> $100 applied to your build — or refunded if we're not a fit</li>
                 </ul>
                 
-                <button class="btn-checkout" id="checkout-btn">Pay $100 Deposit →</button>
-                
-                <p class="guarantee">Your deposit goes toward the full build. Full refund if we can't help.</p>
+                <button class="btn-checkout" id="submit-btn">Submit & Continue →</button>
             </div>
             
             <div class="step-nav" style="justify-content: center;">
@@ -711,38 +690,36 @@
             `).join('');
         }
         
-        // Checkout - create Stripe session and redirect
-        document.getElementById('checkout-btn').addEventListener('click', async () => {
-            const btn = document.getElementById('checkout-btn');
+        // Submit quiz and save to backend
+        document.getElementById('submit-btn').addEventListener('click', async () => {
+            const btn = document.getElementById('submit-btn');
             btn.disabled = true;
-            btn.textContent = 'Loading...';
+            btn.textContent = 'Submitting...';
             
             try {
-                const response = await fetch('/.netlify/functions/create-checkout', {
+                const response = await fetch('/.netlify/functions/vale-intake', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        email: answers.email,
-                        name: answers.name,
-                        quiz_answers: answers
+                        user_name: answers.name,
+                        user_email: answers.email,
+                        pain_point: answers.pain,
+                        role: answers.role,
+                        solved: answers.solved,
+                        source: 'setup-quiz'
                     })
                 });
                 
-                const data = await response.json();
-                
-                if (data.url) {
-                    // Store quiz answers for after payment
-                    localStorage.setItem('vale_quiz_answers', JSON.stringify(answers));
-                    // Redirect to Stripe Checkout
-                    window.location.href = data.url;
+                if (response.ok) {
+                    window.location.href = 'confirmed.html';
                 } else {
-                    throw new Error(data.error || 'Failed to create checkout');
+                    throw new Error('Failed to save');
                 }
             } catch (err) {
                 console.error(err);
-                alert('Something went wrong. Please try again or email kyle@kaihamil.com');
-                btn.disabled = false;
-                btn.textContent = 'Pay $100 Deposit →';
+                // Still redirect - we have the data in localStorage at least
+                localStorage.setItem('vale_quiz_answers', JSON.stringify(answers));
+                window.location.href = 'confirmed.html';
             }
         });
     </script>
