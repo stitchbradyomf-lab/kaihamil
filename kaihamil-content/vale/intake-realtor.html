@@ -462,13 +462,8 @@
             
             <div class="question-card">
                 <p class="question-number">Question 9 of 9</p>
-                <p class="question-text">If this existed and worked, what would you pay monthly?</p>
-                <div class="options">
-                    <label class="option"><input type="radio" name="q9" value="0"> $0 — I'd need to see it first</label>
-                    <label class="option"><input type="radio" name="q9" value="50-100"> $50-100/month</label>
-                    <label class="option"><input type="radio" name="q9" value="100-250"> $100-250/month</label>
-                    <label class="option"><input type="radio" name="q9" value="250+"> $250+/month if it actually saved me time</label>
-                </div>
+                <p class="question-text">How could this AI service bring you a competitive advantage in your markets?</p>
+                <textarea name="q9" placeholder="What would set you apart from other agents?" style="width: 100%; min-height: 120px; padding: 15px; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 1rem; resize: vertical;"></textarea>
             </div>
             
             <div class="nav-buttons">
@@ -581,10 +576,10 @@
             // Frustrations = opportunity (they've tried but failed)
             gap += frustrations * 8;
             
-            // Willingness to pay
-            if (responses.q9 === '250+') gap += 20;
-            else if (responses.q9 === '100-250') gap += 15;
-            else if (responses.q9 === '50-100') gap += 10;
+            // Competitive advantage response (q9 is now free-text)
+            // Add points if they wrote a thoughtful response
+            if (responses.q9 && responses.q9.length > 50) gap += 15;
+            else if (responses.q9 && responses.q9.length > 20) gap += 10;
             
             return Math.min(100, gap);
         }
