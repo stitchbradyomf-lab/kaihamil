@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Valé | Kyle & Marissa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lavender: #c9b8c9;
+            --lavender-light: #e8dde8;
+            --lavender-muted: #d4c4d4;
+            --navy: #2c3e50;
+            --charcoal: #34495e;
+            --white: #ffffff;
+            --off-white: #faf8fa;
+            --light-gray: #f5f3f5;
+            --text-primary: #2c3e50;
+            --text-secondary: #5d6d7e;
+            --text-muted: #95a5a6;
+            --accent: #8e7cc3;
+            --success: #7dcea0;
+            --warning: #f8c471;
+            --love: #d98880;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--off-white);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--lavender-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--navy);
+        }
+        
+        .logo span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .view-toggle {
+            display: flex;
+            background: var(--light-gray);
+            border-radius: 30px;
+            padding: 4px;
+            gap: 4px;
+        }
+        
+        .view-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active {
+            background: var(--navy);
+            color: var(--white);
+        }
+        
+        .view-btn:hover:not(.active) {
+            color: var(--navy);
+        }
+        
+        .user-indicator {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        /* Quote Banner */
+        .quote-banner {
+            background: linear-gradient(135deg, var(--lavender-light) 0%, var(--white) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        
+        .quote-source {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 12px rgba(142, 124, 195, 0.06);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--lavender-light);
+        }
+        
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--navy);
+        }
+        
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        .badge {
+            background: var(--lavender-light);
+            color: var(--navy);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Priority Items */
+        .priority-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--lavender-light);
+        }
+        
+        .priority-item:last-child {
+            border-bottom: none;
+        }
+        
+        .priority-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--lavender);
+            border-radius: 6px;
+            margin-top: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .priority-checkbox:hover {
+            border-color: var(--accent);
+        }
+        
+        .priority-content {
+            flex: 1;
+        }
+        
+        .priority-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .priority-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .priority-link {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .priority-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Concerns */
+        .concern-item {
+            padding: 15px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .concern-item.shared {
+            background: linear-gradient(135deg, var(--lavender-light) 0%, var(--white) 100%);
+            border: 1px solid var(--lavender);
+        }
+        
+        .concern-item.mutual {
+            background: linear-gradient(135deg, #e8f5e9 0%, var(--white) 100%);
+            border: 1px solid var(--success);
+        }
+        
+        .concern-text {
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        
+        .concern-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .concern-status.shared {
+            color: var(--accent);
+        }
+        
+        .concern-status.mutual {
+            color: var(--success);
+        }
+        
+        /* Signals */
+        .signal-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--lavender-light) 100%);
+            border: 1px solid var(--lavender);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .signal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .signal-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .signal-text {
+            margin-bottom: 12px;
+        }
+        
+        .signal-btn {
+            background: var(--navy);
+            color: var(--white);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .signal-btn:hover {
+            background: var(--charcoal);
+        }
+        
+        /* Alignment Section */
+        .alignment-section {
+            margin-bottom: 25px;
+        }
+        
+        .alignment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .alignment-icon {
+            font-size: 1.2rem;
+        }
+        
+        .alignment-header.overlaps {
+            color: var(--success);
+        }
+        
+        .alignment-header.misalign {
+            color: var(--love);
+        }
+        
+        .alignment-header.complementary {
+            color: var(--accent);
+        }
+        
+        .alignment-item {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .alignment-item.overlaps {
+            background: rgba(125, 206, 160, 0.1);
+            border-left: 3px solid var(--success);
+        }
+        
+        .alignment-item.misalign {
+            background: rgba(217, 136, 128, 0.1);
+            border-left: 3px solid var(--love);
+        }
+        
+        .alignment-item.complementary {
+            background: rgba(142, 124, 195, 0.1);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .alignment-marker {
+            font-size: 1.2rem;
+        }
+        
+        .alignment-content {
+            flex: 1;
+        }
+        
+        .alignment-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .alignment-detail {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .alignment-action {
+            background: transparent;
+            border: 1px solid var(--navy);
+            color: var(--navy);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .alignment-action:hover {
+            background: var(--navy);
+            color: var(--white);
+        }
+        
+        /* Goal Cards */
+        .goal-card {
+            background: var(--white);
+            border: 1px solid var(--lavender-light);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .goal-title {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .goal-status {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        
+        .goal-status.planning {
+            background: var(--lavender-light);
+            color: var(--navy);
+        }
+        
+        .goal-status.active {
+            background: rgba(125, 206, 160, 0.2);
+            color: var(--success);
+        }
+        
+        .goal-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .goal-roles {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+        }
+        
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(142, 124, 195, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(142, 124, 195, 0.4);
+        }
+        
+        /* Section Toggle */
+        .view-section {
+            display: none;
+        }
+        
+        .view-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Couples <span>Valé</span></div>
+        
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="kyle">👨 Kyle</button>
+            <button class="view-btn" data-view="marissa">👩 Marissa</button>
+            <button class="view-btn" data-view="both">💕 Both</button>
+        </div>
+        
+        <div class="user-indicator">Viewing as: Kyle</div>
+    </header>
+
+    <div class="container">
+        <!-- Quote Banner -->
+        <div class="quote-banner">
+            <div class="quote-text">"Be curious, not judgmental."</div>
+            <div class="quote-source">— Ted Lasso</div>
+        </div>
+
+        <!-- KYLE'S VIEW -->
+        <div id="kyle-view" class="view-section active">
+            <div class="dashboard-grid">
+                <!-- My Priorities -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">My Priorities Today</div>
+                            <div class="card-subtitle">What needs my attention</div>
+                        </div>
+                        <span class="badge">3 items</span>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Iceland flight research</div>
+                            <div class="priority-meta">Due this week • Family goal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Easter basket shopping</div>
+                            <div class="priority-meta">Due April 2 • <a href="#" class="priority-link">See Marissa's Easter tasks</a></div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Call mortgage broker</div>
+                            <div class="priority-meta">Personal goal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Concerns -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">On My Mind</div>
+                            <div class="card-subtitle">Concerns & worries</div>
+                        </div>
+                    </div>
+                    
+                    <div class="concern-item shared">
+                        <div class="concern-text">"Easter hosting feels rushed"</div>
+                        <div class="concern-status shared">✓ Shared with Marissa</div>
+                    </div>
+                    
+                    <div class="concern-item">
+                        <div class="concern-text">"Work stress bleeding into family time"</div>
+                        <div class="concern-status">Private • <a href="#" class="priority-link">Share with Marissa?</a></div>
+                    </div>
+                    
+                    <div class="concern-item mutual">
+                        <div class="concern-text">"Garage is overwhelming"</div>
+                        <div class="concern-status mutual">💕 Marissa also flagged this</div>
+                    </div>
+                </div>
+
+                <!-- Follow-ups -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">My Follow-ups</div>
+                            <div class="card-subtitle">Don't let these slip</div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Call contractor</div>
+                            <div class="priority-meta">House project estimate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Review kids' report cards</div>
+                            <div class="priority-meta">With Marissa</div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Schedule anniversary dinner</div>
+                            <div class="priority-meta">August 6 — 16 years</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Where I Can Help Marissa -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">💕 Where I Can Help Marissa</div>
+                            <div class="card-subtitle">Opportunities to show up</div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <div class="signal-avatar">👩</div>
+                            <span>Marissa needs help with:</span>
+                        </div>
+                        <div class="signal-text">"Easter dinner menu planning — need to coordinate who's bringing what"</div>
+                        <button class="signal-btn">I'll help</button>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <div class="signal-avatar">👩</div>
+                            <span>Marissa needs help with:</span>
+                        </div>
+                        <div class="signal-text">"Summer camp applications — forms need review"</div>
+                        <button class="signal-btn">I'll help</button>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <div class="signal-avatar">👩</div>
+                            <span>Marissa mentioned:</span>
+                        </div>
+                        <div class="signal-text">"Just need to vent about work stress"</div>
+                        <button class="signal-btn">Schedule talk</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MARISSA'S VIEW (Hidden by default) -->
+        <div id="marissa-view" class="view-section">
+            <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">My Priorities Today</div>
+                            <div class="card-subtitle">What needs my attention</div>
+                        </div>
+                        <span class="badge">2 items</span>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Research Iceland lodging</div>
+                            <div class="priority-meta">Due this week • Family goal</div>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-item">
+                        <div class="priority-checkbox"></div>
+                        <div class="priority-content">
+                            <div class="priority-title">Schedule kids' dentist</div>
+                            <div class="priority-meta">Overdue by 1 week</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">💕 Where I Can Help Kyle</div>
+                            <div class="card-subtitle">Opportunities to show up</div>
+                        </div>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <div class="signal-avatar">👨</div>
+                            <span>Kyle needs help with:</span>
+                        </div>
+                        <div class="signal-text">"Iceland flight research — narrowed to 2 options"</div>
+                        <button class="signal-btn">I'll help</button>
+                    </div>
+                    
+                    <div class="signal-card">
+                        <div class="signal-header">
+                            <div class="signal-avatar">👨</div>
+                            <span>Kyle mentioned:</span>
+                        </div>
+                        <div class="signal-text">"Garage cleanout dream — this weekend?"</div>
+                        <button class="signal-btn">Let's do it</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTH VIEW (The "Us") -->
+        <div id="both-view" class="view-section">
+            <div class="dashboard-grid">
+                <!-- Alignment Overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Alignment Overview</div>
+                            <div class="card-subtitle">Health of our connection</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Overlaps -->
+                    <div class="alignment-section">
+                        <div class="alignment-header overlaps">
+                            <span class="alignment-icon">✓</span>
+                            <span>Overlaps — We're aligned</span>
+                        </div>
+                        
+                        <div class="alignment-item overlaps">
+                            <span class="alignment-marker">✓</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Both concerned about Easter hosting</div>
+                                <div class="alignment-detail">Flagged by both • Joint coordination needed</div>
+                            </div>
+                        </div>
+                        
+                        <div class="alignment-item overlaps">
+                            <span class="alignment-marker">✓</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Both want Iceland trip in November</div>
+                                <div class="alignment-detail">Shared family goal • Planning together</div>
+                            </div>
+                        </div>
+                        
+                        <div class="alignment-item overlaps">
+                            <span class="alignment-marker">✓</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Both mentioned garage cleanup</div>
+                                <div class="alignment-detail">Shared priority • Opportunity to collaborate</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Misalignments -->
+                    <div class="alignment-section">
+                        <div class="alignment-header misalign">
+                            <span class="alignment-icon">⚠</span>
+                            <span>Misalignments — Check in needed</span>
+                        </div>
+                        
+                        <div class="alignment-item misalign">
+                            <span class="alignment-marker">⚠</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Kyle: Work stress high</div>
+                                <div class="alignment-detail">Marissa: Unaware or thinks it's fine</div>
+                            </div>
+                            <button class="alignment-action">Start conversation</button>
+                        </div>
+                        
+                        <div class="alignment-item misalign">
+                            <span class="alignment-marker">⚠</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Marissa: Wants more date nights</div>
+                                <div class="alignment-detail">Kyle: No mention in 30 days</div>
+                            </div>
+                            <button class="alignment-action">Add to Kyle's radar</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Complementary -->
+                    <div class="alignment-section">
+                        <div class="alignment-header complementary">
+                            <span class="alignment-icon">→</span>
+                            <span>Complementary Actions — Great teamwork</span>
+                        </div>
+                        
+                        <div class="alignment-item complementary">
+                            <span class="alignment-marker">→</span>
+                            <div class="alignment-content">
+                                <div class="alignment-title">Iceland planning</div>
+                                <div class="alignment-detail">Kyle: Researching flights • Marissa: Researching lodging</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Joint Goals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Our Shared Goals</div>
+                            <div class="card-subtitle">What we're building together</div>
+                        </div>
+                        <span class="badge">4 Active</span>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-header">
+                            <div class="goal-title">🏔️ Iceland Trip (November 2026)</div>
+                            <span class="goal-status planning">Planning</span>
+                        </div>
+                        <div class="goal-meta">Family adventure</div>
+                        <div class="goal-roles">Kyle: Flights ✓ • Marissa: Lodging (in progress) • Book by May 1</div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-header">
+                            <div class="goal-title">🏔️ Acadia Summer Trip</div>
+                            <span class="goal-status planning">Planning</span>
+                        </div>
+                        <div class="goal-meta">Summer 2026</div>
+                        <div class="goal-roles">Dates TBD • Camping or lodge?</div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-header">
+                            <div class="goal-title">🏠 House Projects</div>
+                            <span class="goal-status active">In Progress</span>
+                        </div>
+                        <div class="goal-meta">Ongoing</div>
+                        <div class="goal-roles">Garage cleanup • Backyard plans • Both engaged</div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-header">
+                            <div class="goal-title">💕 Anniversary (August 6)</div>
+                            <span class="goal-status planning">Needs Planning</span>
+                        </div>
+                        <div class="goal-meta">16 years — special milestone</div>
+                        <div class="goal-roles">Start planning conversation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <button class="fab" title="Quick add">+</button>
+    </div>
+
+    <script>
+        // View toggle functionality
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show corresponding view
+                const view = btn.dataset.view;
+                document.querySelectorAll('.view-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(view + '-view').classList.add('active');
+                
+                // Update user indicator
+                document.querySelector('.user-indicator').textContent = 
+                    view === 'both' ? 'Viewing together' : 'Viewing as: ' + view.charAt(0).toUpperCase() + view.slice(1);
+            });
+        });
+    </script>
+</body>
+</html>
