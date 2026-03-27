@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valé Dashboard | Jeff Weber</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --text-muted: #8b949e;
+            --gold: #f4d03f;
+            --gold-dim: #c9a227;
+            --success: #3fb950;
+            --warning: #d29922;
+            --danger: #f85149;
+            --info: #58a6ff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+        }
+        
+        .logo strong { color: var(--gold); }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        
+        .greeting {
+            margin-bottom: 25px;
+        }
+        
+        .greeting h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .greeting p {
+            color: var(--text-muted);
+        }
+        
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 1000px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold-dim);
+        }
+        
+        .card-header .badge {
+            background: var(--gold-dim);
+            color: var(--bg);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        /* Calendar Widget */
+        .calendar-widget {
+            min-height: 300px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-nav button {
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .calendar-nav button:hover {
+            border-color: var(--gold-dim);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .calendar-day.other-month {
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+        
+        .calendar-day.today {
+            background: var(--gold-dim);
+            color: var(--bg);
+            font-weight: 600;
+        }
+        
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            background: var(--info);
+            border-radius: 50%;
+        }
+        
+        .calendar-day.today.has-event::after {
+            background: var(--bg);
+        }
+        
+        /* Events List */
+        .events-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .event-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .event-item:last-child {
+            border-bottom: none;
+        }
+        
+        .event-time {
+            font-size: 0.85rem;
+            color: var(--gold-dim);
+            min-width: 50px;
+        }
+        
+        .event-details h4 {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .event-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Reminders List */
+        .reminders-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        
+        .reminder-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .reminder-item:last-child {
+            border-bottom: none;
+        }
+        
+        .reminder-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            margin-top: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reminder-checkbox:hover {
+            border-color: var(--gold-dim);
+        }
+        
+        .reminder-content {
+            flex: 1;
+        }
+        
+        .reminder-content h4 {
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .reminder-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .reminder-urgent .reminder-meta {
+            color: var(--danger);
+        }
+        
+        .reminder-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            background: var(--bg-hover);
+        }
+        
+        .reminder-badge.urgent {
+            background: rgba(248, 81, 73, 0.2);
+            color: var(--danger);
+        }
+        
+        .reminder-badge.today {
+            background: rgba(244, 208, 63, 0.2);
+            color: var(--gold);
+        }
+        
+        /* CRM Snippet */
+        .crm-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .crm-stat {
+            text-align: center;
+            padding: 15px;
+            background: var(--bg-hover);
+            border-radius: 8px;
+        }
+        
+        .crm-stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .crm-stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
+        .recent-contacts {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-hover);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h4 {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .contact-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .contact-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .contact-status.active {
+            background: var(--success);
+        }
+        
+        .contact-status.pending {
+            background: var(--warning);
+        }
+        
+        /* Listings Table */
+        .listings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .listings-table th {
+            text-align: left;
+            padding: 12px 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .listings-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .listings-table tr:hover {
+            background: var(--bg-hover);
+        }
+        
+        .listing-address {
+            font-weight: 500;
+        }
+        
+        .listing-address small {
+            display: block;
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+        
+        .listing-price {
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .listing-status {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .listing-status.active {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--success);
+        }
+        
+        .listing-status.pending {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--warning);
+        }
+        
+        .listing-status.closed {
+            background: rgba(139, 148, 158, 0.2);
+            color: var(--text-muted);
+        }
+        
+        /* Leads Section */
+        .leads-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background: var(--gold-dim);
+            color: var(--bg);
+            border-color: var(--gold-dim);
+        }
+        
+        .lead-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--bg-hover);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .lead-score {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .lead-score.high {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--success);
+        }
+        
+        .lead-score.medium {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--warning);
+        }
+        
+        .lead-info {
+            flex: 1;
+        }
+        
+        .lead-info h4 {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .lead-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .lead-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .lead-actions button {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .lead-actions button:hover {
+            border-color: var(--gold-dim);
+        }
+        
+        /* Messages Section */
+        .messages-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-btn.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        
+        .message-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .message-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .message-item:last-child {
+            border-bottom: none;
+        }
+        
+        .message-item.unread {
+            background: rgba(244, 208, 63, 0.05);
+        }
+        
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--bg-hover);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+        
+        .message-header h4 {
+            font-weight: 500;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .message-preview {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .unread-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            margin-top: 5px;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Valé<strong>OS</strong></div>
+        <div class="user-info">
+            <span class="status-dot"></span>
+            <span>Jeff Weber</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="greeting">
+            <h1>Good evening, Jeff</h1>
+            <p>Thursday, March 26 • 3 tasks today • 2 new leads</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Calendar -->
+            <div class="card calendar-widget">
+                <div class="card-header">
+                    <h2>Calendar</h2>
+                    <span class="badge">3 Events</span>
+                </div>
+                <div class="card-content">
+                    <div class="calendar-header">
+                        <h3>March 2026</h3>
+                        <div class="calendar-nav">
+                            <button>←</button>
+                            <button>Today</button>
+                            <button>→</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                        
+                        <div class="calendar-day other-month">23</div>
+                        <div class="calendar-day other-month">24</div>
+                        <div class="calendar-day other-month">25</div>
+                        <div class="calendar-day has-event">26</div>
+                        <div class="calendar-day has-event">27</div>
+                        <div class="calendar-day">28</div>
+                        <div class="calendar-day">29</div>
+                    </div>
+                    
+                    <div class="events-list">
+                        <div class="event-item">
+                            <div class="event-time">2:00 PM</div>
+                            <div class="event-details">
+                                <h4>Listing Appointment</h4>
+                                <p>Sarah Johnson • 189 Moore St, Princeton</p>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-time">4:30 PM</div>
+                            <div class="event-details">
+                                <h4>Follow-up Call</h4>
+                                <p>Mike Chen • Contract review</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Reminders</h2>
+                    <span class="badge" style="background: var(--danger);">2 Urgent</span>
+                </div>
+                <div class="card-content">
+                    <div class="reminders-list">
+                        <div class="reminder-item reminder-urgent">
+                            <div class="reminder-checkbox"></div>
+                            <div class="reminder-content">
+                                <h4>Follow up with Johnsons</h4>
+                                <div class="reminder-meta">Due today • 3 days since last contact</div>
+                            </div>
+                            <span class="reminder-badge urgent">URGENT</span>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-checkbox"></div>
+                            <div class="reminder-content">
+                                <h4>Send market update to database</h4>
+                                <div class="reminder-meta">Due tomorrow • Weekly task</div>
+                            </div>
+                            <span class="reminder-badge today">TODAY</span>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-checkbox"></div>
+                            <div class="reminder-content">
+                                <h4>Post new listing to Instagram</h4>
+                                <div class="reminder-meta">28 Moore St • Draft ready</div>
+                            </div>
+                        </div>
+                        <div class="reminder-item">
+                            <div class="reminder-checkbox"></div>
+                            <div class="reminder-content">
+                                <h4>Review contract with attorney</h4>
+                                <div class="reminder-meta">Due Friday • Closing next week</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRM Snippet -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>CRM Overview</h2>
+                    <span class="badge">36 Total</span>
+                </div>
+                <div class="card-content">
+                    <div class="crm-stats">
+                        <div class="crm-stat">
+                            <div class="crm-stat-value">12</div>
+                            <div class="crm-stat-label">Active Clients</div>
+                        </div>
+                        <div class="crm-stat">
+                            <div class="crm-stat-value">8</div>
+                            <div class="crm-stat-label">Hot Leads</div>
+                        </div>
+                        <div class="crm-stat">
+                            <div class="crm-stat-value">16</div>
+                            <div class="crm-stat-label">Past Clients</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-contacts">
+                        <div class="contact-item">
+                            <div class="contact-avatar">👤</div>
+                            <div class="contact-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Active • Last: 2 days ago</p>
+                            </div>
+                            <div class="contact-status active"></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-avatar">👤</div>
+                            <div class="contact-info">
+                                <h4>Mike & Lisa Chen</h4>
+                                <p>Active • Looking in Princeton</p>
+                            </div>
+                            <div class="contact-status active"></div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-avatar">👤</div>
+                            <div class="contact-info">
+                                <h4>David Martinez</h4>
+                                <p>New Lead • From website</p>
+                            </div>
+                            <div class="contact-status pending"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listings Table -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Listings</h2>
+                    <span class="badge">5 Active</span>
+                </div>
+                <div class="card-content">
+                    <table class="listings-table">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>DOM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="listing-address">
+                                    189 Moore St
+                                    <small>Princeton, NJ</small>
+                                </td>
+                                <td class="listing-price">$1,600,000</td>
+                                <td><span class="listing-status active">Active</span></td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td class="listing-address">
+                                    28 Amherst Way
+                                    <small>Princeton Junction, NJ</small>
+                                </td>
+                                <td class="listing-price">$970,000</td>
+                                <td><span class="listing-status pending">Pending</span></td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td class="listing-address">
+                                    7 Kimberly Ct
+                                    <small>Princeton, NJ</small>
+                                </td>
+                                <td class="listing-price">$1,711,500</td>
+                                <td><span class="listing-status closed">Closed</span></td>
+                                <td>—</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Leads -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Leads</h2>
+                    <span class="badge">8 New</span>
+                </div>
+                <div class="card-content">
+                    <div class="leads-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Hot</button>
+                        <button class="filter-btn">Warm</button>
+                        <button class="filter-btn">New</button>
+                    </div>
+                    
+                    <div class="lead-card">
+                        <div class="lead-score high">92</div>
+                        <div class="lead-info">
+                            <h4>David Martinez</h4>
+                            <div class="lead-meta">Looking in Hamilton • Budget $600K-$750K • Pre-approved</div>
+                        </div>
+                        <div class="lead-actions">
+                            <button>Email</button>
+                            <button>Call</button>
+                        </div>
+                    </div>
+                    
+                    <div class="lead-card">
+                        <div class="lead-score medium">78</div>
+                        <div class="lead-info">
+                            <h4>Jennifer Walsh</h4>
+                            <div class="lead-meta">First-time buyer • Ewing area • Needs guidance</div>
+                        </div>
+                        <div class="lead-actions">
+                            <button>Email</button>
+                            <button>Call</button>
+                        </div>
+                    </div>
+                    
+                    <div class="lead-card">
+                        <div class="lead-score high">88</div>
+                        <div class="lead-info">
+                            <h4>Robert & Amy Chen</h4>
+                            <div class="lead-meta">Relocating from NYC • Princeton • $1M+ budget</div>
+                        </div>
+                        <div class="lead-actions">
+                            <button>Email</button>
+                            <button>Call</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>Messages</h2>
+                    <span class="badge" style="background: var(--gold);">3 New</span>
+                </div>
+                <div class="card-content">
+                    <div class="messages-tabs">
+                        <button class="tab-btn active">All</button>
+                        <button class="tab-btn">Telegram</button>
+                        <button class="tab-btn">Email</button>
+                        <button class="tab-btn">Texts</button>
+                    </div>
+                    
+                    <div class="message-list">
+                        <div class="message-item unread">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Sarah Johnson</h4>
+                                    <span class="message-time">10 min ago</span>
+                                </div>
+                                <div class="message-preview">Can we move our appointment to 3pm? I have a conflict...</div>
+                            </div>
+                            <div class="unread-dot"></div>
+                        </div>
+                        
+                        <div class="message-item unread">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Valé</h4>
+                                    <span class="message-time">1 hour ago</span>
+                                </div>
+                                <div class="message-preview">Draft follow-up ready for the Johnsons. Review and send?</div>
+                            </div>
+                            <div class="unread-dot"></div>
+                        </div>
+                        
+                        <div class="message-item">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>Mike Chen</h4>
+                                    <span class="message-time">3 hours ago</span>
+                                </div>
+                                <div class="message-preview">Thanks for the market update! We're still thinking about...</div>
+                            </div>
+                        </div>
+                        
+                        <div class="message-item unread">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <h4>David Martinez</h4>
+                                    <span class="message-time">5 hours ago</span>
+                                </div>
+                                <div class="message-preview">Hi Jeff, I found you through your website. We're looking for...</div>
+                            </div>
+                            <div class="unread-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <button class="fab" title="Quick action">+</button>
+    </div>
+</body>
+</html>
