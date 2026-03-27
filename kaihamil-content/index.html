@@ -252,23 +252,44 @@
         }
         
         .access-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 24px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
         
         .access-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
         
-        .access-card.featured {
-            background: var(--gold-light);
-            border: 2px solid var(--gold);
+        /* Unique gradients for each card */
+        .access-card.ai-quiz {
+            background: linear-gradient(180deg, #faf6f1 0%, #e8d5a3 100%);
+        }
+        
+        .access-card.frameworks {
+            background: linear-gradient(180deg, #f5e6d3 0%, #d4a574 100%);
+        }
+        
+        .access-card.focus {
+            background: linear-gradient(180deg, #f8e8e0 0%, #c9a227 100%);
+        }
+        
+        .access-card.wisdom {
+            background: linear-gradient(180deg, #f5e8e3 0%, #b87a5e 100%);
+        }
+        
+        .access-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 12px;
+            stroke: var(--brown-dark);
+            stroke-width: 1.5;
+            fill: none;
         }
         
         .access-card.coming-soon {
@@ -498,14 +519,14 @@
                     <span class="groove-hero-cta" style="color: var(--gold);">Learn more →</span>
                 </a>
                 
-                <a href="tools/ai-user-quiz-v3.html" class="access-card">
-                    <div class="access-icon">🤖</div>
+                <a href="tools/ai-user-quiz-v3.html" class="access-card ai-quiz">
+                    <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
                     <div class="access-title">What Kind of AI User Are You?</div>
                     <div class="access-desc">Find your problem-solving style</div>
                 </a>
                 
-                <a href="frameworks/" class="access-card">
-                    <div class="access-icon">◫</div>
+                <a href="frameworks/" class="access-card frameworks">
+                    <svg class="access-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                     <div class="access-title">Frameworks</div>
                     <div class="access-desc">Decision tools and systems</div>
                 </a>
@@ -527,14 +548,14 @@
                     <span class="groove-hero-cta">Check it →</span>
                 </a>
                 
-                <a href="tools/time-and-focus.html" class="access-card">
-                    <div class="access-icon">🎯</div>
+                <a href="tools/time-and-focus.html" class="access-card focus">
+                    <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
                     <div class="access-title">Find Your Focus</div>
                     <div class="access-desc">Where does your time actually go?</div>
                 </a>
                 
-                <a href="wisdom/" class="access-card">
-                    <div class="access-icon">🕯️</div>
+                <a href="wisdom/" class="access-card wisdom">
+                    <svg class="access-icon" viewBox="0 0 24 24"><path d="M12 3c-4.5 0-8 3.5-8 8 0 3 1.5 5.5 4 7v3h8v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z"/><path d="M9 21h6"/></svg>
                     <div class="access-title">Wisdom</div>
                     <div class="access-desc">Philosophy and presence</div>
                 </a>
