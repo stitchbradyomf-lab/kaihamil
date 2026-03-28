@@ -134,6 +134,27 @@
 - "Would love if you could pick up Hudson's prescription"
 - "Dream: Clean out the garage together this weekend"
 
+**Case Study: The Vanity Table (March 28, 2026)**
+
+*What Kyle did:*
+- Bought Marissa a vanity table she'd want but wouldn't buy herself
+- Set Friday night as "family building activity" (not a chore)
+- Led without dominating—let her own the project
+- Used humor to defuse early tension
+- Gave positive reinforcement throughout
+
+*What happened:*
+- Marissa took ownership and finished herself
+- Momentum carried into Easter prep (she started organizing independently)
+- Built connection through shared work
+- Kyle: "Proud of you" multiple times
+
+*The pattern:*
+Remove guilt → Make it social → Lead without dominating → Let them own it → Positive reinforcement → Momentum continues
+
+*For Couples Valé:*
+This is what "Ways to Help Me" should facilitate—not assigned tasks, but recognized opportunities that build connection.
+
 ---
 
 ### 5. Rotating Wisdom
