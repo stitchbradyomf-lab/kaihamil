@@ -2,7 +2,7 @@
 
 **Goal:** Three independent OpenClaw instances running on single VPS (8GB RAM)
 - Couples Valé (Kyle & Marissa)
-- Pro Valé (Jeff)  
+- Valé Pro (Jeff)  
 - Cloud Backup Stitch
 
 **Acceptance Criteria:** All three bots responding, real data loaded, dashboards accessible
@@ -206,7 +206,7 @@ Help couples coordinate their shared life with minimal friction.
 
 ---
 
-## Phase 3: Pro Valé Instance (Jeff)
+## Phase 3: Valé Pro Instance (Jeff)
 
 ### Task 3.1: Install OpenClaw for Pro
 **Description:** Fresh install for Jeff's real estate assistant
@@ -264,7 +264,7 @@ Help couples coordinate their shared life with minimal friction.
 
 ---
 
-### Task 3.4: Test Pro Valé
+### Task 3.4: Test Valé Pro
 **Description:** Verify Jeff's instance works
 **Steps:**
 - [ ] Jeff sends test message
@@ -415,7 +415,7 @@ WantedBy=multi-user.target
 **Steps:**
 - [ ] All three bots respond simultaneously
 - [ ] Couples Valé has real family data
-- [ ] Pro Valé has Jeff's real estate data
+- [ ] Valé Pro has Jeff's real estate data
 - [ ] Backup instance syncing
 - [ ] Dashboards loading
 - [ ] Mobile access working
