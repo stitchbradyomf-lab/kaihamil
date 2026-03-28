@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valé OS | Your Personal Operating System in the Cloud</title>
+    <title>Valé OS | Services We're Building</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -70,13 +70,13 @@
         
         /* Hero */
         .hero {
-            min-height: 85vh;
+            min-height: 75vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 120px 20px 60px;
             background: linear-gradient(180deg, #fff 0%, var(--bg-cream) 100%);
         }
         
@@ -141,8 +141,31 @@
             border-color: var(--gold);
         }
         
-        /* What You Get */
-        .features {
+        /* Lab Banner */
+        .lab-banner {
+            background: var(--gold-light);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 3px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .lab-banner h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--brown-dark);
+            margin-bottom: 10px;
+        }
+        
+        .lab-banner p {
+            color: var(--ink-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+        
+        /* Services Section */
+        .services {
             padding: 80px 20px;
             background: var(--bg-warm);
         }
@@ -152,172 +175,120 @@
             font-size: 2.5rem;
             font-weight: 400;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             color: var(--ink-dark);
         }
         
-        .features-grid {
+        .section-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 30px;
             max-width: 1100px;
             margin: 0 auto;
         }
         
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-        
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-        
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-            color: var(--ink-dark);
-        }
-        
-        .feature-desc {
-            font-size: 0.95rem;
-            color: var(--brown-medium);
-            line-height: 1.6;
-        }
-        
-        /* Pricing */
-        .pricing {
-            padding: 80px 20px;
-            background: var(--bg-cream);
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .price-card {
+        .service-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 40px 30px;
-            text-align: center;
-            position: relative;
             transition: all 0.3s ease;
         }
         
-        .price-card.featured {
-            border-color: var(--gold);
-            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.2);
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
         
-        .price-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold);
+        .service-status {
+            display: inline-block;
+            background: var(--gold-light);
             color: var(--brown-dark);
-            padding: 5px 20px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
         }
         
-        .price-tier {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--ink-dark);
-            margin-bottom: 10px;
+        .service-status.active {
+            background: #d4edda;
+            color: #155724;
         }
         
-        .price-amount {
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--gold);
-            margin-bottom: 5px;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
         }
         
-        .price-period {
+        .service-persona {
             font-size: 0.9rem;
-            color: var(--brown-medium);
-            margin-bottom: 20px;
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 15px;
         }
         
-        .price-setup {
-            font-size: 0.85rem;
-            color: var(--ink-medium);
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .price-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-        }
-        
-        .price-features li {
-            padding: 8px 0;
+        .service-desc {
             font-size: 0.95rem;
             color: var(--brown-medium);
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .service-outcomes {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+        
+        .service-outcomes h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-medium);
+            margin-bottom: 12px;
+        }
+        
+        .service-outcomes ul {
+            list-style: none;
+        }
+        
+        .service-outcomes li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
         }
         
-        .price-features li::before {
-            content: '✓';
+        .service-outcomes li::before {
+            content: '→';
             color: var(--gold);
             font-weight: bold;
-        }
-        
-        .price-cta {
-            display: block;
-            background: var(--brown-dark);
-            color: var(--amber);
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .price-cta:hover {
-            background: var(--gold);
-            color: var(--brown-dark);
-        }
-        
-        .price-card.featured .price-cta {
-            background: var(--gold);
-            color: var(--brown-dark);
-        }
-        
-        .price-card.featured .price-cta:hover {
-            background: var(--brown-dark);
-            color: var(--gold);
         }
         
         /* How It Works */
         .how-it-works {
             padding: 80px 20px;
-            background: var(--bg-warm);
+            background: var(--bg-cream);
         }
         
         .steps {
@@ -357,6 +328,35 @@
         .step-content p {
             color: var(--brown-medium);
             font-size: 0.95rem;
+        }
+        
+        /* Interest Section */
+        .interest-section {
+            padding: 80px 20px;
+            background: var(--bg-warm);
+            text-align: center;
+        }
+        
+        .interest-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 50px 40px;
+        }
+        
+        .interest-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--ink-dark);
+        }
+        
+        .interest-box p {
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+            line-height: 1.7;
         }
         
         /* Footer */
@@ -404,6 +404,7 @@
             .nav { padding: 15px 20px; }
             .cta-secondary { display: block; margin: 15px 0 0 0; }
             .step { flex-direction: column; gap: 15px; }
+            .services-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -413,7 +414,6 @@
         <a href="index.html" class="logo">Valé<span>OS</span></a>
         <div style="display: flex; gap: 25px; align-items: center;">
             <a href="capabilities.html" class="nav-link">Capabilities</a>
-            <a href="pricing.html" class="nav-link">Pricing</a>
             <a href="setup.html" class="nav-link">Get Started</a>
         </div>
     </nav>
@@ -421,122 +421,111 @@
     <!-- Hero -->
     <section class="hero">
         <img src="assets/vale-logo-dark.jpg" alt="Valé OS" style="max-width: 560px; width: 100%; margin-bottom: 30px; border-radius: 16px;">
-        <p class="tagline">Your personal operating system in the cloud</p>
+        <p class="tagline">Services we're building</p>
         <p class="hero-description">
-            Valé is your personal valet in the cloud - the bridge between the peaks and valleys of your daily life. While you navigate the terrains of work, family logistics, or small business, Valé keeps you in control with as little effort as possible. With your operations managed, your details organized, and your attention protected, you're free to rise above the chaos - and soar toward the craft only you can create.
+            Coordinating your life can be a real challenge - especially when you're running a business or leading a family. Valé is your personal valet in the cloud - the bridge between the peaks and valleys of your daily life. While you navigate the terrains of business, work, or family logistics, Valé keeps you in control with as little effort as possible. With your operations managed, your details organized, and your attention protected, you're free to rise above the chaos - and soar toward the craft only you can create.
         </p>
         <div>
-            <a href="setup.html" class="cta-button">Get Started</a>
-            <a href="#how-it-works" class="cta-secondary">See how it works</a>
+            <a href="#services" class="cta-button">See What We're Building</a>
+            <a href="#how-it-works" class="cta-secondary">How this works</a>
         </div>
     </section>
     
-    <!-- Features -->
-    <section class="features">
-        <h2 class="section-title">What Your Valé Does</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3 class="feature-title">Your Own AI Agent</h3>
-                <p class="feature-desc">Not shared software. Your own dedicated AI running on isolated infrastructure, learning your business and preferences over time.</p>
+    <!-- Lab Banner -->
+    <div class="lab-banner">
+        <h2>Built for Real People, Not Everyone</h2>
+        <p>We start narrow. Each service emerges from working with one person who had a specific problem. Only when it works do we share it. No convincing required — just facts about what we built and what happened.</p>
+    </div>
+    
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2 class="section-title">Active Projects</h2>
+        <p class="section-subtitle">Two use cases. Real workflows. Proven outcomes.</p>
+        
+        <div class="services-grid">
+            <!-- Real Estate Service -->
+            <div class="service-card">
+                <span class="service-status active">Active Build</span>
+                <div class="service-icon">🏠</div>
+                <h3 class="service-title">The Solo Real Estate Practice</h3>
+                <p class="service-persona">For: Independent agents running their own book</p>
+                <p class="service-desc">
+                    Jeff runs a solo real estate business. No assistant. No team. Just him, his clients, and a hundred details that don't fit neatly into any single app. We built a Valé that knows his listings, his pipeline, his communication patterns — and surfaces what matters before he asks.
+                </p>
+                <div class="service-outcomes">
+                    <h4>What Changed</h4>
+                    <ul>
+                        <li>Morning brief with active listings, pending deadlines, and client follow-ups</li>
+                        <li>Voice capture during property tours → structured notes + next actions</li>
+                        <li>Client communication history at his fingertips</li>
+                        <li>No more "where did I put that?" before calls</li>
+                    </ul>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3 class="feature-title">Always in Your Pocket</h3>
-                <p class="feature-desc">Private Telegram bot. Ask questions, get reminders, find files - your Valé is always with you, 24/7.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌐</div>
-                <h3 class="feature-title">Web Dashboard</h3>
-                <p class="feature-desc">Full visibility at yourname.kaihamil.com. See what your Valé is doing, browse files, track metrics.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">☀️</div>
-                <h3 class="feature-title">Morning Briefs</h3>
-                <p class="feature-desc">Wake up to what matters. Your Valé reviews your day and delivers focused intelligence each morning.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3 class="feature-title">Always-On Automation</h3>
-                <p class="feature-desc">Custom workflows running in the background. Filing, reminding, alerting - without you lifting a finger.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3 class="feature-title">Private & Secure</h3>
-                <p class="feature-desc">Your data lives on your dedicated server. Isolated, encrypted, backed up daily. Nobody else touches it.</p>
+            
+            <!-- Couples Service -->
+            <div class="service-card">
+                <span class="service-status active">Active Build</span>
+                <div class="service-icon">💑</div>
+                <h3 class="service-title">The Busy Parent Partnership</h3>
+                <p class="service-persona">For: Dual-income couples drowning in coordination</p>
+                <p class="service-desc">
+                    Marissa and Kyle both work. Three kids. Calendar Tetris. The ambient fog of "who's handling what?" We built a Valé that holds the mental load so they don't have to — shared intelligence, proactive briefs, and the bandwidth to actually be present with each other.
+                </p>
+                <div class="service-outcomes">
+                    <h4>What Changed</h4>
+                    <ul>
+                        <li>Shared morning brief with family logistics, not just individual calendars</li>
+                        <li>Natural language answers: "When is the Legoland trip?"</li>
+                        <li>Cognitive load redistribution — both partners can ask, both get answers</li>
+                        <li>Less logistics, more connection</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
     
     <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
-        <h2 class="section-title">How It Works</h2>
+        <h2 class="section-title">How This Works</h2>
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>The Chaos Audit</h3>
-                    <p>We map every place your business information currently lives - emails, documents, notes, communications. We find the chaos.</p>
+                    <h3>We Build for Someone Specific</h3>
+                    <p>Each service starts with one person who has a real problem. We don't generalize until we've solved it for them.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Valé Setup & Training</h3>
-                    <p>We deploy your dedicated Valé on isolated cloud infrastructure. Custom folder architecture, integrations connected, workflows configured.</p>
+                    <h3>We Document What Actually Happened</h3>
+                    <p>Facts only. What we built. What they got. What changed. No projections, no promises.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Go Live</h3>
-                    <p>Your Valé starts working. Morning briefs, proactive alerts, instant file retrieval, automated organization. Peace of mind delivered.</p>
+                    <h3>Similar People Find Us</h3>
+                    <p>If you recognize yourself in these stories, you don't need convincing. You just need what they got.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Continuous Improvement</h3>
-                    <p>Your Valé learns your preferences over time. Monthly check-ins to optimize workflows and add new capabilities as you grow.</p>
+                    <h3>We Talk</h3>
+                    <p>No sales process. Just a conversation about your situation and whether what we built fits.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Start Simple -->
-    <section class="features" id="pricing">
-        <h2 class="section-title">Start Simple. $100.</h2>
-        <p style="text-align: center; max-width: 600px; margin: -30px auto 50px; color: var(--brown-medium); font-size: 1.1rem;">
-            Take the quiz. Get your personalized Valé plan. First contact in 48 hours. Functional system in 7 days.
-        </p>
-        
-        <div class="features-grid" style="max-width: 700px; margin: 0 auto;">
-            <div class="feature-card" style="border: 2px solid var(--gold);">
-                <div class="feature-icon">🚀</div>
-                <div class="feature-title">Your Personalized Plan</div>
-                <div class="feature-desc">Complete a short quiz about your workflow. We design a Valé system tailored to how you actually work - not a generic template.</div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">⏱️</div>
-                <div class="feature-title">48-Hour First Contact</div>
-                <div class="feature-desc">Within 48 hours, you'll hear from us with your custom plan, timeline, and next steps. No waiting weeks to get started.</div>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">✅</div>
-                <div class="feature-title">7-Day Functional System</div>
-                <div class="feature-desc">Your Valé will be operational within 7 days. Real capabilities, real value, from day one.</div>
-            </div>
-        </div>
-        
-        <p style="text-align: center; margin-top: 30px; color: var(--ink-medium); font-size: 0.9rem; font-style: italic;">
-            The $100 goes toward your full build. No risk - if we're not a fit, we'll refund it.
-        </p>
-        
-        <!-- Action Links -->
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="setup.html" class="cta-button">Take the Quiz →</a>
+    <!-- Interest Section -->
+    <section class="interest-section">
+        <div class="interest-box">
+            <h3>See Yourself Here?</h3>
+            <p>We're not trying to sell you something. We're building services that work for specific people with specific problems. If you're a solo real estate agent or a busy parent partnership — or you think your situation might fit — let's talk.</p>
+            <a href="setup.html" class="cta-button">Start a Conversation</a>
         </div>
     </section>
     
