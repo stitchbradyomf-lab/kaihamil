@@ -267,6 +267,82 @@ Groove Pal is the Self side of Kai Hamil. The valley where you find elevation. T
 
 ---
 
+## Network Growth Dynamics
+
+### The Buddy Entry Model
+
+**Starting Point:**
+- 10 pairs of records (20 people)
+- 20 records in circulation
+- $0 revenue
+- 20 first-time listeners
+
+**The Conversion Moment:**
+Each recipient scans their QR code and sees:
+1. Who else received the same album (their "buddy")
+2. The record's journey so far
+3. Option to join: $49 for 2 new records + prepaid mailer
+
+**Network Health Metrics:**
+
+| Metric | Healthy | Warning | Death |
+|--------|---------|---------|-------|
+| Conversion rate | >40% | 20-40% | <20% |
+| Days to first send | <7 | 7-21 | >21 |
+| Record velocity | >2 hops/month | 1-2 hops/month | <1 hop/month |
+| Active sender ratio | >60% | 30-60% | <30% |
+
+**Growth Scenarios:**
+
+**Scenario A: 0% Conversion (Network Death)**
+- Wave 1: 0 signups
+- Result: 20 people, 20 records, $0
+- Network dies immediately
+
+**Scenario B: 25% Conversion (Slow Stall)**
+- Wave 1: 5 signups → $245
+- Wave 2: 1 signup → $49
+- Wave 3: 0 signups
+- Result: 26 people, 32 records, $294
+- *Plateaus after 3 waves*
+
+**Scenario C: 50% Conversion (Sustainable Growth)**
+- Wave 1: 10 signups → $490
+- Wave 2: 5 signups → $245
+- Wave 3: 2 signups → $98
+- Wave 4: 1 signup → $49
+- Result: 38 people, 56 records, $882
+- *Achieves natural equilibrium*
+
+**Scenario D: 100% Conversion (Exponential)**
+- Each wave: +20 paid, +20 new recipients, +40 records
+- After 5 waves: 100 paid, 200 records, $4,900
+- *Network becomes self-sustaining*
+
+**Key Drivers:**
+
+1. **The Buddy Effect** — Seeing someone else with the same record creates immediate connection. No one enters alone.
+
+2. **The 2x Multiplier** — Each signup brings 2 records into circulation. Network record count grows faster than people count.
+
+3. **Days to First Send** — Critical health metric. Fast sends (<7 days) = living network. Slow sends (>21 days) = dying network.
+
+4. **The Conversion Threshold** — 40% is the magic number. Below this, network stalls after 3-4 waves. Above this, momentum compounds.
+
+**Network Death Signals:**
+- Conversion drops below 20%
+- Records sitting idle for >30 days
+- "Days to first send" averaging >14 days
+- Active sender ratio below 30%
+
+**Intervention Points:**
+- **Wave 1:** Focus on founding circle quality (pick connectors, not collectors)
+- **Wave 2:** Personal outreach to non-converters
+- **Wave 3:** Strategic pairing (match people who would actually connect)
+- **Wave 4+:** Shift to community events, not just mail
+
+---
+
 ## Next Steps
 
 1. [ ] Register groovepal.com
