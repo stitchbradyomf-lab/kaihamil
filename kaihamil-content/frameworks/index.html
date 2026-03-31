@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frameworks | Kai Hamil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-cream: #faf6f1;
             --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
             --brown-dark: #3d2817;
             --brown-medium: #6b5344;
             --amber: #d4a574;
             --gold: #c9a227;
             --gold-light: #e8d5a3;
             --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Roboto', -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg-cream);
             color: var(--brown-dark);
             line-height: 1.7;
@@ -32,22 +37,26 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 15px 40px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, var(--bg-cream), transparent);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 100;
         }
         
         .logo {
-            font-size: 1.3rem;
-            font-weight: 300;
-            color: var(--brown-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
             text-decoration: none;
         }
         
-        .logo strong { font-weight: 500; }
+        .logo strong {
+            color: var(--gold);
+        }
         
         .nav-links a {
             color: var(--brown-medium);
@@ -62,23 +71,28 @@
         .hero {
             background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
             color: var(--bg-cream);
-            padding: 100px 40px 60px;
+            padding: 120px 40px 80px;
             text-align: center;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
             margin-bottom: 15px;
         }
         
-        .hero h1 strong { color: var(--gold); }
+        .hero h1 strong { 
+            color: var(--gold);
+            font-weight: 600;
+        }
         
         .hero p {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 300;
         }
         
         /* Container */
@@ -89,13 +103,55 @@
         }
         
         h2 {
-            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
             font-weight: 400;
-            margin: 50px 0 25px;
+            margin: 60px 0 30px;
             color: var(--brown-dark);
         }
         
-        /* Framework Cards */
+        h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        /* What is a Framework - Featured Section */
+        .about-frameworks {
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-warm) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 50px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-frameworks::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--amber) 50%, var(--terracotta) 100%);
+        }
+        
+        .about-frameworks h2 {
+            margin-top: 0;
+            font-size: 2.2rem;
+        }
+        
+        .about-frameworks p {
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .about-frameworks strong {
+            color: var(--ink-dark);
+        }
+        
+        /* Framework Cards - Gradient Dissolving Style */
         .frameworks-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -104,52 +160,91 @@
         }
         
         .framework-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 35px;
             transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 100%);
+            pointer-events: none;
         }
         
         .framework-card:hover {
             transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 20px 50px rgba(201, 162, 39, 0.12);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
         }
         
-        .framework-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        /* Unique gradients for each card type */
+        .framework-card.decision-framework {
+            background: linear-gradient(180deg, #faf6f1 0%, #e8d5a3 100%);
+            border: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        
+        .framework-card.diagnostic-framework {
+            background: linear-gradient(180deg, #f5f9ff 0%, #dbeafe 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .framework-card.assessment-framework {
+            background: linear-gradient(180deg, #f0fdf4 0%, #bbf7d0 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        
+        .framework-card.interactive-framework {
+            background: linear-gradient(180deg, #fdf4ff 0%, #e9d5ff 100%);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        
+        .framework-card.system-self-framework {
+            background: linear-gradient(135deg, #faf6f1 0%, #f5e6d3 50%, #e8d5c5 100%);
+            border: 1px solid rgba(184, 122, 94, 0.3);
+        }
+        
+        .framework-card.professional-framework {
+            background: linear-gradient(180deg, #fefce8 0%, #fde047 100%);
+            border: 1px solid rgba(234, 179, 8, 0.2);
         }
         
         .badge {
             display: inline-block;
-            padding: 4px 12px;
-            background: var(--gold-light);
-            color: var(--brown-dark);
+            padding: 5px 14px;
             font-size: 0.75rem;
             font-weight: 600;
             border-radius: 20px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             align-self: flex-start;
+            background: rgba(255,255,255,0.8);
+            color: var(--brown-dark);
         }
         
-        .badge.diagnostic { background: #dbeafe; color: #1e40af; }
-        .badge.decision { background: #fef3c7; color: #92400e; }
-        .badge.professional { background: #d1fae5; color: #065f46; }
+        .framework-icon {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
         
         .framework-card h3 {
-            font-size: 1.3rem;
-            font-weight: 500;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 12px;
-            color: var(--brown-dark);
+            color: var(--ink-dark);
         }
         
         .framework-card p {
@@ -157,6 +252,7 @@
             font-size: 0.95rem;
             flex: 1;
             margin-bottom: 15px;
+            line-height: 1.6;
         }
         
         .framework-meta {
@@ -165,35 +261,93 @@
             font-weight: 500;
         }
         
-        /* What is a Framework */
-        .about-frameworks {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-top: 50px;
+        /* System // Self Special Styling */
+        .system-self-visual {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 12px;
+            font-size: 0.85rem;
         }
         
-        .about-frameworks h2 {
-            margin-top: 0;
+        .scale-row {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            gap: 10px;
         }
         
-        .about-frameworks p {
+        .scale-label {
+            font-weight: 600;
+            min-width: 80px;
+            color: var(--ink-dark);
+        }
+        
+        .scale-bar {
+            flex: 1;
+            height: 8px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--terracotta) 100%);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .scale-bar::after {
+            content: '●';
+            position: absolute;
+            right: -5px;
+            top: -8px;
+            color: var(--terracotta);
+            font-size: 16px;
+        }
+        
+        .scale-end {
+            font-size: 0.8rem;
             color: var(--brown-medium);
+        }
+        
+        .warning-text {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(217, 136, 128, 0.1);
+            border-left: 3px solid var(--terracotta);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        /* Interactive Diagram Badge */
+        .interactive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
             margin-bottom: 15px;
         }
         
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 60px 40px;
             color: var(--brown-medium);
             border-top: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
         }
         
         @media (max-width: 600px) {
             .frameworks-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 1.8rem; }
+            .hero h1 { font-size: 2rem; }
+            .about-frameworks { padding: 30px; }
         }
     </style>
 </head>
@@ -212,29 +366,96 @@
     </header>
     
     <main class="container">
-        <h2>Featured</h2>
+        <!-- What is a Framework - Now at the top -->
+        <div class="about-frameworks">
+            <h2>What is a Framework?</h2>
+            <p>A framework is a thinking tool — a structured approach for navigating complexity. Unlike rigid systems, frameworks adapt to context while providing clarity. They help you see patterns, identify leverage points, and make better decisions faster.</p>
+            <p>Each framework here has been developed through research, tested in practice, and refined through iteration. Use them as starting points, not prescriptions.</p>
+            <p><strong>How to use:</strong> Start with a diagnostic framework to understand your situation, then apply a decision framework to navigate your next move.</p>
+        </div>
+        
+        <!-- Decision Frameworks - Now first -->
+        <h2>Decision Frameworks</h2>
         <div class="frameworks-grid">
-            <a href="spectrum-of-attention.html" class="framework-card" style="border-color: var(--gold); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201, 162, 39, 0.08) 100%);">
-                <span class="badge" style="background: var(--gold); color: white;">New</span>
-                <div class="framework-icon">📷</div>
-                <h3>The Spectrum of Attention</h3>
-                <p>Map your activities from pure consumption to pure creation. Photography lives at the threshold — where taking in meets making new.</p>
-                <span class="framework-meta">9 positions • Time & Attention • Interactive</span>
+            <a href="5-filters.html" class="framework-card decision-framework">
+                <span class="badge">Decision</span>
+                <div class="framework-icon">⬇</div>
+                <h3>The 5 Filters</h3>
+                <p>5-question framework for deciding under uncertainty. Applies Directional, Preferential, and Philosophical lenses to any choice.</p>
+                <span class="framework-meta">5 filters • Uncertainty navigation</span>
+            </a>
+            
+            <a href="system-self.html" class="framework-card system-self-framework">
+                <span class="badge">Integration</span>
+                <div class="framework-icon">⚖️</div>
+                <h3>System // Self</h3>
+                <p>Bi-directional balance between external infrastructure and internal clarity. Every action in one domain affects the other.</p>
+                <div class="system-self-visual">
+                    <div class="scale-row">
+                        <span class="scale-label">Action:</span>
+                        <span class="scale-end">Planting (Invest)</span>
+                        <div class="scale-bar"></div>
+                        <span class="scale-end">Harvesting (Enjoy)</span>
+                    </div>
+                    <div class="scale-row">
+                        <span class="scale-label">Domain:</span>
+                        <span class="scale-end">External (System)</span>
+                        <div class="scale-bar"></div>
+                        <span class="scale-end">Internal (Self)</span>
+                    </div>
+                    <div class="warning-text">
+                        ⚠️ Well-intentioned actions have 2nd order effects. Investing in systems without tending to self creates debt. Focusing on self without systems creates friction.
+                    </div>
+                </div>
+                <span class="framework-meta">2 domains • Bidirectional • Balance</span>
             </a>
         </div>
         
+        <!-- Assessments - New Category -->
+        <h2>Assessments</h2>
+        <div class="frameworks-grid">
+            <a href="ai-usage-advanced.html" class="framework-card assessment-framework">
+                <span class="badge">Assessment</span>
+                <div class="framework-icon">🤖</div>
+                <h3>AI Usage Advanced</h3>
+                <p>8-question behavioral assessment for AI integration. Bar chart visualization and detailed type analysis.</p>
+                <span class="framework-meta">8 questions • 5 minutes • Behavioral</span>
+            </a>
+            
+            <a href="/tools/ai-user-quiz-v3.html" class="framework-card assessment-framework">
+                <span class="badge">Assessment</span>
+                <div class="framework-icon">🎯</div>
+                <h3>AI User Type Quiz</h3>
+                <p>Quick diagnostic to discover your AI problem-solving style. Explorer, Analyst, Designer, or Builder?</p>
+                <span class="framework-meta">Entry assessment • 2 minutes • Quadrant</span>
+            </a>
+        </div>
+        
+        <!-- Interactive Diagrams -->
+        <h2>Interactive Diagrams</h2>
+        <div class="frameworks-grid">
+            <a href="spectrum-of-attention.html" class="framework-card interactive-framework">
+                <span class="interactive-badge">⚡ Interactive</span>
+                <div class="framework-icon">📷</div>
+                <h3>The Spectrum of Attention</h3>
+                <p>Map your activities from pure consumption to pure creation. Photography lives at the threshold — where taking in meets making new.</p>
+                <span class="framework-meta">9 positions • Time & Attention • Visual</span>
+            </a>
+        </div>
+        
+        <!-- Diagnostic Frameworks -->
         <h2>Diagnostic Frameworks</h2>
         <div class="frameworks-grid">
-            <a href="problem-audit.html" class="framework-card">
-                <span class="badge diagnostic">Diagnostic</span>
+            <a href="problem-audit.html" class="framework-card diagnostic-framework">
+                <span class="badge">Diagnostic</span>
                 <div class="framework-icon">🔍</div>
                 <h3>The Problem Audit</h3>
                 <p>5 questions to identify if you're solving symptoms or root causes. Distinguishes surface problems from structural issues.</p>
                 <span class="framework-meta">5 questions • 3 causal levels</span>
             </a>
             
-            <a href="cause-and-effect/" class="framework-card">
-                <span class="badge diagnostic">Diagnostic</span>
+            <a href="cause-and-effect/" class="framework-card diagnostic-framework">
+                <span class="badge">Diagnostic</span>
                 <div class="framework-icon">🔄</div>
                 <h3>Cause & Effect</h3>
                 <p>Break vicious cycles using Judea Pearl's 3-level causal model. Move from treating symptoms to redesigning systems.</p>
@@ -242,55 +463,22 @@
             </a>
         </div>
         
-        <h2>Decision Frameworks</h2>
-        <div class="frameworks-grid">
-            <a href="5-filters.html" class="framework-card">
-                <span class="badge decision">Decision</span>
-                <div class="framework-icon">◫</div>
-                <h3>The 5 Filters</h3>
-                <p>5-question framework for deciding under uncertainty. Applies Directional, Preferential, and Philosophical lenses to any choice.</p>
-                <span class="framework-meta">5 filters • Uncertainty navigation</span>
-            </a>
-            
-            <a href="system-self.html" class="framework-card">
-                <span class="badge decision">Decision</span>
-                <div class="framework-icon">⚖️</div>
-                <h3>System // Self</h3>
-                <p>Balance external infrastructure with internal clarity. The core philosophy behind everything at Kai Hamil.</p>
-                <span class="framework-meta">2 domains • Integration method</span>
-            </a>
-            
-            <a href="ai-usage-advanced.html" class="framework-card">
-                <span class="badge decision">Assessment</span>
-                <div class="framework-icon">🤖</div>
-                <h3>AI Usage Advanced</h3>
-                <p>8-question behavioral assessment for AI integration. Bar chart visualization and detailed type analysis.</p>
-                <span class="framework-meta">5 minutes • Behavioral</span>
-            </a>
-        </div>
-        
+        <!-- Professional Frameworks -->
         <h2>Professional Frameworks</h2>
         <div class="frameworks-grid">
-            <a href="realtor-discovery-framework.html" class="framework-card">
-                <span class="badge professional">Professional</span>
+            <a href="realtor-discovery-framework.html" class="framework-card professional-framework">
+                <span class="badge">Professional</span>
                 <div class="framework-icon">🏠</div>
                 <h3>Realtor Discovery</h3>
                 <p>20-question diagnostic for identifying root cause problems in realtor businesses. Maps pain points to AI solutions.</p>
                 <span class="framework-meta">20 questions • 5 phases • AI mapping</span>
             </a>
         </div>
-        
-        <div class="about-frameworks">
-            <h2>What is a Framework?</h2>
-            <p>A framework is a thinking tool — a structured approach for navigating complexity. Unlike rigid systems, frameworks adapt to context while providing clarity. They help you see patterns, identify leverage points, and make better decisions faster.</p>
-            <p>Each framework here has been developed through research, tested in practice, and refined through iteration. Use them as starting points, not prescriptions.</p>
-            <p><strong>How to use:</strong> Start with a diagnostic framework to understand your situation, then apply a decision framework to navigate your next move.</p>
-        </div>
     </main>
     
     <footer>
-        <p>Kai Hamil | System // Self</p>
-        <p style="font-size: 0.9rem; margin-top: 10px;"><a href="/" style="color: var(--brown-medium);">← Back to Home</a></p>
+        <p><strong>Kai Hamil</strong> | System // Self</p>
+        <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.7;"><a href="/" style="color: var(--brown-medium);">← Back to Home</a></p>
     </footer>
 </body>
 </html>
