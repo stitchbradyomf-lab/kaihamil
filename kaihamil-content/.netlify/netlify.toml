@@ -41,27 +41,28 @@ X-Content-Type-Options = "nosniff"
 Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[redirects]]
-from = "/private/*"
-to = "/login.html"
-status = 302.0
+from = "/"
+to = "/vale/index.html"
+status = 200.0
 force = true
 
 [redirects.query]
 
 [redirects.conditions]
-Role = ["admin"]
+"conditions[Host]" = "vale.kaihamil.com"
 
 [redirects.headers]
 
 [[redirects]]
-from = "/private/*"
-to = "/login.html"
-status = 302.0
+from = "/*"
+to = "/vale/index.html"
+status = 200.0
 force = true
 
 [redirects.query]
 
 [redirects.conditions]
+Host = ["vale.kaihamil.com"]
 
 [redirects.headers]
 

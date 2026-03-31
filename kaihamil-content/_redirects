@@ -1,7 +1,0 @@
-# Groove Pal domain routing
-/  /products/groove-pal/index.html  200!  Host=groovepal.com
-/  /products/groove-pal/index.html  200!  Host=www.groovepal.com
-
-# Valé subdomain routing  
-/  /vale/index.html  200!  Host=vale.kaihamil.com
-/vale/*  /:splat  301!  Host=vale.kaihamil.com

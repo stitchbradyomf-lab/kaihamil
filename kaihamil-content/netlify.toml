@@ -50,13 +50,6 @@
   conditions = {Host = ["vale.kaihamil.com"]}
 
 [[redirects]]
-  from = "/pricing"
-  to = "/vale/pricing.html"
-  status = 200
-  force = true
-  conditions = {Host = ["vale.kaihamil.com"]}
-
-[[redirects]]
   from = "/capabilities"
   to = "/vale/capabilities.html"
   status = 200

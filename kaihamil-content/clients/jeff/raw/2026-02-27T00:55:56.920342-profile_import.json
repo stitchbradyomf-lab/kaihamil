@@ -1,6 +1,0 @@
-{
-  "timestamp": "2026-02-27T00:55:56.920342",
-  "type": "profile_import",
-  "source": "homes.com_profile",
-  "content": "{\n  \"client_profile\": {\n    \"years_active\": 5,\n    \"total_transactions\": 47,\n    \"neighborhoods\": [\n      \"Westfield\",\n      \"Cranford\",\n      \"Mountainside\",\n      \"Scotch Plains\"\n    ],\n    \"specialties\": [\n      \"first_time_buyers\",\n      \"luxury_homes\"\n    ]\n  },\n  \"transactions\": [\n    {\n      \"id\": \"tx-001\",\n      \"address\": \"123 Maple Street, Westfield, NJ\",\n      \"price\": 725000,\n      \"type\": \"buyer_representation\",\n      \"date\": \"2024-01-15\",\n      \"bedrooms\": 4,\n      \"bathrooms\": 2.5,\n      \"square_feet\": 2400,\n      \"neighborhood\": \"Westfield\",\n      \"property_type\": \"colonial\",\n      \"client_type\": \"family_upgrading\"\n    },\n    {\n      \"id\": \"tx-002\",\n      \"address\": \"456 Oak Avenue, Cranford, NJ\",\n      \"price\": 485000,\n      \"type\": \"seller_representation\",\n      \"date\": \"2024-02-03\",\n      \"bedrooms\": 3,\n      \"bathrooms\": 2,\n      \"square_feet\": 1800,\n      \"neighborhood\": \"Cranford\",\n      \"property_type\": \"cape_cod\",\n      \"client_type\": \"empty_nester_downsizing\"\n    }\n  ],\n  \"imported_at\": \"2026-02-27T00:55:56.920295\"\n}"
-}
