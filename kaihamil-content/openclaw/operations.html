@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --success: #7dcea0;
+            --warning: #f8c471;
+            --danger: #d98880;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { color: var(--gold); }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(125, 206, 160, 0.2);
+            color: #065f46;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-pill::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px 60px;
+        }
+        
+        .page-header {
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        .last-updated {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-top: 10px;
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1100px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Status Cards */
+        .status-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .status-card.healthy::before { background: var(--success); }
+        .status-card.warning::before { background: var(--warning); }
+        .status-card.danger::before { background: var(--danger); }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .status-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-badge.healthy {
+            background: rgba(125, 206, 160, 0.2);
+            color: #065f46;
+        }
+        
+        .status-badge.warning {
+            background: rgba(248, 196, 113, 0.2);
+            color: #92400e;
+        }
+        
+        .status-badge.danger {
+            background: rgba(217, 136, 128, 0.2);
+            color: #991b1b;
+        }
+        
+        .status-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+            margin-top: 4px;
+        }
+        
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .section-badge {
+            background: var(--gold-light);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Activity Items */
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .activity-icon.commit { background: rgba(201, 162, 39, 0.15); }
+        .activity-icon.issue { background: rgba(217, 136, 128, 0.15); }
+        .activity-icon.pr { background: rgba(125, 206, 160, 0.15); }
+        .activity-icon.deploy { background: rgba(184, 122, 94, 0.15); }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .activity-meta {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--amber);
+            white-space: nowrap;
+        }
+        
+        /* Action Items */
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .action-item.priority-high {
+            border-left: 3px solid var(--danger);
+        }
+        
+        .action-item.priority-medium {
+            border-left: 3px solid var(--warning);
+        }
+        
+        .action-item.priority-low {
+            border-left: 3px solid var(--gold);
+        }
+        
+        .action-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .action-text {
+            flex: 1;
+        }
+        
+        .action-source {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Theo Log */
+        .theo-log {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            margin-bottom: 8px;
+            color: var(--brown-medium);
+        }
+        
+        .log-entry.success { color: #065f46; }
+        .log-entry.warning { color: #92400e; }
+        .log-entry.error { color: #991b1b; }
+        
+        .log-time {
+            color: var(--amber);
+            margin-right: 10px;
+        }
+        
+        /* Chart Placeholder */
+        .chart-container {
+            height: 200px;
+            background: linear-gradient(180deg, var(--bg-warm) 0%, transparent 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown-medium);
+            font-style: italic;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        @media (max-width: 900px) {
+            .two-column { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/frameworks/">Frameworks</a>
+            <a href="/openclaw/">OpenClaw</a>
+        </div>
+        <span class="status-pill">Systems Operational</span>
+    </nav>
+    
+    <div class="container">
+        <div class="page-header">
+            <h1>Operations Dashboard</h1>
+            <p>Real-time visibility into site health, development activity, and actionable items</p>
+            <p class="last-updated">Last updated: <span id="lastUpdated">March 31, 2026 at 8:45 AM EDT</span> by Theo</p>
+        </div>
+        
+        <!-- Site Status Cards -->
+        <div class="dashboard-grid">
+            <div class="status-card healthy">
+                <div class="status-header">
+                    <h3>kaihamil.com</h3>
+                    <span class="status-badge healthy">● Healthy</span>
+                </div>
+                <p style="color: var(--brown-medium); font-size: 0.95rem;">Main content site</p>
+                <div class="status-metrics">
+                    <div class="metric">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1.2s</div>
+                        <div class="metric-label">Load Time</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="status-card healthy">
+                <div class="status-header">
+                    <h3>vale.kaihamil.com</h3>
+                    <span class="status-badge healthy">● Healthy</span>
+                </div>
+                <p style="color: var(--brown-medium); font-size: 0.95rem;">Valé OS product site</p>
+                <div class="status-metrics">
+                    <div class="metric">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1.8s</div>
+                        <div class="metric-label">Load Time</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding: 10px; background: rgba(248, 196, 113, 0.1); border-radius: 8px; font-size: 0.85rem;">
+                    ⚠️ SSL expires in 23 days
+                </div>
+            </div>
+            
+            <div class="status-card warning">
+                <div class="status-header">
+                    <h3>groovepal.com</h3>
+                    <span class="status-badge warning">● Slow</span>
+                </div>
+                <p style="color: var(--brown-medium); font-size: 0.95rem;">Groove Pal vinyl network</p>
+                <div class="status-metrics">
+                    <div class="metric">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4.2s</div>
+                        <div class="metric-label">Load Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Two Column Layout -->
+        <div class="two-column">
+            <!-- GitHub Activity -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>📊 Development Activity</h2>
+                    <span class="section-badge">GitHub</span>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon commit">📝</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Updated Frameworks page structure</div>
+                        <div class="activity-meta">kaihamil-content • 3 files changed</div>
+                    </div>
+                    <div class="activity-time">2h ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon commit">📝</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Add Theo site reliability spec</div>
+                        <div class="activity-meta">kaihamil-content • 1 file changed</div>
+                    </div>
+                    <div class="activity-time">5h ago</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon pr">🔀</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Operations dashboard initial build</div>
+                        <div class="activity-meta">Ready for review • No conflicts</div>
+                    </div>
+                    <div class="activity-time">Now</div>
+                </div>
+                
+                <div class="activity-item">
+                    <div class="activity-icon issue">⚠️</div>
+                    <div class="activity-content">
+                        <div class="activity-title">AI User Quiz not capturing results</div>
+                        <div class="activity-meta">#142 • Open • High Priority</div>
+                    </div>
+                    <div class="activity-time">2d ago</div>
+                </div>
+                
+                <div class="section-header" style="margin-top: 30px; margin-bottom: 15px;">
+                    <h3>Open Issues</h3>
+                    <span class="section-badge">3 open</span>
+                </div>
+                
+                <div class="action-item priority-high">
+                    <div class="action-checkbox"></div>
+                    <div class="action-text">
+                        Fix AI User Quiz data capture
+                        <div class="action-source">Issue #142</div>
+                    </div>
+                </div>
+                
+                <div class="action-item priority-medium">
+                    <div class="action-checkbox"></div>
+                    <div class="action-text">
+                        Set up Supabase for unified data store
+                        <div class="action-source">Waiting: Kyle task</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theo Activity -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>🔍 Theo Activity Log</h2>
+                    <span class="section-badge">Site Monitoring</span>
+                </div>
+                
+                <div class="theo-log">
+                    <div class="log-entry success">
+                        <span class="log-time">08:45</span>
+                        All sites responding normally
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">08:30</span>
+                        SSL check: 2 certs valid, 1 expiring soon
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">08:15</span>
+                        Form submissions: 12 processed (0 failures)
+                    </div>
+                    <div class="log-entry warning">
+                        <span class="log-time">07:45</span>
+                        groovepal.com load time: 4.2s (threshold: 3s)
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">06:00</span>
+                        Daily health check completed
+                    </div>
+                    <div class="log-entry success">
+                        <span class="log-time">00:00</span>
+                        GitHub sync: 4 new commits indexed
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">Yesterday</span>
+                        Frameworks page redesigned and deployed
+                    </div>
+                </div>
+                
+                <div class="section-header" style="margin-top: 30px; margin-bottom: 15px;">
+                    <h3>Next Scheduled</h3>
+                </div>
+                
+                <div style="padding: 15px; background: var(--bg-warm); border-radius: 12px; font-size: 0.9rem;">
+                    <div style="margin-bottom: 8px;"><strong>11:45 PM</strong> — Daily metrics compilation</div>
+                    <div style="margin-bottom: 8px;"><strong>Tomorrow 9:00 AM</strong> — Weekly health scan</div>
+                    <div><strong>April 1</strong> — Monthly security audit</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Items Summary -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>🎯 Action Items Requiring Attention</h2>
+                <span class="section-badge">2 items</span>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 15px;">Development</h3>
+                    <div class="action-item priority-high">
+                        <div class="action-checkbox"></div>
+                        <div class="action-text">
+                            Fix AI User Quiz — results currently lost (localStorage only)
+                            <div class="action-source">Theo detected • Data loss risk</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; margin-bottom: 15px;">Infrastructure</h3>
+                    <div class="action-item priority-medium">
+                        <div class="action-checkbox"></div>
+                        <div class="action-text">
+                            Set up Supabase for unified data store
+                            <div class="action-source">Kyle task • Blocks Theo full deployment</div>
+                        </div>
+                    </div>
+                    <div class="action-item priority-low">
+                        <div class="action-checkbox"></div>
+                        <div class="action-text">
+                            Google OAuth credentials for gog Gmail access
+                            <div class="action-source">Kyle task • Enables email monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Metrics Trends (Placeholder for Charts) -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>📈 Performance Trends (30 Days)</h2>
+                <span class="section-badge">Time Series</span>
+            </div>
+            
+            <div class="two-column">
+                <div>
+                    <h4 style="margin-bottom: 10px; color: var(--brown-medium);">Uptime %</h4>
+                    <div class="chart-container">
+                        [Chart: 99.8% → 99.9% trend]
+                        <br>Supabase integration required for live data
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 10px; color: var(--brown-medium);">Response Time (p95)</h4>
+                    <div class="chart-container">
+                        [Chart: 2.8s → 3.1s trend]
+                        <br>Supabase integration required for live data
+                    </div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; padding: 15px; background: var(--bg-warm); border-radius: 12px; font-size: 0.9rem; color: var(--brown-medium);">
+                <strong>Note:</strong> Historical charts require Supabase backend. Current status is real-time via Theo checks. Deploy Supabase to enable full time-series visualization.
+            </p>
+        </div>
+    </div>
+    
+    <footer>
+        <p><strong>Kai Hamil Operations</strong></p>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Theo monitoring • Stitch orchestrating • Kyle deciding</p>
+    </footer>
+    
+    <script>
+        // Auto-update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const options = { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                timeZoneName: 'short'
+            };
+            document.getElementById('lastUpdated').textContent = now.toLocaleDateString('en-US', options);
+        }
+        updateTimestamp();
+        
+        // Placeholder: In production, this would poll Supabase for real-time updates
+        // setInterval(fetchMetrics, 60000); // Update every minute
+    </script>
+</body>
+</html>
