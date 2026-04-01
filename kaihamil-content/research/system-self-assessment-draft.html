@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System // Self Assessment Framework | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+            --danger: #d98880;
+            --danger-dark: #c75050;
+            --warning-bg: rgba(217, 136, 128, 0.1);
+            --success: #5a9a5a;
+            --success-bg: rgba(90, 154, 90, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo strong { color: var(--gold); }
+        
+        .nav-links a {
+            color: var(--brown-medium);
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-medium) 100%);
+            color: var(--bg-cream);
+            padding: 120px 40px 80px;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 strong { 
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 50px 0 25px;
+            color: var(--ink-dark);
+        }
+        
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 30px 0 15px;
+            color: var(--ink-dark);
+        }
+        
+        p {
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .section-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-right: 12px;
+        }
+        
+        /* Introduction Section */
+        .intro-box {
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-warm) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+        
+        .intro-box .quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--ink-dark);
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid var(--gold);
+            background: rgba(201, 162, 39, 0.05);
+        }
+        
+        .flow-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .flow-step {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px 25px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .flow-step.active {
+            background: var(--gold);
+            color: var(--brown-dark);
+        }
+        
+        .flow-arrow {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+        
+        /* Life Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .portfolio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold);
+        }
+        
+        .portfolio-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .portfolio-card .icon {
+            font-size: 1.5rem;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .metric-value {
+            font-weight: 600;
+            color: var(--ink-dark);
+        }
+        
+        .metric-value.gap-positive {
+            color: var(--danger-dark);
+        }
+        
+        .metric-value.gap-negative {
+            color: var(--success);
+        }
+        
+        /* Well-Being Dashboard */
+        .wellbeing-dashboard {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(201, 162, 39, 0.08) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .wellbeing-dashboard h3 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+        
+        .wellbeing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .wellbeing-metric {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        
+        .wellbeing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .wellbeing-title {
+            font-weight: 600;
+            color: var(--ink-dark);
+            font-size: 1.1rem;
+        }
+        
+        .wellbeing-gap {
+            background: var(--warning-bg);
+            color: var(--danger-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .wellbeing-gap.positive {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+        
+        .wellbeing-bar-container {
+            position: relative;
+            height: 24px;
+            background: var(--bg-warm);
+            border-radius: 12px;
+            overflow: visible;
+            margin-bottom: 10px;
+        }
+        
+        .wellbeing-bar-current {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--terracotta) 0%, var(--amber) 100%);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+        
+        .wellbeing-bar-target {
+            position: absolute;
+            top: -4px;
+            width: 4px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 2px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        
+        .wellbeing-bar-target::after {
+            content: 'Target';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+        
+        .wellbeing-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .wellbeing-values .current { font-weight: 600; color: var(--terracotta); }
+        .wellbeing-values .target { font-weight: 600; color: var(--gold); }
+        
+        /* Gap Analysis */
+        .gap-analysis {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .gap-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .gap-table th {
+            background: var(--bg-warm);
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            color: var(--ink-dark);
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .gap-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--brown-medium);
+        }
+        
+        .gap-table tr:hover {
+            background: var(--bg-warm);
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .priority-high {
+            background: var(--warning-bg);
+            color: var(--danger-dark);
+        }
+        
+        .priority-medium {
+            background: rgba(201, 162, 39, 0.2);
+            color: var(--gold);
+        }
+        
+        .priority-low {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+        
+        /* Diagnostic Frameworks */
+        .diagnostic-section {
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-warm) 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .five-whys {
+            margin: 30px 0;
+        }
+        
+        .why-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border-left: 4px solid var(--amber);
+        }
+        
+        .why-number {
+            background: var(--amber);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+        
+        .why-content {
+            flex: 1;
+        }
+        
+        .why-question {
+            font-weight: 600;
+            color: var(--ink-dark);
+            margin-bottom: 5px;
+        }
+        
+        .why-answer {
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        .why-step.root {
+            border-left-color: var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+        }
+        
+        .why-step.root .why-number {
+            background: var(--gold);
+        }
+        
+        /* Attention Spectrum */
+        .attention-spectrum {
+            margin: 30px 0;
+        }
+        
+        .spectrum-bar {
+            display: flex;
+            height: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .spectrum-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .spectrum-segment:hover {
+            filter: brightness(1.1);
+        }
+        
+        .spectrum-segment .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink-dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        
+        .spectrum-segment:hover .tooltip {
+            opacity: 1;
+        }
+        
+        .spectrum-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        /* Action Planning */
+        .action-section {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .experiment-card {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .experiment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .experiment-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--ink-dark);
+        }
+        
+        .experiment-duration {
+            background: var(--gold);
+            color: var(--brown-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .experiment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .experiment-detail {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .experiment-detail-label {
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 5px;
+        }
+        
+        .experiment-detail-value {
+            color: var(--ink-dark);
+            font-weight: 500;
+        }
+        
+        /* Review Cadence */
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .review-frequency {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        
+        .review-focus {
+            font-weight: 600;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .review-duration {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Worksheet Section */
+        .worksheet {
+            background: linear-gradient(180deg, var(--bg-card) 0%, rgba(201, 162, 39, 0.1) 100%);
+            border: 2px dashed var(--gold);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .worksheet h3 {
+            text-align: center;
+            color: var(--gold);
+            margin-top: 0;
+        }
+        
+        .worksheet-intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--bg-cream);
+        }
+        
+        .input-group input:focus,
+        .input-group textarea:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        /* Connected Frameworks */
+        .frameworks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .framework-link {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .framework-link:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .framework-link h4 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .framework-link p {
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            margin: 0;
+        }
+        
+        /* Warning & Info Boxes */
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--danger);
+            border-radius: 0 12px 12px 0;
+            padding: 25px 30px;
+            margin: 30px 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--danger-dark);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .insight-box {
+            background: var(--success-bg);
+            border-left: 4px solid var(--success);
+            border-radius: 0 12px 12px 0;
+            padding: 25px 30px;
+            margin: 30px 0;
+        }
+        
+        .insight-box h4 {
+            color: var(--success);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .insight-box p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            color: var(--brown-medium);
+            border-top: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        
+        footer p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .container { padding: 40px 20px; }
+            .nav { padding: 15px 20px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .flow-diagram { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .gap-table { font-size: 0.85rem; }
+            .gap-table th, .gap-table td { padding: 10px; }
+            .spectrum-bar { height: auto; flex-direction: column; }
+            .spectrum-segment { height: 40px; width: 100% !important; }
+        }
+        
+        /* Print styles */
+        @media print {
+            .nav { display: none; }
+            .hero { padding-top: 40px; }
+            .worksheet input, .worksheet textarea { border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="nav-links">
+            <a href="/frameworks/">← All Frameworks</a>
+            <a href="/frameworks/system-self.html">System // Self</a>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <span class="badge">Core Assessment</span>
+        <h1>System <strong>//</strong> Self Assessment</h1>
+        <p>Gap analysis for your life. Baseline where you are, target where you want to be, and close the distance with intentional action.</p>
+    </header>
+    
+    <main class="container">
+        <!-- SECTION 1: Introduction -->
+        <h2><span class="section-number">1</span>The Framework</h2>
+        
+        <div class="intro-box">
+            <div class="quote">
+                "You can't optimize what you haven't measured. You can't change what you haven't named."
+            </div>
+            
+            <p>System // Self Assessment is gap analysis applied to your entire life. It's not about doing more—it's about understanding where your time and energy are going versus where you want them to go.</p>
+            
+            <p>Most of us operate with a vague sense that something's off. We're too busy. Not creative enough. Stressed about things we shouldn't be stressed about. This framework replaces vague discomfort with specific gaps you can actually address.</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step active">Baseline</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Target</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Gap</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">Action</div>
+            </div>
+            
+            <p style="text-align: center; margin-bottom: 0;"><strong>The process is simple:</strong> Measure where you are. Define where you want to be. The difference is your gap. The gap tells you what to work on.</p>
+        </div>
+        
+        <!-- SECTION 2: Life Portfolio -->
+        <h2><span class="section-number">2</span>The Life Portfolio</h2>
+        
+        <p>Your life is a portfolio of investments. Every hour, every unit of attention, every ounce of energy goes somewhere. The question isn't whether you're allocating—it's whether you're allocating intentionally.</p>
+        
+        <p>Here's Kyle's current allocation across the seven core domains:</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <h4><span class="icon">💼</span> Career</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">55</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">7/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">Medium</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value gap-positive">+10 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">👨‍👩‍👧</span> Family</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">25</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">6/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value gap-negative">-5 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">🏃</span> Health</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">8/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value gap-negative">-3 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">💰</span> Finances</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">5/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">Low</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value">0 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">🤝</span> Relationships</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">3</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">7/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value gap-negative">-2 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">📚</span> Growth</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">6/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">High</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value">0 hrs</span>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <h4><span class="icon">🎨</span> Recreation</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Hours/week</span>
+                    <span class="metric-value">5</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Focus quality</span>
+                    <span class="metric-value">5/10</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Energy return</span>
+                    <span class="metric-value">Medium</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Time gap</span>
+                    <span class="metric-value gap-negative">-2 hrs</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <h4>⚠️ The Bloomberg Reality</h4>
+            <p>55 hours of career (Bloomberg day job + Kai Hamil side work) is 10 more than desired. High focus quality doesn't offset the quantity problem. The gap manifests everywhere else: family time fragmented, exercise sporadic, friendships on autopilot.</p>
+        </div>
+        
+        <!-- SECTION 3: Well-Being Metrics -->
+        <h2><span class="section-number">3</span>Well-Being Metrics</h2>
+        
+        <p>Time allocation tells you where hours go. Well-being metrics tell you how you <em>feel</em>. Both matter. You can spend perfect amounts of time in each domain and still feel terrible if the quality is wrong.</p>
+        
+        <div class="wellbeing-dashboard">
+            <h3>📊 Kyle's Well-Being Dashboard</h3>
+            
+            <div class="wellbeing-grid">
+                <div class="wellbeing-metric">
+                    <div class="wellbeing-header">
+                        <span class="wellbeing-title">🎨 Creativity</span>
+                        <span class="wellbeing-gap">Gap: -4</span>
+                    </div>
+                    <div class="wellbeing-bar-container">
+                        <div class="wellbeing-bar-current" style="width: 40%;"></div>
+                        <div class="wellbeing-bar-target" style="left: 80%;"></div>
+                    </div>
+                    <div class="wellbeing-values">
+                        <span>Current: <span class="current">4/10</span></span>
+                        <span>Target: <span class="target">8/10</span></span>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-metric">
+                    <div class="wellbeing-header">
+                        <span class="wellbeing-title">😰 Stress/Anxiety</span>
+                        <span class="wellbeing-gap">Gap: +3</span>
+                    </div>
+                    <div class="wellbeing-bar-container">
+                        <div class="wellbeing-bar-current" style="width: 70%;"></div>
+                        <div class="wellbeing-bar-target" style="left: 40%;"></div>
+                    </div>
+                    <div class="wellbeing-values">
+                        <span>Current: <span class="current">7/10</span></span>
+                        <span>Target: <span class="target">4/10</span></span>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-metric">
+                    <div class="wellbeing-header">
+                        <span class="wellbeing-title">✨ Fulfillment</span>
+                        <span class="wellbeing-gap">Gap: -3</span>
+                    </div>
+                    <div class="wellbeing-bar-container">
+                        <div class="wellbeing-bar-current" style="width: 60%;"></div>
+                        <div class="wellbeing-bar-target" style="left: 90%;"></div>
+                    </div>
+                    <div class="wellbeing-values">
+                        <span>Current: <span class="current">6/10</span></span>
+                        <span>Target: <span class="target">9/10</span></span>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-metric">
+                    <div class="wellbeing-header">
+                        <span class="wellbeing-title">🧘 Presence</span>
+                        <span class="wellbeing-gap">Gap: -3</span>
+                    </div>
+                    <div class="wellbeing-bar-container">
+                        <div class="wellbeing-bar-current" style="width: 50%;"></div>
+                        <div class="wellbeing-bar-target" style="left: 80%;"></div>
+                    </div>
+                    <div class="wellbeing-values">
+                        <span>Current: <span class="current">5/10</span></span>
+                        <span>Target: <span class="target">8/10</span></span>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-metric">
+                    <div class="wellbeing-header">
+                        <span class="wellbeing-title">⚡ Physical Energy</span>
+                        <span class="wellbeing-gap">Gap: -2</span>
+                    </div>
+                    <div class="wellbeing-bar-container">
+                        <div class="wellbeing-bar-current" style="width: 60%;"></div>
+                        <div class="wellbeing-bar-target" style="left: 80%;"></div>
+                    </div>
+                    <div class="wellbeing-values">
+                        <span>Current: <span class="current">6/10</span></span>
+                        <span>Target: <span class="target">8/10</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="insight-box">
+            <h4>💡 Pattern Recognition</h4>
+            <p>Creativity and Presence have the largest gaps. Both require unstructured time and mental space—exactly what gets squeezed when career consumes an extra 10 hours/week. Stress is the only metric running hot (above target). These aren't separate problems. They're the same problem viewed from different angles.</p>
+        </div>
+        
+        <!-- SECTION 4: Gap Analysis -->
+        <h2><span class="section-number">4</span>Gap Analysis Dashboard</h2>
+        
+        <p>Not all gaps are created equal. Priority emerges from two factors: <strong>Impact</strong> (how much would closing this gap improve your life?) and <strong>Feasibility</strong> (how realistic is it to close?). Multiply them together for a priority score.</p>
+        
+        <div class="gap-analysis">
+            <table class="gap-table">
+                <thead>
+                    <tr>
+                        <th>Gap</th>
+                        <th>Size</th>
+                        <th>Impact</th>
+                        <th>Feasibility</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Career hours overflow</strong><br><small>55hrs → 45hrs target</small></td>
+                        <td>+10 hrs</td>
+                        <td>9/10</td>
+                        <td>6/10</td>
+                        <td><span class="priority-badge priority-high">54 - High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Creativity deficit</strong><br><small>4/10 → 8/10 target</small></td>
+                        <td>-4 points</td>
+                        <td>8/10</td>
+                        <td>7/10</td>
+                        <td><span class="priority-badge priority-high">56 - High</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stress/Anxiety excess</strong><br><small>7/10 → 4/10 target</small></td>
+                        <td>+3 points</td>
+                        <td>9/10</td>
+                        <td>5/10</td>
+                        <td><span class="priority-badge priority-medium">45 - Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Presence deficit</strong><br><small>5/10 → 8/10 target</small></td>
+                        <td>-3 points</td>
+                        <td>7/10</td>
+                        <td>6/10</td>
+                        <td><span class="priority-badge priority-medium">42 - Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Family time deficit</strong><br><small>25hrs → 30hrs target</small></td>
+                        <td>-5 hrs</td>
+                        <td>8/10</td>
+                        <td>5/10</td>
+                        <td><span class="priority-badge priority-medium">40 - Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exercise deficit</strong><br><small>4hrs → 7hrs target</small></td>
+                        <td>-3 hrs</td>
+                        <td>7/10</td>
+                        <td>7/10</td>
+                        <td><span class="priority-badge priority-medium">49 - Medium</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recreation quality</strong><br><small>Focus 5/10 → 8/10</small></td>
+                        <td>-3 points</td>
+                        <td>5/10</td>
+                        <td>8/10</td>
+                        <td><span class="priority-badge priority-low">40 - Low</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Resource Reallocation Opportunity</h3>
+            <p>The math is clear: reclaiming 10 hours from career creates a cascade of closure across multiple gaps. That's not 10 hours of "free time"—it's 10 hours that can flow into:</p>
+            <ul style="color: var(--brown-medium); margin-left: 20px;">
+                <li>+5 hours family (closes gap completely)</li>
+                <li>+3 hours health (closes gap completely)</li>
+                <li>+2 hours creative work (addresses creativity deficit)</li>
+            </ul>
+            <p style="margin-top: 15px;">One change, multiple gaps addressed. That's leverage.</p>
+        </div>
+        
+        <!-- SECTION 5: Diagnostic Frameworks -->
+        <h2><span class="section-number">5</span>Diagnostic Frameworks</h2>
+        
+        <p>Knowing your gaps isn't enough. You need to understand <em>why</em> they exist. Different diagnostic tools reveal different layers of causation.</p>
+        
+        <div class="diagnostic-section">
+            <h3>5 Whys: Career Time Overflow</h3>
+            <p>Start with the symptom. Ask "why" until you hit root cause.</p>
+            
+            <div class="five-whys">
+                <div class="why-step">
+                    <div class="why-number">1</div>
+                    <div class="why-content">
+                        <div class="why-question">Why am I working 55 hours instead of 45?</div>
+                        <div class="why-answer">Because I'm doing both Bloomberg work AND building Kai Hamil content.</div>
+                    </div>
+                </div>
+                
+                <div class="why-step">
+                    <div class="why-number">2</div>
+                    <div class="why-content">
+                        <div class="why-question">Why am I building Kai Hamil alongside a full-time job?</div>
+                        <div class="why-answer">Because I want to create something of my own, but can't afford to quit yet.</div>
+                    </div>
+                </div>
+                
+                <div class="why-step">
+                    <div class="why-number">3</div>
+                    <div class="why-content">
+                        <div class="why-question">Why can't I afford to quit yet?</div>
+                        <div class="why-answer">Because Kai Hamil doesn't generate enough revenue to replace my salary.</div>
+                    </div>
+                </div>
+                
+                <div class="why-step">
+                    <div class="why-number">4</div>
+                    <div class="why-content">
+                        <div class="why-question">Why doesn't Kai Hamil generate enough revenue?</div>
+                        <div class="why-answer">Because I haven't systematized content production or monetization—I'm doing everything manually.</div>
+                    </div>
+                </div>
+                
+                <div class="why-step root">
+                    <div class="why-number">5</div>
+                    <div class="why-content">
+                        <div class="why-question">Why haven't I systematized?</div>
+                        <div class="why-answer"><strong>Root cause:</strong> I've been working IN the business instead of ON it—creating content without building the infrastructure that would make creation sustainable and scalable.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="diagnostic-section">
+            <h3>Attention Spectrum Analysis</h3>
+            <p>Your attention is finite. Where is it actually going? This visualization shows Kyle's current attention distribution across different modes.</p>
+            
+            <div class="attention-spectrum">
+                <div class="spectrum-bar">
+                    <div class="spectrum-segment" style="width: 35%; background: #6b5344;">
+                        <span class="tooltip">Reactive: Email, Slack, interruptions</span>
+                        35%
+                    </div>
+                    <div class="spectrum-segment" style="width: 25%; background: #8b7355;">
+                        <span class="tooltip">Maintenance: Meetings, admin, routine</span>
+                        25%
+                    </div>
+                    <div class="spectrum-segment" style="width: 20%; background: #d4a574;">
+                        <span class="tooltip">Productive: Deep work, deliverables</span>
+                        20%
+                    </div>
+                    <div class="spectrum-segment" style="width: 12%; background: #c9a227;">
+                        <span class="tooltip">Creative: New ideas, exploration</span>
+                        12%
+                    </div>
+                    <div class="spectrum-segment" style="width: 8%; background: #5a9a5a;">
+                        <span class="tooltip">Restorative: Rest, recovery, presence</span>
+                        8%
+                    </div>
+                </div>
+                
+                <div class="spectrum-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #6b5344;"></div>
+                        <span>Reactive (35%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #8b7355;"></div>
+                        <span>Maintenance (25%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #d4a574;"></div>
+                        <span>Productive (20%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #c9a227;"></div>
+                        <span>Creative (12%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #5a9a5a;"></div>
+                        <span>Restorative (8%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4>⚠️ The Attention Imbalance</h4>
+                <p>60% of attention goes to Reactive + Maintenance. Only 12% reaches Creative mode. This explains the Creativity gap (4/10) even when total hours worked are high. It's not about more time—it's about protecting the right <em>type</em> of attention.</p>
+            </div>
+        </div>
+        
+        <!-- SECTION 6: Action Planning -->
+        <h2><span class="section-number">6</span>Action Planning</h2>
+        
+        <p>Analysis without action is procrastination wearing a lab coat. The goal is 2-week experiments—small enough to start, long enough to measure.</p>
+        
+        <div class="action-section">
+            <h3>2-Week Experiments</h3>
+            
+            <div class="experiment-card">
+                <div class="experiment-header">
+                    <span class="experiment-title">🔬 Experiment #1: Protected Creation Blocks</span>
+                    <span class="experiment-duration">2 weeks</span>
+                </div>
+                <p>Block 6-8 AM three days/week as non-negotiable creative time for Kai Hamil. No email, no Slack, no reactive work. Phone in another room.</p>
+                <div class="experiment-details">
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Hypothesis</div>
+                        <div class="experiment-detail-value">Creativity will increase from 4 to 6/10 with protected time.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Success Metric</div>
+                        <div class="experiment-detail-value">Complete 2 pieces of content/week vs. current 0-1.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Risk</div>
+                        <div class="experiment-detail-value">May impact sleep if mornings feel rushed.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Mitigation</div>
+                        <div class="experiment-detail-value">Move bedtime 30 minutes earlier.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="experiment-card">
+                <div class="experiment-header">
+                    <span class="experiment-title">🔬 Experiment #2: Reactive Batching</span>
+                    <span class="experiment-duration">2 weeks</span>
+                </div>
+                <p>Check email/Slack only at 9 AM, 12 PM, and 4 PM. Use auto-responder explaining response windows. Measure stress impact.</p>
+                <div class="experiment-details">
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Hypothesis</div>
+                        <div class="experiment-detail-value">Stress will decrease from 7 to 5/10 by reducing context-switching.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Success Metric</div>
+                        <div class="experiment-detail-value">Reactive attention drops from 35% to 20%.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Risk</div>
+                        <div class="experiment-detail-value">May miss urgent Bloomberg requests.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Mitigation</div>
+                        <div class="experiment-detail-value">Set phone exceptions for direct manager calls.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="experiment-card">
+                <div class="experiment-header">
+                    <span class="experiment-title">🔬 Experiment #3: Family Dinner Fence</span>
+                    <span class="experiment-duration">2 weeks</span>
+                </div>
+                <p>Hard stop at 6:30 PM every weekday. No laptop, no phone at dinner. Full presence 6:30-8:00 PM with family.</p>
+                <div class="experiment-details">
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Hypothesis</div>
+                        <div class="experiment-detail-value">Presence will increase from 5 to 7/10; family hours gap closes by 3.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Success Metric</div>
+                        <div class="experiment-detail-value">Zero phone checks during family time.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Risk</div>
+                        <div class="experiment-detail-value">Work may spill into late night to compensate.</div>
+                    </div>
+                    <div class="experiment-detail">
+                        <div class="experiment-detail-label">Mitigation</div>
+                        <div class="experiment-detail-value">Accept some tasks may need to wait until tomorrow.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Review Cadence</h3>
+            <p>Experiments need checkpoints. Build review into the rhythm:</p>
+            
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-frequency">Daily</div>
+                    <div class="review-focus">Quick pulse check</div>
+                    <div class="review-duration">2 minutes at day end</div>
+                    <p style="font-size: 0.85rem; margin-top: 10px;">Did I protect the blocks? How do I feel? What surprised me?</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-frequency">Weekly</div>
+                    <div class="review-focus">Metric tracking</div>
+                    <div class="review-duration">15 minutes Sunday</div>
+                    <p style="font-size: 0.85rem; margin-top: 10px;">Update well-being scores. Review time allocation. Adjust next week.</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-frequency">Bi-Weekly</div>
+                    <div class="review-focus">Experiment review</div>
+                    <div class="review-duration">30 minutes</div>
+                    <p style="font-size: 0.85rem; margin-top: 10px;">Did experiment work? Continue, modify, or abandon? What's next?</p>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-frequency">Quarterly</div>
+                    <div class="review-focus">Full reassessment</div>
+                    <div class="review-duration">2 hours</div>
+                    <p style="font-size: 0.85rem; margin-top: 10px;">Complete System // Self Assessment again. Compare to baseline. Reset targets.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WORKSHEET -->
+        <h2><span class="section-number">✍️</span>Your Assessment Worksheet</h2>
+        
+        <div class="worksheet">
+            <h3>📋 Complete Your Own Assessment</h3>
+            <p class="worksheet-intro">Use this worksheet to baseline your current state. Be honest—these numbers are for you, not for anyone else.</p>
+            
+            <h4 style="margin-top: 30px; margin-bottom: 15px;">Life Portfolio Audit</h4>
+            
+            <div class="input-group">
+                <label>Career: Hours/week currently invested</label>
+                <div class="input-row">
+                    <input type="number" placeholder="Current hours" min="0" max="100">
+                    <input type="number" placeholder="Target hours" min="0" max="100">
+                    <select>
+                        <option>Focus: 1-10</option>
+                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Family: Hours/week currently invested</label>
+                <div class="input-row">
+                    <input type="number" placeholder="Current hours" min="0" max="100">
+                    <input type="number" placeholder="Target hours" min="0" max="100">
+                    <select>
+                        <option>Focus: 1-10</option>
+                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Health: Hours/week currently invested</label>
+                <div class="input-row">
+                    <input type="number" placeholder="Current hours" min="0" max="100">
+                    <input type="number" placeholder="Target hours" min="0" max="100">
+                    <select>
+                        <option>Focus: 1-10</option>
+                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                        <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                    </select>
+                </div>
+            </div>
+            
+            <h4 style="margin-top: 30px; margin-bottom: 15px;">Well-Being Metrics</h4>
+            
+            <div class="input-group">
+                <label>Rate yourself 1-10 on each dimension:</label>
+                <div class="input-row">
+                    <div>
+                        <small>Creativity</small>
+                        <input type="number" placeholder="Current" min="1" max="10">
+                    </div>
+                    <div>
+                        <small>Stress (lower is better)</small>
+                        <input type="number" placeholder="Current" min="1" max="10">
+                    </div>
+                    <div>
+                        <small>Fulfillment</small>
+                        <input type="number" placeholder="Current" min="1" max="10">
+                    </div>
+                </div>
+                <div class="input-row" style="margin-top: 10px;">
+                    <div>
+                        <small>Presence</small>
+                        <input type="number" placeholder="Current" min="1" max="10">
+                    </div>
+                    <div>
+                        <small>Physical Energy</small>
+                        <input type="number" placeholder="Current" min="1" max="10">
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin-top: 30px; margin-bottom: 15px;">Root Cause Analysis</h4>
+            
+            <div class="input-group">
+                <label>What's your biggest gap? Apply 5 Whys:</label>
+                <textarea placeholder="Gap: "></textarea>
+                <textarea placeholder="Why #1: "></textarea>
+                <textarea placeholder="Why #2: "></textarea>
+                <textarea placeholder="Why #3: "></textarea>
+                <textarea placeholder="Why #4: "></textarea>
+                <textarea placeholder="Why #5 (Root Cause): "></textarea>
+            </div>
+            
+            <h4 style="margin-top: 30px; margin-bottom: 15px;">Your 2-Week Experiment</h4>
+            
+            <div class="input-group">
+                <label>Design one experiment to test:</label>
+                <textarea placeholder="Experiment description: What will you try?"></textarea>
+                <textarea placeholder="Hypothesis: What do you expect will happen?"></textarea>
+                <textarea placeholder="Success metric: How will you know if it worked?"></textarea>
+            </div>
+        </div>
+        
+        <!-- Connected Frameworks -->
+        <h2><span class="section-number">→</span>Connected Frameworks</h2>
+        
+        <p>System // Self Assessment is the foundation. These frameworks provide deeper dives into specific aspects:</p>
+        
+        <div class="frameworks-grid">
+            <a href="/frameworks/5-filters.html" class="framework-link">
+                <h4>The 5 Filters</h4>
+                <p>Decision framework for evaluating opportunities and requests. Use when your gap analysis reveals you're saying "yes" to too much.</p>
+            </a>
+            
+            <a href="/frameworks/cause-and-effect/" class="framework-link">
+                <h4>Cause & Effect Mapping</h4>
+                <p>Visual tool for understanding cascading impacts. Use when one change affects multiple life domains.</p>
+            </a>
+            
+            <a href="/frameworks/attention-spectrum.html" class="framework-link">
+                <h4>Attention Spectrum</h4>
+                <p>Deep dive into attention allocation. Use when you have the time but not the right type of focus.</p>
+            </a>
+            
+            <a href="/frameworks/life-process-mapping.html" class="framework-link">
+                <h4>Life Process Mapping</h4>
+                <p>Map your recurring processes and find inefficiencies. Use when maintenance tasks are eating your creative time.</p>
+            </a>
+            
+            <a href="/frameworks/system-self.html" class="framework-link">
+                <h4>System // Self</h4>
+                <p>The philosophical foundation. Understand the bidirectional balance between external infrastructure and internal clarity.</p>
+            </a>
+            
+            <a href="/frameworks/problem-audit.html" class="framework-link">
+                <h4>Problem Audit</h4>
+                <p>Comprehensive problem inventory. Use when you need to see all your gaps in one place before prioritizing.</p>
+            </a>
+        </div>
+        
+        <!-- Closing -->
+        <div class="intro-box" style="margin-top: 60px;">
+            <div class="quote">
+                "The gap between who you are and who you want to be is measured in attention, not time."
+            </div>
+            <p style="text-align: center; margin-bottom: 0;">Start where you are. Measure honestly. Experiment boldly. Review ruthlessly. The framework works if you work it.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p><strong>Kai Hamil</strong> | System // Self Assessment Framework</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Baseline → Target → Gap → Action</p>
+    </footer>
+</body>
+</html>
