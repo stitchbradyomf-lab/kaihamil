@@ -521,23 +521,61 @@
             font-size: 0.85rem;
         }
         
-        /* Responsive */
+        /* Mobile Redesign */
         @media (max-width: 900px) {
             .split-section {
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
             }
+            
+            /* Reorder for mobile: Hero → System → Self (side by side cards) → Assessment */
             .system-side {
                 border-right: none;
-                border-bottom: 1px solid var(--border);
+                order: 1;
+                padding: 30px 20px;
+            }
+            
+            .self-side {
+                order: 2;
+                padding: 30px 20px;
+                border-top: 1px solid var(--border);
+            }
+            
+            /* Compact product cards on mobile */
+            .product-hero-link {
+                min-height: auto;
+                grid-template-rows: 100px auto auto;
+                padding: 20px;
+            }
+            
+            .product-hero-link img {
+                max-width: 150px;
+                max-height: 80px;
+            }
+            
+            .access-grid {
+                gap: 12px;
+            }
+            
+            /* Assessment promo below System/Self on mobile */
+            .framework-promo {
+                order: 3;
+                padding: 40px 20px;
             }
         }
         
         @media (max-width: 600px) {
+            .wave-hero { min-height: 35vh !important; padding-top: 100px !important; }
             .wave-hero h1 { font-size: 2.2rem; }
             .hero-subtext { font-size: 1rem; }
-            .side-title { font-size: 2rem; }
-            .system-side, .self-side { padding: 40px 20px; }
+            .side-title { font-size: 1.8rem; }
+            .system-side, .self-side { padding: 30px 20px; }
             .nav { padding: 15px 20px; }
+            
+            /* Even more compact on small phones */
+            .framework-promo-title { font-size: 1.6rem; }
+            .framework-promo-desc { font-size: 1rem; }
+            .framework-promo-button { padding: 14px 32px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -569,15 +607,6 @@
             <p class="hero-subtext" style="font-size: 1.5rem; margin-bottom: 0; opacity: 0.7;">
                 System // Self
             </p>
-        </div>
-    </section>
-    
-    <!-- System // Self Framework Promo -->
-    <section class="framework-promo">
-        <div class="framework-promo-content">
-            <h2 class="framework-promo-title">System // Self Assessment</h2>
-            <p class="framework-promo-desc">Discover where your time and energy go—<br>and where you want them to be.</p>
-            <a href="research/system-self-assessment-draft.html" class="framework-promo-button">Explore</a>
         </div>
     </section>
     
@@ -642,14 +671,12 @@
         </div>
     </section>
     
-    <!-- Knowledge Graph Explorer -->
-    <section class="graph-section">
-        <div class="graph-header">
-            <h2>Explore the <strong>Knowledge Graph</strong></h2>
-            <p>Navigate the entire Kai Hamil site — go where it feels right.</p>
-        </div>
-        <div class="graph-embed-container">
-            <iframe src="designs/knowledge-graph-embed.html" width="100%" height="600" frameborder="0" style="border-radius: 16px; border: 1px solid var(--border);"></iframe>
+    <!-- System // Self Framework Promo - Now after split -->
+    <section class="framework-promo">
+        <div class="framework-promo-content">
+            <h2 class="framework-promo-title">System // Self Assessment</h2>
+            <p class="framework-promo-desc">Discover where your time and energy go—and where you want them to be.</p>
+            <a href="research/system-self-assessment-draft.html" class="framework-promo-button">Explore</a>
         </div>
     </section>
     
