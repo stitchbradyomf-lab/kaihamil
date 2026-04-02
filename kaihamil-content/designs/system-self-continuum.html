@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System // Self Continuum | Kai Hamil Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 60px;
+        }
+        
+        /* Continuum Container */
+        .continuum-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 60px;
+            margin: 40px 0;
+        }
+        
+        .continuum-axis {
+            position: relative;
+            height: 400px;
+            margin: 40px 0;
+        }
+        
+        /* The Line */
+        .continuum-line {
+            position: absolute;
+            top: 50%;
+            left: 80px;
+            right: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brown-dark) 0%, var(--gold) 50%, var(--terracotta) 100%);
+            border-radius: 2px;
+            transform: translateY(-50%);
+        }
+        
+        /* Labels */
+        .axis-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .axis-label.system {
+            left: 0;
+            color: var(--brown-dark);
+        }
+        
+        .axis-label.self {
+            right: 0;
+            color: var(--terracotta);
+        }
+        
+        .axis-label span {
+            display: block;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: var(--brown-medium);
+            margin-top: 5px;
+        }
+        
+        /* Content Nodes */
+        .content-node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .content-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .node-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+        
+        .node-label {
+            font-size: 0.85rem;
+            color: var(--ink-dark);
+            font-weight: 500;
+            white-space: nowrap;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        
+        /* Position nodes along the continuum */
+        .node-vale { left: 15%; top: 30%; }
+        .node-vale .node-dot { background: var(--gold); }
+        
+        .node-quiz { left: 25%; top: 70%; }
+        .node-quiz .node-dot { background: var(--amber); }
+        
+        .node-frameworks { left: 40%; top: 25%; }
+        .node-frameworks .node-dot { background: linear-gradient(135deg, var(--gold) 0%, var(--terracotta) 100%); }
+        
+        .node-assessment { left: 50%; top: 50%; }
+        .node-assessment .node-dot { width: 30px; height: 30px; background: var(--gold); border-width: 4px; }
+        .node-assessment .node-label { font-weight: 600; font-size: 0.95rem; }
+        
+        .node-groove { left: 70%; top: 35%; }
+        .node-groove .node-dot { background: #ff6b00; }
+        
+        .node-wisdom { left: 85%; top: 60%; }
+        .node-wisdom .node-dot { background: var(--terracotta); }
+        
+        .node-focus { left: 75%; top: 75%; }
+        .node-focus .node-dot { background: #e8a838; }
+        
+        /* Connection Lines */
+        .connection-line {
+            position: absolute;
+            height: 1px;
+            background: var(--border);
+            opacity: 0.5;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        /* Alternative: Vertical Continuum */
+        .continuum-vertical {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .continuum-axis { display: none; }
+            .continuum-vertical {
+                display: block;
+                position: relative;
+                padding: 20px 0 20px 40px;
+            }
+            
+            .continuum-vertical::before {
+                content: '';
+                position: absolute;
+                left: 15px;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: linear-gradient(180deg, var(--brown-dark) 0%, var(--gold) 50%, var(--terracotta) 100%);
+                border-radius: 2px;
+            }
+            
+            .vertical-node {
+                position: relative;
+                margin: 30px 0;
+                padding: 15px 20px;
+                background: var(--bg-warm);
+                border-radius: 12px;
+                border-left: 4px solid var(--gold);
+            }
+            
+            .vertical-node::before {
+                content: '';
+                position: absolute;
+                left: -34px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: var(--gold);
+                border: 3px solid white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
+            .vertical-node.system { border-left-color: var(--brown-dark); }
+            .vertical-node.system::before { background: var(--brown-dark); }
+            
+            .vertical-node.both { border-left-color: var(--gold); }
+            .vertical-node.both::before { background: var(--gold); width: 20px; height: 20px; }
+            
+            .vertical-node.self { border-left-color: var(--terracotta); }
+            .vertical-node.self::before { background: var(--terracotta); }
+            
+            .vertical-node.groove { border-left-color: #ff6b00; }
+            .vertical-node.groove::before { background: #ff6b00; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>System // Self Continuum</h1>
+        <p class="subtitle">Content pathways arranged from System (efficiency) to Self (meaning)</p>
+        
+        <div class="continuum-wrapper">
+            <div class="continuum-axis">
+                <div class="continuum-line"></div>
+                
+                <div class="axis-label system">
+                    System
+                    <span>Doing things better</span>
+                </div>
+                
+                <div class="axis-label self">
+                    Self
+                    <span>Doing better things</span>
+                </div>
+                
+                <!-- Content Nodes -->
+                <a href="https://vale.kaihamil.com" class="content-node node-vale">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Valé OS</div>
+                </a>
+                
+                <a href="tools/ai-user-quiz-v3.html" class="content-node node-quiz">
+                    <div class="node-dot"></div>
+                    <div class="node-label">AI User Quiz</div>
+                </a>
+                
+                <a href="frameworks/" class="content-node node-frameworks">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Frameworks</div>
+                </a>
+                
+                <a href="research/system-self-assessment-draft.html" class="content-node node-assessment">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Assessment</div>
+                </a>
+                
+                <a href="https://www.groovepal.com" class="content-node node-groove">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Groove Pal</div>
+                </a>
+                
+                <a href="wisdom/" class="content-node node-wisdom">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Wisdom</div>
+                </a>
+                
+                <a href="tools/time-and-focus.html" class="content-node node-focus">
+                    <div class="node-dot"></div>
+                    <div class="node-label">Find Your Focus</div>
+                </a>
+            </div>
+            
+            <!-- Mobile Vertical Version -->
+            <div class="continuum-vertical">
+                <div class="vertical-node system">
+                    <strong>Valé OS</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Your personal driver</p>
+                </div>
+                <div class="vertical-node system">
+                    <strong>AI User Quiz</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Discover your problem-solving style</p>
+                </div>
+                <div class="vertical-node system">
+                    <strong>Frameworks</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Decision tools and systems</p>
+                </div>
+                <div class="vertical-node both">
+                    <strong>System // Self Assessment</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">The bridge between worlds</p>
+                </div>
+                <div class="vertical-node groove">
+                    <strong>Groove Pal</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Send a groove, make a pal</p>
+                </div>
+                <div class="vertical-node self">
+                    <strong>Wisdom</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Philosophy and presence</p>
+                </div>
+                <div class="vertical-node self">
+                    <strong>Find Your Focus</strong>
+                    <p style="font-size: 0.85rem; color: var(--brown-medium); margin-top: 5px;">Where does your time go?</p>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--brown-dark);"></div>
+                    <span>System (Tools)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--gold);"></div>
+                    <span>Bridge (Assessment)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--terracotta);"></div>
+                    <span>Self (Presence)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

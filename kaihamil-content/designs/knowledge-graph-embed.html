@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph Explorer | Kai Hamil Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 40px;
+        }
+        
+        /* Graph Container */
+        .graph-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        #graph-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Controls */
+        .graph-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover, .control-btn.active {
+            background: var(--gold);
+            color: var(--brown-dark);
+            border-color: var(--gold);
+        }
+        
+        /* Legend */
+        .graph-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        
+        /* Alternative: Compact Card View */
+        .compact-view {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            #graph-container { display: none; }
+            .graph-controls { display: none; }
+            
+            .compact-view {
+                display: block;
+            }
+            
+            .knowledge-hub {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .hub-card {
+                background: var(--bg-warm);
+                border-radius: 16px;
+                padding: 20px;
+                text-align: center;
+                text-decoration: none;
+                color: inherit;
+                transition: all 0.3s ease;
+            }
+            
+            .hub-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            }
+            
+            .hub-card.central {
+                grid-column: 1 / -1;
+                background: linear-gradient(135deg, var(--gold-light) 0%, var(--bg-card) 100%);
+                border: 2px solid var(--gold);
+            }
+            
+            .hub-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            
+            .hub-title {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: var(--ink-dark);
+                margin-bottom: 5px;
+            }
+            
+            .hub-desc {
+                font-size: 0.8rem;
+                color: var(--brown-medium);
+            }
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--ink-dark);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+            max-width: 250px;
+        }
+        
+        .tooltip.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Knowledge Graph Explorer</h1>
+        <p class="subtitle">Navigate the entire Kai Hamil knowledge base. Click nodes to explore.</p>
+        
+        <div class="graph-wrapper">
+            <div class="graph-controls">
+                <button class="control-btn active" data-filter="all">All</button>
+                <button class="control-btn" data-filter="system">System</button>
+                <button class="control-btn" data-filter="self">Self</button>
+                <button class="control-btn" data-filter="framework">Frameworks</button>
+                <button class="control-btn" data-filter="tool">Tools</button>
+            </div>
+            
+            <div id="graph-container"></div>
+            <div class="tooltip" id="tooltip"></div>
+            
+            <!-- Mobile Compact View -->
+            <div class="compact-view">
+                <div class="knowledge-hub">
+                    <a href="/" class="hub-card central">
+                        <div class="hub-icon">🏠</div>
+                        <div class="hub-title">Home</div>
+                        <div class="hub-desc">Start here: System // Self</div>
+                    </a>
+                    <a href="/frameworks/" class="hub-card">
+                        <div class="hub-icon">📐</div>
+                        <div class="hub-title">Frameworks</div>
+                        <div class="hub-desc">Mental models</div>
+                    </a>
+                    <a href="/tools/" class="hub-card">
+                        <div class="hub-icon">🛠️</div>
+                        <div class="hub-title">Tools</div>
+                        <div class="hub-desc">Interactive tools</div>
+                    </a>
+                    <a href="/research/" class="hub-card">
+                        <div class="hub-icon">🔬</div>
+                        <div class="hub-title">Research</div>
+                        <div class="hub-desc">Explorations</div>
+                    </a>
+                    <a href="/wisdom/" class="hub-card">
+                        <div class="hub-icon">🕯️</div>
+                        <div class="hub-title">Wisdom</div>
+                        <div class="hub-desc">Ancient meets modern</div>
+                    </a>
+                    <a href="/posts/" class="hub-card">
+                        <div class="hub-icon">✍️</div>
+                        <div class="hub-title">Posts</div>
+                        <div class="hub-desc">Essays & insights</div>
+                    </a>
+                    <a href="/about.html" class="hub-card">
+                        <div class="hub-icon">👤</div>
+                        <div class="hub-title">About</div>
+                        <div class="hub-desc">Who's behind this</div>
+                    </a>
+                    <a href="/openclaw/" class="hub-card">
+                        <div class="hub-icon">⚙️</div>
+                        <div class="hub-title">Operations</div>
+                        <div class="hub-desc">How it's built</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="graph-legend">
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--brown-dark);"></div>
+                    <span>Root</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--gold);"></div>
+                    <span>Paradigm</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--amber);"></div>
+                    <span>System Branch</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: var(--terracotta);"></div>
+                    <span>Self Branch</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #5a9a5a;"></div>
+                    <span>Framework</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot" style="background: #7a9ab8;"></div>
+                    <span>Tool</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simplified graph data (subset for demonstration)
+        const graphData = {
+            nodes: [
+                { id: "root", label: "Kai Hamil", type: "root", x: 0, y: 0 },
+                { id: "paradigm", label: "System // Self", type: "paradigm", x: 0, y: -80 },
+                { id: "system", label: "System", type: "branch", x: -150, y: 50 },
+                { id: "self", label: "Self", type: "branch", x: 150, y: 50 },
+                { id: "frameworks", label: "Frameworks", type: "framework", x: -120, y: 150 },
+                { id: "tools", label: "Tools", type: "tool", x: -180, y: 150 },
+                { id: "research", label: "Research", type: "branch", x: -150, y: 220 },
+                { id: "wisdom", label: "Wisdom", type: "branch", x: 120, y: 150 },
+                { id: "posts", label: "Posts", type: "content", x: 180, y: 150 },
+                { id: "about", label: "About", type: "meta", x: 0, y: 150 },
+                { id: "operations", label: "Operations", type: "meta", x: 0, y: 220 },
+                // Frameworks
+                { id: "sys-self-fw", label: "System//Self Framework", type: "framework", x: -200, y: 250 },
+                { id: "5-filters", label: "5 Filters", type: "framework", x: -250, y: 200 },
+                { id: "cause-effect", label: "Cause & Effect", type: "framework", x: -80, y: 250 },
+                { id: "attention", label: "Attention Spectrum", type: "framework", x: -250, y: 300 },
+                // Tools
+                { id: "ai-quiz", label: "AI User Quiz", type: "tool", x: -300, y: 150 },
+                { id: "focus", label: "Find Your Focus", type: "tool", x: 80, y: 250 },
+                // Products
+                { id: "vale", label: "Valé OS", type: "product", x: -200, y: 20 },
+                { id: "groove", label: "Groove Pal", type: "product", x: 200, y: 20 }
+            ],
+            links: [
+                { source: "root", target: "paradigm" },
+                { source: "root", target: "system" },
+                { source: "root", target: "self" },
+                { source: "root", target: "about" },
+                { source: "system", target: "frameworks" },
+                { source: "system", target: "tools" },
+                { source: "system", target: "research" },
+                { source: "system", target: "vale" },
+                { source: "self", target: "wisdom" },
+                { source: "self", target: "posts" },
+                { source: "self", target: "groove" },
+                { source: "frameworks", target: "sys-self-fw" },
+                { source: "frameworks", target: "5-filters" },
+                { source: "frameworks", target: "cause-effect" },
+                { source: "frameworks", target: "attention" },
+                { source: "tools", target: "ai-quiz" },
+                { source: "tools", target: "focus" },
+                { source: "about", target: "operations" }
+            ]
+        };
+
+        // Color mapping
+        const colorMap = {
+            root: '#3d2817',
+            paradigm: '#c9a227',
+            branch: '#d4a574',
+            framework: '#5a9a5a',
+            tool: '#7a9ab8',
+            product: '#ff6b00',
+            content: '#b87a5e',
+            meta: '#8b7355'
+        };
+
+        // Initialize D3 graph
+        const container = document.getElementById('graph-container');
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        const svg = d3.select('#graph-container')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        // Create simulation
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force('link', d3.forceLink(graphData.links).id(d => d.id).distance(80))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(40));
+
+        // Draw links
+        const link = svg.append('g')
+            .selectAll('line')
+            .data(graphData.links)
+            .enter()
+            .append('line')
+            .attr('stroke', '#e8dfd3')
+            .attr('stroke-width', 1.5);
+
+        // Draw nodes
+        const node = svg.append('g')
+            .selectAll('g')
+            .data(graphData.nodes)
+            .enter()
+            .append('g')
+            .attr('class', 'node')
+            .style('cursor', 'pointer')
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
+
+        // Node circles
+        node.append('circle')
+            .attr('r', d => d.type === 'root' ? 25 : d.type === 'paradigm' ? 20 : 15)
+            .attr('fill', d => colorMap[d.type] || '#6b5344')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 3)
+            .style('filter', 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))');
+
+        // Node labels
+        node.append('text')
+            .text(d => d.label)
+            .attr('x', 0)
+            .attr('y', d => d.type === 'root' ? 35 : d.type === 'paradigm' ? 30 : 25)
+            .attr('text-anchor', 'middle')
+            .style('font-size', d => d.type === 'root' ? '12px' : '10px')
+            .style('font-weight', d => d.type === 'root' || d.type === 'paradigm' ? '600' : '400')
+            .style('fill', '#3d2817')
+            .style('pointer-events', 'none');
+
+        // Tooltip
+        const tooltip = document.getElementById('tooltip');
+
+        node.on('mouseenter', function(event, d) {
+            tooltip.innerHTML = `<strong>${d.label}</strong><br>${d.type}`;
+            tooltip.classList.add('visible');
+            tooltip.style.left = (event.pageX + 10) + 'px';
+            tooltip.style.top = (event.pageY - 30) + 'px';
+        })
+        .on('mouseleave', function() {
+            tooltip.classList.remove('visible');
+        })
+        .on('click', function(event, d) {
+            // Navigate to node URL if available
+            const urls = {
+                root: '/',
+                paradigm: '/frameworks/system-self.html',
+                system: '/',
+                self: '/',
+                frameworks: '/frameworks/',
+                tools: '/tools/',
+                research: '/research/',
+                wisdom: '/wisdom/',
+                posts: '/posts/',
+                about: '/about.html',
+                operations: '/openclaw/',
+                vale: 'https://vale.kaihamil.com',
+                groove: 'https://www.groovepal.com'
+            };
+            if (urls[d.id]) {
+                window.open(urls[d.id], '_blank');
+            }
+        });
+
+        // Update positions
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+
+            node
+                .attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+
+        // Drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // Filter controls
+        document.querySelectorAll('.control-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.control-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                
+                node.style('opacity', d => {
+                    if (filter === 'all') return 1;
+                    if (filter === 'system' && (d.type === 'branch' && d.id === 'system' || d.x < 0)) return 1;
+                    if (filter === 'self' && (d.type === 'branch' && d.id === 'self' || d.x > 0)) return 1;
+                    if (filter === 'framework' && d.type === 'framework') return 1;
+                    if (filter === 'tool' && d.type === 'tool') return 1;
+                    return 0.2;
+                });
+                
+                link.style('opacity', d => {
+                    if (filter === 'all') return 1;
+                    return 0.1;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

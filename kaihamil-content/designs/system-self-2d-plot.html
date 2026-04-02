@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System // Self 2D Plot | Kai Hamil Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+        }
+        
+        .axis-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        /* 2D Plot Container */
+        .plot-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 60px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .plot-area {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: 
+                linear-gradient(90deg, transparent 49.5%, var(--border) 49.5%, var(--border) 50.5%, transparent 50.5%),
+                linear-gradient(0deg, transparent 49.5%, var(--border) 49.5%, var(--border) 50.5%, transparent 50.5%);
+            background-color: rgba(201, 162, 39, 0.03);
+            border-radius: 12px;
+        }
+        
+        /* Axis Labels */
+        .axis-x {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .axis-x .left { color: var(--brown-dark); }
+        .axis-x .right { color: var(--terracotta); }
+        
+        .axis-x span {
+            display: block;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: var(--brown-medium);
+            margin-top: 3px;
+        }
+        
+        .axis-y {
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            display: flex;
+            gap: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .axis-y .top { color: var(--amber); }
+        .axis-y .bottom { color: var(--brown-medium); }
+        
+        .axis-y span {
+            display: block;
+            font-size: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: var(--brown-medium);
+            margin-top: 3px;
+        }
+        
+        /* Quadrant Labels */
+        .quadrant-label {
+            position: absolute;
+            font-size: 0.75rem;
+            color: var(--brown-medium);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .q1 { top: 15%; right: 15%; }
+        .q2 { top: 15%; left: 15%; }
+        .q3 { bottom: 15%; left: 15%; }
+        .q4 { bottom: 15%; right: 15%; }
+        
+        /* Content Nodes */
+        .content-node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .content-node:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            z-index: 10;
+        }
+        
+        .node-orb {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1.5rem;
+        }
+        
+        .node-label {
+            font-size: 0.8rem;
+            color: var(--ink-dark);
+            font-weight: 500;
+            white-space: nowrap;
+            background: rgba(255,255,255,0.95);
+            padding: 4px 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        /* Position nodes on the 2D plot */
+        /* X: System(0) to Self(100), Y: Passive(0) to Active(100) */
+        
+        .node-vale { left: 20%; bottom: 25%; }
+        .node-vale .node-orb { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); }
+        
+        .node-quiz { left: 25%; bottom: 45%; }
+        .node-quiz .node-orb { background: linear-gradient(135deg, var(--amber) 0%, #f5d5c5 100%); }
+        
+        .node-frameworks { left: 35%; bottom: 35%; }
+        .node-frameworks .node-orb { background: linear-gradient(135deg, var(--gold) 0%, var(--terracotta) 100%); }
+        
+        .node-assessment { left: 50%; bottom: 50%; }
+        .node-assessment .node-orb { 
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 50%, var(--terracotta) 100%);
+            border-width: 5px;
+            font-size: 2rem;
+        }
+        .node-assessment .node-label { font-weight: 600; font-size: 0.9rem; }
+        
+        .node-groove { left: 75%; bottom: 60%; }
+        .node-groove .node-orb { background: linear-gradient(135deg, #ff6b00 0%, #ffb366 100%); }
+        
+        .node-wisdom { left: 80%; bottom: 30%; }
+        .node-wisdom .node-orb { background: linear-gradient(135deg, var(--terracotta) 0%, var(--amber) 100%); }
+        
+        .node-focus { left: 70%; bottom: 40%; }
+        .node-focus .node-orb { background: linear-gradient(135deg, #e8a838 0%, var(--gold) 100%); }
+        
+        /* Alternative: Card Grid View */
+        .card-grid-view {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .plot-area { display: none; }
+            .axis-x, .axis-y { display: none; }
+            
+            .card-grid-view {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .dimension-card {
+                background: var(--bg-warm);
+                border-radius: 16px;
+                padding: 20px;
+                border-left: 4px solid var(--gold);
+            }
+            
+            .dimension-card h3 {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+                color: var(--ink-dark);
+            }
+            
+            .dimension-items {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .dimension-item {
+                background: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.9rem;
+                border: 1px solid var(--border);
+            }
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        .legend-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
+        }
+        
+        .legend-items {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        .legend-orb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>System // Self 2D Map</h1>
+        <p class="subtitle">Two dimensions: System ↔ Self (horizontal) × Passive ↔ Active (vertical)</p>
+        
+        <div class="plot-wrapper">
+            <div class="plot-area">
+                <!-- Quadrant Labels -->
+                <span class="quadrant-label q1">Active Self</span>
+                <span class="quadrant-label q2">Active System</span>
+                <span class="quadrant-label q3">Passive System</span>
+                <span class="quadrant-label q4">Passive Self</span>
+                
+                <!-- X Axis -->
+                <div class="axis-x">
+                    <div class="left">
+                        System
+                        <span>Efficiency</span>
+                    </div>
+                    <div class="right">
+                        Self
+                        <span>Meaning</span>
+                    </div>
+                </div>
+                
+                <!-- Y Axis -->
+                <div class="axis-y">
+                    <div class="top">
+                        Active
+                        <span>Creation</span>
+                    </div>
+                    <div class="bottom">
+                        Passive
+                        <span>Consumption</span>
+                    </div>
+                </div>
+                
+                <!-- Content Nodes -->
+                <a href="https://vale.kaihamil.com" class="content-node node-vale">
+                    <div class="node-orb">🚗</div>
+                    <div class="node-label">Valé OS</div>
+                </a>
+                
+                <a href="tools/ai-user-quiz-v3.html" class="content-node node-quiz">
+                    <div class="node-orb">🎯</div>
+                    <div class="node-label">AI User Quiz</div>
+                </a>
+                
+                <a href="frameworks/" class="content-node node-frameworks">
+                    <div class="node-orb">📐</div>
+                    <div class="node-label">Frameworks</div>
+                </a>
+                
+                <a href="research/system-self-assessment-draft.html" class="content-node node-assessment">
+                    <div class="node-orb">⚖️</div>
+                    <div class="node-label">Assessment</div>
+                </a>
+                
+                <a href="https://www.groovepal.com" class="content-node node-groove">
+                    <div class="node-orb">💿</div>
+                    <div class="node-label">Groove Pal</div>
+                </a>
+                
+                <a href="wisdom/" class="content-node node-wisdom">
+                    <div class="node-orb">🕯️</div>
+                    <div class="node-label">Wisdom</div>
+                </a>
+                
+                <a href="tools/time-and-focus.html" class="content-node node-focus">
+                    <div class="node-orb">🎯</div>
+                    <div class="node-label">Find Your Focus</div>
+                </a>
+            </div>
+            
+            <!-- Mobile Card Grid -->
+            <div class="card-grid-view">
+                <div class="dimension-card">
+                    <h3>🎯 Active System (Creation + Efficiency)</h3>
+                    <div class="dimension-items">
+                        <span class="dimension-item">AI User Quiz</span>
+                        <span class="dimension-item">Frameworks</span>
+                    </div>
+                </div>
+                <div class="dimension-card">
+                    <h3>💿 Active Self (Creation + Meaning)</h3>
+                    <div class="dimension-items">
+                        <span class="dimension-item">Groove Pal</span>
+                        <span class="dimension-item">Find Your Focus</span>
+                    </div>
+                </div>
+                <div class="dimension-card">
+                    <h3>🚗 Passive System (Consumption + Efficiency)</h3>
+                    <div class="dimension-items">
+                        <span class="dimension-item">Valé OS</span>
+                    </div>
+                </div>
+                <div class="dimension-card">
+                    <h3>🕯️ Passive Self (Consumption + Meaning)</h3>
+                    <div class="dimension-items">
+                        <span class="dimension-item">Wisdom</span>
+                    </div>
+                </div>
+                <div class="dimension-card" style="border-left-color: var(--gold);">
+                    <h3>⚖️ The Bridge (Center)</h3>
+                    <div class="dimension-items">
+                        <span class="dimension-item">System // Self Assessment</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-section">
+                    <h4>System Side</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: var(--gold);"></div>
+                            <span>Valé OS</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: var(--amber);"></div>
+                            <span>AI User Quiz</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: linear-gradient(135deg, var(--gold), var(--terracotta));"></div>
+                            <span>Frameworks</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="legend-section">
+                    <h4>Self Side</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: #ff6b00;"></div>
+                            <span>Groove Pal</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: var(--terracotta);"></div>
+                            <span>Wisdom</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-orb" style="background: #e8a838;"></div>
+                            <span>Find Your Focus</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
