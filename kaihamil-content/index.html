@@ -403,6 +403,45 @@
             text-decoration: underline;
         }
         
+        /* Knowledge Graph Section */
+        .graph-section {
+            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cream) 100%);
+            padding: 80px 40px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .graph-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .graph-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 15px;
+        }
+        
+        .graph-header h2 strong {
+            color: var(--gold);
+        }
+        
+        .graph-header p {
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .graph-embed-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
         .access-icon {
             font-size: 1.5rem;
             margin-bottom: 10px;
@@ -599,6 +638,17 @@
                     <div class="access-desc">Philosophy and presence</div>
                 </a>
             </div>
+        </div>
+    </section>
+    
+    <!-- Knowledge Graph Explorer -->
+    <section class="graph-section">
+        <div class="graph-header">
+            <h2>Explore the <strong>Knowledge Graph</strong></h2>
+            <p>Navigate the entire Kai Hamil site — go where it feels right.</p>
+        </div>
+        <div class="graph-embed-container">
+            <iframe src="designs/knowledge-graph-embed.html" width="100%" height="600" frameborder="0" style="border-radius: 16px; border: 1px solid var(--border);"></iframe>
         </div>
     </section>
     
