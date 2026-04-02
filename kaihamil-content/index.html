@@ -298,88 +298,60 @@
             cursor: default;
         }
         
-        /* Valé Hero Link - Standalone */
-        .vale-hero-link {
-            display: block;
-            text-decoration: none;
-            text-align: center;
-            padding: 30px 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .vale-hero-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--brown-dark);
-            margin-bottom: 8px;
-        }
-        
-        .vale-hero-title strong {
-            font-weight: 600;
-            color: var(--gold);
-        }
-        
-        .vale-hero-desc {
-            font-size: 0.95rem;
-            color: var(--brown-medium);
-            margin-bottom: 12px;
-        }
-        
-        .vale-hero-cta {
-            font-size: 0.9rem;
-            color: var(--gold);
-            font-weight: 500;
-        }
-        
-        .vale-hero-link:hover .vale-hero-cta {
-            text-decoration: underline;
-        }
-        
-        /* Groove Pal Hero Link - Matches Valé style */
-        .groove-hero-link {
-            display: flex;
-            flex-direction: column;
+        /* Product Hero Links - Aligned Layout */
+        .product-hero-link {
+            display: grid;
+            grid-template-rows: 140px auto auto;
             align-items: center;
-            justify-content: flex-start;
+            justify-items: center;
             text-decoration: none;
             text-align: center;
             padding: 30px 20px;
             margin-bottom: 20px;
             transition: all 0.3s ease;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
             min-height: 280px;
         }
         
-        .groove-hero-link img {
-            max-width: 240px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 12px;
+        .product-hero-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
         
-        .groove-hero-desc {
+        .product-hero-link img {
+            max-width: 200px;
+            max-height: 120px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .product-hero-desc {
             font-size: 0.95rem;
             color: var(--brown-medium);
-            margin-bottom: 8px;
+            margin: 16px 0 12px;
             text-align: center;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            align-self: start;
         }
         
-        .groove-hero-cta {
-            display: block;
+        .product-hero-cta {
             font-size: 0.9rem;
-            color: #ff6b00;
             font-weight: 500;
             text-align: center;
-            margin-top: auto;
-            padding-top: 12px;
+            align-self: end;
         }
         
-        .groove-hero-link:hover .groove-hero-cta {
+        .system-side .product-hero-cta {
+            color: var(--gold);
+        }
+        
+        .self-side .product-hero-cta {
+            color: #ff6b00;
+        }
+        
+        .product-hero-link:hover .product-hero-cta {
             text-decoration: underline;
         }
         
@@ -523,10 +495,10 @@
             </div>
             
             <div class="access-grid">
-                <a href="https://vale.kaihamil.com" class="groove-hero-link">
-                    <img src="vale/assets/vale-logo-dark.jpg" alt="Valé OS" style="border-radius: 12px;">
-                    <div class="groove-hero-desc">Your personal driver on the road of life.</div>
-                    <span class="groove-hero-cta" style="color: var(--gold);">Learn more →</span>
+                <a href="https://vale.kaihamil.com" class="product-hero-link">
+                    <img src="vale/assets/vale-logo-dark.jpg" alt="Valé OS">
+                    <div class="product-hero-desc">Your personal driver on the road of life.</div>
+                    <span class="product-hero-cta">Learn more →</span>
                 </a>
                 
                 <a href="tools/ai-user-quiz-v3.html" class="access-card ai-quiz">
@@ -552,10 +524,10 @@
             </div>
             
             <div class="access-grid">
-                <a href="https://www.groovepal.com" class="groove-hero-link">
+                <a href="https://www.groovepal.com" class="product-hero-link">
                     <img src="products/groove-pal/assets/hero-logo.png" alt="Groove Pal">
-                    <div class="groove-hero-desc">Send a groove. Make a pal.</div>
-                    <span class="groove-hero-cta">Check it →</span>
+                    <div class="product-hero-desc">Send a groove. Make a pal.</div>
+                    <span class="product-hero-cta">Check it →</span>
                 </a>
                 
                 <a href="tools/time-and-focus.html" class="access-card focus">
