@@ -397,18 +397,27 @@
             <h1>Time & Focus Assessment</h1>
             <p class="subtitle">Identify where your attention goes — and where it should go instead</p>
             
-            <!-- Q1: Days of Distraction -->
+            <!-- Q1: The Split -->
             <div class="question-container" id="q1">
                 <div class="question-number">Section 1 of 5</div>
-                <div class="question-text">Which days do you most often feel distracted by "have to do" tasks when you'd rather focus on what you want?</div>
-                <div class="day-grid">
-                    <div class="day-card" onclick="toggleDay(this, 'mon')">Mon</div>
-                    <div class="day-card" onclick="toggleDay(this, 'tue')">Tue</div>
-                    <div class="day-card" onclick="toggleDay(this, 'wed')">Wed</div>
-                    <div class="day-card" onclick="toggleDay(this, 'thu')">Thu</div>
-                    <div class="day-card" onclick="toggleDay(this, 'fri')">Fri</div>
-                    <div class="day-card" onclick="toggleDay(this, 'sat')">Sat</div>
-                    <div class="day-card" onclick="toggleDay(this, 'sun')">Sun</div>
+                <div class="question-text">How often do you reach the end of a day feeling like you were busy but didn't do what actually mattered to you?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'split', 4)">
+                        <input type="radio" name="split">
+                        <span class="option-label">Most days — it's my default state</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'split', 3)">
+                        <input type="radio" name="split">
+                        <span class="option-label">Often — a few times per week</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'split', 2)">
+                        <input type="radio" name="split">
+                        <span class="option-label">Sometimes — maybe once a week</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'split', 1)">
+                        <input type="radio" name="split">
+                        <span class="option-label">Rarely — I'm generally aligned with my priorities</span>
+                    </div>
                 </div>
                 <div class="nav-buttons">
                     <button class="btn btn-secondary" disabled>Back</button>
@@ -570,7 +579,7 @@
     
     <script>
         let answers = {
-            days: [],
+            split: 0,
             times: [],
             presence: 0,
             context: 0,
