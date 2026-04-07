@@ -869,10 +869,71 @@
             return { calculatedType, validatorType };
         }
         
+        // Submit to PocketBase
+        async function submitToPocketBase(calculatedType, validatorType, aligned) {
+            const POCKETBASE_URL = 'http://192.241.180.69:8090';
+            
+            // Calculate scores (approximate based on type)
+            const scores = { explorer: 0, analyst: 0, designer: 0, builder: 0 };
+            scores[calculatedType] = 85;
+            scores[validatorType] = aligned ? 85 : 70;
+            
+            // Get other types
+            const otherTypes = Object.keys(scores).filter(t => t !== calculatedType && t !== validatorType);
+            otherTypes.forEach(t => scores[t] = 45);
+            
+            const data = {
+                quiz_key: 'ai_user_quiz_v3',
+                results: {
+                    scores: scores,
+                    primary_type: calculatedType.charAt(0).toUpperCase() + calculatedType.slice(1),
+                    secondary_type: validatorType.charAt(0).toUpperCase() + validatorType.slice(1),
+                    confidence: aligned ? 'high' : 'medium'
+                },
+                answers: {
+                    q1: answers[1],
+                    q2: answers[2],
+                    q3: answers[3],
+                    q4: answers[4],
+                    q5: answers[5]
+                },
+                metadata: {
+                    source: new URLSearchParams(window.location.search).get('utm_source') || 'organic',
+                    referrer: document.referrer || '',
+                    completed_at: new Date().toISOString(),
+                    user_agent: navigator.userAgent
+                }
+            };
+            
+            try {
+                const response = await fetch(`${POCKETBASE_URL}/api/collections/quiz_responses/records`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Quiz submitted:', result.id);
+                    localStorage.setItem('quizResponseId', result.id);
+                    return result.id;
+                } else {
+                    console.error('Failed to submit:', await response.text());
+                    return null;
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                return null;
+            }
+        }
+        
         function showResults() {
             const { calculatedType, validatorType } = calculateType();
             const type = typeData[calculatedType];
             const aligned = calculatedType === validatorType;
+            
+            // Submit to PocketBase (async, don't block results)
+            submitToPocketBase(calculatedType, validatorType, aligned);
             
             // Store results
             localStorage.setItem('aiUserType', calculatedType);
