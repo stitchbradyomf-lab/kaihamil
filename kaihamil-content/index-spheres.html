@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil | System // Self</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --system: #4a7c8c;
+            --self: #b87a5e;
+            --center: #7a6b5a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(250, 246, 241, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 200;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--brown-dark);
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 150;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active { right: 0; }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 15px 0;
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 140;
+        }
+        
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+        
+        /* Hero with Spheres */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 40px;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .hero-title strong { color: var(--gold); }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+            margin-bottom: 50px;
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        /* Spheres Container */
+        .spheres-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .sphere {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .sphere:hover {
+            transform: scale(1.05);
+        }
+        
+        .sphere.system {
+            left: 15%;
+            background: radial-gradient(circle at 30% 30%, rgba(74, 124, 140, 0.4), rgba(74, 124, 140, 0.8));
+            box-shadow: 0 20px 60px rgba(74, 124, 140, 0.3);
+        }
+        
+        .sphere.self {
+            right: 15%;
+            background: radial-gradient(circle at 30% 30%, rgba(184, 122, 94, 0.4), rgba(184, 122, 94, 0.8));
+            box-shadow: 0 20px 60px rgba(184, 122, 94, 0.3);
+        }
+        
+        .sphere-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .sphere-tagline {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+        }
+        
+        .sphere-cta {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: white;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        /* Overlap Center */
+        .overlap-center {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(122, 107, 90, 0.6), rgba(122, 107, 90, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 50px rgba(122, 107, 90, 0.4);
+            z-index: 10;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        
+        .overlap-center:hover {
+            transform: scale(1.1);
+        }
+        
+        .overlap-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .overlap-subtitle {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+        }
+        
+        /* Expanded Sphere View */
+        .sphere-expanded {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-cream);
+            z-index: 300;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            overflow-y: auto;
+        }
+        
+        .sphere-expanded.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .expanded-header {
+            padding: 100px 40px 40px;
+            text-align: center;
+        }
+        
+        .expanded-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .expanded-system .expanded-title { color: var(--system); }
+        .expanded-self .expanded-title { color: var(--self); }
+        
+        .close-expanded {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 301;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .expanded-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+        
+        .section-group {
+            margin-bottom: 50px;
+        }
+        
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--brown-medium);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .item-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .item-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--brown-dark);
+        }
+        
+        .item-card p {
+            color: var(--brown-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* Posts Preview in Center */
+        .posts-preview {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 40px;
+        }
+        
+        .posts-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .post-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+        
+        .post-item a {
+            color: var(--brown-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .post-item a:hover { color: var(--gold); }
+        
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-top: 5px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            
+            .spheres-container {
+                height: auto;
+                min-height: 600px;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .sphere {
+                position: relative;
+                left: auto !important;
+                right: auto !important;
+                width: 240px;
+                height: 240px;
+            }
+            
+            .overlap-center {
+                position: relative;
+                width: 180px;
+                height: 180px;
+                margin: -30px 0;
+                z-index: 20;
+            }
+            
+            .sphere-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="logo">kai <strong>hamil</strong></a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <div class="menu-overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/">Home</a>
+        <a href="posts/">Posts</a>
+        <a href="frameworks/">Frameworks</a>
+        <a href="wisdom/">Wisdom</a>
+        <a href="graph/">Graph</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact">Contact</a>
+    </div>
+    
+    <!-- Hero Section with Spheres -->
+    <section class="hero">
+        <h1 class="hero-title">kai <strong>hamil</strong></h1>
+        <p class="hero-subtitle">Our lives are run by systems we didn't create. See them so they serve You.</p>
+        
+        <div class="spheres-container">
+            <!-- System Sphere -->
+            <div class="sphere system" onclick="expandSphere('system')">
+                <h2 class="sphere-title">System</h2>
+                <p class="sphere-tagline">Doing things better</p>
+                <span class="sphere-cta">Explore →</span>
+            </div>
+            
+            <!-- Overlap Center -->
+            <div class="overlap-center" onclick="window.location.href='research/system-self-assessment-draft.html'">
+                <h3 class="overlap-title">System // Self</h3>
+                <p class="overlap-subtitle">Assessment</p>
+            </div>
+            
+            <!-- Self Sphere -->
+            <div class="sphere self" onclick="expandSphere('self')">
+                <h2 class="sphere-title">Self</h2>
+                <p class="sphere-tagline">Doing better things</p>
+                <span class="sphere-cta">Explore →</span>
+            </div>
+        </div>
+        
+        <!-- Posts Preview -->
+        <div class="posts-preview">
+            <h2 class="posts-title">Recent Posts</h2>
+            <div class="post-item">
+                <a href="posts/proactive-agent-pattern.html">The Proactive Agent Pattern</a>
+                <div class="post-date">April 2026</div>
+            </div>
+            <div class="post-item">
+                <a href="posts/one-dimensional-decision-trap.html">The One-Dimensional Decision Trap</a>
+                <div class="post-date">March 2026</div>
+            </div>
+            <div class="post-item">
+                <a href="posts/looking-inward.html">Looking Inward</a>
+                <div class="post-date">March 2026</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Expanded System View -->
+    <div class="sphere-expanded expanded-system" id="expandedSystem">
+        <button class="close-expanded" onclick="closeExpanded()">×</button>
+        <div class="expanded-header">
+            <h2 class="expanded-title">System</h2>
+            <p>Doing things better — efficiency, automation, clarity</p>
+        </div>
+        <div class="expanded-content">
+            <div class="section-group">
+                <p class="section-label">Assess</p>
+                <a href="tools/ai-user-quiz-v3.html" class="item-card">
+                    <h3>What Kind of AI User Are You?</h3>
+                    <p>Discover your problem-solving style — Explorer, Analyst, Designer, or Builder</p>
+                </a>
+                <a href="tools/time-and-focus.html" class="item-card">
+                    <h3>Time & Focus Assessment</h3>
+                    <p>Identify where your attention goes and where it's wasted</p>
+                </a>
+            </div>
+            
+            <div class="section-group">
+                <p class="section-label">Explore</p>
+                <a href="frameworks/" class="item-card">
+                    <h3>Frameworks</h3>
+                    <p>Decision tools and systems for better thinking</p>
+                </a>
+                <a href="https://vale.kaihamil.com" class="item-card">
+                    <h3>Valé OS</h3>
+                    <p>You worry about where you want to go. Valé can worry about getting you there.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Expanded Self View -->
+    <div class="sphere-expanded expanded-self" id="expandedSelf">
+        <button class="close-expanded" onclick="closeExpanded()">×</button>
+        <div class="expanded-header">
+            <h2 class="expanded-title">Self</h2>
+            <p>Doing better things — presence, wisdom, meaning</p>
+        </div>
+        <div class="expanded-content">
+            <div class="section-group">
+                <p class="section-label">Assess</p>
+                <a href="research/system-self-assessment-draft.html" class="item-card">
+                    <h3>System // Self Assessment</h3>
+                    <p>Discover where your time and energy go — and where you want them to be</p>
+                </a>
+                <a href="tools/time-and-focus.html" class="item-card">
+                    <h3>Find Your Focus</h3>
+                    <p>Where does your time actually go?</p>
+                </a>
+            </div>
+            
+            <div class="section-group">
+                <p class="section-label">Explore</p>
+                <a href="wisdom/" class="item-card">
+                    <h3>Wisdom</h3>
+                    <p>Philosophy and presence for a meaningful life</p>
+                </a>
+                <a href="https://www.groovepal.com" class="item-card">
+                    <h3>Groove Pal</h3>
+                    <p>Send a groove. Make a pal. Analog connection in a digital world.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.menu-overlay').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+        
+        function expandSphere(type) {
+            const expanded = document.getElementById('expanded' + type.charAt(0).toUpperCase() + type.slice(1));
+            expanded.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeExpanded() {
+            document.querySelectorAll('.sphere-expanded').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.body.style.overflow = '';
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeExpanded();
+            }
+        });
+    </script>
+</body>
+</html>
