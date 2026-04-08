@@ -210,39 +210,39 @@
         /* Overlap Center */
         .overlap-center {
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(122, 107, 90, 0.6), rgba(122, 107, 90, 0.9));
+            background: radial-gradient(circle at 30% 30%, rgba(201, 162, 39, 0.9), rgba(201, 162, 39, 1));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 15px 50px rgba(122, 107, 90, 0.4);
-            z-index: 10;
-            border: 2px solid rgba(255,255,255,0.4);
+            box-shadow: 0 10px 40px rgba(201, 162, 39, 0.5);
+            z-index: 15;
+            border: 3px solid white;
         }
         
         .overlap-center:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            box-shadow: 0 15px 50px rgba(201, 162, 39, 0.6);
         }
         
-        .overlap-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+        .overlap-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+        
+        .overlap-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.95);
             font-weight: 500;
-            color: white;
-            margin-bottom: 5px;
-        }
-        
-        .overlap-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.9);
-            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         /* Expanded Sphere View */
@@ -439,24 +439,49 @@
         <p class="hero-subtitle">Our lives are run by systems we didn't create. See them so they serve You.</p>
         
         <div class="spheres-container">
-            <!-- System Sphere -->
-            <div class="sphere system" onclick="expandSphere('system')">
-                <h2 class="sphere-title">System</h2>
-                <p class="sphere-tagline">Doing things better</p>
-                <span class="sphere-cta">Explore →</span>
-            </div>
+            <!-- SVG Venn Diagram -->
+            <svg viewBox="0 0 400 300" style="width: 100%; max-width: 600px; height: auto;">
+                <defs>
+                    <radialGradient id="systemGrad" cx="30%" cy="30%">
+                        <stop offset="0%" style="stop-color:rgba(74, 124, 140, 0.3)"/>
+                        <stop offset="100%" style="stop-color:rgba(74, 124, 140, 0.7)"/>
+                    </radialGradient>
+                    <radialGradient id="selfGrad" cx="30%" cy="30%">
+                        <stop offset="0%" style="stop-color:rgba(184, 122, 94, 0.3)"/>
+                        <stop offset="100%" style="stop-color:rgba(184, 122, 94, 0.7)"/>
+                    </radialGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- System Sphere -->
+                <circle cx="140" cy="150" r="100" fill="url(#systemGrad)" 
+                        style="cursor: pointer;" onclick="expandSphere('system')"/>
+                <text x="140" y="140" text-anchor="middle" fill="white" font-size="24" 
+                      font-family="Cormorant Garamond, serif" font-weight="500" style="pointer-events: none;">System</text>
+                <text x="140" y="165" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="12" 
+                      style="pointer-events: none;">Doing things better</text>
+                
+                <!-- Self Sphere -->
+                <circle cx="260" cy="150" r="100" fill="url(#selfGrad)" 
+                        style="cursor: pointer;" onclick="expandSphere('self')"/>
+                <text x="260" y="140" text-anchor="middle" fill="white" font-size="24" 
+                      font-family="Cormorant Garamond, serif" font-weight="500" style="pointer-events: none;">Self</text>
+                <text x="260" y="165" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="12" 
+                      style="pointer-events: none;">Doing better things</text>
+            </svg>
             
-            <!-- Overlap Center -->
-            <div class="overlap-center" onclick="window.location.href='research/system-self-assessment-draft.html'">
-                <h3 class="overlap-title">System // Self</h3>
-                <p class="overlap-subtitle">Assessment</p>
-            </div>
-            
-            <!-- Self Sphere -->
-            <div class="sphere self" onclick="expandSphere('self')">
-                <h2 class="sphere-title">Self</h2>
-                <p class="sphere-tagline">Doing better things</p>
-                <span class="sphere-cta">Explore →</span>
+            <!-- Overlap Center - North Star -->
+            <div class="overlap-center" onclick="window.location.href='frameworks/system-self-assessment.html'">
+                <svg class="overlap-icon" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z"/>
+                </svg>
+                <span class="overlap-label">Assess</span>
             </div>
         </div>
         
