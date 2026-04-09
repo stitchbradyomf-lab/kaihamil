@@ -4,120 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Couples Valé | Demo Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --lavender: #d4a5a5;
-            --lavender-light: #f5e8e3;
-            --charcoal: #2d3436;
-            --charcoal-navy: #3d4a5c;
+            --bg: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-hover: #f5e8e3;
+            --border: #e8d5c5;
+            --text: #3d2817;
+            --text-muted: #6b5344;
             --gold: #c9a227;
-            --cream: #faf6f1;
-            --white: #ffffff;
+            --gold-dim: #b89628;
+            --lavender: #d4a5a5;
+            --success: #5a9a5e;
+            --warning: #d4a574;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--cream);
-            color: var(--charcoal);
-            line-height: 1.7;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            min-height: 100vh;
         }
         
         /* Demo Banner */
         .demo-banner {
-            background: var(--charcoal-navy);
-            color: var(--white);
-            padding: 12px 40px;
-            text-align: center;
+            background: #3d4a5c;
+            color: #fff;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.9rem;
         }
         
         .demo-banner a {
             color: var(--gold);
             text-decoration: none;
-            margin-left: 10px;
         }
         
-        /* Navigation */
-        .nav {
-            background: var(--white);
-            padding: 20px 40px;
+        /* Header */
+        .header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--lavender-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 500;
-            color: var(--charcoal-navy);
+            font-size: 1.5rem;
         }
         
-        .logo span {
-            color: var(--lavender);
-        }
+        .logo span { color: var(--lavender); }
         
-        .nav-user {
-            font-size: 0.9rem;
-            color: var(--charcoal-navy);
-        }
-        
-        /* Welcome Banner */
-        .welcome-banner {
-            background: linear-gradient(135deg, var(--lavender-light) 0%, #e8d5c5 100%);
-            border-left: 4px solid var(--gold);
-            padding: 30px;
-            margin: 30px 40px;
-            border-radius: 0 16px 16px 0;
-        }
-        
-        .welcome-header {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: var(--charcoal-navy);
-            margin-bottom: 15px;
-        }
-        
-        .welcome-body {
-            color: var(--charcoal-navy);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-        
-        .welcome-body p {
-            margin-bottom: 15px;
-        }
-        
-        /* Main Dashboard */
-        .dashboard {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px 40px;
-        }
-        
-        .dashboard-header {
+        .user-info {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            gap: 15px;
         }
         
-        .dashboard-header h1 {
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+        
+        .greeting {
+            margin-bottom: 25px;
+        }
+        
+        .greeting h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 400;
-            color: var(--charcoal-navy);
+            margin-bottom: 5px;
         }
         
+        .greeting p {
+            color: var(--text-muted);
+        }
+        
+        /* View Toggle */
         .view-toggle {
             display: flex;
-            background: var(--white);
+            background: var(--bg-card);
             border-radius: 30px;
             padding: 5px;
+            margin-bottom: 25px;
+            width: fit-content;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
@@ -128,434 +124,746 @@
             border-radius: 25px;
             cursor: pointer;
             font-size: 0.9rem;
-            color: var(--charcoal-navy);
+            color: var(--text-muted);
             transition: all 0.2s;
         }
         
         .view-toggle button.active {
             background: var(--lavender);
-            color: var(--white);
+            color: #fff;
         }
         
         /* Dashboard Grid */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
         
-        .card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        @media (max-width: 1000px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
         }
         
-        .card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h2 {
+            font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 15px;
-            color: var(--charcoal-navy);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold-dim);
+        }
+        
+        .card-header .badge {
+            background: var(--gold);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            padding: 20px;
         }
         
         /* Calendar Widget */
+        .calendar-widget { min-height: 300px; }
+        
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            font-size: 0.9rem;
+        }
+        
+        .calendar-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
         }
         
         .calendar-nav {
             display: flex;
-            gap: 5px;
+            gap: 10px;
         }
         
         .calendar-nav button {
-            background: var(--lavender-light);
-            border: none;
-            padding: 5px 10px;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 5px 12px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
         
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 3px;
-            text-align: center;
-            font-size: 0.8rem;
+            gap: 5px;
         }
         
         .calendar-day-header {
-            color: var(--charcoal-navy);
-            opacity: 0.6;
-            padding: 8px 0;
-            font-size: 0.7rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 10px 0;
+            text-transform: uppercase;
         }
         
         .calendar-day {
             aspect-ratio: 1;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            border-radius: 8px;
+            font-size: 0.9rem;
             position: relative;
+        }
+        
+        .calendar-day.other-month {
+            color: var(--text-muted);
+            opacity: 0.5;
         }
         
         .calendar-day.today {
             background: var(--lavender);
-            color: var(--white);
+            color: #fff;
             font-weight: 600;
         }
         
         .calendar-day.has-event::after {
             content: '';
             position: absolute;
-            bottom: 3px;
+            bottom: 6px;
             width: 4px;
             height: 4px;
             background: var(--gold);
             border-radius: 50%;
         }
         
+        .calendar-day.today.has-event::after {
+            background: #fff;
+        }
+        
         .events-list {
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid var(--lavender-light);
+            border-top: 1px solid var(--border);
         }
         
         .event-item {
             display: flex;
-            gap: 10px;
-            padding: 8px 0;
-            font-size: 0.9rem;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
         }
+        
+        .event-item:last-child { border-bottom: none; }
         
         .event-time {
-            color: var(--lavender);
+            font-size: 0.85rem;
+            color: var(--gold-dim);
+            min-width: 60px;
+        }
+        
+        .event-details h4 {
             font-weight: 500;
-            min-width: 50px;
-        }
-        
-        /* Task List */
-        .task-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--lavender-light);
-        }
-        
-        .task-item:last-child {
-            border-bottom: none;
-        }
-        
-        .task-checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--lavender);
-            border-radius: 4px;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-        
-        .task-content {
-            flex: 1;
-        }
-        
-        .task-content h4 {
-            font-weight: 400;
-            font-size: 0.95rem;
             margin-bottom: 3px;
         }
         
-        .task-meta {
-            font-size: 0.75rem;
-            color: var(--charcoal-navy);
+        .event-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Task List */
+        .reminders-list { max-height: 350px; overflow-y: auto; }
+        
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .task-item:last-child { border-bottom: none; }
+        
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            margin-top: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .task-checkbox:hover { border-color: var(--gold); }
+        
+        .task-checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        
+        .task-checkbox.checked::after {
+            content: '✓';
+            color: #fff;
+            font-size: 0.8rem;
+        }
+        
+        .task-content { flex: 1; }
+        
+        .task-content h4 {
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+        
+        .task-content h4.completed {
+            text-decoration: line-through;
             opacity: 0.6;
         }
         
+        .task-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .task-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            background: var(--bg-hover);
+        }
+        
+        .task-badge.urgent {
+            background: rgba(212, 165, 116, 0.3);
+            color: var(--warning);
+        }
+        
+        .task-badge.today {
+            background: rgba(201, 162, 39, 0.2);
+            color: var(--gold-dim);
+        }
+        
+        /* Family Stats */
+        .family-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background: var(--bg-hover);
+            border-radius: 8px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--lavender);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+        
         /* Activity Feed */
+        .activity-list { max-height: 300px; overflow-y: auto; }
+        
         .activity-item {
             display: flex;
             gap: 12px;
             padding: 12px 0;
-            border-bottom: 1px solid var(--lavender-light);
+            border-bottom: 1px solid var(--border);
         }
         
-        .activity-item:last-child {
-            border-bottom: none;
-        }
+        .activity-item:last-child { border-bottom: none; }
         
         .activity-avatar {
             width: 36px;
             height: 36px;
-            background: var(--lavender-light);
+            background: var(--bg-hover);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
         
-        .activity-content {
-            flex: 1;
-        }
+        .activity-content { flex: 1; }
         
         .activity-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         
-        .activity-header h4 {
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
+        .activity-header h4 { font-weight: 500; font-size: 0.9rem; }
         
         .activity-time {
             font-size: 0.75rem;
-            color: var(--charcoal-navy);
-            opacity: 0.5;
+            color: var(--text-muted);
         }
         
         .activity-preview {
             font-size: 0.85rem;
-            color: var(--charcoal-navy);
-            opacity: 0.7;
+            color: var(--text-muted);
         }
         
-        /* Priority Card */
-        .priority-item {
+        /* Kids Schedule */
+        .kid-schedule {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             padding: 12px;
-            background: var(--lavender-light);
-            border-radius: 10px;
+            background: var(--bg-hover);
+            border-radius: 8px;
             margin-bottom: 10px;
         }
         
-        .priority-item:last-child {
-            margin-bottom: 0;
+        .kid-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
         }
         
-        .priority-item h4 {
+        .kid-info { flex: 1; }
+        
+        .kid-info h4 {
             font-weight: 500;
-            font-size: 0.95rem;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
         
-        .priority-item p {
-            font-size: 0.85rem;
-            opacity: 0.7;
+        .kid-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .kid-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            background: var(--success);
+            color: #fff;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--lavender);
+            color: #fff;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(212, 165, 165, 0.3);
+            transition: transform 0.2s;
+        }
+        
+        .fab:hover { transform: scale(1.1); }
+        
+        /* Meal Plan */
+        .meal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .meal-item:last-child { border-bottom: none; }
+        
+        .meal-day {
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        
+        .meal-plan {
+            color: var(--text);
         }
         
         /* Footer */
         .footer {
             text-align: center;
             padding: 40px;
-            color: var(--charcoal-navy);
-            opacity: 0.7;
+            color: var(--text-muted);
             font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .demo-banner { padding: 12px 20px; font-size: 0.8rem; }
-            .nav, .dashboard { padding-left: 20px; padding-right: 20px; }
-            .welcome-banner { margin: 20px; padding: 20px; }
-            .welcome-header { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
     <div class="demo-banner">
-        👋 This is a demo view with sample data — <a href="index.html">Back to Valé OS</a>
+        <span>👋 This is a demo view with sample data</span>
+        <a href="index.html">← Back to Valé OS</a>
     </div>
     
-    <nav class="nav">
+    <header class="header">
         <div class="logo">Couples <span>Valé</span></div>
-        <div class="nav-user">Jordan's View</div>
-    </nav>
-    
-    <!-- Welcome Banner -->
-    <div class="welcome-banner">
-        <div class="welcome-header">
-            Good morning, Jordan
+        <div class="user-info">
+            <span class="status-dot"></span>
+            <span>Jordan & Alex's Dashboard</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="greeting">
+            <h1>Good morning, Jordan</h1>
+            <p>Saturday, April 12 • 3 shared events today • 2 tasks pending</p>
         </div>
         
-        <div class="welcome-body">
-            <p>
-                <strong>Saturday, April 12</strong> — You and Alex have 3 shared events today and 2 tasks pending. The kids' soccer schedule is updated.
-            </p>
+        <div class="view-toggle">
+            <button class="active">Both</button>
+            <button>Alex</button>
+            <button>Jordan</button>
         </div>
-    </div>
-    
-    <!-- Main Dashboard -->
-    <main class="dashboard">
-        <div class="dashboard-header">
-            <h1>Our Dashboard</h1>
-            <div class="view-toggle">
-                <button class="active">Both</button>
-                <button>Alex</button>
-                <button>Jordan</button>
-            </div>
-        </div>
-        
+
         <div class="dashboard-grid">
             <!-- Calendar -->
-            <div class="card">
-                <h3>📅 Upcoming</h3>
-                <div class="calendar-header">
-                    <strong>April 2026</strong>
-                    <div class="calendar-nav">
-                        <button>←</button>
-                        <button>Today</button>
-                        <button>→</button>
-                    </div>
+            <div class="card calendar-widget">
+                <div class="card-header">
+                    <h2>📅 Calendar</h2>
+                    <span class="badge">3 Events</span>
                 </div>
-                <div class="calendar-grid">
-                    <div class="calendar-day-header">S</div>
-                    <div class="calendar-day-header">M</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">W</div>
-                    <div class="calendar-day-header">T</div>
-                    <div class="calendar-day-header">F</div>
-                    <div class="calendar-day-header">S</div>
+                <div class="card-content">
+                    <div class="calendar-header">
+                        <h3>April 2026</h3>
+                        <div class="calendar-nav">
+                            <button>←</button>
+                            <button>Today</button>
+                            <button>→</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                        
+                        <div class="calendar-day other-month">30</div>
+                        <div class="calendar-day other-month">31</div>
+                        <div class="calendar-day">1</div>
+                        <div class="calendar-day">2</div>
+                        <div class="calendar-day has-event">3</div>
+                        <div class="calendar-day">4</div>
+                        <div class="calendar-day has-event">5</div>
+                        <div class="calendar-day">6</div>
+                        <div class="calendar-day">7</div>
+                        <div class="calendar-day has-event">8</div>
+                        <div class="calendar-day">9</div>
+                        <div class="calendar-day">10</div>
+                        <div class="calendar-day">11</div>
+                        <div class="calendar-day today has-event">12</div>
+                    </div>
                     
-                    <div class="calendar-day">6</div>
-                    <div class="calendar-day">7</div>
-                    <div class="calendar-day">8</div>
-                    <div class="calendar-day">9</div>
-                    <div class="calendar-day">10</div>
-                    <div class="calendar-day">11</div>
-                    <div class="calendar-day today has-event">12</div>
-                    <div class="calendar-day has-event">13</div>
-                    <div class="calendar-day">14</div>
-                    <div class="calendar-day has-event">15</div>
-                    <div class="calendar-day">16</div>
-                    <div class="calendar-day">17</div>
-                    <div class="calendar-day">18</div>
-                    <div class="calendar-day">19</div>
-                </div>
-                
-                <div class="events-list">
-                    <div class="event-item">
-                        <div class="event-time">9:00 AM</div>
-                        <div>Maya's soccer game — Field 3</div>
-                    </div>
-                    <div class="event-item">
-                        <div class="event-time">2:00 PM</div>
-                        <div>Grocery run — Whole Foods</div>
-                    </div>
-                    <div class="event-item">
-                        <div class="event-time">5:30 PM</div>
-                        <div>Dinner with the Parkers</div>
+                    <div class="events-list">
+                        <div class="event-item">
+                            <div class="event-time">9:00 AM</div>
+                            <div class="event-details">
+                                <h4>Maya's Soccer Game</h4>
+                                <p>Field 3 • Both attending</p>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-time">2:00 PM</div>
+                            <div class="event-details">
+                                <h4>Grocery Run</h4>
+                                <p>Whole Foods • Jordan assigned</p>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-time">5:30 PM</div>
+                            <div class="event-details">
+                                <h4>Dinner with the Parkers</h4>
+                                <p>Reservation at 6pm • Alex booked</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Shared Tasks -->
+
+            <!-- Tasks -->
             <div class="card">
-                <h3>✓ Shared Tasks</h3>
-                <div class="task-item">
-                    <div class="task-checkbox"></div>
-                    <div class="task-content">
-                        <h4>Schedule dentist appointments</h4>
-                        <div class="task-meta">For both kids • Due this week</div>
-                    </div>
+                <div class="card-header">
+                    <h2>✓ Shared Tasks</h2>
+                    <span class="badge" style="background: var(--warning);">2 Pending</span>
                 </div>
-                <div class="task-item">
-                    <div class="task-checkbox"></div>
-                    <div class="task-content">
-                        <h4>Book summer camp registration</h4>
-                        <div class="task-meta">Opens Monday at 9am</div>
-                    </div>
-                </div>
-                <div class="task-item">
-                    <div class="task-checkbox"></div>
-                    <div class="task-content">
-                        <h4>Plan Mother's Day brunch</h4>
-                        <div class="task-meta">Alex researching options</div>
-                    </div>
-                </div>
-                <div class="task-item">
-                    <div class="task-checkbox"></div>
-                    <div class="task-content">
-                        <h4>Return library books</h4>
-                        <div class="task-meta">Due Tuesday</div>
+                <div class="card-content">
+                    <div class="reminders-list">
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Schedule dentist appointments</h4>
+                                <div class="task-meta">For both kids • Due this week</div>
+                            </div>
+                            <span class="task-badge urgent">Due Soon</span>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Book summer camp registration</h4>
+                                <div class="task-meta">Opens Monday at 9am</div>
+                            </div>
+                            <span class="task-badge today">Monday</span>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4 class="completed">Plan Mother's Day brunch</h4>
+                                <div class="task-meta">Alex researching options • Completed</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Return library books</h4>
+                                <div class="task-meta">Due Tuesday • 4 books</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Order birthday gift for Sam</h4>
+                                <div class="task-meta">Party is Saturday • Lego set in cart</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Family Overview -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>👨‍👩‍👧‍👦 Family</h2>
+                    <span class="badge">3 Kids</span>
+                </div>
+                <div class="card-content">
+                    <div class="family-stats">
+                        <div class="stat-box">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Activities</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">Playdates</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">2</div>
+                            <div class="stat-label">Appointments</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kid-schedule">
+                        <div class="kid-avatar">👧</div>
+                        <div class="kid-info">
+                            <h4>Maya (8)</h4>
+                            <p>Soccer 9am • Piano lessons Wed</p>
+                        </div>
+                        <span class="kid-status">Active</span>
+                    </div>
+                    <div class="kid-schedule">
+                        <div class="kid-avatar">👦</div>
+                        <div class="kid-info">
+                            <h4>Sam (6)</h4>
+                            <p>Swimming Tue/Thu • Birthday party Sat</p>
+                        </div>
+                        <span class="kid-status">Active</span>
+                    </div>
+                    <div class="kid-schedule">
+                        <div class="kid-avatar">👶</div>
+                        <div class="kid-info">
+                            <h4>Leo (3)</h4>
+                            <p>Preschool M/W/F • Nap at 1pm</p>
+                        </div>
+                        <span class="kid-status">At School</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Recent Activity -->
             <div class="card">
-                <h3>💬 Recent</h3>
-                <div class="activity-item">
-                    <div class="activity-avatar">A</div>
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <h4>Alex</h4>
-                            <span class="activity-time">10 min ago</span>
-                        </div>
-                        <div class="activity-preview">"Picked up dry cleaning on the way home"</div>
-                    </div>
+                <div class="card-header">
+                    <h2>💬 Recent</h2>
+                    <span class="badge" style="background: var(--success);">3 New</span>
                 </div>
-                <div class="activity-item">
-                    <div class="activity-avatar">🤖</div>
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <h4>Couples Valé</h4>
-                            <span class="activity-time">1 hour ago</span>
+                <div class="card-content">
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-avatar">A</div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <h4>Alex</h4>
+                                    <span class="activity-time">10 min ago</span>
+                                </div>
+                                <div class="activity-preview">"Picked up dry cleaning on the way home"</div>
+                            </div>
                         </div>
-                        <div class="activity-preview">"Maya's soccer schedule updated — practice moved to Thursday"</div>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-avatar">J</div>
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <h4>Jordan</h4>
-                            <span class="activity-time">3 hours ago</span>
+                        <div class="activity-item">
+                            <div class="activity-avatar">🤖</div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <h4>Couples Valé</h4>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                                <div class="activity-preview">"Maya's soccer schedule updated — practice moved to Thursday"</div>
+                            </div>
                         </div>
-                        <div class="activity-preview">"Added 'Book flights for June trip' to shared list"</div>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-avatar">A</div>
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <h4>Alex</h4>
-                            <span class="activity-time">Yesterday</span>
+                        <div class="activity-item">
+                            <div class="activity-avatar">J</div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <h4>Jordan</h4>
+                                    <span class="activity-time">3 hours ago</span>
+                                </div>
+                                <div class="activity-preview">Added "Book flights for June trip" to shared list</div>
+                            </div>
                         </div>
-                        <div class="activity-preview">"Confirmed dinner reservation for Saturday"</div>
+                        <div class="activity-item">
+                            <div class="activity-avatar">A</div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <h4>Alex</h4>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                                <div class="activity-preview">Confirmed dinner reservation for Saturday</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- This Week -->
+
+            <!-- This Week Priorities -->
             <div class="card">
-                <h3>🎯 This Week</h3>
-                <div class="priority-item">
-                    <h4>🏠 Home</h4>
-                    <p>Finalize contractor quotes for kitchen refresh</p>
+                <div class="card-header">
+                    <h2>🎯 This Week</h2>
+                    <span class="badge">3 Areas</span>
                 </div>
-                <div class="priority-item">
-                    <h4>👨‍👩‍👧‍👦 Family</h4>
-                    <p>Sam's birthday party planning — send invites</p>
+                <div class="card-content">
+                    <div class="kid-schedule" style="background: rgba(90,154,94,0.1);">
+                        <div class="kid-avatar">🏠</div>
+                        <div class="kid-info">
+                            <h4>Home</h4>
+                            <p>Finalize contractor quotes for kitchen refresh</p>
+                        </div>
+                    </div>
+                    <div class="kid-schedule" style="background: rgba(212,165,165,0.1);">
+                        <div class="kid-avatar">🎉</div>
+                        <div class="kid-info">
+                            <h4>Family</h4>
+                            <p>Sam's birthday party planning — send invites</p>
+                        </div>
+                    </div>
+                    <div class="kid-schedule" style="background: rgba(201,162,39,0.1);">
+                        <div class="kid-avatar">💼</div>
+                        <div class="kid-info">
+                            <h4>Work-Life</h4>
+                            <p>Alex has late meeting Wed — Jordan handles pickup</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="priority-item">
-                    <h4>💼 Work-Life</h4>
-                    <p>Alex has late meeting Wednesday — Jordan handles pickup</p>
+            </div>
+
+            <!-- Meal Plan -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>🍽️ Meal Plan</h2>
+                    <span class="badge">This Week</span>
+                </div>
+                <div class="card-content">
+                    <div class="meal-item">
+                        <span class="meal-day">Today</span>
+                        <span class="meal-plan">Grilled salmon & veggies</span>
+                    </div>
+                    <div class="meal-item">
+                        <span class="meal-day">Sun</span>
+                        <span class="meal-plan">Pasta night — kids' choice</span>
+                    </div>
+                    <div class="meal-item">
+                        <span class="meal-day">Mon</span>
+                        <span class="meal-plan">Slow cooker chicken curry</span>
+                    </div>
+                    <div class="meal-item">
+                        <span class="meal-day">Tue</span>
+                        <span class="meal-plan">Tacos & guacamole</span>
+                    </div>
+                    <div class="meal-item">
+                        <span class="meal-day">Wed</span>
+                        <span class="meal-plan">Leftovers / Fend for self</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
-    
+    </div>
+
+    <div class="quick-actions">
+        <button class="fab" title="Quick action">+</button>
+    </div>
+
     <footer class="footer">
-        <p>Couples Valé — Demo View</p>
+        <p>Couples Valé — Demo View with Sample Data</p>
     </footer>
+    
+    <script>
+        function toggleTask(checkbox) {
+            checkbox.classList.toggle('checked');
+            const taskContent = checkbox.nextElementSibling;
+            const taskTitle = taskContent.querySelector('h4');
+            taskTitle.classList.toggle('completed');
+        }
+        
+        // View toggle functionality
+        document.querySelectorAll('.view-toggle button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
