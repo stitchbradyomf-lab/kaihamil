@@ -973,8 +973,8 @@
             <input type="text" id="searchInput" placeholder="Search tasks, events, notes..." onkeyup="searchDashboard()">
         </div>
         
-        <!-- Daily Check-in Card -->
-        <div class="card check-in-card" style="margin-bottom: 20px;">
+        <!-- Daily Check-in Card (hidden in Both view) -->
+        <div class="card check-in-card partner-section" id="checkinCard" style="margin-bottom: 20px;">
             <div class="card-header">
                 <h2>📊 Daily Check-in</h2>
                 <span class="badge" style="background: var(--theme-primary);">How are you feeling?</span>
@@ -1517,6 +1517,12 @@
                         el.style.display = view === 'both' ? 'block' : 'none';
                     }
                 });
+                
+                // Show/hide check-in card (only for individual views)
+                const checkinCard = document.getElementById('checkinCard');
+                if (checkinCard) {
+                    checkinCard.style.display = view === 'both' ? 'none' : 'block';
+                }
                 
                 // Highlight assigned items for individual views
                 document.querySelectorAll('.assigned-jordan, .assigned-alex').forEach(el => {
