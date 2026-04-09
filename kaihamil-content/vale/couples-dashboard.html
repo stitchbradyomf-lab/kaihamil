@@ -3,654 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couples Valé | Kyle & Marissa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Couples Valé | Marissa's Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-cream: #faf6f1;
-            --bg-card: #fffdf9;
-            --bg-warm: #f8f5f0;
-            --brown-dark: #3d2817;
-            --brown-medium: #6b5344;
-            --amber: #d4a574;
+            --lavender: #d4a5a5;
+            --lavender-light: #f5e8e3;
+            --charcoal: #2d3436;
+            --charcoal-navy: #3d4a5c;
             --gold: #c9a227;
-            --gold-light: #e8d5a3;
-            --rose: #c9a8a0;
-            --terracotta: #b87a5e;
-            --sage: #a8b5a0;
-            --border: #e8dfd3;
+            --cream: #faf6f1;
+            --white: #ffffff;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-cream);
-            color: var(--brown-dark);
-            line-height: 1.6;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
         }
         
-        .header {
-            background: var(--bg-card);
-            padding: 20px 30px;
-            border-bottom: 1px solid var(--border);
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--lavender-light);
         }
         
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-        }
-        
-        .logo strong { color: var(--gold); }
-        
-        .couple-names {
-            font-size: 0.9rem;
-            color: var(--brown-medium);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px;
-        }
-        
-        /* Quote Banner */
-        .quote-banner {
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-warm) 100%);
-            border-left: 4px solid var(--gold);
-            padding: 25px 30px;
-            margin-bottom: 30px;
-            border-radius: 0 12px 12px 0;
-        }
-        
-        .quote-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--brown-dark);
-            margin-bottom: 10px;
-        }
-        
-        .quote-source {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
-        }
-        
-        /* Grid Layout */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-        
-        @media (max-width: 900px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Cards */
-        .card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-        }
-        
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .card-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-        }
-        
-        .card-subtitle {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
-            margin-top: 4px;
-        }
-        
-        .badge {
-            background: var(--gold-light);
-            color: var(--brown-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        /* Events Section */
-        .event-item {
-            display: flex;
-            gap: 15px;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .event-item:last-child {
-            border-bottom: none;
-        }
-        
-        .event-date {
-            min-width: 50px;
-            text-align: center;
-        }
-        
-        .event-day {
             font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--gold);
-            line-height: 1;
-        }
-        
-        .event-month {
-            font-size: 0.75rem;
-            color: var(--brown-medium);
-            text-transform: uppercase;
-        }
-        
-        .event-details h4 {
             font-weight: 500;
-            margin-bottom: 4px;
+            color: var(--charcoal-navy);
         }
         
-        .event-meta {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
+        .logo span {
+            color: var(--lavender);
         }
         
-        .event-type {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.7rem;
-            margin-left: 8px;
-        }
-        
-        .event-type.holiday {
-            background: var(--gold-light);
-            color: var(--brown-dark);
-        }
-        
-        .event-type.birthday {
-            background: var(--rose);
-            color: white;
-        }
-        
-        .event-type.recurring {
-            background: var(--sage);
-            color: white;
-        }
-        
-        /* Easter Alert */
-        .easter-alert {
-            background: linear-gradient(135deg, #f5e8e3 0%, #e8d5c5 100%);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-        }
-        
-        .easter-alert h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--brown-dark);
-        }
-        
-        .easter-tasks {
-            list-style: none;
-        }
-        
-        .easter-tasks li {
-            padding: 6px 0;
+        .nav-user {
             font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: var(--charcoal-navy);
         }
         
-        .easter-tasks li::before {
-            content: '☐';
-            color: var(--terracotta);
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--lavender-light) 0%, #e8d5c5 100%);
+            border-left: 4px solid var(--gold);
+            padding: 30px;
+            margin: 30px 40px;
+            border-radius: 0 16px 16px 0;
+            position: relative;
+            transition: all 0.3s ease;
         }
         
-        /* Goals Section */
-        .goal-item {
-            background: linear-gradient(135deg, #f8f5f0 0%, #f0ebe3 100%);
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 12px;
+        .welcome-banner.dismissed {
+            display: none;
         }
         
-        .goal-item:last-child {
-            margin-bottom: 0;
+        .welcome-banner.collapsed {
+            padding: 20px 30px;
         }
         
-        .goal-header {
+        .welcome-banner.collapsed .welcome-body {
+            display: none;
+        }
+        
+        .welcome-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
         }
         
-        .goal-title {
-            font-weight: 500;
-        }
-        
-        .goal-status {
-            font-size: 0.75rem;
-            padding: 2px 10px;
-            border-radius: 10px;
-        }
-        
-        .goal-status.planning {
-            background: var(--gold-light);
-            color: var(--brown-dark);
-        }
-        
-        .goal-status.active {
-            background: var(--sage);
-            color: white;
-        }
-        
-        .goal-date {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
-        }
-        
-        .goal-lead {
-            font-size: 0.8rem;
-            color: var(--brown-medium);
-            margin-top: 8px;
-        }
-        
-        /* Help Lists */
-        .help-section {
-            margin-bottom: 20px;
-        }
-        
-        .help-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .help-header {
+        .welcome-controls {
             display: flex;
-            align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid;
         }
         
-        .help-header.kyle {
-            border-color: var(--amber);
+        .welcome-btn {
+            background: rgba(255,255,255,0.7);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--charcoal-navy);
+            transition: all 0.2s;
         }
         
-        .help-header.marissa {
-            border-color: var(--rose);
+        .welcome-btn:hover {
+            background: var(--white);
         }
         
-        .help-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--bg-warm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .welcome-body {
+            color: var(--charcoal-navy);
+            line-height: 1.7;
             font-size: 1rem;
         }
         
-        .help-name {
+        .welcome-body p {
+            margin-bottom: 15px;
+        }
+        
+        .welcome-quote {
+            font-style: italic;
+            border-left: 3px solid var(--gold);
+            padding-left: 15px;
+            margin: 20px 0;
+            color: var(--charcoal);
+        }
+        
+        .welcome-cta {
+            background: var(--gold);
+            color: var(--charcoal-navy);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
             font-weight: 500;
         }
         
-        .help-item {
+        .welcome-cta span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Main Dashboard */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        .dashboard-header {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--border);
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
         
-        .help-item:last-child {
-            border-bottom: none;
+        .dashboard-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--charcoal-navy);
         }
         
-        .help-priority {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
-            white-space: nowrap;
+        .view-toggle {
+            display: flex;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
-        .help-priority.urgent {
-            background: rgba(184, 122, 94, 0.2);
-            color: var(--terracotta);
+        .view-toggle button {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--charcoal-navy);
+            transition: all 0.2s;
         }
         
-        .help-priority.when-time {
-            background: var(--bg-warm);
-            color: var(--brown-medium);
+        .view-toggle button.active {
+            background: var(--lavender);
+            color: var(--white);
         }
         
-        .help-priority.dream {
-            background: var(--gold-light);
-            color: var(--brown-dark);
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
         
-        .help-text {
-            flex: 1;
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--charcoal-navy);
+        }
+        
+        .card-content {
+            color: var(--charcoal);
+            font-size: 0.95rem;
+        }
+        
+        .placeholder {
+            background: var(--lavender-light);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: var(--charcoal-navy);
+            opacity: 0.7;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--charcoal-navy);
+            opacity: 0.7;
             font-size: 0.9rem;
         }
         
-        .help-offer {
-            background: var(--gold);
-            color: var(--brown-dark);
-            border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        
-        .help-offer:hover {
-            background: var(--brown-dark);
-            color: var(--gold);
-        }
-        
-        /* Quick Actions */
-        .quick-actions {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .fab {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--gold);
-            color: var(--brown-dark);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
-        }
-        
-        /* Birthdays Quick View */
-        .birthday-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .birthday-item {
-            text-align: center;
-            padding: 12px 8px;
-            background: var(--bg-warm);
-            border-radius: 10px;
-        }
-        
-        .birthday-name {
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-        
-        .birthday-date {
-            font-size: 0.75rem;
-            color: var(--brown-medium);
-        }
-        
-        .birthday-avatar {
-            font-size: 1.5rem;
-            margin-bottom: 6px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav, .dashboard {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .welcome-banner {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .welcome-header {
+                font-size: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">Couples <strong>Valé</strong></div>
-        <div class="couple-names">Kyle & Marissa</div>
-    </header>
-
-    <div class="container">
-        <!-- Quote Banner -->
-        <div class="quote-banner">
-            <div class="quote-text">"Be curious, not judgmental."</div>
-            <div class="quote-source">— Ted Lasso</div>
+    <nav class="nav">
+        <div class="logo">Couples <span>Valé</span></div>
+        <div class="nav-user">Marissa's View</div>
+    </nav>
+    
+    <!-- Welcome Banner - First Visit Only -->
+    <div class="welcome-banner" id="welcomeBanner">
+        <div class="welcome-header">
+            Welcome, Marissa
+            <div class="welcome-controls">
+                <button class="welcome-btn" onclick="toggleWelcome()">Minimize</button>
+                <button class="welcome-btn" onclick="dismissWelcome()">Dismiss</button>
+            </div>
         </div>
-
+        
+        <div class="welcome-body">
+            <p>
+                This is Couples Valé — an operating system for <strong>us</strong>. Built because I wanted to be more present for you, for our kids, for our home.
+            </p>
+            
+            <p>
+                As part of my new role, I decided to build rather than just study. Early months were figuring out pieces, getting them to work. By March, I saw what was possible — the infrastructure I'd built could become something real. A business, yes, but first: a system for <strong>us</strong>.
+            </p>
+            
+            <p>
+                Everything I've built is to reduce the load we carry. The mental weight. The "who's doing what" fog. The coordination that drains us.
+            </p>
+            
+            <div class="welcome-quote">
+                "I want to build technology systems that make people's lives easier. To automate as much as possible and reduce the cognitive and administrative load for working professionals and people in similar situations."
+            </div>
+            
+            <p>
+                <strong>This is my proposal:</strong> Be the pilot customer with me. If Couples Valé works for us — if it actually helps us coordinate, connect, and carry less — then it will work for others.
+            </p>
+            
+            <p>
+                Your experience shapes the product. Your needs drive what we build. You're not a bystander to my project — you're the reason it exists.
+            </p>
+            
+            <div class="welcome-cta">
+                <strong>Let's build this together.</strong><br>
+                <span>— Kyle</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <div class="dashboard-header">
+            <h1>Our Dashboard</h1>
+            <div class="view-toggle">
+                <button class="active">Both</button>
+                <button>Kyle</button>
+                <button>Marissa</button>
+            </div>
+        </div>
+        
         <div class="dashboard-grid">
-            <!-- Upcoming Events -->
             <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Upcoming Events</div>
-                        <div class="card-subtitle">Next 30 days</div>
-                    </div>
-                    <span class="badge">9 days to Easter</span>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">30</div>
-                        <div class="event-month">Mar</div>
-                    </div>
-                    <div class="event-details">
-                        <h4>Rowan's Practice <span class="event-type recurring">Weekly</span></h4>
-                        <div class="event-meta">4:00 PM • Soccer field</div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">5</div>
-                        <div class="event-month">Apr</div>
-                    </div>
-                    <div class="event-details">
-                        <h4>Easter Sunday <span class="event-type holiday">Holiday</span></h4>
-                        <div class="event-meta">Family dinner at our house</div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">3</div>
-                        <div class="event-month">Apr</div>
-                    </div>
-                    <div class="event-details">
-                        <h4>Kyle's Birthday <span class="event-type birthday">Birthday</span></h4>
-                        <div class="event-meta">Turning 41 🎉</div>
-                    </div>
-                </div>
-                
-                <div class="event-item">
-                    <div class="event-date">
-                        <div class="event-day">11</div>
-                        <div class="event-month">May</div>
-                    </div>
-                    <div class="event-details">
-                        <h4>Dylan's Birthday <span class="event-type birthday">Birthday</span></h4>
-                        <div class="event-meta">Plan celebration</div>
-                    </div>
-                </div>
-                
-                <!-- Easter Alert -->
-                <div class="easter-alert">
-                    <h4>🐰 Easter Prep (April 5)</h4>
-                    <ul class="easter-tasks">
-                        <li>Purchase basket items for kids</li>
-                        <li>Package baskets together</li>
-                        <li>Plan Easter dinner menu</li>
-                        <li>Coordinate who's bringing what</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Family Birthdays -->
-            <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Family Birthdays</div>
-                        <div class="card-subtitle">2026</div>
-                    </div>
-                </div>
-                
-                <div class="birthday-grid">
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">👩</div>
-                        <div class="birthday-name">Marissa</div>
-                        <div class="birthday-date">Feb 17 ✓</div>
-                    </div>
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">👨</div>
-                        <div class="birthday-name">Kyle</div>
-                        <div class="birthday-date">Apr 3</div>
-                    </div>
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">🎂</div>
-                        <div class="birthday-name">Dylan</div>
-                        <div class="birthday-date">May 11</div>
-                    </div>
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">👦</div>
-                        <div class="birthday-name">Rowan</div>
-                        <div class="birthday-date">Jul 3</div>
-                    </div>
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">👶</div>
-                        <div class="birthday-name">Hudson</div>
-                        <div class="birthday-date">Aug 16</div>
-                    </div>
-                    <div class="birthday-item">
-                        <div class="birthday-avatar">💕</div>
-                        <div class="birthday-name">Anniversary</div>
-                        <div class="birthday-date">Aug 6 • 16 yrs</div>
+                <h3>📅 Upcoming</h3>
+                <div class="card-content">
+                    <div class="placeholder">
+                        Calendar sync pending<br>
+                        <small>iCloud integration in progress</small>
                     </div>
                 </div>
             </div>
-
-            <!-- Family Goals -->
+            
             <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Family Goals</div>
-                        <div class="card-subtitle">The "us" we're building</div>
+                <h3>✓ Shared Tasks</h3>
+                <div class="card-content">
+                    <div class="placeholder">
+                        Task list coming soon<br>
+                        <small>Pulling from your existing tools</small>
                     </div>
-                    <span class="badge">3 Active</span>
-                </div>
-                
-                <div class="goal-item">
-                    <div class="goal-header">
-                        <span class="goal-title">🇮🇸 Iceland Family Trip</span>
-                        <span class="goal-status planning">Planning</span>
-                    </div>
-                    <div class="goal-date">November 2026</div>
-                    <div class="goal-lead">Kyle researching flights • Marissa on lodging</div>
-                </div>
-                
-                <div class="goal-item">
-                    <div class="goal-header">
-                        <span class="goal-title">🏔️ Acadia Summer Trip</span>
-                        <span class="goal-status planning">Planning</span>
-                    </div>
-                    <div class="goal-date">Summer 2026</div>
-                    <div class="goal-lead">Dates TBD • Camping or lodge?</div>
-                </div>
-                
-                <div class="goal-item">
-                    <div class="goal-header">
-                        <span class="goal-title">🏠 House Projects</span>
-                        <span class="goal-status active">In Progress</span>
-                    </div>
-                    <div class="goal-date">Ongoing</div>
-                    <div class="goal-lead">Garage cleanout • Backyard plans</div>
-                </div>
-                
-                <div class="goal-item">
-                    <div class="goal-header">
-                        <span class="goal-title">🎢 Legoland Hudson Valley</span>
-                        <span class="goal-status planning">Planning</span>
-                    </div>
-                    <div class="goal-date">Spring/Summer 2026</div>
-                    <div class="goal-lead">Daddy-daughter trip opportunity</div>
                 </div>
             </div>
-
-            <!-- Ways You Can Help Me -->
+            
             <div class="card">
-                <div class="card-header">
-                    <div>
-                        <div class="card-title">Ways You Can Help Me</div>
-                        <div class="card-subtitle">Opportunities, not obligations</div>
+                <h3>💬 Recent</h3>
+                <div class="card-content">
+                    <div class="placeholder">
+                        Activity feed<br>
+                        <small>Messages and updates</small>
                     </div>
                 </div>
-                
-                <div class="help-section">
-                    <div class="help-header kyle">
-                        <div class="help-avatar">👨</div>
-                        <span class="help-name">Kyle could use help with:</span>
-                    </div>
-                    
-                    <div class="help-item">
-                        <span class="help-priority when-time">When you have time</span>
-                        <span class="help-text">Researching Iceland flight options (I've narrowed to 2)</span>
-                        <button class="help-offer">I'll help</button>
-                    </div>
-                    
-                    <div class="help-item">
-                        <span class="help-priority urgent">Soon</span>
-                        <span class="help-text">Picking up Hudson's prescription</span>
-                        <button class="help-offer">I'll help</button>
-                    </div>
-                    
-                    <div class="help-item">
-                        <span class="help-priority dream">Dream</span>
-                        <span class="help-text">Garage cleanout together this weekend</span>
-                        <button class="help-offer">Let's do it</button>
-                    </div>
-                </div>
-                
-                <div class="help-section">
-                    <div class="help-header marissa">
-                        <div class="help-avatar">👩</div>
-                        <span class="help-name">Marissa could use help with:</span>
-                    </div>
-                    
-                    <div class="help-item">
-                        <span class="help-priority when-time">When you have time</span>
-                        <span class="help-text">Easter dinner planning - need to coordinate who's bringing what</span>
-                        <button class="help-offer">I'll help</button>
-                    </div>
-                    
-                    <div class="help-item">
-                        <span class="help-priority urgent">Soon</span>
-                        <span class="help-text">Review kids' summer camp applications</span>
-                        <button class="help-offer">I'll help</button>
+            </div>
+            
+            <div class="card">
+                <h3>🎯 This Week</h3>
+                <div class="card-content">
+                    <div class="placeholder">
+                        Priority focus areas<br>
+                        <small>Based on your calendars</small>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="quick-actions">
-        <button class="fab" title="Quick add">+</button>
-    </div>
+    </main>
+    
+    <footer class="footer">
+        <p>Couples Valé — Built for us</p>
+    </footer>
+    
+    <script>
+        // Welcome banner state management
+        function dismissWelcome() {
+            document.getElementById('welcomeBanner').classList.add('dismissed');
+            localStorage.setItem('marissaWelcomeSeen', 'true');
+        }
+        
+        function toggleWelcome() {
+            const banner = document.getElementById('welcomeBanner');
+            const btn = event.target;
+            
+            if (banner.classList.contains('collapsed')) {
+                banner.classList.remove('collapsed');
+                btn.textContent = 'Minimize';
+            } else {
+                banner.classList.add('collapsed');
+                btn.textContent = 'Expand';
+            }
+        }
+        
+        // Check if user has seen welcome before
+        if (localStorage.getItem('marissaWelcomeSeen') === 'true') {
+            document.getElementById('welcomeBanner').classList.add('dismissed');
+        }
+    </script>
 </body>
 </html>
