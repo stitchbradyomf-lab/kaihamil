@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Couples Valé | Demo Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #faf6f1;
@@ -16,8 +16,35 @@
             --gold: #c9a227;
             --gold-dim: #b89628;
             --lavender: #d4a5a5;
+            --navy: #3d4a5c;
             --success: #5a9a5e;
             --warning: #d4a574;
+            
+            /* Dynamic theme colors */
+            --theme-primary: var(--lavender);
+            --theme-secondary: rgba(212, 165, 165, 0.1);
+            --theme-accent: rgba(212, 165, 165, 0.2);
+        }
+        
+        /* Theme: Jordan (Navy) */
+        body.theme-jordan {
+            --theme-primary: var(--navy);
+            --theme-secondary: rgba(61, 74, 92, 0.1);
+            --theme-accent: rgba(61, 74, 92, 0.2);
+        }
+        
+        /* Theme: Alex (Lavender) */
+        body.theme-alex {
+            --theme-primary: var(--lavender);
+            --theme-secondary: rgba(212, 165, 165, 0.1);
+            --theme-accent: rgba(212, 165, 165, 0.2);
+        }
+        
+        /* Theme: Both (Yellow-orange calm) */
+        body.theme-both {
+            --theme-primary: #e8a87c;
+            --theme-secondary: rgba(232, 168, 124, 0.1);
+            --theme-accent: rgba(232, 168, 124, 0.2);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -526,6 +553,92 @@
             color: var(--text);
         }
         
+        /* Search bar */
+        .search-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text);
+        }
+        
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        /* Check-in card */
+        .check-in-card {
+            background: linear-gradient(135deg, var(--theme-secondary) 0%, var(--theme-accent) 100%);
+            border: 2px solid var(--theme-primary);
+        }
+        
+        .rating-widget {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .rating-star {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--theme-primary);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+        
+        .rating-star:hover,
+        .rating-star.active {
+            background: var(--theme-primary);
+            color: #fff;
+        }
+        
+        .notes-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 80px;
+            background: var(--bg-card);
+        }
+        
+        .save-btn {
+            background: var(--theme-primary);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        
+        .save-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
         /* Partner-specific sections */
         .partner-section {
             display: none;
@@ -539,6 +652,44 @@
         .view-alex .show-alex,
         .view-both .show-both {
             display: block;
+        }
+        
+        /* Assigned item highlighting */
+        .assigned-jordan {
+            background: linear-gradient(90deg, rgba(61, 74, 92, 0.15) 0%, transparent 100%);
+            border-left: 4px solid var(--navy);
+        }
+        
+        .assigned-alex {
+            background: linear-gradient(90deg, rgba(212, 165, 165, 0.15) 0%, transparent 100%);
+            border-left: 4px solid var(--lavender);
+        }
+        
+        /* Alternating row shades */
+        .task-item:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .task-item:nth-child(even) {
+            background: rgba(250, 246, 241, 0.5);
+        }
+        
+        /* Editable items */
+        [contenteditable="true"] {
+            border-bottom: 1px dashed var(--border);
+            cursor: text;
+        }
+        
+        [contenteditable="true"]:focus {
+            outline: none;
+            border-bottom: 1px solid var(--theme-primary);
+        }
+        
+        .edit-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 4px;
         }
         
         .gratitude-item {
@@ -654,6 +805,32 @@
             <button data-view="alex">Alex</button>
             <button data-view="jordan">Jordan</button>
         </div>
+        
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Search tasks, events, notes..." onkeyup="searchDashboard()">
+        </div>
+        
+        <!-- Daily Check-in Card -->
+        <div class="card check-in-card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h2>📊 Daily Check-in</h2>
+                <span class="badge" style="background: var(--theme-primary);">How are you feeling?</span>
+            </div>
+            <div class="card-content">
+                <p style="margin-bottom: 10px; font-size: 0.95rem;">Rate your current state (1 = struggling, 5 = thriving)</p>
+                <div class="rating-widget" id="ratingWidget">
+                    <button class="rating-star" onclick="setRating(1)">1</button>
+                    <button class="rating-star" onclick="setRating(2)">2</button>
+                    <button class="rating-star" onclick="setRating(3)">3</button>
+                    <button class="rating-star" onclick="setRating(4)">4</button>
+                    <button class="rating-star" onclick="setRating(5)">5</button>
+                </div>
+                <textarea class="notes-input" id="checkinNotes" placeholder="What's on your mind? Any wins, worries, or needs today? (Click to edit)"></textarea>
+                <button class="save-btn" onclick="saveCheckin()">Save Check-in</button>
+            </div>
+        </div>
 
         <div class="dashboard-grid view-both" id="dashboardContent">
             <!-- Calendar -->
@@ -693,28 +870,28 @@
                         <div class="calendar-day">9</div>
                         <div class="calendar-day">10</div>
                         <div class="calendar-day">11</div>
-                        <div class="calendar-day today has-event">12</div>
+                        <div class="calendar-day today has-event assigned-jordan assigned-alex" id="todayCell">12</div>
                     </div>
                     
                     <div class="events-list">
-                        <div class="event-item">
+                        <div class="event-item" data-searchable="Maya's Soccer Game Field 3 Both attending">
                             <div class="event-time">9:00 AM</div>
                             <div class="event-details">
-                                <h4>Maya's Soccer Game</h4>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Maya's Soccer Game</h4>
                                 <p>Field 3 • Both attending</p>
                             </div>
                         </div>
-                        <div class="event-item">
+                        <div class="event-item assigned-jordan" data-searchable="Grocery Run Whole Foods Jordan assigned">
                             <div class="event-time">2:00 PM</div>
                             <div class="event-details">
-                                <h4>Grocery Run</h4>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Grocery Run</h4>
                                 <p>Whole Foods • Jordan assigned</p>
                             </div>
                         </div>
-                        <div class="event-item">
+                        <div class="event-item assigned-alex" data-searchable="Dinner with the Parkers Reservation Alex booked">
                             <div class="event-time">5:30 PM</div>
                             <div class="event-details">
-                                <h4>Dinner with the Parkers</h4>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Dinner with the Parkers</h4>
                                 <p>Reservation at 6pm • Alex booked</p>
                             </div>
                         </div>
@@ -729,45 +906,46 @@
                     <span class="badge" style="background: var(--warning);">2 Pending</span>
                 </div>
                 <div class="card-content">
-                    <div class="reminders-list">
-                        <div class="task-item">
+                    <div class="reminders-list" id="taskList">
+                        <div class="task-item" data-searchable="Schedule dentist appointments For both kids Due this week">
                             <div class="task-checkbox" onclick="toggleTask(this)"></div>
                             <div class="task-content">
-                                <h4>Schedule dentist appointments</h4>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Schedule dentist appointments</h4>
                                 <div class="task-meta">For both kids • Due this week</div>
                             </div>
                             <span class="task-badge urgent">Due Soon</span>
                         </div>
-                        <div class="task-item">
+                        <div class="task-item assigned-jordan" data-searchable="Book summer camp registration Opens Monday Jordan">
                             <div class="task-checkbox" onclick="toggleTask(this)"></div>
                             <div class="task-content">
-                                <h4>Book summer camp registration</h4>
-                                <div class="task-meta">Opens Monday at 9am</div>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Book summer camp registration</h4>
+                                <div class="task-meta">Jordan • Opens Monday at 9am</div>
                             </div>
                             <span class="task-badge today">Monday</span>
                         </div>
-                        <div class="task-item">
+                        <div class="task-item assigned-alex" data-searchable="Plan Mother's Day brunch Alex researching Completed">
                             <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
                             <div class="task-content">
-                                <h4 class="completed">Plan Mother's Day brunch</h4>
-                                <div class="task-meta">Alex researching options • Completed</div>
+                                <h4 class="completed" contenteditable="true" onclick="showEditHint(this)">Plan Mother's Day brunch</h4>
+                                <div class="task-meta">Alex • Completed</div>
                             </div>
                         </div>
-                        <div class="task-item">
+                        <div class="task-item assigned-jordan" data-searchable="Return library books Due Tuesday 4 books Jordan">
                             <div class="task-checkbox" onclick="toggleTask(this)"></div>
                             <div class="task-content">
-                                <h4>Return library books</h4>
-                                <div class="task-meta">Due Tuesday • 4 books</div>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Return library books</h4>
+                                <div class="task-meta">Jordan • Due Tuesday • 4 books</div>
                             </div>
                         </div>
-                        <div class="task-item">
+                        <div class="task-item assigned-alex" data-searchable="Order birthday gift for Sam Party Saturday Alex">
                             <div class="task-checkbox" onclick="toggleTask(this)"></div>
                             <div class="task-content">
-                                <h4>Order birthday gift for Sam</h4>
-                                <div class="task-meta">Party is Saturday • Lego set in cart</div>
+                                <h4 contenteditable="true" onclick="showEditHint(this)">Order birthday gift for Sam</h4>
+                                <div class="task-meta">Alex • Party Saturday • Lego set in cart</div>
                             </div>
                         </div>
                     </div>
+                    <p class="edit-hint">💡 Click any task text to edit</p>
                 </div>
             </div>
 
@@ -951,107 +1129,107 @@
                 </div>
             </div>
 
-            <!-- Jordan's View: What's on Alex's Mind -->
+            <!-- Jordan's View: What's on Jordan's Mind (First person) -->
             <div class="card partner-section show-jordan" style="display: none;">
                 <div class="card-header">
-                    <h2>💭 On Alex's Mind</h2>
-                    <span class="badge" style="background: var(--lavender);">Jordan's View</span>
+                    <h2>💭 On Your Mind</h2>
+                    <span class="badge" style="background: var(--navy);">Jordan</span>
                 </div>
                 <div class="card-content">
                     <div class="mind-item">
-                        <h4>Work Stress</h4>
-                        <p>"Big presentation Thursday — could use some extra space Wednesday night to prep"</p>
-                    </div>
-                    <div class="mind-item">
-                        <h4>Family Worry</h4>
-                        <p>"Concerned about Sam's reading progress — wondering if we should check in with teacher"</p>
-                    </div>
-                    <div class="mind-item">
-                        <h4>Self-Care Need</h4>
-                        <p>"Haven't had alone time in 2 weeks — could use an afternoon to recharge"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Alex's View: What's on Jordan's Mind -->
-            <div class="card partner-section show-alex" style="display: none;">
-                <div class="card-header">
-                    <h2>💭 On Jordan's Mind</h2>
-                    <span class="badge" style="background: var(--gold);">Alex's View</span>
-                </div>
-                <div class="card-content">
-                    <div class="mind-item">
-                        <h4>Project Deadline</h4>
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Project Deadline</h4>
                         <p>"Client deliverable due Friday — may need to work late Thursday"</p>
                     </div>
                     <div class="mind-item">
-                        <h4>Social Commitment</h4>
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Social Commitment</h4>
                         <p>"Feeling guilty about missing Parker's birthday party — wants to send gift"</p>
                     </div>
                     <div class="mind-item">
-                        <h4>Health Goal</h4>
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Health Goal</h4>
                         <p>"Trying to get back to morning runs — hoping for support on early bedtime"</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Ways Jordan Can Help Alex -->
+            <!-- Jordan's View: Ways Alex Can Help Jordan -->
             <div class="card partner-section show-jordan" style="display: none;">
                 <div class="card-header">
-                    <h2>🤝 Ways to Help Alex</h2>
-                    <span class="badge" style="background: var(--success);">Suggestions</span>
-                </div>
-                <div class="card-content">
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">☕</span>
-                        <div class="help-content">
-                            <h4>Bring coffee Thursday morning</h4>
-                            <p>Big presentation day — small gesture of support</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">📚</span>
-                        <div class="help-content">
-                            <h4>Research reading tutors this weekend</h4>
-                            <p>Take task off Alex's plate — come with options</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">🧘</span>
-                        <div class="help-content">
-                            <h4>Handle Saturday morning solo</h4>
-                            <p>Give Alex 3 hours to herself — no questions asked</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ways Alex Can Help Jordan -->
-            <div class="card partner-section show-alex" style="display: none;">
-                <div class="card-header">
-                    <h2>🤝 Ways to Help Jordan</h2>
-                    <span class="badge" style="background: var(--success);">Suggestions</span>
+                    <h2>🤝 Ways Alex Can Help You</h2>
+                    <span class="badge" style="background: var(--success);">For Jordan</span>
                 </div>
                 <div class="card-content">
                     <div class="help-item" onclick="this.style.opacity='0.5'">
                         <span class="help-icon">🎁</span>
                         <div class="help-content">
-                            <h4>Order Parker's gift today</h4>
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Order Parker's gift today</h4>
                             <p>Remove guilt — something small but thoughtful</p>
                         </div>
                     </div>
                     <div class="help-item" onclick="this.style.opacity='0.5'">
                         <span class="help-icon">🌙</span>
                         <div class="help-content">
-                            <h4>Early bedtime support Wednesday</h4>
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Early bedtime support Wednesday</h4>
                             <p>Tag-team kids to bed so Jordan can get 7 hours</p>
                         </div>
                     </div>
                     <div class="help-item" onclick="this.style.opacity='0.5'">
                         <span class="help-icon">🍽️</span>
                         <div class="help-content">
-                            <h4>Handle dinner Thursday</h4>
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle dinner Thursday</h4>
                             <p>One less thing before deadline — order in or prep ahead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alex's View: What's on Alex's Mind (First person) -->
+            <div class="card partner-section show-alex" style="display: none;">
+                <div class="card-header">
+                    <h2>💭 On Your Mind</h2>
+                    <span class="badge" style="background: var(--lavender);">Alex</span>
+                </div>
+                <div class="card-content">
+                    <div class="mind-item">
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Work Stress</h4>
+                        <p>"Big presentation Thursday — could use some extra space Wednesday night to prep"</p>
+                    </div>
+                    <div class="mind-item">
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Family Worry</h4>
+                        <p>"Concerned about Sam's reading progress — wondering if we should check in with teacher"</p>
+                    </div>
+                    <div class="mind-item">
+                        <h4 contenteditable="true" onclick="showEditHint(this)">Self-Care Need</h4>
+                        <p>"Haven't had alone time in 2 weeks — could use an afternoon to recharge"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alex's View: Ways Jordan Can Help Alex -->
+            <div class="card partner-section show-alex" style="display: none;">
+                <div class="card-header">
+                    <h2>🤝 Ways Jordan Can Help You</h2>
+                    <span class="badge" style="background: var(--success);">For Alex</span>
+                </div>
+                <div class="card-content">
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">☕</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Bring coffee Thursday morning</h4>
+                            <p>Big presentation day — small gesture of support</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">📚</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Research reading tutors this weekend</h4>
+                            <p>Take task off Alex's plate — come with options</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">🧘</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle Saturday morning solo</h4>
+                            <p>Give Alex 3 hours to herself — no questions asked</p>
                         </div>
                     </div>
                 </div>
@@ -1068,11 +1246,71 @@
     </footer>
     
     <script>
+        // Current rating
+        let currentRating = 0;
+        
         function toggleTask(checkbox) {
             checkbox.classList.toggle('checked');
             const taskContent = checkbox.nextElementSibling;
             const taskTitle = taskContent.querySelector('h4');
             taskTitle.classList.toggle('completed');
+        }
+        
+        // Rating functionality
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll('.rating-star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+        
+        function saveCheckin() {
+            const notes = document.getElementById('checkinNotes').value;
+            if (currentRating === 0) {
+                alert('Please select a rating first');
+                return;
+            }
+            alert(`Check-in saved! Rating: ${currentRating}/5\nNotes: ${notes || 'None'}`);
+        }
+        
+        // Search functionality
+        function searchDashboard() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchableItems = document.querySelectorAll('[data-searchable]');
+            
+            searchableItems.forEach(item => {
+                const searchableText = item.getAttribute('data-searchable').toLowerCase();
+                const textContent = item.textContent.toLowerCase();
+                
+                if (searchTerm === '' || searchableText.includes(searchTerm) || textContent.includes(searchTerm)) {
+                    item.style.display = '';
+                    item.style.opacity = '1';
+                } else {
+                    item.style.opacity = '0.3';
+                }
+            });
+        }
+        
+        // Edit hint
+        function showEditHint(element) {
+            // Remove any existing hints
+            const existingHint = element.parentElement.querySelector('.edit-hint');
+            if (!existingHint) {
+                const hint = document.createElement('div');
+                hint.className = 'edit-hint';
+                hint.textContent = '💡 Click to edit text';
+                element.parentElement.appendChild(hint);
+                
+                // Remove hint after 3 seconds
+                setTimeout(() => {
+                    hint.remove();
+                }, 3000);
+            }
         }
         
         // View toggle functionality
@@ -1086,6 +1324,11 @@
                 const view = this.getAttribute('data-view');
                 const dashboard = document.getElementById('dashboardContent');
                 const greeting = document.querySelector('.greeting h1');
+                const body = document.body;
+                
+                // Update theme
+                body.className = '';
+                body.classList.add('theme-' + view);
                 
                 // Update greeting based on view
                 if (view === 'jordan') {
@@ -1113,8 +1356,43 @@
                         el.style.display = view === 'both' ? 'block' : 'none';
                     }
                 });
+                
+                // Highlight assigned items for individual views
+                document.querySelectorAll('.assigned-jordan, .assigned-alex').forEach(el => {
+                    el.style.display = '';
+                });
+                
+                if (view === 'jordan') {
+                    document.querySelectorAll('.assigned-alex:not(.assigned-jordan)').forEach(el => {
+                        if (!el.classList.contains('calendar-day')) {
+                            el.style.opacity = '0.5';
+                        }
+                    });
+                    document.querySelectorAll('.assigned-jordan').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.boxShadow = '0 0 0 2px var(--navy)';
+                    });
+                } else if (view === 'alex') {
+                    document.querySelectorAll('.assigned-jordan:not(.assigned-alex)').forEach(el => {
+                        if (!el.classList.contains('calendar-day')) {
+                            el.style.opacity = '0.5';
+                        }
+                    });
+                    document.querySelectorAll('.assigned-alex').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.boxShadow = '0 0 0 2px var(--lavender)';
+                    });
+                } else {
+                    document.querySelectorAll('.assigned-jordan, .assigned-alex').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.boxShadow = 'none';
+                    });
+                }
             });
         });
+        
+        // Initialize with "both" theme
+        document.body.classList.add('theme-both');
     </script>
 </body>
 </html>
