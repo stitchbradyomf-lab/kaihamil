@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Valé | Demo Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lavender: #d4a5a5;
+            --lavender-light: #f5e8e3;
+            --charcoal: #2d3436;
+            --charcoal-navy: #3d4a5c;
+            --gold: #c9a227;
+            --cream: #faf6f1;
+            --white: #ffffff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.7;
+        }
+        
+        /* Demo Banner */
+        .demo-banner {
+            background: var(--charcoal-navy);
+            color: var(--white);
+            padding: 12px 40px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .demo-banner a {
+            color: var(--gold);
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--lavender-light);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--charcoal-navy);
+        }
+        
+        .logo span {
+            color: var(--lavender);
+        }
+        
+        .nav-user {
+            font-size: 0.9rem;
+            color: var(--charcoal-navy);
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--lavender-light) 0%, #e8d5c5 100%);
+            border-left: 4px solid var(--gold);
+            padding: 30px;
+            margin: 30px 40px;
+            border-radius: 0 16px 16px 0;
+        }
+        
+        .welcome-header {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 15px;
+        }
+        
+        .welcome-body {
+            color: var(--charcoal-navy);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        .welcome-body p {
+            margin-bottom: 15px;
+        }
+        
+        /* Main Dashboard */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px 40px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--charcoal-navy);
+        }
+        
+        .view-toggle {
+            display: flex;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .view-toggle button {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--charcoal-navy);
+            transition: all 0.2s;
+        }
+        
+        .view-toggle button.active {
+            background: var(--lavender);
+            color: var(--white);
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--charcoal-navy);
+        }
+        
+        /* Calendar Widget */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .calendar-nav button {
+            background: var(--lavender-light);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        .calendar-day-header {
+            color: var(--charcoal-navy);
+            opacity: 0.6;
+            padding: 8px 0;
+            font-size: 0.7rem;
+        }
+        
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            position: relative;
+        }
+        
+        .calendar-day.today {
+            background: var(--lavender);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        
+        .events-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--lavender-light);
+        }
+        
+        .event-item {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .event-time {
+            color: var(--lavender);
+            font-weight: 500;
+            min-width: 50px;
+        }
+        
+        /* Task List */
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--lavender-light);
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--lavender);
+            border-radius: 4px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-content h4 {
+            font-weight: 400;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+        
+        .task-meta {
+            font-size: 0.75rem;
+            color: var(--charcoal-navy);
+            opacity: 0.6;
+        }
+        
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--lavender-light);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--lavender-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+        
+        .activity-header h4 {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .activity-time {
+            font-size: 0.75rem;
+            color: var(--charcoal-navy);
+            opacity: 0.5;
+        }
+        
+        .activity-preview {
+            font-size: 0.85rem;
+            color: var(--charcoal-navy);
+            opacity: 0.7;
+        }
+        
+        /* Priority Card */
+        .priority-item {
+            padding: 12px;
+            background: var(--lavender-light);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .priority-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .priority-item h4 {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .priority-item p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--charcoal-navy);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-banner { padding: 12px 20px; font-size: 0.8rem; }
+            .nav, .dashboard { padding-left: 20px; padding-right: 20px; }
+            .welcome-banner { margin: 20px; padding: 20px; }
+            .welcome-header { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        👋 This is a demo view with sample data — <a href="index.html">Back to Valé OS</a>
+    </div>
+    
+    <nav class="nav">
+        <div class="logo">Couples <span>Valé</span></div>
+        <div class="nav-user">Jordan's View</div>
+    </nav>
+    
+    <!-- Welcome Banner -->
+    <div class="welcome-banner">
+        <div class="welcome-header">
+            Good morning, Jordan
+        </div>
+        
+        <div class="welcome-body">
+            <p>
+                <strong>Saturday, April 12</strong> — You and Alex have 3 shared events today and 2 tasks pending. The kids' soccer schedule is updated.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <div class="dashboard-header">
+            <h1>Our Dashboard</h1>
+            <div class="view-toggle">
+                <button class="active">Both</button>
+                <button>Alex</button>
+                <button>Jordan</button>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- Calendar -->
+            <div class="card">
+                <h3>📅 Upcoming</h3>
+                <div class="calendar-header">
+                    <strong>April 2026</strong>
+                    <div class="calendar-nav">
+                        <button>←</button>
+                        <button>Today</button>
+                        <button>→</button>
+                    </div>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">S</div>
+                    <div class="calendar-day-header">M</div>
+                    <div class="calendar-day-header">T</div>
+                    <div class="calendar-day-header">W</div>
+                    <div class="calendar-day-header">T</div>
+                    <div class="calendar-day-header">F</div>
+                    <div class="calendar-day-header">S</div>
+                    
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day today has-event">12</div>
+                    <div class="calendar-day has-event">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day has-event">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                </div>
+                
+                <div class="events-list">
+                    <div class="event-item">
+                        <div class="event-time">9:00 AM</div>
+                        <div>Maya's soccer game — Field 3</div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-time">2:00 PM</div>
+                        <div>Grocery run — Whole Foods</div>
+                    </div>
+                    <div class="event-item">
+                        <div class="event-time">5:30 PM</div>
+                        <div>Dinner with the Parkers</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shared Tasks -->
+            <div class="card">
+                <h3>✓ Shared Tasks</h3>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-content">
+                        <h4>Schedule dentist appointments</h4>
+                        <div class="task-meta">For both kids • Due this week</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-content">
+                        <h4>Book summer camp registration</h4>
+                        <div class="task-meta">Opens Monday at 9am</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-content">
+                        <h4>Plan Mother's Day brunch</h4>
+                        <div class="task-meta">Alex researching options</div>
+                    </div>
+                </div>
+                <div class="task-item">
+                    <div class="task-checkbox"></div>
+                    <div class="task-content">
+                        <h4>Return library books</h4>
+                        <div class="task-meta">Due Tuesday</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="card">
+                <h3>💬 Recent</h3>
+                <div class="activity-item">
+                    <div class="activity-avatar">A</div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h4>Alex</h4>
+                            <span class="activity-time">10 min ago</span>
+                        </div>
+                        <div class="activity-preview">"Picked up dry cleaning on the way home"</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">🤖</div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h4>Couples Valé</h4>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                        <div class="activity-preview">"Maya's soccer schedule updated — practice moved to Thursday"</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">J</div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h4>Jordan</h4>
+                            <span class="activity-time">3 hours ago</span>
+                        </div>
+                        <div class="activity-preview">"Added 'Book flights for June trip' to shared list"</div>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">A</div>
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <h4>Alex</h4>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                        <div class="activity-preview">"Confirmed dinner reservation for Saturday"</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- This Week -->
+            <div class="card">
+                <h3>🎯 This Week</h3>
+                <div class="priority-item">
+                    <h4>🏠 Home</h4>
+                    <p>Finalize contractor quotes for kitchen refresh</p>
+                </div>
+                <div class="priority-item">
+                    <h4>👨‍👩‍👧‍👦 Family</h4>
+                    <p>Sam's birthday party planning — send invites</p>
+                </div>
+                <div class="priority-item">
+                    <h4>💼 Work-Life</h4>
+                    <p>Alex has late meeting Wednesday — Jordan handles pickup</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>Couples Valé — Demo View</p>
+    </footer>
+</body>
+</html>
