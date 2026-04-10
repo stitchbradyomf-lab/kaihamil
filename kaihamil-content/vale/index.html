@@ -164,6 +164,34 @@
             font-size: 1.05rem;
         }
         
+        /* Split Section - 50/50 Layout */
+        .split-section {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .split-section > div {
+            flex: 1;
+            width: 50%;
+        }
+        
+        .system-side {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+        }
+        
+        .self-side {
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.1) 0%, rgba(212, 165, 165, 0.15) 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .split-section {
+                flex-direction: column;
+            }
+            .split-section > div {
+                width: 100%;
+            }
+        }
+        
         /* Services Section */
         .services {
             padding: 80px 20px;
@@ -531,7 +559,7 @@
         </div>
         
         <!-- Couples Valé: For Your Relationship -->
-        <div class="self-side" style="padding: 80px 40px; background: linear-gradient(135deg, rgba(232, 168, 124, 0.1) 0%, rgba(212, 165, 165, 0.15) 100%);">
+        <div class="self-side" style="padding: 80px 40px;">
             <div class="side-header">
                 <h2 class="side-title" style="color: #d4a5a5;">Couples Valé</h2>
                 <p class="side-subtitle">For your relationship</p>
