@@ -994,6 +994,86 @@
         </div>
 
         <div class="dashboard-grid view-both" id="dashboardContent">
+            <!-- Gratitude Section -->
+            <div class="card show-both">
+                <div class="card-header">
+                    <h2>💝 Gratitude</h2>
+                    <span class="badge">This Week</span>
+                </div>
+                <div class="card-content">
+                    <div class="gratitude-item">
+                        <h4>From Alex to Jordan</h4>
+                        <p>"Thanks for handling the morning routine solo this week while I had early meetings. The kids were fed, dressed, and happy. I noticed."</p>
+                    </div>
+                    <div class="gratitude-item">
+                        <h4>From Jordan to Alex</h4>
+                        <p>"Appreciate you remembering to reschedule the dentist and handling all the insurance calls. That mental load is real."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jordan's View: Ways Alex Can Help Jordan -->
+            <div class="card partner-section show-jordan" style="display: none;">
+                <div class="card-header">
+                    <h2>🤝 Ways Alex Can Help You</h2>
+                    <span class="badge" style="background: var(--success);">For Jordan</span>
+                </div>
+                <div class="card-content">
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">🎁</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Order Parker's gift today</h4>
+                            <p>Remove guilt — something small but thoughtful</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">🌙</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Early bedtime support Wednesday</h4>
+                            <p>Tag-team kids to bed so Jordan can get 7 hours</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">🍽️</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle dinner Thursday</h4>
+                            <p>One less thing before deadline — order in or prep ahead</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alex's View: Ways Jordan Can Help Alex -->
+            <div class="card partner-section show-alex" style="display: none;">
+                <div class="card-header">
+                    <h2>🤝 Ways Jordan Can Help You</h2>
+                    <span class="badge" style="background: var(--success);">For Alex</span>
+                </div>
+                <div class="card-content">
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">☕</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Bring coffee Thursday morning</h4>
+                            <p>Big presentation day — small gesture of support</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">📚</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Research reading tutors this weekend</h4>
+                            <p>Take task off Alex's plate — come with options</p>
+                        </div>
+                    </div>
+                    <div class="help-item" onclick="this.style.opacity='0.5'">
+                        <span class="help-icon">🧘</span>
+                        <div class="help-content">
+                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle Saturday morning solo</h4>
+                            <p>Give Alex 3 hours to herself — no questions asked</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Calendar -->
             <div class="card calendar-widget">
                 <div class="card-header">
@@ -1272,24 +1352,6 @@
                 </div>
             </div>
 
-            <!-- Gratitude Section -->
-            <div class="card show-both">
-                <div class="card-header">
-                    <h2>💝 Gratitude</h2>
-                    <span class="badge">This Week</span>
-                </div>
-                <div class="card-content">
-                    <div class="gratitude-item">
-                        <h4>From Alex to Jordan</h4>
-                        <p>"Thanks for handling the morning routine solo this week while I had early meetings. The kids were fed, dressed, and happy. I noticed."</p>
-                    </div>
-                    <div class="gratitude-item">
-                        <h4>From Jordan to Alex</h4>
-                        <p>"Appreciate you remembering to reschedule the dentist and handling all the insurance calls. That mental load is real."</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Jordan's View: What's on Jordan's Mind (First person) -->
             <div class="card partner-section show-jordan" style="display: none;">
                 <div class="card-header">
@@ -1308,37 +1370,6 @@
                     <div class="mind-item">
                         <h4 contenteditable="true" onclick="showEditHint(this)">Health Goal</h4>
                         <p>"Trying to get back to morning runs — hoping for support on early bedtime"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Jordan's View: Ways Alex Can Help Jordan -->
-            <div class="card partner-section show-jordan" style="display: none;">
-                <div class="card-header">
-                    <h2>🤝 Ways Alex Can Help You</h2>
-                    <span class="badge" style="background: var(--success);">For Jordan</span>
-                </div>
-                <div class="card-content">
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">🎁</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Order Parker's gift today</h4>
-                            <p>Remove guilt — something small but thoughtful</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">🌙</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Early bedtime support Wednesday</h4>
-                            <p>Tag-team kids to bed so Jordan can get 7 hours</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">🍽️</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle dinner Thursday</h4>
-                            <p>One less thing before deadline — order in or prep ahead</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1365,36 +1396,6 @@
                 </div>
             </div>
 
-            <!-- Alex's View: Ways Jordan Can Help Alex -->
-            <div class="card partner-section show-alex" style="display: none;">
-                <div class="card-header">
-                    <h2>🤝 Ways Jordan Can Help You</h2>
-                    <span class="badge" style="background: var(--success);">For Alex</span>
-                </div>
-                <div class="card-content">
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">☕</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Bring coffee Thursday morning</h4>
-                            <p>Big presentation day — small gesture of support</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">📚</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Research reading tutors this weekend</h4>
-                            <p>Take task off Alex's plate — come with options</p>
-                        </div>
-                    </div>
-                    <div class="help-item" onclick="this.style.opacity='0.5'">
-                        <span class="help-icon">🧘</span>
-                        <div class="help-content">
-                            <h4 contenteditable="true" onclick="showEditHint(this)">Handle Saturday morning solo</h4>
-                            <p>Give Alex 3 hours to herself — no questions asked</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
