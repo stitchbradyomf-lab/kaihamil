@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Valé Manifesto | Three Is Stronger Than Two</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --lavender: #d4a5a5;
+            --border: #e8dfd3;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            line-height: 1.7;
+        }
+        
+        .nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--lavender); }
+        
+        .nav-link {
+            color: var(--brown-medium);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover { color: var(--lavender); }
+        
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(135deg, #f5e8e3 0%, #faf6f1 50%, #f8f5f0 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--brown-medium);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .section {
+            padding: 80px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--brown-medium);
+        }
+        
+        .highlight-box {
+            background: var(--bg-card);
+            border-left: 4px solid var(--lavender);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .highlight-box p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--ink-dark);
+            margin: 0;
+        }
+        
+        .triangle-diagram {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--bg-warm);
+            margin: 40px 0;
+            border-radius: 16px;
+        }
+        
+        .triangle-diagram h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--ink-dark);
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .comparison-col {
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .comparison-col.weak {
+            background: rgba(212, 165, 165, 0.1);
+            border: 1px solid rgba(212, 165, 165, 0.3);
+        }
+        
+        .comparison-col.strong {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+        
+        .comparison-col h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .comparison-col.weak h4 { color: var(--brown-medium); }
+        .comparison-col.strong h4 { color: var(--gold); }
+        
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f5e8e3 0%, #faf6f1 100%);
+        }
+        
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--ink-dark);
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--brown-medium);
+            font-size: 1.1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--lavender);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
+        }
+        
+        .footer {
+            background: var(--brown-dark);
+            color: var(--amber);
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer a {
+            color: var(--amber);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="logo">Couples <span>Valé</span></a>
+        <a href="index.html" class="nav-link">← Back to Valé OS</a>
+    </nav>
+    
+    <section class="hero">
+        <h1>Three Is Stronger Than Two</h1>
+        <p class="subtitle">A manifesto for relationship infrastructure</p>
+    </section>
+    
+    <section class="section">
+        <h2>The Problem</h2>
+        <p>50% of marriages fail. Not because people stop loving each other. Not because they're incompatible. But because the <strong>bilateral burden</strong> becomes unbearable.</p>
+        
+        <p>When two people own a relationship jointly, every misalignment becomes personal. Every dropped ball becomes blame. Every unmet expectation becomes a wound. The responsibility is shared, which means when things go wrong, there's no clear owner — only mutual disappointment.</p>
+        
+        <div class="highlight-box">
+            <p>"The enemy isn't the other person as steward of the relationship. It is the burden of expectation within the overall bilateral structure."</p>
+        </div>
+        
+        <p>This is why administration and logistics destroy relationships. Not because couples can't handle tasks. But because tasks that fall through the cracks have no owner. And blame without ownership erodes the very connection that makes the relationship worth maintaining.</p>
+    </section>
+    
+    <div class="triangle-diagram">
+        <h3>The Triangle Solution</h3>
+        <div style="font-size: 4rem; margin: 20px 0;">△</div>
+        <p style="max-width: 500px; margin: 0 auto; color: var(--brown-medium);">
+            <strong>You</strong> ↔ <strong>Your Partner</strong><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↖&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↗<br>
+            &nbsp;&nbsp;&nbsp;<strong>Couples Valé</strong>
+        </p>
+        <p style="max-width: 500px; margin: 20px auto 0; color: var(--brown-medium); font-style: italic;">
+            A neutral third entity becomes the source of blame for misalignment. It's Couples Valé's problem to solve, while each party gets to benefit from giving to each other.
+        </p>
+    </div>
+    
+    <section class="section">
+        <h2>Why Three Works</h2>
+        <p>In game theory, the triangle is the strongest structure. A couple bears the responsibility of owning both themselves as individuals AND the relationship itself. That's two entities trying to manage three domains (you, me, us).</p>
+        
+        <p>By adding a neutral third party — an objective system — stability is added. Problems within the relationship don't require adjudication. They require system tuning.</p>
+        
+        <div class="highlight-box">
+            <p>"Couples Valé is not an app you use together. It's a third member of your relationship that manages the administrative burden so you can manage the connection."</p>
+        </div>
+    </section>
+    
+    <div class="comparison">
+        <div class="comparison-col weak">
+            <h4>Bilateral (Weak)</h4>
+            <p style="color: var(--brown-medium); margin-bottom: 15px;"><strong>You</strong> ↔ <strong>Partner</strong></p>
+            <ul style="list-style: none; color: var(--brown-medium); line-height: 2;">
+                <li>❌ "You forgot to..."</li>
+                <li>❌ "I thought you were..."</li>
+                <li>❌ Blame loops</li>
+                <li>❌ Defensive walls</li>
+                <li>❌ Erosion over time</li>
+            </ul>
+        </div>
+        
+        <div class="comparison-col strong">
+            <h4>Triangular (Strong)</h4>
+            <p style="color: var(--brown-medium); margin-bottom: 15px;"><strong>You</strong> ↔ <strong>Partner</strong> + <strong>System</strong></p>
+            <ul style="list-style: none; color: var(--brown-medium); line-height: 2;">
+                <li>✓ "The system didn't catch..."</li>
+                <li>✓ "Let's update our shared context"</li>
+                <li>✓ Joint problem-solving</li>
+                <li>✓ United against the gap</li>
+                <li>✓ Grace preserved</li>
+            </ul>
+        </div>
+    </div>
+    
+    <section class="section">
+        <h2>A Humanitarian Use of AI</h2>
+        <p>I'm doing this because it's the most important thing in the world to me. I see the impact that relationship strength has on my personal life. I am responsible for both things — myself, and my relationship.</p>
+        
+        <p>I'm doing this not because I'm dependent on the relationship, but because <strong>I love to love</strong>. Being in a loving relationship is a magical thing, and it absolutely sucks when life and administration gets in the way.</p>
+        
+        <div class="highlight-box">
+            <p>"AI has the potential to act as that neutral third-party that takes on the administrative burden of managing the under-defined responsibilities of a relationship, keeping the connection between the people pure."</p>
+        </div>
+        
+        <p>When the burden of managing and optimizing not just yourself, but the relationship connection at the same time, becomes too heavy — that's where Couples Valé steps in. It holds the administrative load so you can hold each other.</p>
+    </section>
+    
+    <section class="section">
+        <h2>What This Means</h2>
+        <p><strong>Not</strong> a shared to-do list.<br>
+        <strong>But</strong> a relationship operating system.</p>
+        
+        <p><strong>Not</strong> a way to monitor your partner.<br>
+        <strong>But</strong> a neutral third party for blame.</p>
+        
+        <p><strong>Not</strong> another app to check.<br>
+        <strong>But</strong> space to be human together.</p>
+        
+        <p><strong>Not</strong> a band-aid for broken communication.<br>
+        <strong>But</strong> relief from bilateral burden.</p>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Preserve the Magic</h2>
+        <p>50% of relationships fail fighting the wrong enemy. The enemy isn't your partner. The enemy is the structure itself. Couples Valé is the third point that changes everything.</p>
+        <a href="couples-demo.html" class="cta-button">See the Demo</a>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-brand">Couples <span style="color: var(--lavender);">Valé</span></div>
+        <p style="margin-bottom: 20px; opacity: 0.7;">A truly humanitarian use of AI</p>
+        <div>
+            <a href="https://kaihamil.com">Kai Hamil</a>
+            <a href="index.html">Valé OS</a>
+            <a href="mailto:kyle@kaihamil.com">Contact</a>
+        </div>
+    </footer>
+</body>
+</html>
