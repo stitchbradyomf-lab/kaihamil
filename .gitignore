@@ -1,0 +1,10 @@
+# Secrets - NEVER commit these
+openclaw.json
+.env
+*.pem
+*.key
+secrets/
+.DS_Store
+*.log
+node_modules/
+kaihamil-private/
