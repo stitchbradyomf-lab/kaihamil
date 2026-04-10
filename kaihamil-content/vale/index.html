@@ -284,6 +284,11 @@
             border: 2px solid #d4a5a5;
         }
         
+        a:hover .service-card.couples-card {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(212, 165, 165, 0.3);
+        }
+        
         .service-card.couples-card .service-title {
             color: #d4a5a5;
             font-size: 1.8rem;
@@ -651,30 +656,32 @@
             </div>
             
             <!-- Couples Valé -->
-            <div class="service-card couples-card">
-                <span class="service-status active">Active Build</span>
-                <h3 class="service-title">Couples Valé</h3>
-                <p class="service-persona">Jordan & Alex, Parents</p>
-                <p class="service-desc">
-                    Both work. Three kids. Calendar Tetris. Their Valé holds the mental load so they don't have to — creating bandwidth to be present with each other.
-                </p>
-                <div class="dashboard-preview" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(212, 165, 165, 0.3);">
-                    <p style="font-size: 0.85rem; color: #5a4a4a; margin-bottom: 10px; font-weight: 500;">Dashboard Preview</p>
-                    <div style="background: linear-gradient(135deg, #f5e8e3 0%, #faf6f1 100%); border-radius: 8px; padding: 10px; font-size: 0.7rem; color: #3d2817; border: 1px solid #e8d5c5;">
-                        <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
-                            <span style="color: #d4a5a5;">◆</span> 
-                            <span style="font-weight: 500;">Couples Valé</span>
-                        </div>
-                        <div style="opacity: 0.8;">Our Dashboard • Both View</div>
-                        <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                            <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">📅 Upcoming</div>
-                            <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">✓ Shared Tasks</div>
-                            <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">💬 Recent</div>
-                            <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">🎯 This Week</div>
+            <a href="couples-demo.html" style="text-decoration: none; color: inherit; display: block;">
+                <div class="service-card couples-card" style="cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <span class="service-status active">Active Build</span>
+                    <h3 class="service-title">Couples Valé</h3>
+                    <p class="service-persona">Jordan & Alex, Parents</p>
+                    <p class="service-desc">
+                        Both work. Three kids. Calendar Tetris. Their Valé holds the mental load so they don't have to — creating bandwidth to be present with each other.
+                    </p>
+                    <div class="dashboard-preview" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(212, 165, 165, 0.3);">
+                        <p style="font-size: 0.85rem; color: #5a4a4a; margin-bottom: 10px; font-weight: 500;">Dashboard Preview</p>
+                        <div style="background: linear-gradient(135deg, #f5e8e3 0%, #faf6f1 100%); border-radius: 8px; padding: 10px; font-size: 0.7rem; color: #3d2817; border: 1px solid #e8d5c5;">
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px; align-items: center;">
+                                <span style="color: #d4a5a5;">◆</span> 
+                                <span style="font-weight: 500;">Couples Valé</span>
+                            </div>
+                            <div style="opacity: 0.8;">Our Dashboard • Both View</div>
+                            <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                                <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">📅 Upcoming</div>
+                                <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">✓ Shared Tasks</div>
+                                <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">💬 Recent</div>
+                                <div style="background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #e8d5c5;">🎯 This Week</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
     
