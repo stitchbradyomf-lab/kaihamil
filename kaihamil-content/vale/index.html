@@ -242,6 +242,11 @@
             border: 2px solid #3d4a5c;
         }
         
+        a:hover .service-card.pro-card {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(61, 74, 92, 0.3);
+        }
+        
         .service-card.pro-card .service-title {
             font-weight: 700;
             color: #3d4a5c;
@@ -631,29 +636,31 @@
         
         <div class="services-grid">
             <!-- Valé Pro -->
-            <div class="service-card pro-card" style="position: relative;">
-                <span class="service-status active">Active Build</span>
-                <h3 class="service-title">Valé Pro</h3>
-                <p class="service-persona">Jordan Quinn, Real Estate</p>
-                <p class="service-desc">
-                    Runs a solo practice. No assistant. No team. Just him, his clients, and a hundred details. His Valé learns his patterns, manages the monotony, and surfaces what matters before he asks.
-                </p>
-                <div class="dashboard-preview" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(61, 74, 92, 0.2);">
-                    <p style="font-size: 0.85rem; color: #3d4a5c; margin-bottom: 10px; font-weight: 500;">Dashboard Preview</p>
-                    <div style="background: #161b22; border-radius: 8px; padding: 10px; font-family: monospace; font-size: 0.7rem; color: #8b949e;">
-                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-                            <span style="color: #f4d03f;">●</span> Jordan Quinn
-                        </div>
-                        <div style="opacity: 0.7;">3 tasks today • 2 new leads</div>
-                        <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                            <div style="background: #21262d; padding: 6px; border-radius: 4px;">📅 Calendar</div>
-                            <div style="background: #21262d; padding: 6px; border-radius: 4px;">✓ Reminders</div>
-                            <div style="background: #21262d; padding: 6px; border-radius: 4px;">👥 CRM</div>
-                            <div style="background: #21262d; padding: 6px; border-radius: 4px;">🏠 Listings</div>
+            <a href="dashboard.html" style="text-decoration: none; color: inherit; display: block;">
+                <div class="service-card pro-card" style="position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <span class="service-status active">Active Build</span>
+                    <h3 class="service-title">Valé Pro</h3>
+                    <p class="service-persona">Jordan Quinn, Real Estate</p>
+                    <p class="service-desc">
+                        Runs a solo practice. No assistant. No team. Just him, his clients, and a hundred details. His Valé learns his patterns, manages the monotony, and surfaces what matters before he asks.
+                    </p>
+                    <div class="dashboard-preview" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.7); border-radius: 12px; border: 1px solid rgba(61, 74, 92, 0.2);">
+                        <p style="font-size: 0.85rem; color: #3d4a5c; margin-bottom: 10px; font-weight: 500;">Dashboard Preview</p>
+                        <div style="background: #161b22; border-radius: 8px; padding: 10px; font-family: monospace; font-size: 0.7rem; color: #8b949e;">
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                <span style="color: #f4d03f;">●</span> Jordan Quinn
+                            </div>
+                            <div style="opacity: 0.7;">3 tasks today • 2 new leads</div>
+                            <div style="margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                                <div style="background: #21262d; padding: 6px; border-radius: 4px;">📅 Calendar</div>
+                                <div style="background: #21262d; padding: 6px; border-radius: 4px;">✓ Reminders</div>
+                                <div style="background: #21262d; padding: 6px; border-radius: 4px;">👥 CRM</div>
+                                <div style="background: #21262d; padding: 6px; border-radius: 4px;">🏠 Listings</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             
             <!-- Couples Valé -->
             <a href="couples-demo.html" style="text-decoration: none; color: inherit; display: block;">
