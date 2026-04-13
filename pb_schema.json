@@ -1,380 +1,416 @@
-{
-  "collections": [
-    {
-      "id": "_pb_users_auth_",
-      "name": "users",
-      "type": "auth",
-      "system": false,
-      "schema": [
-        {
-          "id": "user_name",
-          "name": "name",
-          "type": "text",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": null,
-            "max": null,
-            "pattern": ""
-          }
+[
+  {
+    "id": "_pb_users_auth_",
+    "name": "users",
+    "type": "auth",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "r7vfoibq",
+        "name": "name",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
         }
-      ],
-      "indexes": [],
-      "listRule": "id = @request.auth.id",
-      "viewRule": "id = @request.auth.id",
-      "createRule": "",
-      "updateRule": "id = @request.auth.id",
-      "deleteRule": "id = @request.auth.id",
-      "options": {
-        "allowEmailAuth": true,
-        "allowOAuth2Auth": false,
-        "allowUsernameAuth": false,
-        "exceptEmailDomains": null,
-        "manageRule": null,
-        "minPasswordLength": 8,
-        "onlyEmailDomains": null,
-        "requireEmail": false
       }
-    },
-    {
-      "id": "daily_ratings",
-      "name": "daily_ratings",
-      "type": "base",
-      "system": false,
-      "schema": [
-        {
-          "id": "user_id",
-          "name": "user",
-          "type": "relation",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "collectionId": "_pb_users_auth_",
-            "cascadeDelete": true,
-            "minSelect": null,
-            "maxSelect": 1,
-            "displayFields": []
-          }
-        },
-        {
-          "id": "date",
-          "name": "date",
-          "type": "date",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": "",
-            "max": ""
-          }
-        },
-        {
-          "id": "kids",
-          "name": "kids",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "partner",
-          "name": "partner",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "inner_circle",
-          "name": "inner_circle",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "work",
-          "name": "work",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "business",
-          "name": "business",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "administration",
-          "name": "administration",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "home",
-          "name": "home",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "body",
-          "name": "body",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "mind",
-          "name": "mind",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "emotion",
-          "name": "emotion",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "sleep",
-          "name": "sleep",
-          "type": "number",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "total",
-          "name": "total",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 0,
-            "max": 55
-          }
-        },
-        {
-          "id": "notes",
-          "name": "notes",
-          "type": "text",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": null,
-            "max": 2000,
-            "pattern": ""
-          }
-        }
-      ],
-      "indexes": [
-        "CREATE UNIQUE INDEX `idx_unique_user_date` ON `daily_ratings` (`user`, `date`)",
-        "CREATE INDEX `idx_date` ON `daily_ratings` (`date`)"
-      ],
-      "listRule": "user = @request.auth.id",
-      "viewRule": "user = @request.auth.id",
-      "createRule": "user = @request.auth.id",
-      "updateRule": "user = @request.auth.id",
-      "deleteRule": "user = @request.auth.id",
-      "options": {}
-    },
-    {
-      "id": "intentions",
-      "name": "intentions",
-      "type": "base",
-      "system": false,
-      "schema": [
-        {
-          "id": "user_id",
-          "name": "user",
-          "type": "relation",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "collectionId": "_pb_users_auth_",
-            "cascadeDelete": true,
-            "minSelect": null,
-            "maxSelect": 1,
-            "displayFields": []
-          }
-        },
-        {
-          "id": "period",
-          "name": "period",
-          "type": "select",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "maxSelect": 1,
-            "values": ["weekly", "monthly", "quarterly"]
-          }
-        },
-        {
-          "id": "period_start",
-          "name": "period_start",
-          "type": "date",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": "",
-            "max": ""
-          }
-        },
-        {
-          "id": "period_end",
-          "name": "period_end",
-          "type": "date",
-          "system": false,
-          "required": true,
-          "unique": false,
-          "options": {
-            "min": "",
-            "max": ""
-          }
-        },
-        {
-          "id": "target_kids",
-          "name": "target_kids",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "target_partner",
-          "name": "target_partner",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "target_work",
-          "name": "target_work",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "target_business",
-          "name": "target_business",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "target_sleep",
-          "name": "target_sleep",
-          "type": "number",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {
-            "min": 1,
-            "max": 5
-          }
-        },
-        {
-          "id": "focus_areas",
-          "name": "focus_areas",
-          "type": "json",
-          "system": false,
-          "required": false,
-          "unique": false,
-          "options": {}
-        }
-      ],
-      "indexes": [
-        "CREATE UNIQUE INDEX `idx_unique_user_period` ON `intentions` (`user`, `period`, `period_start`)"
-      ],
-      "listRule": "user = @request.auth.id",
-      "viewRule": "user = @request.auth.id",
-      "createRule": "user = @request.auth.id",
-      "updateRule": "user = @request.auth.id",
-      "deleteRule": "user = @request.auth.id",
-      "options": {}
+    ],
+    "indexes": [],
+    "listRule": "id = @request.auth.id",
+    "viewRule": "id = @request.auth.id",
+    "createRule": "",
+    "updateRule": "id = @request.auth.id",
+    "deleteRule": "id = @request.auth.id",
+    "options": {
+      "allowEmailAuth": true,
+      "allowOAuth2Auth": false,
+      "allowUsernameAuth": false,
+      "exceptEmailDomains": null,
+      "manageRule": null,
+      "minPasswordLength": 8,
+      "onlyEmailDomains": null,
+      "requireEmail": false
     }
-  ]
-}
+  },
+  {
+    "id": "p7r8h9s0t1u2v3w4",
+    "name": "daily_ratings",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "user_rel",
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "date_field",
+        "name": "date",
+        "type": "date",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "kids_field",
+        "name": "kids",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "partner_field",
+        "name": "partner",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "inner_circle_field",
+        "name": "inner_circle",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "work_field",
+        "name": "work",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "business_field",
+        "name": "business",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "admin_field",
+        "name": "administration",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "home_field",
+        "name": "home",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "body_field",
+        "name": "body",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "mind_field",
+        "name": "mind",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "emotion_field",
+        "name": "emotion",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "sleep_field",
+        "name": "sleep",
+        "type": "number",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "total_field",
+        "name": "total",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 0,
+          "max": 55,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "notes_field",
+        "name": "notes",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": 2000,
+          "pattern": ""
+        }
+      }
+    ],
+    "indexes": [],
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "user = @request.auth.id",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "options": {}
+  },
+  {
+    "id": "a1b2c3d4e5f6g7h8",
+    "name": "intentions",
+    "type": "base",
+    "system": false,
+    "schema": [
+      {
+        "system": false,
+        "id": "user_rel2",
+        "name": "user",
+        "type": "relation",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "collectionId": "_pb_users_auth_",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
+        }
+      },
+      {
+        "system": false,
+        "id": "period_field",
+        "name": "period",
+        "type": "select",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "values": ["weekly", "monthly", "quarterly"]
+        }
+      },
+      {
+        "system": false,
+        "id": "start_field",
+        "name": "period_start",
+        "type": "date",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "end_field",
+        "name": "period_end",
+        "type": "date",
+        "required": true,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": "",
+          "max": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "target_kids_field",
+        "name": "target_kids",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "target_partner_field",
+        "name": "target_partner",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "target_work_field",
+        "name": "target_work",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "target_business_field",
+        "name": "target_business",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "target_sleep_field",
+        "name": "target_sleep",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": 1,
+          "max": 5,
+          "noDecimal": true
+        }
+      },
+      {
+        "system": false,
+        "id": "focus_field",
+        "name": "focus_areas",
+        "type": "json",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {}
+      }
+    ],
+    "indexes": [],
+    "listRule": "user = @request.auth.id",
+    "viewRule": "user = @request.auth.id",
+    "createRule": "user = @request.auth.id",
+    "updateRule": "user = @request.auth.id",
+    "deleteRule": "user = @request.auth.id",
+    "options": {}
+  }
+]
