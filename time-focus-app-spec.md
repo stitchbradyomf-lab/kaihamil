@@ -292,4 +292,4 @@ time-focus-app/
 
 ---
 
-**Reference:** See `kaihamil-private/tools/time-focus-radar.html` for existing radar chart visualization and styling inspiration.
+**Reference:** See `kaihamil-content/tools/time-focus-radar.html` for existing radar chart visualization and styling inspiration.
