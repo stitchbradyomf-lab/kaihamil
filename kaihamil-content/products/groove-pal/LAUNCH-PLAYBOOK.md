@@ -71,7 +71,7 @@ No promotion required. No social posts expected. Just participate in the system 
 By the time the founding circle is active, the MVP platform must be ready:
 
 - Registration via QR scan
-- Payment processing ($35)
+- Payment processing ($45)
 - Basic profile creation
 - Record logging (sent/received)
 - Thank you notes between pals
@@ -158,7 +158,7 @@ Coordinate a "public launch" moment, even though the platform has been live:
 
 By month 6, target 1,000 active pals. At this scale:
 
-- Revenue: ~$35,000 total collected
+- Revenue: ~$45,000 total collected
 - Records in circulation: ~1,500-2,000
 - Average record journey: 3-4 stickers
 - Groove credits redeemed: ~100-150 free records sent

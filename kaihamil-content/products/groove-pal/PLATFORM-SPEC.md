@@ -110,7 +110,7 @@ ThankYou {
    - Email
    - City
    - Password
-4. Submit → Stripe checkout ($35)
+4. Submit → Stripe checkout ($45)
 5. Payment success → Account created
 6. Confirmation page:
    - "Welcome, Pal."
@@ -131,7 +131,7 @@ ThankYou {
 **Steps:**
 1. Homepage → "Become a Groove Pal" CTA
 2. Registration form (same as above)
-3. Stripe checkout ($35)
+3. Stripe checkout ($45)
 4. Account created, fulfillment triggered
 5. Dashboard access
 

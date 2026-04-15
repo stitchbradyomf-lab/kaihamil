@@ -45,7 +45,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 **For New Members:**
 - Scan QR code on a sticker → lands on registration page
-- Pay $35 to join → receive your own sticker sheet + welcome record
+- Pay $45 to join → receive your own sticker sheet + welcome record
 - Create profile: name, location (city only), music taste
 
 **For Active Pals:**
@@ -74,7 +74,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 ## Economics
 
-### The $35 Join Fee
+### The $45 Join Fee
 
 **What you get:**
 - 1 welcome vinyl (curated by Groove Pal)
@@ -82,7 +82,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 - Access to the platform
 - Ability to track records you send
 
-**Where the $35 goes:**
+**Where the $45 goes:**
 | Item | Cost |
 |------|------|
 | Vinyl (wholesale) | $12-15 |
@@ -97,14 +97,14 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 **Solution:** The Groove Loop
 
-1. **You join** ($35) → receive welcome record + stickers
+1. **You join** ($45) → receive welcome record + stickers
 2. **You send a record** → log it on the platform
 3. **That record travels** → each new registration from your sticker earns you a "groove credit"
 4. **3 groove credits** → we send you a new record (free)
 5. **You send that one too** → the loop continues
 
 **The math:**
-- Each new member pays $35
+- Each new member pays $45
 - ~$15 goes to vinyl + stickers + shipping
 - ~$5 goes to reward records for active sharers
 - ~$10 goes to platform + margin
@@ -117,8 +117,8 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 | Members | Revenue | Vinyl Costs | Reward Records | Net |
 |---------|---------|-------------|----------------|-----|
 | 100 | $3,500 | $1,500 | $300 | $1,700 |
-| 1,000 | $35,000 | $15,000 | $3,000 | $17,000 |
-| 10,000 | $350,000 | $150,000 | $30,000 | $170,000 |
+| 1,000 | $45,000 | $15,000 | $3,000 | $17,000 |
+| 10,000 | $450,000 | $150,000 | $30,000 | $170,000 |
 | 100,000 | $3.5M | $1.5M | $300K | $1.7M |
 
 **At scale:** ~48% margin after fulfillment and rewards.
@@ -148,7 +148,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 ### Phase 3: Public Launch (Month 4+)
 
-- Open registration (anyone can join for $35)
+- Open registration (anyone can join for $45)
 - Content: stories of records that traveled far
 - Press: "The anti-social network" angle
 - Partnerships: indie record stores, vinyl subscription boxes
@@ -193,7 +193,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 ### MVP Features
 
 - **Registration** via QR scan
-- **Payment** ($35 Stripe checkout)
+- **Payment** ($45 Stripe checkout)
 - **Profile** (name, city, music taste)
 - **Record logging** (I sent / I received)
 - **Sticker tracking** (which records have my sticker)

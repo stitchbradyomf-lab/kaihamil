@@ -12,7 +12,7 @@ This isn't venture-scale economics. It's sustainable economics. The goal is a he
 
 ---
 
-## The $35 Join Fee
+## The $45 Join Fee
 
 ### What You Get
 
@@ -23,7 +23,7 @@ This isn't venture-scale economics. It's sustainable economics. The goal is a he
 | Platform Access | Track records, send thanks, earn credits |
 | The Invitation | Ability to bring others into the network |
 
-### Where the $35 Goes
+### Where the $45 Goes
 
 | Line Item | Cost Range | Notes |
 |-----------|------------|-------|
@@ -78,7 +78,7 @@ This creates a natural selection for generosity:
 - **Total: ~$16-20**
 
 **Revenue generated per reward:**
-- 3 new pals × $35 = $105
+- 3 new pals × $45 = $135
 - Minus their costs: ~$90
 - **Net: ~$15-20**
 
@@ -92,7 +92,7 @@ This creates a natural selection for generosity:
 
 | | Amount |
 |---|--------|
-| Revenue | $35 |
+| Revenue | $45 |
 | COGS (vinyl, sticker, mailer, shipping) | $21-27 |
 | Platform/ops allocation | $3-5 |
 | **Gross margin** | **$3-9** |
@@ -115,8 +115,8 @@ Most pals join once. Some become highly active and:
 | Pals | One-Time Revenue | Monthly Steady-State* |
 |------|------------------|----------------------|
 | 100 | $3,500 | ~$300/mo new |
-| 1,000 | $35,000 | ~$2,500/mo new |
-| 10,000 | $350,000 | ~$15,000/mo new |
+| 1,000 | $45,000 | ~$2,500/mo new |
+| 10,000 | $450,000 | ~$15,000/mo new |
 | 100,000 | $3.5M | ~$100,000/mo new |
 
 *Assuming 7-10% monthly growth after reaching scale*
@@ -195,7 +195,7 @@ Reward records are earned over time — a pal doesn't earn 3 credits on day one.
 
 ## Pricing Philosophy
 
-### Why $35?
+### Why $45?
 
 **Too low ($20-25):**
 - Margins disappear
@@ -207,7 +207,7 @@ Reward records are earned over time — a pal doesn't earn 3 credits on day one.
 - Pressure to make it "worth it"
 - Loses the casual, generous spirit
 
-**$35 is the sweet spot:**
+**$45 is the sweet spot:**
 - Accessible but not trivial
 - Enough margin to sustain
 - Feels like a fair exchange
@@ -225,7 +225,7 @@ Reward records are earned over time — a pal doesn't earn 3 credits on day one.
 ## Revenue Streams (Current & Potential)
 
 ### Primary (Now)
-- **Join fees:** $35 per new pal
+- **Join fees:** $45 per new pal
 
 ### Secondary (Future)
 - **Extra sticker sheets:** $10 for 10 more (optional)
@@ -271,7 +271,7 @@ At ~$5 margin per pal after COGS:
 
 ### Year 1 Target
 - 1,000 pals
-- $35,000 revenue
+- $45,000 revenue
 - ~$17,000 net after costs
 - Reinvest in vinyl, platform, content
 
@@ -283,7 +283,7 @@ At ~$5 margin per pal after COGS:
 
 ### Year 3+ Target
 - 10,000+ pals
-- $350,000+ revenue (cumulative)
+- $450,000+ revenue (cumulative)
 - ~$170,000+ net (cumulative)
 - Sustainable, profitable network
 
@@ -324,7 +324,7 @@ The goal is building something meaningful and sustainable. If an exit happens, g
 
 | Metric | Target |
 |--------|--------|
-| Join fee | $35 |
+| Join fee | $45 |
 | Cost to fulfill | ~$26-30 |
 | Margin per pal | ~$5-9 |
 | Reward cost | ~$18 |

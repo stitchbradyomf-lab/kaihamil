@@ -105,7 +105,7 @@ The platform is minimal by design. It exists to support the physical experience,
 
 ## Getting Started
 
-1. **Join for $35** — receive your welcome vinyl + sticker sheet
+1. **Join for $45** — receive your welcome vinyl + sticker sheet
 2. **Listen** — put on the record, be present
 3. **Attach your sticker** — add your QR code to the sleeve
 4. **Send it forward** — mail it to someone you think will love it

@@ -26,7 +26,7 @@ You receive a record. You listen — really listen. You attach your sticker. You
 No algorithms. No feeds. Just music, mail, and meaning.
 
 ### CTA
-**[Become a Groove Pal — $35]**
+**[Become a Groove Pal — $45]**
 
 *Includes welcome vinyl + personal sticker sheet*
 
@@ -117,7 +117,7 @@ The math is simple: the people who share the most get free vinyl. The network re
 
 ### Price Card
 
-**$35 — One Time**
+**$45 — One Time**
 
 *Everything you need to start sharing:*
 
@@ -184,7 +184,7 @@ This is that same energy — sealed and sent forward.
 ### Body
 Become a Groove Pal today. Receive your welcome vinyl, attach your first sticker, and start sharing the music that matters.
 
-**[Become a Groove Pal — $35]**
+**[Become a Groove Pal — $45]**
 
 *The groove moves when you do.*
 
