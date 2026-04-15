@@ -194,6 +194,18 @@ def get_reminders():
     except FileNotFoundError:
         return []
 
+def get_video_rep_section():
+    """Get video rep tracking section"""
+    try:
+        import subprocess
+        result = subprocess.run(
+            ["python3", os.path.join(WORKSPACE, "scripts/video-rep-integration.py")],
+            capture_output=True, text=True, timeout=10
+        )
+        return result.stdout
+    except:
+        return ""
+
 def generate_brief():
     """Generate morning brief"""
     brief = []
@@ -249,7 +261,13 @@ def generate_brief():
         brief.append("✅ No outstanding reminders")
     brief.append("")
     
-    # 5. SESSION ACTIVITY
+    # 5. VIDEO REP TRACKING
+    video_section = get_video_rep_section()
+    if video_section:
+        brief.append(video_section)
+        brief.append("")
+    
+    # 6. SESSION ACTIVITY
     brief.append("💬 SESSION ACTIVITY")
     brief.append("-" * 40)
     usage = get_yesterday_token_usage()
