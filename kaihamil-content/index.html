@@ -21,6 +21,8 @@
             --terracotta: #b87a5e;
             --ink-dark: #2c2420;
             --ink-medium: #5a5048;
+            --self-light: #faf6f1;
+            --system-dark: #3d2817;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -133,112 +135,247 @@
             visibility: visible;
         }
         
-        /* Wave Hero Section */
-        .wave-hero {
-            min-height: 55vh;
+        /* Circle Hero Section */
+        .circle-hero {
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 100px 20px 60px;
+            padding: 120px 20px 40px;
             position: relative;
-            overflow: hidden;
             background: #ffffff;
         }
         
-        .wave-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('images/hero-wave.png') no-repeat center center;
-            background-size: cover;
-            opacity: 0.9;
-            z-index: 0;
-        }
-        
-        .wave-hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 900px;
-        }
-        
-        .wave-hero h1 {
+        .circle-hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 400;
             color: var(--ink-dark);
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
         
-        .wave-hero h1 strong {
+        .circle-hero h1 strong {
             font-weight: 600;
             color: var(--gold);
         }
         
-        .hero-subtext {
-            font-size: 1.2rem;
-            color: var(--ink-medium);
-            font-weight: 300;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        /* Concentric Circles */
+        .circles-container {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 0 auto 30px;
         }
         
-        .cta-button {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--brown-dark);
-            padding: 16px 36px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.1rem;
+        .circle-outer {
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: var(--system-dark);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .circle-outer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(61, 40, 23, 0.3);
+        }
+        
+        .circle-outer.active {
+            box-shadow: 0 0 0 4px var(--gold);
+        }
+        
+        .circle-outer-label {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold-light);
+            font-size: 1rem;
             font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        .circle-outer-desc {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--amber);
+            font-size: 0.85rem;
+            font-weight: 300;
+            white-space: nowrap;
+        }
+        
+        .circle-inner {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: var(--self-light);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+        
+        .circle-inner:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .circle-inner.active {
+            box-shadow: 0 0 0 4px var(--terracotta);
+        }
+        
+        .circle-inner-label {
+            color: var(--terracotta);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        
+        .circle-inner-desc {
+            color: var(--brown-medium);
+            font-size: 0.8rem;
+            font-weight: 300;
+        }
+        
+        /* Content Menu Below Circles */
+        .content-menu {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .menu-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .menu-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .menu-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .system-menu h3 {
+            color: var(--brown-dark);
+        }
+        
+        .self-menu h3 {
+            color: var(--terracotta);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        
+        .menu-item {
+            display: block;
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
         }
         
-        .cta-button:hover {
-            background: var(--brown-dark);
-            color: var(--gold);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(61, 40, 23, 0.3);
+        .system-menu .menu-item {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
         }
         
-        /* Split Section */
+        .system-menu .menu-item:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        
+        .self-menu .menu-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+        
+        .self-menu .menu-item:hover {
+            background: #fef5ef;
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+        }
+        
+        .menu-item-title {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 4px;
+        }
+        
+        .menu-item-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+        }
+        
+        /* Full Navigation (default) */
+        .full-navigation {
+            display: block;
+        }
+        
+        .full-navigation.hidden {
+            display: none;
+        }
+        
+        /* Split Section: System // Self */
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 60vh;
+            min-height: 50vh;
         }
         
-        /* System Side - Posts Style */
+        /* System Side */
         .system-side {
             background: var(--bg-cream);
-            padding: 60px 40px;
+            padding: 50px 40px;
             border-right: 1px solid var(--border);
         }
         
         .side-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         
         .side-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 400;
             color: var(--brown-dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         
         .side-subtitle {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--brown-medium);
             font-weight: 300;
         }
@@ -247,26 +384,25 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-width: 380px;
+            max-width: 340px;
             margin: 0 auto;
         }
         
         .access-card {
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 20px;
             text-decoration: none;
             color: inherit;
             transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
         }
         
         .access-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.1);
         }
         
-        /* Unique gradients for each card */
         .access-card.ai-quiz {
             background: linear-gradient(180deg, #faf6f1 0%, #e8d5a3 100%);
         }
@@ -284,190 +420,31 @@
         }
         
         .access-icon {
-            width: 28px;
-            height: 28px;
-            margin-bottom: 12px;
+            width: 24px;
+            height: 24px;
+            margin-bottom: 10px;
             stroke: var(--brown-dark);
             stroke-width: 1.5;
             fill: none;
         }
         
-        .access-card.coming-soon {
-            background: var(--bg-warm);
-            border: 2px dashed var(--terracotta);
-            cursor: default;
-        }
-        
-        /* Framework Promo Section */
-        .framework-promo {
-            background: linear-gradient(135deg, var(--bg-warm) 0%, var(--bg-cream) 100%);
-            padding: 60px 40px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .framework-promo-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .framework-promo-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 400;
-            color: var(--ink-dark);
-            margin-bottom: 12px;
-        }
-        
-        .framework-promo-desc {
-            font-size: 1.1rem;
-            color: var(--brown-medium);
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-        
-        .framework-promo-button {
-            display: inline-block;
-            background: var(--gold);
-            color: var(--brown-dark);
-            padding: 16px 48px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
-        }
-        
-        .framework-promo-button:hover {
-            background: var(--brown-dark);
-            color: var(--gold);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(61, 40, 23, 0.3);
-        }
-        
-        /* Product Hero Links - Aligned Layout */
-        .product-hero-link {
-            display: grid;
-            grid-template-rows: 140px auto auto;
-            align-items: center;
-            justify-items: center;
-            text-decoration: none;
-            text-align: center;
-            padding: 30px 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            min-height: 280px;
-        }
-        
-        .product-hero-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-        }
-        
-        .product-hero-link img {
-            max-width: 200px;
-            max-height: 120px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-        
-        .product-hero-desc {
-            font-size: 0.95rem;
-            color: var(--brown-medium);
-            margin: 16px 0 12px;
-            text-align: center;
-            align-self: start;
-        }
-        
-        .product-hero-cta {
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-            align-self: end;
-        }
-        
-        .system-side .product-hero-cta {
-            color: var(--gold);
-        }
-        
-        .self-side .product-hero-cta {
-            color: #ff6b00;
-        }
-        
-        .product-hero-link:hover .product-hero-cta {
-            text-decoration: underline;
-        }
-        
-        /* Knowledge Graph Section */
-        .graph-section {
-            background: linear-gradient(180deg, var(--bg-warm) 0%, var(--bg-cream) 100%);
-            padding: 80px 40px;
-            border-top: 1px solid var(--border);
-        }
-        
-        .graph-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .graph-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            color: var(--ink-dark);
-            margin-bottom: 15px;
-        }
-        
-        .graph-header h2 strong {
-            color: var(--gold);
-        }
-        
-        .graph-header p {
-            font-size: 1.1rem;
-            color: var(--brown-medium);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        
-        .graph-embed-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        
-        .access-icon {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
         .access-title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             color: var(--brown-dark);
             margin-bottom: 4px;
         }
         
-        .access-title.large {
-            font-size: 1.2rem;
-        }
-        
         .access-desc {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--brown-medium);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         /* Self Side */
         .self-side {
             background: var(--bg-warm);
-            padding: 60px 40px;
+            padding: 50px 40px;
         }
         
         .self-side .side-title {
@@ -479,8 +456,45 @@
             border: 1px solid var(--border);
         }
         
-        .self-side .access-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        /* Product Links */
+        .product-link {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+        
+        .product-link img {
+            max-width: 180px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+        
+        .product-link-desc {
+            font-size: 0.85rem;
+            color: var(--brown-medium);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .product-link-cta {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .system-side .product-link-cta {
+            color: var(--gold);
+        }
+        
+        .self-side .product-link-cta {
+            color: #ff6b00;
+        }
+        
+        .product-link:hover .product-link-cta {
+            text-decoration: underline;
         }
         
         /* Footer */
@@ -499,7 +513,6 @@
         }
         .footer-brand h2 strong { font-weight: 600; }
         .footer-brand p { opacity: 0.6; margin-top: 5px; }
-        .footer-brand a { color: inherit; text-decoration: none; }
         
         .footer-nav {
             display: flex;
@@ -521,61 +534,49 @@
             font-size: 0.85rem;
         }
         
-        /* Mobile Redesign */
+        /* Mobile */
         @media (max-width: 900px) {
             .split-section {
                 display: flex;
                 flex-direction: column;
             }
             
-            /* Reorder for mobile: Hero → System → Self (side by side cards) → Assessment */
             .system-side {
                 border-right: none;
-                order: 1;
                 padding: 30px 20px;
             }
             
             .self-side {
-                order: 2;
                 padding: 30px 20px;
                 border-top: 1px solid var(--border);
             }
             
-            /* Compact product cards on mobile */
-            .product-hero-link {
-                min-height: auto;
-                grid-template-rows: 100px auto auto;
-                padding: 20px;
+            .circles-container {
+                width: 280px;
+                height: 280px;
             }
             
-            .product-hero-link img {
-                max-width: 150px;
-                max-height: 80px;
+            .circle-outer {
+                width: 280px;
+                height: 280px;
             }
             
-            .access-grid {
-                gap: 12px;
-            }
-            
-            /* Assessment promo below System/Self on mobile */
-            .framework-promo {
-                order: 3;
-                padding: 40px 20px;
+            .circle-inner {
+                width: 150px;
+                height: 150px;
             }
         }
         
         @media (max-width: 600px) {
-            .wave-hero { min-height: 35vh !important; padding-top: 100px !important; }
-            .wave-hero h1 { font-size: 2.2rem; }
-            .hero-subtext { font-size: 1rem; }
-            .side-title { font-size: 1.8rem; }
-            .system-side, .self-side { padding: 30px 20px; }
+            .circle-hero { min-height: 60vh; padding-top: 100px; }
+            .circle-hero h1 { font-size: 2.8rem; }
+            .circles-container { width: 240px; height: 240px; }
+            .circle-outer { width: 240px; height: 240px; }
+            .circle-inner { width: 130px; height: 130px; }
+            .circle-outer-label, .circle-inner-label { font-size: 0.85rem; }
+            .side-title { font-size: 1.6rem; }
             .nav { padding: 15px 20px; }
-            
-            /* Even more compact on small phones */
-            .framework-promo-title { font-size: 1.6rem; }
-            .framework-promo-desc { font-size: 1rem; }
-            .framework-promo-button { padding: 14px 32px; font-size: 1rem; }
+            .menu-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -598,73 +599,121 @@
         <a href="contact">Contact</a>
     </div>
     
-    <!-- Clean Hero Section -->
-    <section class="wave-hero" style="min-height: 45vh; padding: 120px 20px 40px;">
-        <div class="wave-hero-content">
-            <h1 style="font-size: 4rem; margin-bottom: 10px;">kai <strong>hamil</strong></h1>
-            <p class="hero-subtext" style="font-size: 1.5rem; margin-bottom: 0; opacity: 0.7;">
-                Better Systems // Better Self
-            </p>
-        </div>
-    </section>
-
-    <!-- Split Section: System // Self -->
-    <section class="split-section">
-        <!-- System Side -->
-        <div class="system-side">
-            <div class="side-header">
-                <h2 class="side-title">Systems</h2>
-                <p class="side-subtitle">Doing things better</p>
-                <p style="font-size: 0.9rem; color: var(--brown-medium); margin-top: 10px; max-width: 90%;">Our lives are run by systems. Systems we haven't created, signed up for, or even knew existed. See them and understand them so you can influence them - not the other way around.</p>
-            </div>
-            
-            <div class="access-grid">
-                <a href="tools/ai-user-quiz-v3.html" class="access-card ai-quiz">
-                    <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
-                    <div class="access-title">What Kind of AI User Are You?</div>
-                    <div class="access-desc">Find your problem-solving style</div>
-                </a>
-                
-                <a href="frameworks/" class="access-card frameworks">
-                    <svg class="access-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                    <div class="access-title">Frameworks</div>
-                    <div class="access-desc">Decision tools and systems</div>
-                </a>
-                
-                <a href="https://vale.kaihamil.com" style="display: block; text-align: center; text-decoration: none; padding: 20px 0;">
-                    <img src="vale/assets/vale-logo-dark.jpg" alt="Valé OS" style="max-width: 240px; max-height: 180px; width: auto; height: auto; object-fit: contain; margin-bottom: 16px;">
-                    <div style="font-size: 0.95rem; color: var(--brown-medium); margin-bottom: 12px; line-height: 1.5;">You worry about where you want to go. Valé can worry about getting you there.</div>
-                    <span style="font-size: 0.9rem; font-weight: 500; color: var(--gold);">Learn more →</span>
-                </a>
+    <!-- Circle Hero Section -->
+    <section class="circle-hero">
+        <h1>kai <strong>hamil</strong></h1>
+        
+        <!-- Concentric Circles -->
+        <div class="circles-container">
+            <div class="circle-outer" onclick="selectCircle('system')" id="system-circle">
+                <span class="circle-outer-label">System</span>
+                <span class="circle-outer-desc">Doing things better</span>
+                <div class="circle-inner" onclick="event.stopPropagation(); selectCircle('self')" id="self-circle">
+                    <span class="circle-inner-label">Self</span>
+                    <span class="circle-inner-desc">Doing better things</span>
+                </div>
             </div>
         </div>
         
-        <!-- Self Side -->
-        <div class="self-side">
-            <div class="side-header">
-                <h2 class="side-title">Self</h2>
-                <p class="side-subtitle">Doing better things</p>
-                <p style="font-size: 0.9rem; color: var(--brown-medium); margin-top: 10px; max-width: 90%;">Every one of us has unique potential, and as far as we know only one life in which to realize it. Direct your time and focus towards the things and people that matter - to you.</p>
+        <!-- Dynamic Content Menu -->
+        <div class="content-menu">
+            <!-- System Menu -->
+            <div class="menu-section system-menu" id="system-menu">
+                <h3>Systems</h3>
+                <div class="menu-grid">
+                    <a href="tools/ai-user-quiz-v3.html" class="menu-item">
+                        <div class="menu-item-title">What Kind of AI User Are You?</div>
+                        <div class="menu-item-desc">Find your problem-solving style</div>
+                    </a>
+                    <a href="frameworks/" class="menu-item">
+                        <div class="menu-item-title">Frameworks</div>
+                        <div class="menu-item-desc">Decision tools and systems</div>
+                    </a>
+                    <a href="https://vale.kaihamil.com" class="menu-item">
+                        <div class="menu-item-title">Valé OS</div>
+                        <div class="menu-item-desc">Strategic navigation for your goals</div>
+                    </a>
+                </div>
             </div>
             
-            <div class="access-grid">
-                <a href="tools/time-and-focus.html" class="access-card focus">
-                    <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
-                    <div class="access-title">Find Your Focus</div>
-                    <div class="access-desc">Where does your time actually go?</div>
-                </a>
+            <!-- Self Menu -->
+            <div class="menu-section self-menu" id="self-menu">
+                <h3>Self</h3>
+                <div class="menu-grid">
+                    <a href="tools/time-and-focus.html" class="menu-item">
+                        <div class="menu-item-title">Find Your Focus</div>
+                        <div class="menu-item-desc">Where does your time actually go?</div>
+                    </a>
+                    <a href="wisdom/" class="menu-item">
+                        <div class="menu-item-title">Wisdom</div>
+                        <div class="menu-item-desc">Philosophy and presence</div>
+                    </a>
+                    <a href="https://www.groovepal.com" class="menu-item">
+                        <div class="menu-item-title">Groove Pal</div>
+                        <div class="menu-item-desc">Send a groove. Make a pal.</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Navigation (default when no circle selected) -->
+    <section class="full-navigation" id="full-nav">
+        <div class="split-section">
+            <!-- System Side -->
+            <div class="system-side">
+                <div class="side-header">
+                    <h2 class="side-title">Systems</h2>
+                    <p class="side-subtitle">Doing things better</p>
+                </div>
                 
-                <a href="wisdom/" class="access-card wisdom">
-                    <svg class="access-icon" viewBox="0 0 24 24"><path d="M12 3c-4.5 0-8 3.5-8 8 0 3 1.5 5.5 4 7v3h8v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z"/><path d="M9 21h6"/></svg>
-                    <div class="access-title">Wisdom</div>
-                    <div class="access-desc">Philosophy and presence</div>
-                </a>
+                <div class="access-grid">
+                    <a href="tools/ai-user-quiz-v3.html" class="access-card ai-quiz">
+                        <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+                        <div class="access-title">What Kind of AI User Are You?</div>
+                        <div class="access-desc">Find your problem-solving style</div>
+                    </a>
+                    
+                    <a href="frameworks/" class="access-card frameworks">
+                        <svg class="access-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                        <div class="access-title">Frameworks</div>
+                        <div class="access-desc">Decision tools and systems</div>
+                    </a>
+                    
+                    <a href="https://vale.kaihamil.com" class="product-link">
+                        <img src="vale/assets/vale-logo-dark.jpg" alt="Valé OS">
+                        <div class="product-link-desc">You worry about where you want to go. Valé can worry about getting you there.</div>
+                        <span class="product-link-cta">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Self Side -->
+            <div class="self-side">
+                <div class="side-header">
+                    <h2 class="side-title">Self</h2>
+                    <p class="side-subtitle">Doing better things</p>
+                </div>
                 
-                <a href="https://www.groovepal.com" style="display: block; text-align: center; text-decoration: none; padding: 5px 0;">
-                    <img src="products/groove-pal/assets/hero-logo.png" alt="Groove Pal" style="max-width: 320px; max-height: 180px; width: auto; height: auto; object-fit: contain; margin-bottom: 16px;">
-                    <div style="font-size: 0.95rem; color: var(--brown-medium); margin-bottom: 12px; line-height: 1.5;">Send a groove. Make a pal.</div>
-                    <span style="font-size: 0.9rem; font-weight: 500; color: #ff6b00;">Check it →</span>
-                </a>
+                <div class="access-grid">
+                    <a href="tools/time-and-focus.html" class="access-card focus">
+                        <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
+                        <div class="access-title">Find Your Focus</div>
+                        <div class="access-desc">Where does your time actually go?</div>
+                    </a>
+                    
+                    <a href="wisdom/" class="access-card wisdom">
+                        <svg class="access-icon" viewBox="0 0 24 24"><path d="M12 3c-4.5 0-8 3.5-8 8 0 3 1.5 5.5 4 7v3h8v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z"/><path d="M9 21h6"/></svg>
+                        <div class="access-title">Wisdom</div>
+                        <div class="access-desc">Philosophy and presence</div>
+                    </a>
+                    
+                    <a href="https://www.groovepal.com" class="product-link">
+                        <img src="products/groove-pal/assets/hero-logo.png" alt="Groove Pal">
+                        <div class="product-link-desc">Send a groove. Make a pal.</div>
+                        <span class="product-link-cta">Check it →</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -683,6 +732,47 @@
     </footer>
     
     <script>
+        let selectedCircle = null;
+        
+        function selectCircle(circle) {
+            const systemCircle = document.getElementById('system-circle');
+            const selfCircle = document.getElementById('self-circle');
+            const systemMenu = document.getElementById('system-menu');
+            const selfMenu = document.getElementById('self-menu');
+            const fullNav = document.getElementById('full-nav');
+            
+            // Toggle off if clicking same circle
+            if (selectedCircle === circle) {
+                selectedCircle = null;
+                systemCircle.classList.remove('active');
+                selfCircle.classList.remove('active');
+                systemMenu.classList.remove('active');
+                selfMenu.classList.remove('active');
+                fullNav.classList.remove('hidden');
+                return;
+            }
+            
+            selectedCircle = circle;
+            
+            // Reset states
+            systemCircle.classList.remove('active');
+            selfCircle.classList.remove('active');
+            systemMenu.classList.remove('active');
+            selfMenu.classList.remove('active');
+            
+            // Hide full navigation
+            fullNav.classList.add('hidden');
+            
+            // Activate selected
+            if (circle === 'system') {
+                systemCircle.classList.add('active');
+                systemMenu.classList.add('active');
+            } else if (circle === 'self') {
+                selfCircle.classList.add('active');
+                selfMenu.classList.add('active');
+            }
+        }
+        
         function toggleMenu() {
             document.querySelector('.hamburger').classList.toggle('active');
             document.querySelector('.mobile-menu').classList.toggle('active');
