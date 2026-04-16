@@ -206,6 +206,30 @@ def get_video_rep_section():
     except:
         return ""
 
+def get_daily_intentions_section():
+    """Get daily intentions section"""
+    try:
+        result = subprocess.run(
+            ["python3", os.path.join(WORKSPACE, "scripts/daily-intentions.py"), "morning"],
+            capture_output=True, text=True, timeout=10
+        )
+        # Extract just the video rep and priority section
+        lines = result.stdout.split('\n')
+        section = []
+        in_section = False
+        for line in lines:
+            if '🎬 TODAY' in line:
+                in_section = True
+            if in_section:
+                section.append(line)
+            if '📝 SET YOUR INTENTION' in line:
+                section.append("-" * 40)
+                section.append("Reply to this message with your intention for today")
+                break
+        return '\n'.join(section) if section else ""
+    except:
+        return ""
+
 def generate_brief():
     """Generate morning brief"""
     brief = []
@@ -214,6 +238,13 @@ def generate_brief():
     brief.append(f"📅 {datetime.now().strftime('%A, %B %d, %Y')}")
     brief.append("=" * 55)
     brief.append("")
+    
+    # DAILY INTENTIONS (NEW)
+    intentions = get_daily_intentions_section()
+    if intentions:
+        brief.append(intentions)
+        brief.append("")
+        brief.append("")
     
     # 1. YESTERDAY'S WORK
     brief.append("📋 YESTERDAY'S WORK")
