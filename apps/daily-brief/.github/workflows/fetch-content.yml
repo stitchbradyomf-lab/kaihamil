@@ -1,0 +1,17 @@
+name: Fetch Daily Content
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 6:00 AM UTC
+    - cron: "0 14 * * *"  # 2:00 PM UTC
+  workflow_dispatch:       # Manual trigger from GitHub UI
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger content fetch
+        run: |
+          curl -s -f -X GET "${{ secrets.APP_URL }}/api/cron/fetch" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -o /dev/null -w "HTTP %{http_code}\n"

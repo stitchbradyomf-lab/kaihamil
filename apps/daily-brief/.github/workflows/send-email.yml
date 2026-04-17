@@ -1,0 +1,16 @@
+name: Send Daily Email
+
+on:
+  schedule:
+    - cron: "0 7 * * *"  # 7:00 AM UTC (after 6 AM fetch completes)
+  workflow_dispatch:
+
+jobs:
+  email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger email delivery
+        run: |
+          curl -s -f -X GET "${{ secrets.APP_URL }}/api/cron/email" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -o /dev/null -w "HTTP %{http_code}\n"
