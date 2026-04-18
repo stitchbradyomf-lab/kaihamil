@@ -1,5 +1,13 @@
 # Stitch's Kanban Board
-**Last Updated:** March 2, 2026 9:15 AM
+**Last Updated:** April 18, 2026 5:15 PM
+
+## DONE (April 18, 2026) ✅
+- [x] **Video Idea Quick Capture System** — Instant idea capture → auto-generated outlines → morning brief integration. Just say "capture <idea>" and get a ready-to-record outline with hook, body, close structure. Auto-detects template type (what I wish I knew, behind the scenes, hot take, 60-sec tip). Connected to video rep tracker for seamless workflow.
+
+## DONE (April 17, 2026) ✅
+- [x] **Video Rep Quick-Start System** — Zero-friction video shipping assistant with smart outlines, evening nudges, and morning brief integration
+- [x] **Video Rep Evening Nudge** — 6 PM cron that sends gentle reminder if no rep logged yet
+- [x] **Video Rep Integration Update** — Morning brief now shows quick-start command for zero-rep state
 
 ## DONE (Feb 26-27) ✅
 - [x] **Claude Code Integration Research** — Complete architecture report for sandboxed agent-directed tool usage

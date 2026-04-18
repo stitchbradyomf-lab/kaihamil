@@ -102,9 +102,9 @@ def get_yesterday_work():
     return ["No work log found for yesterday"]
 
 def get_recent_content():
-    """Get recently modified content using git or file timestamps"""
+    """Get recently created content using git commit dates"""
     recent_files = []
-    three_days_ago = (datetime.now() - timedelta(days=3)).timestamp()
+    one_day_ago = (datetime.now() - timedelta(days=1))
     
     # Check content directories
     content_dirs = [
@@ -125,18 +125,31 @@ def get_recent_content():
                 
             filepath = os.path.join(dir_path, f)
             try:
-                stat = os.stat(filepath)
-                if stat.st_mtime > three_days_ago:
-                    recent_files.append({
-                        'name': f,
-                        'section': section,
-                        'mtime': stat.st_mtime
-                    })
-            except:
+                # Get git commit date for file creation
+                result = subprocess.run(
+                    ['git', 'log', '--follow', '--format=%aI', '--', filepath],
+                    capture_output=True, text=True, cwd=CONTENT_DIR, timeout=10
+                )
+                
+                if result.returncode == 0 and result.stdout.strip():
+                    # Get the oldest commit date (file creation)
+                    commits = result.stdout.strip().split('\n')
+                    if commits:
+                        # Parse ISO date from last commit (oldest = first creation)
+                        created_str = commits[-1].strip()
+                        created_date = datetime.fromisoformat(created_str.replace('Z', '+00:00'))
+                        
+                        if created_date > one_day_ago:
+                            recent_files.append({
+                                'name': f,
+                                'section': section,
+                                'created': created_date
+                            })
+            except Exception:
                 pass
     
-    # Sort by modification time
-    recent_files.sort(key=lambda x: x['mtime'], reverse=True)
+    # Sort by creation date
+    recent_files.sort(key=lambda x: x['created'], reverse=True)
     
     return [f"{f['section']}/{f['name']}" for f in recent_files[:8]]
 
@@ -200,6 +213,18 @@ def get_video_rep_section():
         import subprocess
         result = subprocess.run(
             ["python3", os.path.join(WORKSPACE, "scripts/video-rep-integration.py")],
+            capture_output=True, text=True, timeout=10
+        )
+        return result.stdout
+    except:
+        return ""
+
+def get_video_ideas_section():
+    """Get video ideas ready to record"""
+    try:
+        import subprocess
+        result = subprocess.run(
+            ["python3", os.path.join(WORKSPACE, "scripts/video-idea-capture.py"), "brief"],
             capture_output=True, text=True, timeout=10
         )
         return result.stdout
@@ -292,13 +317,19 @@ def generate_brief():
         brief.append("✅ No outstanding reminders")
     brief.append("")
     
-    # 5. VIDEO REP TRACKING
+    # 5. VIDEO IDEAS (NEW - Quick Capture System)
+    video_ideas_section = get_video_ideas_section()
+    if video_ideas_section:
+        brief.append(video_ideas_section)
+        brief.append("")
+    
+    # 6. VIDEO REP TRACKING
     video_section = get_video_rep_section()
     if video_section:
         brief.append(video_section)
         brief.append("")
     
-    # 6. SESSION ACTIVITY
+    # 7. SESSION ACTIVITY
     brief.append("💬 SESSION ACTIVITY")
     brief.append("-" * 40)
     usage = get_yesterday_token_usage()

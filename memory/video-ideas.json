@@ -1,0 +1,108 @@
+{
+  "ideas": [
+    {
+      "id": 1,
+      "captured_at": "2026-04-18T17:06:32.894913",
+      "raw_text": "I wish I knew about the /bin/zsh validation method before building my first product. The 48-hour rule would have saved me months",
+      "source": "telegram",
+      "tags": [],
+      "template_used": "what_i_wish",
+      "outline": {
+        "title": "I wish I knew about the /bin/zsh validation method before bu",
+        "template": "What I Wish I Knew",
+        "duration": 60,
+        "structure": [
+          "\ud83c\udfa3 HOOK (3 sec): 'I wish someone told me...'",
+          "\ud83d\udcdd THE MISTAKE (20 sec): What I used to do wrong",
+          "\ud83d\udca1 THE SHIFT (30 sec): What changed everything",
+          "\ud83c\udfaf CLOSE (7 sec): Your invitation to try it"
+        ],
+        "notes": {
+          "core_message": "I wish I knew about the /bin/zsh validation method before building my first product",
+          "talking_points": [
+            "The 48-hour rule would have saved me months"
+          ],
+          "cta_ideas": [
+            "Follow for more",
+            "Drop a comment if this resonates",
+            "Save this for later"
+          ]
+        }
+      },
+      "status": "captured",
+      "priority": "normal",
+      "scheduled_for": null,
+      "recorded_at": null,
+      "platform": null,
+      "url": null
+    },
+    {
+      "id": 2,
+      "captured_at": "2026-04-18T17:06:42.405943",
+      "raw_text": "The real reason most AI automations fail - it's not the tech, it's the handoff between human and machine",
+      "source": "telegram",
+      "tags": [],
+      "template_used": "60_second_tip",
+      "outline": {
+        "title": "The real reason most AI automations fail - it's not the tech",
+        "template": "60-Second Tip",
+        "duration": 60,
+        "structure": [
+          "\ud83c\udfa3 HOOK (3 sec): Start with a bold claim or question",
+          "\ud83d\udcdd THE TIP (45 sec): One clear, actionable insight",
+          "\ud83c\udfaf CLOSE (12 sec): Call to action or key takeaway"
+        ],
+        "notes": {
+          "core_message": "The real reason most AI automations fail - it's not the tech, it's the handoff between human and machine",
+          "talking_points": [],
+          "cta_ideas": [
+            "Follow for more",
+            "Drop a comment if this resonates",
+            "Save this for later"
+          ]
+        }
+      },
+      "status": "captured",
+      "priority": "normal",
+      "scheduled_for": null,
+      "recorded_at": null,
+      "platform": null,
+      "url": null
+    },
+    {
+      "id": 3,
+      "captured_at": "2026-04-18T17:08:11.361045",
+      "raw_text": "How I actually use OpenClaw to run my entire content operation - the real workflow behind the scenes",
+      "source": "telegram",
+      "tags": [],
+      "template_used": "behind_the_scenes",
+      "outline": {
+        "title": "How I actually use OpenClaw to run my entire content operati",
+        "template": "Behind the Scenes",
+        "duration": 60,
+        "structure": [
+          "\ud83c\udfa3 HOOK (3 sec): 'Here's how I actually...'",
+          "\ud83d\udcdd THE PROCESS (45 sec): Walk through your real workflow",
+          "\ud83c\udfaf CLOSE (12 sec): Tool mention or follow invitation"
+        ],
+        "notes": {
+          "core_message": "How I actually use OpenClaw to run my entire content operation - the real workflow behind the scenes",
+          "talking_points": [],
+          "cta_ideas": [
+            "Follow for more",
+            "Drop a comment if this resonates",
+            "Save this for later"
+          ]
+        }
+      },
+      "status": "captured",
+      "priority": "normal",
+      "scheduled_for": null,
+      "recorded_at": null,
+      "platform": null,
+      "url": null
+    }
+  ],
+  "archived": [],
+  "next_id": 4
+}
