@@ -81,14 +81,45 @@ A single-purpose thinking app that applies Bloom's Taxonomy to individual though
 
 ## 5. The Six Levels (Bloom's Taxonomy)
 
-| Level | Cognitive Action | App Question | Example Response |
-|-------|------------------|--------------|------------------|
-| **K**eep | Knowledge | What did you think? | "I need to lose weight" |
-| **C**atching | Comprehension | What do you mean? | "The scale number is higher" |
-| **A**pes | Application | When/where did this appear? | "This morning, after breakfast" |
-| **A**nd | Analysis | What contributed? | "Stress eating, less movement" |
-| **S**illy | Synthesis | What could you do? | "Move scale, schedule walks" |
-| **E**lephants | Evaluation | What's the plan? | "This week: [3 actions]" |
+| Level | Cognitive Action | App Question | Example Response | Content Type |
+|-------|------------------|--------------|------------------|--------------|
+| **K**eep | Knowledge | What did you think? | "I need to lose weight" | **Scaffolding, not teaching** — UI patterns for capture |
+| **C**atching | Comprehension | What do you mean? | "The scale number is higher" | Frameworks that transform meaning |
+| **A**pes | Application | When/where did this appear? | "This morning, after breakfast" | Frameworks that contextualize |
+| **A**nd | Analysis | What contributed? | "Stress eating, less movement" | Frameworks that decompose |
+| **S**illy | Synthesis | What could you do? | "Move scale, schedule walks" | Frameworks that create |
+| **E**lephants | Evaluation | What's the plan? | "This week: [3 actions]" | Frameworks that judge |
+
+### Level 1: Knowledge — The Open Gate (Special Design)
+
+**L1 is structurally different from L2–L6.**
+
+L2 through L6 are **transformations** — they take input and do cognitive work. L1 isn't a transformation. It's the **raw material**. The user isn't recalling facts; they're declaring thoughts. "I need to lose weight." "I should buy a boat."
+
+**The L1 Design Challenge:** Lower friction for capture while ensuring quality input for L2.
+
+**Three Jobs of L1:**
+
+1. **Lower friction of capture** — The ape must be caught before anything else. Most thoughts die between "I had a thought" and "I wrote it down." L1 is closer to a UI pattern than a framework article.
+
+2. **Separate fact-claim from emotional charge** — "I need to lose weight" is two things fused: observation ("scale said X") and judgment ("that's bad"). L2 can't work if they're still welded together.
+
+3. **Offer vocabulary of thought-types without prescribing meaning** — Reactive, aspirational, rumination, comparison, grievance, wish, worry, plan-fragment. Tagging is a Knowledge-level act (recall/identify) that primes Comprehension without doing its work.
+
+**L1 Content (Not Frameworks, But Scaffolding):**
+
+| Content | Type | Purpose |
+|---------|------|---------|
+| **Catch Log Primer** | One-screen reference | "A catch is a thought you noticed. That's it. You're not judging, solving, or deciding if it's silly yet." |
+| **Thought-Type Glossary** | Taxonomy | 20 categories: reactive, aspirational, comparison, grievance, sunk-cost lament, shiny-object wish. User picks one when logging. |
+| **Observation vs. Judgment Splitter** | Micro-tool | Two fields: "What actually happened?" / "What did you make it mean?" (raw/read, event/echo) |
+| **Daily Brief Integration** | Workflow | Morning prompt: "What thought is swinging from the vines today?" |
+
+**Anti-Patterns for L1:**
+- ❌ Long articles explaining what thoughts are
+- ❌ Judgment or interpretation at capture time
+- ❌ Requiring categorization before capture
+- ❌ Venting without structure
 
 ### The Decision Point (After Level 4)
 **"Is this thought worth your energy?"**

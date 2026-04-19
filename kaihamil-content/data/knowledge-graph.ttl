@@ -184,8 +184,9 @@ kcaase:Level1_Knowledge a kh:CognitionLevel ;
     kh:acronymWord "Keep" ;
     kh:nodeType "cognition" ;
     kh:branch "kcaase" ;
-    kh:description "State your thought/idea/opinion/feeling to review. 'I know I'm upset about my weight.'" ;
+    kh:description "Raw thought capture — the open gate. Not transformation, just declaration. 'I need to lose weight.'" ;
     kh:appPrompt "What did you think? State it clearly." ;
+    kh:designNote "L1 is scaffolding, not teaching. Lower friction, separate observation from judgment, offer thought-type vocabulary." ;
     kh:leadsTo kcaase:Level2_Comprehension .
 
 kcaase:Level2_Comprehension a kh:CognitionLevel ;
@@ -723,8 +724,47 @@ kh:dismiss-path a kh:Node ;
 # GAPS IDENTIFIED
 # ============================================
 
+# L1 Scaffolding (Not Frameworks)
+
+kh:catch-log-primer a kh:Content ;
+    rdfs:label "Catch Log Primer" ;
+    kh:nodeType "content" ;
+    kh:branch "kcaase" ;
+    kh:url "/kcaase/catch-log-primer.html" ;
+    kh:description "One-screen reference: 'A catch is a thought you noticed. That's it. You're not judging, solving, or deciding if it's silly yet.'" ;
+    kh:cognitionLevel kcaase:Level1_Knowledge ;
+    kh:contentType "scaffolding" .
+
+kh:thought-type-glossary a kh:Content ;
+    rdfs:label "Thought-Type Glossary" ;
+    kh:nodeType "content" ;
+    kh:branch "kcaase" ;
+    kh:url "/kcaase/thought-types.html" ;
+    kh:description "Taxonomy of 20 thought categories: reactive, aspirational, comparison, grievance, sunk-cost lament, shiny-object wish. User picks one when logging." ;
+    kh:cognitionLevel kcaase:Level1_Knowledge ;
+    kh:contentType "scaffolding" .
+
+kh:observation-judgment-splitter a kh:Tool ;
+    rdfs:label "Observation vs. Judgment Splitter" ;
+    kh:nodeType "content" ;
+    kh:branch "kcaase" ;
+    kh:url "/kcaase/raw-read.html" ;
+    kh:description "Micro-tool with two fields: 'What actually happened?' (raw) / 'What did you make it mean?' (read). Separates fact from emotional charge before L2." ;
+    kh:cognitionLevel kcaase:Level1_Knowledge ;
+    kh:contentType "scaffolding" .
+
+kh:daily-brief-kcaase-prompt a kh:Content ;
+    rdfs:label "Daily Brief KCAASE Prompt" ;
+    kh:nodeType "content" ;
+    kh:branch "kcaase" ;
+    kh:description "Morning brief integration: 'What thought is swinging from the vines today?'" ;
+    kh:cognitionLevel kcaase:Level1_Knowledge ;
+    kh:contentType "workflow" .
+
+# Gap resolved — L1 now has scaffolding content
 kh:gap-l1-knowledge a kh:Node ;
-    rdfs:label "L1 Knowledge Gap" ;
+    rdfs:label "L1 Knowledge Gap — RESOLVED" ;
     kh:nodeType "gap" ;
-    kh:description "Thin coverage at Knowledge level. Need content for: stating facts, recalling information, identifying what you know" ;
-    kh:branch "kcaase" .
+    kh:description "L1 coverage now complete with scaffolding (not frameworks): Catch Log Primer, Thought-Type Glossary, Observation/Judgment Splitter, Daily Brief integration" ;
+    kh:branch "kcaase" ;
+    kh:status "resolved" .
