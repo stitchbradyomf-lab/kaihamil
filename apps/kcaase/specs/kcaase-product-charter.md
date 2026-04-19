@@ -115,11 +115,39 @@ L2 through L6 are **transformations** — they take input and do cognitive work.
 | **Observation vs. Judgment Splitter** | Micro-tool | Two fields: "What actually happened?" / "What did you make it mean?" (raw/read, event/echo) |
 | **Daily Brief Integration** | Workflow | Morning prompt: "What thought is swinging from the vines today?" |
 
+**L1 Governance (Structural, Not Editorial):**
+
+The only governance at L1 is structural. No quality bar. No "is this worth solving" filter — that's L4's job.
+
+| Constraint | Purpose |
+|------------|---------|
+| **Character limit** | Forces compression (small Comprehension nudge) |
+| **Timestamp + context tag** | Metadata for later pattern work |
+| **Optional thought-type tag** | From glossary; recall without judgment |
+| **Optional observation/judgment split** | Separates raw from read |
+
+**No filtering at the gate.** A silly elephant must be allowed in so it can be recognized and dismissed. If you filter at L1, you never build the skill of catching and releasing — which is half the product's promise.
+
+**The Aperture Science Voice for L1:**
+
+> "Thought received. Specimen logged. Processing optional."
+
+Dry, slightly formal, mildly ceremonial. This tone signals: *we take this seriously enough to examine it, but lightly enough that you don't have to finish right now.* It makes the gate feel like a **lab intake**, not a journal. That's the right metaphor for L1.
+
+**Daily Brief Integration — L1 as Service:**
+
+The brief surfaces 1–3 "uncaught" moments from yesterday (calendar overruns, repeated search terms, ambient signals) and prompts:
+
+> "Was there a thought behind this?"
+
+This is **L1-as-service**: the system helps the user notice what they would've let pass.
+
 **Anti-Patterns for L1:**
 - ❌ Long articles explaining what thoughts are
 - ❌ Judgment or interpretation at capture time
 - ❌ Requiring categorization before capture
 - ❌ Venting without structure
+- ❌ **Putting a thinking framework at the gate** — 5-filters, problem-audit, cause-and-effect belong at L2+. Shaping the thought before capture is the anti-pattern.
 
 ### The Decision Point (After Level 4)
 **"Is this thought worth your energy?"**

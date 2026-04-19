@@ -757,9 +757,10 @@ kh:daily-brief-kcaase-prompt a kh:Content ;
     rdfs:label "Daily Brief KCAASE Prompt" ;
     kh:nodeType "content" ;
     kh:branch "kcaase" ;
-    kh:description "Morning brief integration: 'What thought is swinging from the vines today?'" ;
+    kh:description "Morning brief integration: 'What thought is swinging from the vines today?' Also surfaces 1-3 uncaught moments from ambient signals (calendar overruns, repeated search terms) with prompt: 'Was there a thought behind this?'" ;
     kh:cognitionLevel kcaase:Level1_Knowledge ;
-    kh:contentType "workflow" .
+    kh:contentType "workflow" ;
+    kh:designNote "L1-as-service: system helps user notice what they would have let pass" .
 
 # Gap resolved — L1 now has scaffolding content
 kh:gap-l1-knowledge a kh:Node ;
