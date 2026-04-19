@@ -14,6 +14,12 @@ KC AASE is a thinking tool that applies Bloom's Taxonomy to everyday thoughts. I
 
 **Core Promise:** *"Catch it before you solve it — or realize it's just a silly elephant."*
 
+**Development Ethos: Dogfood First**
+
+> *"Build an entire backlog of idea progression and make it work for me before unleashing as a potential product."*
+
+KCAASE must model Kyle's own thought process workflow. He logs his ideas here and decides if they are apes (worth solving) or silly elephants (worth dismissing). The product is **personal infrastructure first**, public product second. It works for the founder before it works for anyone else.
+
 ---
 
 ## 2. Problem Statement
@@ -65,6 +71,7 @@ A single-purpose thinking app that applies Bloom's Taxonomy to individual though
 - Tendency to overthink and over-plan
 - Values systems that reduce decision fatigue
 - Wants to ship more, plan less
+- **Needs a personal backlog of idea progression** — ape vs. silly elephant decisions logged over time
 
 ### Secondary: Similar Thinkers
 - Knowledge workers with "idea overwhelm"
@@ -190,6 +197,36 @@ Dashboard → Caught Apes (solved) → Silly Elephants (dismissed)
 - [ ] Action plan generation (Level 6)
 - [ ] Local storage of history
 - [ ] Export action plan as text
+
+## 7.5 Personal Use Case: Kyle's Workflow
+
+Before KCAASE is a product, it is **Kyle's personal thinking infrastructure**.
+
+### The Daily Practice
+1. **Morning:** Review daily brief for uncaught moments (ambient signals)
+2. **Throughout day:** Log thoughts as they arise — business ideas, product concepts, concerns, reactions
+3. **Evening:** Process 1–2 catches through the six levels
+4. **Decision:** Ape (add to backlog) or silly elephant (dismiss with one line)
+
+### The Personal Backlog
+- **Apes Caught:** Ideas worth solving — tracked with progression through L1–L6
+- **Silly Elephants:** Ideas dismissed — logged with reason for future pattern recognition
+- **Pattern Dashboard:** "You've had 4 'shiny-object' thoughts this week"
+
+### Success for Kyle
+- **Clarity:** Every active idea has been through the six levels
+- **Peace:** Dismissed ideas don't rattle around in working memory
+- **Wisdom:** Over time, faster recognition of silly elephants
+- **Shipping:** More apes solved because fewer silly elephants consuming energy
+
+### Product Decision Gate
+KCAASE becomes a public product only after:
+- [ ] Kyle has logged 100+ catches
+- [ ] Pattern recognition is working (identifying repeat thought types)
+- [ ] The silly elephant dismissal feels genuinely freeing, not like giving up
+- [ ] The workflow is embedded in daily routine (not forced)
+
+---
 
 ### V2 (Should Have)
 - [ ] Pattern recognition ("You've had 3 similar thoughts")
