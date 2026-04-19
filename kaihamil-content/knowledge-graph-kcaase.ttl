@@ -1,0 +1,245 @@
+# KCAASE Knowledge Graph
+# Bloom's Taxonomy levels as KCAASE entities with content mappings
+# Created: April 19, 2026
+
+@prefix kh: <https://kaihamil.com/ontology/> .
+@prefix kcaase: <https://kaihamil.com/kcaase/> .
+@prefix framework: <https://kaihamil.com/frameworks/> .
+@prefix post: <https://kaihamil.com/posts/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# Ontology definitions
+kh:CognitionLevel a rdfs:Class ;
+    rdfs:label "Cognition Level" ;
+    rdfs:comment "A level in Bloom's Taxonomy / KCAASE hierarchy" .
+
+kh:Framework a rdfs:Class ;
+    rdfs:label "Framework" ;
+    rdfs:comment "A thinking framework or mental model" .
+
+kh:Post a rdfs:Class ;
+    rdfs:label "Post" ;
+    rdfs:comment "A blog post or article" .
+
+kh:mapsToLevel a rdf:Property ;
+    rdfs:label "maps to level" ;
+    rdfs:domain kh:Framework ;
+    rdfs:range kh:CognitionLevel .
+
+kh:primaryLevel a rdf:Property ;
+    rdfs:label "primary level" ;
+    rdfs:domain kh:Post ;
+    rdfs:range kh:CognitionLevel .
+
+kh:secondaryLevel a rdf:Property ;
+    rdfs:label "secondary level" ;
+    rdfs:domain kh:Post ;
+    rdfs:range kh:CognitionLevel .
+
+kh:prerequisiteFor a rdf:Property ;
+    rdfs:label "prerequisite for" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range kh:CognitionLevel .
+
+kh:leadsTo a rdf:Property ;
+    rdfs:label "leads to" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range kh:CognitionLevel .
+
+kh:offrampAt a rdf:Property ;
+    rdfs:label "offramp at" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:comment "Level where dismissal (silly elephant) is possible" .
+
+# KCAASE Cognition Levels
+
+kcaase:Level1_Knowledge a kh:CognitionLevel ;
+    rdfs:label "Knowledge" ;
+    kcaase:acronymLetter "K" ;
+    kcaase:acronymWord "Keep" ;
+    rdfs:comment "State your thought/idea/opinion/feeling to review. 'I know I'm upset about my weight.'" ;
+    kh:leadsTo kcaase:Level2_Comprehension .
+
+kcaase:Level2_Comprehension a kh:CognitionLevel ;
+    rdfs:label "Comprehension" ;
+    kcaase:acronymLetter "C" ;
+    kcaase:acronymWord "Catching" ;
+    rdfs:comment "Restate in objective terms using different descriptors. 'My weight has risen since last year.'" ;
+    kh:prerequisiteFor kcaase:Level3_Application ;
+    kh:leadsTo kcaase:Level3_Application .
+
+kcaase:Level3_Application a kh:CognitionLevel ;
+    rdfs:label "Application" ;
+    kcaase:acronymLetter "A" ;
+    kcaase:acronymWord "Apes" ;
+    rdfs:comment "Observe how the thought manifests in reality. 'My weight has made me less active, and I exercise less.'" ;
+    kh:offrampAt "silly elephant - does this actually affect you?" ;
+    kh:prerequisiteFor kcaase:Level4_Analysis ;
+    kh:leadsTo kcaase:Level4_Analysis .
+
+kcaase:Level4_Analysis a kh:CognitionLevel ;
+    rdfs:label "Analysis" ;
+    kcaase:acronymLetter "A" ;
+    kcaase:acronymWord "And" ;
+    rdfs:comment "Ask and answer WHY the thought is true. 'I stopped tracking my Apple Watch rings, and lost motivation to exercise, leading to a weight gain.' Leverage Root Cause Analysis and 5 Whys frameworks here." ;
+    kh:offrampAt "silly elephant - is the 'why' related to something else entirely?" ;
+    kh:prerequisiteFor kcaase:Level5_Synthesis ;
+    kh:leadsTo kcaase:Level5_Synthesis .
+
+kcaase:Level5_Synthesis a kh:CognitionLevel ;
+    rdfs:label "Synthesis" ;
+    kcaase:acronymLetter "S" ;
+    kcaase:acronymWord "Silly" ;
+    rdfs:comment "What can be done or created? 'Resume wearing my apple watch and being the person who closes the rings every day.'" ;
+    kh:prerequisiteFor kcaase:Level6_Evaluation ;
+    kh:leadsTo kcaase:Level6_Evaluation .
+
+kcaase:Level6_Evaluation a kh:CognitionLevel ;
+    rdfs:label "Evaluation" ;
+    kcaase:acronymLetter "E" ;
+    kcaase:acronymWord "Elephants" ;
+    rdfs:comment "How will it affect the outcome? 'This will improve my burned calorie count and lose weight for the summer.'" .
+
+# Framework Mappings
+
+framework:5-filters a kh:Framework ;
+    rdfs:label "5 Filters for Deciding Under Uncertainty" ;
+    kh:mapsToLevel kcaase:Level2_Comprehension ;
+    rdfs:comment "Filters for thinking in uncertainty = making sense of what a thing means before acting" .
+
+framework:life-process-mapping a kh:Framework ;
+    rdfs:label "Life Process Mapping" ;
+    kh:mapsToLevel kcaase:Level3_Application ;
+    kh:mapsToLevel kcaase:Level4_Analysis ;
+    rdfs:comment "Mapping real life experiences onto the framework; moves from 'apply it' into breaking the system into parts" .
+
+framework:problem-audit a kh:Framework ;
+    rdfs:label "Problem Audit" ;
+    kh:mapsToLevel kcaase:Level4_Analysis ;
+    rdfs:comment "Audits by definition decompose — root cause territory" .
+
+framework:cause-and-effect a kh:Framework ;
+    rdfs:label "Cause and Effect Framework" ;
+    kh:mapsToLevel kcaase:Level4_Analysis ;
+    rdfs:comment "The canonical Analyze-stage framework" .
+
+framework:system-self a kh:Framework ;
+    rdfs:label "System // Self" ;
+    kh:mapsToLevel kcaase:Level5_Synthesis ;
+    rdfs:comment "The meta-framework that fuses System and Self into a new whole — classic L5" .
+
+framework:system-self-assessment a kh:Framework ;
+    rdfs:label "System // Self Assessment" ;
+    kh:mapsToLevel kcaase:Level6_Evaluation ;
+    rdfs:comment "Self-assessment = judging value against criteria — textbook L6" .
+
+framework:attention-spectrum a kh:Framework ;
+    rdfs:label "The Attention Spectrum" ;
+    kh:mapsToLevel kcaase:Level2_Comprehension ;
+    rdfs:comment "Spectra are sense-making tools — understanding where a thing sits on a continuum" .
+
+framework:realtor-discovery a kh:Framework ;
+    rdfs:label "Realtor Discovery Framework" ;
+    kh:mapsToLevel kcaase:Level1_Knowledge ;
+    kh:mapsToLevel kcaase:Level2_Comprehension ;
+    rdfs:comment "Discovery frameworks typically gather facts then interpret them" .
+
+framework:ai-usage-advanced a kh:Framework ;
+    rdfs:label "AI Usage (Advanced)" ;
+    kh:mapsToLevel kcaase:Level3_Application ;
+    rdfs:comment "Usage = applying a tool in context" .
+
+# Post Mappings
+
+post:5-filters-deciding-uncertainty a kh:Post ;
+    rdfs:label "5 Filters for Deciding Under Uncertainty" ;
+    kh:primaryLevel kcaase:Level2_Comprehension ;
+    kh:secondaryLevel kcaase:Level6_Evaluation ;
+    rdfs:comment "Filters → decision" .
+
+post:5-filters-applied-openclaw a kh:Post ;
+    rdfs:label "5 Filters Applied to OpenClaw" ;
+    kh:primaryLevel kcaase:Level3_Application ;
+    rdfs:comment "Filters in a specific context" .
+
+post:thinking-cause-effect a kh:Post ;
+    rdfs:label "Thinking in Cause and Effect" ;
+    kh:primaryLevel kcaase:Level4_Analysis .
+
+post:one-dimensional-decision-trap a kh:Post ;
+    rdfs:label "The One-Dimensional Decision Trap" ;
+    kh:primaryLevel kcaase:Level6_Evaluation ;
+    rdfs:comment "Judgment quality / decision criteria — also maps to 'silly elephant' dismissal path" .
+
+post:looking-inward a kh:Post ;
+    rdfs:label "Looking Inward" ;
+    kh:primaryLevel kcaase:Level6_Evaluation ;
+    rdfs:comment "Reflective judgment — also maps to 'silly elephant' dismissal path" .
+
+post:51-ratio-math-saves-relationships a kh:Post ;
+    rdfs:label "The 5:1 Ratio: Math That Saves Relationships" ;
+    kh:primaryLevel kcaase:Level3_Application ;
+    rdfs:comment "A rule applied to lived situations" .
+
+post:physics-of-love a kh:Post ;
+    rdfs:label "The Physics of Love" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    rdfs:comment "Cross-domain metaphor building" .
+
+post:proactive-agent-pattern a kh:Post ;
+    rdfs:label "The Proactive Agent Pattern" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    rdfs:comment "Creating a new pattern" .
+
+post:ai-agent-architecture a kh:Post ;
+    rdfs:label "AI Agent Architecture" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    rdfs:comment "Designing a whole" .
+
+post:ai-video-editing-tools a kh:Post ;
+    rdfs:label "AI Video Editing Tools" ;
+    kh:primaryLevel kcaase:Level1_Knowledge ;
+    kh:secondaryLevel kcaase:Level3_Application ;
+    rdfs:comment "Tool survey" .
+
+post:what-im-building a kh:Post ;
+    rdfs:label "What I'm Building" ;
+    rdfs:comment "Meta / not primarily a cognition piece" .
+
+# KCAASE Decision Paths
+
+kcaase:SolvePath a kh:Path ;
+    rdfs:label "Solve It Path" ;
+    rdfs:comment "Continue through all 6 levels to create actionable solution" ;
+    kh:usesFramework framework:system-self ;
+    kh:usesFramework framework:system-self-assessment ;
+    kh:usesPost post:proactive-agent-pattern .
+
+kcaase:DismissPath a kh:Path ;
+    rdfs:label "Silly Elephant Path" ;
+    rdfs:comment "Dismiss the thought as not worth solving" ;
+    kh:usesPost post:one-dimensional-decision-trap ;
+    kh:usesPost post:looking-inward .
+
+# Gaps Identified
+
+kcaase:Gap_L1_Knowledge a kh:Gap ;
+    rdfs:label "L1 Knowledge Gap" ;
+    rdfs:comment "Thin coverage at Knowledge level. Need more content for: stating facts, recalling information, identifying what you know" ;
+    kh:suggestedContent "What do I actually know about this?" ;
+    kh:suggestedContent "Fact vs. assumption checker" ;
+    kh:suggestedContent "The information inventory" .
+
+# Navigation Hints for KCAASE App
+
+kcaase:Level1_Knowledge kh:appPrompt "What did you think? State it clearly." .
+kcaase:Level2_Comprehension kh:appPrompt "What do you mean? Restate objectively." .
+kcaase:Level3_Application kh:appPrompt "When/where did this appear? How does it manifest?" .
+kcaase:Level4_Analysis kh:appPrompt "What contributed? Why is this true? (Use 5 Whys)" .
+kcaase:Level5_Synthesis kh:appPrompt "What could you do? Create options." .
+kcaase:Level6_Evaluation kh:appPrompt "What's the plan? How will it affect outcomes?" .
+
+kcaase:Level3_Application kh:offrampPrompt "Does this actually affect you, or could it be a silly elephant?" .
+kcaase:Level4_Analysis kh:offrampPrompt "Is the 'why' something else entirely? Time to dismiss?" .
