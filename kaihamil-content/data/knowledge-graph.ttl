@@ -1,0 +1,730 @@
+# Kai Hamil Unified Knowledge Graph
+# Source of truth: RDF/TTL format
+# Exported to: graph.json for visual rendering
+# Created: April 19, 2026
+
+@prefix kh: <https://kaihamil.com/ontology/> .
+@prefix kcaase: <https://kaihamil.com/kcaase/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================
+# ONTOLOGY
+# ============================================
+
+kh:Node a rdfs:Class ;
+    rdfs:label "Graph Node" ;
+    rdfs:comment "Any entity in the knowledge graph" .
+
+kh:Content a rdfs:Class ;
+    rdfs:label "Content" ;
+    rdfs:subClassOf kh:Node ;
+    rdfs:comment "Pages, posts, frameworks, tools" .
+
+kh:Framework a rdfs:Class ;
+    rdfs:label "Framework" ;
+    rdfs:subClassOf kh:Content ;
+    rdfs:comment "Mental models and structured thinking" .
+
+kh:Post a rdfs:Class ;
+    rdfs:label "Post" ;
+    rdfs:subClassOf kh:Content ;
+    rdfs:comment "Blog posts and articles" .
+
+kh:Tool a rdfs:Class ;
+    rdfs:label "Tool" ;
+    rdfs:subClassOf kh:Content ;
+    rdfs:comment "Interactive tools and assessments" .
+
+kh:Collection a rdfs:Class ;
+    rdfs:label "Collection" ;
+    rdfs:subClassOf kh:Node ;
+    rdfs:comment "Grouping containers (frameworks, wisdom, etc.)" .
+
+kh:Paradigm a rdfs:Class ;
+    rdfs:label "Paradigm" ;
+    rdfs:subClassOf kh:Node ;
+    rdfs:comment "Core organizing principles" .
+
+kh:CognitionLevel a rdfs:Class ;
+    rdfs:label "Cognition Level" ;
+    rdfs:subClassOf kh:Node ;
+    rdfs:comment "Bloom's Taxonomy / KCAASE level" .
+
+kh:Edge a rdfs:Class ;
+    rdfs:label "Edge" ;
+    rdfs:comment "Relationship between nodes" .
+
+# Properties
+kh:url a rdf:Property ;
+    rdfs:label "URL" ;
+    rdfs:domain kh:Node ;
+    rdfs:range xsd:string .
+
+kh:description a rdf:Property ;
+    rdfs:label "Description" ;
+    rdfs:domain kh:Node ;
+    rdfs:range xsd:string .
+
+kh:branch a rdf:Property ;
+    rdfs:label "Branch" ;
+    rdfs:domain kh:Node ;
+    rdfs:range xsd:string .
+
+kh:tagline a rdf:Property ;
+    rdfs:label "Tagline" ;
+    rdfs:domain kh:Node ;
+    rdfs:range xsd:string .
+
+kh:nodeType a rdf:Property ;
+    rdfs:label "Node Type" ;
+    rdfs:domain kh:Node ;
+    rdfs:range xsd:string .
+
+kh:contains a rdf:Property ;
+    rdfs:label "Contains" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:related a rdf:Property ;
+    rdfs:label "Related" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:deepens a rdf:Property ;
+    rdfs:label "Deepens" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:applies a rdf:Property ;
+    rdfs:label "Applies" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:explores a rdf:Property ;
+    rdfs:label "Explores" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:inspires a rdf:Property ;
+    rdfs:label "Inspires" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:contrasts a rdf:Property ;
+    rdfs:label "Contrasts" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:implements a rdf:Property ;
+    rdfs:label "Implements" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+kh:opens a rdf:Property ;
+    rdfs:label "Opens" ;
+    rdfs:domain kh:Node ;
+    rdfs:range kh:Node .
+
+# KCAASE Properties
+kh:cognitionLevel a rdf:Property ;
+    rdfs:label "Cognition Level" ;
+    rdfs:domain kh:Content ;
+    rdfs:range kh:CognitionLevel .
+
+kh:primaryLevel a rdf:Property ;
+    rdfs:label "Primary Level" ;
+    rdfs:domain kh:Content ;
+    rdfs:range kh:CognitionLevel .
+
+kh:secondaryLevel a rdf:Property ;
+    rdfs:label "Secondary Level" ;
+    rdfs:domain kh:Content ;
+    rdfs:range kh:CognitionLevel .
+
+kh:prerequisiteFor a rdf:Property ;
+    rdfs:label "Prerequisite For" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range kh:CognitionLevel .
+
+kh:leadsTo a rdf:Property ;
+    rdfs:label "Leads To" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range kh:CognitionLevel .
+
+kh:offrampAt a rdf:Property ;
+    rdfs:label "Offramp At" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range xsd:string .
+
+kh:appPrompt a rdf:Property ;
+    rdfs:label "App Prompt" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range xsd:string .
+
+kh:acronymLetter a rdf:Property ;
+    rdfs:label "Acronym Letter" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range xsd:string .
+
+kh:acronymWord a rdf:Property ;
+    rdfs:label "Acronym Word" ;
+    rdfs:domain kh:CognitionLevel ;
+    rdfs:range xsd:string .
+
+# ============================================
+# KCAASE COGNITION LEVELS
+# ============================================
+
+kcaase:Level1_Knowledge a kh:CognitionLevel ;
+    rdfs:label "Knowledge" ;
+    kh:acronymLetter "K" ;
+    kh:acronymWord "Keep" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "State your thought/idea/opinion/feeling to review. 'I know I'm upset about my weight.'" ;
+    kh:appPrompt "What did you think? State it clearly." ;
+    kh:leadsTo kcaase:Level2_Comprehension .
+
+kcaase:Level2_Comprehension a kh:CognitionLevel ;
+    rdfs:label "Comprehension" ;
+    kh:acronymLetter "C" ;
+    kh:acronymWord "Catching" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "Restate in objective terms using different descriptors. 'My weight has risen since last year.'" ;
+    kh:appPrompt "What do you mean? Restate objectively." ;
+    kh:prerequisiteFor kcaase:Level3_Application ;
+    kh:leadsTo kcaase:Level3_Application .
+
+kcaase:Level3_Application a kh:CognitionLevel ;
+    rdfs:label "Application" ;
+    kh:acronymLetter "A" ;
+    kh:acronymWord "Apes" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "Observe how the thought manifests in reality. 'My weight has made me less active, and I exercise less.'" ;
+    kh:appPrompt "When/where did this appear? How does it manifest?" ;
+    kh:offrampAt "Does this actually affect you, or could it be a silly elephant?" ;
+    kh:prerequisiteFor kcaase:Level4_Analysis ;
+    kh:leadsTo kcaase:Level4_Analysis .
+
+kcaase:Level4_Analysis a kh:CognitionLevel ;
+    rdfs:label "Analysis" ;
+    kh:acronymLetter "A" ;
+    kh:acronymWord "And" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "Ask and answer WHY the thought is true. 'I stopped tracking my Apple Watch rings, and lost motivation to exercise, leading to a weight gain.' Leverage Root Cause Analysis and 5 Whys frameworks here." ;
+    kh:appPrompt "What contributed? Why is this true? (Use 5 Whys)" ;
+    kh:offrampAt "Is the 'why' related to something else entirely? Time to dismiss?" ;
+    kh:prerequisiteFor kcaase:Level5_Synthesis ;
+    kh:leadsTo kcaase:Level5_Synthesis .
+
+kcaase:Level5_Synthesis a kh:CognitionLevel ;
+    rdfs:label "Synthesis" ;
+    kh:acronymLetter "S" ;
+    kh:acronymWord "Silly" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "What can be done or created? 'Resume wearing my apple watch and being the person who closes the rings every day.'" ;
+    kh:appPrompt "What could you do? Create options." ;
+    kh:prerequisiteFor kcaase:Level6_Evaluation ;
+    kh:leadsTo kcaase:Level6_Evaluation .
+
+kcaase:Level6_Evaluation a kh:CognitionLevel ;
+    rdfs:label "Evaluation" ;
+    kh:acronymLetter "E" ;
+    kh:acronymWord "Elephants" ;
+    kh:nodeType "cognition" ;
+    kh:branch "kcaase" ;
+    kh:description "How will it affect the outcome? 'This will improve my burned calorie count and lose weight for the summer.'" ;
+    kh:appPrompt "What's the plan? How will it affect outcomes?" .
+
+# ============================================
+# CORE STRUCTURE (from existing graph.json)
+# ============================================
+
+kh:root a kh:Node ;
+    rdfs:label "Kai Hamil" ;
+    kh:nodeType "root" ;
+    kh:url "/" ;
+    kh:description "Entry point: Quiz + System // Self" ;
+    kh:opens kh:paradigm ;
+    kh:contains kh:ai-quiz-v3 ;
+    kh:contains kh:operations .
+
+kh:paradigm a kh:Paradigm ;
+    rdfs:label "System // Self" ;
+    kh:nodeType "paradigm" ;
+    kh:url "/paradigm/" ;
+    kh:description "The central paradigm: Doing things better // Doing better things" ;
+    kh:branch "both" ;
+    kh:contains kh:system ;
+    kh:contains kh:self ;
+    kh:contains kh:about .
+
+kh:system a kh:Collection ;
+    rdfs:label "System" ;
+    kh:nodeType "collection" ;
+    kh:url "/system/" ;
+    kh:tagline "Doing things better" ;
+    kh:description "Science, frameworks, tools for others" ;
+    kh:branch "system" ;
+    kh:contrasts kh:self ;
+    kh:contains kh:frameworks ;
+    kh:contains kh:tools-system ;
+    kh:contains kh:research .
+
+kh:self a kh:Collection ;
+    rdfs:label "Self" ;
+    kh:nodeType "collection" ;
+    kh:url "/self/" ;
+    kh:tagline "Doing better things" ;
+    kh:description "Art, wisdom, how we grow ourselves" ;
+    kh:branch "self" ;
+    kh:contains kh:wisdom ;
+    kh:contains kh:tools-self .
+
+kh:frameworks a kh:Collection ;
+    rdfs:label "Frameworks" ;
+    kh:nodeType "collection" ;
+    kh:url "/frameworks/" ;
+    kh:description "Mental models and structured thinking" ;
+    kh:branch "system" .
+
+kh:tools-system a kh:Collection ;
+    rdfs:label "System Tools" ;
+    kh:nodeType "collection" ;
+    kh:url "/tools/system/" ;
+    kh:description "Problem-solving and assessment tools" ;
+    kh:branch "system" .
+
+kh:research a kh:Collection ;
+    rdfs:label "Research" ;
+    kh:nodeType "collection" ;
+    kh:url "/research/" ;
+    kh:description "Explorations and drafts (disclaimer: unvalidated)" ;
+    kh:branch "system" .
+
+kh:wisdom a kh:Collection ;
+    rdfs:label "Wisdom Traditions" ;
+    kh:nodeType "collection" ;
+    kh:url "/wisdom/" ;
+    kh:description "Ancient wisdom applied to modern life" ;
+    kh:branch "self" .
+
+kh:tools-self a kh:Collection ;
+    rdfs:label "Self Tools" ;
+    kh:nodeType "collection" ;
+    kh:url "/tools/self/" ;
+    kh:description "Reflection and personal growth tools" ;
+    kh:branch "self" .
+
+kh:about a kh:Collection ;
+    rdfs:label "About" ;
+    kh:nodeType "collection" ;
+    kh:url "/about/" ;
+    kh:description "Who is behind this" ;
+    kh:branch "both" .
+
+kh:operations a kh:Collection ;
+    rdfs:label "Operations" ;
+    kh:nodeType "collection" ;
+    kh:url "/openclaw/" ;
+    kh:description "How the sausage is made" ;
+    kh:branch "meta" .
+
+# ============================================
+# FRAMEWORKS WITH KCAASE MAPPINGS
+# ============================================
+
+kh:5-filters a kh:Framework ;
+    rdfs:label "5 Filters for Deciding Under Uncertainty" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/5-filters.html" ;
+    kh:description "Decision-making under uncertainty" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level2_Comprehension ;
+    kh:related kh:uncertainty ;
+    kh:applies kh:post-5filters-openclaw ;
+    kh:applies kh:post-5filters-uncertainty .
+
+kh:cause-effect a kh:Framework ;
+    rdfs:label "Cause & Effect" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/cause-effect.html" ;
+    kh:description "Understanding chains of causation" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level4_Analysis ;
+    kh:implements kh:pdsa ;
+    kh:applies kh:post-cause-effect .
+
+kh:pdsa a kh:Framework ;
+    rdfs:label "PDSA Cycle" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/cause-and-effect/" ;
+    kh:description "Plan-Do-Study-Act improvement cycle" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level4_Analysis .
+
+kh:problem-audit a kh:Framework ;
+    rdfs:label "Problem Audit" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/problem-audit.html" ;
+    kh:description "Structured problem analysis" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level4_Analysis .
+
+kh:system-self-framework a kh:Framework ;
+    rdfs:label "System // Self Framework" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/system-self.html" ;
+    kh:description "The core paradigm explained" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    kh:related kh:paradigm ;
+    kh:explores kh:assembly-agency .
+
+kh:life-process-mapping a kh:Framework ;
+    rdfs:label "Life Process Mapping" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/life-process-mapping.html" ;
+    kh:description "Zoom out to see patterns. Map life stages and transitions." ;
+    kh:branch "self" ;
+    kh:primaryLevel kcaase:Level3_Application ;
+    kh:secondaryLevel kcaase:Level4_Analysis ;
+    kh:related kh:purpose ;
+    kh:related kh:uncertainty ;
+    kh:related kh:system-self-framework ;
+    kh:related kh:problem-audit ;
+    kh:applies kh:post-looking-inward .
+
+kh:ai-usage-advanced a kh:Framework ;
+    rdfs:label "AI Usage Advanced" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/ai-usage-advanced.html" ;
+    kh:description "Deep assessment of AI integration" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level3_Application ;
+    kh:deepens kh:ai-profile-deepdive ;
+    kh:related kh:ai-quiz-v3 .
+
+kh:realtor-discovery a kh:Framework ;
+    rdfs:label "Realtor Discovery" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/realtor-discovery.html" ;
+    kh:description "Client discovery for real estate" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level1_Knowledge ;
+    kh:secondaryLevel kcaase:Level2_Comprehension ;
+    kh:explores kh:realtor-research ;
+    kh:applies kh:realtor-memory .
+
+kh:attention-spectrum a kh:Framework ;
+    rdfs:label "The Attention Spectrum" ;
+    kh:nodeType "content" ;
+    kh:url "/frameworks/attention-spectrum.html" ;
+    kh:description "Understanding where attention sits on a continuum" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level2_Comprehension .
+
+# ============================================
+# POSTS WITH KCAASE MAPPINGS
+# ============================================
+
+kh:post-5filters-openclaw a kh:Post ;
+    rdfs:label "5 Filters Applied to OpenClaw" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/5-filters-openclaw.html" ;
+    kh:description "Framework in action" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level3_Application ;
+    kh:related kh:5-filters .
+
+kh:post-5filters-uncertainty a kh:Post ;
+    rdfs:label "5 Filters: Deciding in Uncertainty" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/5-filters-uncertainty.html" ;
+    kh:description "Decision-making when you don't know" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level2_Comprehension ;
+    kh:secondaryLevel kcaase:Level6_Evaluation ;
+    kh:related kh:5-filters ;
+    kh:related kh:uncertainty .
+
+kh:post-cause-effect a kh:Post ;
+    rdfs:label "Thinking in Cause & Effect" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/thinking-cause-effect.html" ;
+    kh:description "Applying causal thinking" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level4_Analysis ;
+    kh:related kh:cause-effect .
+
+kh:post-looking-inward a kh:Post ;
+    rdfs:label "Looking Inward" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/looking-inward.html" ;
+    kh:description "To find what you're meant to do externally, look inside." ;
+    kh:branch "self" ;
+    kh:primaryLevel kcaase:Level6_Evaluation ;
+    kh:related kh:life-process-mapping ;
+    kh:related kh:system-self-framework ;
+    kh:related kh:purpose ;
+    kh:related kh:uncertainty .
+
+kh:post-5-1-ratio a kh:Post ;
+    rdfs:label "The 5:1 Ratio" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/5-1-ratio.html" ;
+    kh:description "Balance in feedback" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level3_Application .
+
+kh:post-agent-arch a kh:Post ;
+    rdfs:label "AI Agent Architecture" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/ai-agent-architecture.html" ;
+    kh:description "How agents are built" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    kh:related kh:ops-architecture .
+
+kh:post-physics-love a kh:Post ;
+    rdfs:label "The Physics of Love" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/physics-of-love.html" ;
+    kh:description "Love as a force" ;
+    kh:branch "self" ;
+    kh:primaryLevel kcaase:Level5_Synthesis ;
+    kh:related kh:love .
+
+kh:post-ai-video a kh:Post ;
+    rdfs:label "AI Video Editing Tools" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/ai-video-editing.html" ;
+    kh:description "Tools for AI-assisted video" ;
+    kh:branch "system" ;
+    kh:primaryLevel kcaase:Level1_Knowledge ;
+    kh:secondaryLevel kcaase:Level3_Application .
+
+kh:post-what-building a kh:Post ;
+    rdfs:label "What I'm Building" ;
+    kh:nodeType "content" ;
+    kh:url "/posts/what-building.html" ;
+    kh:description "The vision and the work" ;
+    kh:branch "both" ;
+    kh:related kh:paradigm ;
+    kh:related kh:kyle-bio .
+
+# ============================================
+# TOOLS
+# ============================================
+
+kh:ai-quiz-v3 a kh:Tool ;
+    rdfs:label "AI Problem Solver Quiz" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/ai-user-quiz-v3.html" ;
+    kh:description "Discover your problem-solving type (Double Diamond)" ;
+    kh:branch "system" ;
+    kh:deepens kh:quiz-result ;
+    kh:deepens kh:ai-profile-deepdive ;
+    kh:related kh:hour-apart .
+
+kh:quiz-result a kh:Tool ;
+    rdfs:label "Quiz Result" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/quiz-result.html" ;
+    kh:description "Your problem-solver type revealed" ;
+    kh:branch "system" ;
+    kh:deepens kh:ai-profile-deepdive .
+
+kh:control-chart-evaluator a kh:Tool ;
+    rdfs:label "Control Chart Evaluator" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/control-chart-evaluator.html" ;
+    kh:description "Interactive tool to classify variation" ;
+    kh:branch "system" ;
+    kh:related kh:5-filters .
+
+kh:hour-apart a kh:Tool ;
+    rdfs:label "The Hour Apart" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/philosophy-lab.html" ;
+    kh:description "Pick a lens. See differently." ;
+    kh:branch "self" ;
+    kh:deepens kh:wisdom ;
+    kh:related kh:free-hour .
+
+kh:free-hour a kh:Tool ;
+    rdfs:label "The Free Hour" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/free-hour.html" ;
+    kh:description "What would you do with found time?" ;
+    kh:branch "self" ;
+    kh:deepens kh:hour-apart ;
+    kh:related kh:script-stops .
+
+# ============================================
+# WISDOM CONTENT
+# ============================================
+
+kh:uncertainty a kh:Content ;
+    rdfs:label "Uncertainty" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/uncertainty.html" ;
+    kh:description "Living with not knowing" ;
+    kh:branch "self" ;
+    kh:related kh:suffering ;
+    kh:related kh:5-filters .
+
+kh:purpose a kh:Content ;
+    rdfs:label "Purpose" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/purpose.html" ;
+    kh:description "Finding meaning in life" ;
+    kh:branch "self" ;
+    kh:related kh:mortality ;
+    kh:related kh:ambition .
+
+kh:love a kh:Content ;
+    rdfs:label "Love" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/love.html" ;
+    kh:description "What the traditions say about love" ;
+    kh:branch "self" ;
+    kh:applies kh:post-physics-love .
+
+kh:suffering a kh:Content ;
+    rdfs:label "Suffering" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/suffering.html" ;
+    kh:description "The role of suffering in growth" ;
+    kh:branch "self" ;
+    kh:related kh:mortality ;
+    kh:related kh:uncertainty .
+
+kh:mortality a kh:Content ;
+    rdfs:label "Mortality" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/mortality.html" ;
+    kh:description "Confronting our finite time" ;
+    kh:branch "self" ;
+    kh:related kh:purpose .
+
+kh:not-scrolling a kh:Content ;
+    rdfs:label "Philosophy of Not Scrolling" ;
+    kh:nodeType "content" ;
+    kh:url "/wisdom/philosophy-of-not-scrolling.html" ;
+    kh:description "Reclaiming attention" ;
+    kh:branch "self" ;
+    kh:explores kh:not-scrolling-research ;
+    kh:related kh:free-hour .
+
+# ============================================
+# META / OPERATIONS
+# ============================================
+
+kh:knowledge-graph a kh:Content ;
+    rdfs:label "Knowledge Graph" ;
+    kh:nodeType "content" ;
+    kh:url "/research/knowledge-graph.html" ;
+    kh:description "Visual map of all concepts" ;
+    kh:branch "system" ;
+    kh:related kh:kg-design-brief ;
+    kh:related kh:paradigm .
+
+kh:kg-design-brief a kh:Content ;
+    rdfs:label "KG Design Brief" ;
+    kh:nodeType "content" ;
+    kh:url "/research/kg-design-brief.html" ;
+    kh:description "Design rationale for the knowledge graph" ;
+    kh:branch "system" ;
+    kh:related kh:knowledge-graph .
+
+kh:assembly-agency a kh:Content ;
+    rdfs:label "Assembly to Agency" ;
+    kh:nodeType "content" ;
+    kh:url "/research/assembly-to-agency-draft.html" ;
+    kh:description "The shift from instruction to intention" ;
+    kh:branch "system" ;
+    kh:related kh:paradigm .
+
+kh:common-cause-variation a kh:Content ;
+    rdfs:label "Common Cause Variation" ;
+    kh:nodeType "content" ;
+    kh:url "/research/common-cause-variation.html" ;
+    kh:description "Distinguishing normal variation from special cause" ;
+    kh:branch "system" ;
+    kh:deepens kh:control-chart-evaluator ;
+    kh:related kh:uncertainty ;
+    kh:related kh:cause-effect .
+
+kh:ops-architecture a kh:Content ;
+    rdfs:label "Agent Architecture" ;
+    kh:nodeType "content" ;
+    kh:url "/openclaw/architecture.html" ;
+    kh:description "Technical architecture" ;
+    kh:branch "meta" .
+
+kh:kyle-bio a kh:Content ;
+    rdfs:label "Kyle Joseph Brady" ;
+    kh:nodeType "content" ;
+    kh:url "/about/kyle-joseph-brady.html" ;
+    kh:description "The human behind the work" ;
+    kh:branch "both" ;
+    kh:inspires kh:paradigm ;
+    kh:related kh:post-what-building .
+
+# ============================================
+# KCAASE APP INTEGRATION
+# ============================================
+
+kh:kcaase-app a kh:Tool ;
+    rdfs:label "KCAASE" ;
+    kh:nodeType "content" ;
+    kh:url "/tools/kcaase.html" ;
+    kh:description "Keep Catching Apes And Silly Elephants — Bloom's Taxonomy thinking tool" ;
+    kh:branch "system" ;
+    kh:contains kcaase:Level1_Knowledge ;
+    kh:contains kcaase:Level2_Comprehension ;
+    kh:contains kcaase:Level3_Application ;
+    kh:contains kcaase:Level4_Analysis ;
+    kh:contains kcaase:Level5_Synthesis ;
+    kh:contains kcaase:Level6_Evaluation ;
+    kh:related kh:5-filters ;
+    kh:related kh:cause-effect ;
+    kh:related kh:problem-audit ;
+    kh:related kh:system-self-framework .
+
+# KCAASE Pathways
+kh:solve-path a kh:Node ;
+    rdfs:label "Solve It Path" ;
+    kh:nodeType "pathway" ;
+    kh:description "Continue through all 6 levels to create actionable solution" ;
+    kh:branch "kcaase" ;
+    kh:contains kcaase:Level5_Synthesis ;
+    kh:contains kcaase:Level6_Evaluation ;
+    kh:related kh:system-self-framework ;
+    kh:related kh:post-agent-arch .
+
+kh:dismiss-path a kh:Node ;
+    rdfs:label "Silly Elephant Path" ;
+    kh:nodeType "pathway" ;
+    kh:description "Dismiss the thought as not worth solving" ;
+    kh:branch "kcaase" ;
+    kh:related kh:post-looking-inward ;
+    kh:related kh:uncertainty .
+
+# ============================================
+# GAPS IDENTIFIED
+# ============================================
+
+kh:gap-l1-knowledge a kh:Node ;
+    rdfs:label "L1 Knowledge Gap" ;
+    kh:nodeType "gap" ;
+    kh:description "Thin coverage at Knowledge level. Need content for: stating facts, recalling information, identifying what you know" ;
+    kh:branch "kcaase" .

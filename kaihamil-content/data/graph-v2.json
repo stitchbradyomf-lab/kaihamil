@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "created": "2026-04-19",
+    "description": "Kai Hamil knowledge graph with KCAASE cognition levels",
+    "nodeCount": 85,
+    "edgeCount": 156,
+    "sourceFormat": "RDF/Turtle",
+    "sourceFile": "knowledge-graph.ttl"
+  },
+  "nodes": [
+    {"id": "root", "label": "Kai Hamil", "type": "root", "branch": "root", "url": "/", "description": "Entry point: Quiz + System // Self"},
+    {"id": "paradigm", "label": "System // Self", "type": "paradigm", "branch": "both", "url": "/paradigm/", "description": "The central paradigm: Doing things better // Doing better things"},
+    {"id": "system", "label": "System", "type": "collection", "branch": "system", "url": "/system/", "tagline": "Doing things better", "description": "Science, frameworks, tools for others"},
+    {"id": "self", "label": "Self", "type": "collection", "branch": "self", "url": "/self/", "tagline": "Doing better things", "description": "Art, wisdom, how we grow ourselves"},
+    {"id": "frameworks", "label": "Frameworks", "type": "collection", "branch": "system", "url": "/frameworks/", "description": "Mental models and structured thinking"},
+    {"id": "tools-system", "label": "System Tools", "type": "collection", "branch": "system", "url": "/tools/system/", "description": "Problem-solving and assessment tools"},
+    {"id": "research", "label": "Research", "type": "collection", "branch": "system", "url": "/research/", "description": "Explorations and drafts (disclaimer: unvalidated)"},
+    {"id": "wisdom", "label": "Wisdom Traditions", "type": "collection", "branch": "self", "url": "/wisdom/", "description": "Ancient wisdom applied to modern life"},
+    {"id": "tools-self", "label": "Self Tools", "type": "collection", "branch": "self", "url": "/tools/self/", "description": "Reflection and personal growth tools"},
+    {"id": "about", "label": "About", "type": "collection", "branch": "both", "url": "/about/", "description": "Who is behind this"},
+    {"id": "operations", "label": "Operations", "type": "collection", "branch": "meta", "url": "/openclaw/", "description": "How the sausage is made"},
+
+    {"id": "kcaase-app", "label": "KCAASE", "type": "content", "branch": "kcaase", "url": "/tools/kcaase.html", "description": "Keep Catching Apes And Silly Elephants — Bloom's Taxonomy thinking tool"},
+    {"id": "kcaase-L1", "label": "Knowledge (Keep)", "type": "cognition", "branch": "kcaase", "acronymLetter": "K", "acronymWord": "Keep", "appPrompt": "What did you think? State it clearly.", "description": "State your thought/idea/opinion/feeling to review"},
+    {"id": "kcaase-L2", "label": "Comprehension (Catching)", "type": "cognition", "branch": "kcaase", "acronymLetter": "C", "acronymWord": "Catching", "appPrompt": "What do you mean? Restate objectively.", "description": "Restate in objective terms using different descriptors"},
+    {"id": "kcaase-L3", "label": "Application (Apes)", "type": "cognition", "branch": "kcaase", "acronymLetter": "A", "acronymWord": "Apes", "appPrompt": "When/where did this appear? How does it manifest?", "description": "Observe how the thought manifests in reality"},
+    {"id": "kcaase-L4", "label": "Analysis (And)", "type": "cognition", "branch": "kcaase", "acronymLetter": "A", "acronymWord": "And", "appPrompt": "What contributed? Why is this true? (Use 5 Whys)", "description": "Ask and answer WHY the thought is true"},
+    {"id": "kcaase-L5", "label": "Synthesis (Silly)", "type": "cognition", "branch": "kcaase", "acronymLetter": "S", "acronymWord": "Silly", "appPrompt": "What could you do? Create options.", "description": "What can be done or created?"},
+    {"id": "kcaase-L6", "label": "Evaluation (Elephants)", "type": "cognition", "branch": "kcaase", "acronymLetter": "E", "acronymWord": "Elephants", "appPrompt": "What's the plan? How will it affect outcomes?", "description": "How will it affect the outcome?"},
+    {"id": "solve-path", "label": "Solve It Path", "type": "pathway", "branch": "kcaase", "description": "Continue through all 6 levels to create actionable solution"},
+    {"id": "dismiss-path", "label": "Silly Elephant Path", "type": "pathway", "branch": "kcaase", "description": "Dismiss the thought as not worth solving"},
+
+    {"id": "5-filters", "label": "5 Filters Assessment", "type": "content", "branch": "system", "url": "/frameworks/5-filters.html", "description": "Decision-making under uncertainty", "cognitionLevel": "L2"},
+    {"id": "cause-effect", "label": "Cause & Effect", "type": "content", "branch": "system", "url": "/frameworks/cause-effect.html", "description": "Understanding chains of causation", "cognitionLevel": "L4"},
+    {"id": "pdsa", "label": "PDSA Cycle", "type": "content", "branch": "system", "url": "/frameworks/cause-and-effect/", "description": "Plan-Do-Study-Act improvement cycle", "cognitionLevel": "L4"},
+    {"id": "problem-audit", "label": "Problem Audit", "type": "content", "branch": "system", "url": "/frameworks/problem-audit.html", "description": "Structured problem analysis", "cognitionLevel": "L4"},
+    {"id": "system-self-framework", "label": "System // Self Framework", "type": "content", "branch": "system", "url": "/frameworks/system-self.html", "description": "The core paradigm explained", "cognitionLevel": "L5"},
+    {"id": "life-process-mapping", "label": "Life Process Mapping", "type": "content", "branch": "self", "url": "/frameworks/life-process-mapping.html", "description": "Zoom out to see patterns", "cognitionLevel": "L3"},
+    {"id": "ai-usage-advanced", "label": "AI Usage Advanced", "type": "content", "branch": "system", "url": "/frameworks/ai-usage-advanced.html", "description": "Deep assessment of AI integration", "cognitionLevel": "L3"},
+    {"id": "realtor-discovery", "label": "Realtor Discovery", "type": "content", "branch": "system", "url": "/frameworks/realtor-discovery.html", "description": "Client discovery for real estate", "cognitionLevel": "L1"},
+    {"id": "attention-spectrum", "label": "The Attention Spectrum", "type": "content", "branch": "system", "url": "/frameworks/attention-spectrum.html", "description": "Understanding where attention sits on a continuum", "cognitionLevel": "L2"},
+
+    {"id": "post-5filters-openclaw", "label": "5 Filters Applied to OpenClaw", "type": "content", "branch": "system", "url": "/posts/5-filters-openclaw.html", "description": "Framework in action", "cognitionLevel": "L3"},
+    {"id": "post-5filters-uncertainty", "label": "5 Filters: Deciding in Uncertainty", "type": "content", "branch": "system", "url": "/posts/5-filters-uncertainty.html", "description": "Decision-making when you don't know", "cognitionLevel": "L2"},
+    {"id": "post-cause-effect", "label": "Thinking in Cause & Effect", "type": "content", "branch": "system", "url": "/posts/thinking-cause-effect.html", "description": "Applying causal thinking", "cognitionLevel": "L4"},
+    {"id": "post-looking-inward", "label": "Looking Inward", "type": "content", "branch": "self", "url": "/posts/looking-inward.html", "description": "To find what you're meant to do externally, look inside.", "cognitionLevel": "L6"},
+    {"id": "post-5-1-ratio", "label": "The 5:1 Ratio", "type": "content", "branch": "system", "url": "/posts/5-1-ratio.html", "description": "Balance in feedback", "cognitionLevel": "L3"},
+    {"id": "post-agent-arch", "label": "AI Agent Architecture", "type": "content", "branch": "system", "url": "/posts/ai-agent-architecture.html", "description": "How agents are built", "cognitionLevel": "L5"},
+    {"id": "post-physics-love", "label": "The Physics of Love", "type": "content", "branch": "self", "url": "/posts/physics-of-love.html", "description": "Love as a force", "cognitionLevel": "L5"},
+    {"id": "post-ai-video", "label": "AI Video Editing Tools", "type": "content", "branch": "system", "url": "/posts/ai-video-editing.html", "description": "Tools for AI-assisted video", "cognitionLevel": "L1"},
+    {"id": "post-what-building", "label": "What I'm Building", "type": "content", "branch": "both", "url": "/posts/what-building.html", "description": "The vision and the work"},
+
+    {"id": "ai-quiz-v3", "label": "AI Problem Solver Quiz", "type": "content", "branch": "system", "url": "/tools/ai-user-quiz-v3.html", "description": "Discover your problem-solving type (Double Diamond)"},
+    {"id": "control-chart-evaluator", "label": "Control Chart Evaluator", "type": "content", "branch": "system", "url": "/tools/control-chart-evaluator.html", "description": "Interactive tool to classify variation"},
+    {"id": "hour-apart", "label": "The Hour Apart", "type": "content", "branch": "self", "url": "/tools/philosophy-lab.html", "description": "Pick a lens. See differently."},
+    {"id": "free-hour", "label": "The Free Hour", "type": "content", "branch": "self", "url": "/tools/free-hour.html", "description": "What would you do with found time?"},
+
+    {"id": "uncertainty", "label": "Uncertainty", "type": "content", "branch": "self", "url": "/wisdom/uncertainty.html", "description": "Living with not knowing"},
+    {"id": "purpose", "label": "Purpose", "type": "content", "branch": "self", "url": "/wisdom/purpose.html", "description": "Finding meaning in life"},
+    {"id": "love", "label": "Love", "type": "content", "branch": "self", "url": "/wisdom/love.html", "description": "What the traditions say about love"},
+    {"id": "suffering", "label": "Suffering", "type": "content", "branch": "self", "url": "/wisdom/suffering.html", "description": "The role of suffering in growth"},
+    {"id": "mortality", "label": "Mortality", "type": "content", "branch": "self", "url": "/wisdom/mortality.html", "description": "Confronting our finite time"},
+    {"id": "not-scrolling", "label": "Philosophy of Not Scrolling", "type": "content", "branch": "self", "url": "/wisdom/philosophy-of-not-scrolling.html", "description": "Reclaiming attention"},
+
+    {"id": "knowledge-graph", "label": "Knowledge Graph", "type": "content", "branch": "system", "url": "/research/knowledge-graph.html", "description": "Visual map of all concepts"},
+    {"id": "assembly-agency", "label": "Assembly to Agency", "type": "content", "branch": "system", "url": "/research/assembly-to-agency-draft.html", "description": "The shift from instruction to intention"},
+    {"id": "common-cause-variation", "label": "Common Cause Variation", "type": "content", "branch": "system", "url": "/research/common-cause-variation.html", "description": "Distinguishing normal variation from special cause"},
+
+    {"id": "kyle-bio", "label": "Kyle Joseph Brady", "type": "content", "branch": "both", "url": "/about/kyle-joseph-brady.html", "description": "The human behind the work"},
+
+    {"id": "gap-l1", "label": "L1 Knowledge Gap", "type": "gap", "branch": "kcaase", "description": "Thin coverage at Knowledge level. Need content for: stating facts, recalling information, identifying what you know"}
+  ],
+  "edges": [
+    {"source": "root", "target": "paradigm", "type": "opens", "label": "opens"},
+    {"source": "root", "target": "ai-quiz-v3", "type": "contains", "label": "entry quiz"},
+    {"source": "root", "target": "operations", "type": "contains"},
+
+    {"source": "paradigm", "target": "system", "type": "contains", "label": "branch"},
+    {"source": "paradigm", "target": "self", "type": "contains", "label": "branch"},
+    {"source": "paradigm", "target": "about", "type": "contains", "label": "who"},
+    {"source": "system", "target": "self", "type": "contrasts", "label": "complements"},
+
+    {"source": "system", "target": "frameworks", "type": "contains"},
+    {"source": "system", "target": "tools-system", "type": "contains"},
+    {"source": "system", "target": "research", "type": "contains"},
+
+    {"source": "self", "target": "wisdom", "type": "contains"},
+    {"source": "self", "target": "tools-self", "type": "contains"},
+
+    {"source": "frameworks", "target": "5-filters", "type": "contains"},
+    {"source": "frameworks", "target": "cause-effect", "type": "contains"},
+    {"source": "frameworks", "target": "pdsa", "type": "contains"},
+    {"source": "frameworks", "target": "problem-audit", "type": "contains"},
+    {"source": "frameworks", "target": "system-self-framework", "type": "contains"},
+    {"source": "frameworks", "target": "life-process-mapping", "type": "contains"},
+    {"source": "frameworks", "target": "ai-usage-advanced", "type": "contains"},
+    {"source": "frameworks", "target": "realtor-discovery", "type": "contains"},
+    {"source": "frameworks", "target": "attention-spectrum", "type": "contains"},
+
+    {"source": "tools-system", "target": "ai-quiz-v3", "type": "contains"},
+    {"source": "tools-system", "target": "control-chart-evaluator", "type": "contains"},
+    {"source": "tools-system", "target": "kcaase-app", "type": "contains"},
+
+    {"source": "tools-self", "target": "free-hour", "type": "contains"},
+    {"source": "tools-self", "target": "hour-apart", "type": "contains"},
+
+    {"source": "wisdom", "target": "uncertainty", "type": "contains"},
+    {"source": "wisdom", "target": "purpose", "type": "contains"},
+    {"source": "wisdom", "target": "love", "type": "contains"},
+    {"source": "wisdom", "target": "suffering", "type": "contains"},
+    {"source": "wisdom", "target": "mortality", "type": "contains"},
+    {"source": "wisdom", "target": "not-scrolling", "type": "contains"},
+
+    {"source": "about", "target": "kyle-bio", "type": "contains"},
+
+    {"source": "research", "target": "knowledge-graph", "type": "contains"},
+    {"source": "research", "target": "assembly-agency", "type": "contains"},
+    {"source": "research", "target": "common-cause-variation", "type": "contains"},
+
+    {"source": "kcaase-app", "target": "kcaase-L1", "type": "contains"},
+    {"source": "kcaase-app", "target": "kcaase-L2", "type": "contains"},
+    {"source": "kcaase-app", "target": "kcaase-L3", "type": "contains"},
+    {"source": "kcaase-app", "target": "kcaase-L4", "type": "contains"},
+    {"source": "kcaase-app", "target": "kcaase-L5", "type": "contains"},
+    {"source": "kcaase-app", "target": "kcaase-L6", "type": "contains"},
+
+    {"source": "kcaase-L1", "target": "kcaase-L2", "type": "leadsTo", "label": "→"},
+    {"source": "kcaase-L2", "target": "kcaase-L3", "type": "leadsTo", "label": "→"},
+    {"source": "kcaase-L3", "target": "kcaase-L4", "type": "leadsTo", "label": "→"},
+    {"source": "kcaase-L4", "target": "kcaase-L5", "type": "leadsTo", "label": "→"},
+    {"source": "kcaase-L5", "target": "kcaase-L6", "type": "leadsTo", "label": "→"},
+
+    {"source": "kcaase-L3", "target": "dismiss-path", "type": "offramp", "label": "silly elephant?"},
+    {"source": "kcaase-L4", "target": "dismiss-path", "type": "offramp", "label": "silly elephant?"},
+    {"source": "kcaase-L4", "target": "solve-path", "type": "leadsTo", "label": "solve it"},
+    {"source": "solve-path", "target": "kcaase-L5", "type": "contains"},
+    {"source": "solve-path", "target": "kcaase-L6", "type": "contains"},
+
+    {"source": "5-filters", "target": "kcaase-L2", "type": "teaches", "label": "teaches"},
+    {"source": "5-filters", "target": "uncertainty", "type": "related"},
+    {"source": "5-filters", "target": "post-5filters-openclaw", "type": "applies"},
+    {"source": "5-filters", "target": "post-5filters-uncertainty", "type": "applies"},
+
+    {"source": "cause-effect", "target": "kcaase-L4", "type": "teaches", "label": "teaches"},
+    {"source": "cause-effect", "target": "pdsa", "type": "implements"},
+    {"source": "cause-effect", "target": "post-cause-effect", "type": "applies"},
+
+    {"source": "problem-audit", "target": "kcaase-L4", "type": "teaches", "label": "teaches"},
+
+    {"source": "system-self-framework", "target": "kcaase-L5", "type": "teaches", "label": "teaches"},
+    {"source": "system-self-framework", "target": "paradigm", "type": "related"},
+    {"source": "system-self-framework", "target": "assembly-agency", "type": "explores"},
+
+    {"source": "life-process-mapping", "target": "kcaase-L3", "type": "teaches", "label": "teaches"},
+    {"source": "life-process-mapping", "target": "purpose", "type": "related"},
+    {"source": "life-process-mapping", "target": "post-looking-inward", "type": "applies"},
+
+    {"source": "ai-usage-advanced", "target": "kcaase-L3", "type": "teaches", "label": "teaches"},
+
+    {"source": "realtor-discovery", "target": "kcaase-L1", "type": "teaches", "label": "teaches"},
+
+    {"source": "attention-spectrum", "target": "kcaase-L2", "type": "teaches", "label": "teaches"},
+
+    {"source": "post-5filters-openclaw", "target": "5-filters", "type": "related"},
+    {"source": "post-5filters-uncertainty", "target": "5-filters", "type": "related"},
+    {"source": "post-5filters-uncertainty", "target": "uncertainty", "type": "related"},
+
+    {"source": "post-cause-effect", "target": "cause-effect", "type": "related"},
+
+    {"source": "post-looking-inward", "target": "dismiss-path", "type": "related", "label": "dismissal wisdom"},
+    {"source": "post-looking-inward", "target": "life-process-mapping", "type": "related"},
+    {"source": "post-looking-inward", "target": "purpose", "type": "related"},
+    {"source": "post-looking-inward", "target": "uncertainty", "type": "related"},
+
+    {"source": "post-5-1-ratio", "target": "kcaase-L3", "type": "teaches", "label": "teaches"},
+
+    {"source": "post-agent-arch", "target": "kcaase-L5", "type": "teaches", "label": "teaches"},
+
+    {"source": "post-physics-love", "target": "kcaase-L5", "type": "teaches", "label": "teaches"},
+    {"source": "post-physics-love", "target": "love", "type": "related"},
+
+    {"source": "post-ai-video", "target": "kcaase-L1", "type": "teaches", "label": "teaches"},
+
+    {"source": "post-what-building", "target": "paradigm", "type": "related"},
+    {"source": "post-what-building", "target": "kyle-bio", "type": "related"},
+
+    {"source": "ai-quiz-v3", "target": "hour-apart", "type": "related"},
+
+    {"source": "free-hour", "target": "hour-apart", "type": "deepens"},
+    {"source": "free-hour", "target": "not-scrolling", "type": "related"},
+
+    {"source": "uncertainty", "target": "suffering", "type": "related"},
+    {"source": "uncertainty", "target": "5-filters", "type": "related"},
+    {"source": "suffering", "target": "mortality", "type": "related"},
+    {"source": "mortality", "target": "purpose", "type": "related"},
+    {"source": "love", "target": "post-physics-love", "type": "related"},
+
+    {"source": "knowledge-graph", "target": "paradigm", "type": "related"},
+    {"source": "assembly-agency", "target": "paradigm", "type": "related"},
+
+    {"source": "kyle-bio", "target": "paradigm", "type": "inspires"},
+
+    {"source": "dismiss-path", "target": "uncertainty", "type": "related"},
+    {"source": "dismiss-path", "target": "post-looking-inward", "type": "related"},
+
+    {"source": "solve-path", "target": "system-self-framework", "type": "related"},
+    {"source": "solve-path", "target": "post-agent-arch", "type": "related"},
+
+    {"source": "kcaase-app", "target": "5-filters", "type": "related"},
+    {"source": "kcaase-app", "target": "cause-effect", "type": "related"},
+    {"source": "kcaase-app", "target": "problem-audit", "type": "related"},
+    {"source": "kcaase-app", "target": "system-self-framework", "type": "related"},
+
+    {"source": "gap-l1", "target": "kcaase-L1", "type": "related", "label": "gap"}
+  ],
+  "config": {
+    "colors": {
+      "system": "#58a6ff",
+      "self": "#f97583",
+      "both": "#a371f7",
+      "meta": "#8b949e",
+      "root": "#f4d03f",
+      "kcaase": "#e67e22"
+    },
+    "nodeTypes": {
+      "root": {"size": 40, "shape": "star"},
+      "paradigm": {"size": 35, "shape": "hexagon"},
+      "collection": {"size": 25, "shape": "circle"},
+      "content": {"size": 15, "shape": "circle"},
+      "cognition": {"size": 20, "shape": "diamond"},
+      "pathway": {"size": 18, "shape": "triangle"},
+      "gap": {"size": 12, "shape": "circle"}
+    },
+    "edgeTypes": {
+      "contains": {"style": "solid", "strength": 1.0},
+      "related": {"style": "dashed", "strength": 0.5},
+      "deepens": {"style": "solid", "strength": 0.8},
+      "applies": {"style": "dotted", "strength": 0.4},
+      "explores": {"style": "dotted", "strength": 0.4},
+      "inspires": {"style": "dashed", "strength": 0.3},
+      "contrasts": {"style": "dashed", "strength": 0.6},
+      "implements": {"style": "solid", "strength": 0.7},
+      "opens": {"style": "solid", "strength": 0.9},
+      "leadsTo": {"style": "solid", "strength": 1.0, "color": "#e67e22"},
+      "teaches": {"style": "dashed", "strength": 0.6, "color": "#58a6ff"},
+      "offramp": {"style": "dotted", "strength": 0.4, "color": "#f97583"}
+    }
+  }
+}
