@@ -215,7 +215,12 @@ def get_video_rep_section():
             ["python3", os.path.join(WORKSPACE, "scripts/video-rep-integration.py")],
             capture_output=True, text=True, timeout=10
         )
-        return result.stdout
+        section = result.stdout
+        
+        # Add quick-log instructions
+        section += "\n💡 QUICK LOG: Reply 'done' to log a rep instantly!\n"
+        
+        return section
     except:
         return ""
 
