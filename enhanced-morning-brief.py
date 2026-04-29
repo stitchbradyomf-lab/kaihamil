@@ -260,8 +260,146 @@ def get_daily_intentions_section():
     except:
         return ""
 
+
+def load_gavin_overnight():
+    """Load and parse Gavin's overnight research digest"""
+    gavin_file = os.path.join(WORKSPACE, "content-pipeline/research/digests/latest-gavin-overnight.md")
+    
+    if not os.path.exists(gavin_file):
+        return None
+    
+    try:
+        with open(gavin_file, 'r') as f:
+            content = f.read()
+        
+        result = {
+            'top_lines': [],
+            'relevant_items': [],
+            'implications': [],
+            'one_liners': [],
+            'signals': [],
+            'date': None
+        }
+        
+        # Extract date from header line
+        for line in content.split('\n'):
+            if line.startswith('# Gavin Overnight') and '-' in line:
+                parts = line.split('-')
+                if len(parts) >= 2:
+                    result['date'] = parts[-1].strip()
+                break
+        
+        lines = content.split('\n')
+        current_section = None
+        
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            
+            # Detect sections by header
+            if stripped.startswith('## '):
+                header = stripped[3:].lower()
+                if 'top line' in header or 'suggested angle' in header:
+                    current_section = 'top_lines'
+                elif 'relevant' in header or 'item' in header:
+                    current_section = 'relevant_items'
+                elif 'implication' in header:
+                    current_section = 'implications'
+                elif 'one-liner' in header or 'angle' in header:
+                    current_section = 'one_liners'
+                elif 'signal' in header:
+                    current_section = 'signals'
+                else:
+                    current_section = None
+                continue
+            
+            # Before first ## section, treat bullets as top_lines (the header section)
+            if current_section is None and stripped.startswith('- ') and not result['top_lines']:
+                current_section = 'top_lines'
+            
+            # Extract content based on section
+            if current_section == 'top_lines' and stripped.startswith('- '):
+                result['top_lines'].append(stripped[2:])
+            elif current_section == 'relevant_items' and stripped.startswith('### '):
+                result['relevant_items'].append({'title': stripped[4:], 'content': []})
+            elif current_section == 'relevant_items' and result['relevant_items'] and stripped.startswith('- '):
+                result['relevant_items'][-1]['content'].append(stripped[2:])
+            elif current_section == 'implications' and (stripped.startswith(('1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.'))):
+                result['implications'].append(stripped[3:].strip() if len(stripped) > 2 else stripped)
+            elif current_section == 'one_liners' and stripped.startswith('- '):
+                result['one_liners'].append(stripped[2:])
+            elif current_section == 'signals' and stripped.startswith('- '):
+                result['signals'].append(stripped[2:])
+        
+        return result
+    except Exception as e:
+        print(f"Error loading Gavin overnight: {e}")
+        return None
+
+
+def render_gavin_section(gavin_data):
+    """Render Gavin research as first-class brief section"""
+    if not gavin_data:
+        return None
+    
+    lines = []
+    lines.append("📰 GAVIN'S OVERNIGHT TOP LINES")
+    lines.append("-" * 40)
+    
+    # Top 3 lines max
+    for line in gavin_data.get('top_lines', [])[:3]:
+        lines.append(f"• {line[:70]}")
+    
+    # Most relevant item (just one, with why it matters)
+    items = gavin_data.get('relevant_items', [])
+    if items:
+        lines.append("")
+        lines.append(f"🔍 {items[0]['title'][:50]}")
+        # Find "Why it matters" in content
+        for content_line in items[0].get('content', []):
+            if 'why it matters' in content_line.lower() or 'why it matters' in content_line.lower():
+                # Extract after the colon or just the line
+                if ':' in content_line:
+                    lines.append(f"  → {content_line.split(':', 1)[1].strip()[:65]}")
+                else:
+                    lines.append(f"  → {content_line[:65]}")
+                break
+    
+    # One implication
+    implications = gavin_data.get('implications', [])
+    if implications:
+        lines.append("")
+        lines.append(f"💡 This week: {implications[0][:60]}")
+    
+    # One memorable one-liner
+    one_liners = gavin_data.get('one_liners', [])
+    if one_liners:
+        lines.append("")
+        lines.append(f'"{one_liners[0][:55]}..."')
+    
+    return '\n'.join(lines)
+
+
+def render_signals_section(gavin_data):
+    """Render signals to watch section"""
+    if not gavin_data:
+        return None
+    
+    signals = gavin_data.get('signals', [])
+    if not signals:
+        return None
+    
+    lines = []
+    lines.append("🔭 SIGNALS TO WATCH")
+    lines.append("-" * 40)
+    
+    for signal in signals[:3]:
+        lines.append(f"• {signal[:60]}")
+    
+    return '\n'.join(lines)
+
+
 def generate_brief():
-    """Generate morning brief"""
+    """Generate morning brief with Gavin research as first-class citizen"""
     brief = []
     brief.append("=" * 55)
     brief.append("🌅 MORNING BRIEF")
@@ -269,77 +407,101 @@ def generate_brief():
     brief.append("=" * 55)
     brief.append("")
     
-    # DAILY INTENTIONS (NEW)
-    intentions = get_daily_intentions_section()
-    if intentions:
-        brief.append(intentions)
+    # Load Gavin research (first-class, required section)
+    gavin_data = load_gavin_overnight()
+    gavin_section = render_gavin_section(gavin_data)
+    
+    if gavin_section:
+        brief.append(gavin_section)
+        brief.append("")
+        brief.append("")
+    else:
+        brief.append("📰 RESEARCH CYCLE PENDING")
+        brief.append("-" * 40)
+        brief.append("• No overnight signals captured yet")
+        brief.append("• Check back after 6 AM for fresh research")
         brief.append("")
         brief.append("")
     
-    # 1. YESTERDAY'S WORK
+    # Signals to watch (derived from Gavin)
+    signals_section = render_signals_section(gavin_data)
+    if signals_section:
+        brief.append(signals_section)
+        brief.append("")
+        brief.append("")
+    
+    # Editorial framing: set intention based on research
+    brief.append("🎯 TODAY'S FOCUS")
+    brief.append("-" * 40)
+    if gavin_data and gavin_data.get('implications'):
+        brief.append(f"Based on overnight signals: {gavin_data['implications'][0][:55]}")
+    else:
+        brief.append("Reply to this message with your intention for today")
+    brief.append("")
+    brief.append("")
+    
+    # 1. YESTERDAY'S WORK (trimmed)
     brief.append("📋 YESTERDAY'S WORK")
     brief.append("-" * 40)
     work = get_yesterday_work()
-    for item in work[:6]:
+    for item in work[:4]:
         brief.append(f"• {item[:60]}")
     brief.append("")
     
-    # 2. CONTENT CREATED
-    brief.append("📝 CONTENT CREATED (Last 3 days)")
-    brief.append("-" * 40)
-    content = get_recent_content()
-    if content:
-        for item in content:
-            brief.append(f"• {item}")
-    else:
-        brief.append("• No new content in last 3 days")
-    brief.append("")
-    
-    # 3. KANBAN
+    # 2. KANBAN (condensed)
     brief.append("📊 KANBAN BOARD")
     brief.append("-" * 40)
     kanban = get_kanban_status()
-    brief.append(f"🔵 In Progress: {len(kanban['in_progress'])}")
+    brief.append(f"🔵 In Progress: {len(kanban['in_progress'])} | 🟡 Todo: {len(kanban['todo'])} | ⚪ Backlog: {len(kanban['backlog'])}")
     if kanban['in_progress']:
-        for task in kanban['in_progress'][:3]:
-            brief.append(f"   • {task[:45]}")
-    brief.append(f"🟡 Todo: {len(kanban['todo'])}")
-    brief.append(f"⚪ Backlog: {len(kanban['backlog'])}")
+        brief.append("Active: " + kanban['in_progress'][0][:45])
     brief.append("")
     
-    # 4. REMINDERS
-    brief.append("🔔 OUTSTANDING REMINDERS")
-    brief.append("-" * 40)
+    # 3. REMINDERS (if any)
     reminders = get_reminders()
     if reminders:
+        brief.append("🔔 OUTSTANDING REMINDERS")
+        brief.append("-" * 40)
         current_cat = None
-        for r in reminders:
+        for r in reminders[:5]:
             if r["category"] != current_cat:
                 current_cat = r["category"]
                 brief.append(f"  [{current_cat}]")
             brief.append(f"  • {r['item'][:50]}")
-    else:
-        brief.append("✅ No outstanding reminders")
+        brief.append("")
+    
+    # 4. CONTENT CREATED (only if recent)
+    content = get_recent_content()
+    if content:
+        brief.append("📝 CONTENT CREATED (Last 3 days)")
+        brief.append("-" * 40)
+        for item in content[:3]:
+            brief.append(f"• {item}")
+        brief.append("")
+    
+    # 5. VIDEO STATUS (collapsed to one line)
+    brief.append("🎬 VIDEO STATUS")
+    brief.append("-" * 40)
+    try:
+        result = subprocess.run(
+            ["python3", os.path.join(WORKSPACE, "scripts/video-rep-integration.py"), "status"],
+            capture_output=True, text=True, timeout=10
+        )
+        # Extract just the key stats line
+        for line in result.stdout.split('\n'):
+            if 'Total:' in line or 'Streak:' in line:
+                brief.append(line.strip())
+                break
+        brief.append("💡 Reply 'done' to log a rep instantly")
+    except:
+        brief.append("• Video rep tracking available")
     brief.append("")
     
-    # 5. VIDEO IDEAS (NEW - Quick Capture System)
-    video_ideas_section = get_video_ideas_section()
-    if video_ideas_section:
-        brief.append(video_ideas_section)
-        brief.append("")
-    
-    # 6. VIDEO REP TRACKING
-    video_section = get_video_rep_section()
-    if video_section:
-        brief.append(video_section)
-        brief.append("")
-    
-    # 7. SESSION ACTIVITY
+    # 6. SESSION ACTIVITY (minimal)
     brief.append("💬 SESSION ACTIVITY")
     brief.append("-" * 40)
     usage = get_yesterday_token_usage()
-    brief.append(f"Yesterday's sessions: {usage['sessions']}")
-    brief.append(f"Note: {usage['note']}")
+    brief.append(f"Yesterday: {usage['sessions']} sessions")
     brief.append("")
     
     brief.append("=" * 55)
