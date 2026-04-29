@@ -345,10 +345,10 @@ def render_gavin_section(gavin_data):
     lines.append("📰 GAVIN'S OVERNIGHT TOP LINES")
     lines.append("-" * 40)
     
-    # Top 3 lines max
+    # Top 3 lines max - show complete thoughts, not truncated
     top_lines = gavin_data.get('top_lines', [])
     for line in top_lines[:3]:
-        lines.append(f"• {line[:70]}")
+        lines.append(f"• {line}")
     
     # Use 4th top line as implication if no explicit implications section
     implications = gavin_data.get('implications', [])
@@ -357,13 +357,13 @@ def render_gavin_section(gavin_data):
     
     if implications:
         lines.append("")
-        lines.append(f"💡 This week: {implications[0][:60]}")
+        lines.append(f"💡 This week: {implications[0]}")
     
     # One memorable one-liner from suggested angles
     one_liners = gavin_data.get('one_liners', [])
     if one_liners:
         lines.append("")
-        lines.append(f'"{one_liners[0][:55]}..."')
+        lines.append(f'"{one_liners[0]}"')
     
     return '\n'.join(lines)
 
@@ -433,7 +433,7 @@ def generate_brief():
             implication = gavin_data['top_lines'][3]
     
     if implication:
-        brief.append(f"Based on overnight signals: {implication[:55]}")
+        brief.append(f"Based on overnight signals: {implication}")
     else:
         brief.append("Reply to this message with your intention for today")
     brief.append("")
@@ -443,13 +443,13 @@ def generate_brief():
     brief.append("📋 YESTERDAY")
     work = get_yesterday_work()
     if work:
-        brief.append(f"• {work[0][:50]}")
+        brief.append(f"• {work[0]}")
     brief.append("")
     
     # 2. KANBAN (minimal)
     kanban = get_kanban_status()
     if kanban['in_progress']:
-        brief.append(f"📊 Active: {kanban['in_progress'][0][:40]}")
+        brief.append(f"📊 Active: {kanban['in_progress'][0]}")
         brief.append("")
     
     # 3. REMINDERS (if any, minimal)
