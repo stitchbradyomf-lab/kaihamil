@@ -439,75 +439,50 @@ def generate_brief():
     brief.append("")
     brief.append("")
     
-    # 1. YESTERDAY'S WORK (trimmed)
-    brief.append("📋 YESTERDAY'S WORK")
-    brief.append("-" * 40)
+    # 1. YESTERDAY'S WORK (minimal)
+    brief.append("📋 YESTERDAY")
     work = get_yesterday_work()
-    for item in work[:4]:
-        brief.append(f"• {item[:60]}")
+    if work:
+        brief.append(f"• {work[0][:50]}")
     brief.append("")
     
-    # 2. KANBAN (condensed)
-    brief.append("📊 KANBAN BOARD")
-    brief.append("-" * 40)
+    # 2. KANBAN (minimal)
     kanban = get_kanban_status()
-    brief.append(f"🔵 In Progress: {len(kanban['in_progress'])} | 🟡 Todo: {len(kanban['todo'])} | ⚪ Backlog: {len(kanban['backlog'])}")
     if kanban['in_progress']:
-        brief.append("Active: " + kanban['in_progress'][0][:45])
-    brief.append("")
+        brief.append(f"📊 Active: {kanban['in_progress'][0][:40]}")
+        brief.append("")
     
-    # 3. REMINDERS (if any)
+    # 3. REMINDERS (if any, minimal)
     reminders = get_reminders()
     if reminders:
-        brief.append("🔔 OUTSTANDING REMINDERS")
-        brief.append("-" * 40)
-        current_cat = None
-        for r in reminders[:5]:
-            if r["category"] != current_cat:
-                current_cat = r["category"]
-                brief.append(f"  [{current_cat}]")
-            brief.append(f"  • {r['item'][:50]}")
+        brief.append(f"🔔 {len(reminders)} reminders")
         brief.append("")
     
-    # 4. CONTENT CREATED (only if recent)
+    # 4. CONTENT CREATED (only if recent, minimal)
     content = get_recent_content()
     if content:
-        brief.append("📝 CONTENT CREATED (Last 3 days)")
-        brief.append("-" * 40)
-        for item in content[:3]:
-            brief.append(f"• {item}")
+        brief.append(f"📝 {len(content)} new items")
         brief.append("")
     
-    # 5. VIDEO STATUS (collapsed to one line)
-    brief.append("🎬 VIDEO STATUS")
-    brief.append("-" * 40)
+    # 5. VIDEO STATUS (one line)
     try:
         result = subprocess.run(
             ["python3", os.path.join(WORKSPACE, "scripts/video-rep-integration.py"), "status"],
             capture_output=True, text=True, timeout=10
         )
-        # Extract just the key stats line
         for line in result.stdout.split('\n'):
-            if 'Total:' in line or 'Streak:' in line:
-                brief.append(line.strip())
+            if 'Streak:' in line:
+                brief.append(f"🎬 {line.strip()} | Reply 'done' to log")
                 break
-        brief.append("💡 Reply 'done' to log a rep instantly")
     except:
-        brief.append("• Video rep tracking available")
+        pass
     brief.append("")
     
-    # 6. SESSION ACTIVITY (minimal)
-    brief.append("💬 SESSION ACTIVITY")
-    brief.append("-" * 40)
-    usage = get_yesterday_token_usage()
-    brief.append(f"Yesterday: {usage['sessions']} sessions")
-    brief.append("")
-    
-    brief.append("=" * 55)
+    brief.append("=" * 40)
     return "\n".join(brief)
 
 def send_telegram(message, chat_id="8280504619"):
-    """Send via Telegram"""
+    """Send via Telegram, splitting long messages if needed"""
     env_file = os.path.expanduser("~/.openclaw/.env.telegram")
     token = None
     
@@ -523,22 +498,78 @@ def send_telegram(message, chat_id="8280504619"):
     if not token:
         return False
     
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    data = {"chat_id": chat_id, "text": message}
+    # Telegram has a 4096 character limit per message
+    MAX_LENGTH = 4000  # Leave some buffer
     
-    try:
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(data).encode('utf-8'),
-            headers={"Content-Type": "application/json"},
-            method="POST"
-        )
-        with urllib.request.urlopen(req) as response:
-            result = json.loads(response.read().decode('utf-8'))
-            return result.get("ok", False)
-    except Exception as e:
-        print(f"Telegram error: {e}")
-        return False
+    if len(message) <= MAX_LENGTH:
+        # Send as single message
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+        data = {"chat_id": chat_id, "text": message}
+        
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(data).encode('utf-8'),
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req) as response:
+                result = json.loads(response.read().decode('utf-8'))
+                return result.get("ok", False)
+        except Exception as e:
+            print(f"Telegram error: {e}")
+            return False
+    else:
+        # Split into multiple messages
+        # Try to split at section boundaries
+        sections = message.split("\n\n")
+        current_msg = ""
+        
+        for section in sections:
+            if len(current_msg) + len(section) + 2 > MAX_LENGTH:
+                # Send current message
+                if current_msg:
+                    url = f"https://api.telegram.org/bot{token}/sendMessage"
+                    data = {"chat_id": chat_id, "text": current_msg.strip()}
+                    
+                    try:
+                        req = urllib.request.Request(
+                            url,
+                            data=json.dumps(data).encode('utf-8'),
+                            headers={"Content-Type": "application/json"},
+                            method="POST"
+                        )
+                        with urllib.request.urlopen(req) as response:
+                            json.loads(response.read().decode('utf-8'))
+                    except Exception as e:
+                        print(f"Telegram error: {e}")
+                        return False
+                
+                # Start new message with this section
+                current_msg = section + "\n\n"
+            else:
+                current_msg += section + "\n\n"
+        
+        # Send final message
+        if current_msg.strip():
+            url = f"https://api.telegram.org/bot{token}/sendMessage"
+            data = {"chat_id": chat_id, "text": current_msg.strip()}
+            
+            try:
+                req = urllib.request.Request(
+                    url,
+                    data=json.dumps(data).encode('utf-8'),
+                    headers={"Content-Type": "application/json"},
+                    method="POST"
+                )
+                with urllib.request.urlopen(req) as response:
+                    result = json.loads(response.read().decode('utf-8'))
+                    return result.get("ok", False)
+            except Exception as e:
+                print(f"Telegram error: {e}")
+                return False
+        
+        return True
 
 def main():
     brief = generate_brief()
