@@ -346,31 +346,20 @@ def render_gavin_section(gavin_data):
     lines.append("-" * 40)
     
     # Top 3 lines max
-    for line in gavin_data.get('top_lines', [])[:3]:
+    top_lines = gavin_data.get('top_lines', [])
+    for line in top_lines[:3]:
         lines.append(f"• {line[:70]}")
     
-    # Most relevant item (just one, with why it matters)
-    items = gavin_data.get('relevant_items', [])
-    if items:
-        lines.append("")
-        lines.append(f"🔍 {items[0]['title'][:50]}")
-        # Find "Why it matters" in content
-        for content_line in items[0].get('content', []):
-            if 'why it matters' in content_line.lower() or 'why it matters' in content_line.lower():
-                # Extract after the colon or just the line
-                if ':' in content_line:
-                    lines.append(f"  → {content_line.split(':', 1)[1].strip()[:65]}")
-                else:
-                    lines.append(f"  → {content_line[:65]}")
-                break
-    
-    # One implication
+    # Use 4th top line as implication if no explicit implications section
     implications = gavin_data.get('implications', [])
+    if not implications and len(top_lines) >= 4:
+        implications = [top_lines[3]]
+    
     if implications:
         lines.append("")
         lines.append(f"💡 This week: {implications[0][:60]}")
     
-    # One memorable one-liner
+    # One memorable one-liner from suggested angles
     one_liners = gavin_data.get('one_liners', [])
     if one_liners:
         lines.append("")
@@ -433,8 +422,18 @@ def generate_brief():
     # Editorial framing: set intention based on research
     brief.append("🎯 TODAY'S FOCUS")
     brief.append("-" * 40)
-    if gavin_data and gavin_data.get('implications'):
-        brief.append(f"Based on overnight signals: {gavin_data['implications'][0][:55]}")
+    
+    # Get implication from explicit section or from 4th top line
+    implication = None
+    if gavin_data:
+        implications = gavin_data.get('implications', [])
+        if implications:
+            implication = implications[0]
+        elif len(gavin_data.get('top_lines', [])) >= 4:
+            implication = gavin_data['top_lines'][3]
+    
+    if implication:
+        brief.append(f"Based on overnight signals: {implication[:55]}")
     else:
         brief.append("Reply to this message with your intention for today")
     brief.append("")
