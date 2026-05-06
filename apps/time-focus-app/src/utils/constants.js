@@ -42,4 +42,5 @@ export const MAX_SCORE = CATEGORIES.length * 5; // 55
 
 export const EMPTY_RATINGS = Object.fromEntries(CATEGORY_KEYS.map(k => [k, 0]));
 
-export const PB_URL = import.meta.env.VITE_PB_URL || 'http://127.0.0.1:8090';
+// PocketBase URL - uses environment variable in production, falls back to local
+export const PB_URL = import.meta.env.VITE_PB_URL || 'http://192.241.180.69:8090';
