@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Focus - Data Recovery Tool</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f0;
+            color: #3d3d3d;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #5c4d3c;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .subtitle {
+            color: #7a6b5a;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .card h2 {
+            color: #5c4d3c;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        .status.found {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .entry-count {
+            font-size: 32px;
+            font-weight: bold;
+            color: #5c4d3c;
+            margin: 10px 0;
+        }
+        .entry-label {
+            color: #7a6b5a;
+            font-size: 14px;
+        }
+        .date-range {
+            background: #f9f9f7;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        button {
+            background: #5c4d3c;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #4a3d30;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        button.secondary {
+            background: #7a6b5a;
+        }
+        button.secondary:hover {
+            background: #6a5b4a;
+        }
+        .output {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        .warning strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #155724;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f7;
+            border-radius: 8px;
+        }
+        .step-number {
+            background: #5c4d3c;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+        .step-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #5c4d3c;
+        }
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Time & Focus Data Recovery</h1>
+        <p class="subtitle">Recover your locally-stored entries and sync them to PocketBase</p>
+
+        <div class="warning">
+            <strong>⚠️ Important</strong>
+            This tool reads data from your browser's localStorage. Make sure you're opening this in the same browser where you've been using the Time & Focus app.
+        </div>
+
+        <!-- Step 1: Scan for Data -->
+        <div class="card">
+            <h2>Step 1: Scan for Local Data</h2>
+            <div id="scanStatus">
+                <button onclick="scanData()">🔍 Scan for Local Entries</button>
+            </div>
+            <div id="scanResults" class="hidden">
+                <span id="entriesStatus" class="status"></span>
+                <div class="entry-count" id="entryCount">0</div>
+                <div class="entry-label">entries found in localStorage</div>
+                <div class="date-range" id="dateRange">No date range available</div>
+            </div>
+        </div>
+
+        <!-- Step 2: Export Data -->
+        <div class="card hidden" id="exportCard">
+            <h2>Step 2: Export Your Data</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Copy as JSON</h3>
+                    <p>Copy this data and save it somewhere safe (Notes app, email, etc.)</p>
+                    <button onclick="copyJSON()" class="secondary">📋 Copy JSON to Clipboard</button>
+                    <div class="output hidden" id="jsonOutput"></div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Email to Yourself</h3>
+                    <p>Opens your email app with the data attached</p>
+                    <button onclick="emailData()" class="secondary">📧 Email Data</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Sync to PocketBase -->
+        <div class="card hidden" id="syncCard">
+            <h2>Step 3: Sync to PocketBase (Optional)</h2>
+            <p>If PocketBase is now working, you can sync directly:</p>
+            
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #666;">PocketBase URL:</label>
+                <input type="text" id="pbUrl" value="http://192.241.180.69:8090" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #666;">Your Email:</label>
+                <input type="email" id="userEmail" placeholder="your@email.com" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #666;">Your Password:</label>
+                <input type="password" id="userPassword" placeholder="••••••••" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            </div>
+            
+            <button onclick="syncToPocketBase()">☁️ Sync to PocketBase</button>
+            <div id="syncResults"></div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="card">
+            <h2>📋 Recovery Instructions</h2>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Scan for Data</h3>
+                    <p>Click "Scan for Local Entries" to find your stored data</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Export & Save</h3>
+                    <p>Copy the JSON or email it to yourself as a backup</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Fix PocketBase</h3>
+                    <p>Run the setup script on your computer to create the proper collections</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Import Data</h3>
+                    <p>Use the exported JSON to import your entries to PocketBase</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Storage keys used by Time & Focus app
+        const STORAGE_KEYS = {
+            ENTRIES: 'tf_entries',
+            INTENTIONS: 'tf_intentions',
+            USER: 'tf_user',
+            SESSION: 'tf_session'
+        };
+
+        let recoveredData = null;
+
+        function scanData() {
+            console.log('Scanning localStorage...');
+            
+            try {
+                const entriesJson = localStorage.getItem(STORAGE_KEYS.ENTRIES);
+                const intentionsJson = localStorage.getItem(STORAGE_KEYS.INTENTIONS);
+                const userJson = localStorage.getItem(STORAGE_KEYS.USER);
+                
+                const entries = entriesJson ? JSON.parse(entriesJson) : [];
+                const intentions = intentionsJson ? JSON.parse(intentionsJson) : [];
+                const user = userJson ? JSON.parse(userJson) : null;
+                
+                recoveredData = {
+                    entries: entries,
+                    intentions: intentions,
+                    user: user,
+                    exportedAt: new Date().toISOString()
+                };
+                
+                // Update UI
+                document.getElementById('scanResults').classList.remove('hidden');
+                document.getElementById('exportCard').classList.remove('hidden');
+                document.getElementById('syncCard').classList.remove('hidden');
+                
+                const entriesStatus = document.getElementById('entriesStatus');
+                const entryCount = document.getElementById('entryCount');
+                const dateRange = document.getElementById('dateRange');
+                
+                if (entries.length > 0) {
+                    entriesStatus.textContent = `✓ Found ${entries.length} entries`;
+                    entriesStatus.className = 'status found';
+                    entryCount.textContent = entries.length;
+                    
+                    // Calculate date range
+                    const dates = entries.map(e => e.date).filter(Boolean).sort();
+                    if (dates.length > 0) {
+                        dateRange.textContent = `From: ${dates[0]} → To: ${dates[dates.length - 1]}`;
+                    }
+                } else {
+                    entriesStatus.textContent = '✗ No entries found';
+                    entriesStatus.className = 'status missing';
+                    entryCount.textContent = '0';
+                    dateRange.textContent = 'No entries in localStorage';
+                }
+                
+                // Show raw JSON
+                document.getElementById('jsonOutput').textContent = JSON.stringify(recoveredData, null, 2);
+                
+            } catch (err) {
+                alert('Error scanning data: ' + err.message);
+                console.error(err);
+            }
+        }
+
+        function copyJSON() {
+            if (!recoveredData) {
+                alert('No data to copy. Please scan first.');
+                return;
+            }
+            
+            const json = JSON.stringify(recoveredData, null, 2);
+            
+            // Show the output
+            document.getElementById('jsonOutput').classList.remove('hidden');
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(json).then(() => {
+                alert('✓ JSON copied to clipboard!\n\nPaste this into Notes, email, or save as a file.');
+            }).catch(err => {
+                alert('Could not copy automatically. Please select and copy the text below.');
+                console.error(err);
+            });
+        }
+
+        function emailData() {
+            if (!recoveredData) {
+                alert('No data to email. Please scan first.');
+                return;
+            }
+            
+            const json = JSON.stringify(recoveredData, null, 2);
+            const subject = 'Time & Focus Data Backup - ' + new Date().toLocaleDateString();
+            const body = 'Here is my Time & Focus data backup:\n\n' + json;
+            
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        async function syncToPocketBase() {
+            const pbUrl = document.getElementById('pbUrl').value;
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            
+            if (!email || !password) {
+                alert('Please enter your email and password');
+                return;
+            }
+            
+            if (!recoveredData || recoveredData.entries.length === 0) {
+                alert('No entries to sync');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('syncResults');
+            resultsDiv.innerHTML = '<p>Syncing...</p>';
+            
+            try {
+                // Import PocketBase dynamically
+                const { default: PocketBase } = await import('https://cdn.jsdelivr.net/npm/pocketbase@0.26.8/dist/pocketbase.es.mjs');
+                
+                const pb = new PocketBase(pbUrl);
+                
+                // Authenticate
+                await pb.collection('users').authWithPassword(email, password);
+                resultsDiv.innerHTML = '<p>✓ Authenticated</p>';
+                
+                const userId = pb.authStore.model.id;
+                let successCount = 0;
+                let errorCount = 0;
+                
+                // Sync entries
+                for (const entry of recoveredData.entries) {
+                    try {
+                        const record = {
+                            user_id: userId,
+                            entry_date: entry.date + ' 00:00:00',
+                            ratings: entry.ratings || {},
+                            aggregate: {
+                                total: entry.total || 0,
+                                domain_totals: entry.domain_totals || {}
+                            },
+                            reflection: entry.notes || '',
+                            metadata: {
+                                rating_notes: entry.ratingNotes || {}
+                            }
+                        };
+                        
+                        // Check if entry already exists
+                        const filter = `user_id="${userId}" && entry_date>="${entry.date} 00:00:00" && entry_date<="${entry.date} 23:59:59"`;
+                        
+                        try {
+                            const existing = await pb.collection('time_focus_entries').getFirstListItem(filter);
+                            // Update existing
+                            await pb.collection('time_focus_entries').update(existing.id, record);
+                        } catch {
+                            // Create new
+                            await pb.collection('time_focus_entries').create(record);
+                        }
+                        
+                        successCount++;
+                    } catch (err) {
+                        console.error('Failed to sync entry:', entry.date, err);
+                        errorCount++;
+                    }
+                }
+                
+                resultsDiv.innerHTML = `
+                    <div class="success">
+                        <strong>✓ Sync Complete!</strong><br>
+                        Successfully synced: ${successCount} entries<br>
+                        Failed: ${errorCount} entries
+                    </div>
+                `;
+                
+            } catch (err) {
+                resultsDiv.innerHTML = `
+                    <div class="warning">
+                        <strong>✗ Sync Failed</strong><br>
+                        ${err.message}
+                    </div>
+                `;
+                console.error(err);
+            }
+        }
+
+        // Auto-scan on load if data exists
+        window.addEventListener('load', () => {
+            const entries = localStorage.getItem(STORAGE_KEYS.ENTRIES);
+            if (entries && entries !== '[]') {
+                console.log('Found existing data, ready to scan');
+            }
+        });
+    </script>
+</body>
+</html>
