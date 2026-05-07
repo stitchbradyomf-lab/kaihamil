@@ -1,0 +1,121 @@
+graph TB
+    subgraph User["👤 User Layer"]
+        Telegram["Telegram Chat"]
+        WebApp["Web Dashboard"]
+    end
+
+    subgraph OpenClaw["⚙️ OpenClaw Runtime"]
+        Gateway["Gateway Daemon"]
+        SessionMgr["Session Manager"]
+        AgentRouter["Agent Router"]
+        ToolRegistry["Tool Registry"]
+    end
+
+    subgraph Agents["🤖 Agent Layer"]
+        Stitch["Stitch<br/>Main Assistant"]
+        Gavin["Gavin Daly<br/>Research"]
+        Kimi["Kimi<br/>Analysis"]
+        Roger["Roger<br/>Code Review"]
+        Connie["Connie<br/>Content"]
+    end
+
+    subgraph LLMs["🧠 LLM Providers"]
+        OpenAI["OpenAI<br/>GPT-5.4"]
+        Moonshot["Moonshot<br/>Kimi K2.5"]
+        Anthropic["Anthropic<br/>Claude"]
+    end
+
+    subgraph Tools["🛠️ Tool Layer"]
+        WebSearch["Web Search<br/>Brave/Kimi"]
+        ImageGen["Image Generation<br/>Gemini/Nano"]
+        VideoGen["Video Generation<br/>Qwen"]
+        MusicGen["Music Generation<br/>Lyria"]
+        CodeExec["Code Execution<br/>Sandbox"]
+        FileOps["File Operations"]
+    end
+
+    subgraph External["🌐 External Services"]
+        GitHub["GitHub<br/>Version Control"]
+        Netlify["Netlify<br/>Hosting"]
+        PocketBase["PocketBase<br/>Database"]
+        DigitalOcean["Digital Ocean<br/>VPS"]
+    end
+
+    subgraph Data["💾 Data Layer"]
+        MemoryWiki["Memory Wiki<br/>Markdown"]
+        DailyBrief["Daily Brief<br/>Content"]
+        UserData["User Data<br/>PB Collections"]
+    end
+
+    subgraph Automation["⏰ Automation"]
+        Cron["Cron Scheduler"]
+        Heartbeat["Heartbeat System"]
+        TaskFlow["TaskFlow<br/>Orchestration"]
+    end
+
+    %% User interactions
+    Telegram -->|Message| Gateway
+    WebApp -->|API| Gateway
+
+    %% OpenClaw routing
+    Gateway --> SessionMgr
+    SessionMgr --> AgentRouter
+    AgentRouter --> Stitch
+    
+    %% Agent specialization
+    Stitch -->|Research tasks| Gavin
+    Stitch -->|Analysis tasks| Kimi
+    Stitch -->|Code tasks| Roger
+    Stitch -->|Writing tasks| Connie
+    
+    %% LLM routing
+    Stitch -->|Primary| OpenAI
+    Gavin -->|Research| Moonshot
+    Kimi -->|Analysis| Moonshot
+    Roger -->|Code| Anthropic
+    Connie -->|Content| OpenAI
+    
+    %% Tool usage
+    Stitch --> ToolRegistry
+    ToolRegistry --> WebSearch
+    ToolRegistry --> ImageGen
+    ToolRegistry --> VideoGen
+    ToolRegistry --> MusicGen
+    ToolRegistry --> CodeExec
+    ToolRegistry --> FileOps
+    
+    %% External integrations
+    Stitch --> GitHub
+    Stitch --> Netlify
+    Stitch --> PocketBase
+    Stitch --> DigitalOcean
+    
+    %% Data flow
+    Stitch --> MemoryWiki
+    Gavin --> DailyBrief
+    PocketBase --> UserData
+    
+    %% Automation
+    Cron -->|Triggers| Stitch
+    Cron -->|Research| Gavin
+    Heartbeat -->|Health checks| Gateway
+    TaskFlow -->|Complex flows| AgentRouter
+    
+    %% Styling
+    classDef userLayer fill:#e1f5fe
+    classDef openclawLayer fill:#fff3e0
+    classDef agentLayer fill:#e8f5e9
+    classDef llmLayer fill:#f3e5f5
+    classDef toolLayer fill:#fce4ec
+    classDef externalLayer fill:#e0f2f1
+    classDef dataLayer fill:#fff8e1
+    classDef autoLayer fill:#e8eaf6
+    
+    class Telegram,WebApp userLayer
+    class Gateway,SessionMgr,AgentRouter,ToolRegistry openclawLayer
+    class Stitch,Gavin,Kimi,Roger,Connie agentLayer
+    class OpenAI,Moonshot,Anthropic llmLayer
+    class WebSearch,ImageGen,VideoGen,MusicGen,CodeExec,FileOps toolLayer
+    class GitHub,Netlify,PocketBase,DigitalOcean externalLayer
+    class MemoryWiki,DailyBrief,UserData dataLayer
+    class Cron,Heartbeat,TaskFlow autoLayer
