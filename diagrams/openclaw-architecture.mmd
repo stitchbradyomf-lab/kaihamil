@@ -4,11 +4,11 @@ graph TB
         WebApp["Web Dashboard"]
     end
 
-    subgraph OpenClaw["⚙️ OpenClaw Runtime"]
-        Gateway["Gateway Daemon"]
-        SessionMgr["Session Manager"]
-        AgentRouter["Agent Router"]
-        ToolRegistry["Tool Registry"]
+    subgraph OpenClaw["⚙️ OpenClaw"]
+        Gateway["Gateway"]
+        SessionMgr["Sessions"]
+        AgentRouter["Router"]
+        ToolRegistry["Tools"]
     end
 
     subgraph Agents["🤖 Agent Layer"]
