@@ -1,0 +1,47 @@
+flowchart TB
+    User([User]) -->|Message| Telegram[Telegram]
+    Telegram --> Gateway[OpenClaw Gateway]
+    
+    Gateway --> Agents
+    subgraph Agents["AI Agents"]
+        Stitch[Stitch - Main]
+        Gavin[Gavin - Research]
+        Kimi[Kimi - Analysis]
+        Roger[Roger - Code]
+    end
+    
+    Stitch --> LLMs
+    subgraph LLMs["LLM Providers"]
+        OpenAI[OpenAI GPT-5.4]
+        Moonshot[Moonshot Kimi]
+        Anthropic[Anthropic Claude]
+    end
+    
+    Stitch --> Tools
+    subgraph Tools["Tools"]
+        Search[Web Search]
+        Images[Image Gen]
+        Code[Code Exec]
+        Files[File Ops]
+    end
+    
+    Stitch --> External
+    subgraph External["External APIs"]
+        GitHub[GitHub]
+        Netlify[Netlify]
+        PocketBase[PocketBase DB]
+        DO[Digital Ocean]
+    end
+    
+    Stitch --> Data
+    subgraph Data["Data Storage"]
+        Memory[Memory Wiki]
+        Brief[Daily Brief]
+        UserData[User Data]
+    end
+    
+    Cron[Cron Jobs] -->|Scheduled| Stitch
+    
+    style Stitch fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style Gateway fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style Telegram fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
