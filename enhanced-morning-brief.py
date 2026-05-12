@@ -261,6 +261,188 @@ def get_daily_intentions_section():
         return ""
 
 
+def get_weekly_goals():
+    """Get persistent weekly goals from CURRENT.md or KANBAN.md"""
+    goals = {
+        'active': [],
+        'completed': [],
+        'source': None
+    }
+    
+    # Try CURRENT.md first
+    current_file = os.path.join(WORKSPACE, "CURRENT.md")
+    if os.path.exists(current_file):
+        try:
+            with open(current_file, 'r') as f:
+                content = f.read()
+            
+            # Look for "This Week" or weekly goals section
+            lines = content.split('\n')
+            in_goals = False
+            for line in lines:
+                stripped = line.strip()
+                if 'week' in stripped.lower() and ('this' in stripped.lower() or 'goals' in stripped.lower()):
+                    in_goals = True
+                    goals['source'] = 'CURRENT.md'
+                    continue
+                if in_goals and stripped.startswith('- '):
+                    task = stripped[2:]
+                    if '[x]' in task.lower() or 'done' in task.lower():
+                        goals['completed'].append(task.replace('[x]', '').replace('[X]', '').strip())
+                    else:
+                        goals['active'].append(task.replace('[ ]', '').strip())
+                elif in_goals and stripped.startswith('#') and len(stripped) > 2:
+                    # New section
+                    break
+        except:
+            pass
+    
+    # Fallback to KANBAN.md IN PROGRESS
+    if not goals['active']:
+        kanban = get_kanban_status()
+        goals['active'] = kanban.get('in_progress', [])[:5]
+        goals['completed'] = kanban.get('done', [])[-5:]
+        goals['source'] = 'KANBAN.md'
+    
+    return goals
+
+
+def get_github_activity(days=7):
+    """Get recent GitHub activity (commits, PRs)"""
+    activity = {
+        'commits': [],
+        'files_changed': [],
+        'repo': 'stitchbradyomf-lab/kaihamil'
+    }
+    
+    try:
+        since = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+        
+        # Get commits
+        result = subprocess.run(
+            ['git', 'log', '--since', since, '--pretty=format:%h|%s|%ad', '--date=short'],
+            capture_output=True, text=True, cwd=WORKSPACE, timeout=10
+        )
+        
+        if result.returncode == 0:
+            for line in result.stdout.strip().split('\n')[:10]:
+                if '|' in line:
+                    parts = line.split('|', 2)
+                    if len(parts) >= 2:
+                        activity['commits'].append({
+                            'hash': parts[0],
+                            'message': parts[1],
+                            'link': f"https://github.com/{activity['repo']}/commit/{parts[0]}"
+                        })
+        
+        # Get recently modified files
+        files_result = subprocess.run(
+            ['git', 'diff', '--name-only', f'HEAD~{min(days, 10)}..HEAD'],
+            capture_output=True, text=True, cwd=WORKSPACE, timeout=10
+        )
+        
+        if files_result.returncode == 0:
+            activity['files_changed'] = [
+                f for f in files_result.stdout.strip().split('\n') 
+                if f and not f.startswith('.')
+            ][:15]
+        
+    except Exception as e:
+        print(f"GitHub activity error: {e}")
+    
+    return activity
+
+
+def get_openclaw_activity():
+    """Get recent OpenClaw workspace activity"""
+    activity = {
+        'files_created': [],
+        'files_modified': [],
+        'agents_used': set()
+    }
+    
+    try:
+        # Find recently modified files (last 24 hours)
+        one_day_ago = datetime.now() - timedelta(days=1)
+        
+        for root, dirs, files in os.walk(WORKSPACE):
+            # Skip hidden and node_modules
+            dirs[:] = [d for d in dirs if not d.startswith('.') and d != 'node_modules']
+            
+            for file in files:
+                if file.startswith('.'):
+                    continue
+                    
+                filepath = os.path.join(root, file)
+                try:
+                    stat = os.stat(filepath)
+                    mtime = datetime.fromtimestamp(stat.st_mtime)
+                    
+                    if mtime > one_day_ago:
+                        rel_path = os.path.relpath(filepath, WORKSPACE)
+                        if stat.st_size < 1000:  # Likely new file
+                            activity['files_created'].append(rel_path)
+                        else:
+                            activity['files_modified'].append(rel_path)
+                except:
+                    pass
+        
+        # Check for agent activity in memory files
+        today = datetime.now().strftime('%Y-%m-%d')
+        for memory_base in [MEMORY_DIR, PRIVATE_MEMORY_DIR]:
+            if os.path.exists(memory_base):
+                mem_file = os.path.join(memory_base, f"{today}.md")
+                if os.path.exists(mem_file):
+                    try:
+                        with open(mem_file, 'r') as f:
+                            content = f.read()
+                        # Look for agent mentions
+                        for agent in ['Stitch', 'Gavin', 'Kimi', 'Roger', 'Connie']:
+                            if agent.lower() in content.lower():
+                                activity['agents_used'].add(agent)
+                    except:
+                        pass
+        
+        activity['agents_used'] = list(activity['agents_used'])
+        
+    except Exception as e:
+        print(f"OpenClaw activity error: {e}")
+    
+    return activity
+
+
+def get_pocketbase_status():
+    """Get PocketBase collection status"""
+    status = {
+        'collections': [],
+        'recent_entries': 0,
+        'connected': False
+    }
+    
+    # Try to query PB via HTTP API
+    try:
+        import urllib.request
+        
+        pb_url = os.environ.get('POCKETBASE_URL', 'http://192.241.180.69:8090')
+        
+        # Check health
+        req = urllib.request.Request(f"{pb_url}/api/health", method='GET')
+        with urllib.request.urlopen(req, timeout=5) as response:
+            if response.status == 200:
+                status['connected'] = True
+        
+        # Get collections list
+        req = urllib.request.Request(f"{pb_url}/api/collections", method='GET')
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            status['collections'] = [c['name'] for c in data.get('items', [])]
+        
+    except:
+        status['connected'] = False
+    
+    return status
+
+
 def load_gavin_overnight():
     """Load and parse Gavin's overnight research digest"""
     gavin_file = os.path.join(WORKSPACE, "content-pipeline/research/digests/latest-gavin-overnight.md")
@@ -388,7 +570,7 @@ def render_signals_section(gavin_data):
 
 
 def generate_brief():
-    """Generate morning brief with Gavin research as first-class citizen"""
+    """Generate morning brief with weekly goals and cross-system status"""
     brief = []
     brief.append("=" * 55)
     brief.append("🌅 MORNING BRIEF")
@@ -418,6 +600,54 @@ def generate_brief():
         brief.append(signals_section)
         brief.append("")
         brief.append("")
+    
+    # === WEEKLY GOALS (Persistent) ===
+    weekly_goals = get_weekly_goals()
+    if weekly_goals['active'] or weekly_goals['completed']:
+        brief.append("🎯 WEEKLY GOALS")
+        brief.append("-" * 40)
+        
+        if weekly_goals['active']:
+            brief.append("In Progress:")
+            for goal in weekly_goals['active'][:3]:  # Top 3
+                brief.append(f"  • {goal}")
+        
+        if weekly_goals['completed']:
+            brief.append("")
+            brief.append(f"✓ Completed: {len(weekly_goals['completed'])} this week")
+        
+        brief.append("")
+        brief.append("")
+    
+    # === CROSS-SYSTEM STATUS ===
+    brief.append("📊 SYSTEM STATUS")
+    brief.append("-" * 40)
+    
+    # GitHub activity
+    github = get_github_activity(days=7)
+    if github['commits']:
+        brief.append(f"🐙 GitHub: {len(github['commits'])} commits this week")
+        # Show last 2 commits
+        for commit in github['commits'][:2]:
+            brief.append(f"  • {commit['message'][:50]}")
+    
+    # OpenClaw activity
+    openclaw = get_openclaw_activity()
+    if openclaw['files_created'] or openclaw['files_modified']:
+        total_files = len(openclaw['files_created']) + len(openclaw['files_modified'])
+        brief.append(f"⚙️ OpenClaw: {total_files} files touched (24h)")
+        if openclaw['agents_used']:
+            brief.append(f"  Agents: {', '.join(openclaw['agents_used'])}")
+    
+    # PocketBase status
+    pb = get_pocketbase_status()
+    if pb['connected']:
+        brief.append(f"💾 PocketBase: Connected ({len(pb['collections'])} collections)")
+    else:
+        brief.append("💾 PocketBase: Check connection")
+    
+    brief.append("")
+    brief.append("")
     
     # Editorial framing: set intention based on research
     brief.append("🎯 TODAY'S FOCUS")
