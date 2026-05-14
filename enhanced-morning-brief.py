@@ -443,6 +443,104 @@ def get_pocketbase_status():
     return status
 
 
+def get_time_focus_yesterday():
+    """Get yesterday's Time & Focus entry from PocketBase"""
+    result = {
+        'has_data': False,
+        'date': None,
+        'ratings': {},
+        'average': 0,
+        'reflection': None
+    }
+    
+    try:
+        import urllib.request
+        import urllib.parse
+        
+        pb_url = os.environ.get('POCKETBASE_URL', 'http://192.241.180.69:8090')
+        pb_email = os.environ.get('POCKETBASE_ADMIN_EMAIL', 'kyle@kaihamil.com')
+        pb_password = os.environ.get('POCKETBASE_ADMIN_PASSWORD', 'Scobey1022')
+        
+        # Authenticate first
+        auth_token = None
+        if pb_password:
+            auth_data = json.dumps({
+                'identity': pb_email,
+                'password': pb_password
+            }).encode('utf-8')
+            
+            auth_req = urllib.request.Request(
+                f"{pb_url}/api/collections/_superusers/auth-with-password",
+                data=auth_data,
+                headers={'Content-Type': 'application/json'},
+                method='POST'
+            )
+            
+            with urllib.request.urlopen(auth_req, timeout=10) as auth_response:
+                auth_result = json.loads(auth_response.read().decode('utf-8'))
+                auth_token = auth_result.get('token')
+        
+        yesterday = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
+        yesterday_dt = datetime.strptime(yesterday, '%Y-%m-%d')
+        
+        # Query time_focus_entries - get all entries to find yesterday
+        url = f"{pb_url}/api/collections/time_focus_entries/records?perPage=100"
+        req = urllib.request.Request(url, method='GET')
+        
+        if auth_token:
+            req.add_header('Authorization', f'Bearer {auth_token}')
+        
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            items = data.get('items', [])
+            
+            # Find yesterday's entry by entry_date
+            entry = None
+            for item in items:
+                entry_date = item.get('entry_date')
+                if entry_date:
+                    # Parse entry_date (format: 2026-04-12 00:00:00.000Z)
+                    try:
+                        item_date = datetime.strptime(entry_date[:10], '%Y-%m-%d')
+                        if item_date.date() == yesterday_dt.date():
+                            entry = item
+                            break
+                    except:
+                        continue
+            
+            if entry:
+                result['has_data'] = True
+                result['date'] = yesterday
+                result['reflection'] = entry.get('reflection', '')
+                
+                # Extract ratings from nested ratings object
+                ratings_data = entry.get('ratings', {})
+                categories = [
+                    'kids', 'partner', 'inner_circle', 'work', 'business',
+                    'administration', 'home', 'body', 'mind', 'emotion', 'sleep'
+                ]
+                
+                ratings = {}
+                total = 0
+                count = 0
+                
+                for cat in categories:
+                    val = ratings_data.get(cat)
+                    if val is not None and val > 0:  # 0 means not rated
+                        ratings[cat] = val
+                        total += val
+                        count += 1
+                
+                result['ratings'] = ratings
+                result['average'] = round(total / count, 1) if count > 0 else 0
+                
+    except Exception as e:
+        # Silently fail - auth might be wrong
+        pass
+    
+    return result
+
+
 def load_gavin_overnight():
     """Load and parse Gavin's overnight research digest"""
     gavin_file = os.path.join(WORKSPACE, "content-pipeline/research/digests/latest-gavin-overnight.md")
@@ -639,12 +737,26 @@ def generate_brief():
         if openclaw['agents_used']:
             brief.append(f"  Agents: {', '.join(openclaw['agents_used'])}")
     
-    # PocketBase status
+    # PocketBase status + Time & Focus
     pb = get_pocketbase_status()
+    tf_yesterday = get_time_focus_yesterday()
+    
     if pb['connected']:
         brief.append(f"💾 PocketBase: Connected ({len(pb['collections'])} collections)")
     else:
         brief.append("💾 PocketBase: Check connection")
+    
+    # Time & Focus yesterday
+    if tf_yesterday['has_data']:
+        brief.append(f"⏱️ Yesterday: {tf_yesterday['average']}/5 avg ({len(tf_yesterday['ratings'])} categories)")
+        # Show highest and lowest
+        if tf_yesterday['ratings']:
+            sorted_ratings = sorted(tf_yesterday['ratings'].items(), key=lambda x: x[1], reverse=True)
+            highest = sorted_ratings[0]
+            lowest = sorted_ratings[-1]
+            brief.append(f"  ↑ {highest[0]}: {highest[1]} | ↓ {lowest[0]}: {lowest[1]}")
+    else:
+        brief.append("⏱️ Yesterday: No Time & Focus data logged")
     
     brief.append("")
     brief.append("")
