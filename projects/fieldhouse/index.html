@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fieldhouse — Concept Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1812;
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --clay: #c4875a;
+    --clay-light: #e8c4a0;
+    --sage: #7a8c72;
+    --charcoal: #2e2b26;
+    --muted: #8a8378;
+    --rule: rgba(26,24,18,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    mix-blend-mode: multiply;
+  }
+
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--clay);
+    opacity: 0.4;
+  }
+
+  /* Ambient circle */
+  .hero-orb {
+    position: absolute;
+    top: -8rem;
+    right: -8rem;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,135,90,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--clay-light);
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.55);
+    max-width: 30ch;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid var(--clay);
+    padding-bottom: 0.5rem;
+    width: fit-content;
+    transition: color 0.2s, gap 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.8s forwards;
+  }
+
+  .hero-cta:hover { color: var(--clay-light); gap: 1.5rem; }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-right-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .concept-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.7s forwards;
+  }
+
+  .pillar {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: default;
+    transition: background 0.2s;
+  }
+
+  .pillar:first-child { border-top: 1px solid var(--rule); }
+
+  .pillar:hover .pillar-num { color: var(--clay); }
+
+  .pillar-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--clay-light);
+    padding-top: 0.15rem;
+    transition: color 0.2s;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    color: var(--charcoal);
+  }
+
+  .pillar-body {
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── POSITIONING STATEMENT ── */
+  .positioning {
+    background: var(--ink);
+    padding: 7rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .positioning::before {
+    content: '"';
+    position: absolute;
+    top: -2rem;
+    left: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem;
+    color: rgba(196,135,90,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .positioning-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .positioning-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 2.5rem;
+  }
+
+  .positioning-statement {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--cream);
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+
+  .positioning-statement strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--clay-light);
+  }
+
+  .positioning-footnote {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── EXPERIENCE ZONES ── */
+  .zones {
+    padding: 7rem 5rem;
+    background: var(--warm-white);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .zone {
+    padding: 2.5rem 2.5rem 2.5rem 0;
+    border-right: 1px solid var(--rule);
+    padding-right: 2.5rem;
+    transition: background 0.3s;
+  }
+
+  .zone:last-child { border-right: none; padding-right: 0; }
+  .zone:not(:first-child) { padding-left: 2.5rem; }
+
+  .zone-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .zone-icon.clay { background: rgba(196,135,90,0.12); }
+  .zone-icon.sage { background: rgba(122,140,114,0.12); }
+  .zone-icon.ink { background: rgba(26,24,18,0.06); }
+
+  .zone-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--ink);
+  }
+
+  .zone-tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1rem;
+  }
+
+  .zone-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .zone-features {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .zone-feature {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--charcoal);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .zone-feature::before {
+    content: '';
+    width: 1rem;
+    height: 1px;
+    background: var(--clay-light);
+    flex-shrink: 0;
+  }
+
+  /* ── MEMBERSHIP ── */
+  .membership {
+    background: var(--cream);
+    padding: 7rem 5rem;
+  }
+
+  .membership-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .membership-copy h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .membership-copy h2 em {
+    font-style: italic;
+    color: var(--clay);
+  }
+
+  .membership-copy p {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .membership-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tier {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    cursor: default;
+  }
+
+  .tier:first-child { border-top: 1px solid var(--rule); }
+
+  .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .tier-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .tier-price {
+    text-align: right;
+  }
+
+  .tier-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .tier-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  .tier.featured {
+    background: var(--ink);
+    padding: 2rem 1.5rem;
+    border-radius: 2px;
+    border: none;
+    margin: 0 -1.5rem;
+  }
+
+  .tier.featured .tier-name { color: var(--cream); }
+  .tier.featured .tier-desc { color: rgba(245,240,232,0.5); }
+  .tier.featured .tier-amount { color: var(--clay-light); }
+  .tier.featured .tier-period { color: rgba(245,240,232,0.4); }
+
+  /* ── RULES / PHILOSOPHY ── */
+  .philosophy {
+    padding: 7rem 5rem;
+    background: var(--warm-white);
+  }
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+  }
+
+  .rule-item {
+    padding: 2.5rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rule-item:nth-child(even) { border-right: none; }
+  .rule-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .rule-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--clay);
+    margin-bottom: 1rem;
+  }
+
+  .rule-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .rule-body {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── CONCEPT BRIEF (doc section) ── */
+  .brief {
+    background: var(--ink);
+    padding: 7rem 5rem;
+    position: relative;
+  }
+
+  .brief-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 3rem;
+  }
+
+  .brief-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+  }
+
+  .brief-nav {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .brief-nav-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.25);
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(245,240,232,0.08);
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+
+  .brief-nav-item:hover,
+  .brief-nav-item.active { color: var(--clay-light); }
+
+  .brief-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .brief-section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .brief-section p {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.5);
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+
+  .brief-section p strong {
+    color: var(--clay-light);
+    font-weight: 400;
+  }
+
+  .brief-divider {
+    height: 1px;
+    background: rgba(245,240,232,0.08);
+  }
+
+  /* ── WAITLIST ── */
+  .waitlist {
+    background: var(--clay);
+    padding: 7rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .waitlist-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(26,24,18,0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .waitlist h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    max-width: 18ch;
+  }
+
+  .waitlist p {
+    font-size: 0.85rem;
+    color: rgba(26,24,18,0.65);
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 40ch;
+    line-height: 1.65;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 0;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    background: rgba(26,24,18,0.08);
+    border: 1px solid rgba(26,24,18,0.25);
+    border-right: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    outline: none;
+    font-weight: 300;
+  }
+
+  .waitlist-input::placeholder { color: rgba(26,24,18,0.4); }
+
+  .waitlist-btn {
+    padding: 1rem 1.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .waitlist-btn:hover { background: var(--charcoal); }
+
+  .waitlist-note {
+    margin-top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(26,24,18,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .footer-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.2);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--clay); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-wordmark">Fieldhouse</span>
+  <ul class="nav-links">
+    <li><a href="#zones">The Space</a></li>
+    <li><a href="#membership">Membership</a></li>
+    <li><a href="#brief">Concept</a></li>
+    <li><a href="#waitlist">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-orb"></div>
+    <span class="hero-label">Fieldhouse — Founding Membership</span>
+    <h1 class="hero-headline">
+      Your kids<br>
+      leave <em>exhausted.</em><br>
+      You leave<br>
+      <em>accomplished.</em>
+    </h1>
+    <p class="hero-sub">A membership space built for professional parents — where the work gets done and the kids don't want to leave.</p>
+    <a href="#waitlist" class="hero-cta">Request Access →</a>
+  </div>
+
+  <div class="hero-right">
+    <span class="hero-right-label">The premise</span>
+    <div class="concept-pillars">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <div>
+          <div class="pillar-title">Not a kids' place</div>
+          <p class="pillar-body">Designed from the ceiling down for parents who actually want to be there — premium seating, real coffee, fast wifi, and the ambient quiet of people doing real work.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <div>
+          <div class="pillar-title">Not a gym</div>
+          <p class="pillar-body">You're not here to work out. You're here to be near your kids while having three productive hours on a Saturday morning. That's enough. That's the point.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <div>
+          <div class="pillar-title">Not a birthday party</div>
+          <p class="pillar-body">No events, no noise spikes, no strangers' children in rented princess dresses. Members only. Controlled environment. The vibe is always yours.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">04</span>
+        <div>
+          <div class="pillar-title">One flat membership</div>
+          <p class="pillar-body">Coffee, play, workspace, all of it — included. No tokens, no hourly fees, no social math. Show up. Do your thing. Leave when you're ready.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING STATEMENT -->
+<section class="positioning">
+  <div class="positioning-inner">
+    <p class="positioning-label">Why it exists</p>
+    <p class="positioning-statement">
+      Every parent has sat next to the birthday cake, phone in hand,<br>
+      <strong>wishing they could open their laptop</strong> — but knowing they couldn't.<br>
+      Fieldhouse is the place where they can.
+    </p>
+    <p class="positioning-footnote">Bucks County, Pennsylvania — Opening 2026</p>
+  </div>
+</section>
+
+<!-- ZONES -->
+<section class="zones" id="zones">
+  <div class="section-header reveal">
+    <h2 class="section-title">The Space</h2>
+    <span class="section-label">Three zones, one environment</span>
+  </div>
+  <div class="zones-grid">
+    <div class="zone reveal">
+      <div class="zone-icon clay">☕</div>
+      <div class="zone-tagline">For parents</div>
+      <div class="zone-name">The Fieldwork</div>
+      <p class="zone-desc">A proper co-working café with sightlines into the play zones. Acoustic zoning, standing desks, private booths, high-speed wifi, and a coffee program you'd drive here for even without kids.</p>
+      <div class="zone-features">
+        <span class="zone-feature">Espresso bar — real program, real roaster</span>
+        <span class="zone-feature">Sound-managed open floor + quiet booths</span>
+        <span class="zone-feature">Direct sightlines to all play areas</span>
+        <span class="zone-feature">Community seating for organic networking</span>
+      </div>
+    </div>
+    <div class="zone reveal">
+      <div class="zone-icon sage">🧗</div>
+      <div class="zone-tagline">For kids — ages 3–12</div>
+      <div class="zone-name">The Yard</div>
+      <p class="zone-desc">Physical, self-directed play at a scale kids remember. A legendary anchor feature — the kind a seven-year-old tells their entire class about — surrounded by climbing, ball play, and open movement.</p>
+      <div class="zone-features">
+        <span class="zone-feature">Signature large-format climbing structure</span>
+        <span class="zone-feature">Age-zoned free play areas</span>
+        <span class="zone-feature">Ambient staff — present, not programmatic</span>
+        <span class="zone-feature">No screens. No tokens. No rounds.</span>
+      </div>
+    </div>
+    <div class="zone reveal">
+      <div class="zone-icon ink">⚙️</div>
+      <div class="zone-tagline">For curious minds</div>
+      <div class="zone-name">The Workshop</div>
+      <p class="zone-desc">A maker space for kids who want to build, create, and tinker — and a place for parents to pull up a stool and actually do something together. The inspiration half of exhausted-or-inspired.</p>
+      <div class="zone-features">
+        <span class="zone-feature">Light fabrication & building materials</span>
+        <span class="zone-feature">Drawing, design, and analog making</span>
+        <span class="zone-feature">Parent-kid overlap zone</span>
+        <span class="zone-feature">Rotating seasonal projects</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="membership" id="membership">
+  <div class="membership-grid">
+    <div class="membership-copy reveal">
+      <h2>One place.<br><em>Everything included.</em></h2>
+      <p>Fieldhouse operates on a membership model — not because it sounds exclusive, but because it needs to. A consistent, curated environment only works when the community inside it is invested in it.</p>
+      <p>No day passes. No upsells. No price-per-jump. Your membership is your access to everything — every zone, every cup, every hour we're open.</p>
+      <p style="margin-top:2rem; font-family:'DM Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--clay); text-transform:uppercase;">Founding member pricing shown. Rates subject to change at launch.</p>
+    </div>
+    <div class="membership-tiers reveal">
+      <div class="tier">
+        <div>
+          <div class="tier-name">Solo</div>
+          <div class="tier-desc">One adult. Ideal for parents who come alone or trade off with a partner.</div>
+        </div>
+        <div class="tier-price">
+          <span class="tier-amount">$129</span>
+          <span class="tier-period">/ month</span>
+        </div>
+      </div>
+      <div class="tier featured">
+        <div>
+          <div class="tier-name">Family</div>
+          <div class="tier-desc">Two adults + up to three children. The core membership — built for how families actually work.</div>
+        </div>
+        <div class="tier-price">
+          <span class="tier-amount">$229</span>
+          <span class="tier-period">/ month</span>
+        </div>
+      </div>
+      <div class="tier">
+        <div>
+          <div class="tier-name">Founding</div>
+          <div class="tier-desc">Locked-in rate for our first 50 members. Full family access at a permanent discount.</div>
+        </div>
+        <div class="tier-price">
+          <span class="tier-amount">$179</span>
+          <span class="tier-period">/ month — locked</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY / RULES -->
+<section class="philosophy" id="philosophy">
+  <div class="section-header reveal">
+    <h2 class="section-title">How it works</h2>
+    <span class="section-label">Eight things we believe</span>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 01</div>
+      <div class="rule-title">Laptops are welcome</div>
+      <p class="rule-body">The whole point is that you don't have to pretend you're not working. Open it. Get something done. Nobody will judge you — they're doing the same thing.</p>
+    </div>
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 02</div>
+      <div class="rule-title">No birthday parties. Ever.</div>
+      <p class="rule-body">They break the environment for everyone not invited. They create noise spikes, territorial seating, and the exact vibe we're here to escape. Not for any price.</p>
+    </div>
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 03</div>
+      <div class="rule-title">Kids are supervised — not managed</div>
+      <p class="rule-body">Staff are present in all play zones. They're trained, attentive, and calm. But they're not running activities or blowing whistles. The play is self-directed.</p>
+    </div>
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 04</div>
+      <div class="rule-title">The coffee is real</div>
+      <p class="rule-body">Single origin, dialed in, from a roaster we believe in. Not a Keurig in the corner. The coffee is a signal — it tells you what kind of place this is before you sit down.</p>
+    </div>
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 05</div>
+      <div class="rule-title">No screens in the play zones</div>
+      <p class="rule-body">This is intentional. Parents at this price point are actively trying to give their kids physical, creative time. We protect that. Phones stay in the café.</p>
+    </div>
+    <div class="rule-item reveal">
+      <div class="rule-number">Rule 06</div>
+      <div class="rule-title">Membership is the product</div>
+      <p class="rule-body">Recurring access means recurring investment — from us and from you. The space can be better because the economics are stable. No nickel-and-diming, ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT BRIEF -->
+<section class="brief" id="brief">
+  <p class="brief-label">Concept Document — Internal Brief</p>
+  <div class="brief-grid">
+    <div class="brief-nav">
+      <a href="#" class="brief-nav-item active">Overview</a>
+      <a href="#" class="brief-nav-item">The Insight</a>
+      <a href="#" class="brief-nav-item">The Model</a>
+      <a href="#" class="brief-nav-item">Real Estate</a>
+      <a href="#" class="brief-nav-item">Competitive</a>
+      <a href="#" class="brief-nav-item">Next Steps</a>
+    </div>
+    <div class="brief-content reveal">
+      <div class="brief-section">
+        <h3>What Fieldhouse is</h3>
+        <p>A membership-based third place for professional parents and their children — combining co-working ergonomics, café quality, ambient child supervision, and physical play at a scale kids find legendary.</p>
+        <p>Not a trampoline park. Not a children's museum. Not a library. Not a gym. <strong>The best parts of each, without the worst of any.</strong></p>
+      </div>
+      <div class="brief-divider"></div>
+      <div class="brief-section">
+        <h3>The core insight</h3>
+        <p>Every parent has sat next to the birthday cake, phone in hand, wishing they could open their laptop. The social permission to work while being present with your kids doesn't exist anywhere — not at Funzilla, not at a coffee shop, not at a playground.</p>
+        <p><strong>Fieldhouse grants that permission by design.</strong> The environment itself makes it normal — even expected. Two guilt pressures (working on weekends, not engaging with kids) cancel each other out. The resolution is worth real money.</p>
+      </div>
+      <div class="brief-divider"></div>
+      <div class="brief-section">
+        <h3>The operating model</h3>
+        <p><strong>Membership-only.</strong> No day passes, no pay-per-visit, no birthday party rentals. Recurring revenue enables investment in the space and creates a consistent, curated environment. 50 founding members at $179/month = $107K ARR before opening day.</p>
+        <p><strong>All-inclusive.</strong> Coffee, play access, workspace — one price. Every micro-transaction is a small extraction. Every extraction builds quiet resentment. Fieldhouse charges once and delivers everything.</p>
+        <p><strong>Waitlist as strategy.</strong> Limited founding memberships signal exclusivity, give pricing power, and let us tune member density before scaling. Demand outstripping supply is the best launch problem to have.</p>
+      </div>
+      <div class="brief-divider"></div>
+      <div class="brief-section">
+        <h3>Real estate thesis</h3>
+        <p>Target: <strong>10,000–18,000 SF flex/industrial conversion</strong> within a 15-minute drive radius of Newtown Township, Yardley, and Langhorne — the highest-income family corridor in Bucks County (median HHI $131K–$166K).</p>
+        <p>Building requirements: high ceilings (16ft+), large open floor plate, strong parking ratio, loading access for equipment. Former big-box retail, sports facility, or light industrial preferred. Langhorne–Newtown–Warminster spine has active inventory at $13–$25/SF.</p>
+        <p><strong>The indoor focus decouples us from traditional retail site selection.</strong> We don't need street visibility or foot traffic — we need drive-time proximity to affluent family zip codes.</p>
+      </div>
+      <div class="brief-divider"></div>
+      <div class="brief-section">
+        <h3>Competitive whitespace</h3>
+        <p>Funzilla (Langhorne) proves demand. It's built for kids; parents are an afterthought on plastic benches. <strong>Fieldhouse is Funzilla's demographic grown up.</strong></p>
+        <p>No competitor has threaded: parent co-working + premium café + serious child play + membership model + no birthday parties. The whitespace is real and the market is demonstrably there.</p>
+      </div>
+      <div class="brief-divider"></div>
+      <div class="brief-section">
+        <h3>Nearest next steps</h3>
+        <p><strong>1.</strong> Identify 3–5 candidate buildings along the Langhorne–Newtown corridor. Drive them. Photograph. Note ceilings, parking, neighbors.</p>
+        <p><strong>2.</strong> Soft conversations with 5–10 parents in the target demo. Not a survey — real conversations. Does the concept land? What's missing?</p>
+        <p><strong>3.</strong> Connect with one hospitality operator or commercial RE contact with experience converting flex space. Understand the permit and build-out reality.</p>
+        <p><strong>4.</strong> Open the waitlist. Even a landing page with an email capture creates real signal. Demand before the building exists is the only validation that matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <p class="waitlist-eyebrow">Founding Membership — Limited to 50</p>
+  <h2>Be here<br>before it opens.</h2>
+  <p>Founding members lock in a permanent rate and help shape what Fieldhouse becomes. We'll be in touch before anything goes public.</p>
+  <div class="waitlist-form">
+    <input class="waitlist-input" type="email" placeholder="your@email.com">
+    <button class="waitlist-btn">Request Access</button>
+  </div>
+  <p class="waitlist-note">No spam. No pressure. Just first access when the doors open.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-wordmark">Fieldhouse</span>
+  <span class="footer-note">Concept document — Bucks County, PA — 2026</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Brief nav active state
+  const navItems = document.querySelectorAll('.brief-nav-item');
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      navItems.forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Waitlist form
+  document.querySelector('.waitlist-btn').addEventListener('click', () => {
+    const input = document.querySelector('.waitlist-input');
+    if (input.value.includes('@')) {
+      input.value = '';
+      input.placeholder = 'You\'re on the list. We\'ll be in touch.';
+      document.querySelector('.waitlist-btn').textContent = 'Done ✓';
+    }
+  });
+</script>
+</body>
+</html>
