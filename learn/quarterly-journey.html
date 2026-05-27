@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kai Hamil — Three Month Journey</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ :root {
+ --ink: #1a1812;
+ --cream: #f5f0e8;
+ --clay: #c4875a;
+ --sage: #7a8c72;
+ --muted: #8a8378;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+ background: var(--cream);
+ color: var(--ink);
+ line-height: 1.6;
+ }
+ .hero {
+ min-height: 60vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ padding: 4rem 2rem;
+ background: var(--ink);
+ color: var(--cream);
+ }
+ .hero h1 {
+ font-size: clamp(2.5rem, 6vw, 4rem);
+ font-weight: 300;
+ margin-bottom: 1rem;
+ }
+ .hero p {
+ font-size: 1.1rem;
+ color: var(--muted);
+ max-width: 50ch;
+ }
+ .timeline {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 4rem 2rem;
+ }
+ .phase {
+ margin-bottom: 4rem;
+ padding-left: 2rem;
+ border-left: 2px solid var(--clay);
+ position: relative;
+ }
+ .phase::before {
+ content: '';
+ position: absolute;
+ left: -6px;
+ top: 0;
+ width: 10px;
+ height: 10px;
+ background: var(--clay);
+ border-radius: 50%;
+ }
+ .phase-header {
+ display: flex;
+ align-items: baseline;
+ gap: 1rem;
+ margin-bottom: 1rem;
+ }
+ .phase-month {
+ font-size: 0.75rem;
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ color: var(--clay);
+ font-weight: 600;
+ }
+ .phase-title {
+ font-size: 1.5rem;
+ font-weight: 400;
+ }
+ .phase-focus {
+ font-size: 0.9rem;
+ color: var(--muted);
+ margin-bottom: 1.5rem;
+ }
+ .deliverables {
+ display: grid;
+ gap: 1rem;
+ }
+ .deliverable {
+ background: white;
+ padding: 1.25rem;
+ border-radius: 4px;
+ border-left: 3px solid var(--sage);
+ }
+ .deliverable-type {
+ font-size: 0.7rem;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ color: var(--clay);
+ margin-bottom: 0.5rem;
+ }
+ .deliverable-name {
+ font-weight: 500;
+ margin-bottom: 0.25rem;
+ }
+ .deliverable-status {
+ font-size: 0.85rem;
+ color: var(--muted);
+ }
+ .architecture {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 4rem 2rem;
+ }
+ .architecture-inner {
+ max-width: 900px;
+ margin: 0 auto;
+ }
+ .architecture h2 {
+ font-size: 1.75rem;
+ font-weight: 300;
+ margin-bottom: 2rem;
+ text-align: center;
+ }
+ .stack-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ gap: 1.5rem;
+ }
+ .stack-layer {
+ background: rgba(255,255,255,0.05);
+ padding: 1.5rem;
+ border-radius: 4px;
+ }
+ .stack-layer h3 {
+ font-size: 0.8rem;
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ color: var(--clay);
+ margin-bottom: 1rem;
+ }
+ .stack-layer ul {
+ list-style: none;
+ font-size: 0.9rem;
+ }
+ .stack-layer li {
+ padding: 0.35rem 0;
+ border-bottom: 1px solid rgba(255,255,255,0.05);
+ }
+ .stack-layer li:last-child {
+ border-bottom: none;
+ }
+ .insights {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 4rem 2rem;
+ }
+ .insights h2 {
+ font-size: 1.75rem;
+ font-weight: 300;
+ margin-bottom: 2rem;
+ text-align: center;
+ }
+ .insight-grid {
+ display: grid;
+ gap: 1.5rem;
+ }
+ .insight-card {
+ background: white;
+ padding: 1.5rem;
+ border-radius: 4px;
+ }
+ .insight-card h3 {
+ font-size: 1rem;
+ font-weight: 500;
+ margin-bottom: 0.75rem;
+ color: var(--clay);
+ }
+ .insight-card p {
+ font-size: 0.9rem;
+ color: var(--muted);
+ }
+ .current {
+ background: var(--sage);
+ color: white;
+ padding: 4rem 2rem;
+ }
+ .current-inner {
+ max-width: 700px;
+ margin: 0 auto;
+ text-align: center;
+ }
+ .current h2 {
+ font-size: 1.75rem;
+ font-weight: 300;
+ margin-bottom: 1.5rem;
+ }
+ .current p {
+ font-size: 1rem;
+ opacity: 0.9;
+ margin-bottom: 2rem;
+ }
+ .current-focus {
+ display: inline-block;
+ background: rgba(0,0,0,0.2);
+ padding: 1rem 2rem;
+ border-radius: 4px;
+ font-size: 0.9rem;
+ }
+ footer {
+ text-align: center;
+ padding: 3rem 2rem;
+ color: var(--muted);
+ font-size: 0.85rem;
+ }
+</style>
+</head>
+<body>
+
+<section class="hero">
+ <h1>Kai Hamil</h1>
+ <p>Three months of building systems, discovering friction, and learning what actually matters. A quarterly journey from concept to method.</p>
+</section>
+
+<section class="timeline">
+
+ <div class="phase">
+ <div class="phase-header">
+ <span class="phase-month">February 2026</span>
+ <h2 class="phase-title">Foundation & Framing</h2>
+ </div>
+ <p class="phase-focus">Establishing the core thesis and initial product concepts</p>
+ <div class="deliverables">
+ <div class="deliverable">
+ <div class="deliverable-type">Concept</div>
+ <div class="deliverable-name">Kai Hamil Core Thesis</div>
+ <div class="deliverable-status">"Most people are running assembly in an agentic world" — mission to combine agentic AI with thinking frameworks</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Product</div>
+ <div class="deliverable-name">Valé OS Concept</div>
+ <div class="deliverable-status">System for life administration — initial framing as productized service</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Decision</div>
+ <div class="deliverable-name">Channel Architecture</div>
+ <div class="deliverable-status">Angel (Slack) for personal, Stitch (Telegram) for KH work</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="phase">
+ <div class="phase-header">
+ <span class="phase-month">March 2026</span>
+ <h2 class="phase-title">Discovery & Pivots</h2>
+ </div>
+ <p class="phase-focus">From product ideas to worked examples; the valley revelation</p>
+ <div class="deliverables">
+ <div class="deliverable">
+ <div class="deliverable-type">Insight</div>
+ <div class="deliverable-name">The Valley Revelation</div>
+ <div class="deliverable-status">"I experienced the highest point emotionally at the lowest point" — Death Valley as founding paradox</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Product</div>
+ <div class="deliverable-name">Groove Pal</div>
+ <div class="deliverable-status">Vinyl sharing network — the "Self" business, pen pal network concept</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Product</div>
+ <div class="deliverable-name">Couples Valé</div>
+ <div class="deliverable-status">Built for marriage first, then shared — relationship infrastructure</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Decision</div>
+ <div class="deliverable-name">Content Doctrine</div>
+ <div class="deliverable-status">Medium-form cinematic video as primary product; shorts as compression layer</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="phase">
+ <div class="phase-header">
+ <span class="phase-month">April 2026</span>
+ <h2 class="phase-title">Systems & Infrastructure</h2>
+ </div>
+ <p class="phase-focus">Building the daily brief, Time & Focus, and technical architecture</p>
+ <div class="deliverables">
+ <div class="deliverable">
+ <div class="deliverable-type">System</div>
+ <div class="deliverable-name">Daily Brief Architecture</div>
+ <div class="deliverable-status">Life & Times concept — breaking, all-time, and evergreen research modes</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Product</div>
+ <div class="deliverable-name">Time & Focus App</div>
+ <div class="deliverable-status">Personal energy tracking with PocketBase backend — 37+ days of usage</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Infrastructure</div>
+ <div class="deliverable-name">GitHub + PocketBase + Netlify</div>
+ <div class="deliverable-status">Three-layer architecture: durable artifacts, runtime aggregation, deployed UI</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Client Work</div>
+ <div class="deliverable-name">Gatefield HOA Website</div>
+ <div class="deliverable-status">Three-page structure, Netlify deploy, June 6 annual meeting deadline</div>
+ </div>
+ </div>
+ </div>
+
+ <div class="phase">
+ <div class="phase-header">
+ <span class="phase-month">May 2026</span>
+ <h2 class="phase-title">Method & Education</h2>
+ </div>
+ <p class="phase-focus">From products to teaching; the framework emerges</p>
+ <div class="deliverables">
+ <div class="deliverable">
+ <div class="deliverable-type">Framework</div>
+ <div class="deliverable-name">The Kai Hamil Method</div>
+ <div class="deliverable-status">Idea → Plan → Tasks → Actions → Results → Impact (with feedback loop)</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Framework</div>
+ <div class="deliverable-name">Socratic Teaching Approach</div>
+ <div class="deliverable-status">Learner-centered, question-driven, failure as curriculum</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Course</div>
+ <div class="deliverable-name">Phase 1: Build a Daily Brief That Doesn't Work</div>
+ <div class="deliverable-status">4-week curriculum using the 7 AM cron job failure as opening story</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Concept</div>
+ <div class="deliverable-name">Fieldhouse</div>
+ <div class="deliverable-status">Membership space for professional parents — worked example #2</div>
+ </div>
+ <div class="deliverable">
+ <div class="deliverable-type">Assessment</div>
+ <div class="deliverable-name">Five Tests for Founders</div>
+ <div class="deliverable-status">Kai Hamil as lifestyle business + content play, not venture-scale</div>
+ </div>
+ </div>
+ </div>
+
+</section>
+
+<section class="architecture">
+ <div class="architecture-inner">
+ <h2>The Architecture</h2>
+ <div class="stack-grid">
+ <div class="stack-layer">
+ <h3>Content Layer</h3>
+ <ul>
+ <li>Substack — storytelling about systems</li>
+ <li>LinkedIn — learning about intelligence</li>
+ <li>YouTube — pursuing equilibrium</li>
+ <li>Short-form — Intentional Dad</li>
+ </ul>
+ </div>
+ <div class="stack-layer">
+ <h3>Product Layer</h3>
+ <ul>
+ <li>Valé OS — demonstration object</li>
+ <li>Groove Pal — worked example</li>
+ <li>Time & Focus — personal tool</li>
+ <li>Couples Valé — relationship infra</li>
+ </ul>
+ </div>
+ <div class="stack-layer">
+ <h3>Method Layer</h3>
+ <ul>
+ <li>The Kai Hamil Method</li>
+ <li>Socratic teaching framework</li>
+ <li>Phase 1 course curriculum</li>
+ <li>Active Effort List system</li>
+ </ul>
+ </div>
+ <div class="stack-layer">
+ <h3>Infrastructure</h3>
+ <ul>
+ <li>GitHub — durable artifacts</li>
+ <li>PocketBase — runtime data</li>
+ <li>Netlify — deployed UI</li>
+ <li>OpenClaw — agent orchestration</li>
+ </ul>
+ </div>
+ </div>
+ </div>
+</section>
+
+<section class="insights">
+ <h2>Key Insights</h2>
+ <div class="insight-grid">
+ <div class="insight-card">
+ <h3>From Products to Method</h3>
+ <p>Started building products (Valé, Groove Pal). Discovered the real asset is the method that produces them. Products become worked examples, not businesses.</p>
+ </div>
+ <div class="insight-card">
+ <h3>Content vs. Building</h3>
+ <p>Creating content feels like progress but often isn't. The hard work is specific, pride-worthy building — not documentation of intent.</p>
+ </div>
+ <div class="insight-card">
+ <h3>Failure as Curriculum</h3>
+ <p>The 7 AM cron job that never worked became the opening story of the course. Real failure is more valuable than manufactured success.</p>
+ </div>
+ <div class="insight-card">
+ <h3>Marissa as Data Point</h3>
+ <p>Couples Valé didn't land. Not a verdict — information. Either she's not the market, the thing wasn't good, or over-fitting occurred. All useful.</p>
+ </div>
+ <div class="insight-card">
+ <h3>System // Self</h3>
+ <p>The organizing principle: System = doing things better (efficiency). Self = doing better things (wisdom). Both required, different metrics.</p>
+ </div>
+ <div class="insight-card">
+ <h3>The Path Forward</h3>
+ <p>Education as near-term income. Workshop as lead generation. Community of independent doers as long-term value. Not four businesses — one practice.</p>
+ </div>
+ </div>
+</section>
+
+<section class="current">
+ <div class="current-inner">
+ <h2>Current Focus</h2>
+ <p>Teaching the method through worked examples. Building a community of system-developers. Preparing for Phase 1 course launch.</p>
+ <div class="current-focus">Active: Groove Pal QR codes (May 25) · Workshop curriculum · Demand discovery</div>
+ </div>
+</section>
+
+<footer>
+ <p>Kai Hamil · Quarter 1, 2026 · Three months of building</p>
+</footer>
+
+</body>
+</html>
