@@ -24,6 +24,14 @@ By the end, you'll have a system that *almost* works. More importantly, you'll u
 
 ---
 
+## The Origin Story
+
+This course is based on real events. The instructor has attempted to build a daily brief system that sends at 7 AM. It has never worked. Multiple cron jobs have been created, disabled, re-enabled, and abandoned. The 7 AM message remains theoretical.
+
+**This is not a bug in the curriculum. It is the curriculum.**
+
+---
+
 ## The Meta-Lesson
 
 The daily brief that doesn't send at 7 AM teaches something the working one can't:
@@ -208,6 +216,20 @@ This course requires you to be comfortable with:
 - Letting students struggle
 - Celebrating partial success
 - Admitting when your own systems fail (they will)
+
+### A Note on Communication
+
+The instructor attempted to communicate the 7 AM cron job failure through sarcasm. The AI assistant failed to detect it. This became a secondary lesson:
+
+**Sarcasm is not an effective debugging strategy.**
+
+When systems fail, direct communication works better than irony. State the problem clearly. Show the evidence. Ask for what you need.
+
+This applies to human collaborators too.
+
+---
+
+*Course based on actual events. Cron jobs mentioned are real and still not working.*
 
 Your role is Socratic guide, not expert with solutions. The daily brief that doesn't send at 7 AM is the curriculum.
 
