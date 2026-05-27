@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Kai Hamil Method</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ :root {
+ --ink: #1a1812;
+ --cream: #f5f0e8;
+ --warm-white: #faf8f4;
+ --clay: #c4875a;
+ --clay-light: #e8c4a0;
+ --sage: #7a8c72;
+ --charcoal: #2e2b26;
+ --muted: #8a8378;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+ background: var(--warm-white);
+ color: var(--ink);
+ line-height: 1.7;
+ font-size: 16px;
+ }
+ nav {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ background: var(--ink);
+ padding: 1rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ z-index: 100;
+ }
+ nav a {
+ color: var(--cream);
+ text-decoration: none;
+ font-size: 0.85rem;
+ }
+ nav a:hover { color: var(--clay-light); }
+ .hero {
+ min-height: 50vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ padding: 6rem 2rem 4rem;
+ background: var(--ink);
+ color: var(--cream);
+ }
+ .hero h1 {
+ font-size: clamp(2rem, 5vw, 3.5rem);
+ font-weight: 300;
+ margin-bottom: 1rem;
+ letter-spacing: -0.02em;
+ }
+ .hero p {
+ font-size: 1.1rem;
+ color: var(--muted);
+ font-style: italic;
+ }
+ .content {
+ max-width: 700px;
+ margin: 0 auto;
+ padding: 4rem 2rem;
+ }
+ .content h2 {
+ font-size: 1.5rem;
+ font-weight: 500;
+ margin: 3rem 0 1rem;
+ color: var(--ink);
+ border-bottom: 2px solid var(--clay);
+ padding-bottom: 0.5rem;
+ }
+ .content h3 {
+ font-size: 1.15rem;
+ font-weight: 600;
+ margin: 2rem 0 0.75rem;
+ color: var(--charcoal);
+ }
+ .content h4 {
+ font-size: 1rem;
+ font-weight: 600;
+ margin: 1.5rem 0 0.5rem;
+ color: var(--clay);
+ }
+ .content p {
+ margin-bottom: 1rem;
+ color: var(--charcoal);
+ }
+ .content ul, .content ol {
+ margin: 1rem 0 1.5rem 1.5rem;
+ }
+ .content li {
+ margin-bottom: 0.5rem;
+ }
+ .content strong {
+ color: var(--ink);
+ font-weight: 600;
+ }
+ .content blockquote {
+ border-left: 3px solid var(--clay);
+ padding-left: 1.5rem;
+ margin: 1.5rem 0;
+ font-style: italic;
+ color: var(--muted);
+ }
+ .content code {
+ background: var(--cream);
+ padding: 0.2rem 0.4rem;
+ border-radius: 3px;
+ font-family: 'SF Mono', Monaco, monospace;
+ font-size: 0.9em;
+ }
+ .content pre {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 1.5rem;
+ border-radius: 4px;
+ overflow-x: auto;
+ margin: 1.5rem 0;
+ font-family: 'SF Mono', Monaco, monospace;
+ font-size: 0.9rem;
+ line-height: 1.5;
+ }
+ .content table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 1.5rem 0;
+ font-size: 0.95rem;
+ }
+ .content th, .content td {
+ padding: 0.75rem;
+ text-align: left;
+ border-bottom: 1px solid var(--cream);
+ }
+ .content th {
+ background: var(--cream);
+ font-weight: 600;
+ color: var(--ink);
+ }
+ .content tr:hover {
+ background: var(--warm-white);
+ }
+ .stage-box {
+ background: white;
+ border-left: 4px solid var(--clay);
+ padding: 1.5rem;
+ margin: 1.5rem 0;
+ border-radius: 0 4px 4px 0;
+ }
+ .stage-box h3 {
+ margin-top: 0;
+ color: var(--clay);
+ }
+ .highlight-box {
+ background: var(--sage);
+ color: white;
+ padding: 1.5rem;
+ border-radius: 4px;
+ margin: 2rem 0;
+ }
+ .highlight-box p {
+ color: white;
+ margin-bottom: 0;
+ }
+ .highlight-box strong {
+ color: var(--clay-light);
+ }
+ footer {
+ text-align: center;
+ padding: 3rem 2rem;
+ color: var(--muted);
+ font-size: 0.85rem;
+ border-top: 1px solid var(--cream);
+ margin-top: 3rem;
+ }
+ @media (max-width: 600px) {
+ .content { padding: 2rem 1.5rem; }
+ .hero { padding: 5rem 1.5rem 3rem; }
+ }
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="/">← Kai Hamil</a>
+ <a href="/learn/">Learn →</a>
+</nav>
+
+<section class="hero">
+ <h1>The Kai Hamil Method</h1>
+ <p>A framework for turning ideas into systems that create impact.</p>
+</section>
+
+<article class="content">
+
+<h2>The Core Belief</h2>
+
+<p><strong>Agency is earned through preparation.</strong></p>
+
+<p>You don't wait for opportunity. You build the capacity to recognize it, evaluate it, and act on it — before you need to.</p>
+
+<p>This method is how you do that.</p>
+
+<h2>The Why</h2>
+
+<p>Three forces drive this work:</p>
+
+<ol>
+<li><strong>Agency</strong> — The ability to shape your circumstances rather than react to them</li>
+<li><strong>Pride of ownership</strong> — Knowing you built something that works, that lasts, that matters</li>
+<li><strong>Confidence</strong> — The quiet certainty that you can do it better than they can, because you've done the work</li>
+</ol>
+
+<p>These aren't abstract virtues. They're the outputs of a specific kind of preparation.</p>
+
+<h2>The Information System</h2>
+
+<p>Not a platform. A mechanism.</p>
+
+<pre>
+IDEA → PLAN → TASKS → ACTIONS → RESULTS → IMPACT
+         ↑___________________________|
+                    (feedback)
+</pre>
+
+<p>Each stage has specific questions, specific outputs, and specific failure modes.</p>
+
+<div class="stage-box">
+<h3>Stage 1: IDEA</h3>
+<p><strong>Question:</strong> What do I see that others don't?</p>
+
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>Friction in your own life</li>
+<li>Patterns across multiple contexts</li>
+<li>Conversations where people complain about the same thing</li>
+<li>Technologies or shifts that change what's possible</li>
+</ul>
+
+<p><strong>Output:</strong> A one-sentence insight. The thing that, once stated, feels obvious.</p>
+
+<blockquote>
+"Every parent has sat next to the birthday cake, phone in hand, wishing they could open their laptop."
+</blockquote>
+
+<p><strong>Failure mode:</strong> Ideas without insight. "An app for X" without the specific tension that makes it necessary.</p>
+</div>
+
+<div class="stage-box">
+<h3>Stage 2: PLAN</h3>
+<p><strong>Question:</strong> What would this look like if it worked?</p>
+
+<h4>The Constraint Stack</h4>
+<p>What must be true for this to work?</p>
+<ul>
+<li>Economic (unit economics, capital requirements)</li>
+<li>Operational (who does the work, what skills required)</li>
+<li>Temporal (timeline to viability, path to scale)</li>
+<li>Personal (what you bring, what you need)</li>
+</ul>
+
+<h4>The Moat</h4>
+<p>What makes this defensible? Not just different — hard to copy.</p>
+
+<h4>The Exit (or End State)</h4>
+<p>Where does this lead? What does success look like in 3 years? 10?</p>
+
+<p><strong>Output:</strong> A concept document. 2-5 pages that someone else could read and understand what you're building and why.</p>
+
+<p><strong>Failure mode:</strong> Plans without constraints. "We'll figure it out later" on the things that kill ventures.</p>
+</div>
+
+<div class="stage-box">
+<h3>Stage 3: TASKS</h3>
+<p><strong>Question:</strong> What is the smallest next step?</p>
+
+<p><strong>Principle:</strong> Decompose until the next action is obvious and executable today.</p>
+
+<p><strong>The Task Filter:</strong></p>
+<ul>
+<li>Can I do this in under 2 hours?</li>
+<li>Do I know what "done" looks like?</li>
+<li>Does this unblock something else?</li>
+</ul>
+
+<p><strong>Output:</strong> A task list with owners, deadlines, and dependencies.</p>
+
+<p><strong>Failure mode:</strong> Tasks that are actually projects. "Build the website" is not a task. "Register domain and point to Netlify" is.</p>
+</div>
+
+<div class="stage-box">
+<h3>Stage 4: ACTIONS</h3>
+<p><strong>Question:</strong> What am I actually doing right now?</p>
+
+<p><strong>Principle:</strong> Presence in execution. One thing at a time, fully.</p>
+
+<p><strong>The Action Log:</strong></p>
+<ul>
+<li>What I intended to do</li>
+<li>What I actually did</li>
+<li>What I learned</li>
+<li>What changed</li>
+</ul>
+
+<p><strong>Output:</strong> Completed tasks, documented learnings, updated plans.</p>
+
+<p><strong>Failure mode:</strong> Action without reflection. Doing the same thing repeatedly without noticing it's not working.</p>
+</div>
+
+<div class="stage-box">
+<h3>Stage 5: RESULTS</h3>
+<p><strong>Question:</strong> What happened?</p>
+
+<p><strong>Metrics:</strong></p>
+<ul>
+<li>Quantitative (numbers that matter)</li>
+<li>Qualitative (stories that explain)</li>
+<li>Comparative (vs. expectation, vs. alternative)</li>
+</ul>
+
+<p><strong>Output:</strong> A clear picture of what the actions produced.</p>
+
+<p><strong>Failure mode:</strong> Results without context. Numbers that don't tell you what to do next.</p>
+</div>
+
+<div class="stage-box">
+<h3>Stage 6: IMPACT</h3>
+<p><strong>Question:</strong> What changed in the world?</p>
+
+<p><strong>Types:</strong></p>
+<ul>
+<li>Economic (revenue, savings, efficiency)</li>
+<li>Social (relationships strengthened, community built)</li>
+<li>Personal (skills gained, confidence earned, options created)</li>
+</ul>
+
+<p><strong>Output:</strong> A story you can tell about what this work meant.</p>
+
+<p><strong>Failure mode:</strong> Activity without impact. Being busy without being effective.</p>
+</div>
+
+<h2>The Feedback Loop</h2>
+
+<p>Results and impact feed back into ideas.</p>
+
+<ul>
+<li>What worked that I didn't expect?</li>
+<li>What failed that I thought would work?</li>
+<li>What new opportunities emerged?</li>
+<li>What constraints became clearer?</li>
+</ul>
+
+<p><strong>The system learns.</strong> Each cycle makes the next one faster and more precise.</p>
+
+<h2>The Preparation Principle</h2>
+
+<p>The method isn't just for when you have an idea. It's for before you have an idea.</p>
+
+<p><strong>You prepare by:</strong></p>
+
+<ol>
+<li><strong>Building the information system</strong> — The mechanism that captures, organizes, and surfaces ideas</li>
+<li><strong>Developing pattern recognition</strong> — Seeing the same friction in different contexts</li>
+<li><strong>Maintaining optionality</strong> — Keeping capacity available for when the right opportunity appears</li>
+<li><strong>Documenting the work</strong> — Creating artifacts that demonstrate competence</li>
+</ol>
+
+<p><strong>The result:</strong> When opportunity arrives, you're ready. Not scrambling. Not improvising. Executing.</p>
+
+<h2>The Kai Hamil Stack</h2>
+
+<p>This method produces specific artifacts:</p>
+
+<table>
+<tr>
+<th>Artifact</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td>Concept documents</td>
+<td>Clarify thinking, attract partners, guide execution</td>
+</tr>
+<tr>
+<td>Worked examples</td>
+<td>Demonstrate the method, teach the principles</td>
+</tr>
+<tr>
+<td>Active effort lists</td>
+<td>Maintain focus, manage energy, show progress</td>
+</tr>
+<tr>
+<td>Daily briefs</td>
+<td>Stay informed, spot patterns, maintain presence</td>
+</tr>
+<tr>
+<td>Memory systems</td>
+<td>Learn from experience, avoid repetition, build wisdom</td>
+</tr>
+</table>
+
+<p>These aren't tools for their own sake. They're the infrastructure of agency.</p>
+
+<h2>How to Use This Method</h2>
+
+<h3>For a new idea:</h3>
+<ol>
+<li>Write the one-sentence insight</li>
+<li>Draft the concept document (constraint stack, moat, exit)</li>
+<li>Decompose to tasks</li>
+<li>Execute the smallest next step</li>
+<li>Log results</li>
+<li>Close the feedback loop</li>
+</ol>
+
+<h3>For ongoing work:</h3>
+<ol>
+<li>Review active effort list</li>
+<li>Pick the highest-leverage action</li>
+<li>Execute with presence</li>
+<li>Document what happened</li>
+<li>Update plans based on results</li>
+</ol>
+
+<h3>For preparation:</h3>
+<ol>
+<li>Maintain the information system</li>
+<li>Capture ideas without committing to them</li>
+<li>Build skills before you need them</li>
+<li>Create artifacts that demonstrate competence</li>
+</ol>
+
+<div class="highlight-box">
+<p><strong>The Standard</strong></p>
+<p>Clarity before action. Action before optimization. Impact before scale.</p>
+</div>
+
+<p>You don't build to impress. You build to work. The elegance is in the function.</p>
+
+<h2>Summary</h2>
+
+<p>The Kai Hamil method is a system for turning ideas into impact through:</p>
+
+<ol>
+<li><strong>Preparation</strong> — Building capacity before you need it</li>
+<li><strong>Clarity</strong> — Understanding what you're building and why</li>
+<li><strong>Execution</strong> — Doing the smallest next step with presence</li>
+<li><strong>Learning</strong> — Closing the feedback loop between results and ideas</li>
+<li><strong>Impact</strong> — Creating change that matters</li>
+</ol>
+
+<p>It's not about being busy. It's about being ready.</p>
+
+</article>
+
+<footer>
+ <p>The Kai Hamil Method · Drafted May 25, 2026</p>
+</footer>
+
+</body>
+</html>

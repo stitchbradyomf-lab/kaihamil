@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 1: Build a Daily Brief That Doesn't Work</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ :root {
+ --ink: #1a1812;
+ --cream: #f5f0e8;
+ --warm-white: #faf8f4;
+ --clay: #c4875a;
+ --clay-light: #e8c4a0;
+ --sage: #7a8c72;
+ --charcoal: #2e2b26;
+ --muted: #8a8378;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+ background: var(--warm-white);
+ color: var(--ink);
+ line-height: 1.7;
+ font-size: 16px;
+ }
+ nav {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ background: var(--ink);
+ padding: 1rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ z-index: 100;
+ }
+ nav a {
+ color: var(--cream);
+ text-decoration: none;
+ font-size: 0.85rem;
+ }
+ nav a:hover { color: var(--clay-light); }
+ .hero {
+ min-height: 60vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ padding: 6rem 2rem 4rem;
+ background: var(--clay);
+ color: var(--ink);
+ }
+ .hero h1 {
+ font-size: clamp(1.75rem, 5vw, 3rem);
+ font-weight: 300;
+ margin-bottom: 1rem;
+ letter-spacing: -0.02em;
+ line-height: 1.2;
+ }
+ .hero p {
+ font-size: 1.1rem;
+ opacity: 0.85;
+ font-style: italic;
+ max-width: 50ch;
+ }
+ .content {
+ max-width: 700px;
+ margin: 0 auto;
+ padding: 4rem 2rem;
+ }
+ .content h2 {
+ font-size: 1.5rem;
+ font-weight: 500;
+ margin: 3rem 0 1rem;
+ color: var(--ink);
+ border-bottom: 2px solid var(--clay);
+ padding-bottom: 0.5rem;
+ }
+ .content h3 {
+ font-size: 1.25rem;
+ font-weight: 600;
+ margin: 2.5rem 0 1rem;
+ color: var(--charcoal);
+ }
+ .content h4 {
+ font-size: 1.1rem;
+ font-weight: 600;
+ margin: 1.5rem 0 0.75rem;
+ color: var(--clay);
+ }
+ .content p {
+ margin-bottom: 1rem;
+ color: var(--charcoal);
+ }
+ .content ul, .content ol {
+ margin: 1rem 0 1.5rem 1.5rem;
+ }
+ .content li {
+ margin-bottom: 0.5rem;
+ }
+ .content strong {
+ color: var(--ink);
+ font-weight: 600;
+ }
+ .premise-box {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 2rem;
+ border-radius: 4px;
+ margin: 2rem 0;
+ text-align: center;
+ }
+ .premise-box p {
+ color: var(--cream);
+ font-size: 1.2rem;
+ margin-bottom: 0;
+ }
+ .origin-story {
+ background: #fef3f2;
+ border-left: 4px solid #dc2626;
+ padding: 1.5rem;
+ margin: 2rem 0;
+ border-radius: 0 4px 4px 0;
+ }
+ .origin-story h3 {
+ color: #dc2626;
+ margin-top: 0;
+ }
+ .week-box {
+ background: white;
+ padding: 2rem;
+ margin: 2rem 0;
+ border-radius: 4px;
+ border: 1px solid var(--cream);
+ }
+ .week-header {
+ display: flex;
+ align-items: baseline;
+ gap: 1rem;
+ margin-bottom: 1rem;
+ padding-bottom: 0.75rem;
+ border-bottom: 2px solid var(--clay);
+ }
+ .week-number {
+ font-size: 0.75rem;
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ color: var(--clay);
+ font-weight: 600;
+ }
+ .week-title {
+ font-size: 1.25rem;
+ font-weight: 500;
+ }
+ .week-focus {
+ font-size: 0.9rem;
+ color: var(--muted);
+ margin-bottom: 1.5rem;
+ }
+ .session-box {
+ background: var(--warm-white);
+ padding: 1.25rem;
+ margin: 1rem 0;
+ border-radius: 4px;
+ border-left: 3px solid var(--sage);
+ }
+ .session-box h4 {
+ color: var(--sage);
+ margin-top: 0;
+ margin-bottom: 0.75rem;
+ }
+ .socratic-arc {
+ background: var(--cream);
+ padding: 1rem 1.5rem;
+ border-radius: 4px;
+ margin: 1rem 0;
+ }
+ .socratic-arc li {
+ margin-bottom: 0.35rem;
+ font-style: italic;
+ color: var(--muted);
+ }
+ .output-box {
+ background: var(--sage);
+ color: white;
+ padding: 1rem 1.5rem;
+ border-radius: 4px;
+ margin: 1rem 0;
+ }
+ .output-box strong {
+ color: var(--clay-light);
+ }
+ .homework-box {
+ background: #f0fdf4;
+ border: 1px solid var(--sage);
+ padding: 1.25rem;
+ border-radius: 4px;
+ margin: 1rem 0;
+ }
+ .homework-box h4 {
+ color: var(--sage);
+ margin-top: 0;
+ }
+ .failure-list {
+ background: #fef3f2;
+ padding: 1.25rem;
+ border-radius: 4px;
+ margin: 1rem 0;
+ }
+ .failure-list h4 {
+ color: #dc2626;
+ margin-top: 0;
+ }
+ .assessment-box {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 2rem;
+ border-radius: 4px;
+ margin: 2rem 0;
+ }
+ .assessment-box h3 {
+ color: var(--clay-light);
+ margin-top: 0;
+ }
+ .assessment-box ol {
+ margin-left: 1.5rem;
+ }
+ .assessment-box li {
+ margin-bottom: 0.75rem;
+ color: var(--cream);
+ }
+ .outcome-grid {
+ display: grid;
+ gap: 1rem;
+ margin: 2rem 0;
+ }
+ .outcome-card {
+ background: white;
+ padding: 1.5rem;
+ border-radius: 4px;
+ border-left: 4px solid var(--clay);
+ }
+ .outcome-card h4 {
+ color: var(--clay);
+ margin-top: 0;
+ margin-bottom: 0.5rem;
+ }
+ .outcome-card p {
+ margin-bottom: 0;
+ font-size: 0.95rem;
+ }
+ .instructor-note {
+ background: var(--cream);
+ padding: 2rem;
+ border-radius: 4px;
+ margin: 2rem 0;
+ }
+ .sarcasm-lesson {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 1.5rem;
+ border-radius: 4px;
+ margin: 1.5rem 0;
+ }
+ .sarcasm-lesson h4 {
+ color: var(--clay-light);
+ margin-top: 0;
+ }
+ .sarcasm-lesson p {
+ color: var(--cream);
+ margin-bottom: 0;
+ }
+ footer {
+ text-align: center;
+ padding: 3rem 2rem;
+ color: var(--muted);
+ font-size: 0.85rem;
+ border-top: 1px solid var(--cream);
+ margin-top: 3rem;
+ }
+ @media (max-width: 600px) {
+ .content { padding: 2rem 1.5rem; }
+ .hero { padding: 5rem 1.5rem 3rem; }
+ }
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="/">← Kai Hamil</a>
+ <a href="/learn/">Learn →</a>
+</nav>
+
+<section class="hero">
+ <h1>Phase 1:<br>Build a Daily Brief System<br>That Doesn't Work</h1>
+ <p>A course on learning through failure, using the Kai Hamil method</p>
+</section>
+
+<article class="content">
+
+<h2>The Premise</h2>
+
+<div class="premise-box">
+<p>You'll build a daily brief system. It will fail to send at 7 AM.<br><strong>That's the point.</strong></p>
+</div>
+
+<p>Most courses teach success. This one teaches the path to success — which includes misconfiguration, silent failures, cron jobs that don't fire, and the slow realization that your assumptions were wrong.</p>
+
+<p>By the end, you'll have a system that <em>almost</em> works. More importantly, you'll understand <em>why</em> it doesn't, and how to fix it.</p>
+
+<h2>Learning Objectives</h2>
+
+<ol>
+<li><strong>Identify friction</strong> in your own information consumption</li>
+<li><strong>Design a system</strong> to address that friction</li>
+<li><strong>Build the infrastructure</strong> (data sources, processing, delivery)</li>
+<li><strong>Experience failure</strong> and learn to diagnose it</li>
+<li><strong>Iterate toward function</strong> — or discover the system you actually need</li>
+</ol>
+
+<div class="origin-story">
+<h3>The Origin Story</h3>
+<p>This course is based on real events. The instructor has attempted to build a daily brief system that sends at 7 AM. It has never worked. Multiple cron jobs have been created, disabled, re-enabled, and abandoned. The 7 AM message remains theoretical.</p>
+<p><strong>This is not a bug in the curriculum. It is the curriculum.</strong></p>
+</div>
+
+<h2>The Meta-Lesson</h2>
+
+<p>The daily brief that doesn't send at 7 AM teaches something the working one can't:</p>
+
+<ul>
+<li>Systems are harder than they look</li>
+<li>Automation requires precision</li>
+<li>The gap between "should work" and "works" is where skill lives</li>
+<li>Debugging is the real craft</li>
+</ul>
+
+<p>Your job isn't to avoid this. It's to move through it faster next time.</p>
+
+<h2>Course Structure: 4 Weeks</h2>
+
+<div class="week-box">
+<div class="week-header">
+<span class="week-number">Week 1</span>
+<h3 class="week-title">The Problem You Actually Have</h3>
+</div>
+<p class="week-focus">Clarify what you need, not what you think you want</p>
+
+<div class="session-box">
+<h4>Session 1: Information Audit (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"What do you check first thing in the morning?"</li>
+<li>"What do you wish you knew that you don't?"</li>
+<li>"What information do you ignore that you probably shouldn't?"</li>
+</ul>
+</div>
+<div class="output-box">
+<strong>Output:</strong> Personal information diet map — sources, frequency, value, gaps
+</div>
+</div>
+
+<div class="session-box">
+<h4>Session 2: The Daily Brief Concept (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"If you had one message each morning, what would it tell you?"</li>
+<li>"Who is this for — you, or an aspirational version of you?"</li>
+<li>"What would make you stop reading it?"</li>
+</ul>
+</div>
+<div class="output-box">
+<strong>Output:</strong> Draft brief specification — sections, sources, tone, length
+</div>
+</div>
+
+<div class="homework-box">
+<h4>Homework</h4>
+<ul>
+<li>Log every information source you touch for 48 hours</li>
+<li>Write the ideal brief you'd want to receive (one example)</li>
+</ul>
+</div>
+</div>
+
+<div class="week-box">
+<div class="week-header">
+<span class="week-number">Week 2</span>
+<h3 class="week-title">Building the Thing That Won't Work</h3>
+</div>
+<p class="week-focus">Construct the infrastructure, knowing it will fail</p>
+
+<div class="session-box">
+<h4>Session 3: Architecture Decisions (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"Where does the data live? Where should it live?"</li>
+<li>"Who processes it — you, a script, an API?"</li>
+<li>"How does it reach you — email, text, app?"</li>
+</ul>
+</div>
+<div class="output-box">
+<strong>Output:</strong> System architecture diagram — sources → processor → storage → delivery
+</div>
+</div>
+
+<div class="session-box">
+<h4>Session 4: Implementation (90 min)</h4>
+<p><strong>Work session:</strong></p>
+<ul>
+<li>Set up data collection (APIs, scraping, manual)</li>
+<li>Configure processing (filtering, formatting, synthesis)</li>
+<li>Connect delivery channel (email, Telegram, etc.)</li>
+<li>Schedule the automation (cron, scheduler, etc.)</li>
+</ul>
+<div class="output-box">
+<strong>Output:</strong> Working (in theory) daily brief system
+</div>
+</div>
+
+<div class="homework-box">
+<h4>Homework</h4>
+<ul>
+<li>Let it run for 48 hours</li>
+<li>Document what happens — and what doesn't</li>
+</ul>
+</div>
+</div>
+
+<div class="week-box">
+<div class="week-header">
+<span class="week-number">Week 3</span>
+<h3 class="week-title">The Failure Post-Mortem</h3>
+</div>
+<p class="week-focus">Learn from what broke</p>
+
+<div class="session-box">
+<h4>Session 5: Diagnosis (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"What did you expect to happen?"</li>
+<li>"What actually happened?"</li>
+<li>"What's the simplest explanation for the gap?"</li>
+</ul>
+</div>
+
+<div class="failure-list">
+<h4>Common failures to explore:</h4>
+<ul>
+<li>Credentials expired or missing</li>
+<li>API rate limits</li>
+<li>Timezone misconfiguration</li>
+<li>Cron syntax error</li>
+<li>Silent failure (no error, just no output)</li>
+<li>Delivery channel blocked</li>
+</ul>
+</div>
+
+<div class="output-box">
+<strong>Output:</strong> Failure log — what failed, why, evidence
+</div>
+</div>
+
+<div class="session-box">
+<h4>Session 6: The Pivot (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"Is this worth fixing?"</li>
+<li>"What would a simpler version look like?"</li>
+<li>"What would you need to know to make this reliable?"</li>
+</ul>
+</div>
+<div class="output-box">
+<strong>Output:</strong> Decision — fix, simplify, or abandon
+</div>
+</div>
+
+<div class="homework-box">
+<h4>Homework</h4>
+<ul>
+<li>Implement one fix or simplification</li>
+<li>Test again for 48 hours</li>
+</ul>
+</div>
+</div>
+
+<div class="week-box">
+<div class="week-header">
+<span class="week-number">Week 4</span>
+<h3 class="week-title">What You Actually Built</h3>
+</div>
+<p class="week-focus">Extract the learning, regardless of outcome</p>
+
+<div class="session-box">
+<h4>Session 7: The Working (or Not) System (90 min)</h4>
+<p><strong>Demonstration:</strong></p>
+<ul>
+<li>Each student shows their system</li>
+<li>What works, what doesn't, what they learned</li>
+<li>Peer feedback using Socratic questions</li>
+</ul>
+</div>
+
+<div class="session-box">
+<h4>Session 8: The Meta-Reflection (90 min)</h4>
+<div class="socratic-arc">
+<ul>
+<li>"What surprised you about this process?"</li>
+<li>"What will you do differently next time?"</li>
+<li>"What system do you actually need — not the one you set out to build?"</li>
+</ul>
+</div>
+<div class="output-box">
+<strong>Output:</strong> Personal method refinement — how they now approach system building
+</div>
+</div>
+</div>
+
+<h2>Course Materials</h2>
+
+<h3>Required</h3>
+<ul>
+<li>Computer with internet</li>
+<li>Text editor</li>
+<li>Willingness to fail publicly</li>
+</ul>
+
+<h3>Provided</h3>
+<ul>
+<li>Method framework (from <a href="method.html">learn/method.html</a>)</li>
+<li>Socratic questioning guide (from <a href="socratic-method.html">learn/socratic-method.html</a>)</li>
+<li>Example architectures (working and broken)</li>
+<li>Debugging checklist</li>
+</ul>
+
+<h3>Optional</h3>
+<ul>
+<li>API keys for data sources (news, weather, calendar)</li>
+<li>Cloud hosting (free tier sufficient)</li>
+<li>Automation platform (Zapier, Make, etc.)</li>
+</ul>
+
+<div class="assessment-box">
+<h3>Assessment</h3>
+<p style="margin-bottom: 1rem;"><strong>No grades.</strong> Only questions:</p>
+<ol>
+<li>Did you build something?</li>
+<li>Did it fail in an interesting way?</li>
+<li>Do you understand why?</li>
+<li>Can you apply this learning to the next system?</li>
+</ol>
+</div>
+
+<h2>The Honest Outcomes</h2>
+
+<div class="outcome-grid">
+<div class="outcome-card">
+<h4>Best case</h4>
+<p>A daily brief that works, that you designed, that fits your life.</p>
+</div>
+
+<div class="outcome-card">
+<h4>Likely case</h4>
+<p>A daily brief that almost works, plus deep understanding of why automation is hard.</p>
+</div>
+
+<div class="outcome-card">
+<h4>Valuable case</h4>
+<p>Discovery that you don't actually want a daily brief — you want something else entirely, and now you know how to build it.</p>
+</div>
+
+<div class="outcome-card">
+<h4>Failure case</h4>
+<p>Nothing works, nothing learned, frustration. (This is also information.)</p>
+</div>
+</div>
+
+<h2>Why This Works</h2>
+
+<p><strong>Traditional course:</strong> "Here's how to build a working system." (You copy, it works, you don't understand why.)</p>
+
+<p><strong>This course:</strong> "Build a system. It will fail. Understand the failure. Iterate." (You struggle, you learn, you can build anything.)</p>
+
+<p>The Kai Hamil method isn't about success. It's about <strong>preparation</strong> — building the capacity to succeed through repeated, examined failure.</p>
+
+<div class="instructor-note">
+<h3>Instructor Note</h3>
+<p>This course requires you to be comfortable with:</p>
+<ul>
+<li>Not having answers</li>
+<li>Letting students struggle</li>
+<li>Celebrating partial success</li>
+<li>Admitting when your own systems fail (they will)</li>
+</ul>
+
+<div class="sarcasm-lesson">
+<h4>A Note on Communication</h4>
+<p>The instructor attempted to communicate the 7 AM cron job failure through sarcasm. The AI assistant failed to detect it. This became a secondary lesson:</p>
+<p><strong>Sarcasm is not an effective debugging strategy.</strong></p>
+<p>When systems fail, direct communication works better than irony. State the problem clearly. Show the evidence. Ask for what you need. This applies to human collaborators too.</p>
+</div>
+
+<p>Your role is Socratic guide, not expert with solutions. The daily brief that doesn't send at 7 AM is the curriculum.</p>
+</div>
+
+<p style="text-align: center; margin-top: 3rem; font-style: italic; color: var(--muted);">Course based on actual events. Cron jobs mentioned are real and still not working.</p>
+
+</article>
+
+<footer>
+ <p>Phase 1: Build a Daily Brief That Doesn't Work · Drafted May 27, 2026</p>
+</footer>
+
+</body>
+</html>

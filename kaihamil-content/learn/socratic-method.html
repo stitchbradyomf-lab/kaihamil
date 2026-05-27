@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Socratic Method for Kai Hamil</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ :root {
+ --ink: #1a1812;
+ --cream: #f5f0e8;
+ --warm-white: #faf8f4;
+ --clay: #c4875a;
+ --clay-light: #e8c4a0;
+ --sage: #7a8c72;
+ --charcoal: #2e2b26;
+ --muted: #8a8378;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+ background: var(--warm-white);
+ color: var(--ink);
+ line-height: 1.7;
+ font-size: 16px;
+ }
+ nav {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ background: var(--ink);
+ padding: 1rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ z-index: 100;
+ }
+ nav a {
+ color: var(--cream);
+ text-decoration: none;
+ font-size: 0.85rem;
+ }
+ nav a:hover { color: var(--clay-light); }
+ .hero {
+ min-height: 50vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ padding: 6rem 2rem 4rem;
+ background: var(--sage);
+ color: white;
+ }
+ .hero h1 {
+ font-size: clamp(2rem, 5vw, 3.5rem);
+ font-weight: 300;
+ margin-bottom: 1rem;
+ letter-spacing: -0.02em;
+ }
+ .hero p {
+ font-size: 1.1rem;
+ opacity: 0.9;
+ font-style: italic;
+ }
+ .content {
+ max-width: 700px;
+ margin: 0 auto;
+ padding: 4rem 2rem;
+ }
+ .content h2 {
+ font-size: 1.5rem;
+ font-weight: 500;
+ margin: 3rem 0 1rem;
+ color: var(--ink);
+ border-bottom: 2px solid var(--sage);
+ padding-bottom: 0.5rem;
+ }
+ .content h3 {
+ font-size: 1.15rem;
+ font-weight: 600;
+ margin: 2rem 0 0.75rem;
+ color: var(--charcoal);
+ }
+ .content h4 {
+ font-size: 1rem;
+ font-weight: 600;
+ margin: 1.5rem 0 0.5rem;
+ color: var(--sage);
+ }
+ .content p {
+ margin-bottom: 1rem;
+ color: var(--charcoal);
+ }
+ .content ul, .content ol {
+ margin: 1rem 0 1.5rem 1.5rem;
+ }
+ .content li {
+ margin-bottom: 0.5rem;
+ }
+ .content strong {
+ color: var(--ink);
+ font-weight: 600;
+ }
+ .content blockquote {
+ border-left: 3px solid var(--sage);
+ padding-left: 1.5rem;
+ margin: 1.5rem 0;
+ font-style: italic;
+ color: var(--muted);
+ }
+ .shift-box {
+ background: var(--ink);
+ color: var(--cream);
+ padding: 2rem;
+ border-radius: 4px;
+ margin: 2rem 0;
+ }
+ .shift-box h3 {
+ color: var(--clay-light);
+ margin-top: 0;
+ }
+ .shift-box p {
+ color: var(--cream);
+ margin-bottom: 0.5rem;
+ }
+ .principle-grid {
+ display: grid;
+ gap: 1.5rem;
+ margin: 2rem 0;
+ }
+ .principle-card {
+ background: white;
+ padding: 1.5rem;
+ border-left: 4px solid var(--clay);
+ border-radius: 0 4px 4px 0;
+ }
+ .principle-card h4 {
+ color: var(--clay);
+ margin-top: 0;
+ }
+ .question-type {
+ background: white;
+ padding: 1.5rem;
+ margin: 1.5rem 0;
+ border-radius: 4px;
+ border: 1px solid var(--cream);
+ }
+ .question-type h4 {
+ color: var(--sage);
+ margin-top: 0;
+ }
+ .question-type blockquote {
+ font-size: 1.1rem;
+ color: var(--ink);
+ font-weight: 500;
+ margin: 1rem 0;
+ padding: 1rem;
+ background: var(--cream);
+ border-left: 3px solid var(--clay);
+ font-style: normal;
+ }
+ .arc-section {
+ background: white;
+ padding: 1.5rem;
+ margin: 1rem 0;
+ border-radius: 4px;
+ }
+ .arc-section h4 {
+ color: var(--clay);
+ margin-top: 0;
+ margin-bottom: 1rem;
+ }
+ .comparison-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin: 1.5rem 0;
+ font-size: 0.95rem;
+ }
+ .comparison-table th, .comparison-table td {
+ padding: 0.75rem;
+ text-align: left;
+ border-bottom: 1px solid var(--cream);
+ }
+ .comparison-table th {
+ background: var(--sage);
+ color: white;
+ font-weight: 500;
+ }
+ .comparison-table tr:nth-child(even) {
+ background: var(--warm-white);
+ }
+ .role-box {
+ background: var(--cream);
+ padding: 1.5rem;
+ border-radius: 4px;
+ margin: 1.5rem 0;
+ }
+ .role-box h4 {
+ color: var(--clay);
+ margin-top: 0;
+ }
+ .risk-reward {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1.5rem;
+ margin: 2rem 0;
+ }
+ .risk-box, .reward-box {
+ padding: 1.5rem;
+ border-radius: 4px;
+ }
+ .risk-box {
+ background: #fef3f2;
+ border-left: 4px solid #dc2626;
+ }
+ .reward-box {
+ background: #f0fdf4;
+ border-left: 4px solid var(--sage);
+ }
+ .risk-box h4 { color: #dc2626; margin-top: 0; }
+ .reward-box h4 { color: var(--sage); margin-top: 0; }
+ @media (max-width: 600px) {
+ .content { padding: 2rem 1.5rem; }
+ .hero { padding: 5rem 1.5rem 3rem; }
+ .risk-reward { grid-template-columns: 1fr; }
+ }
+ footer {
+ text-align: center;
+ padding: 3rem 2rem;
+ color: var(--muted);
+ font-size: 0.85rem;
+ border-top: 1px solid var(--cream);
+ margin-top: 3rem;
+ }
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="/">← Kai Hamil</a>
+ <a href="/learn/">Learn →</a>
+</nav>
+
+<section class="hero">
+ <h1>Socratic Method for Kai Hamil</h1>
+ <p>A learner-centered approach to teaching system development</p>
+</section>
+
+<article class="content">
+
+<div class="shift-box">
+<h3>The Core Shift</h3>
+<p><strong>From:</strong> "Here's what I built and how you can use it"</p>
+<p><strong>To:</strong> "What do you need to build, and how can I help you discover it?"</p>
+</div>
+
+<p>The Socratic method fits your method because it puts the learner's needs first — not your examples, not your frameworks, but their actual situation and capacity.</p>
+
+<h2>Key Principles</h2>
+
+<div class="principle-grid">
+<div class="principle-card">
+<h4>Maieutics (midwifery)</h4>
+<p><strong>What it means:</strong> Draw out what the learner already knows</p>
+<p><strong>How you apply it:</strong> They have ideas. Your job is to surface them, not supply them.</p>
+</div>
+
+<div class="principle-card">
+<h4>Elenchus (testing)</h4>
+<p><strong>What it means:</strong> Examine beliefs through questioning</p>
+<p><strong>How you apply it:</strong> "What would have to be true for that to work?"</p>
+</div>
+
+<div class="principle-card">
+<h4>Aporia (productive confusion)</h4>
+<p><strong>What it means:</strong> Create space where old answers don't fit</p>
+<p><strong>How you apply it:</strong> "If that's the solution, why hasn't it worked yet?"</p>
+</div>
+
+<div class="principle-card">
+<h4>Logos over authority</h4>
+<p><strong>What it means:</strong> Reason matters more than your status</p>
+<p><strong>How you apply it:</strong> You're a guide, not a guru.</p>
+</div>
+</div>
+
+<h2>Six Question Types for Your Context</h2>
+
+<div class="question-type">
+<h4>1. Clarification</h4>
+<blockquote>"What do you mean by 'system' in your work?"</blockquote>
+<p>Force precision. Most people use words they haven't defined.</p>
+</div>
+
+<div class="question-type">
+<h4>2. Assumption Probing</h4>
+<blockquote>"What are you assuming about how your work <em>should</em> flow?"</blockquote>
+<p>Surface the invisible constraints they don't know they're operating under.</p>
+</div>
+
+<div class="question-type">
+<h4>3. Evidence Examination</h4>
+<blockquote>"How do you know that's the bottleneck?"</blockquote>
+<p>Separate intuition from data. Both matter, but know which you're using.</p>
+</div>
+
+<div class="question-type">
+<h4>4. Viewpoint Exploration</h4>
+<blockquote>"How would your [client/partner/employee] describe this same problem?"</blockquote>
+<p>Break the solipsism. Systems involve multiple actors.</p>
+</div>
+
+<div class="question-type">
+<h4>5. Implication Tracing</h4>
+<blockquote>"If you automate that decision, what happens to your attention?"</blockquote>
+<p>Every system change has second-order effects. Surface them early.</p>
+</div>
+
+<div class="question-type">
+<h4>6. Meta-Reflection</h4>
+<blockquote>"Why is <em>that</em> the most important question right now?"</blockquote>
+<p>Teach them to manage their own inquiry, not just answer yours.</p>
+</div>
+
+<h2>The Socratic Arc in a Single Session</h2>
+
+<div class="arc-section">
+<h4>Opening (5 min): Clarify their immediate situation</h4>
+<ul>
+<li>"What brought you here today?"</li>
+<li>"What have you already tried?"</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Exploration (20 min): Probe assumptions and surface constraints</h4>
+<ul>
+<li>"What would have to change for that to work?"</li>
+<li>"What's the real cost of doing nothing?"</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Discovery (15 min): Draw out their own insight</h4>
+<ul>
+<li>"You mentioned X and Y — what's the connection you're seeing?"</li>
+<li>"If you had to explain this to someone else, what would you say?"</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Commitment (10 min): Define the smallest next step</h4>
+<ul>
+<li>"What's the first thing you could do to test this?"</li>
+<li>"What would you need to know to feel confident starting?"</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Closing (5 min): Solidify and schedule follow-up</h4>
+<ul>
+<li>"What surprised you in this conversation?"</li>
+<li>"What will you do by [specific date]?"</li>
+</ul>
+</div>
+
+<h2>How This Differs from Traditional Teaching</h2>
+
+<table class="comparison-table">
+<tr>
+<th>Traditional</th>
+<th>Socratic</th>
+</tr>
+<tr>
+<td>"Here's the framework"</td>
+<td>"What framework do you need?"</td>
+</tr>
+<tr>
+<td>"Let me show you my example"</td>
+<td>"What's your example?"</td>
+</tr>
+<tr>
+<td>"This is how you apply it"</td>
+<td>"How would you apply this?"</td>
+</tr>
+<tr>
+<td>Knowledge transfer</td>
+<td>Capacity building</td>
+</tr>
+<tr>
+<td>Instructor-centered</td>
+<td>Learner-centered</td>
+</tr>
+</table>
+
+<h2>Your Role as Socratic Guide</h2>
+
+<div class="role-box">
+<h4>You are not:</h4>
+<ul>
+<li>The expert with answers</li>
+<li>The validator of their ideas</li>
+<li>The source of frameworks they must adopt</li>
+</ul>
+</div>
+
+<div class="role-box">
+<h4>You are:</h4>
+<ul>
+<li>The mirror that reflects their thinking back to them</li>
+<li>The questioner who surfaces what they haven't examined</li>
+<li>The midwife who helps them birth their own insight</li>
+</ul>
+</div>
+
+<p><strong>Your preparation matters more than your presentation:</strong></p>
+<ul>
+<li>Know the territory (your method, common patterns, failure modes)</li>
+<li>Have worked examples ready (but don't force them)</li>
+<li>Be prepared to be wrong about what they need</li>
+</ul>
+
+<h2>Application to Your Workshop</h2>
+
+<div class="arc-section">
+<h4>Week 1: Their Current State</h4>
+<ul>
+<li>Where are you losing time, attention, or energy?</li>
+<li>What have you already tried to fix it?</li>
+<li>What's the real constraint — time, knowledge, tools, or clarity?</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Week 2: Their Ideal State</h4>
+<ul>
+<li>If this worked perfectly, what would be different?</li>
+<li>Who else would notice? What would they see?</li>
+<li>What's the smallest version of this that would matter?</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Week 3: Their Path</h4>
+<ul>
+<li>What would you need to know to start?</li>
+<li>What could you do in the next 48 hours?</li>
+<li>What would tell you you're on the right track?</li>
+</ul>
+</div>
+
+<div class="arc-section">
+<h4>Week 4: Their System</h4>
+<ul>
+<li>What have you discovered that surprised you?</li>
+<li>What will you actually implement?</li>
+<li>What support do you need to sustain this?</li>
+</ul>
+</div>
+
+<h2>The Risk and Reward</h2>
+
+<div class="risk-reward">
+<div class="risk-box">
+<h4>The Risk</h4>
+<p>Socratic teaching is slower. It requires patience. The learner might discover something you didn't anticipate — or fail to discover what you think is obvious.</p>
+</div>
+
+<div class="reward-box">
+<h4>The Reward</h4>
+<p>They own what they build. It fits their actual life, not your generic template. They can sustain it because they designed it.</p>
+</div>
+</div>
+
+<h2>Summary</h2>
+
+<p>The Socratic method applied to your work means:</p>
+
+<ol>
+<li><strong>Start with their need, not your solution</strong></li>
+<li><strong>Ask questions that surface their own insight</strong></li>
+<li><strong>Test assumptions rather than supply answers</strong></li>
+<li><strong>Let them build the system that fits their life</strong></li>
+<li><strong>Your frameworks are tools they can choose, not truths they must accept</strong></li>
+</ol>
+
+<p>You're not teaching them to use your method. You're teaching them to develop their own.</p>
+
+</article>
+
+<footer>
+ <p>Socratic Method for Kai Hamil · Drafted May 26, 2026</p>
+</footer>
+
+</body>
+</html>
