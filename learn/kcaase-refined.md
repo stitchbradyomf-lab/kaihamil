@@ -93,6 +93,8 @@ What remains becomes clear. Three conditions, not two:
 
 Direction tells you which way to move. Value tells you if you should. Control tells you how.
 
+**The Fear-Value Paradox:** Some things we fear are actually worth pursuing. The fear is a signal of stakes, not a signal of avoidance. Public speaking, hard conversations, starting something — feared and valued simultaneously.
+
 The app doesn't make the decision for you. It makes the decision **yours**.
 
 ---
