@@ -7,10 +7,12 @@
 ## The Problem
 
 You face uncertainty. Your mind projects:
-- A **goal** — something you want
-- A **fear** — something you want to avoid
+- A **goal** — something you want (move toward)
+- A **fear** — something you want to avoid (move away)
 
 Both are predictions. Both create anxiety. Both feel urgent.
+
+**But desire/fear is only direction.** It tells you which way to move. It doesn't tell you if the destination is worth reaching.
 
 ---
 
@@ -22,7 +24,7 @@ Identify what you're predicting:
 - What future are you imagining?
 - Is it desired or feared?
 
-*This is your starting point — not truth, just a mental image.*
+*This gives you direction (toward/away). Not value. Not worth.*
 
 ---
 
@@ -83,9 +85,13 @@ What remains becomes clear. Three conditions, not two:
 
 **Anxiety → Clarity**
 
-- Clear on what's valued (not just desired)
-- Clear on what's in your control vs not
-- Clear on what's worth your life
+| Dimension | Question | Answers |
+|-----------|----------|---------|
+| **Direction** | Toward or away? | Desired / Feared |
+| **Value** | Worth it? | Valued / Not valued |
+| **Control** | Can I influence? | In control / Out of control |
+
+Direction tells you which way to move. Value tells you if you should. Control tells you how.
 
 The app doesn't make the decision for you. It makes the decision **yours**.
 
