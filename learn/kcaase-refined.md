@@ -95,6 +95,8 @@ Direction tells you which way to move. Value tells you if you should. Control te
 
 **The Fear-Value Paradox:** Some things we fear are actually worth pursuing. The fear is a signal of stakes, not a signal of avoidance. Public speaking, hard conversations, starting something — feared and valued simultaneously.
 
+**Framing is Fluid:** Desire vs fear is just your *current* perspective on a future state. As you assess the full process to get there — the costs, the second-order effects, the person you'll become — the framing can flip. What looked like a goal reveals hidden costs. What looked like a fear reveals hidden value. The analysis changes the prediction.
+
 The app doesn't make the decision for you. It makes the decision **yours**.
 
 ---
