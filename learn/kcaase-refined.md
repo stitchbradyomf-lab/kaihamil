@@ -56,12 +56,26 @@ Examine the prediction:
 
 ### Step 4: Transform to Decision
 
-What remains becomes clear:
+What remains becomes clear. Three conditions, not two:
 
-| | In Your Control | Out of Your Control |
-|---|---|---|
-| **Desired** | Pursue it | Release it |
-| **Feared** | Mitigate it | Accept it |
+**1. Valued** — Not just desired, but worth the total net effect
+- Does this serve who you're becoming?
+- Is the cost (time, energy, attention, opportunity) justified?
+- Will you be proud of this in 10 years?
+
+**2. In Your Control** — Can you actually influence this?
+- Direct control: your actions, your choices
+- Indirect control: your preparation, your positioning
+- No control: others' choices, random events, the past
+
+**The Matrix:**
+
+| | Valued + In Control | Valued + Out of Control | Not Valued |
+|---|---|---|---|
+| **Pursue** | Do it fully | Prepare, then release | Don't start |
+| **Feared** | Mitigate | Accept and move on | Ignore it |
+
+*"Desired" is too immediate, too selfish. "Valued" asks: is this worthy of your life?*
 
 ---
 
@@ -69,9 +83,9 @@ What remains becomes clear:
 
 **Anxiety → Clarity**
 
-- Clear on what's desired vs feared
+- Clear on what's valued (not just desired)
 - Clear on what's in your control vs not
-- Clear on what's worth caring about
+- Clear on what's worth your life
 
 The app doesn't make the decision for you. It makes the decision **yours**.
 
@@ -100,4 +114,4 @@ The path forward emerges not from eliminating uncertainty, but from **knowing wh
 
 ---
 
-*Refined: May 28, 2026*
+*Refined: May 29, 2026 — Added "Valued" as third condition beyond desired*
