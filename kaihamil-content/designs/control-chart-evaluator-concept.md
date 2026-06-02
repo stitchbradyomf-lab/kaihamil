@@ -1,4 +1,4 @@
-# Control Chart Evaluator Tool — Concept Document
+# Control Chart Evaluator Tool - Concept Document
 
 ## Purpose
 Help users evaluate life events against their personal control limits to distinguish common cause (normal variation) from special cause (system shift).
@@ -44,9 +44,9 @@ A simple diagnostic tool that asks 4 questions to classify any event:
 ## Output
 
 **Classification:**
-- 🟢 Common Cause — "This is weather. Ride it out."
-- 🔴 Special Cause — "This is a signal. Investigate."
-- 🟡 Unclear — "Collect more data points."
+- 🟢 Common Cause - "This is weather. Ride it out."
+- 🔴 Special Cause - "This is a signal. Investigate."
+- 🟡 Unclear - "Collect more data points."
 
 **Recommendation:**
 - For common cause: Breathing exercise, wait 24 hours, self-care

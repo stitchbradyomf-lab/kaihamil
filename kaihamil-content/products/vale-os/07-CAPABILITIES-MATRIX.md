@@ -1,5 +1,5 @@
 # Valé OS
-## Capabilities Matrix — What's Actually Included
+## Capabilities Matrix - What's Actually Included
 
 ---
 
@@ -7,7 +7,7 @@
 
 > **"Your personal operating system in the cloud"**
 
-Not an app. Not a tool. A complete AI-powered operations layer that connects to your existing life and business — and runs 24/7 in your pocket via Telegram.
+Not an app. Not a tool. A complete AI-powered operations layer that connects to your existing life and business - and runs 24/7 in your pocket via Telegram.
 
 ---
 
@@ -16,7 +16,7 @@ Not an app. Not a tool. A complete AI-powered operations layer that connects to 
 Every client gets their own private Telegram bot (e.g., `@YourName_assistant_bot`):
 
 ### Why Telegram?
-- ✅ Works on phone, tablet, desktop — everywhere
+- ✅ Works on phone, tablet, desktop - everywhere
 - ✅ No new app to learn (if they use Telegram) or simple to set up
 - ✅ Push notifications for alerts
 - ✅ Voice messages supported
@@ -40,7 +40,7 @@ Every client gets their own private Telegram bot (e.g., `@YourName_assistant_bot
 
 "What did I promise John last week?"
 → On March 12, you told him you'd send comps by EOW. 
-   That's overdue — want me to draft a message?
+   That's overdue - want me to draft a message?
 
 "What's the weather for the open house Saturday?"
 → Saturday in Austin: 78°F, sunny, 10% rain chance. Perfect.
@@ -226,10 +226,10 @@ Examples by industry:
 | **Browser Automation** | Basic | Full | Full |
 | **Morning Brief** | ✅ | ✅ (enhanced) | ✅ (team) |
 | **Weekly Ops Test** | ✅ | ✅ | ✅ |
-| **Website Testing** | — | ✅ | ✅ |
-| **Industry Skill Pack** | — | 1 included | All included |
+| **Website Testing** | - | ✅ | ✅ |
+| **Industry Skill Pack** | - | 1 included | All included |
 | **Custom Cron Jobs** | 2 | 5 | Unlimited |
-| **Custom Skills** | — | 1 | 3+ |
+| **Custom Skills** | - | 1 | 3+ |
 
 ---
 

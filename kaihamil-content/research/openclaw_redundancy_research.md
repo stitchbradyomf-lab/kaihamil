@@ -12,7 +12,7 @@
 - Single point of failure: Mac mini in house runs OpenClaw
 - Want redundancy for critical operations
 - Need hands-on experience installing again to better tell the story
-- Installation complexity is high — need to understand the "initial struggle" to help others
+- Installation complexity is high - need to understand the "initial struggle" to help others
 
 **Business Opportunity (Kai Hamil):**
 - OpenClaw installation is not straightforward for most people
@@ -29,7 +29,7 @@
 **A. VPS Cloud Instance (RECOMMENDED)**
 - **Providers:** DigitalOcean, Hostinger, OVHcloud, Kamatera, Oracle Cloud
 - **Cost:** $5-20/month for basic instance
-- **Oracle Cloud Free Tier:** 4 ARM CPUs, 24GB RAM, 200GB storage — FREE forever
+- **Oracle Cloud Free Tier:** 4 ARM CPUs, 24GB RAM, 200GB storage - FREE forever
 - **Benefits:**
   - 24/7 uptime independent of home internet/power
   - Geographic redundancy (different data center)
@@ -55,7 +55,7 @@
 
 ### 2. Existing Service Offerings
 
-**Cognio Labs:** "Managed OpenClaw Setup Service" — $499
+**Cognio Labs:** "Managed OpenClaw Setup Service" - $499
 - Security-hardened, professionally configured
 - Telegram integration, Google Services
 - Curated agent skills
@@ -158,10 +158,10 @@
 
 ### Phase 1: Personal Redundancy (This Week)
 1. **Sign up for Oracle Cloud Free Tier** (4 CPUs, 24GB RAM, FREE)
-2. **Install OpenClaw on VPS** — document every step
-3. **Configure minimal setup** — Telegram only initially
-4. **Test failover scenarios** — disconnect Mac mini, verify VPS responds
-5. **Log "initial struggle"** — what was hard? what would help others?
+2. **Install OpenClaw on VPS** - document every step
+3. **Configure minimal setup** - Telegram only initially
+4. **Test failover scenarios** - disconnect Mac mini, verify VPS responds
+5. **Log "initial struggle"** - what was hard? what would help others?
 
 ### Phase 2: Service Development (Next 2 Weeks)
 1. **Create installation checklist/playbook** from Phase 1 experience
@@ -203,10 +203,10 @@
 ## The Story You Can Tell
 
 **The Hook:**
-> "I have two AI assistants. One in my house, one in the cloud. If my internet goes out, if my power flickers, if I'm traveling — I'm never without help."
+> "I have two AI assistants. One in my house, one in the cloud. If my internet goes out, if my power flickers, if I'm traveling - I'm never without help."
 
 **The Setup:**
-> "Most people think AI assistants mean Alexa or Siri — always listening, always connected to Big Tech. OpenClaw is different. It's yours. It runs on your hardware. It knows your life because it lives in your systems. But setting it up? That's not a 5-minute task. It took me three tries to get it right."
+> "Most people think AI assistants mean Alexa or Siri - always listening, always connected to Big Tech. OpenClaw is different. It's yours. It runs on your hardware. It knows your life because it lives in your systems. But setting it up? That's not a 5-minute task. It took me three tries to get it right."
 
 **The Service:**
 > "Now I help others skip those three tries. 90 minutes, and you're up and running. Your own AI assistant, private, customized, always available."

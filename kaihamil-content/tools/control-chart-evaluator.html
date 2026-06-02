@@ -524,7 +524,7 @@
             <div class="guide-grid">
                 <div class="guide-card">
                     <h4>Points Within Limits</h4>
-                    <p>If all points fall between the Upper and Lower Control Limits (UCL/LCL), your system is stable. The variation is "common cause"—normal fluctuation. Don't overreact to individual data points.</p>
+                    <p>If all points fall between the Upper and Lower Control Limits (UCL/LCL), your system is stable. The variation is "common cause"-normal fluctuation. Don't overreact to individual data points.</p>
                 </div>
                 <div class="guide-card">
                     <h4>Points Outside Limits</h4>
@@ -699,7 +699,7 @@
             if (specialSignals.length === 0) {
                 return {
                     title: 'System is Stable',
-                    text: 'Your data shows common cause variation—normal fluctuation within predictable limits. This is good news: your system is stable. Resist the urge to "fix" individual data points. If you want better results, you need to improve the system itself, not react to normal variation.'
+                    text: 'Your data shows common cause variation-normal fluctuation within predictable limits. This is good news: your system is stable. Resist the urge to "fix" individual data points. If you want better results, you need to improve the system itself, not react to normal variation.'
                 };
             }
             
@@ -717,14 +717,14 @@
             if (hasRuns) {
                 return {
                     title: 'System Shift Detected',
-                    text: 'Your system has shifted to a new level. The average has changed. This could be improvement or degradation depending on direction. Identify what changed around the time of the shift—it\'s likely a significant factor affecting your process.'
+                    text: 'Your system has shifted to a new level. The average has changed. This could be improvement or degradation depending on direction. Identify what changed around the time of the shift-it\'s likely a significant factor affecting your process.'
                 };
             }
             
             if (hasTrends) {
                 return {
                     title: 'Trend Detected',
-                    text: 'Your data shows a progressive trend. Something is changing over time—getting better or worse gradually. Investigate before it becomes more pronounced. Trends often indicate emerging issues or improvements that will become significant if left unaddressed.'
+                    text: 'Your data shows a progressive trend. Something is changing over time-getting better or worse gradually. Investigate before it becomes more pronounced. Trends often indicate emerging issues or improvements that will become significant if left unaddressed.'
                 };
             }
         }

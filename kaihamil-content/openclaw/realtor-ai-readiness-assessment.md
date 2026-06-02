@@ -6,15 +6,15 @@
 ## MEETING GUIDE FOR KYLE
 
 ### Pre-Meeting Setup (5 minutes)
-1. **Positioning:** "I'm helping realtors identify where AI can save them time on admin so they can focus on what actually makes money — relationships and deals."
+1. **Positioning:** "I'm helping realtors identify where AI can save them time on admin so they can focus on what actually makes money - relationships and deals."
 2. **The Promise:** "In 20 minutes, I'll show you exactly which tasks are costing you the most money and which ones AI can handle immediately."
-3. **The Ask:** "After this, I'll put together a specific recommendation — free, no obligation. If it makes sense, we can talk about building it."
+3. **The Ask:** "After this, I'll put together a specific recommendation - free, no obligation. If it makes sense, we can talk about building it."
 
 ### Meeting Flow (20-30 minutes)
-1. **Context setting** (2 min) — Explain you're researching how AI helps realtors
-2. **The Assessment** (15 min) — Walk through questions, capture answers
-3. **Immediate Insights** (5 min) — Share 1-2 obvious opportunities you spotted
-4. **Next Steps** (2 min) — Promise written recommendation within 48 hours
+1. **Context setting** (2 min) - Explain you're researching how AI helps realtors
+2. **The Assessment** (15 min) - Walk through questions, capture answers
+3. **Immediate Insights** (5 min) - Share 1-2 obvious opportunities you spotted
+4. **Next Steps** (2 min) - Promise written recommendation within 48 hours
 
 ---
 
@@ -283,10 +283,10 @@ ___________________________________________________
 - 24+ transactions: 25 points
 
 **Total Score:**
-- **20-50:** Early stage — foundational AI tools recommended
-- **51-80:** Moderate opportunity — several high-impact automations possible
-- **81-120:** High opportunity — comprehensive AI transformation viable
-- **121+:** Prime candidate — significant ROI potential
+- **20-50:** Early stage - foundational AI tools recommended
+- **51-80:** Moderate opportunity - several high-impact automations possible
+- **81-120:** High opportunity - comprehensive AI transformation viable
+- **121+:** Prime candidate - significant ROI potential
 
 ---
 
@@ -303,7 +303,7 @@ ___________________________________________________
 "You mentioned spending 10 hours a week on follow-up. AI can draft personalized responses in 30 seconds that you just review and send. That's 8 hours a week back."
 
 ### If they spend 2+ hours per listing on marketing:
-"One listing, two hours. You said you do 3 listings a month — that's 6 hours. AI can generate all your listing copy, social posts, and emails in 15 minutes."
+"One listing, two hours. You said you do 3 listings a month - that's 6 hours. AI can generate all your listing copy, social posts, and emails in 15 minutes."
 
 ---
 
@@ -311,7 +311,7 @@ ___________________________________________________
 
 Within 48 hours, send them:
 
-**Subject:** Your AI Opportunity Assessment — [Their Name]
+**Subject:** Your AI Opportunity Assessment - [Their Name]
 
 Hi [Name],
 
@@ -322,20 +322,20 @@ Thanks for walking through the assessment with me. Based on our conversation, he
 - Annual cost of that time: $[X] (at $75/hour effective rate)
 
 **TOP 3 AI OPPORTUNITIES:**
-1. **[Opportunity Name]** — [Brief description]
+1. **[Opportunity Name]** - [Brief description]
    - Time saved: [X] hours/week
    - Impact: [High/Medium/Low]
 
-2. **[Opportunity Name]** — [Brief description]
+2. **[Opportunity Name]** - [Brief description]
    - Time saved: [X] hours/week
    - Impact: [High/Medium/Low]
 
-3. **[Opportunity Name]** — [Brief description]
+3. **[Opportunity Name]** - [Brief description]
    - Time saved: [X] hours/week
    - Impact: [High/Medium/Low]
 
 **RECOMMENDED NEXT STEP:**
-[Specific recommendation — pilot project, tool setup, etc.]
+[Specific recommendation - pilot project, tool setup, etc.]
 
 Let me know if you want to discuss implementing any of these.
 
@@ -349,7 +349,7 @@ Kyle
 1. **Customize this** with your branding/contact info
 2. **Practice** the 2-minute intro until it's natural
 3. **Bring a tablet or laptop** to capture answers in real-time
-4. **Set the follow-up meeting** at the end ("I'll have recommendations ready Thursday — want to grab coffee?")
+4. **Set the follow-up meeting** at the end ("I'll have recommendations ready Thursday - want to grab coffee?")
 5. **Build one sample deliverable** in advance so you know what the output looks like
 
 Good luck with the meeting!

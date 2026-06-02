@@ -283,9 +283,9 @@ Investigate gate form submission timeout.
 ---
 
 ## Related Files
-- `/openclaw/testing/automated-tests.js` — Test implementation
-- `/openclaw/testing/test-results/` — Failure screenshots
-- `/openclaw/testing/baselines/` — Visual regression baselines
+- `/openclaw/testing/automated-tests.js` - Test implementation
+- `/openclaw/testing/test-results/` - Failure screenshots
+- `/openclaw/testing/baselines/` - Visual regression baselines
 
 ---
 

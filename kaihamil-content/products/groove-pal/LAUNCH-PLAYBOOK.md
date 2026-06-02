@@ -1,4 +1,4 @@
-# Groove Pal — Launch Playbook
+# Groove Pal - Launch Playbook
 
 **From zero to 1,000 pals.**
 
@@ -21,7 +21,7 @@ The founding circle matters more than the thousandth member. Get that right, and
 
 ### The First 10
 
-Kyle personally selects 10 people to receive the first records. These aren't random — they're people who:
+Kyle personally selects 10 people to receive the first records. These aren't random - they're people who:
 
 - Have a relationship with music (not just casual listeners)
 - Understand the spirit of sharing over collecting

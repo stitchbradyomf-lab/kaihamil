@@ -5,7 +5,7 @@
 
 ## Your Own AI Operations Assistant
 
-Every client gets a **dedicated AI agent** running on isolated infrastructure — not shared software, not a generic chatbot. Your own always-on operations assistant that learns your business, watches your files, and keeps everything organized.
+Every client gets a **dedicated AI agent** running on isolated infrastructure - not shared software, not a generic chatbot. Your own always-on operations assistant that learns your business, watches your files, and keeps everything organized.
 
 ---
 
@@ -20,8 +20,8 @@ Every client gets a **dedicated AI agent** running on isolated infrastructure �
 
 **What You Get:**
 - ✅ **Your own dedicated AI instance** (isolated VPS)
-- ✅ **Private Telegram bot** — your AI in your pocket
-- ✅ **Web dashboard** — see everything at `yourname.kaihamil.com`
+- ✅ **Private Telegram bot** - your AI in your pocket
+- ✅ **Web dashboard** - see everything at `yourname.kaihamil.com`
 - ✅ Apple Notes & Reminders integration
 - ✅ Calendar & Contacts access
 - ✅ Weather + Web search
@@ -155,9 +155,9 @@ Everything in Growth, plus:
 | **Calendar/Contacts** | ✅ | ✅ | ✅ |
 | **Browser Automation** | Basic | Full | Full |
 | **Morning Brief** | ✅ | Enhanced | Team briefs |
-| **Website Testing** | — | ✅ | Comprehensive |
-| **Industry Skill Pack** | — | 1 included | All included |
-| **Custom Skills** | — | 1 | 3+ |
+| **Website Testing** | - | ✅ | Comprehensive |
+| **Industry Skill Pack** | - | 1 included | All included |
+| **Custom Skills** | - | 1 | 3+ |
 | **Custom Cron Jobs** | 2 | 5 | Unlimited |
 | Setup time | 2 weeks | 3 weeks | 4 weeks |
 | Files migrated | 500 | 2,000 | Unlimited |
@@ -225,7 +225,7 @@ Everything in Growth, plus:
 
 **The "Actually Organized" Promise:**
 
-If after 30 days you can't find any document in under 60 seconds, we'll rebuild your system at no additional cost—or refund your setup fee, your choice.
+If after 30 days you can't find any document in under 60 seconds, we'll rebuild your system at no additional cost-or refund your setup fee, your choice.
 
 ---
 
@@ -238,10 +238,10 @@ A: Your AI agent runs on its own isolated server. Your data never mixes with oth
 A: Just your existing email (Gmail or Outlook), calendar, and file storage (Google Drive, Dropbox, etc.). We connect to what you already use. No new software to learn.
 
 **Q: Is my data safe?**
-A: Yes. Your instance is completely isolated — separate server, separate database, separate everything. We use encrypted connections, and you can revoke access anytime.
+A: Yes. Your instance is completely isolated - separate server, separate database, separate everything. We use encrypted connections, and you can revoke access anytime.
 
 **Q: What if the AI makes a mistake?**
-A: All actions are logged. The agent organizes and alerts — it doesn't make decisions for you. For anything important, it asks before acting. You're always in control.
+A: All actions are logged. The agent organizes and alerts - it doesn't make decisions for you. For anything important, it asks before acting. You're always in control.
 
 **Q: Can you just do this as a one-time project?**
 A: We offer setup-only at $3,000 (Growth) or $6,000 (Scale) with 90 days of basic support. But AI agents need ongoing tuning to stay effective. We recommend at least 3 months.
@@ -250,7 +250,7 @@ A: We offer setup-only at $3,000 (Growth) or $6,000 (Scale) with 90 days of basi
 A: Your agent learns and adapts. Monthly check-ins ensure we're adjusting to your evolving needs. You can upgrade tiers anytime.
 
 **Q: Is this like hiring a virtual assistant?**
-A: Different. VAs work 40 hours/week and execute tasks you assign. Your AI agent works 24/7, proactively watches everything, and handles organization automatically. Many clients eventually use both — the AI handles the system, the VA uses the system.
+A: Different. VAs work 40 hours/week and execute tasks you assign. Your AI agent works 24/7, proactively watches everything, and handles organization automatically. Many clients eventually use both - the AI handles the system, the VA uses the system.
 
 **Q: How much of my time does this take?**
 A: Setup: 6-9 hours over 2-3 weeks. Ongoing: You interact with your agent as needed (usually a few minutes/day), plus monthly check-in calls. The agent does the heavy lifting.

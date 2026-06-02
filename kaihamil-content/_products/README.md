@@ -1,4 +1,4 @@
-# _products — Staging Area
+# _products - Staging Area
 
 Pre-publish research, design docs, and prototypes. Underscore prefix = Netlify ignores this folder.
 

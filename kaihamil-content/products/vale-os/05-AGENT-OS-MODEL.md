@@ -1,11 +1,11 @@
 # Valé OS
-## Valé OS as a Service — Technical & Business Model
+## Valé OS as a Service - Technical & Business Model
 
 ---
 
 ## The Model
 
-Each client gets their own **dedicated AI agent** running on isolated infrastructure. This isn't "shared software with your login" — it's a personal AI operations assistant that lives in their business.
+Each client gets their own **dedicated AI agent** running on isolated infrastructure. This isn't "shared software with your login" - it's a personal AI operations assistant that lives in their business.
 
 ### Infrastructure Per Client
 - Dedicated VPS instance (isolated, secure)
@@ -15,11 +15,11 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 - Always-on availability
 
 ### What The Agent Does
-1. **Watches** — Monitors inboxes, calendars, file drops for new items
-2. **Organizes** — Auto-files documents, tags content, maintains structure
-3. **Alerts** — Proactive notifications when attention needed
-4. **Assists** — Answers questions about their own business ("When did I last talk to Sarah?")
-5. **Maintains** — Self-heals organizational decay, suggests improvements
+1. **Watches** - Monitors inboxes, calendars, file drops for new items
+2. **Organizes** - Auto-files documents, tags content, maintains structure
+3. **Alerts** - Proactive notifications when attention needed
+4. **Assists** - Answers questions about their own business ("When did I last talk to Sarah?")
+5. **Maintains** - Self-heals organizational decay, suggests improvements
 
 ---
 
@@ -68,7 +68,7 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 | Growth | 4 vCPU / 8GB | $40-60/mo |
 | Scale | 8 vCPU / 16GB | $80-120/mo |
 
-*Note: API costs (LLM usage) additional — typically $20-100/mo depending on activity*
+*Note: API costs (LLM usage) additional - typically $20-100/mo depending on activity*
 
 ### OpenClaw Components
 - Core agent runtime
@@ -265,20 +265,20 @@ Each client gets their own **dedicated AI agent** running on isolated infrastruc
 ### The Pitch Evolution
 
 **Old pitch:** "We'll organize your business."
-**New pitch:** "You get your own AI operations assistant — always on, always learning, always organizing."
+**New pitch:** "You get your own AI operations assistant - always on, always learning, always organizing."
 
 ### Key Differentiators to Emphasize
-1. **It's YOURS** — Not shared software, your own dedicated AI
-2. **It LEARNS** — Gets smarter about your business over time
-3. **It WATCHES** — Proactive, not reactive
-4. **It's SECURE** — Isolated infrastructure, your data stays yours
-5. **It's AFFORDABLE** — Fraction of hiring help
+1. **It's YOURS** - Not shared software, your own dedicated AI
+2. **It LEARNS** - Gets smarter about your business over time
+3. **It WATCHES** - Proactive, not reactive
+4. **It's SECURE** - Isolated infrastructure, your data stays yours
+5. **It's AFFORDABLE** - Fraction of hiring help
 
 ### Objection Handling Updates
 
 | Objection | Response |
 |-----------|----------|
-| "What about AI hallucinations?" | "Your agent only works with your real data. It files and organizes — it doesn't make things up. And every action is logged." |
+| "What about AI hallucinations?" | "Your agent only works with your real data. It files and organizes - it doesn't make things up. And every action is logged." |
 | "I'm not technical" | "You don't need to be. You interact with it like texting an assistant. 'Did I follow up with John?' 'Where's the Smith contract?'" |
 | "What if AI takes over?" | "It can only access what you authorize. You can revoke access anytime. It's a tool, not a replacement for your judgment." |
-| "Is my data safe?" | "Your instance is completely isolated — separate server, separate everything. No other client can access your data, ever." |
+| "Is my data safe?" | "Your instance is completely isolated - separate server, separate everything. No other client can access your data, ever." |

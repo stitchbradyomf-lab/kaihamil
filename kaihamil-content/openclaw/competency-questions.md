@@ -215,7 +215,7 @@ WHERE {
 
 ---
 
-## Groove Pal — Record Journey Analytics
+## Groove Pal - Record Journey Analytics
 
 ### Q11: Which genres spend the most time in the South?
 **Query Type:** Aggregation with geographic filtering
@@ -378,7 +378,7 @@ WHERE {
 **Business Value:** Track attrition and identify patterns
 **Status:** ⬜ Not yet tested
 
-### Q20: Seasonal patterns — do records move faster in certain months?
+### Q20: Seasonal patterns - do records move faster in certain months?
 **Query Type:** Temporal analysis
 **Expected Pattern:**
 ```sparql
@@ -397,10 +397,10 @@ ORDER BY ?month
 ---
 
 ## Related Files
-- `/data/graph.json` — Main knowledge graph
-- `/data/allowlist.json` — User access tracking
-- `/openclaw/knowledge-graph-schema.md` — Graph structure documentation
-- `/products/groove-pal/design/knowledge-graph-schema.md` — Groove Pal schema
+- `/data/graph.json` - Main knowledge graph
+- `/data/allowlist.json` - User access tracking
+- `/openclaw/knowledge-graph-schema.md` - Graph structure documentation
+- `/products/groove-pal/design/knowledge-graph-schema.md` - Groove Pal schema
 
 ---
 

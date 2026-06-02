@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-We're at an inflection point in how work... works. Three converging forces — the proven success of the 4-day work week, AI-driven productivity gains of 7.5+ hours per week, and the emergence of post-scarcity economic thinking — suggest that the 40-hour, 5-day work week may be an artifact of industrial-era constraints rather than a natural law.
+We're at an inflection point in how work... works. Three converging forces - the proven success of the 4-day work week, AI-driven productivity gains of 7.5+ hours per week, and the emergence of post-scarcity economic thinking - suggest that the 40-hour, 5-day work week may be an artifact of industrial-era constraints rather than a natural law.
 
 This research explores:
 1. The data behind 4-day work week trials
@@ -12,7 +12,7 @@ This research explores:
 
 ---
 
-## Part 1: The 4-Day Work Week — The Data
+## Part 1: The 4-Day Work Week - The Data
 
 ### The Largest Study Yet (2025)
 
@@ -46,7 +46,7 @@ Among companies leveraging AI, 93% report that the technology enables or support
 
 ---
 
-## Part 2: AI Productivity — The Numbers
+## Part 2: AI Productivity - The Numbers
 
 ### Time Saved Per Week
 
@@ -126,16 +126,16 @@ AI Era Constraint: ??? (emerging)
 
 An emerging framework where:
 - **Apps, automations, and 3D-printed goods** are accessible on-demand
-- **No money paid upfront** — open source usage and sharing
+- **No money paid upfront** - open source usage and sharing
 - **Intellectual property** becomes unnecessary
 - **Value** is tracked via contribution/reputation, not price
 
 ### Precedents and Parallels
 
-**"Whuffie" — Cory Doctorow's "Down and Out in the Magic Kingdom" (2003):**
+**"Whuffie" - Cory Doctorow's "Down and Out in the Magic Kingdom" (2003):**
 > "A digitally compiled estimate of your reputation in the eyes of the whole world... people strive to gain respect points... by building new things."
 
-Doctorow's Bitchun Society eliminated scarcity through free energy and universal assemblers. What remained scarce — human creativity, trust, reputation — became the new currency.
+Doctorow's Bitchun Society eliminated scarcity through free energy and universal assemblers. What remained scarce - human creativity, trust, reputation - became the new currency.
 
 **The Culture (Iain M. Banks):**
 A post-scarcity civilization where technology enables all production to be automated. No money. No property (except sentimental). People pursue interests freely.
@@ -145,7 +145,7 @@ Real-world projects aiming for "low work-hour requirement for attaining a modern
 
 ### The Mechanism: Usage Karma
 
-In an Open Source Society, value isn't priced — it's demonstrated:
+In an Open Source Society, value isn't priced - it's demonstrated:
 
 | Traditional | Open Source Society |
 |-------------|---------------------|
@@ -162,7 +162,7 @@ In an Open Source Society, value isn't priced — it's demonstrated:
 4. Reputation accrues based on real-world impact
 5. Access to others' creations gated by your contribution history
 
-**Not UBI (Universal Basic Income).** More like **UBA (Universal Basic Access)** — everyone gets the basics, but premium access to scarce creator time or specialized tools requires demonstrated contribution.
+**Not UBI (Universal Basic Income).** More like **UBA (Universal Basic Access)** - everyone gets the basics, but premium access to scarce creator time or specialized tools requires demonstrated contribution.
 
 ### Why This Might Work
 
@@ -237,28 +237,28 @@ In an Open Source Society, value isn't priced — it's demonstrated:
 
 ## Conclusion: The Question Is Open
 
-We're not in a post-scarcity society yet. But we're approaching "post-bullshit-work" — the elimination of meaningless tasks through AI, the validation of shorter work weeks through data, and the emergence of contribution-based value systems through open source culture.
+We're not in a post-scarcity society yet. But we're approaching "post-bullshit-work" - the elimination of meaningless tasks through AI, the validation of shorter work weeks through data, and the emergence of contribution-based value systems through open source culture.
 
 The 40-hour, 5-day week was invented for factories. Knowledge work was always different. AI simply makes the mismatch undeniable.
 
-The future of work isn't about working more or even working smarter. It's about **working on what matters** — and having the freedom to define what matters for yourself.
+The future of work isn't about working more or even working smarter. It's about **working on what matters** - and having the freedom to define what matters for yourself.
 
 ---
 
 ## References
 
 - 4 Day Week Global Research Reports (2024-2025)
-- Scientific American — "Biggest Trial of Four-Day Workweek" (July 2025)
-- Nature — "Biggest trial of four-day work week finds workers are happier" (July 2025)
-- LSE/Microsoft Research — "AI boosts productivity by equivalent of one workday per week" (2024)
-- Forbes — "29% of companies with 4-day workweeks use AI extensively" (May 2024)
-- Korn Ferry — "AI saves employees average of 7.5 hours per week" (2024)
-- St. Louis Fed — "The Impact of Generative AI on Work Productivity" (2025)
-- Doctorow, Cory — "Down and Out in the Magic Kingdom" (2003)
-- Banks, Iain M. — The Culture series
-- Open Source Ecology — wiki documentation
+- Scientific American - "Biggest Trial of Four-Day Workweek" (July 2025)
+- Nature - "Biggest trial of four-day work week finds workers are happier" (July 2025)
+- LSE/Microsoft Research - "AI boosts productivity by equivalent of one workday per week" (2024)
+- Forbes - "29% of companies with 4-day workweeks use AI extensively" (May 2024)
+- Korn Ferry - "AI saves employees average of 7.5 hours per week" (2024)
+- St. Louis Fed - "The Impact of Generative AI on Work Productivity" (2025)
+- Doctorow, Cory - "Down and Out in the Magic Kingdom" (2003)
+- Banks, Iain M. - The Culture series
+- Open Source Ecology - wiki documentation
 
 ---
 
 *Research compiled: February 21, 2026*
-*Status: Living document — updates as data evolves*
+*Status: Living document - updates as data evolves*

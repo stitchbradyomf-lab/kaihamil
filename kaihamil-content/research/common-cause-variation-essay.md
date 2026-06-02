@@ -1,6 +1,6 @@
 # Common Cause: The Weather of Your Life
 
-## Research Brief — Special Cause Variation for Emotional Regulation
+## Research Brief - Special Cause Variation for Emotional Regulation
 
 **Core Concept:** Statistical Process Control (Deming) applied to daily life. Most stress comes from misidentifying normal variation as crisis.
 
@@ -12,7 +12,7 @@
 
 Of course not. You understand weather as a system with expected variation. Rain in April? Normal. Snow in January? Normal. A thunderstorm? Dramatic, but within normal limits.
 
-But when your kid has a tantrum, your spouse is grumpy, or someone cuts you off in traffic — suddenly this is a CRISIS. A special event. A problem that needs solving.
+But when your kid has a tantrum, your spouse is grumpy, or someone cuts you off in traffic - suddenly this is a CRISIS. A special event. A problem that needs solving.
 
 It's not. It's just weather.
 

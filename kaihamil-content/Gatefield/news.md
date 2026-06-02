@@ -4,10 +4,10 @@
 
 We're excited to launch the new Gatefield HOA website. This site provides:
 
-- **Easy access to documents** — Bylaws, CC&Rs, forms, all in one place
-- **Meeting information** — Schedules, agendas, and minutes
-- **Board contact** — Direct email links to board members
-- **Lower costs** — Reduces printing and mailing expenses
+- **Easy access to documents** - Bylaws, CC&Rs, forms, all in one place
+- **Meeting information** - Schedules, agendas, and minutes
+- **Board contact** - Direct email links to board members
+- **Lower costs** - Reduces printing and mailing expenses
 
 The site is maintained by the board and updates automatically when changes are made.
 

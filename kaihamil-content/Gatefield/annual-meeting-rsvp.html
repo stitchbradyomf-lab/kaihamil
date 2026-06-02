@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annual Meeting RSVP - Gatefield</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* Top bar */
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ background: var(--parchment);
+ position: sticky;
+ top: 0;
+ z-index: 50;
+ backdrop-filter: blur(8px);
+ background: rgba(250, 247, 240, 0.95);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ /* Hero */
+ .hero {
+ text-align: center;
+ padding: 5rem 2rem 3rem;
+ max-width: 680px;
+ margin: 0 auto;
+ }
+
+ .hero .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1rem;
+ }
+
+ .hero h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2rem, 4vw, 2.75rem);
+ color: var(--gatefield-green);
+ line-height: 1.15;
+ margin-bottom: 0.75rem;
+ }
+ .hero h1 em { font-style: italic; color: var(--deep-brass); }
+
+ .hero .date {
+ font-family: 'Cinzel', serif;
+ font-size: 1rem;
+ letter-spacing: 0.1em;
+ color: var(--gatefield-green);
+ margin-bottom: 0.5rem;
+ }
+
+ .hero .time {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 1.1rem;
+ color: var(--muted);
+ }
+
+ /* Form section */
+ .form-section {
+ background: var(--aged-paper);
+ padding: 4rem 2rem 6rem;
+ border-top: 1px solid var(--brass-tint);
+ }
+
+ .form-inner {
+ max-width: 600px;
+ margin: 0 auto;
+ }
+
+ .form-intro {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.2rem;
+ line-height: 1.6;
+ color: var(--muted);
+ margin-bottom: 2.5rem;
+ text-align: center;
+ }
+
+ form {
+ display: grid;
+ gap: 1.75rem;
+ }
+
+ .field label {
+ display: block;
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 0.6rem;
+ }
+
+ .field input[type="text"],
+ .field textarea {
+ width: 100%;
+ background: transparent;
+ border: none;
+ border-bottom: 1px solid var(--brass);
+ color: var(--gatefield-green);
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.15rem;
+ padding: 0.5rem 0;
+ }
+ .field input:focus,
+ .field textarea:focus {
+ outline: none;
+ border-bottom-color: var(--deep-brass);
+ }
+ .field textarea {
+ resize: vertical;
+ min-height: 100px;
+ }
+
+ .field-hint {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 0.95rem;
+ color: var(--muted);
+ margin-top: 0.4rem;
+ }
+
+ /* RSVP options */
+ .rsvp-options {
+ display: grid;
+ gap: 1rem;
+ margin-top: 0.75rem;
+ }
+ .rsvp-option {
+ display: flex;
+ align-items: flex-start;
+ gap: 0.85rem;
+ cursor: pointer;
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.15rem;
+ color: var(--gatefield-green);
+ line-height: 1.4;
+ padding: 1rem;
+ border: 1px solid var(--brass-tint);
+ border-radius: 4px;
+ background: var(--parchment);
+ transition: all 0.2s;
+ }
+ .rsvp-option:hover {
+ border-color: var(--brass);
+ }
+ .rsvp-option input[type="radio"] {
+ appearance: none;
+ width: 18px;
+ height: 18px;
+ border: 1px solid var(--brass);
+ border-radius: 50%;
+ background: transparent;
+ cursor: pointer;
+ flex-shrink: 0;
+ margin-top: 3px;
+ position: relative;
+ }
+ .rsvp-option input[type="radio"]:checked {
+ border-color: var(--gatefield-green);
+ }
+ .rsvp-option input[type="radio"]:checked::after {
+ content: '';
+ position: absolute;
+ inset: 4px;
+ background: var(--gatefield-green);
+ border-radius: 50%;
+ }
+ .rsvp-note {
+ display: block;
+ font-style: italic;
+ color: var(--muted);
+ font-size: 0.95rem;
+ margin-top: 0.25rem;
+ }
+
+ .submit-btn {
+ margin-top: 1rem;
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ background: transparent;
+ border: 1px solid var(--brass);
+ padding: 1rem 2.5rem;
+ cursor: pointer;
+ transition: all 0.3s;
+ justify-self: start;
+ }
+ .submit-btn:hover {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ }
+
+ /* Footer */
+ footer {
+ padding: 2.5rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <a class="back" href="index.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Annual Meeting</div>
+</div>
+
+<div class="hero">
+ <div class="eyebrow">2026 Annual Meeting</div>
+ <h1>Please <em>respond.</em></h1>
+ <div class="date">June 6, 2026</div>
+ <div class="time">10:00 AM</div>
+</div>
+
+<div class="form-section">
+ <div class="form-inner">
+ <p class="form-intro">Let us know if you'll attend the annual meeting. Your response helps us plan accordingly.</p>
+
+ <form name="annual-meeting-rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+ <input type="hidden" name="form-name" value="annual-meeting-rsvp">
+ <p style="display:none;"><label>Don't fill: <input name="bot-field"></label></p>
+
+ <div class="field">
+ <label for="rsvp-name">Name</label>
+ <input type="text" id="rsvp-name" name="name" required>
+ </div>
+
+ <div class="field">
+ <label for="rsvp-address">Address</label>
+ <input type="text" id="rsvp-address" name="address" required>
+ </div>
+
+ <div class="field">
+ <label>Will you attend the annual meeting?</label>
+ <div class="rsvp-options">
+ <label class="rsvp-option">
+ <input type="radio" name="attending" value="yes" required>
+ <span>
+ <strong>Yes, I will attend</strong>
+ <span class="rsvp-note">Looking forward to seeing you there.</span>
+ </span>
+ </label>
+ <label class="rsvp-option">
+ <input type="radio" name="attending" value="no" required>
+ <span>
+ <strong>No, I cannot attend</strong>
+ <span class="rsvp-note">We'll share meeting minutes afterward.</span>
+ </span>
+ </label>
+ </div>
+ </div>
+
+ <div class="field">
+ <label for="rsvp-notes">Comments (optional) - Agenda items to discuss</label>
+ <textarea id="rsvp-notes" name="notes" placeholder="Topics you'd like addressed at the meeting"></textarea>
+ </div>
+
+ <button type="submit" class="submit-btn">Submit RSVP</button>
+ </form>
+ </div>
+</div>
+
+<footer>© 2026 Gatefield Homeowners Association</footer>
+
+</body>
+</html>

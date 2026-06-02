@@ -1,4 +1,4 @@
-# Groove Pal — Economics
+# Groove Pal - Economics
 
 **The math behind the meaning.**
 
@@ -6,7 +6,7 @@
 
 ## The Core Model
 
-Groove Pal operates on a simple economic premise: charge enough to cover costs, reward sharing, and sustain the network — without extracting more than necessary.
+Groove Pal operates on a simple economic premise: charge enough to cover costs, reward sharing, and sustain the network - without extracting more than necessary.
 
 This isn't venture-scale economics. It's sustainable economics. The goal is a healthy, growing network that pays for itself and rewards the people who make it work.
 
@@ -37,7 +37,7 @@ This isn't venture-scale economics. It's sustainable economics. The goal is a he
 
 ### The Reality
 
-At low volume, margins are thin. Some records cost more, some shipping goes farther. The ~$4-5 average margin is intentional — this isn't a high-margin business.
+At low volume, margins are thin. Some records cost more, some shipping goes farther. The ~$4-5 average margin is intentional - this isn't a high-margin business.
 
 At scale, margins improve through:
 - Better vinyl wholesale pricing
@@ -82,7 +82,7 @@ This creates a natural selection for generosity:
 - Minus their costs: ~$90
 - **Net: ~$15-20**
 
-**Result:** Reward records roughly break even. They're not a profit center — they're a retention and growth engine.
+**Result:** Reward records roughly break even. They're not a profit center - they're a retention and growth engine.
 
 ---
 
@@ -104,7 +104,7 @@ Most pals join once. Some become highly active and:
 - Earn credits and receive reward records (cost to us)
 - Stay engaged and maintain network health
 
-**Lifetime value isn't about extraction** — it's about network contribution.
+**Lifetime value isn't about extraction** - it's about network contribution.
 
 ---
 
@@ -186,7 +186,7 @@ Groove Pal has favorable cash flow dynamics:
 
 ### Timing Considerations
 
-Reward records are earned over time — a pal doesn't earn 3 credits on day one. This spreads the cost:
+Reward records are earned over time - a pal doesn't earn 3 credits on day one. This spreads the cost:
 - **Month 1-3:** Few rewards (network building)
 - **Month 4-6:** First wave of rewards
 - **Ongoing:** Steady state ~10-15% of revenue goes to rewards
@@ -332,7 +332,7 @@ The goal is building something meaningful and sustainable. If an exit happens, g
 | Year 1 target | 1,000 pals / $17K net |
 | Long-term | 10K-50K pals / $100-300K annual net |
 
-**The math works.** Not venture math — sustainable math. The kind that lets you build something real without extracting from the people who make it special.
+**The math works.** Not venture math - sustainable math. The kind that lets you build something real without extracting from the people who make it special.
 
 ---
 

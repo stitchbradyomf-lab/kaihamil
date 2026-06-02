@@ -8,9 +8,9 @@ After a listener logs their entry, they need a way to send the record to its nex
 
 ## Entry Points
 
-1. **After logging** — Redirect from log form submission
-2. **Direct visit** — Return to `/record/{id}/send` anytime
-3. **Reminder email** — "Ready to send GP-0047 forward?"
+1. **After logging** - Redirect from log form submission
+2. **Direct visit** - Return to `/record/{id}/send` anytime
+3. **Reminder email** - "Ready to send GP-0047 forward?"
 
 ---
 
@@ -87,7 +87,7 @@ Ship to:
 Shipping Tips:
 • USPS Media Mail is cheapest (~$4-5)
 • Use a padded mailer or small box
-• No insurance needed — honor system
+• No insurance needed - honor system
 
 [Mark as Shipped]
 [I Changed My Mind]
@@ -107,7 +107,7 @@ Shipping Tips:
 Did you ship GP-0047 to Alex T.?
 
 [Yes, It's in the Mail]
-[Not Yet — Remind Me Later]
+[Not Yet - Remind Me Later]
 ```
 
 **On confirmation:**
@@ -138,7 +138,7 @@ Status: In Transit 📦
 ```
 A record is coming your way!
 
-Kind of Blue — Miles Davis
+Kind of Blue - Miles Davis
 From: Sarah M. in Asheville, NC
 
 Expected: March 25-30
@@ -182,7 +182,7 @@ Did you just receive this record?
 - After 14 days: Gentle reminder
 - After 30 days: "Still planning to send?"
 - After 60 days: Release match, recipient goes back to pool
-- No penalty — life happens
+- No penalty - life happens
 
 ### Record Lost in Transit
 - Sender reports: "It never arrived"
@@ -193,7 +193,7 @@ Did you just receive this record?
 ### Recipient Declines
 - "I can't accept right now"
 - Record returns to matching pool
-- No penalty — circumstances change
+- No penalty - circumstances change
 
 ---
 
@@ -201,14 +201,14 @@ Did you just receive this record?
 
 ### Record Status Enum
 ```
-in_circulation    — Active, moving between people
-with_listener     — Currently held by someone
-ready_to_ship     — Logged, awaiting destination selection
-matched           — Destination selected, address not yet revealed
-address_revealed  — Sender has shipping info
-shipped           — In transit
-lost              — Lost in mail, journey paused
-retired           — No longer circulating
+in_circulation    - Active, moving between people
+with_listener     - Currently held by someone
+ready_to_ship     - Logged, awaiting destination selection
+matched           - Destination selected, address not yet revealed
+address_revealed  - Sender has shipping info
+shipped           - In transit
+lost              - Lost in mail, journey paused
+retired           - No longer circulating
 ```
 
 ### Shipping Log Entry
@@ -269,7 +269,7 @@ Options:
 - Request a genre/era
 - Surprise me
 
-This keeps the economy balanced — records flow out, rewards flow back.
+This keeps the economy balanced - records flow out, rewards flow back.
 
 ---
 
@@ -291,9 +291,9 @@ This keeps the economy balanced — records flow out, rewards flow back.
 
 For launch, simplify to:
 
-1. **Manual matching only** — Admin assigns next recipient
-2. **Email-based address exchange** — No in-app reveal yet
-3. **Honor system tracking** — Sender/recipient email confirmations
-4. **No Groove Loop yet** — Add after proving core loop works
+1. **Manual matching only** - Admin assigns next recipient
+2. **Email-based address exchange** - No in-app reveal yet
+3. **Honor system tracking** - Sender/recipient email confirmations
+4. **No Groove Loop yet** - Add after proving core loop works
 
 Scale automation as volume grows.

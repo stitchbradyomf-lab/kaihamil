@@ -9,7 +9,7 @@
 **From:** "Here's what I built and how you can use it"
 **To:** "What do you need to build, and how can I help you discover it?"
 
-The Socratic method fits your method because it puts the learner's needs first — not your examples, not your frameworks, but their actual situation and capacity.
+The Socratic method fits your method because it puts the learner's needs first - not your examples, not your frameworks, but their actual situation and capacity.
 
 ---
 
@@ -69,7 +69,7 @@ Teach them to manage their own inquiry, not just answer yours.
 - "What's the real cost of doing nothing?"
 
 **Discovery (15 min):** Draw out their own insight
-- "You mentioned X and Y — what's the connection you're seeing?"
+- "You mentioned X and Y - what's the connection you're seeing?"
 - "If you had to explain this to someone else, what would you say?"
 
 **Commitment (10 min):** Define the smallest next step
@@ -118,7 +118,7 @@ Teach them to manage their own inquiry, not just answer yours.
 **Week 1: Their Current State**
 - Where are you losing time, attention, or energy?
 - What have you already tried to fix it?
-- What's the real constraint — time, knowledge, tools, or clarity?
+- What's the real constraint - time, knowledge, tools, or clarity?
 
 **Week 2: Their Ideal State**
 - If this worked perfectly, what would be different?
@@ -139,7 +139,7 @@ Teach them to manage their own inquiry, not just answer yours.
 
 ## The Risk
 
-Socratic teaching is slower. It requires patience. The learner might discover something you didn't anticipate — or fail to discover what you think is obvious.
+Socratic teaching is slower. It requires patience. The learner might discover something you didn't anticipate - or fail to discover what you think is obvious.
 
 **The reward:** They own what they build. It fits their actual life, not your generic template. They can sustain it because they designed it.
 

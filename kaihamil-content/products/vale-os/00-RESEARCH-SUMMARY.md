@@ -8,21 +8,21 @@
 ### The Core Problem
 Small service businesses (1-10 employees) operate in **organizational chaos** that they've normalized:
 - Documents scattered across 5+ locations (email, desktop, Google Drive, Downloads, phone)
-- Client communications across text, email, WhatsApp, DMs—never consolidated
+- Client communications across text, email, WhatsApp, DMs-never consolidated
 - Project status exists only in the owner's head
 - Follow-ups tracked by memory (and frequently missed)
 - No naming conventions, so "final_v2_FINAL_actual.pdf" is common
 - Time tax: 5-10 hours/week lost to "where is that?"
 
 ### Why It Persists
-1. **No time to fix it** — they're busy doing the actual work
-2. **Previous solutions failed** — tried apps, abandoned them
-3. **Don't know what "organized" looks like** — no template to follow
-4. **It's embarrassing** — won't admit it publicly
-5. **Creeping normalization** — "this is just how it is"
+1. **No time to fix it** - they're busy doing the actual work
+2. **Previous solutions failed** - tried apps, abandoned them
+3. **Don't know what "organized" looks like** - no template to follow
+4. **It's embarrassing** - won't admit it publicly
+5. **Creeping normalization** - "this is just how it is"
 
 ### What "Content Tracking" Means for Non-Creators
-For service businesses, "content" isn't blog posts—it's:
+For service businesses, "content" isn't blog posts-it's:
 - **Client communications** (emails, texts, notes from calls)
 - **Documents** (contracts, proposals, signed agreements)
 - **Project files** (deliverables, drafts, feedback)
@@ -99,7 +99,7 @@ They need to track *touchpoints and artifacts*, not content calendars.
 | Affordable for SMB | ✓ | ❌ | ❌ | ✓ | ✓ |
 | Holistic (not just tools) | ❌ | ✓ | ❌ | ✓ | ✓ |
 
-**Positioning statement:** "We're the operations consultant who actually implements—and the virtual assistant who builds the system instead of just using it."
+**Positioning statement:** "We're the operations consultant who actually implements-and the virtual assistant who builds the system instead of just using it."
 
 ---
 
@@ -112,17 +112,17 @@ They need to track *touchpoints and artifacts*, not content calendars.
 - Maintenance requires scheduling calls
 
 ### How AI/Automation Changes This
-1. **Intelligent filing** — AI can auto-categorize documents as they arrive
-2. **Proactive alerts** — System notices when something's unfiled for >24 hrs
-3. **Pattern recognition** — Identifies repeated manual work that could be automated
-4. **Natural language search** — "Find the contract I signed with Sarah in October"
-5. **Context maintenance** — System remembers client preferences, history, patterns
-6. **24/7 availability** — Automation doesn't take breaks
+1. **Intelligent filing** - AI can auto-categorize documents as they arrive
+2. **Proactive alerts** - System notices when something's unfiled for >24 hrs
+3. **Pattern recognition** - Identifies repeated manual work that could be automated
+4. **Natural language search** - "Find the contract I signed with Sarah in October"
+5. **Context maintenance** - System remembers client preferences, history, patterns
+6. **24/7 availability** - Automation doesn't take breaks
 
 ### Marketing Angle
 *"Your organization system that thinks, learns, and watches so you don't have to."*
 
-This is the "upgrade path" — start with manual systems, introduce AI layer as trust builds.
+This is the "upgrade path" - start with manual systems, introduce AI layer as trust builds.
 
 ---
 
@@ -139,7 +139,7 @@ This is the "upgrade path" — start with manual systems, introduce AI layer as 
 
 **Secondary targets:**
 - Business coaches/consultants ($100K-300K)
-- Small agency owners (marketing, PR, creative — 2-5 people)
+- Small agency owners (marketing, PR, creative - 2-5 people)
 - Financial advisors/planners
 
 ### Transformation Statement
@@ -163,15 +163,15 @@ This is the "upgrade path" — start with manual systems, introduce AI layer as 
 | Objection | Response |
 |-----------|----------|
 | "I don't have time for this" | "That's exactly why you need it. Setup takes 6-9 hours over 3 weeks. It saves 5+ hours every week after." |
-| "I've tried apps before" | "Apps fail when there's no system underneath. We build the system first—the tools serve the system, not the other way around." |
-| "Can't I just hire a VA?" | "A VA needs instructions. We build the instructions. Many clients hire both—we create the playbook the VA follows." |
+| "I've tried apps before" | "Apps fail when there's no system underneath. We build the system first-the tools serve the system, not the other way around." |
+| "Can't I just hire a VA?" | "A VA needs instructions. We build the instructions. Many clients hire both-we create the playbook the VA follows." |
 | "It's expensive" | "You're losing $2-5K/month in time already. This pays for itself in month one." |
 | "My business is too messy" | "That's literally what we fix. The messier you are, the bigger the transformation." |
-| "What if my business changes?" | "Systems should evolve. That's why we include monthly check-ins—we adjust as you grow." |
+| "What if my business changes?" | "Systems should evolve. That's why we include monthly check-ins-we adjust as you grow." |
 
 ### Elevator Pitch (30 seconds)
 
-> "I build organizational systems for small service businesses—realtors, consultants, agencies—who are great at what they do but drowning in the chaos of running a business. I create a custom Command Center where every document, every client, every project has a home. My clients can find anything in 30 seconds, see exactly what needs their attention, and stop waking up at 3am wondering if they forgot something. Setup takes 3 weeks, then I maintain it monthly so it keeps working."
+> "I build organizational systems for small service businesses-realtors, consultants, agencies-who are great at what they do but drowning in the chaos of running a business. I create a custom Command Center where every document, every client, every project has a home. My clients can find anything in 30 seconds, see exactly what needs their attention, and stop waking up at 3am wondering if they forgot something. Setup takes 3 weeks, then I maintain it monthly so it keeps working."
 
 ### Tagline Options
 - *"Because your business deserves better than 'I'll remember that.'"*
@@ -214,11 +214,11 @@ If "Valé OS" doesn't resonate:
 - Explore team/enterprise tier
 
 ### Key Channels
-1. **LinkedIn** — Primary. Business owners live here. Educational content + DM outreach.
-2. **Local networking** — BNI, Chamber, real estate associations
-3. **Referrals** — Happy clients are the best sales team
-4. **Podcasts** — Guest spots on business/real estate shows
-5. **Partnerships** — Transaction coordinators, bookkeepers, business coaches
+1. **LinkedIn** - Primary. Business owners live here. Educational content + DM outreach.
+2. **Local networking** - BNI, Chamber, real estate associations
+3. **Referrals** - Happy clients are the best sales team
+4. **Podcasts** - Guest spots on business/real estate shows
+5. **Partnerships** - Transaction coordinators, bookkeepers, business coaches
 
 ---
 

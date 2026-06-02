@@ -7,7 +7,7 @@
 
 **What we deliver:** A fully documented organizational system + ongoing maintenance for small service businesses.
 
-**Core promise:** Client can find any document, see any project status, and know what needs attention—in under 30 seconds.
+**Core promise:** Client can find any document, see any project status, and know what needs attention-in under 30 seconds.
 
 ---
 

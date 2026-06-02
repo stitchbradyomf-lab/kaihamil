@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - Visitor</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* Top bar */
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ /* Hero photo */
+ .hero {
+ width: 100%;
+ height: 70vh;
+ overflow: hidden;
+ position: relative;
+ }
+ .hero img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ display: block;
+ }
+ .hero-caption {
+ position: absolute;
+ bottom: 2rem;
+ right: 2rem;
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 0.95rem;
+ color: var(--parchment);
+ text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+ letter-spacing: 0.02em;
+ }
+
+ /* Sections */
+ section {
+ max-width: 680px;
+ margin: 0 auto;
+ padding: 6rem 2rem;
+ }
+
+ .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2.25rem, 5vw, 3.25rem);
+ color: var(--gatefield-green);
+ line-height: 1.1;
+ letter-spacing: -0.01em;
+ }
+ h1 em { font-style: italic; color: var(--deep-brass); }
+
+ h2 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: 1.75rem;
+ color: var(--gatefield-green);
+ margin-bottom: 1.25rem;
+ }
+
+ p.lead {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.3rem;
+ line-height: 1.55;
+ color: var(--ink);
+ margin-top: 1.5rem;
+ }
+
+ /* Board grid */
+ .board {
+ background: var(--aged-paper);
+ padding: 6rem 2rem;
+ }
+ .board-inner {
+ max-width: 680px;
+ margin: 0 auto;
+ }
+ .board-list {
+ margin-top: 2.5rem;
+ display: grid;
+ gap: 1.5rem;
+ }
+ .board-member {
+ display: flex;
+ justify-content: space-between;
+ align-items: baseline;
+ padding-bottom: 1.5rem;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+ .board-member:last-child { border-bottom: none; }
+ .board-name {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.4rem;
+ color: var(--gatefield-green);
+ }
+ .board-role {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ /* Photo strip */
+ .strip {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 1px;
+ background: var(--brass-tint);
+ margin: 0;
+ padding: 0;
+ }
+ @media (max-width: 600px) {
+ .strip { grid-template-columns: 1fr; }
+ }
+ .strip-img {
+ aspect-ratio: 4/5;
+ overflow: hidden;
+ }
+ .strip-img img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ display: block;
+ transition: transform 1.5s ease;
+ }
+ .strip-img:hover img {
+ transform: scale(1.04);
+ }
+
+ /* Realtor form */
+ .form-section {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ padding: 6rem 2rem;
+ }
+ .form-inner {
+ max-width: 600px;
+ margin: 0 auto;
+ }
+ .form-section .eyebrow { color: var(--brass); }
+ .form-section h2 {
+ color: var(--parchment);
+ font-size: 2.25rem;
+ }
+ .form-section h2 em { color: var(--brass); }
+ .form-section p.lead {
+ color: var(--brass-tint);
+ font-size: 1.15rem;
+ }
+
+ form {
+ margin-top: 3rem;
+ display: grid;
+ gap: 1.5rem;
+ }
+
+ .field label {
+ display: block;
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: var(--brass-tint);
+ margin-bottom: 0.6rem;
+ }
+
+ .field input[type="text"],
+ .field input[type="email"],
+ .field input[type="tel"],
+ .field textarea {
+ width: 100%;
+ background: transparent;
+ border: none;
+ border-bottom: 1px solid var(--brass);
+ color: var(--parchment);
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.15rem;
+ padding: 0.5rem 0;
+ transition: border-color 0.3s;
+ }
+
+ .field input:focus,
+ .field textarea:focus {
+ outline: none;
+ border-bottom-color: var(--brass-tint);
+ }
+
+ .field textarea {
+ resize: vertical;
+ min-height: 80px;
+ }
+
+ /* Checkbox group */
+ .checks {
+ display: grid;
+ gap: 0.85rem;
+ margin-top: 0.5rem;
+ }
+ .check {
+ display: flex;
+ align-items: flex-start;
+ gap: 0.85rem;
+ cursor: pointer;
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.1rem;
+ color: var(--parchment);
+ line-height: 1.4;
+ }
+ .check input[type="checkbox"] {
+ appearance: none;
+ width: 16px;
+ height: 16px;
+ border: 1px solid var(--brass);
+ background: transparent;
+ cursor: pointer;
+ flex-shrink: 0;
+ margin-top: 4px;
+ position: relative;
+ transition: background 0.2s;
+ }
+ .check input[type="checkbox"]:checked {
+ background: var(--brass);
+ }
+ .check input[type="checkbox"]:checked::after {
+ content: '';
+ position: absolute;
+ inset: 2px;
+ background: var(--gatefield-green);
+ clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+ }
+
+ .submit-btn {
+ margin-top: 1.5rem;
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--parchment);
+ background: transparent;
+ border: 1px solid var(--brass);
+ padding: 1rem 2.5rem;
+ cursor: pointer;
+ transition: all 0.3s;
+ justify-self: start;
+ }
+ .submit-btn:hover {
+ background: var(--brass);
+ color: var(--gatefield-green);
+ }
+
+ /* Gallery Section */
+ .gallery-section {
+ background: var(--aged-paper);
+ padding: 6rem 2rem;
+ }
+ .gallery-inner {
+ max-width: 1000px;
+ margin: 0 auto;
+ }
+ .gallery-section h2 {
+ text-align: center;
+ margin-bottom: 3rem;
+ }
+ .gallery-section .eyebrow {
+ text-align: center;
+ display: block;
+ }
+ .gallery {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 1.5rem;
+ }
+ @media (max-width: 900px) {
+ .gallery { grid-template-columns: repeat(2, 1fr); }
+ }
+ @media (max-width: 500px) {
+ .gallery { grid-template-columns: 1fr; }
+ }
+ .gallery-item {
+ position: relative;
+ aspect-ratio: 4/5;
+ overflow: hidden;
+ border-radius: 4px;
+ }
+ .gallery-item img {
+ width: 100%;
+ height: 100%;
+ object-fit: cover;
+ display: block;
+ transition: transform 0.6s ease;
+ }
+ .gallery-item:hover img {
+ transform: scale(1.05);
+ }
+ .gallery-caption {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ padding: 1rem;
+ background: linear-gradient(transparent, rgba(28, 43, 34, 0.85));
+ color: var(--parchment);
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 1.1rem;
+ text-align: center;
+ }
+
+ /* Footer */
+ footer {
+ padding: 2.5rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <a class="back" href="index.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Visitor</div>
+</div>
+
+<div class="hero">
+ <img src="neighborhood-spring-new.jpg" alt="Gatefield in spring">
+ <div class="hero-caption">Gatefield in spring - Yardley, Pennsylvania.</div>
+</div>
+
+<section>
+ <div class="eyebrow">Welcome</div>
+ <h1>A quiet neighborhood, <em>well kept by those who live here.</em></h1>
+ <p class="lead">Gatefield is a community of twenty-two homes in Lower Makefield Township. We are pleased to share a glimpse with neighbors and visitors.</p>
+</section>
+
+<div class="strip">
+ <div class="strip-img"><img src="hero-winter.jpg" alt="Winter morning at the Gatefield entrance"></div>
+ <div class="strip-img"><img src="street-sign.jpg" alt="Mt. Eyre and Thistlewood street sign in spring"></div>
+</div>
+
+<div class="board">
+ <div class="board-inner">
+ <div class="eyebrow">Board of Directors</div>
+ <h2>Stewards of the neighborhood.</h2>
+
+ <div class="board-list">
+ <div class="board-member">
+ <div class="board-name">Kyle Brady</div>
+ <div class="board-role">President</div>
+ </div>
+ <div class="board-member">
+ <div class="board-name">Thomas Convery</div>
+ <div class="board-role">Vice President</div>
+ </div>
+ <div class="board-member">
+ <div class="board-name">James Weinberg</div>
+ <div class="board-role">Treasurer</div>
+ </div>
+ <div class="board-member">
+ <div class="board-name">Denise Weinberg</div>
+ <div class="board-role">Secretary</div>
+ </div>
+ </div>
+ </div>
+</div>
+
+<!-- Photo Gallery -->
+<div class="gallery-section">
+ <div class="gallery-inner">
+ <div class="eyebrow">Through the Seasons</div>
+ <h2>Gatefield <em>year-round.</em></h2>
+ 
+ <div class="gallery">
+ <div class="gallery-item">
+ <img src="hero-winter.jpg" alt="Gatefield in winter">
+ <span class="gallery-caption">Winter</span>
+ </div>
+ <div class="gallery-item">
+ <img src="neighborhood-spring-new.jpg" alt="Gatefield in spring">
+ <span class="gallery-caption">Spring</span>
+ </div>
+ <div class="gallery-item">
+ <img src="gatefield-2.jpg" alt="Gatefield neighborhood">
+ <span class="gallery-caption">The Loop</span>
+ </div>
+ <div class="gallery-item">
+ <img src="gatefield-4.jpg" alt="Gatefield entrance">
+ <span class="gallery-caption">The Entrance</span>
+ </div>
+ </div>
+ </div>
+</div>
+
+<div class="form-section">
+ <div class="form-inner">
+ <div class="eyebrow">For Realtors</div>
+ <h2>Request HOA <em>documents.</em></h2>
+ <p class="lead">For active listings within Gatefield. Allow 5–7 business days for fulfillment.</p>
+
+ <form name="realtor-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+ <input type="hidden" name="form-name" value="realtor-request">
+ <p style="display:none;"><label>Don't fill: <input name="bot-field"></label></p>
+
+ <div class="field">
+ <label for="agent">Agent Name</label>
+ <input type="text" id="agent" name="agent" required>
+ </div>
+
+ <div class="field">
+ <label for="brokerage">Brokerage</label>
+ <input type="text" id="brokerage" name="brokerage" required>
+ </div>
+
+ <div class="field">
+ <label for="email">Email</label>
+ <input type="email" id="email" name="email" required>
+ </div>
+
+ <div class="field">
+ <label for="phone">Phone</label>
+ <input type="tel" id="phone" name="phone">
+ </div>
+
+ <div class="field">
+ <label for="address">Property Address (within Gatefield)</label>
+ <input type="text" id="address" name="address" required>
+ </div>
+
+ <div class="field">
+ <label>Documents Requested</label>
+ <div class="checks">
+ <label class="check">
+ <input type="checkbox" name="docs" value="resale-cert">
+ <span>Resale Certificate</span>
+ </label>
+ <label class="check">
+ <input type="checkbox" name="docs" value="bylaws">
+ <span>Bylaws &amp; Governing Documents</span>
+ </label>
+ <label class="check">
+ <input type="checkbox" name="docs" value="financials">
+ <span>Current Financials &amp; Annual Budget</span>
+ </label>
+ <label class="check">
+ <input type="checkbox" name="docs" value="meeting-minutes">
+ <span>Recent Meeting Minutes</span>
+ </label>
+ <label class="check">
+ <input type="checkbox" name="docs" value="insurance">
+ <span>Insurance Certificate</span>
+ </label>
+ </div>
+ </div>
+
+ <div class="field">
+ <label for="notes">Additional Notes</label>
+ <textarea id="notes" name="notes"></textarea>
+ </div>
+
+ <button type="submit" class="submit-btn">Submit Request</button>
+ </form>
+ </div>
+</div>
+
+<footer>© 2026 Gatefield Homeowners Association</footer>
+
+</body>
+</html>

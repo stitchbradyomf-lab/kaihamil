@@ -139,7 +139,7 @@
 *What Kyle did:*
 - Bought Marissa a vanity table she'd want but wouldn't buy herself
 - Set Friday night as "family building activity" (not a chore)
-- Led without dominating—let her own the project
+- Led without dominating-let her own the project
 - Used humor to defuse early tension
 - Gave positive reinforcement throughout
 
@@ -153,7 +153,7 @@
 Remove guilt → Make it social → Lead without dominating → Let them own it → Positive reinforcement → Momentum continues
 
 *For Couples Valé:*
-This is what "Ways to Help Me" should facilitate—not assigned tasks, but recognized opportunities that build connection.
+This is what "Ways to Help Me" should facilitate-not assigned tasks, but recognized opportunities that build connection.
 
 ---
 
@@ -162,8 +162,8 @@ This is what "Ways to Help Me" should facilitate—not assigned tasks, but recog
 **Purpose:** Daily reflection, shared values
 
 **Quote Rotation:**
-1. "Be curious, not judgmental" — Ted Lasso
-2. "I am not what happens to me, I am what I choose to become" — Carl Jung
+1. "Be curious, not judgmental" - Ted Lasso
+2. "I am not what happens to me, I am what I choose to become" - Carl Jung
 3. "The system fuels the self, and the self invests in the system"
 4. "Direction over destination"
 5. "The crowded table"
@@ -200,7 +200,7 @@ This is what "Ways to Help Me" should facilitate—not assigned tasks, but recog
 **Sample Interactions:**
 
 **Morning Brief:**
-> "Good morning, Kyle and Marissa. Today: Hudson has practice at 4 PM. Easter prep reminder: 9 days until baskets need to be ready. Kyle mentioned needing help with Iceland research—opportunity there. Today's quote: 'Be curious, not judgmental.'"
+> "Good morning, Kyle and Marissa. Today: Hudson has practice at 4 PM. Easter prep reminder: 9 days until baskets need to be ready. Kyle mentioned needing help with Iceland research-opportunity there. Today's quote: 'Be curious, not judgmental.'"
 
 **Coordination:**
 > "I've noticed you both have 'clean garage' on your minds. Would this weekend work? I can block 3 hours Saturday morning."

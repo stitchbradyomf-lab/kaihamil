@@ -1,4 +1,4 @@
-# Groove Pal — Landing Page Copy
+# Groove Pal - Landing Page Copy
 
 **URL:** groovepal.com
 
@@ -21,12 +21,12 @@
 The vinyl sharing network built on trust, patience, and presence.
 
 ### Body
-You receive a record. You listen — really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
+You receive a record. You listen - really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
 
 No algorithms. No feeds. Just music, mail, and meaning.
 
 ### CTA
-**[Become a Groove Pal — $45]**
+**[Become a Groove Pal - $45]**
 
 *Includes welcome vinyl + personal sticker sheet*
 
@@ -43,13 +43,13 @@ No algorithms. No feeds. Just music, mail, and meaning.
 A record arrives in your mailbox. Sent by someone who thought you'd love it. Inside: music waiting to be heard.
 
 **2. Listen**
-Put it on. Sit down. Be present. This isn't background music — it's an invitation to slow down.
+Put it on. Sit down. Be present. This isn't background music - it's an invitation to slow down.
 
 **3. Attach**
 Add your sticker to the sleeve. Your QR code joins the record's story. Now you're part of its journey.
 
 **4. Send Forward**
-Choose someone — a friend, a family member, a curious stranger. Write a note. Mail it on.
+Choose someone - a friend, a family member, a curious stranger. Write a note. Mail it on.
 
 **5. Watch It Travel**
 Track where your records go. See the stickers accumulate. Read the notes from people who've held what you once held.
@@ -79,10 +79,10 @@ Stickers accumulate like stamps in a passport. Each record tells its own story t
 **Trust Is the Feature**
 
 ### Quote
-> "This is a network of Groove Pals — not banking regulators."
+> "This is a network of Groove Pals - not banking regulators."
 
 ### Body
-There's no enforcement. No penalties. No surveillance. If a record stops traveling, that's okay — it found a home.
+There's no enforcement. No penalties. No surveillance. If a record stops traveling, that's okay - it found a home.
 
 We trust that most people, given the chance, will share generously. That's how the network grows. That's what makes it real.
 
@@ -117,7 +117,7 @@ The math is simple: the people who share the most get free vinyl. The network re
 
 ### Price Card
 
-**$45 — One Time**
+**$45 - One Time**
 
 *Everything you need to start sharing:*
 
@@ -172,7 +172,7 @@ Groove Pal began with a letter.
 
 Before it was a network, it was a relationship. Two people connected first by mail, then by music, then by marriage. The slow reveal of who someone is through what they share. The trust built across distance and time.
 
-This is that same energy — sealed and sent forward.
+This is that same energy - sealed and sent forward.
 
 ---
 
@@ -184,7 +184,7 @@ This is that same energy — sealed and sent forward.
 ### Body
 Become a Groove Pal today. Receive your welcome vinyl, attach your first sticker, and start sharing the music that matters.
 
-**[Become a Groove Pal — $45]**
+**[Become a Groove Pal - $45]**
 
 *The groove moves when you do.*
 

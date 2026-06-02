@@ -1,6 +1,6 @@
 # Gatefield Homeowners Association
 
-Welcome to the Gatefield HOA website — your source for community news, documents, and meeting information.
+Welcome to the Gatefield HOA website - your source for community news, documents, and meeting information.
 
 ## Quick Links
 
@@ -19,9 +19,9 @@ Gatefield Community Center
 
 ## Recent Updates
 
-**May 15, 2026** — New website launched to improve access to HOA documents and reduce printing costs.
+**May 15, 2026** - New website launched to improve access to HOA documents and reduce printing costs.
 
-**April 2026** — Spring landscaping completed. Thank you for your patience during the work.
+**April 2026** - Spring landscaping completed. Thank you for your patience during the work.
 
 [View All News →](/news)
 

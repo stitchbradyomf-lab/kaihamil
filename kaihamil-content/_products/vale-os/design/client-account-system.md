@@ -1,4 +1,4 @@
-# Valé Client Account System — Spec
+# Valé Client Account System - Spec
 
 ## Overview
 
@@ -186,7 +186,7 @@ User accounts for Valé prospects and clients, keyed by email address. Handles:
 
 ## Stripe Setup
 
-1. Create Product: "Valé Deposit" — $100
+1. Create Product: "Valé Deposit" - $100
 2. Create Products for tiers (final payment):
    - Personal: $2,899 (total $2,999 - $100)
    - Professional: $4,899

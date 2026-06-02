@@ -26,7 +26,7 @@ Transform Concept 4 from explicit metaphor explanation to abstract, interpretabl
 - [ ] Create coral structures = Systems (deploy, monitor, etc.)
 - [ ] Create fish schools = Agent clusters (orchestrator, executor, etc.)
 - [ ] Animate fish movement (gentle schooling behavior)
-- [ ] Make reef feel "living" — subtle animations, organic shapes
+- [ ] Make reef feel "living" - subtle animations, organic shapes
 
 ### Task 2.2: Operations Elements
 - [ ] Deploy pipeline → Coral archway

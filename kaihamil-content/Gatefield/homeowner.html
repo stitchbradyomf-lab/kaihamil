@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - Homeowner</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* ============ PASSWORD GATE ============ */
+ .gate {
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 2rem;
+ position: relative;
+ }
+
+ .gate::before {
+ content: '';
+ position: fixed;
+ inset: 0;
+ background-image: url('hero-winter.jpg');
+ background-size: cover;
+ background-position: center;
+ opacity: 0.08;
+ z-index: -1;
+ }
+
+ .gate-mark {
+ text-align: center;
+ margin-bottom: 4rem;
+ }
+
+ .gate .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1rem;
+ }
+
+ .gate .wordmark {
+ font-family: 'Cinzel', serif;
+ font-weight: 600;
+ font-size: 2.5rem;
+ letter-spacing: 0.1em;
+ color: var(--gatefield-green);
+ }
+
+ .gate .rule {
+ width: 50px;
+ height: 1px;
+ background: var(--brass);
+ margin: 1.25rem auto 0.4rem;
+ position: relative;
+ }
+ .gate .rule::after {
+ content: '';
+ position: absolute;
+ top: 4px;
+ left: 0; right: 0;
+ height: 1px;
+ background: var(--brass);
+ }
+
+ .gate-form {
+ text-align: center;
+ width: 100%;
+ max-width: 360px;
+ }
+
+ .gate-prompt {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 1.15rem;
+ color: var(--muted);
+ margin-bottom: 2rem;
+ }
+
+ .gate-form input {
+ width: 100%;
+ background: transparent;
+ border: none;
+ border-bottom: 1px solid var(--brass);
+ color: var(--gatefield-green);
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.3rem;
+ padding: 0.75rem 0;
+ text-align: center;
+ letter-spacing: 0.2em;
+ margin-bottom: 1.5rem;
+ }
+ .gate-form input:focus {
+ outline: none;
+ border-bottom-color: var(--deep-brass);
+ }
+
+ .gate-form button {
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ background: transparent;
+ border: 1px solid var(--brass);
+ padding: 0.85rem 2.5rem;
+ cursor: pointer;
+ transition: all 0.3s;
+ }
+ .gate-form button:hover {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ }
+
+ .gate-error {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ color: #8B3A3A;
+ font-size: 0.95rem;
+ margin-top: 1rem;
+ min-height: 1.5rem;
+ }
+
+ .gate-back {
+ position: absolute;
+ top: 2rem;
+ left: 2rem;
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ }
+ .gate-back:hover { color: var(--deep-brass); }
+
+ /* ============ MAIN CONTENT (hidden until unlocked) ============ */
+ .content { display: none; }
+ .content.visible { display: block; }
+
+ /* Top bar */
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ background: var(--parchment);
+ position: sticky;
+ top: 0;
+ z-index: 50;
+ backdrop-filter: blur(8px);
+ background: rgba(250, 247, 240, 0.95);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ /* Section nav */
+ .subnav {
+ display: flex;
+ justify-content: center;
+ gap: 2.5rem;
+ padding: 1.25rem 2rem;
+ border-bottom: 1px solid var(--brass-tint);
+ background: var(--aged-paper);
+ flex-wrap: wrap;
+ }
+ .subnav a {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ padding-bottom: 0.25rem;
+ border-bottom: 1px solid transparent;
+ transition: all 0.2s;
+ }
+ .subnav a:hover {
+ color: var(--deep-brass);
+ border-bottom-color: var(--brass);
+ }
+
+ /* Welcome */
+ .welcome {
+ text-align: center;
+ padding: 5rem 2rem 4rem;
+ max-width: 680px;
+ margin: 0 auto;
+ }
+ .welcome .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1rem;
+ }
+ .welcome h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2rem, 4vw, 2.75rem);
+ color: var(--gatefield-green);
+ line-height: 1.15;
+ }
+ .welcome h1 em { font-style: italic; color: var(--deep-brass); }
+
+ /* Section base */
+ section {
+ max-width: 720px;
+ margin: 0 auto;
+ padding: 5rem 2rem;
+ }
+ section.alt {
+ max-width: 100%;
+ background: var(--aged-paper);
+ padding: 0;
+ }
+ section.alt .inner {
+ max-width: 720px;
+ margin: 0 auto;
+ padding: 5rem 2rem;
+ }
+
+ .section-eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ h2 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+ color: var(--gatefield-green);
+ margin-bottom: 1.25rem;
+ line-height: 1.15;
+ }
+ h2 em { font-style: italic; color: var(--deep-brass); }
+
+ p.lead {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.2rem;
+ line-height: 1.55;
+ color: var(--ink);
+ margin-bottom: 1.5rem;
+ }
+
+ /* Budget */
+ .budget-table {
+ margin-top: 2.5rem;
+ border-top: 1px solid var(--brass-tint);
+ }
+ .budget-row {
+ display: grid;
+ grid-template-columns: 1fr auto;
+ padding: 1.1rem 0;
+ border-bottom: 1px solid var(--brass-tint);
+ align-items: baseline;
+ gap: 1rem;
+ }
+ .budget-label {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.15rem;
+ color: var(--ink);
+ }
+ .budget-amount {
+ font-family: 'Cinzel', serif;
+ font-size: 0.95rem;
+ color: var(--gatefield-green);
+ letter-spacing: 0.05em;
+ }
+ .budget-row.total {
+ border-bottom: none;
+ margin-top: 1rem;
+ padding-top: 1.5rem;
+ border-top: 1px solid var(--brass);
+ }
+ .budget-row.total .budget-label,
+ .budget-row.total .budget-amount {
+ font-weight: 500;
+ color: var(--gatefield-green);
+ }
+
+ .budget-meta {
+ margin-top: 2rem;
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 0.95rem;
+ color: var(--muted);
+ }
+
+ /* Garden committee */
+ .projects {
+ margin-top: 2.5rem;
+ display: grid;
+ gap: 1.75rem;
+ }
+ .project {
+ padding: 1.5rem 0;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+ .project:last-child { border-bottom: none; }
+ .project-head {
+ display: flex;
+ justify-content: space-between;
+ align-items: baseline;
+ gap: 1rem;
+ margin-bottom: 0.5rem;
+ flex-wrap: wrap;
+ }
+ .project-title {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.4rem;
+ color: var(--gatefield-green);
+ }
+ .project-status {
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ padding: 0.3rem 0.75rem;
+ border: 1px solid var(--brass);
+ color: var(--deep-brass);
+ flex-shrink: 0;
+ }
+ .project-status.active { background: var(--brass); color: var(--gatefield-green); border-color: var(--brass); }
+ .project-status.complete { color: var(--pine); border-color: var(--pine); opacity: 0.7; }
+ .project-desc {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.05rem;
+ color: var(--muted);
+ line-height: 1.55;
+ }
+
+ /* Documents */
+ .doc-link {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1.5rem 0;
+ border-bottom: 1px solid var(--brass-tint);
+ text-decoration: none;
+ color: var(--gatefield-green);
+ transition: padding-left 0.3s;
+ }
+ .doc-link:hover {
+ padding-left: 0.5rem;
+ }
+ .doc-link:last-child { border-bottom: none; }
+ .doc-name {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.2rem;
+ }
+ .doc-meta {
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ }
+
+ /* Comment form */
+ .form-section {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ padding: 5rem 2rem;
+ }
+ .form-inner {
+ max-width: 600px;
+ margin: 0 auto;
+ }
+ .form-section .section-eyebrow { color: var(--brass); }
+ .form-section h2 {
+ color: var(--parchment);
+ }
+ .form-section h2 em { color: var(--brass); }
+ .form-section p.lead { color: var(--brass-tint); }
+
+ form {
+ margin-top: 2.5rem;
+ display: grid;
+ gap: 1.5rem;
+ }
+
+ .field label {
+ display: block;
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: var(--brass-tint);
+ margin-bottom: 0.6rem;
+ }
+
+ .field input[type="text"],
+ .field input[type="email"],
+ .field textarea {
+ width: 100%;
+ background: transparent;
+ border: none;
+ border-bottom: 1px solid var(--brass);
+ color: var(--parchment);
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.15rem;
+ padding: 0.5rem 0;
+ }
+ .field input:focus, .field textarea:focus {
+ outline: none;
+ border-bottom-color: var(--brass-tint);
+ }
+ .field textarea {
+ resize: vertical;
+ min-height: 120px;
+ }
+
+ /* Visibility radio */
+ .visibility {
+ display: grid;
+ gap: 0.75rem;
+ margin-top: 0.5rem;
+ }
+ .vis-option {
+ display: flex;
+ align-items: flex-start;
+ gap: 0.85rem;
+ cursor: pointer;
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.05rem;
+ color: var(--parchment);
+ line-height: 1.4;
+ }
+ .vis-option input[type="radio"] {
+ appearance: none;
+ width: 16px;
+ height: 16px;
+ border: 1px solid var(--brass);
+ border-radius: 50%;
+ background: transparent;
+ cursor: pointer;
+ flex-shrink: 0;
+ margin-top: 4px;
+ position: relative;
+ }
+ .vis-option input[type="radio"]:checked::after {
+ content: '';
+ position: absolute;
+ inset: 3px;
+ background: var(--brass);
+ border-radius: 50%;
+ }
+ .vis-note {
+ display: block;
+ font-style: italic;
+ color: var(--brass-tint);
+ font-size: 0.9rem;
+ margin-top: 0.2rem;
+ }
+
+ .submit-btn {
+ margin-top: 1.5rem;
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--parchment);
+ background: transparent;
+ border: 1px solid var(--brass);
+ padding: 1rem 2.5rem;
+ cursor: pointer;
+ transition: all 0.3s;
+ justify-self: start;
+ }
+ .submit-btn:hover {
+ background: var(--brass);
+ color: var(--gatefield-green);
+ }
+
+ /* News Section */
+ .news-items {
+ margin-top: 2.5rem;
+ display: grid;
+ gap: 2rem;
+ }
+ .news-item {
+ padding: 1.75rem 0;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+ .news-item:last-child {
+ border-bottom: none;
+ }
+ .news-date {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 0.5rem;
+ }
+ .news-title {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.4rem;
+ color: var(--gatefield-green);
+ margin-bottom: 0.5rem;
+ }
+ .news-desc {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.05rem;
+ color: var(--muted);
+ line-height: 1.55;
+ }
+
+ /* Footer */
+ footer {
+ padding: 2.5rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<!-- ============ PASSWORD GATE ============ -->
+<div class="gate" id="gate">
+ <a href="index.html" class="gate-back">← Back</a>
+
+ <div class="gate-mark">
+ <div class="eyebrow">Homeowner Access</div>
+ <div class="wordmark">GATEFIELD</div>
+ <div class="rule"></div>
+ </div>
+
+ <div class="gate-form">
+ <div class="gate-prompt">Please enter the resident password.</div>
+ <input type="password" id="pw" placeholder="••••••••" autofocus>
+ <br>
+ <button onclick="checkPassword()">Enter</button>
+ <div class="gate-error" id="error"></div>
+ </div>
+</div>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div class="content" id="content">
+
+ <div class="topbar">
+ <a class="back" href="index.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Homeowner</div>
+ </div>
+
+ <div class="subnav">
+ <a href="#budget">Budget</a>
+ <a href="#garden">Landscape Committee</a>
+ <a href="#documents">Guidelines</a>
+ <a href="#news">News</a>
+ <a href="annual-meeting-rsvp.html">Annual Meeting RSVP</a>
+ <a href="#comment">Submit a Comment</a>
+ </div>
+
+ <div class="welcome">
+ <div class="eyebrow">Welcome Home</div>
+ <h1>For the residents of <em>Gatefield.</em></h1>
+ </div>
+
+ <!-- Budget -->
+ <section id="budget">
+ <div class="section-eyebrow">2026 Annual Budget</div>
+ <h2>Where the dues <em>go.</em></h2>
+ <p class="lead">A summary of the operating budget approved at the November 2025 annual meeting. The full ledger is available on request.</p>
+
+ <div class="budget-table">
+ <div class="budget-row">
+ <div class="budget-label">Landscaping &amp; Grounds</div>
+ <div class="budget-amount">$12,000</div>
+ </div>
+ <div class="budget-row">
+ <div class="budget-label">Snow Removal</div>
+ <div class="budget-amount">$4,400</div>
+ </div>
+ <div class="budget-row">
+ <div class="budget-label">Common Area Maintenance</div>
+ <div class="budget-amount">$3,000</div>
+ </div>
+ <div class="budget-row">
+ <div class="budget-label">Insurance &amp; Legal</div>
+ <div class="budget-amount">$2,500</div>
+ </div>
+ <div class="budget-row">
+ <div class="budget-label">Reserve Contribution</div>
+ <div class="budget-amount">$3,000</div>
+ </div>
+ <div class="budget-row">
+ <div class="budget-label">Administration &amp; Web</div>
+ <div class="budget-amount">$1,500</div>
+ </div>
+ <div class="budget-row total">
+ <div class="budget-label">Total Operating Budget</div>
+ <div class="budget-amount">$26,400</div>
+ </div>
+ </div>
+
+ <div class="budget-meta">Annual dues per household: $1,200. Reserve fund balance as of Q1 2026: $24,000.</div>
+ </section>
+
+ <!-- Garden Committee -->
+ <section id="garden" class="alt">
+ <div class="inner">
+ <div class="section-eyebrow">Landscape Committee</div>
+ <h2>Projects <em>and achievements.</em></h2>
+ <p class="lead">The landscape committee works year-round to maintain and enhance Gatefield's natural beauty. Committee members: Ann Mule, Kathy Weck, Fern Fried, Jenny Li, Denise Weinberg, and honorary member Jim Burke.</p>
+
+ <div class="projects">
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">Tree Removal - Three-Year Plan Completion</div>
+ <div class="project-status active">Approved</div>
+ </div>
+ <div class="project-desc">Removal and stump grinding of 3 dead/almost dead trees (one large Linden and 2 purple leaf plum) on the island. Final phase of the 2024-2026 tree plan. T&T Tree Services proposal approved at $2,075.</div>
+ </div>
+
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">Spring Vinca Planting</div>
+ <div class="project-status active">Approved</div>
+ </div>
+ <div class="project-desc">Planting of 25 flats of vinca flowers at both entrances prior to spring cleanup and mulching. Includes 2 free waterings. Cost: $1,125. Up to 4 additional waterings may be coordinated by Fern Fried as needed ($125 each, up to $500 total).</div>
+ </div>
+
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">Spring Cleanup & Mulching</div>
+ <div class="project-status">Upcoming</div>
+ </div>
+ <div class="project-desc">Annual spring cleanup and mulching by J&J scheduled for mid-May. Committee declined optional additional spring pruning.</div>
+ </div>
+
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">2025 Tree Work & Replanting</div>
+ <div class="project-status complete">Complete</div>
+ </div>
+ <div class="project-desc">T&T tree work completed on time and on budget. Three new trees replanted at top and bottom entrances. Electrical work and bi-annual fence power washing also completed.</div>
+ </div>
+
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">Holiday Lights</div>
+ <div class="project-status complete">Complete</div>
+ </div>
+ <div class="project-desc">Holiday lighting installation was a fabulous success. Thank you to all volunteers who made this possible.</div>
+ </div>
+
+ <div class="project">
+ <div class="project-head">
+ <div class="project-title">Annual Block Party</div>
+ <div class="project-status complete">Complete</div>
+ </div>
+ <div class="project-desc">October 2025 outdoor block party was a wonderful success for the entire neighborhood. Looking forward to the next gathering.</div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Documents -->
+ <section id="documents">
+ <div class="section-eyebrow">Governing Documents</div>
+ <h2>The HOA <em>guidelines.</em></h2>
+ <p class="lead">Current versions of the documents that govern our community.</p>
+
+ <div style="margin-top: 2.5rem;">
+ <a href="#" class="doc-link">
+ <div class="doc-name">HOA Guidelines &amp; Bylaws</div>
+ <div class="doc-meta">PDF · Rev. 2025</div>
+ </a>
+ <a href="#" class="doc-link">
+ <div class="doc-name">Architectural Review Standards</div>
+ <div class="doc-meta">PDF · Rev. 2024</div>
+ </a>
+ <a href="#" class="doc-link">
+ <div class="doc-name">Annual Meeting Minutes - November 2025</div>
+ <div class="doc-meta">PDF</div>
+ </a>
+ <a href="#" class="doc-link">
+ <div class="doc-name">Reserve Study - 2024</div>
+ <div class="doc-meta">PDF</div>
+ </a>
+ </div>
+ </section>
+
+ <!-- Community News -->
+ <section id="news" class="alt">
+ <div class="inner">
+ <div class="section-eyebrow">Community News</div>
+ <h2>News & <em>Highlights.</em></h2>
+ <p class="lead">Celebrating the people and moments that make Gatefield special.</p>
+
+ <div class="news-items">
+ <div class="news-item">
+ <div class="news-date">June 6, 2026</div>
+ <div class="news-title">Wedding Bells for Maddie Carlton</div>
+ <div class="news-desc">Join us in congratulating Maddie Carlton on her upcoming wedding. Wishing you a lifetime of happiness!</div>
+ </div>
+
+ <div class="news-item">
+ <div class="news-date">June 18, 2026</div>
+ <div class="news-title">Last Day of School - Pennsbury School District</div>
+ <div class="news-desc">Summer break begins for Pennsbury students. Here's to a safe and fun summer for all our neighborhood kids.</div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- Comment Form -->
+ <div class="form-section" id="comment">
+ <div class="form-inner">
+ <div class="section-eyebrow">Submit a Comment</div>
+ <h2>Speak to the <em>board.</em></h2>
+ <p class="lead">Concerns, suggestions, RSVPs, or just a word of thanks. You choose whether your comment stays between you and the board, or is shared with the neighborhood.</p>
+
+ <form name="homeowner-comment" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+ <input type="hidden" name="form-name" value="homeowner-comment">
+ <p style="display:none;"><label>Don't fill: <input name="bot-field"></label></p>
+
+ <div class="field">
+ <label for="name">Name</label>
+ <input type="text" id="name" name="name" required>
+ </div>
+
+ <div class="field">
+ <label for="address">Address</label>
+ <input type="text" id="address" name="address" required>
+ </div>
+
+ <div class="field">
+ <label for="email">Email</label>
+ <input type="email" id="email" name="email" required>
+ </div>
+
+ <div class="field">
+ <label for="message">Comment</label>
+ <textarea id="message" name="message" required></textarea>
+ </div>
+
+ <div class="field">
+ <label>Visibility</label>
+ <div class="visibility">
+ <label class="vis-option">
+ <input type="radio" name="visibility" value="private" checked>
+ <span>
+ <strong>Private to the board</strong>
+ <span class="vis-note">Only board members will see this comment.</span>
+ </span>
+ </label>
+ <label class="vis-option">
+ <input type="radio" name="visibility" value="public">
+ <span>
+ <strong>Share with the neighborhood</strong>
+ <span class="vis-note">Once approved, your comment will be visible to other homeowners.</span>
+ </span>
+ </label>
+ </div>
+ </div>
+
+ <button type="submit" class="submit-btn">Send to Board</button>
+ </form>
+ </div>
+ </div>
+
+ <footer>© 2026 Gatefield Homeowners Association · Homeowner Portal</footer>
+
+</div>
+
+<script>
+ // Simple client-side password check.
+ // For production, move this to a Netlify Function so the password isn't in the HTML.
+ const PASSWORD = "gatefield2026"; // Rotate annually
+
+ // Store the hash before authentication
+ let targetHash = window.location.hash;
+
+ function checkPassword() {
+ const input = document.getElementById('pw').value.trim().toLowerCase();
+ const errorEl = document.getElementById('error');
+
+ if (input === PASSWORD) {
+ sessionStorage.setItem('gatefield-auth', 'ok');
+ showContent();
+ } else {
+ errorEl.textContent = 'That password isn\u2019t recognized. Please try again.';
+ document.getElementById('pw').value = '';
+ }
+ }
+
+ function showContent() {
+ document.getElementById('gate').style.display = 'none';
+ document.getElementById('content').classList.add('visible');
+ 
+ // Navigate to the stored hash after showing content
+ if (targetHash) {
+ window.location.hash = targetHash;
+ }
+ }
+
+ // Allow Enter key to submit
+ document.getElementById('pw').addEventListener('keypress', (e) => {
+ if (e.key === 'Enter') checkPassword();
+ });
+
+ // Stay logged in for the session
+ if (sessionStorage.getItem('gatefield-auth') === 'ok') {
+ showContent();
+ }
+</script>
+
+</body>
+</html>

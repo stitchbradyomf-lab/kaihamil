@@ -55,11 +55,11 @@
 
 ### Insurance-Specific Features
 
-1. **Policy tracker** — All active policies per client, renewal dates, carrier contacts
-2. **Claims assistant** — Status tracking, document collection prompts
-3. **Renewal pipeline** — Auto-generated outreach sequences
-4. **Quote follow-up** — "You quoted Sarah 12 days ago, no response yet"
-5. **Compliance log** — Audit trail for all client interactions
+1. **Policy tracker** - All active policies per client, renewal dates, carrier contacts
+2. **Claims assistant** - Status tracking, document collection prompts
+3. **Renewal pipeline** - Auto-generated outreach sequences
+4. **Quote follow-up** - "You quoted Sarah 12 days ago, no response yet"
+5. **Compliance log** - Audit trail for all client interactions
 
 ### Pricing Adjustment
 Same tiers apply. May warrant +$50/mo premium for compliance features.
@@ -74,7 +74,7 @@ Same tiers apply. May warrant +$50/mo premium for compliance features.
 - Referrals from realtor clients ("Who does your insurance?")
 
 **Messaging tweak:**
-> "Your policies, renewals, and client files — finally organized. An AI assistant that knows insurance and keeps your agency running smoothly."
+> "Your policies, renewals, and client files - finally organized. An AI assistant that knows insurance and keeps your agency running smoothly."
 
 ---
 
@@ -122,16 +122,16 @@ Same tiers apply. May warrant +$50/mo premium for compliance features.
 - Point-of-sale (Blend, Floify): Borrower-facing
 - Pipeline tools (Whiteboard, MortgageHippo): Limited
 
-**Gap:** No AI assistant that proactively manages the organizational chaos around the LOS. Everyone has the same core tools — no one has an AI that watches everything and keeps them on track.
+**Gap:** No AI assistant that proactively manages the organizational chaos around the LOS. Everyone has the same core tools - no one has an AI that watches everything and keeps them on track.
 
 ### Mortgage-Specific Features
 
-1. **Loan file organizer** — Auto-structure per MISMO standards
-2. **Document hunter** — "You're still missing W-2s for John Smith"
-3. **Deadline tracker** — Lock expirations, closing dates, condition due dates
-4. **Pipeline view** — All active loans with status and next action
-5. **Communication log** — Every touchpoint per loan, searchable
-6. **Post-close archive** — Compliance-ready file retention
+1. **Loan file organizer** - Auto-structure per MISMO standards
+2. **Document hunter** - "You're still missing W-2s for John Smith"
+3. **Deadline tracker** - Lock expirations, closing dates, condition due dates
+4. **Pipeline view** - All active loans with status and next action
+5. **Communication log** - Every touchpoint per loan, searchable
+6. **Post-close archive** - Compliance-ready file retention
 
 ### Pricing Adjustment
 Scale tier may be most common (high volume = high value). Consider loan-volume-based pricing as alternative.
@@ -152,7 +152,7 @@ Scale tier may be most common (high volume = high value). Consider loan-volume-b
 - Realtor client referrals ("Who's your loan officer?")
 
 **Messaging tweak:**
-> "Never lose track of a loan again. An AI assistant that watches your pipeline, chases documents, and keeps every file organized — so you can focus on closing."
+> "Never lose track of a loan again. An AI assistant that watches your pipeline, chases documents, and keeps every file organized - so you can focus on closing."
 
 ---
 
@@ -167,7 +167,7 @@ Scale tier may be most common (high volume = high value). Consider loan-volume-b
 | Margin/affordability | High | Medium-High | High |
 | AI solution awareness | Low | Very Low | Medium |
 | Networking culture | Strong | Strong | Strong |
-| Cross-referral potential | — | High | High |
+| Cross-referral potential | - | High | High |
 | Implementation complexity | Medium | Medium | High |
 
 ---

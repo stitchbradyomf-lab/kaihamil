@@ -1,4 +1,4 @@
-# Groove Pal — Recipient Workflow
+# Groove Pal - Recipient Workflow
 
 ## The Journey of a Record
 
@@ -54,11 +54,11 @@ Favorite track: [dropdown of album tracks]
 
 Who did you listen with? (optional)
   [ ] Solo
-  [ ] With someone — who? [________]
+  [ ] With someone - who? [________]
 
 Anything you want to share? (optional)
   [___________________________]
-  (Keep it simple — a sentence or two is perfect)
+  (Keep it simple - a sentence or two is perfect)
 
 [Submit Log Entry]
 ```
@@ -138,10 +138,10 @@ Anything you want to share? (optional)
 ```
 
 ### Record status states
-- `in_transit` — shipped, not yet received
-- `with_listener` — received, being enjoyed
-- `ready_to_ship` — logged, awaiting next destination
-- `shipped` — marked shipped, waiting for next scan
+- `in_transit` - shipped, not yet received
+- `with_listener` - received, being enjoyed
+- `ready_to_ship` - logged, awaiting next destination
+- `shipped` - marked shipped, waiting for next scan
 
 ---
 
@@ -161,7 +161,7 @@ Anything you want to share? (optional)
 **What if someone never logs?**
 - After 90 days, gentle email reminder
 - After 180 days, option to mark as "lost" (rare)
-- Honor system — most people want to participate
+- Honor system - most people want to participate
 
 **What if QR code is damaged?**
 - Record ID printed on sticker as backup

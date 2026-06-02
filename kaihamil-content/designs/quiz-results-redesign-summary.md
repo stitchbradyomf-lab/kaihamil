@@ -114,11 +114,11 @@ Speed and simplicity. Best mobile experience.
 ## Implementation Notes
 
 ### Common Elements All Designs Need
-1. **Type calculation** — Use existing logic from simple quiz
-2. **Position calculation** — Map 5 answers to 2D position:
+1. **Type calculation** - Use existing logic from simple quiz
+2. **Position calculation** - Map 5 answers to 2D position:
    - X axis: (Directive answers - Inquisitive answers) / 5 → 0-100%
    - Y axis: (Execution answers - Assistive answers) / 5 → 0-100%
-3. **Hybrid handling** — If scores are close (within 1), show "balanced" message
+3. **Hybrid handling** - If scores are close (within 1), show "balanced" message
 
 ### Technical Implementation
 - Pure HTML/CSS (no Chart.js needed)
@@ -144,4 +144,4 @@ Speed and simplicity. Best mobile experience.
 4. Test on actual mobile device
 5. Deploy
 
-No deploy tonight — review when rested.
+No deploy tonight - review when rested.

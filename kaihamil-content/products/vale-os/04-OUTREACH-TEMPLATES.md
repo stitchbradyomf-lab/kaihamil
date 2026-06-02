@@ -15,11 +15,11 @@ Hi [First Name],
 
 I work with [realtors/consultants/agency owners] who are great at what they do but drowning in the *where-did-I-put-that* chaos of running a business.
 
-Quick question: If I told you that by next month, you could find any client document in under 30 seconds—no more hunting through emails, folders, and "I know I saved it somewhere"—would that matter to your daily sanity?
+Quick question: If I told you that by next month, you could find any client document in under 30 seconds-no more hunting through emails, folders, and "I know I saved it somewhere"-would that matter to your daily sanity?
 
 I'm building organizational systems for small service businesses, and I'd love to learn more about how you currently manage the operational side of [their company].
 
-If you've got 15 minutes this week, I'd love to hear what's working (and what's not) in your current setup. No pitch—just genuinely curious.
+If you've got 15 minutes this week, I'd love to hear what's working (and what's not) in your current setup. No pitch-just genuinely curious.
 
 [Your name]
 
@@ -59,7 +59,7 @@ Hi [First Name],
 
 [Mutual connection] mentioned you're running a [business type] and juggling all the operational chaos that comes with it.
 
-I help small service businesses build simple organizational systems—basically, I create the "where does this go?" structure so you can focus on actual work instead of hunting for files and wondering what's falling through the cracks.
+I help small service businesses build simple organizational systems-basically, I create the "where does this go?" structure so you can focus on actual work instead of hunting for files and wondering what's falling through the cracks.
 
 Not sure if it's a fit, but [mutual connection] thought it might be worth a conversation.
 
@@ -77,7 +77,7 @@ Free to chat for 15 minutes sometime this week? I'll share what I'm seeing work 
 
 Hi [First Name],
 
-Following up on my note from last week. Totally understand if the timing's not right—running a [business type] doesn't leave much inbox time.
+Following up on my note from last week. Totally understand if the timing's not right-running a [business type] doesn't leave much inbox time.
 
 If organizational chaos isn't keeping you up at night, feel free to ignore this. But if you've got a drawer of unfiled papers, a desktop full of "I'll organize this later" files, or a nagging feeling that something important is slipping through... might be worth 15 minutes.
 
@@ -116,7 +116,7 @@ Hey [Name] - I've enjoyed our conversation about [topic].
 
 I've been thinking about your comment about [their pain point]. That's actually exactly what I help people solve.
 
-I build organizational systems for small service businesses—basically creating the infrastructure so you can find anything in 30 seconds and stop worrying about what's falling through cracks.
+I build organizational systems for small service businesses-basically creating the infrastructure so you can find anything in 30 seconds and stop worrying about what's falling through cracks.
 
 Would you be open to a quick call to see if it might help? No pitch, just an honest conversation about whether it makes sense for your situation.
 ```
@@ -162,7 +162,7 @@ Important documents scattered across:
 - Desktop folder called "Stuff"
 - Downloads folder (definitely)
 
-The fix isn't another app. It's deciding once where each type of thing goes—and building the habit.
+The fix isn't another app. It's deciding once where each type of thing goes-and building the habit.
 
 Takes 3 weeks to set up a system. Saves 3+ hours every week forever.
 ```
@@ -205,7 +205,7 @@ This is why I do this work.
 - "What have you tried before? Why didn't it work?"
 
 ### Vision (3 min)
-- "If you had a magic wand and could snap your fingers—what would 'organized' look like for you?"
+- "If you had a magic wand and could snap your fingers-what would 'organized' look like for you?"
 - "What would change in your business/life if you had that?"
 
 ### Bridge (5 min)

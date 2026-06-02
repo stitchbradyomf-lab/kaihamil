@@ -6,7 +6,7 @@
 
 ## The Concept
 
-Groove Pal is a vinyl sharing network built on trust, patience, and presence. You receive a record from a pal. You listen — really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
+Groove Pal is a vinyl sharing network built on trust, patience, and presence. You receive a record from a pal. You listen - really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
 
 No algorithms. No feeds. Just music, mail, and meaning.
 
@@ -17,11 +17,11 @@ No algorithms. No feeds. Just music, mail, and meaning.
 ### The Journey of a Record
 
 1. **You receive a vinyl** from a Groove Pal (or buy one to start)
-2. **You listen** — sit with someone, put on the record, be present
-3. **You attach your sticker** — your QR code joins the record's story
-4. **You send it forward** — mail it to a friend, family member, or stranger
-5. **They scan and register** — now they're a Groove Pal too
-6. **The cycle continues** — the record collects stickers, stories, miles
+2. **You listen** - sit with someone, put on the record, be present
+3. **You attach your sticker** - your QR code joins the record's story
+4. **You send it forward** - mail it to a friend, family member, or stranger
+5. **They scan and register** - now they're a Groove Pal too
+6. **The cycle continues** - the record collects stickers, stories, miles
 
 ### The Sticker System
 
@@ -49,11 +49,11 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 - Create profile: name, location (city only), music taste
 
 **For Active Pals:**
-- **My Records** — vinyl I've sent, where they've traveled
-- **Received** — records that came to me, their journey so far
-- **Say Thanks** — send a note to the pal who sent you a record
-- **The Groove** — discuss lyrics, memories, what the music means to you
-- **Send Forward** — log when you mail a record to someone new
+- **My Records** - vinyl I've sent, where they've traveled
+- **Received** - records that came to me, their journey so far
+- **Say Thanks** - send a note to the pal who sent you a record
+- **The Groove** - discuss lyrics, memories, what the music means to you
+- **Send Forward** - log when you mail a record to someone new
 
 **Record Tracking:**
 - Each record has a unique ID (first sticker applied)
@@ -63,7 +63,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 ### The Honor System
 
-> "This is a network of Groove Pals — not banking regulators."
+> "This is a network of Groove Pals - not banking regulators."
 
 - No enforcement. No penalties. No tracking beyond what people share.
 - If a record stops traveling, that's okay. It found a home.
@@ -159,7 +159,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 - Ambassador program (prolific sharers get perks)
 - Limited edition Groove Pal pressings
-- Annual "Groove Pal Day" — everyone sends a record
+- Annual "Groove Pal Day" - everyone sends a record
 - Corporate/team packages (team building through vinyl)
 
 ---
@@ -175,16 +175,16 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 
 **The Groove Pal Mailer**
 - Branded record mailer
-- "Handle with care — music inside" messaging
+- "Handle with care - music inside" messaging
 - Space for handwritten note
 
 ### Future Merchandise
 
-- **Groove Pal tote** — for carrying records to friends
-- **Listening journal** — notes on records received
-- **Turntable mat** — Groove Pal branded
-- **Enamel pin** — "I'm a Groove Pal"
-- **Limited pressings** — Groove Pal exclusive vinyl compilations
+- **Groove Pal tote** - for carrying records to friends
+- **Listening journal** - notes on records received
+- **Turntable mat** - Groove Pal branded
+- **Enamel pin** - "I'm a Groove Pal"
+- **Limited pressings** - Groove Pal exclusive vinyl compilations
 
 ---
 
@@ -204,7 +204,7 @@ Each Groove Pal receives a sheet of personal QR code stickers when they join.
 - **Record map** (visualize a record's journey)
 - **Groove credits** (automated reward tracking)
 - **Discussion threads** (per record or per album)
-- **Listening parties** (virtual, async — "this week we're all listening to...")
+- **Listening parties** (virtual, async - "this week we're all listening to...")
 
 ### Tech Stack (Lean)
 
@@ -321,13 +321,13 @@ Each recipient scans their QR code and sees:
 
 **Key Drivers:**
 
-1. **The Buddy Effect** — Seeing someone else with the same record creates immediate connection. No one enters alone.
+1. **The Buddy Effect** - Seeing someone else with the same record creates immediate connection. No one enters alone.
 
-2. **The 2x Multiplier** — Each signup brings 2 records into circulation. Network record count grows faster than people count.
+2. **The 2x Multiplier** - Each signup brings 2 records into circulation. Network record count grows faster than people count.
 
-3. **Days to First Send** — Critical health metric. Fast sends (<7 days) = living network. Slow sends (>21 days) = dying network.
+3. **Days to First Send** - Critical health metric. Fast sends (<7 days) = living network. Slow sends (>21 days) = dying network.
 
-4. **The Conversion Threshold** — 40% is the magic number. Below this, network stalls after 3-4 waves. Above this, momentum compounds.
+4. **The Conversion Threshold** - 40% is the magic number. Below this, network stalls after 3-4 waves. Above this, momentum compounds.
 
 **Network Death Signals:**
 - Conversion drops below 20%

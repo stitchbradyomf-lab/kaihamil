@@ -1,4 +1,4 @@
-# Knowledge Graph Expansion — March 6, 2026
+# Knowledge Graph Expansion - March 6, 2026
 
 Based on Kyle's feedback on the triple store structure.
 

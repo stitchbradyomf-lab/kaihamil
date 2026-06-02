@@ -8,7 +8,7 @@
 
 **You'll build a daily brief system. It will fail to send at 7 AM. That's the point.**
 
-Most courses teach success. This one teaches the path to success — which includes misconfiguration, silent failures, cron jobs that don't fire, and the slow realization that your assumptions were wrong.
+Most courses teach success. This one teaches the path to success - which includes misconfiguration, silent failures, cron jobs that don't fire, and the slow realization that your assumptions were wrong.
 
 By the end, you'll have a system that *almost* works. More importantly, you'll understand *why* it doesn't, and how to fix it.
 
@@ -20,7 +20,7 @@ By the end, you'll have a system that *almost* works. More importantly, you'll u
 2. **Design a system** to address that friction
 3. **Build the infrastructure** (data sources, processing, delivery)
 4. **Experience failure** and learn to diagnose it
-5. **Iterate toward function** — or discover the system you actually need
+5. **Iterate toward function** - or discover the system you actually need
 
 ---
 
@@ -59,15 +59,15 @@ Your job isn't to avoid this. It's to move through it faster next time.
 - "What do you wish you knew that you don't?"
 - "What information do you ignore that you probably shouldn't?"
 
-**Output:** Personal information diet map — sources, frequency, value, gaps
+**Output:** Personal information diet map - sources, frequency, value, gaps
 
 ### Session 2: The Daily Brief Concept (90 min)
 **Socratic arc:**
 - "If you had one message each morning, what would it tell you?"
-- "Who is this for — you, or an aspirational version of you?"
+- "Who is this for - you, or an aspirational version of you?"
 - "What would make you stop reading it?"
 
-**Output:** Draft brief specification — sections, sources, tone, length
+**Output:** Draft brief specification - sections, sources, tone, length
 
 ### Homework
 - Log every information source you touch for 48 hours
@@ -82,10 +82,10 @@ Your job isn't to avoid this. It's to move through it faster next time.
 ### Session 3: Architecture Decisions (90 min)
 **Socratic arc:**
 - "Where does the data live? Where should it live?"
-- "Who processes it — you, a script, an API?"
-- "How does it reach you — email, text, app?"
+- "Who processes it - you, a script, an API?"
+- "How does it reach you - email, text, app?"
 
-**Output:** System architecture diagram — sources → processor → storage → delivery
+**Output:** System architecture diagram - sources → processor → storage → delivery
 
 ### Session 4: Implementation (90 min)
 **Work session:**
@@ -98,7 +98,7 @@ Your job isn't to avoid this. It's to move through it faster next time.
 
 ### Homework
 - Let it run for 48 hours
-- Document what happens — and what doesn't
+- Document what happens - and what doesn't
 
 ---
 
@@ -120,7 +120,7 @@ Your job isn't to avoid this. It's to move through it faster next time.
 - Silent failure (no error, just no output)
 - Delivery channel blocked
 
-**Output:** Failure log — what failed, why, evidence
+**Output:** Failure log - what failed, why, evidence
 
 ### Session 6: The Pivot (90 min)
 **Socratic arc:**
@@ -128,7 +128,7 @@ Your job isn't to avoid this. It's to move through it faster next time.
 - "What would a simpler version look like?"
 - "What would you need to know to make this reliable?"
 
-**Output:** Decision — fix, simplify, or abandon
+**Output:** Decision - fix, simplify, or abandon
 
 ### Homework
 - Implement one fix or simplification
@@ -150,9 +150,9 @@ Your job isn't to avoid this. It's to move through it faster next time.
 **Socratic arc:**
 - "What surprised you about this process?"
 - "What will you do differently next time?"
-- "What system do you actually need — not the one you set out to build?"
+- "What system do you actually need - not the one you set out to build?"
 
-**Output:** Personal method refinement — how they now approach system building
+**Output:** Personal method refinement - how they now approach system building
 
 ---
 
@@ -193,7 +193,7 @@ Your job isn't to avoid this. It's to move through it faster next time.
 
 **Likely case:** A daily brief that almost works, plus deep understanding of why automation is hard.
 
-**Valuable case:** Discovery that you don't actually want a daily brief — you want something else entirely, and now you know how to build it.
+**Valuable case:** Discovery that you don't actually want a daily brief - you want something else entirely, and now you know how to build it.
 
 **Failure case:** Nothing works, nothing learned, frustration. (This is also information.)
 
@@ -205,7 +205,7 @@ Your job isn't to avoid this. It's to move through it faster next time.
 
 **This course:** "Build a system. It will fail. Understand the failure. Iterate." (You struggle, you learn, you can build anything.)
 
-The Kai Hamil method isn't about success. It's about **preparation** — building the capacity to succeed through repeated, examined failure.
+The Kai Hamil method isn't about success. It's about **preparation** - building the capacity to succeed through repeated, examined failure.
 
 ---
 

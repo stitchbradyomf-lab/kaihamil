@@ -1,5 +1,5 @@
 # Valé OS
-## Client Portal — Web Dashboard
+## Client Portal - Web Dashboard
 
 ---
 
@@ -45,7 +45,7 @@
 
 ## Dashboard Sections
 
-### 🏠 Home — At a Glance
+### 🏠 Home - At a Glance
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -152,14 +152,14 @@
 │  Your agent knows about:                         │
 │                                                  │
 │  👥 CLIENTS (24)                                 │
-│     John Smith — Buyer, prefers Westside         │
-│     Maria Garcia — Seller, 123 Main St listing   │
-│     Sarah Chen — Investor, looking for multifam  │
+│     John Smith - Buyer, prefers Westside         │
+│     Maria Garcia - Seller, 123 Main St listing   │
+│     Sarah Chen - Investor, looking for multifam  │
 │     [View all →]                                 │
 │                                                  │
 │  🏠 PROPERTIES (12 active)                       │
-│     1234 Oak St — Showing scheduled              │
-│     789 Pine Ave — Closing Mar 25                │
+│     1234 Oak St - Showing scheduled              │
+│     789 Pine Ave - Closing Mar 25                │
 │     [View all →]                                 │
 │                                                  │
 │  📋 PREFERENCES & NOTES                          │
@@ -328,13 +328,13 @@ PUT  /api/settings        → Update preferences
 |---------|---------|--------|-------|
 | Web dashboard | ✅ | ✅ | ✅ |
 | Custom subdomain | ✅ | ✅ | ✅ |
-| Custom domain | — | — | ✅ |
+| Custom domain | - | - | ✅ |
 | Activity log | 7 days | 30 days | 90 days |
 | Knowledge graph | Basic | Full | Full + export |
 | Metrics/insights | Basic | Full | Full + reports |
-| Team access | — | — | Up to 5 users |
-| API access | — | — | ✅ |
-| White-label | — | — | Optional add-on |
+| Team access | - | - | Up to 5 users |
+| API access | - | - | ✅ |
+| White-label | - | - | Optional add-on |
 
 ---
 
@@ -347,7 +347,7 @@ PUT  /api/settings        → Update preferences
 > Unlike a black-box tool, you see every action. Morning brief sent? Check. Documents filed? See exactly where.
 
 ### "Audit trail of agent work"
-> Every action logged. If you ever wonder "did I follow up with John?" — it's all there.
+> Every action logged. If you ever wonder "did I follow up with John?" - it's all there.
 
 ### "Peace of mind"
 > Green status light = everything working. Red = we're already on it. Sleep better knowing someone's watching.
@@ -407,7 +407,7 @@ Subject: Your Valé OS Portal is Ready 🎉
 
 Hi Sarah,
 
-Great news — your personal operations dashboard is live!
+Great news - your personal operations dashboard is live!
 
 🌐 Your Portal: https://sarah.kaihamil.com
 📱 Your Telegram Bot: @Sarah_Valé OS_bot
@@ -422,9 +422,9 @@ Your morning briefs will start tomorrow at 7:00 AM.
 You can adjust this in Settings anytime.
 
 Questions? Just reply to this email or message your 
-bot directly — I'm here to help.
+bot directly - I'm here to help.
 
 Welcome to your new operational clarity!
 
-— Kai
+- Kai
 ```

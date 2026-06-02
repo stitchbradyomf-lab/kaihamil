@@ -1,166 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gatefield Homeowners Association</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        header {
-            background: #2c5282;
-            color: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-        header p {
-            opacity: 0.9;
-        }
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .card h2 {
-            color: #2c5282;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .quick-links a {
-            display: block;
-            padding: 15px;
-            background: #edf2f7;
-            color: #2c5282;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .quick-links a:hover {
-            background: #e2e8f0;
-        }
-        .meeting-box {
-            background: #c6f6d5;
-            border-left: 4px solid #48bb78;
-            padding: 20px;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
-        .meeting-box h3 {
-            color: #22543d;
-            margin-bottom: 10px;
-        }
-        .meeting-box p {
-            color: #2f855a;
-            margin: 5px 0;
-        }
-        .update {
-            padding: 15px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .update:last-child {
-            border-bottom: none;
-        }
-        .update-date {
-            color: #718096;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-        .update h4 {
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #718096;
-            font-size: 0.9em;
-        }
-        .demo-notice {
-            background: #fef3c7;
-            border: 2px dashed #f59e0b;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #92400e;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - Yardley, Pennsylvania</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ html, body { height: 100%; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ font-weight: 400;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ overflow-x: hidden;
+ }
+
+ .page {
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 4rem 2rem;
+ position: relative;
+ }
+
+ /* Subtle background hint of the spring photo, very faint */
+ .page::before {
+ content: '';
+ position: fixed;
+ inset: 0;
+ background-image: url('neighborhood-spring.jpg');
+ background-size: cover;
+ background-position: center;
+ opacity: 0.06;
+ z-index: -1;
+ filter: saturate(1.1);
+ }
+
+ .mark {
+ text-align: center;
+ margin-bottom: 5rem;
+ opacity: 0;
+ animation: rise 1.2s ease 0.2s forwards;
+ }
+
+ .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.32em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ .wordmark {
+ font-family: 'Cinzel', serif;
+ font-weight: 600;
+ font-size: clamp(2.75rem, 7vw, 5rem);
+ letter-spacing: 0.1em;
+ color: var(--gatefield-green);
+ line-height: 1;
+ }
+
+ .rule {
+ width: 60px;
+ height: 1px;
+ background: var(--brass);
+ margin: 1.5rem auto 0.4rem;
+ position: relative;
+ }
+ .rule::after {
+ content: '';
+ position: absolute;
+ top: 4px;
+ left: 0; right: 0;
+ height: 1px;
+ background: var(--brass);
+ }
+
+ .place {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 1.05rem;
+ color: var(--muted);
+ margin-top: 1.25rem;
+ letter-spacing: 0.02em;
+ }
+
+ /* Two doors */
+ .doors {
+ display: grid;
+ grid-template-columns: 1fr auto 1fr;
+ gap: 0;
+ max-width: 720px;
+ width: 100%;
+ align-items: center;
+ }
+
+ @media (max-width: 640px) {
+ .doors {
+ grid-template-columns: 1fr;
+ gap: 2rem;
+ max-width: 320px;
+ }
+ .divider { display: none; }
+ }
+
+ .door {
+ text-align: center;
+ padding: 2.5rem 1.5rem;
+ text-decoration: none;
+ color: var(--gatefield-green);
+ transition: all 0.4s ease;
+ border: 1px solid transparent;
+ opacity: 0;
+ animation: rise 1.2s ease 0.6s forwards;
+ cursor: pointer;
+ }
+
+ .door:nth-child(3) {
+ animation-delay: 0.8s;
+ }
+
+ .door:hover {
+ border-color: var(--brass-tint);
+ background: rgba(245, 237, 224, 0.5);
+ }
+
+ .door-num {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.3em;
+ color: var(--deep-brass);
+ margin-bottom: 1.5rem;
+ }
+
+ .door-title {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: 2rem;
+ color: var(--gatefield-green);
+ margin-bottom: 0.5rem;
+ letter-spacing: 0.01em;
+ }
+
+ .door-sub {
+ font-family: 'Cormorant Garamond', serif;
+ font-style: italic;
+ font-size: 1rem;
+ color: var(--muted);
+ line-height: 1.5;
+ }
+
+ .door-arrow {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ color: var(--brass);
+ margin-top: 2rem;
+ text-transform: uppercase;
+ transition: letter-spacing 0.3s ease;
+ }
+
+ .door:hover .door-arrow {
+ letter-spacing: 0.4em;
+ color: var(--deep-brass);
+ }
+
+ .divider {
+ width: 1px;
+ height: 140px;
+ background: var(--brass-tint);
+ opacity: 0.6;
+ }
+
+ footer {
+ position: absolute;
+ bottom: 2rem;
+ left: 0;
+ right: 0;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ opacity: 0;
+ animation: fade-only 1.2s ease 1.4s forwards;
+ }
+
+ @keyframes rise {
+ from { opacity: 0; transform: translateY(20px); }
+ to { opacity: 1; transform: translateY(0); }
+ }
+
+ @keyframes fade-only {
+ from { opacity: 0; }
+ to { opacity: 0.7; }
+ }
+</style>
 </head>
 <body>
-    <div class="demo-notice">
-        🚧 <strong>Demo Site</strong> — For Gatefield HOA Board Review (May 2026)
-    </div>
 
-    <header>
-        <h1>🏘️ Gatefield Homeowners Association</h1>
-        <p>Your source for community news, documents, and meeting information.</p>
-    </header>
+<div class="page">
 
-    <div class="card">
-        <h2>Quick Links</h2>
-        <div class="quick-links">
-            <a href="meetings.html">📅 Meeting Schedule</a>
-            <a href="documents.html">📄 Documents & Forms</a>
-            <a href="board.html">👥 Board Members</a>
-            <a href="news.html">📰 Community News</a>
-        </div>
-    </div>
+ <div class="mark">
+ <div class="eyebrow">Est. Lower Makefield, Pennsylvania</div>
+ <div class="wordmark">GATEFIELD</div>
+ <div class="rule"></div>
+ <div class="place">A neighborhood of twenty-two homes.</div>
+ </div>
 
-    <div class="card">
-        <h2>Next Meeting</h2>
-        <div class="meeting-box">
-            <h3>Annual Meeting</h3>
-            <p><strong>Date:</strong> Saturday, June 6, 2026</p>
-            <p><strong>Time:</strong> 10:00 AM</p>
-            <p><strong>Location:</strong> Gatefield Community Center</p>
-            <p style="margin-top: 15px;"><a href="meetings.html" style="color: #22543d; font-weight: 600;">View Agenda →</a></p>
-        </div>
-    </div>
+ <div class="doors">
 
-    <div class="card">
-        <h2>Recent Updates</h2>
-        <div class="update">
-            <div class="update-date">May 15, 2026</div>
-            <h4>New Website Launched</h4>
-            <p>New website launched to improve access to HOA documents and reduce printing costs.</p>
-        </div>
-        <div class="update">
-            <div class="update-date">April 2026</div>
-            <h4>Spring Landscaping Complete</h4>
-            <p>Spring landscaping project completed including tree trimming, mulching, and irrigation repairs.</p>
-        </div>
-        <p style="margin-top: 15px;"><a href="news.html" style="color: #2c5282;">View All News →</a></p>
-    </div>
+ <a href="homeowner.html" class="door">
+ <div class="door-num">- I -</div>
+ <div class="door-title">Homeowner</div>
+ <div class="door-sub">For current residents of Gatefield.<br>Password required.</div>
+ <div class="door-arrow">Enter →</div>
+ </a>
 
-    <footer>
-        <p>Questions? Contact the board at <a href="mailto:board@gatefield-hoa.org">board@gatefield-hoa.org</a></p>
-        <p style="margin-top: 10px; font-size: 0.85em;">Demo for Annual Meeting — June 6, 2026</p>
-    </footer>
+ <div class="divider"></div>
+
+ <a href="visitor.html" class="door">
+ <div class="door-num">- II -</div>
+ <div class="door-title">Visitor</div>
+ <div class="door-sub">For neighbors, prospective residents,<br>and realtors.</div>
+ <div class="door-arrow">Enter →</div>
+ </a>
+
+ </div>
+
+ <footer>© 2026 Gatefield Homeowners Association</footer>
+
+</div>
+
 </body>
 </html>

@@ -3,11 +3,11 @@
 
 ---
 
-### What if you had a tireless assistant who never forgot anything, worked 24/7, and kept your entire business organized — automatically?
+### What if you had a tireless assistant who never forgot anything, worked 24/7, and kept your entire business organized - automatically?
 
-You started your business to do what you're great at—selling homes, helping clients, closing deals. Not to manage 47 browser tabs, hunt for contracts you *know* you saved somewhere, or wake up at 3am wondering if you followed up with that lead.
+You started your business to do what you're great at-selling homes, helping clients, closing deals. Not to manage 47 browser tabs, hunt for contracts you *know* you saved somewhere, or wake up at 3am wondering if you followed up with that lead.
 
-**Valé OS** gives you your own dedicated AI assistant — your Valé — that watches everything, organizes everything, and keeps you on track — without adding another thing to your plate.
+**Valé OS** gives you your own dedicated AI assistant - your Valé - that watches everything, organizes everything, and keeps you on track - without adding another thing to your plate.
 
 ---
 
@@ -49,7 +49,7 @@ Your agent works continuously:
 
 ## It Lives in Your Pocket
 
-Every client gets a **private Telegram bot** — your AI assistant, always with you:
+Every client gets a **private Telegram bot** - your AI assistant, always with you:
 
 ```
 You: "Where's the Smith contract?"
@@ -67,7 +67,7 @@ AI:  "March 12: You said you'd send comps by EOW.
       That's overdue. Want me to draft a message?"
 ```
 
-Plus automatic **morning briefs**, **proactive alerts** for missed follow-ups, and **daily system checks** — all delivered right to your phone.
+Plus automatic **morning briefs**, **proactive alerts** for missed follow-ups, and **daily system checks** - all delivered right to your phone.
 
 ---
 
@@ -103,11 +103,11 @@ Plus automatic **morning briefs**, **proactive alerts** for missed follow-ups, a
 
 Your personal **web dashboard** at `yourname.kaihamil.com`:
 
-- 🟢 **Status at a glance** — Is everything running? Green = good.
-- 📋 **Activity log** — See exactly what your AI has been doing
-- 📁 **File browser** — Your organized files, searchable
-- 🧠 **Knowledge graph** — Everything your AI knows about your business
-- 📊 **Metrics** — Time saved, items organized, insights
+- 🟢 **Status at a glance** - Is everything running? Green = good.
+- 📋 **Activity log** - See exactly what your AI has been doing
+- 📁 **File browser** - Your organized files, searchable
+- 🧠 **Knowledge graph** - Everything your AI knows about your business
+- 📊 **Metrics** - Time saved, items organized, insights
 
 *Full visibility. Full audit trail. Full peace of mind.*
 
@@ -115,7 +115,7 @@ Your personal **web dashboard** at `yourname.kaihamil.com`:
 
 ## What Makes This Different
 
-**It's YOURS.** Not shared software — your own AI on your own isolated server. Your data never touches anyone else's.
+**It's YOURS.** Not shared software - your own AI on your own isolated server. Your data never touches anyone else's.
 
 **It LEARNS.** Unlike generic tools, your agent builds deep knowledge of your business, clients, and preferences over time.
 
@@ -144,4 +144,4 @@ No pitch. No pressure. Just clarity.
 
 ---
 
-*Valé OS by Kai Hamil — Your Valé, your craft.*
+*Valé OS by Kai Hamil - Your Valé, your craft.*

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP Received - Gatefield</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ html, body { height: 100%; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 2rem;
+ text-align: center;
+ }
+
+ .mark {
+ margin-bottom: 3rem;
+ }
+
+ .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.32em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ .wordmark {
+ font-family: 'Cinzel', serif;
+ font-weight: 600;
+ font-size: 2.5rem;
+ letter-spacing: 0.1em;
+ color: var(--gatefield-green);
+ }
+
+ .rule {
+ width: 50px;
+ height: 1px;
+ background: var(--brass);
+ margin: 1.5rem auto;
+ position: relative;
+ }
+ .rule::after {
+ content: '';
+ position: absolute;
+ top: 4px;
+ left: 0; right: 0;
+ height: 1px;
+ background: var(--brass);
+ }
+
+ h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(1.75rem, 4vw, 2.5rem);
+ color: var(--gatefield-green);
+ margin-bottom: 1rem;
+ }
+ h1 em { font-style: italic; color: var(--deep-brass); }
+
+ p {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.2rem;
+ color: var(--muted);
+ max-width: 480px;
+ margin-bottom: 2.5rem;
+ line-height: 1.6;
+ }
+
+ .btn {
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ background: transparent;
+ border: 1px solid var(--brass);
+ padding: 1rem 2.5rem;
+ text-decoration: none;
+ transition: all 0.3s;
+ display: inline-block;
+ }
+ .btn:hover {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ }
+
+ footer {
+ position: absolute;
+ bottom: 2rem;
+ left: 0;
+ right: 0;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ }
+</style>
+</head>
+<body>
+
+<div class="mark">
+ <div class="eyebrow">Gatefield HOA</div>
+ <div class="wordmark">GATEFIELD</div>
+ <div class="rule"></div>
+</div>
+
+<h1>RSVP <em>received.</em></h1>
+<p>Thank you for your response. We've recorded your attendance for the annual meeting on June 6, 2026.</p>
+
+<a href="/homeowner.html" class="btn">Return to Homeowner Portal</a>
+
+<footer>© 2026 Gatefield Homeowners Association</footer>
+
+</body>
+</html>

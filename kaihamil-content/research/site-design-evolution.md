@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Goal:** Transform content.kaihamil.com from a storage location into a destination — a living expression of perspective, not just a file index.
+**Goal:** Transform content.kaihamil.com from a storage location into a destination - a living expression of perspective, not just a file index.
 
 **Core Philosophy:** Every page should be a work of art that represents Kyle's perspective on its element. Abstract, interpretable, balancing audience desires with authentic reality.
 
@@ -196,7 +196,7 @@
 
 4. **Coral Reef Visualization**
    - How to represent "living" systems? (Animation? Real-time metrics?)
-   - Agent clusters as fish schools — interaction patterns?
+   - Agent clusters as fish schools - interaction patterns?
 
 ---
 

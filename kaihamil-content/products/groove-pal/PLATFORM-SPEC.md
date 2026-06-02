@@ -1,4 +1,4 @@
-# Groove Pal — Platform Specification
+# Groove Pal - Platform Specification
 
 **MVP Features, User Flows, and Technical Requirements**
 
@@ -6,7 +6,7 @@
 
 ## Platform Philosophy
 
-The platform exists to support the physical experience, not replace it. Every feature should make the analog journey better — not create a parallel digital experience that competes with it.
+The platform exists to support the physical experience, not replace it. Every feature should make the analog journey better - not create a parallel digital experience that competes with it.
 
 **Design principles:**
 - Minimal by default

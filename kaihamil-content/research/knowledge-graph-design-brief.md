@@ -14,7 +14,7 @@ This document proposes a semantic knowledge graph architecture to store the rela
 **Core Philosophy:** Every entity is connected. Abstractions (frameworks) link to implementations (products). Decisions link to outcomes. Content links to the thinking that produced it. Transparency is achieved through auditable relationship chains.
 
 **Foundational Design Principle:**
-> Systems serve presence. The infrastructure we build — automations, agents, workflows, knowledge graphs — exists to create space for physical presence with other humans. Digital scaled communication, record-keeping, content production: these should happen without consuming the attention they enable. The goal is lower overhead, less friction, more presence. Work for life, not the reverse.
+> Systems serve presence. The infrastructure we build - automations, agents, workflows, knowledge graphs - exists to create space for physical presence with other humans. Digital scaled communication, record-keeping, content production: these should happen without consuming the attention they enable. The goal is lower overhead, less friction, more presence. Work for life, not the reverse.
 >
 > *This principle guides all design decisions: Does this system increase or decrease Kyle's capacity for presence?*
 
@@ -261,7 +261,7 @@ kai:resolves a rdf:Property ;
 - [ ] Can trace idea evolution (origin → development → current form)
 - [ ] Can identify patterns (recurring frictions, successful frameworks)
 - [ ] Can support RAG with high relevance and accuracy
-- [ ] Is auditable — any claim can be traced to source
+- [ ] Is auditable - any claim can be traced to source
 
 ---
 

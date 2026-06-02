@@ -6,9 +6,9 @@
 
 ## What Is This?
 
-Groove Pal is a vinyl sharing network built on trust, patience, and presence. It's what happens when you combine the intimacy of a penpal with the soul of a record collection — and let it travel.
+Groove Pal is a vinyl sharing network built on trust, patience, and presence. It's what happens when you combine the intimacy of a penpal with the soul of a record collection - and let it travel.
 
-You receive a record. You listen — really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
+You receive a record. You listen - really listen. You attach your sticker. You send it to someone new. The record travels. The connection grows.
 
 No algorithms. No feeds. Just music, mail, and meaning.
 
@@ -35,11 +35,11 @@ Every friction is a feature. Every delay is a gift. The wait makes the arrival m
 ### The Journey of a Record
 
 1. **You receive a vinyl** from a Groove Pal (or join and receive your welcome record)
-2. **You listen** — sit with someone, put on the record, be present
-3. **You attach your sticker** — your QR code joins the record's story
-4. **You send it forward** — mail it to a friend, family member, or stranger
-5. **They scan and register** — now they're a Groove Pal too
-6. **The cycle continues** — the record collects stickers, stories, miles
+2. **You listen** - sit with someone, put on the record, be present
+3. **You attach your sticker** - your QR code joins the record's story
+4. **You send it forward** - mail it to a friend, family member, or stranger
+5. **They scan and register** - now they're a Groove Pal too
+6. **The cycle continues** - the record collects stickers, stories, miles
 
 ### The Sticker System
 
@@ -53,9 +53,9 @@ On the record sleeve, stickers accumulate like stamps in a passport. Each scan r
 
 ### The Honor System
 
-> "This is a network of Groove Pals — not banking regulators."
+> "This is a network of Groove Pals - not banking regulators."
 
-There's no enforcement. No penalties. No tracking beyond what people choose to share. If a record stops traveling, that's okay — it found a home. If someone doesn't send it forward, the network absorbs it gracefully.
+There's no enforcement. No penalties. No tracking beyond what people choose to share. If a record stops traveling, that's okay - it found a home. If someone doesn't send it forward, the network absorbs it gracefully.
 
 Trust is the feature, not a bug.
 
@@ -66,10 +66,10 @@ Trust is the feature, not a bug.
 Digital music is infinite and weightless. That's its gift and its curse.
 
 Vinyl is finite and physical. It demands:
-- **Space** — you can't hoard infinitely
-- **Time** — you can't skip; you sit with the whole side
-- **Presence** — you can't background it; it asks for attention
-- **Care** — it can scratch, warp, break
+- **Space** - you can't hoard infinitely
+- **Time** - you can't skip; you sit with the whole side
+- **Presence** - you can't background it; it asks for attention
+- **Care** - it can scratch, warp, break
 
 When you send someone a record, you're sending them time. You're saying: *this mattered to me enough to hold it, listen to it, and pass it on.*
 
@@ -84,7 +84,7 @@ Groove Pal is for people who:
 - Miss the ritual of music
 - Want connection that isn't mediated by algorithms
 - Believe in trust between strangers
-- Have records they love — and want to share
+- Have records they love - and want to share
 
 It's not for collectors who want to preserve value. It's not for completists who need every pressing. It's for people who understand that music gets better when it travels, and records gain meaning from the people who've loved them.
 
@@ -94,10 +94,10 @@ It's not for collectors who want to preserve value. It's not for completists who
 
 **groovepal.com** is where the digital meets the physical:
 
-- **Track your records** — see where the vinyl you've sent has traveled
-- **Discover stories** — read notes from the people who held it before you
-- **Say thanks** — send gratitude to the pal who sent you a record
-- **Earn credits** — the more you share, the more free records come your way
+- **Track your records** - see where the vinyl you've sent has traveled
+- **Discover stories** - read notes from the people who held it before you
+- **Say thanks** - send gratitude to the pal who sent you a record
+- **Earn credits** - the more you share, the more free records come your way
 
 The platform is minimal by design. It exists to support the physical experience, not replace it.
 
@@ -105,11 +105,11 @@ The platform is minimal by design. It exists to support the physical experience,
 
 ## Getting Started
 
-1. **Join for $45** — receive your welcome vinyl + sticker sheet
-2. **Listen** — put on the record, be present
-3. **Attach your sticker** — add your QR code to the sleeve
-4. **Send it forward** — mail it to someone you think will love it
-5. **Repeat** — keep the groove moving
+1. **Join for $45** - receive your welcome vinyl + sticker sheet
+2. **Listen** - put on the record, be present
+3. **Attach your sticker** - add your QR code to the sleeve
+4. **Send it forward** - mail it to someone you think will love it
+5. **Repeat** - keep the groove moving
 
 ---
 

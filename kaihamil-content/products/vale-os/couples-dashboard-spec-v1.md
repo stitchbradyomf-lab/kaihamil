@@ -4,7 +4,7 @@
 
 **Product:** Couples Valé  
 **For:** Kyle & Marissa Brady (founding couple)  
-**Purpose:** Relationship infrastructure—system for the "us"  
+**Purpose:** Relationship infrastructure-system for the "us"  
 **Architecture:** Dual individual views + shared alignment layer
 
 ---
@@ -111,7 +111,7 @@
 ### Quote of the Day
 ```
 "Be curious, not judgmental."
-— Ted Lasso
+- Ted Lasso
 ```
 
 ---
@@ -138,7 +138,7 @@
 ## View 3: Both (The "Us")
 
 ### Purpose
-Show the health of the connection—overlaps, gaps, opportunities
+Show the health of the connection-overlaps, gaps, opportunities
 
 ### Alignment Matrix
 ```
@@ -162,7 +162,7 @@ Show the health of the connection—overlaps, gaps, opportunities
 │ COMPLEMENTARY ACTIONS                   │
 │ → Kyle researching Iceland flights     │
 │ → Marissa researching Iceland lodging  │
-│   [Perfect—working together]            │
+│   [Perfect-working together]            │
 └─────────────────────────────────────────┘
 ```
 
@@ -184,7 +184,7 @@ Show the health of the connection—overlaps, gaps, opportunities
 │                                         │
 │ 💕 Anniversary (Aug 6)                   │
 │ Status: Needs planning                  │
-│ 16 years—special milestone              │
+│ 16 years-special milestone              │
 │ [Start planning conversation]           │
 └─────────────────────────────────────────┘
 ```
@@ -238,7 +238,7 @@ Show the health of the connection—overlaps, gaps, opportunities
 │ TODAY'S WISDOM                          │
 │                                         │
 │ "Be curious, not judgmental."           │
-│ — Ted Lasso                             │
+│ - Ted Lasso                             │
 │                                         │
 │ Both save quotes they love.             │
 │ Daily rotation.                         │
@@ -260,15 +260,15 @@ THEN promote to "Joint Goal" with urgency boost
 **Misalignment Detection:**
 ```
 IF Kyle.urgent["work_stress"] AND Marissa.not_mentioned["work_stress"]
-THEN alert Kyle: "Marissa may not see this—share?"
-AND alert Marissa: "Kyle flagged work stress—check in?"
+THEN alert Kyle: "Marissa may not see this-share?"
+AND alert Marissa: "Kyle flagged work stress-check in?"
 ```
 
 **Complementary Detection:**
 ```
 IF Kyle.working_on["iceland_flights"] 
    AND Marissa.working_on["iceland_lodging"]
-THEN Both view: "You're both working on Iceland—great teamwork!"
+THEN Both view: "You're both working on Iceland-great teamwork!"
 ```
 
 ### Manual Signals
@@ -341,7 +341,7 @@ Users can explicitly signal:
 
 ### Security
 - Shared password protects `/vale/couples/*`
-- No persistent "user login"—just session toggle
+- No persistent "user login"-just session toggle
 - Full transparency: both can see everything
 - Optional: private notes (flagged as "only me")
 
@@ -359,7 +359,7 @@ vale/couples/tommy-melissa/
 ```
 
 **Cross-couple features (later):**
-- "Couples book club"—shared reading
+- "Couples book club"-shared reading
 - Double date suggestions
 - Comparative insights (opt-in)
 

@@ -41,19 +41,19 @@ Advances in how we program computers have historically led to shifts in how soci
 | Old Framing | New Framing |
 |-------------|-------------|
 | "Frameworks for the AI age" | "The roadmap from instruction to intention" |
-| "Tools for agency" | "Bridge to agency—meeting you where you are" |
+| "Tools for agency" | "Bridge to agency-meeting you where you are" |
 | "Optimize your life" | "Upgrade your operating system" |
 | Target: Already self-directed people | Target: People feeling the script crack |
 
 ### The Narrative Arc
 1. **Recognition:** "The script isn't working" (assembly language showing errors)
-2. **Transition:** Kai Hamil frameworks (high-level language—still writing code, but more efficiently)
-3. **Agency:** Intent-based living with AI support (agentic—declare goals, system navigates)
+2. **Transition:** Kai Hamil frameworks (high-level language-still writing code, but more efficiently)
+3. **Agency:** Intent-based living with AI support (agentic-declare goals, system navigates)
 
 ### Content Principles
 - Lead with empathy for people recognizing the script is cracking
 - Use 2nd person to speak directly to the experience
-- Avoid emdash (—); use standard dash (-) or 3-dot ellipses (...) instead
+- Avoid emdash (-); use standard dash (-) or 3-dot ellipses (...) instead
 - Acknowledge the fear and grief of letting go of the old script
 - Position KH as bridge, not destination
 
@@ -73,7 +73,7 @@ Not: Already self-actualized high-performers. People in transition, feeling the 
 
 ### Key Messaging
 - "Most people are running assembly in an agentic world"
-- "The transition isn't automatic—you need a roadmap"
+- "The transition isn't automatic-you need a roadmap"
 - "We've done the hard work of building the bridge"
 - "The script was someone else's design for a life"
 
@@ -96,11 +96,11 @@ Not: Already self-actualized high-performers. People in transition, feeling the 
 - How much personal story vs. universal framework?
 
 ### Related Files
-- `/wisdom/when-the-script-stops-working.html` — Empathetic entry point for script-crackers
-- `/content-pipeline/life-script-evolution-analysis.md` — Historical analysis (5 stages)
-- `/content-pipeline/kh-frameworks-stage5-mapping.md` — Framework → challenge mapping
-- `/wisdom/assembly-to-agency.html` — Code/life parallel essay
-- `/about/kyle-joseph-brady.html` — Personal bio with journey narrative
+- `/wisdom/when-the-script-stops-working.html` - Empathetic entry point for script-crackers
+- `/content-pipeline/life-script-evolution-analysis.md` - Historical analysis (5 stages)
+- `/content-pipeline/kh-frameworks-stage5-mapping.md` - Framework → challenge mapping
+- `/wisdom/assembly-to-agency.html` - Code/life parallel essay
+- `/about/kyle-joseph-brady.html` - Personal bio with journey narrative
 
 ---
 

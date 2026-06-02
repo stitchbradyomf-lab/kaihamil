@@ -1,4 +1,4 @@
-# Groove Pal — Brand Guide
+# Groove Pal - Brand Guide
 
 **A pal to whom you send your groove.**
 
@@ -6,7 +6,7 @@
 
 ## Elevator Pitch
 
-Welcome to Groove Pal — a pen-pal style vinyl record sharing program and platform that promotes experiencing and sharing analog activities with others. The platform tracks the journey of a record and enables sharing a conversation about the listening experience, bringing people together over shared non-screen time experiences.
+Welcome to Groove Pal - a pen-pal style vinyl record sharing program and platform that promotes experiencing and sharing analog activities with others. The platform tracks the journey of a record and enables sharing a conversation about the listening experience, bringing people together over shared non-screen time experiences.
 
 ---
 
@@ -131,14 +131,14 @@ We find meaning in small things. We don't lecture about it.
 ### Color Palette
 
 **Primary**
-- **Cream** (#FAF6F1) — Background, warmth, paper
-- **Vinyl Black** (#1A1A1A) — Text, contrast, the record itself
-- **Amber Gold** (#C9A227) — Accent, warmth, nostalgia
+- **Cream** (#FAF6F1) - Background, warmth, paper
+- **Vinyl Black** (#1A1A1A) - Text, contrast, the record itself
+- **Amber Gold** (#C9A227) - Accent, warmth, nostalgia
 
 **Secondary**
-- **Warm Brown** (#6B5344) — Secondary text, earthiness
-- **Terracotta** (#B87A5E) — Highlights, energy
-- **Soft White** (#FFFDF9) — Cards, brightness
+- **Warm Brown** (#6B5344) - Secondary text, earthiness
+- **Terracotta** (#B87A5E) - Highlights, energy
+- **Soft White** (#FFFDF9) - Cards, brightness
 
 ### Typography
 
@@ -212,7 +212,7 @@ We find meaning in small things. We don't lecture about it.
 **Style:** Rigid record mailer with custom sleeve
 
 **Exterior:**
-- "Handle with care — music inside"
+- "Handle with care - music inside"
 - Groove Pal logo (subtle)
 - Space for handwritten address
 

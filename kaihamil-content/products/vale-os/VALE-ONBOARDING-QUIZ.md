@@ -1,4 +1,4 @@
-# Valé OS — Onboarding Quiz
+# Valé OS - Onboarding Quiz
 
 *This quiz guides new Valé users through initial configuration. Responses generate the SOUL.md, USER.md, and openclaw.json settings.*
 
@@ -8,10 +8,10 @@
 
 **Q1. What's the primary focus for your Valé?**
 
-- [ ] **Personal Life** — Family, health, home, relationships, personal admin
-- [ ] **Work** — Job responsibilities, meetings, tasks, deadlines, colleagues
-- [ ] **Business** — Entrepreneurship, clients, revenue, operations, growth
-- [ ] **General** — All-purpose assistant, balanced across domains
+- [ ] **Personal Life** - Family, health, home, relationships, personal admin
+- [ ] **Work** - Job responsibilities, meetings, tasks, deadlines, colleagues
+- [ ] **Business** - Entrepreneurship, clients, revenue, operations, growth
+- [ ] **General** - All-purpose assistant, balanced across domains
 
 **Q2. In one sentence, what do you most want your Valé to help with?**
 
@@ -58,11 +58,11 @@ Brief  [1]----[2]----[3]----[4]----[5]  Thorough
 
 **Q7. Pick the tone that fits best:**
 
-- [ ] **Warm & Friendly** — Like a helpful colleague
-- [ ] **Direct & Efficient** — No fluff, just results
-- [ ] **Calm & Supportive** — Reassuring, low-pressure
-- [ ] **Energetic & Motivating** — Upbeat, encouraging
-- [ ] **Neutral & Professional** — Polished, business-appropriate
+- [ ] **Warm & Friendly** - Like a helpful colleague
+- [ ] **Direct & Efficient** - No fluff, just results
+- [ ] **Calm & Supportive** - Reassuring, low-pressure
+- [ ] **Energetic & Motivating** - Upbeat, encouraging
+- [ ] **Neutral & Professional** - Polished, business-appropriate
 
 **Q8. Any personality traits you want your Valé to have?**
 
@@ -198,7 +198,7 @@ Brief  [1]----[2]----[3]----[4]----[5]  Thorough
 
 - [ ] Everything relevant (full memory)
 - [ ] Work/task context only
-- [ ] Minimal — just current tasks
+- [ ] Minimal - just current tasks
 - [ ] Ask me before storing anything personal
 
 **Q20. Are there things your Valé should NEVER store or reference?**
@@ -298,11 +298,11 @@ Identity:
 
 After completing this quiz:
 
-1. **Discovery Call** — We review your responses together
-2. **Chaos Audit** — Map your current tools and workflows
-3. **Build & Configure** — Your Valé is created with these settings
-4. **Training** — Learn how to work with your Valé
-5. **Go Live** — Start using your personal operating system
+1. **Discovery Call** - We review your responses together
+2. **Chaos Audit** - Map your current tools and workflows
+3. **Build & Configure** - Your Valé is created with these settings
+4. **Training** - Learn how to work with your Valé
+5. **Go Live** - Start using your personal operating system
 
 ---
 

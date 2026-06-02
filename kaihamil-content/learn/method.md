@@ -8,7 +8,7 @@
 
 **Agency is earned through preparation.**
 
-You don't wait for opportunity. You build the capacity to recognize it, evaluate it, and act on it — before you need to.
+You don't wait for opportunity. You build the capacity to recognize it, evaluate it, and act on it - before you need to.
 
 This method is how you do that.
 
@@ -18,9 +18,9 @@ This method is how you do that.
 
 Three forces drive this work:
 
-1. **Agency** — The ability to shape your circumstances rather than react to them
-2. **Pride of ownership** — Knowing you built something that works, that lasts, that matters
-3. **Confidence** — The quiet certainty that you can do it better than they can, because you've done the work
+1. **Agency** - The ability to shape your circumstances rather than react to them
+2. **Pride of ownership** - Knowing you built something that works, that lasts, that matters
+3. **Confidence** - The quiet certainty that you can do it better than they can, because you've done the work
 
 These aren't abstract virtues. They're the outputs of a specific kind of preparation.
 
@@ -73,7 +73,7 @@ What must be true for this to work?
 - Personal (what you bring, what you need)
 
 ### The Moat
-What makes this defensible? Not just different — hard to copy.
+What makes this defensible? Not just different - hard to copy.
 
 ### The Exit (or End State)
 Where does this lead? What does success look like in 3 years? 10?
@@ -168,10 +168,10 @@ The method isn't just for when you have an idea. It's for before you have an ide
 
 **You prepare by:**
 
-1. **Building the information system** — The mechanism that captures, organizes, and surfaces ideas
-2. **Developing pattern recognition** — Seeing the same friction in different contexts
-3. **Maintaining optionality** — Keeping capacity available for when the right opportunity appears
-4. **Documenting the work** — Creating artifacts that demonstrate competence
+1. **Building the information system** - The mechanism that captures, organizes, and surfaces ideas
+2. **Developing pattern recognition** - Seeing the same friction in different contexts
+3. **Maintaining optionality** - Keeping capacity available for when the right opportunity appears
+4. **Documenting the work** - Creating artifacts that demonstrate competence
 
 **The result:** When opportunity arrives, you're ready. Not scrambling. Not improvising. Executing.
 
@@ -232,11 +232,11 @@ You don't build to impress. You build to work. The elegance is in the function.
 
 The Kai Hamil method is a system for turning ideas into impact through:
 
-1. **Preparation** — Building capacity before you need it
-2. **Clarity** — Understanding what you're building and why
-3. **Execution** — Doing the smallest next step with presence
-4. **Learning** — Closing the feedback loop between results and ideas
-5. **Impact** — Creating change that matters
+1. **Preparation** - Building capacity before you need it
+2. **Clarity** - Understanding what you're building and why
+3. **Execution** - Doing the smallest next step with presence
+4. **Learning** - Closing the feedback loop between results and ideas
+5. **Impact** - Creating change that matters
 
 It's not about being busy. It's about being ready.
 

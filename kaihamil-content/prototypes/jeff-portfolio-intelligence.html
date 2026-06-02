@@ -533,7 +533,7 @@
                     <strong>Top 3 by price:</strong>
                     ${sorted.slice(0, 3).map((t, i) => `
                         <div style="margin-top: 10px; padding: 10px; background: var(--bg-cream); border-radius: 8px;">
-                            ${i + 1}. ${t.address} — $${(t.price/1000000).toFixed(2)}M
+                            ${i + 1}. ${t.address} - $${(t.price/1000000).toFixed(2)}M
                         </div>
                     `).join('')}
                 </div>
@@ -558,7 +558,7 @@
                     <strong>Fastest 3 sales:</strong>
                     ${sorted.slice(0, 3).map((t, i) => `
                         <div style="margin-top: 10px; padding: 10px; background: var(--bg-cream); border-radius: 8px;">
-                            ${i + 1}. ${t.address} — ${t.daysOnMarket} days
+                            ${i + 1}. ${t.address} - ${t.daysOnMarket} days
                         </div>
                     `).join('')}
                 </div>
