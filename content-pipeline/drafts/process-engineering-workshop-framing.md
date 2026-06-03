@@ -303,5 +303,35 @@ This is the shift. This is the work.
 
 ---
 
+## Human-in-the-Loop Process Engineering
+
+**Anchor on where people need to be involved.**
+
+Then optimize everything else around it.
+
+### The Four Levels
+
+| Level | Human Role | AI Role | Classification |
+|-------|------------|---------|----------------|
+| **1. Full Control** | Human primary | None | Human primary |
+| **2. AI Assisted** | Human decides | AI supports | Human primary |
+| **3. AI Performed, Human Approves** | Human validates | AI executes | AI primary |
+| **4. AI Performed, Human Aware** | Human notified | AI executes | AI primary |
+
+**The split:**
+- Top two levels: Human primary
+- Bottom two levels: AI primary
+
+### The Design Sequence
+
+1. Identify what needs human involvement (Levels 1-2)
+2. Protect and optimize those areas
+3. Automate everything else (Levels 3-4)
+4. Measure against the bottleneck
+
+This is the framework. This is the work.
+
+---
+
 *Transcribed: June 3, 2026*
 *Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating, Tokyo colleague conversation*
