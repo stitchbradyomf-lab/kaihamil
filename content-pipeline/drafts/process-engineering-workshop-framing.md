@@ -333,5 +333,46 @@ This is the framework. This is the work.
 
 ---
 
+## The Constraint Paradox
+
+**Theory of Constraints states:** There will always be a weakest link. Every system is rate-limited somewhere. This is a characteristic of variable systems.
+
+**The goal:** Remove, exploit, or elevate constraints so they are no longer the bottleneck.
+
+**The result:** A new bottleneck pops up. Focus shifts there.
+
+Sounds like whack-a-mole.
+
+**When are you done?**
+
+You're done when the system is **good enough**.
+
+When incremental investment in this system is now prioritized against investment in **other systems**.
+
+And so on.
+
+---
+
+## Purposeful Constraints
+
+**Not all constraints are problems.**
+
+Having a real Italian toss pizza dough is not an inefficiency.
+
+It's a **competitive advantage**.
+
+Some constraints:
+- Create value
+- Define identity
+- Differentiate from alternatives
+
+These constraints are **features, not bugs**.
+
+**The discernment:** Which constraints to eliminate? Which to preserve?
+
+This is the art beneath the science.
+
+---
+
 *Transcribed: June 3, 2026*
 *Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating, Tokyo colleague conversation*
