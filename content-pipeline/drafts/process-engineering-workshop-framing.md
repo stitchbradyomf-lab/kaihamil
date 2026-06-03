@@ -232,5 +232,53 @@ That's all there is to it.
 
 ---
 
+## The Vendor Operations Insight
+
+*(Hardware crisis averted. Back in business.)*
+
+Meeting with Tokyo colleague. Applying process engineering to vendor operations.
+
+**The revelation:**
+
+The goal of successful vendor operations isn't to be successful vendor operations.
+
+It is to **stay ahead of being a constraint in the system relative to alternatives**.
+
+---
+
+## Metrics and the Target
+
+Metrics and KPIs are only as good as their **predictive and representative relationship to the bottleneck** in the way of hitting your target.
+
+And in order for there to be a bottleneck, **there needs to be a target**.
+
+Otherwise the concept of speed and throughput do not matter.
+
+Which might be the case in some processes—but certainly not in anything you're paying for.
+
+---
+
+## The Implication
+
+Without a target:
+- Speed is meaningless
+- Throughput is irrelevant
+- Optimization is theater
+
+With a target:
+- The bottleneck reveals itself
+- Metrics become meaningful
+- Process engineering has purpose
+
+**The sequence:**
+1. Define the target
+2. Identify the bottleneck
+3. Engineer the process
+4. Measure against constraint
+
+Not the reverse.
+
+---
+
 *Transcribed: June 3, 2026*
-*Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating*
+*Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating, Tokyo colleague conversation*
