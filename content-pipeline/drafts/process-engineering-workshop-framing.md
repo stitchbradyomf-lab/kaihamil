@@ -374,5 +374,17 @@ This is the art beneath the science.
 
 ---
 
+## The Answer
+
+It all comes back to the question:
+
+**"What do you want your people to do?"**
+
+You want your Italian to toss pizza dough.
+
+The constraint is the point.
+
+---
+
 *Transcribed: June 3, 2026*
 *Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating, Tokyo colleague conversation*
