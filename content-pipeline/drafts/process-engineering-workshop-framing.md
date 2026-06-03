@@ -280,5 +280,28 @@ Not the reverse.
 
 ---
 
+## Vendor Operations = People Operations
+
+**Vendor versus internal employee is a lower-level distinction.**
+
+It doesn't apply to the automation space.
+
+**The real filter:** People versus machine.
+
+**The hierarchy of substitutes:**
+- What needs to be done?
+- What are the possible paths?
+- Which path is better?
+- Follow that path.
+
+Sometimes the path leads to a vendor.  
+Sometimes it leads elsewhere.
+
+**The trend:** Paths to vendors are decreasing. Paths to automation are increasing.
+
+This is the shift. This is the work.
+
+---
+
 *Transcribed: June 3, 2026*
 *Source: Kitchen realization, dishwasher unloading, outdoor laptop overheating, Tokyo colleague conversation*
