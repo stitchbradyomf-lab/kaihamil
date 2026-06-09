@@ -236,6 +236,46 @@
  border-bottom-color: var(--brass);
  }
 
+ /* Nav groups for dropdown */
+ .nav-group {
+ position: relative;
+ }
+
+ .nav-parent {
+ cursor: pointer;
+ }
+
+ .nav-children {
+ display: none;
+ position: absolute;
+ top: 100%;
+ left: 50%;
+ transform: translateX(-50%);
+ background: var(--parchment);
+ border: 1px solid var(--brass-tint);
+ padding: 0.75rem 0;
+ min-width: 160px;
+ z-index: 100;
+ box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+ }
+
+ .nav-children a {
+ display: block;
+ padding: 0.5rem 1.25rem;
+ font-size: 0.65rem;
+ white-space: nowrap;
+ border-bottom: none;
+ }
+
+ .nav-children a:hover {
+ background: var(--aged-paper);
+ border-bottom-color: transparent;
+ }
+
+ .nav-group:hover .nav-children {
+ display: block;
+ }
+
  /* Welcome */
  .welcome {
  text-align: center;
@@ -616,13 +656,22 @@
  </div>
 
  <div class="subnav">
- <a href="#budget">Budget</a>
+ <div class="nav-group">
+ <a href="#budget" class="nav-parent">Budget</a>
+ <div class="nav-children">
  <a href="budget-history.html">History</a>
  <a href="budget-alternatives.html">2027 Options</a>
+ </div>
+ </div>
  <a href="#garden">Landscape Committee</a>
  <a href="#documents">Guidelines</a>
  <a href="#news">News</a>
+ <div class="nav-group">
+ <a href="annual-meeting-2026.html" class="nav-parent">Meetings</a>
+ <div class="nav-children">
  <a href="annual-meeting-2026.html">Annual Meeting 2026</a>
+ </div>
+ </div>
  <a href="#comment">Submit a Comment</a>
  </div>
 
