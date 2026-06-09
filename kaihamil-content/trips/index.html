@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trips | Kai Hamil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #faf6f1;
+            --bg-card: #fffdf9;
+            --bg-warm: #f8f5f0;
+            --brown-dark: #3d2817;
+            --brown-medium: #6b5344;
+            --amber: #d4a574;
+            --gold: #c9a227;
+            --gold-light: #e8d5a3;
+            --border: #e8dfd3;
+            --sand: #e8ddd3;
+            --terracotta: #b87a5e;
+            --ink-dark: #2c2420;
+            --ink-medium: #5a5048;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-cream);
+            color: var(--brown-dark);
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--ink-dark);
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--ink-medium);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: var(--terracotta);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 100px 40px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--ink-dark);
+        }
+        
+        .subtitle {
+            color: var(--ink-medium);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        
+        /* Trip Cards */
+        .trips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .trip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .trip-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .trip-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--terracotta);
+            margin-bottom: 8px;
+        }
+        
+        .trip-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--ink-dark);
+        }
+        
+        .trip-meta {
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+            margin-bottom: 12px;
+        }
+        
+        .trip-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--brown-medium);
+        }
+        
+        footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--ink-medium);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="../" class="logo">kai hamil</a>
+        <a href="../" class="back-link">← Back</a>
+    </nav>
+    
+    <main>
+        <h1>Trips</h1>
+        <p class="subtitle">Itineraries, plans, and travel notes.</p>
+        
+        <div class="trips-list">
+            <a href="azores-15-year-anniversary.html" class="trip-card">
+                <div class="trip-eyebrow">Anniversary · August 2026</div>
+                <h2 class="trip-title">Azores 15 Year Anniversary</h2>
+                <div class="trip-meta">São Miguel, Açores · 6 nights · 2 travelers</div>
+                <p class="trip-desc">Six nights from west to east — decompress at Pedras do Mar, adventure through Sete Cidades and crater lakes, then thermal calm at Octant Furnas.</p>
+            </a>
+        </div>
+        
+        <footer>
+            <p>© 2026 Kai Hamil</p>
+        </footer>
+    </main>
+</body>
+</html>
