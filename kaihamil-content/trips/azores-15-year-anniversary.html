@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>São Miguel · 18–25 August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#15271F;
+ --sea:#1B4D4A;
+ --ochre:#BB6F38;
+ --hydrangea:#6E8FBC;
+ --mist:#EEF1ED;
+ --card:#FBFCFA;
+ --line:#D6DDD6;
+ --muted:#5C6B61;
+ }
+ *{box-sizing:border-box;}
+ html{-webkit-text-size-adjust:100%;}
+ body{
+ margin:0;
+ background:var(--mist);
+ color:var(--ink);
+ font-family:"Inter",system-ui,sans-serif;
+ font-size:16px;
+ line-height:1.6;
+ -webkit-font-smoothing:antialiased;
+ }
+ .wrap{
+ max-width:760px;
+ margin:0 auto;
+ padding:0 22px 72px;
+ }
+ .mono{font-family:"Space Mono",ui-monospace,monospace;}
+ a{color:var(--sea);text-decoration:none;border-bottom:1px solid var(--line);}
+ a:hover{border-color:var(--sea);}
+ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:2px;}
+
+ /* ---------- HERO ---------- */
+ header.hero{
+ padding:60px 0 34px;
+ border-bottom:1px solid var(--line);
+ }
+ .eyebrow{
+ font-family:"Space Mono",monospace;
+ font-size:12px;
+ letter-spacing:.28em;
+ text-transform:uppercase;
+ color:var(--sea);
+ margin:0 0 18px;
+ }
+ h1{
+ font-family:"Fraunces",serif;
+ font-weight:500;
+ font-size:clamp(54px,13vw,104px);
+ line-height:.94;
+ letter-spacing:-.02em;
+ margin:0;
+ }
+ h1 .sub{
+ display:block;
+ font-style:italic;
+ font-weight:400;
+ font-size:clamp(20px,5vw,30px);
+ color:var(--muted);
+ letter-spacing:0;
+ margin-top:14px;
+ line-height:1.25;
+ }
+ .meta{
+ margin-top:30px;
+ font-family:"Space Mono",monospace;
+ font-size:12.5px;
+ letter-spacing:.04em;
+ color:var(--ink);
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px 0;
+ }
+ .meta span{padding-right:16px;margin-right:16px;border-right:1px solid var(--line);white-space:nowrap;}
+ .meta span:last-child{border-right:0;}
+
+ /* ---------- SECTIONS ---------- */
+ section{padding-top:46px;}
+ .lede{
+ font-size:18px;
+ color:var(--ink);
+ max-width:62ch;
+ }
+ .lede strong{font-weight:600;}
+ h2{
+ font-family:"Space Mono",monospace;
+ font-size:12px;
+ font-weight:700;
+ letter-spacing:.26em;
+ text-transform:uppercase;
+ color:var(--sea);
+ margin:0 0 22px;
+ display:flex;
+ align-items:center;
+ gap:12px;
+ }
+ h2::after{content:"";flex:1;height:1px;background:var(--line);}
+
+ /* ---------- FLIGHTS ---------- */
+ .flights{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+ .flight{
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:3px;
+ padding:18px 20px;
+ }
+ .flight .tag{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+ .route{
+ font-family:"Fraunces",serif;
+ font-size:30px;
+ font-weight:500;
+ margin:8px 0 2px;
+ letter-spacing:.01em;
+ }
+ .route .arrow{color:var(--ochre);font-style:italic;padding:0 6px;}
+ .flight .when{font-size:14px;color:var(--muted);margin-bottom:12px;}
+ .times{font-family:"Space Mono",monospace;font-size:14px;line-height:1.9;}
+ .times b{color:var(--ink);}
+ .times .plus{color:var(--ochre);font-size:11px;vertical-align:super;}
+ .fnote{
+ margin-top:14px;
+ font-size:13px;
+ color:var(--muted);
+ line-height:1.55;
+ }
+
+ /* ---------- HOTELS ---------- */
+ .hotel{
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:3px;
+ padding:20px 22px;
+ margin-bottom:14px;
+ display:grid;
+ grid-template-columns:auto 1fr;
+ gap:0 22px;
+ }
+ .hotel .nights{
+ font-family:"Fraunces",serif;
+ font-size:40px;
+ font-weight:500;
+ line-height:1;
+ color:var(--sea);
+ text-align:center;
+ }
+ .hotel .nights small{display:block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--muted);margin-top:5px;}
+ .hotel h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin:0 0 3px;}
+ .hotel .place{font-size:13.5px;color:var(--muted);margin-bottom:8px;}
+ .hotel .role{font-size:14.5px;margin:0 0 10px;}
+ .hotel .dates{font-family:"Space Mono",monospace;font-size:12.5px;color:var(--ink);}
+ .hotel .contact{font-family:"Space Mono",monospace;font-size:12px;color:var(--muted);margin-top:6px;}
+ .hotel .contact b{color:var(--ochre);font-weight:700;}
+
+ /* ---------- ITINERARY SPINE ---------- */
+ .days{position:relative;margin-top:6px;padding-left:30px;}
+ .days::before{
+ content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;
+ background:linear-gradient(to bottom,var(--sea),#3C7458 38%,#8E7A48 64%,var(--ochre));
+ }
+ .day{position:relative;padding:0 0 30px;}
+ .day:last-child{padding-bottom:0;}
+ .day::before{
+ content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;
+ background:var(--node,var(--sea));border:3px solid var(--mist);
+ }
+ .day .dh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px;}
+ .day .num{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--muted);}
+ .day .date{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--node,var(--sea));font-weight:700;}
+ .day h3{font-family:"Fraunces",serif;font-weight:600;font-size:22px;margin:0;line-height:1.15;width:100%;}
+ .day p{margin:6px 0 0;font-size:15px;color:var(--ink);max-width:60ch;}
+
+ /* ---------- CHECKLIST ---------- */
+ ol.check{list-style:none;counter-reset:c;margin:0;padding:0;}
+ ol.check li{
+ counter-increment:c;
+ position:relative;
+ padding:13px 0 13px 44px;
+ border-bottom:1px solid var(--line);
+ font-size:15px;
+ }
+ ol.check li::before{
+ content:counter(c,decimal-leading-zero);
+ position:absolute;left:0;top:13px;
+ font-family:"Space Mono",monospace;font-size:12px;font-weight:700;
+ color:var(--ochre);
+ }
+ ol.check li b{font-weight:600;}
+ ol.check li .det{display:block;color:var(--muted);font-size:13px;margin-top:2px;}
+ ol.check li:first-child b::after{content:" ↓ book first";font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sea);font-weight:700;}
+
+ /* ---------- NOTES ---------- */
+ .notes{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ochre);border-radius:3px;padding:6px 22px;}
+ .notes dl{margin:0;}
+ .notes dt{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sea);margin-top:16px;}
+ .notes dd{margin:3px 0 16px;font-size:14.5px;color:var(--ink);}
+
+ footer{
+ margin-top:54px;padding-top:20px;border-top:1px solid var(--line);
+ font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);
+ display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+ }
+
+ /* ---------- MOTION ---------- */
+ .reveal{opacity:0;transform:translateY(10px);animation:rise .7s ease forwards;}
+ @keyframes rise{to{opacity:1;transform:none;}}
+ @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none;}}
+
+ /* ---------- RESPONSIVE ---------- */
+ @media (max-width:560px){
+ .flights{grid-template-columns:1fr;}
+ .meta span{border-right:0;padding-right:0;margin-right:0;}
+ .meta{gap:4px 18px;flex-direction:row;}
+ }
+
+ /* ---------- PRINT ---------- */
+ @media print{
+ body{background:#fff;font-size:11.5pt;}
+ .wrap{max-width:none;padding:0 6px;}
+ header.hero{padding-top:6px;}
+ .flight,.hotel,.notes,.day,ol.check li{break-inside:avoid;}
+ section{padding-top:24px;}
+ .reveal{animation:none;opacity:1;transform:none;}
+ a{border:0;color:var(--ink);}
+ }
+</style>
+</head>
+<body>
+<div class="wrap reveal">
+
+ <header class="hero">
+ <p class="eyebrow">Azores · Atlantic Portugal</p>
+ <h1>São&nbsp;Miguel
+ <span class="sub">Six nights, west to east — decompress, adventure, then thermal calm.</span>
+ </h1>
+ <div class="meta">
+ <span>18–25 AUG 2026</span>
+ <span>EWR ⇄ PDL</span>
+ <span>6 NIGHTS</span>
+ <span>2 TRAVELERS</span>
+ <span>2 HOTELS</span>
+ </div>
+ </header>
+
+ <section>
+ <p class="lede">The plan traces the island from its green western craters to the steaming eastern valley. Three nights on the north coast at <strong>Pedras do Mar</strong> keep the active days — Sete Cidades, the crater lake, the west coast — within easy reach. Then three nights east at <strong>Octant Furnas</strong> trade motion for thermal water, gardens, and nothing to do. The even split costs a little more than a Furnas-light version, but it earns you Nordeste and a true day of rest.</p>
+ </section>
+
+ <section>
+ <h2>Flights</h2>
+ <div class="flights">
+ <div class="flight">
+ <span class="tag">Outbound · Tue 18 Aug</span>
+ <div class="route">EWR<span class="arrow">→</span>PDL</div>
+ <div class="when">United · nonstop · red-eye · ~5h30</div>
+ <div class="times">
+ <div>Depart <b>23:05</b> &nbsp;Newark</div>
+ <div>Arrive <b>08:40</b><span class="plus">+1</span> &nbsp;Ponta Delgada</div>
+ </div>
+ <p class="fnote">Sleep on the plane, wake up on the island.</p>
+ </div>
+ <div class="flight">
+ <span class="tag">Return · Tue 25 Aug</span>
+ <div class="route">PDL<span class="arrow">→</span>EWR</div>
+ <div class="when">United · nonstop · ~6h</div>
+ <div class="times">
+ <div>Depart <b>11:00</b> &nbsp;Ponta Delgada</div>
+ <div>Arrive <b>early&nbsp;PM</b> &nbsp;Newark</div>
+ </div>
+ <p class="fnote">Same-day arrival home.</p>
+ </div>
+ </div>
+ <p class="fnote">Times are indicative — confirm exact schedule at booking; the route runs daily in peak August. The Azores sit <b>4 hours ahead</b> of New Jersey in summer.</p>
+ </section>
+
+ <section>
+ <h2>Hotels</h2>
+ <div class="hotel">
+ <div class="nights">3<small>NIGHTS</small></div>
+ <div>
+ <h3>Pedras do Mar Resort &amp; Spa</h3>
+ <div class="place">Fenais da Luz · north coast · 4.5★</div>
+ <p class="role">The active base — resort spa, sea views, and ~25 minutes from the airport. Your launchpad for the western excursions.</p>
+ <div class="dates">CHECK IN&nbsp; Wed 19 Aug &nbsp;·&nbsp; OUT&nbsp; Sat 22 Aug</div>
+ <div class="contact">pedrasdomar.com &nbsp;·&nbsp; <b>+351 296 249 300</b></div>
+ </div>
+ </div>
+ <div class="hotel">
+ <div class="nights">3<small>NIGHTS</small></div>
+ <div>
+ <h3>Octant Hotels Furnas</h3>
+ <div class="place">Furnas valley · east · 4.7★</div>
+ <p class="role">The thermal finale — geothermal pools, the couples massage, and deliberately empty days. The splurge, saved for last.</p>
+ <div class="dates">CHECK IN&nbsp; Sat 22 Aug &nbsp;·&nbsp; OUT&nbsp; Tue 25 Aug</div>
+ <div class="contact">furnas.octanthotels.com &nbsp;·&nbsp; <b>+351 296 249 200</b></div>
+ </div>
+ </div>
+ </section>
+
+ <section>
+ <h2>Day by day</h2>
+ <div class="days">
+ <div class="day" style="--node:#1B4D4A">
+ <div class="dh"><span class="num">DAY 01</span><span class="date">WED 19 AUG</span></div>
+ <h3>Arrive &amp; decompress</h3>
+ <p>Land around 08:40 and collect the rental. Ease into Ponta Delgada's old town and marina with a long lunch, check in at Pedras do Mar near 3, then nap off the red-eye. Resort spa and a quiet first dinner — nothing strenuous.</p>
+ </div>
+ <div class="day" style="--node:#2C6553">
+ <div class="dh"><span class="num">DAY 02</span><span class="date">THU 20 AUG</span></div>
+ <h3>West — Sete Cidades</h3>
+ <p>Vista do Rei and the short ridge walk to Boca do Inferno, looking down on the twin blue-and-green crater lakes. In the afternoon, Ponta da Ferraria — a hot spring inside an ocean tidal pool — timed to low tide. Mosteiros on the west coast if the light holds.</p>
+ </div>
+ <div class="day" style="--node:#3C7458">
+ <div class="dh"><span class="num">DAY 03</span><span class="date">FRI 21 AUG</span></div>
+ <h3>The crater lake</h3>
+ <p>Lagoa do Fogo in the morning, then the thermal forest pools at Caldeira Velha — book the first timed slot. Wind down in Ribeira Grande. Last night at Pedras do Mar.</p>
+ </div>
+ <div class="day" style="--node:#6E7A4E">
+ <div class="dh"><span class="num">DAY 04</span><span class="date">SAT 22 AUG</span></div>
+ <h3>Move east</h3>
+ <p>An unhurried checkout, with a stop at Gorreana — Europe's oldest tea plantation — on the drive. Check in at Octant Furnas and settle into the geothermal pools and the ochre thermal pool at Terra Nostra Garden.</p>
+ </div>
+ <div class="day" style="--node:#947A47">
+ <div class="dh"><span class="num">DAY 05</span><span class="date">SUN 23 AUG</span></div>
+ <h3>Nordeste</h3>
+ <p>The island's most dramatic coast — the Ponta do Sossego viewpoints, or the Salto do Prego waterfall hike from Faial da Terra. Back to Furnas for the evening pools.</p>
+ </div>
+ <div class="day" style="--node:#B06D3D">
+ <div class="dh"><span class="num">DAY 06</span><span class="date">MON 24 AUG</span></div>
+ <h3>Do nothing, properly</h3>
+ <p>Cozido lunch cooked in the volcanic ground, the hot pools at Poça da Dona Beija, and the couples massage at the Octant spa. Nowhere else to be.</p>
+ </div>
+ <div class="day" style="--node:#BB6F38">
+ <div class="dh"><span class="num">DAY 07</span><span class="date">TUE 25 AUG</span></div>
+ <h3>Home</h3>
+ <p>Early checkout and the ~50-minute drive to PDL for the late-morning flight back to Newark.</p>
+ </div>
+ </div>
+ </section>
+
+ <section>
+ <h2>To reserve</h2>
+ <ol class="check">
+ <li><b>Flights</b> — EWR ⇄ PDL, both legs<span class="det">Tue 18 Aug out · Tue 25 Aug back</span></li>
+ <li><b>Rental car</b><span class="det">Full trip · pick up PDL airport Wed 19 · drop Tue 25 · island fleets sell out in August</span></li>
+ <li><b>Pedras do Mar</b> — 3 nights<span class="det">19–22 Aug · pedrasdomar.com · +351 296 249 300</span></li>
+ <li><b>Octant Furnas</b> — 3 nights<span class="det">22–25 Aug · furnas.octanthotels.com · +351 296 249 200</span></li>
+ <li><b>Couples massage</b> — Octant spa<span class="det">Mon 24 Aug · book together with the room</span></li>
+ <li><b>Cozido lunch</b> — Furnas<span class="det">Mon 24 Aug · usually ordered a day ahead</span></li>
+ <li><b>Caldeira Velha</b> — timed entry<span class="det">Fri 21 Aug · first slot · parquesnaturais.azores.gov.pt</span></li>
+ <li><b>Poça da Dona Beija</b> — timed entry<span class="det">Mon 24 Aug · pocadonabeija.com</span></li>
+ </ol>
+ </section>
+
+ <section>
+ <h2>Good to know</h2>
+ <div class="notes">
+ <dl>
+ <dt>Tides</dt>
+ <dd>Ponta da Ferraria only works around low tide — check the table and aim Thursday afternoon to it.</dd>
+ <dt>Terra Nostra</dt>
+ <dd>Wear a dark swimsuit; the iron-rich water stains light fabric.</dd>
+ <dt>Drive times</dt>
+ <dd>Airport ↔ Pedras do Mar ~25 min · Pedras ↔ Furnas ~1 h · Furnas ↔ airport ~50 min.</dd>
+ <dt>Season</dt>
+ <dd>August is warm, sunny, and busy — the driest, sunniest month, with the warmest sea. Reserve everything early.</dd>
+ </dl>
+ </div>
+ </section>
+
+ <footer>
+ <span>SÃO MIGUEL · AÇORES</span>
+ <span>18–25 AUG 2026</span>
+ </footer>
+
+</div>
+</body>
+</html>
