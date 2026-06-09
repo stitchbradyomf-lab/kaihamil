@@ -109,7 +109,62 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
-        
+
+        /* Trip Group (multi-page trips) */
+        .trip-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .group-header {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .group-header .trip-title {
+            margin-bottom: 8px;
+        }
+
+        .group-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .group-link {
+            display: flex;
+            flex-direction: column;
+            padding: 16px 20px;
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+
+        .group-link:hover {
+            background: var(--bg-cream);
+            border-color: var(--terracotta);
+            transform: translateX(4px);
+        }
+
+        .link-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--ink-dark);
+            margin-bottom: 4px;
+        }
+
+        .link-desc {
+            font-size: 0.9rem;
+            color: var(--ink-medium);
+        }
+
         .trip-eyebrow {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -165,18 +220,23 @@
                 <div class="trip-meta">Zion, Bryce Canyon, Grand Canyon · 10 days · 5 travelers</div>
                 <p class="trip-desc">A family adventure through the American Southwest — national parks, slot canyons, and desert landscapes from Springdale to the Grand Canyon.</p>
             </a>
-            <a href="sao-miguel-five-or-six.html" class="trip-card">
-                <div class="trip-eyebrow">Anniversary Options · August 2026</div>
-                <h2 class="trip-title">São Miguel: Five or Six</h2>
-                <div class="trip-meta">São Miguel, Açores · 5 or 6 nights · 2 travelers</div>
-                <p class="trip-desc">Two versions of the same calm — settle into Octant Ponta Delgada, then drift east to Octant Furnas. The sixth night buys more nothing-to-do.</p>
-            </a>
-            <a href="azores-15-year-anniversary.html" class="trip-card">
-                <div class="trip-eyebrow">Anniversary · August 2026</div>
-                <h2 class="trip-title">Azores 15 Year Anniversary</h2>
-                <div class="trip-meta">São Miguel, Açores · 6 nights · 2 travelers</div>
-                <p class="trip-desc">Six nights from west to east — decompress at Pedras do Mar, adventure through Sete Cidades and crater lakes, then thermal calm at Octant Furnas.</p>
-            </a>
+            <div class="trip-group">
+                <div class="group-header">
+                    <div class="trip-eyebrow">15th Anniversary 2026 · August</div>
+                    <h2 class="trip-title">São Miguel, Açores</h2>
+                    <div class="trip-meta">6 nights · 2 travelers · 2 Octant hotels</div>
+                </div>
+                <div class="group-links">
+                    <a href="azores-15-year-anniversary.html" class="group-link">
+                        <span class="link-title">Six nights, west to east</span>
+                        <span class="link-desc">The final itinerary — Octant Ponta Delgada + Octant Furnas</span>
+                    </a>
+                    <a href="sao-miguel-five-or-six.html" class="group-link">
+                        <span class="link-title">Five or Six</span>
+                        <span class="link-desc">Compare the options — why we chose six</span>
+                    </a>
+                </div>
+            </div>
         </div>
         
         <footer>
