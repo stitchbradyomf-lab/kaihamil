@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - 2025 Annual Meeting</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* Top bar */
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ /* Hero */
+ .hero {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ padding: 5rem 2rem;
+ text-align: center;
+ }
+
+ .hero .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--brass);
+ margin-bottom: 1.25rem;
+ }
+
+ .hero h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2.5rem, 5vw, 3.5rem);
+ line-height: 1.1;
+ margin-bottom: 1rem;
+ }
+
+ .hero h1 em {
+ font-style: italic;
+ color: var(--brass);
+ }
+
+ .hero .date {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.25rem;
+ color: var(--brass-tint);
+ }
+
+ /* Sections */
+ section {
+ max-width: 720px;
+ margin: 0 auto;
+ padding: 5rem 2rem;
+ }
+
+ section.alt {
+ background: var(--aged-paper);
+ }
+
+ .section-eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ h2 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(1.75rem, 4vw, 2.25rem);
+ color: var(--gatefield-green);
+ margin-bottom: 1.5rem;
+ }
+
+ h2 em {
+ font-style: italic;
+ color: var(--deep-brass);
+ }
+
+ p.lead {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.25rem;
+ line-height: 1.55;
+ color: var(--ink);
+ margin-bottom: 2rem;
+ }
+
+ /* Agenda items */
+ .agenda-item {
+ margin-bottom: 2.5rem;
+ padding-bottom: 2.5rem;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .agenda-item:last-child {
+ border-bottom: none;
+ }
+
+ .agenda-title {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.35rem;
+ font-weight: 500;
+ color: var(--gatefield-green);
+ margin-bottom: 0.75rem;
+ }
+
+ .agenda-desc {
+ color: var(--muted);
+ line-height: 1.7;
+ margin-bottom: 1rem;
+ }
+
+ .vote-badge {
+ display: inline-block;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ font-weight: 500;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ padding: 0.4rem 0.8rem;
+ background: var(--brass);
+ color: var(--gatefield-green);
+ margin-top: 0.5rem;
+ }
+
+ .vote-badge.approved {
+ background: var(--pine);
+ color: var(--parchment);
+ }
+
+ /* Follow-ups */
+ .followup-list {
+ list-style: none;
+ }
+
+ .followup-list li {
+ position: relative;
+ padding-left: 1.75rem;
+ margin-bottom: 1rem;
+ line-height: 1.7;
+ }
+
+ .followup-list li::before {
+ content: '';
+ position: absolute;
+ left: 0;
+ top: 0.6rem;
+ width: 8px;
+ height: 8px;
+ background: var(--brass);
+ border-radius: 50%;
+ }
+
+ .followup-list .owner {
+ font-weight: 500;
+ color: var(--gatefield-green);
+ }
+
+ .followup-list .due {
+ font-size: 0.85rem;
+ color: var(--muted);
+ }
+
+ /* Footer */
+ footer {
+ padding: 3rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <a class="back" href="index.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Annual Meeting 2025</div>
+</div>
+
+<div class="hero">
+ <div class="eyebrow">June 6, 2026</div>
+ <h1>2025 Annual <em>Meeting</em></h1>
+ <div class="date">Held at the home of Kyle &amp; Marissa Brady</div>
+</div>
+
+<!-- Agenda -->
+<section id="agenda">
+ <div class="section-eyebrow">Meeting Agenda</div>
+ <h2>What we <em>covered.</em></h2>
+ <p class="lead">The following items were presented, discussed, and voted upon at the annual meeting.</p>
+
+ <div class="agenda-item">
+ <div class="agenda-title">1. Welcome &amp; Introductions</div>
+ <div class="agenda-desc">President Kyle Brady called the meeting to order at 10:00 AM. Board members present: Kyle Brady (President), Thomas Convery (Vice President), James Weinberg (Treasurer), Denise Weinberg (Secretary). All 22 households were represented either in person or by proxy.</div>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">2. Treasurer's Report</div>
+ <div class="agenda-desc">Treasurer James Weinberg presented the 2025 financial summary and proposed 2026 budget. The association ended 2025 with a cash balance of $2,974.72. The 2026 budget projects $26,400 in revenue (dues from 22 households) and $22,900 in expenses, with a projected net positive cash flow of $3,500.</div>
+ <span class="vote-badge approved">Budget Approved</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">3. Landscape Committee Report</div>
+ <div class="agenda-desc">Committee member Fern Fried presented the spring and summer landscaping plan, including vinca planting at both entrances, spring cleanup and mulching, and completion of the three-year tree removal plan.</div>
+ <span class="vote-badge approved">Projects Approved</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">4. Tree Removal - Final Phase</div>
+ <div class="agenda-desc">Proposal to remove 3 dead/almost dead trees (one large Linden and 2 purple leaf plum) on the island, including stump grinding. T&amp;T Tree Services proposal of $2,075 was presented.</div>
+ <span class="vote-badge approved">Approved</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">5. Spring Vinca Planting</div>
+ <div class="agenda-desc">Proposal to plant 25 flats of vinca flowers at both entrances prior to spring cleanup and mulching, including 2 free waterings. Cost: $1,125. Option for up to 4 additional waterings at $125 each.</div>
+ <span class="vote-badge approved">Approved</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">6. Website &amp; Communication Update</div>
+ <div class="agenda-desc">President Kyle Brady demonstrated the new Gatefield HOA website, including homeowner portal access, document repository, and annual meeting RSVP system. The site is now live at gatefield-hoa.netlify.app.</div>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">7. Open Discussion &amp; Community News</div>
+ <div class="agenda-desc">Community announcements included congratulations to Maddie Carlton on her upcoming wedding (June 6, 2026), school end date (June 18, 2026), and general neighborhood updates.</div>
+ </div>
+</section>
+
+<!-- Follow-ups -->
+<section id="followups" class="alt">
+ <div class="section-eyebrow">Action Items</div>
+ <h2>To-do <em>follow-ups.</em></h2>
+ <p class="lead">The following actions were assigned at the meeting with designated owners and timelines.</p>
+
+ <ul class="followup-list">
+ <li>
+ <span class="owner">Fern Fried</span> to coordinate with T&amp;T Tree Services for tree removal scheduling. <span class="due">Target: June 2026</span>
+ </li>
+ <li>
+ <span class="owner">Fern Fried</span> to coordinate spring vinca planting and schedule initial watering. <span class="due">Target: Late June 2026</span>
+ </li>
+ <li>
+ <span class="owner">Landscape Committee</span> to coordinate spring cleanup and mulching following vinca planting. <span class="due">Target: June-July 2026</span>
+ </li>
+ <li>
+ <span class="owner">Kyle Brady</span> to finalize website homeowner password distribution and update board contact information. <span class="due">Target: June 2026</span>
+ </li>
+ <li>
+ <span class="owner">James Weinberg</span> to provide quarterly financial updates to the board and annual summary to homeowners. <span class="due">Ongoing</span>
+ </li>
+ </ul>
+</section>
+
+<!-- Votes -->
+<section id="votes">
+ <div class="section-eyebrow">Votes Taken</div>
+ <h2>Requests for <em>votes.</em></h2>
+ <p class="lead">All items requiring homeowner approval were presented and voted upon. Results below.</p>
+
+ <div class="agenda-item">
+ <div class="agenda-title">2026 Operating Budget</div>
+ <div class="agenda-desc">Approval of $22,900 operating budget with projected $3,500 positive cash flow.</div>
+ <span class="vote-badge approved">Approved Unanimously</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">Tree Removal - Final Phase</div>
+ <div class="agenda-desc">Approval of $2,075 expenditure for removal of 3 trees and stump grinding.</div>
+ <span class="vote-badge approved">Approved Unanimously</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">Spring Vinca Planting</div>
+ <div class="agenda-desc">Approval of $1,125 expenditure for 25 flats of vinca flowers at both entrances.</div>
+ <span class="vote-badge approved">Approved Unanimously</span>
+ </div>
+
+ <div class="agenda-item">
+ <div class="agenda-title">Landscape Committee Projects</div>
+ <div class="agenda-desc">Approval of overall spring/summer landscaping plan including cleanup and mulching.</div>
+ <span class="vote-badge approved">Approved Unanimously</span>
+ </div>
+</section>
+
+<footer>
+ <p>Gatefield Homeowners Association</p>
+ <p>Bucks County, Pennsylvania</p>
+ <p style="margin-top: 1rem;"><a href="index.html" style="color: var(--deep-brass);">← Return to Main Site</a></p>
+</footer>
+
+</body>
+</html>
