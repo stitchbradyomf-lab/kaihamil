@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - Budget Alternatives</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ .hero {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ padding: 5rem 2rem;
+ text-align: center;
+ }
+
+ .hero .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--brass);
+ margin-bottom: 1.25rem;
+ }
+
+ .hero h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2.5rem, 5vw, 3.5rem);
+ line-height: 1.1;
+ margin-bottom: 1rem;
+ }
+
+ .hero h1 em {
+ font-style: italic;
+ color: var(--brass);
+ }
+
+ .hero .subtitle {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.25rem;
+ color: var(--brass-tint);
+ max-width: 600px;
+ margin: 0 auto;
+ }
+
+ section {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 5rem 2rem;
+ }
+
+ section.alt {
+ background: var(--aged-paper);
+ }
+
+ .section-eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ h2 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(1.75rem, 4vw, 2.25rem);
+ color: var(--gatefield-green);
+ margin-bottom: 1.5rem;
+ }
+
+ h2 em {
+ font-style: italic;
+ color: var(--deep-brass);
+ }
+
+ p.lead {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.25rem;
+ line-height: 1.55;
+ color: var(--ink);
+ margin-bottom: 2rem;
+ }
+
+ /* Comparison table */
+ .comparison-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-top: 2rem;
+ font-size: 0.95rem;
+ }
+
+ .comparison-table th {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ font-weight: 500;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ text-align: left;
+ padding: 1.25rem 1rem;
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ }
+
+ .comparison-table th:first-child {
+ border-radius: 4px 0 0 0;
+ }
+
+ .comparison-table th:last-child {
+ border-radius: 0 4px 0 0;
+ }
+
+ .comparison-table td {
+ padding: 1rem;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .comparison-table tr:hover {
+ background: var(--aged-paper);
+ }
+
+ .comparison-table .category {
+ font-weight: 500;
+ color: var(--gatefield-green);
+ }
+
+ .comparison-table .amount {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.1rem;
+ }
+
+ .comparison-table .highlight {
+ background: var(--aged-paper);
+ font-weight: 500;
+ }
+
+ .comparison-table .total-row {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ font-weight: 500;
+ }
+
+ .comparison-table .total-row .category,
+ .comparison-table .total-row .amount {
+ color: var(--parchment);
+ }
+
+ /* Option cards */
+ .options-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+ gap: 1.5rem;
+ margin-top: 2rem;
+ }
+
+ .option-card {
+ background: var(--aged-paper);
+ padding: 2rem;
+ border-top: 4px solid var(--brass);
+ }
+
+ .option-card.recommended {
+ border-top-color: var(--gatefield-green);
+ }
+
+ .option-card .option-name {
+ font-family: 'Cinzel', serif;
+ font-size: 0.75rem;
+ font-weight: 500;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 0.5rem;
+ }
+
+ .option-card .dues-amount {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 2.5rem;
+ font-weight: 500;
+ color: var(--gatefield-green);
+ margin-bottom: 0.25rem;
+ }
+
+ .option-card .monthly {
+ font-size: 0.9rem;
+ color: var(--muted);
+ margin-bottom: 1.5rem;
+ }
+
+ .option-card .surplus {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.5rem;
+ color: var(--gatefield-green);
+ margin-bottom: 0.5rem;
+ }
+
+ .option-card .surplus-label {
+ font-size: 0.8rem;
+ color: var(--muted);
+ margin-bottom: 1rem;
+ }
+
+ .option-card .increase {
+ font-size: 0.85rem;
+ padding: 0.5rem 0;
+ border-top: 1px solid var(--brass-tint);
+ }
+
+ .option-card .badge {
+ display: inline-block;
+ font-size: 0.65rem;
+ font-weight: 500;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ padding: 0.35rem 0.75rem;
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ margin-top: 1rem;
+ }
+
+ footer {
+ padding: 3rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <a class="back" href="homeowner.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Budget Alternatives</div>
+</div>
+
+<div class="hero">
+ <div class="eyebrow">Community Vote</div>
+ <h1>Budget <em>Alternatives</em></h1>
+ <p class="subtitle">Three options for the 2027 annual budget, presented for homeowner consideration and vote.</p>
+</div>
+
+<!-- Options Overview -->
+<section id="options">
+ <div class="section-eyebrow">The Choices</div>
+ <h2>Three <em>scenarios.</em></h2>
+ <p class="lead">Each option maintains current service levels while building reserves at different rates. All three use the same expense baseline of $22,900.</p>
+
+ <div class="options-grid">
+ <div class="option-card">
+ <div class="option-name">Baseline</div>
+ <div class="dues-amount">$1,200</div>
+ <div class="monthly">$100.00 per month</div>
+ <div class="surplus">$3,500</div>
+ <div class="surplus-label">Annual surplus</div>
+ <div class="increase">No change from 2026</div>
+ </div>
+
+ <div class="option-card recommended">
+ <div class="option-name">Alternative #1</div>
+ <div class="dues-amount">$1,400</div>
+ <div class="monthly">$116.67 per month</div>
+ <div class="surplus">$7,900</div>
+ <div class="surplus-label">Annual surplus</div>
+ <div class="increase">+$16.67 per month</div>
+ <span class="badge">Builds Reserves Faster</span>
+ </div>
+
+ <div class="option-card">
+ <div class="option-name">Alternative #2</div>
+ <div class="dues-amount">$1,600</div>
+ <div class="monthly">$133.33 per month</div>
+ <div class="surplus">$12,300</div>
+ <div class="surplus-label">Annual surplus</div>
+ <div class="increase">+$33.33 per month</div>
+ <span class="badge">Maximum Reserve Growth</span>
+ </div>
+ </div>
+</section>
+
+<!-- Detailed Comparison -->
+<section id="comparison" class="alt">
+ <div class="section-eyebrow">Detailed Breakdown</div>
+ <h2>Side by side <em>comparison.</em></h2>
+ <p class="lead">Complete financial picture for each budget alternative.</p>
+
+ <table class="comparison-table">
+ <thead>
+ <tr>
+ <th>Category</th>
+ <th>Baseline<br><span style="font-size:0.75em;opacity:0.8">$1,200/home</span></th>
+ <th>Alternative #1<br><span style="font-size:0.75em;opacity:0.8">$1,400/home</span></th>
+ <th>Alternative #2<br><span style="font-size:0.75em;opacity:0.8">$1,600/home</span></th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td class="category">Number of Homes</td>
+ <td class="amount">22</td>
+ <td class="amount">22</td>
+ <td class="amount">22</td>
+ </tr>
+ <tr class="highlight">
+ <td class="category">HOA Dues Revenue</td>
+ <td class="amount">$26,400</td>
+ <td class="amount">$30,800</td>
+ <td class="amount">$35,200</td>
+ </tr>
+ <tr>
+ <td class="category">Landscaping &amp; Maintenance</td>
+ <td class="amount">$13,400</td>
+ <td class="amount">$13,400</td>
+ <td class="amount">$13,400</td>
+ </tr>
+ <tr>
+ <td class="category">Special &amp; Non-Recurring Projects</td>
+ <td class="amount">$3,000</td>
+ <td class="amount">$3,000</td>
+ <td class="amount">$3,000</td>
+ </tr>
+ <tr>
+ <td class="category">Holiday Lighting</td>
+ <td class="amount">$2,300</td>
+ <td class="amount">$2,300</td>
+ <td class="amount">$2,300</td>
+ </tr>
+ <tr>
+ <td class="category">Liability Insurance</td>
+ <td class="amount">$2,700</td>
+ <td class="amount">$2,700</td>
+ <td class="amount">$2,700</td>
+ </tr>
+ <tr>
+ <td class="category">Printing &amp; Supplies</td>
+ <td class="amount">$250</td>
+ <td class="amount">$250</td>
+ <td class="amount">$250</td>
+ </tr>
+ <tr>
+ <td class="category">Postage &amp; PO Box Rental</td>
+ <td class="amount">$250</td>
+ <td class="amount">$250</td>
+ <td class="amount">$250</td>
+ </tr>
+ <tr>
+ <td class="category">Social Events</td>
+ <td class="amount">$1,000</td>
+ <td class="amount">$1,000</td>
+ <td class="amount">$1,000</td>
+ </tr>
+ <tr class="total-row">
+ <td class="category">Total Expenses</td>
+ <td class="amount">$22,900</td>
+ <td class="amount">$22,900</td>
+ <td class="amount">$22,900</td>
+ </tr>
+ <tr class="highlight">
+ <td class="category">Annual Surplus</td>
+ <td class="amount">$3,500</td>
+ <td class="amount">$7,900</td>
+ <td class="amount">$12,300</td>
+ </tr>
+ </tbody>
+ </table>
+</section>
+
+<!-- Considerations -->
+<section id="considerations">
+ <div class="section-eyebrow">Decision Framework</div>
+ <h2>Factors to <em>consider.</em></h2>
+ <p class="lead">Questions to guide your vote on the appropriate budget level for 2027.</p>
+
+ <p><strong>Reserve Position:</strong> Our projected 2026 ending balance of $10,070 provides approximately 5 months of operating expenses. Industry guidelines suggest 3-6 months as healthy. All three options maintain this standard, with Alternatives #1 and #2 building additional cushion for future capital needs.</p>
+
+ <p><strong>Known Future Expenses:</strong> The three-year tree removal plan will conclude in 2026. No major capital projects are currently planned for 2027, but entrance improvements and ongoing landscaping needs will continue.</p>
+
+ <p><strong>Historical Context:</strong> Dues have remained at $1,200 since 2022. During 2019-2021, dues ranged from $600-$1,200 as the association recovered from higher-expense years. The baseline option continues this stable rate.</p>
+
+ <p><strong>Monthly Impact:</strong> Alternative #1 adds $16.67 per month ($200 annually) per household. Alternative #2 adds $33.33 per month ($400 annually). Consider this alongside other household budget priorities.</p>
+
+ <p><strong>Flexibility:</strong> Higher surpluses in Alternatives #1 and #2 create options: accelerate reserve growth, fund additional community improvements, or provide buffer against future assessment needs.</p>
+</section>
+
+<footer>
+ <p>Gatefield Homeowners Association</p>
+ <p>Bucks County, Pennsylvania</p>
+ <p style="margin-top: 1rem;"><a href="homeowner.html" style="color: var(--deep-brass);">← Return to Homeowner Portal</a></p>
+</footer>
+
+</body>
+</html>

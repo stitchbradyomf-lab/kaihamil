@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gatefield - Budget History</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+ :root {
+ --parchment: #FAF7F0;
+ --aged-paper: #F5EDE0;
+ --gatefield-green: #1C2B22;
+ --pine: #2F4A3A;
+ --brass: #B08D3F;
+ --deep-brass: #8A6A2E;
+ --brass-tint: #C9B789;
+ --ink: #1A1A1A;
+ --muted: #5C5852;
+ }
+
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+ body {
+ background: var(--parchment);
+ color: var(--ink);
+ font-family: 'Inter', sans-serif;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ .topbar {
+ padding: 1.5rem 2rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .topbar a.back {
+ font-family: 'Cinzel', serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gatefield-green);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+ .topbar a.back:hover { color: var(--deep-brass); }
+
+ .topbar .mini-mark {
+ font-family: 'Cinzel', serif;
+ font-size: 1.1rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ color: var(--gatefield-green);
+ }
+
+ .topbar .mini-rule {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ color: var(--deep-brass);
+ text-transform: uppercase;
+ }
+
+ .hero {
+ background: var(--gatefield-green);
+ color: var(--parchment);
+ padding: 5rem 2rem;
+ text-align: center;
+ }
+
+ .hero .eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--brass);
+ margin-bottom: 1.25rem;
+ }
+
+ .hero h1 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(2.5rem, 5vw, 3.5rem);
+ line-height: 1.1;
+ }
+
+ .hero h1 em {
+ font-style: italic;
+ color: var(--brass);
+ }
+
+ section {
+ max-width: 900px;
+ margin: 0 auto;
+ padding: 5rem 2rem;
+ }
+
+ section.alt {
+ background: var(--aged-paper);
+ }
+
+ .section-eyebrow {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.68rem;
+ font-weight: 500;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: var(--deep-brass);
+ margin-bottom: 1.25rem;
+ }
+
+ h2 {
+ font-family: 'Cormorant Garamond', serif;
+ font-weight: 500;
+ font-size: clamp(1.75rem, 4vw, 2.25rem);
+ color: var(--gatefield-green);
+ margin-bottom: 1.5rem;
+ }
+
+ h2 em {
+ font-style: italic;
+ color: var(--deep-brass);
+ }
+
+ p.lead {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.25rem;
+ line-height: 1.55;
+ color: var(--ink);
+ margin-bottom: 2rem;
+ }
+
+ /* History table */
+ .history-table {
+ width: 100%;
+ border-collapse: collapse;
+ margin-top: 2rem;
+ font-size: 0.9rem;
+ }
+
+ .history-table th {
+ font-family: 'Cinzel', serif;
+ font-size: 0.65rem;
+ font-weight: 500;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ text-align: left;
+ padding: 1rem 0.75rem;
+ border-bottom: 2px solid var(--brass);
+ color: var(--gatefield-green);
+ }
+
+ .history-table td {
+ padding: 0.875rem 0.75rem;
+ border-bottom: 1px solid var(--brass-tint);
+ }
+
+ .history-table tr:hover {
+ background: var(--aged-paper);
+ }
+
+ .history-table .year {
+ font-weight: 500;
+ color: var(--gatefield-green);
+ }
+
+ .history-table .positive {
+ color: #2d5a3d;
+ }
+
+ .history-table .negative {
+ color: #8b4513;
+ }
+
+ .history-table .current {
+ background: var(--aged-paper);
+ font-weight: 500;
+ }
+
+ /* Summary cards */
+ .summary-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+ gap: 1.5rem;
+ margin-top: 2rem;
+ }
+
+ .summary-card {
+ background: var(--aged-paper);
+ padding: 1.5rem;
+ border-left: 3px solid var(--brass);
+ }
+
+ .summary-card .label {
+ font-family: 'Inter', sans-serif;
+ font-size: 0.65rem;
+ font-weight: 500;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ color: var(--muted);
+ margin-bottom: 0.5rem;
+ }
+
+ .summary-card .value {
+ font-family: 'Cormorant Garamond', serif;
+ font-size: 1.75rem;
+ font-weight: 500;
+ color: var(--gatefield-green);
+ }
+
+ .summary-card .change {
+ font-size: 0.85rem;
+ margin-top: 0.25rem;
+ }
+
+ footer {
+ padding: 3rem 2rem;
+ text-align: center;
+ font-family: 'Inter', sans-serif;
+ font-size: 0.7rem;
+ letter-spacing: 0.15em;
+ color: var(--muted);
+ text-transform: uppercase;
+ background: var(--parchment);
+ border-top: 1px solid var(--brass-tint);
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <a class="back" href="homeowner.html">← Back</a>
+ <div class="mini-mark">GATEFIELD</div>
+ <div class="mini-rule">Budget History</div>
+</div>
+
+<div class="hero">
+ <div class="eyebrow">2017-2026</div>
+ <h1>Budget <em>History</em></h1>
+</div>
+
+<!-- Summary -->
+<section id="summary">
+ <div class="section-eyebrow">Ten Year Overview</div>
+ <h2>Financial <em>trajectory.</em></h2>
+ <p class="lead">A decade of Gatefield's financial history, from annual dues to cash reserves.</p>
+
+ <div class="summary-grid">
+ <div class="summary-card">
+ <div class="label">2026 Projected Balance</div>
+ <div class="value">$10,070</div>
+ <div class="change positive">+$3,500 from 2025</div>
+ </div>
+ <div class="summary-card">
+ <div class="label">Annual Dues (2026)</div>
+ <div class="value">$1,200</div>
+ <div class="change">Per household</div>
+ </div>
+ <div class="summary-card">
+ <div class="label">Peak Balance</div>
+ <div class="value">$27,014</div>
+ <div class="change">2019</div>
+ </div>
+ <div class="summary-card">
+ <div class="label">Homes</div>
+ <div class="value">22</div>
+ <div class="change">Consistent</div>
+ </div>
+ </div>
+</section>
+
+<!-- History Table -->
+<section id="history" class="alt">
+ <div class="section-eyebrow">Year by Year</div>
+ <h2>The <em>numbers.</em></h2>
+ <p class="lead">Complete financial history from 2017 through the 2026 projection.</p>
+
+ <table class="history-table">
+ <thead>
+ <tr>
+ <th>Year</th>
+ <th>Start Balance</th>
+ <th>Revenue</th>
+ <th>Expenses</th>
+ <th>Net Flow</th>
+ <th>End Balance</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td class="year">2017</td>
+ <td>-</td>
+ <td>$17,700</td>
+ <td>$24,685</td>
+ <td class="negative">-$6,985</td>
+ <td>$24,278</td>
+ </tr>
+ <tr>
+ <td class="year">2018</td>
+ <td>$24,278</td>
+ <td>$18,000</td>
+ <td>$15,263</td>
+ <td class="positive">+$2,737</td>
+ <td>$27,014</td>
+ </tr>
+ <tr>
+ <td class="year">2019</td>
+ <td>$27,014</td>
+ <td>$15,200</td>
+ <td>$21,261</td>
+ <td class="negative">-$6,061</td>
+ <td>$20,953</td>
+ </tr>
+ <tr>
+ <td class="year">2020</td>
+ <td>$20,953</td>
+ <td>$10,800</td>
+ <td>$23,864</td>
+ <td class="negative">-$13,064</td>
+ <td>$7,889</td>
+ </tr>
+ <tr>
+ <td class="year">2021</td>
+ <td>$7,889</td>
+ <td>$17,200</td>
+ <td>$19,700</td>
+ <td class="negative">-$2,500</td>
+ <td>$5,389</td>
+ </tr>
+ <tr>
+ <td class="year">2022</td>
+ <td>$5,389</td>
+ <td>$25,935</td>
+ <td>$21,894</td>
+ <td class="positive">+$4,041</td>
+ <td>$9,430</td>
+ </tr>
+ <tr>
+ <td class="year">2023</td>
+ <td>$9,430</td>
+ <td>$25,000</td>
+ <td>$22,457</td>
+ <td class="positive">+$2,543</td>
+ <td>$11,973</td>
+ </tr>
+ <tr>
+ <td class="year">2024</td>
+ <td>$11,973</td>
+ <td>$22,000</td>
+ <td>$27,402</td>
+ <td class="negative">-$5,402</td>
+ <td>$6,571</td>
+ </tr>
+ <tr>
+ <td class="year">2025</td>
+ <td>$6,571</td>
+ <td>$26,400</td>
+ <td>$29,995</td>
+ <td class="negative">-$3,595</td>
+ <td>$2,975</td>
+ </tr>
+ <tr class="current">
+ <td class="year">2026 (Proj)</td>
+ <td>$2,975</td>
+ <td>$26,400</td>
+ <td>$22,900</td>
+ <td class="positive">+$3,500</td>
+ <td>$10,070</td>
+ </tr>
+ </tbody>
+ </table>
+</section>
+
+<!-- Notes -->
+<section id="notes">
+ <div class="section-eyebrow">Context</div>
+ <h2>Understanding the <em>variance.</em></h2>
+ <p class="lead">Several factors explain the year-to-year fluctuations in our financial history.</p>
+
+ <p><strong>2017-2018:</strong> Major tree removal and landscaping projects resulted in higher expenses. The association invested in long-term property improvements.</p>
+
+ <p><strong>2019-2020:</strong> Dues decreased as some households faced financial hardship. Expenses remained steady, drawing down reserves.</p>
+
+ <p><strong>2021:</strong> Continued recovery period with conservative spending and gradual dues normalization.</p>
+
+ <p><strong>2022-2023:</strong> Return to full dues collection ($1,200/household). Stable operations with positive cash flow.</p>
+
+ <p><strong>2024-2025:</strong> Increased investment in special projects including tree removal phases and entrance improvements. Higher expenses but necessary for property maintenance.</p>
+
+ <p><strong>2026 (Projected):</strong> Return to positive cash flow with stabilized expenses and full revenue collection. The projected $10,070 ending balance provides healthy reserves for future needs.</p>
+</section>
+
+<footer>
+ <p>Gatefield Homeowners Association</p>
+ <p>Bucks County, Pennsylvania</p>
+ <p style="margin-top: 1rem;"><a href="homeowner.html" style="color: var(--deep-brass);">← Return to Homeowner Portal</a></p>
+</footer>
+
+</body>
+</html>
