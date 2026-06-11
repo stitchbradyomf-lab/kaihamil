@@ -3,6 +3,7 @@ const TABS = [
   { key: 'weekly',   label: 'Weekly' },
   { key: 'monthly',  label: 'Monthly' },
   { key: 'quarterly',label: 'Quarterly' },
+  { key: 'framework',label: 'Framework' },
   { key: 'reports',  label: 'Reports' },
 ];
 
