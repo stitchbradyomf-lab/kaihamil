@@ -50,6 +50,8 @@
 - **Son:** Hudson
 - **Daughter:** Rowan (born July 3, 2016 - turning 10 on July 3, 2026)
 - **Daughter:** Dylan (born May 11, 2020 - just turned 6 on May 11, 2026)
+- **Marissa's mom:** Joanne ("JoJo")
+- **Marissa's dad:** "Grandpa"
 
 ## Context
 

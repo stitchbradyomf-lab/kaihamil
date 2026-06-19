@@ -21,6 +21,10 @@
 - Born July 3, 2016
 - Turning 10 on July 3, 2026
 - Hudson's younger sister, Dylan's older sister
+- **10th birthday (2026):**
+  - Bike from Kyle and Marissa, bought at the LBI local surf shop (same shop where they bought her 7th birthday bike — family continuity)
+  - Wants squishies (likely from JoJo / Marissa's mom Joanne)
+  - Wants a sleepover with friends (Kyle reluctantly approving)
 
 ### Dylan
 - Kyle and Marissa's younger daughter
@@ -101,3 +105,9 @@
 ### Marissa's Dad ("Grandpa")
 - Joined LBI week (June 2026)
 - *Surname / additional details TBD*
+
+### Joanne ("JoJo")
+- Marissa's mom
+- Grandmother to Hudson, Rowan, and Dylan
+- Will likely buy Rowan's squishies for her 10th birthday
+- *Additional details TBD*

@@ -19,6 +19,7 @@ graph TD
   BRADY_N[Brady<br/>nephew, ~3]
 
   GRANDPA_M[Grandpa<br/>Marissa's dad]
+  JOJO[Joanne / JoJo<br/>Marissa's mom]
 
   UNCLE_J[Uncle Jeremy<br/>Kyle's dad's brother]
   TOMMY[Tommy<br/>cousin, 15]
@@ -40,6 +41,7 @@ graph TD
   MARISSA -- parent --> ROWAN
   MARISSA -- parent --> DYLAN
   MARISSA -- child of --> GRANDPA_M
+  MARISSA -- child of --> JOJO
 
   MOM -- parent --> KYLE
   MOM -- parent --> ELISE
@@ -73,7 +75,7 @@ graph TD
 
   class KYLE,MARISSA,HUDSON,ROWAN,DYLAN immediate
   class MOM,DAD,ELISE,STEVE,BRADY_N,MOM_BF kyleside
-  class GRANDPA_M marissaside
+  class GRANDPA_M,JOJO marissaside
   class UNCLE_J,TOMMY,AUNT_M,ROSS,EMILY,CAMPBELL,ELLISON extended
 ```
 
@@ -97,7 +99,7 @@ graph TD
 - They're not attending family events — they're *building the infrastructure* for them
 
 ## Next To Add
-- Marissa's mother / siblings (if any)
+- Marissa's siblings (if any)
 - Hudson's birthday / age
 - Kyle's wider friend circle
 - Bloomberg / professional network

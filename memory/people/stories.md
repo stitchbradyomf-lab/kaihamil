@@ -52,6 +52,27 @@ Kyle and Marissa don't attend family events. They *build family events*. The arc
 
 ---
 
+## The LBI Surf Shop Bike — Rowan's 7th and 10th Birthdays
+
+**The story:**
+- For Rowan's 7th birthday (2023), Kyle and Marissa bought her a bike at the local LBI surf shop while on vacation there
+- For her 10th birthday (2026), they did it again — same shop, three years later
+- Discovered/decided during the LBI 70th-birthday family week, June 2026
+
+**Why it matters:**
+This is a real example of how Kyle and Marissa quietly build family rituals. They didn't plan to create a "surf shop bike" tradition — they just made the same right choice twice, in the same place. That's how traditions actually form: through repetition you only notice in hindsight.
+
+**Future hook:**
+Next bike-buying-age milestone for Rowan (13? 16?) is a candidate to keep the chain going.
+
+Kyle also noted Rowan's other 10th birthday wishes:
+- Squishies (likely fulfilled by JoJo, Marissa's mom)
+- Sleepover with friends (Kyle reluctantly obliging)
+
+The layered roles — parents do the bike, grandparents do the squishies, friends provide the sleepover — are themselves a tiny portrait of a well-functioning family system.
+
+---
+
 ## Cross-Divorce Pattern — Kyle's Mom + Uncle Jeremy
 
 **The pattern:**
