@@ -16,9 +16,17 @@
 - Old enough to attend live sports — attended the first World Cup 2026 game in Philadelphia with Kyle
 - Father-son experiences becoming defining memories
 
-### Daughters (2)
-- Names not yet captured
-- *Stitch to fill in when Kyle shares*
+### Rowan
+- Kyle and Marissa's older daughter
+- Born July 3, 2016
+- Turning 10 on July 3, 2026
+- Hudson's younger sister, Dylan's older sister
+
+### Dylan
+- Kyle and Marissa's younger daughter
+- Born May 11, 2020
+- Just turned 6 on May 11, 2026
+- The youngest in Kyle and Marissa's family
 
 ## Kyle's Side
 

@@ -45,6 +45,12 @@
 ## Mission Statement
 > "I combine agentic AI systems with thinking frameworks to help you make decisions that lead you to where you want to go in life. Wherever that may be."
 
+## Family
+- **Wife:** Marissa Brady
+- **Son:** Hudson
+- **Daughter:** Rowan (born July 3, 2016 - turning 10 on July 3, 2026)
+- **Daughter:** Dylan (born May 11, 2020 - just turned 6 on May 11, 2026)
+
 ## Context
 
 Kyle wants to transform a hectic family/life/work situation into a seamless digital life. He's excited about building ventures together and turning imagination into reality - in hopes to add true value to the world and improve people's lives. 

@@ -9,8 +9,8 @@ graph TD
   KYLE[Kyle Brady<br/>b. 1985-04-03]
   MARISSA[Marissa Brady<br/>wife]
   HUDSON[Hudson<br/>son]
-  DAUGHTER1[Daughter 1]
-  DAUGHTER2[Daughter 2]
+  ROWAN[Rowan<br/>daughter, 10<br/>b. 2016-07-03]
+  DYLAN[Dylan<br/>daughter, 6<br/>b. 2020-05-11]
 
   MOM[Kyle's Mom<br/>70 in 2026]
   DAD[Kyle's Dad]
@@ -33,12 +33,12 @@ graph TD
 
   KYLE -- spouse --> MARISSA
   KYLE -- parent --> HUDSON
-  KYLE -- parent --> DAUGHTER1
-  KYLE -- parent --> DAUGHTER2
+  KYLE -- parent --> ROWAN
+  KYLE -- parent --> DYLAN
 
   MARISSA -- parent --> HUDSON
-  MARISSA -- parent --> DAUGHTER1
-  MARISSA -- parent --> DAUGHTER2
+  MARISSA -- parent --> ROWAN
+  MARISSA -- parent --> DYLAN
   MARISSA -- child of --> GRANDPA_M
 
   MOM -- parent --> KYLE
@@ -71,7 +71,7 @@ graph TD
   classDef marissaside fill:#bbf7d0,stroke:#166534,color:#000
   classDef extended fill:#e9d5ff,stroke:#6b21a8,color:#000
 
-  class KYLE,MARISSA,HUDSON,DAUGHTER1,DAUGHTER2 immediate
+  class KYLE,MARISSA,HUDSON,ROWAN,DYLAN immediate
   class MOM,DAD,ELISE,STEVE,BRADY_N,MOM_BF kyleside
   class GRANDPA_M marissaside
   class UNCLE_J,TOMMY,AUNT_M,ROSS,EMILY,CAMPBELL,ELLISON extended
@@ -98,7 +98,7 @@ graph TD
 
 ## Next To Add
 - Marissa's mother / siblings (if any)
-- Kyle's daughters' names
+- Hudson's birthday / age
 - Kyle's wider friend circle
 - Bloomberg / professional network
 - Kai Hamil collaborators
