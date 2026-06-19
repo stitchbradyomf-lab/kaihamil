@@ -185,6 +185,21 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Business Evaluation Principles (June 19, 2026)
+
+Kyle posted a Quartz Leadership newsletter as a guiding doc for KH business evaluation. **Stored at `learn/business-evaluation-principles.md`** — reference explicitly during any business evaluation task.
+
+**The 5 principles:**
+1. **Offer Supersedes Product** (Hormozi) - Outcome -> bonuses -> guarantee -> THEN price
+2. **Solve for Failure First** (Munger inversion) - Pre-mortem before allocating budget
+3. **Psycho-Logic** (Sutherland) - Reframe before rebuild; people buy meaning, not specs
+4. **Profit First** (Michalowicz) - Skim profit BEFORE expenses, not as leftover
+5. **Blame the System** (Deming) - Trend lines over point-in-time reactions
+
+**The composing flow:** Solve for Failure -> Build -> Frame with Psycho-Logic -> Sell with Offer -> Capture with Profit First -> Learn with System Thinking.
+
+---
+
 ## Summer of Kai Hamil (June 2026)
 
 **LBI Week — Mom's 70th Birthday:**
