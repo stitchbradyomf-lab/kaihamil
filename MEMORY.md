@@ -185,6 +185,31 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Kai Hamil North Star (June 19, 2026)
+
+Kyle clarified the actual mission during a business evaluation discussion:
+
+> "Providing AI services isn't my goal - using them to produce something that helps others should be. Groove Pal is still in play, because it showcases real cultural value. But it's still winning through distribution, not creation. My ultimate goal should be creation aided by the unequal advantage I have of developing technology systems."
+
+**Stored at `learn/kh-north-star.md`** — reference during all KH venture/time/spending decisions.
+
+**The hierarchy:**
+1. **Tier 1 (The Mission):** Original creative work where the technology system is the unfair advantage — Life & Times, films, KCAASE, Brady Visuals
+2. **Tier 2 (Mission-Adjacent):** Real cultural value via distribution — Groove Pal
+3. **Tier 3 (Mission-Funding):** Services that pay for the mission — Workshop, Valé OS, client work
+
+**Counterfactual test:** Would this exist without Kyle's combination of creative vision + systems capability + Bloomberg-grade execution? If anyone could do it with capital + AI tools, it's not the mission.
+
+**Implications:**
+- Workshop = revenue path, NOT the mission
+- Valé OS = revenue path, NOT the mission
+- Groove Pal = cultural play (distribution), not the destination
+- The mission is original creative work — films, publications, products only Kyle can build
+
+**Time allocation rule:** If <20% of the week goes to Tier 1 creation, the system is misaligned with the mission.
+
+---
+
 ## Business Evaluation Principles (June 19, 2026)
 
 Kyle posted a Quartz Leadership newsletter as a guiding doc for KH business evaluation. **Stored at `learn/business-evaluation-principles.md`** — reference explicitly during any business evaluation task.
