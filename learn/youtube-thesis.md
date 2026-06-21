@@ -154,6 +154,18 @@ Recommendation for the channel-opening video:
 - Sets the bar: this is going to be a channel that pays off
 - Naturally introduces System // Self framing
 
+### The channel's koan (recurring motif)
+
+> **Data = new event streams + existing content.**
+> **Outcome = decision-making capability.**
+> **"What do you do with information? Use it to make a better-informed decision."**
+
+This is the spine of the channel — a single framing that every pillar can return to. See `learn/youtube-first-10.md` for how it threads through the launch queue.
+
+### The first 10 videos
+
+A complete production queue with three-pillar distribution, cross-referenced narrative compounding, and recurring motif anchored across multiple videos. Stored at `learn/youtube-first-10.md`.
+
 ---
 
 ## How This Reframes Existing KH Assets
