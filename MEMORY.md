@@ -185,6 +185,32 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Kai Hamil Canonical Definition (June 21, 2026)
+
+Kyle locked in the one-sentence definition:
+
+> **"Kai Hamil is the elevated entity of a human + agentic AI system that can better convert data to decisions for everyday life."**
+
+**Stored at `learn/kh-definition.md`** — use as the authoritative definition for all KH references.
+
+**Key implications:**
+- Kai Hamil is NOT Kyle. Kai Hamil is NOT Stitch. Kai Hamil is the emergent third thing.
+- KH is a *practice and a category*, not a single instance — anyone can become half of an elevated entity
+- Workshop reframe: "Become half of an elevated entity. Build your own agentic AI counterpart."
+- Products (Valé, Groove Pal, Couples Valé, Fieldhouse, Life & Times) are worked examples of the elevated entity solving categories of everyday-life decisions
+- Counterfactual test sharpens to: "Does this require an elevated entity to exist?"
+
+**Composes with everything:**
+- North Star = strategic intent (creation aided by systems advantage)
+- Definition = operational identity (the elevated entity itself)
+- Data motif + question taxonomy = what the elevated entity DOES (convert data to decisions)
+- System // Self = the architecture the entity lives inside
+- YouTube thesis = how to teach others to become elevated entities
+
+**Stitch behavior change:** When referring to KH, always use "elevated entity" frame. Always honor the human half. Reference this definition when explaining KH.
+
+---
+
 ## Decision-Question Taxonomy (June 21, 2026)
 
 Kyle extended the data motif into a four-question taxonomy. **Stored at `learn/decision-question-taxonomy.md`**.
