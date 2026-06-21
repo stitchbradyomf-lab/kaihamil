@@ -185,6 +185,29 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## YouTube Thesis (June 21, 2026)
+
+Kyle identified YouTube as the right channel for KH, anchored by 18 years of operational depth in financial data/technology systems. **Stored at `learn/youtube-thesis.md`**.
+
+**Core insight (article-sourced):** YouTube has bifurcated. Entertainment lane = AI-saturated and brutal. Expertise lane = wide open for credentialed builders. Daniel Pink hit 200K subs in <1 year; Doctor Alex 433K in 6 months. They're not YouTubers — they're professionals building ON YouTube.
+
+**Why this is Kyle's lane:** 18 years inside the leading financial data provider, three generations of technology transitions, operating depth no AI hype creator can fake. The harder to fake, the more valuable.
+
+**Three content pillars:**
+1. **The Inside View** — stories/frameworks from 18 years (authority anchor)
+2. **System // Self** — KH philosophy (philosophy anchor)
+3. **Build With Me** — watching Kyle actually use his unfair advantage to create (worked-example anchor)
+
+**Format:** 8-minute medium-form, talking head + B-roll, one excellent video per week. Shorts only as derivative compression.
+
+**Critical guardrail:** Never name Bloomberg in any KH content. Use "the leading financial data and analytics provider" or "one of the world's most data-rigorous companies."
+
+**Reframes existing KH assets:** YouTube channel becomes the center of gravity. Substack feeds scripts. Life & Times is content gold. Workshop is the natural CTA, not the lead funnel. Groove Pal becomes a "Build With Me" arc.
+
+**Composes with the KH North Star:** YouTube videos ARE Tier 1 creation per `learn/kh-north-star.md` — they require Kyle's specific combination of vision + systems + operational reality and could not exist without it.
+
+---
+
 ## Kai Hamil North Star (June 19, 2026)
 
 Kyle clarified the actual mission during a business evaluation discussion:
@@ -552,3 +575,22 @@ Kyle posted a Quartz Leadership newsletter as a guiding doc for KH business eval
 
 <!-- openclaw-memory-promotion:memory:memory/2026-06-03.md:25:25 -->
 - When different commands disagree, the system subtly reintroduces: [score=0.901 recalls=0 avg=0.620 source=memory/2026-06-03.md:25-25]
+
+## Promoted From Short-Term Memory (2026-06-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-16.md:44:44 -->
+- > "A renewed desire to build and create value through our partnership. Back at it after this weekend. Summer of Kai Hamil in the healthiest possible way." [score=0.907 recalls=0 avg=0.620 source=memory/2026-06-16.md:44-44]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-16.md:46:46 -->
+- **The frame:** "In the healthiest possible way" — this isn't a grind summer. It's: [score=0.907 recalls=0 avg=0.620 source=memory/2026-06-16.md:46-46]
+<!-- openclaw-memory-promotion:memory:memory/2026-06-16.md:56:57 -->
+- **The pattern:** Major presence stretch → renewed creative energy. The vacation isn't the interruption to the work. The vacation is what makes the work worth doing. [score=0.907 recalls=0 avg=0.620 source=memory/2026-06-16.md:56-57]
+
+## Promoted From Short-Term Memory (2026-06-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-16.md:52:52 -->
+- This is the post-presence creative wave — the kind of work that flows *out of* a full cup, not from depletion. [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-16.md:52-52]
+
+## Promoted From Short-Term Memory (2026-06-21)
+
+<!-- openclaw-memory-promotion:memory:memory/2026-06-16.md:22:23 -->
+- **Kyle's intent for the week:** > "A major stretch of time with my family, and trying to stay present in that as much as possible." [score=0.849 recalls=0 avg=0.620 source=memory/2026-06-16.md:22-23]
