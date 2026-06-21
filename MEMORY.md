@@ -185,6 +185,24 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Decision-Question Taxonomy (June 21, 2026)
+
+Kyle extended the data motif into a four-question taxonomy. **Stored at `learn/decision-question-taxonomy.md`**.
+
+**The four canonical decision-questions:**
+1. **Diagnostic** — "Is anything failing or broken?" (operational health, time-sensitive)
+2. **Allocative** — "Where should I invest time/resources/attention?" (opportunity cost)
+3. **Directional** — "Where is this trending, and what does it imply?" (trajectory)
+4. **Identity / Values** — "Is this aligned with who I'm trying to become?" (self-coherence)
+
+**Why it matters:** Information without a decision-question is noise. Every video, every Stitch interaction, every business evaluation should identify the question type first — because the question determines what data is relevant and what framing helps.
+
+**Operating rule for Stitch:** When Kyle asks an ambiguous question, clarify by question type before answering. Example: "Are you asking diagnostically, allocatively, directionally, or identity-wise?" This turns Stitch from a retrieval system into a decision partner.
+
+**Sharpened channel koan:** Data = event streams + existing content. Outcome = decision-making. The right data depends on the question — and there are only four kinds.
+
+---
+
 ## YouTube Thesis (June 21, 2026)
 
 Kyle identified YouTube as the right channel for KH, anchored by 18 years of operational depth in financial data/technology systems. **Stored at `learn/youtube-thesis.md`**.

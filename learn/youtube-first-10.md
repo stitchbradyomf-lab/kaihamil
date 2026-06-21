@@ -11,11 +11,22 @@ The strategic queue. Get all 10 outlined before producing #1.
 
 > **"Data is new event streams plus existing content.
 > Outcome is decision-making capability.
-> What do you do with information? Use it to make a better-informed decision."**
+> The right data depends on the question you're asking — and there are only four kinds."**
 
 This becomes the spine of the channel. Every Pillar 1 video can return to it. Every Pillar 2 video can reframe it through System // Self. Every Pillar 3 video shows it in operation.
 
 It's the channel's *koan*.
+
+### The four canonical decision-questions
+
+1. **Diagnostic** — "Is anything failing or broken?"
+2. **Allocative** — "Where should I invest time/resources/attention?"
+3. **Directional** — "Where is this trending, and what does it imply?"
+4. **Identity / Values** — "Is this aligned with who I'm trying to become?"
+
+Full taxonomy with examples and Stitch operating notes at `learn/decision-question-taxonomy.md`.
+
+Every video in the queue should sharpen by asking: **which question type does this help the viewer answer?**
 
 ---
 
