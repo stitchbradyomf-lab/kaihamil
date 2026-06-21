@@ -185,6 +185,36 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Kai Hamil Canonical Pitch (June 21, 2026)
+
+Kyle locked in the one-line, externally-facing pitch. **Stored at `learn/kh-pitch.md`.**
+
+**The pitch:**
+> "I can teach you how to use AI systems to boost your decision-making power and improve every aspect of your life."
+
+**What it REPLACES (wrong pitch):**
+> "I can teach you how to build AI agent systems." — commoditized, mechanism-first, no outcome anchor.
+
+**Why it works:**
+- Teacher posture, not seller posture
+- AI is the means, not the subject
+- Names the actual outcome (decision-making power)
+- Universal scope (every aspect of life)
+- Composes cleanly with the WHAT/HOW/WHY stack:
+  - WHAT → "boost your decision-making power"
+  - HOW → "use AI systems" (implicit)
+  - WHY → "improve every aspect of your life"
+
+**Used everywhere now:**
+- YouTube channel description, video taglines
+- Workshop landing page
+- Valé OS positioning
+- All KH products are the same pitch with different delivery vehicles
+
+**Stitch operating rule:** Default to this pitch in any KH copy. Never lead with mechanism ("build agent systems," "automate your workflow"). Lead with the outcome. Flag any old-pitch drift.
+
+---
+
 ## Kai Hamil WHAT/HOW/WHY (June 21, 2026)
 
 Kyle refined the architecture. **Stored at `learn/kh-what-how-why.md`.**
