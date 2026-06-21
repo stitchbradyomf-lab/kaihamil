@@ -185,6 +185,31 @@ This is what Couples Valé should facilitate.
 
 ---
 
+## Kai Hamil WHAT/HOW/WHY (June 21, 2026)
+
+Kyle refined the architecture. **Stored at `learn/kh-what-how-why.md`.**
+
+**The three-layer stack:**
+- **WHAT (the practice):** Leveraging data management and decision analytics principles in everyday life. Universal, teachable, portable.
+- **HOW (the mechanism):** The elevated entity of human + agentic AI system. Era-specific.
+- **WHY (the mission):** System fuels Self. Self serves others through time and talents. Eternal.
+
+**Kyle's exact framing:**
+> "The elevated entity is still 'the how'. 'The what' is leveraging data management / decision analytics principles in everyday life. That's the System. It fuels the Self. The Self serves others through its time and talents."
+
+**Implications:**
+- The channel teaches the WHAT, demonstrates the HOW, anchors the WHY — healthy mix is 40/30/30
+- Bucket 1 (WHAT) videos: entry-level decision/data principles for everyday life
+- Bucket 2 (HOW) videos: Build With Me — elevated entity at work
+- Bucket 3 (WHY) videos: service, presence, meaning
+- Channel name decision sharpened: Kyle Brady teaches the practice; Kai Hamil is the framework taught
+- Resolves the original Time & Focus framing ("help others; on your terms") — it was the WHY all along
+- The North Star, the data motif, the four-question taxonomy all compose into this stack cleanly
+
+**Stitch operating rule:** When evaluating content/decisions, identify which layer is in play. Don't let HOW eat WHAT (demo-itis). Don't let WHY drift from WHAT (inspiration without formation). Honor the service motive.
+
+---
+
 ## Kai Hamil Canonical Definition (June 21, 2026)
 
 Kyle locked in the one-sentence definition:

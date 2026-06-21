@@ -13,6 +13,18 @@
 
 ---
 
+### Important refinement (later same day):
+
+This definition describes the **HOW** — the operational mechanism. See `learn/kh-what-how-why.md` for the full three-layer stack:
+
+- **WHAT:** Leveraging data management and decision analytics principles in everyday life (the practice)
+- **HOW:** The elevated entity (this definition — the mechanism)
+- **WHY:** System fuels Self. Self serves others through time and talents (the mission)
+
+The elevated entity is the means, not the end. Use the WHAT/HOW/WHY doc when explaining or evaluating; use this doc when defining the mechanism specifically.
+
+---
+
 ## Why This Definition Works
 
 This single sentence resolves the ambiguity that's been quietly hovering over Kai Hamil for months. Let's unpack each piece:
