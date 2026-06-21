@@ -229,6 +229,33 @@ Kyle extended the data motif into a four-question taxonomy. **Stored at `learn/d
 
 ---
 
+## YouTube Channel Strategy Locked (June 21, 2026)
+
+Kyle confirmed YouTube as the primary platform for KH. Substack and LinkedIn = co-benefit echoes.
+
+**Stored at `learn/youtube-channel-strategy.md`** — cadence, production loop, and Stitch's role in each video.
+
+**Key context Kyle revealed:** Previously operated a YouTube channel called **whiskyxing** — has lived experience with the platform, equipment, edit loop, and the psychological side of publishing video. Already crossed the bar of "I am a person who has published video on YouTube," which is the invisible-but-enormous threshold most non-creators don't cross.
+
+**Decisions made:**
+- Primary platform: YouTube (not Substack, not LinkedIn)
+- Cadence: one video per week, ~6-8 hours production budget
+- Cross-post to Substack (essay version) and LinkedIn (paragraph distillation), but YouTube is canonical
+- Recommended channel name: **Kyle Brady** (not Kai Hamil) — personal-credentialed channels outperform branded ones in expertise lane; Kai Hamil enters as recurring framework within content
+- 90-day target: 10 videos published, channel voice locked, first DM from credentialed peer
+
+**Production loop with Stitch:**
+- Sun: script with Stitch help
+- Mon: shoot A-roll
+- Tue: B-roll + thumbnail concepts (Stitch supports)
+- Wed-Thu: edit
+- Fri: metadata + scheduling (Stitch supports)
+- Sat: publish
+
+**Failure modes to watch:** early-discouragement spiral, pivot temptation around video 4-6, shorts-first slip, comparison trap with faster-growing channels, "should this be a Substack post instead" mistake.
+
+---
+
 ## YouTube Thesis (June 21, 2026)
 
 Kyle identified YouTube as the right channel for KH, anchored by 18 years of operational depth in financial data/technology systems. **Stored at `learn/youtube-thesis.md`**.
