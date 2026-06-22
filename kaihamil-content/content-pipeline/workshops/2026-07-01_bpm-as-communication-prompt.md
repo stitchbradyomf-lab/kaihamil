@@ -1,170 +1,170 @@
-# Slide Deck Generation Prompt
-**Workshop:** Business Process Mapping as Communication
-**Date:** July 1, 2026 (Bloomberg)
+# Slide Deck Generation Prompt - v2
+**Workshop:** Why We Map: Process Mapping as a Tool for Purpose
+**Date:** July 1, 2026
+**Audience:** A team in the philanthropy division currently mapping some of their own processes
+**Format:** ~10 slides, conceptual, includes 2-3 in-room exercises
 **Author:** Kyle Brady
-**Source artifact:** Will be used as the input prompt to a slide-generation model (Gemini, GPT, Gamma, etc.)
 
 ---
 
-## THE PROMPT (copy from here ⬇)
+## THE PROMPT (copy from here below)
 
-You are an expert instructional designer and slide-deck author. Produce a polished, presentation-ready slide deck for a one-hour workshop. Output the deck as a structured outline: one slide per section, with slide title, on-slide content (bulleted or short prose), speaker notes (2–4 sentences), and a visual direction (what should be drawn, diagrammed, or photographed on the slide). At the end, include a one-page "facilitator brief" summarizing the arc, the two load-bearing arguments, the audience map, and the success criteria.
+You are an expert instructional designer and slide-deck author. Produce a polished, presentation-ready slide deck for a one-hour workshop designed for active participation, not passive listening. The deck must be no more than 10 slides total (including the exercise slides). Output the deck as a structured outline: one slide per section, with slide title, on-slide content (short prose or tight bullets), speaker notes (3-5 sentences), and a visual direction (what should be drawn, diagrammed, or photographed on the slide). At the end, include a one-page facilitator brief.
 
 ### Workshop title
-**"Maps, Not Diagrams: Business Process Mapping as a Communication System for Humans and Machines."**
+
+**"Why We Map: Process Mapping as a Tool for Purpose."**
 
 ### Audience
-Mixed-discipline professionals at a large financial data and analytics company. Roughly half are operationally embedded (vendor management, data ops, production analysts). The rest are strategic (product, technology, leadership). Almost all have *seen* business process maps; many have *made* them; few have made ones they would defend as great. They are intelligent, time-pressured, and skeptical of decorative artifacts. They want practical leverage, not theory for its own sake.
 
-### What the audience is trying to understand
-1. **What separates a useful process map from a decorative one** — concretely, not philosophically.
-2. **How a process map functions as a *communication system*** — not a drawing, not a document, but a shared artifact that coordinates *both human and AI/agent-based participants* in a workflow.
-3. **What "good" looks like when their workflows now include agentic AI systems** as co-actors. Most existing mapping conventions predate this. They need a way to map work where some steps are owned by software that learns and acts.
-4. **How to climb from describing a process to instrumenting one** — so the map enables analysis, synthesis, and evaluation, not just knowledge transfer.
+A team in the philanthropy division of a large financial data and analytics company. They are actively mapping some of their own processes right now. They are intelligent, mission-driven, and operationally engaged. They are not executives and the workshop should not pitch up at them. They are practitioners doing real work. They do not need to be sold on process mapping; they need to be helped to do it *well*.
 
-### Core thesis (this MUST be the spine of the deck)
+What this means for tone and content:
+- Conceptual, not executive. No corporate framing language. No buzzwords.
+- Practical, not theoretical. They will leave and apply this tomorrow.
+- Respectful of their context. Philanthropy work involves trust, stewardship, and mission - the deck should honor that rather than flatten everything to "operations."
+- Method-agnostic. Do not advocate for a specific notation style (BPMN, swimlanes, flowcharts, etc.). Notation is a downstream choice. The deck is about *why* and *what makes a map great*, not *which symbols to use*.
 
-> **A business process map is a communication artifact. Its quality is judged by what it enables the reader (human or machine) to *do*, not by what it depicts.**
+### Core thesis (the spine of the deck)
+
+> **A process map is not a drawing. It is a tool for purpose.**
 >
-> Most maps stop at the Knowledge level of Bloom's Taxonomy. Great maps walk up to **Analysis, Synthesis, and Evaluation** — and they do so by including a built-in measurement system, explicit context, and reusable structure.
+> The reason to make one is to enable a group of people - and now also the AI systems working with them - to share an understanding of how their work happens, so they can do that work better, measure it honestly, and decide together what to change.
+>
+> Great maps climb a purpose ladder: from *describing* what happens, to *understanding* why, to *measuring* honestly, to *judging* whether it should continue as-is.
 
-### The Bloom's Taxonomy frame (mnemonic: "Keep Catching Apes and Silly Elephants")
+### The purpose ladder (replace the academic "Bloom's Taxonomy" framing for this audience)
 
-Apply Bloom's Taxonomy to process maps explicitly:
+The original frame for this material was Bloom's Taxonomy. For this team, soften the academic language and present it as a "purpose ladder" the map can climb. Mention Bloom's once in passing for those who recognize it; do not center it.
 
-| Level | What the map provides | Audience question it answers |
-|-------|----------------------|------------------------------|
-| **Knowledge** | Factual diagram connections — steps, sequence, handoffs | "How does it work?" |
-| **Comprehension** | Context + system attributes — where this process sits in the larger system, what its properties are | "How does this fit?" |
-| **Application** | Lived experience — the mapper has *run* the process; the map carries the truths only running it reveals | "What's *actually* true here?" |
-| **Analysis** | A built-in measurement system — where to measure, how to model the data, where it aggregates and transforms | "How healthy is it? What does the data say?" |
-| **Synthesis** | Reusable building blocks; recombines into new processes | "What else can this enable?" |
-| **Evaluation** | Fitness-for-purpose judgment built into the map | "Should this exist? Should it change?" |
+| Rung | The map's purpose at this level | The question it helps the team answer |
+|---|---|---|
+| **Describe** | Show the steps and handoffs as they actually are | "How does this work?" |
+| **Understand** | Add context - where this fits in the larger mission, what the surrounding systems are | "Why does it work this way?" |
+| **Measure** | Name where data is produced, captured, and used | "How healthy is it? What is it telling us?" |
+| **Judge** | Carry the criteria the team uses to evaluate whether the process is serving its purpose | "Should this continue as-is? What would we change, and why?" |
 
-A great process map *strives upward* through these layers. A bad one stops at Knowledge and calls the job done.
+Most maps stop at Describe. Great maps climb the rungs deliberately, and each rung enables a different conversation the team can now have.
 
-### Two load-bearing sentences (must appear verbatim, on their own slides)
+### Two things this deck must do that most BPM workshops do not
 
-1. **"If you have not used the system, you are relying on imperfect communication to translate reality to the map."** → The Application argument.
-2. **"If the data cannot be measured, it cannot be managed, and it cannot be understood precisely."** → The Analysis argument.
+**1. Treat the map as a communication artifact between humans AND machines.**
 
-### The human + machine communication layer (this is the novel contribution)
+Most maps were designed when the only readers were humans. Philanthropy teams now work alongside AI systems that read inputs, generate outputs, and execute steps. A map that only speaks to humans will be invisible to half its readers. The workshop should make this explicit and treat it as a design decision for the participants to think about as they map their own work.
 
-Modern process maps must communicate to **two distinct kinds of readers** simultaneously:
-- **Human readers** — who need narrative, context, judgment cues, and the *why*.
-- **Machine readers / agentic systems** — which need structured inputs/outputs, explicit ownership boundaries, measurable signals, and unambiguous handoff conditions.
+**2. Make data the natural output of the map, not an afterthought.**
 
-Implication: a great map is **dual-rendered** — it carries the same workflow in a form humans can absorb and in a form agents can act on. The audience should leave understanding that mapping is no longer a documentation activity; it is **interface design between humans and the agentic systems they now work alongside**.
+When a map names what data is produced at each step, where it accumulates, and what decisions it enables, the team gains something far beyond a description - they gain a measurable, queryable representation of their work. This is what allows analysis and evaluation to happen at all. The deck should make this connection visible.
 
-This reframe is the workshop's strategic payload: BPM is not a back-office craft anymore. It is the spec language for the elevated entity (human + agentic AI) at work.
+### Worked example (use carefully)
 
-### Audience-awareness principle (must be foregrounded)
+Use a generic worked example that the audience can relate to without it feeling personal to the presenter:
 
-A great communicator (and therefore a great map-maker) starts by asking: **"Who is reading this, and what are they trying to understand?"** The deck should explicitly model:
-- **The audience taxonomy** for any given map: operator, analyst, executive, auditor, agent.
-- **The question each one is trying to answer.**
-- **The level of Bloom's they need the map to reach for them.**
+**"Photo Attribution Workflow"** - a small, recognizable example where digital photos are filtered, attributed (star ratings, tags, faces), and rendered into both digital outputs (web galleries, posts) and physical outputs (books, frames). The same underlying corpus produces multiple outputs. The map honors a clear producer side (what writes into the corpus) and consumer side (what reads out of it to make artifacts).
 
-A map written for an operator that pretends to also serve an executive will fail both. A map that is read by an agentic AI but lacks structured measurement points will silently fail without anyone noticing.
+Use this example *briefly* and *as a stepping stone*. The deck should pivot quickly to a hypothetical example more native to the audience's world, such as:
 
-The discipline: **declare the audience and the question first; design the map second.**
+- **A grant intake and review process** (applications received, reviewed, scored, decisions made, learnings captured for future cycles)
+- **A donor stewardship cadence** (touchpoints, thank-yous, reporting, relationship continuity)
+- **A program reporting loop** (data captured in the field, aggregated, reported up, and used to inform next-year planning)
 
-### The worked example (case study to weave through the deck)
+Pick one of these (suggest one in the speaker notes; let Kyle choose) and use it as the running example through the climb. The photo workflow appears only as the warm-up; the philanthropy-shaped example carries the teaching.
 
-Use the following generalizable example as the running case study. It should appear in 3-4 slides, returned to as the deck climbs each Bloom's level. Do NOT reference any specific recipient, family member, occasion, or personal photo content. Keep it framed as a *generic, reusable* workflow that any photo producer or consumer might run.
+### Exercises (must include 2-3, clearly marked)
 
-**"Photo Attribution Workflow"** — the middle layer of a larger pipeline that has photo capture upstream and printed-artifact consumption downstream:
+The deck must include 2-3 in-room exercises. Each exercise should:
+- Take 5-10 minutes
+- Be doable with paper, sticky notes, or a shared whiteboard - no special tools
+- Land a specific learning beat from the surrounding content
+- Produce something each participant can take back to their own current mapping work
 
-```
-[UPSTREAM]                    [THE WORKFLOW]                       [DOWNSTREAM]
-Photo capture     →     Filter • Attribute • Sort     →     Printed artifacts
-(camera, phone,         (the business process being           (books, frames,
- shared albums)          mapped)                               journals, calendars)
-```
+Suggested exercises (the deck should use these three or close variants):
 
-The workflow itself contains the following steps (use these as the stage labels):
+**Exercise A - "Who reads this map?"**
+Each participant lists every person (or system) who will read the map they're currently building. For each reader, they write what that reader is trying to *do* with the map. Surfaces the audience-discipline lesson and reveals readers they hadn't designed for - including AI systems.
 
-1. **Ingest** — collect photos from capture sources into a single working set
-2. **Keep / Reject** — first-pass filter; bad exposures, duplicates, throwaways out
-3. **Star Rating** — attribute quality on a 1-5 scale; the heart of the curation signal
-4. **Color / Edit for Print** — color-correct and prepare images for the physical medium
-5. **Categorize / Sort** — group by theme, subject, time, or destination
-6. **Publish to Website** — render the public/shareable layer
-7. **Export to Drive for Printing Service** — produce the file set the downstream printer consumes
+**Exercise B - "Where does the data live?"**
+For one step in their own current map, participants annotate: what data is produced here, where does it go, who uses it, and what decision does it enable? The exercise demonstrates that most existing maps are silent about data, and adding this layer transforms the map into a measurable system.
 
-Some stages are owned by humans (judgment-heavy: star rating, color decisions, theme calls). Some are owned by AI agents (volume-heavy: ingest, dedupe, face/scene tagging, draft star recommendations, draft sort). Some are shared (the agent proposes, the human approves).
+**Exercise C - "What would make this map worth keeping?"**
+Each participant writes one sentence completing this prompt: *"This map is worth keeping if it helps us ____."* Forces the purpose conversation. Surfaces that different members of the team often have *different* answers - which is itself a discovery worth having early in the mapping work.
 
-The workflow has explicit measurement points (volume in/out per stage, keep rate, agent-vs-human star agreement, defect rate downstream, cycle time per artifact, cost per published or printed item, reuse rate across runs).
+These exercises are the workshop's real instructional payload. The content slides exist to set them up and debrief them.
 
-Why this example works pedagogically:
-- It is **bounded** — clear upstream input (raw photos) and clear downstream output (export-ready files for a printing service).
-- It is **universal** — virtually everyone in the audience either produces or consumes photos; the abstraction collapses to something they have personally felt friction inside.
-- It is **mixed-agent** — the filter/attribute/sort steps are exactly where AI agents are now competent, while the *judgment* steps remain human; the split is visible and defensible.
-- It is **instrumented** — the attribution layer (star ratings, keep/reject) generates clean numerical signal, making the Analysis-level argument easy to show.
-- It is **reusable** — the same workflow feeds many downstream artifacts (books, frames, journals, web galleries) without modification, demonstrating Synthesis level.
+### The 10-slide structure (target shape)
 
-The deck should NOT lead with the worked example. It should earn the right to introduce it after the audience accepts the thesis, then use it to make the Bloom's climb visible. The presenter has personally run this workflow end-to-end, which entitles the deck to make the Application argument honestly. Do not name the specific personal artifact produced; reference "a recent end-to-end run" or similar generic phrasing if needed.
+The deck must fit in approximately 10 slides total, including exercise slides. Suggested arc:
 
-### Deck arc (target ~25-30 slides)
+1. **Cold open.** A single image: a complicated process map that fails to communicate. Title: *"What is this for?"* Speaker uses this to surface that most maps don't survive a "what is this for" question - and that's the question the workshop will answer.
 
-1. **Cold open (1 slide).** A single image of a real-looking but useless process map. Title: *"What is this for?"*
-2. **The premise (2 slides).** Most maps are diagrams. Great maps are instruments. Difference matters more than it looks.
-3. **Process maps as communication systems (2 slides).** Define the readership. Establish that there are now two kinds of readers: humans and agents.
-4. **Knowing your audience (2-3 slides).** The audience taxonomy. The question each one is trying to answer. The principle: declare audience and question before designing the map.
-5. **Bloom's Taxonomy applied to process mapping (3-4 slides).** Walk the six levels. Anchor the mnemonic. Land the framing that great maps strive upward.
-6. **The Application argument (2 slides).** Verbatim sentence as a full-bleed slide. Why second-hand mapping fails.
-7. **The Analysis argument (2-3 slides).** Verbatim sentence as a full-bleed slide. Measurement belongs *in* the map. Show a fragment of a metric table.
-8. **Worked example introduction (1-2 slides).** Show the upstream → workflow → downstream framing first, then zoom into the workflow itself at Knowledge level only — the seven stages as boxes and arrows.
-9. **Climbing the worked example (4-5 slides).** Same workflow, re-rendered at Comprehension (where it fits in the larger photo lifecycle), then Application (what changed once it was actually run), then Analysis (which stages carry which measurements and what they enable). Each climb adds visible layers to the same diagram.
-10. **The human + machine rendering (2 slides).** The same workflow shown twice — once for human readers (narrative + judgment cues), once as a structured spec for agents (typed inputs/outputs, ownership, measurement points). Use the photo attribution workflow to make the dual-rendering concrete: star-rating is a human judgment call; ingest/dedupe is agent-owned; color-for-print is a shared step where the agent proposes and the human approves. Make the split visible on the slide.
-11. **Synthesis & Evaluation as the frontier (2 slides).** Tease — don't deliver. Reusable building blocks. Maps that judge themselves.
-12. **Practitioner checklist (1 slide).** A pocket checklist the audience leaves with: questions to ask of any map they make or read.
-13. **Closer (1 slide).** Reprise the cold-open image, but now annotated, instrumented, audience-tagged. *"Same diagram. Different map."*
+2. **The thesis.** "A process map is a tool for purpose." On-slide: the thesis sentence and the four rungs of the purpose ladder named simply.
+
+3. **Who reads the map?** Maps now have human readers AND machine readers. Brief, conceptual. Sets up Exercise A.
+
+4. **Exercise A - "Who reads this map?"** Clear instructions on slide. 7 minutes paper-based exercise + brief share-back.
+
+5. **The purpose ladder.** A single visual with the four rungs (Describe, Understand, Measure, Judge) and the question each rung enables the team to answer. Worked example shown at each rung briefly. The point: a great map *chooses* how high it climbs.
+
+6. **Where the data emerges.** The measurement rung deserves its own slide. When a map names data production, capture, and use, it stops being a drawing and starts being a system you can analyze. Sets up Exercise B.
+
+7. **Exercise B - "Where does the data live?"** Clear instructions. 8 minutes on a single step from each participant's real current map. Brief share-back.
+
+8. **Judging your own map.** Maps don't just describe processes - the best ones carry the criteria the team uses to decide whether the process is still serving its purpose. Sets up Exercise C and the workshop's most important conversation.
+
+9. **Exercise C - "What would make this map worth keeping?"** Clear instructions. 5 minutes individual + 5 minutes group surfacing of different answers. This is where the workshop's purpose-thesis lands in the room.
+
+10. **Closer.** A reprise of the cold-open image, now annotated and instrumented. Title: *"Same diagram. Different map."* Closing line: *"You map because your team's time and focus are worth protecting. Map only what you'll use; instrument what you map; judge what you instrument."* Optional final beat: name the next mapping session the team has scheduled and offer the questions from this workshop as a checklist they can bring to it.
 
 ### Tone and constraints
 
-- **Direct, dense, low-fluff.** Audience is sophisticated.
-- **No motivational filler.** No "leverage your synergies."
-- **Concrete examples over abstractions.** Every claim earns a slide only if it can be shown.
-- **Visuals matter.** For each slide, specify what should be drawn or diagrammed.
-- **The presenter has actually run the worked-example workflow.** The deck may reference that fact as proof of the Application argument; it should not pretend otherwise.
-- **Do not name any specific employer of the presenter.** Refer generically to "a large financial data and analytics company" if context is needed.
-- **Do not use em-dashes.** Use standard dashes (-) or ellipses (...) instead.
+- **Conceptual, not method-preachy.** Do not advocate for specific notation. Do not name BPMN, swimlanes, or any tool by brand. Notation is a downstream choice.
+- **Plain language.** No corporate buzzwords. No academic jargon (mention Bloom's in passing only).
+- **Respectful of philanthropy work.** Honor that this team's processes touch trust, stewardship, and mission. Avoid optimization-only language.
+- **Practitioner voice.** Kyle has mapped real processes (including in his personal life). The deck may reference that lived experience without naming personal projects or family members.
+- **No reference to a specific employer.** Use generic "your organization" or "your team" framing.
+- **No em-dashes.** Use standard dashes (-) or ellipses (...) instead.
+- **Single truth, not "canonical."** Use plain words. "The version we agree on" or "the single truth" over "the canonical version."
 
 ### Output format
 
 For each slide produce:
-1. **Slide number and title**
-2. **On-slide content** (bullets or short prose; what the audience sees)
-3. **Speaker notes** (2-4 sentences; what the presenter says)
-4. **Visual direction** (what to draw, diagram, or photograph)
 
-After the slide-by-slide output, include a **facilitator brief** (≤1 page) with:
+1. **Slide number and title**
+2. **On-slide content** (short prose or tight bullets; what the audience sees)
+3. **Speaker notes** (3-5 sentences; what the presenter says, including any setup/debrief language for exercise slides)
+4. **Visual direction** (what to draw, diagram, or photograph)
+5. **Time budget** (~minutes spent on this slide in the live workshop, so the total adds to about 55-60 minutes)
+
+After the slide-by-slide output, include a one-page **facilitator brief** with:
 - The deck's spine in one sentence
-- The two load-bearing arguments and where they live in the arc
-- The audience map (who's in the room, what they want)
-- The success criteria (what a participant should be able to do differently the next day)
-- Three anticipated objections and one-sentence responses to each
+- The purpose-ladder framing in one sentence
+- The two distinctive moves (machines as readers; data as natural output)
+- The three exercises with timing and intended learning beat
+- Three anticipated questions or objections from the participants and one-sentence responses to each
+- A note on what materials are needed (sticky notes, markers, paper, etc.) and any setup the facilitator should do before the session
 
 Begin.
 
-## END OF PROMPT ⬆ (copy stops here)
+## END OF PROMPT (copy stops above)
 
 ---
 
-## Notes for Kyle (not part of the prompt)
+## Notes (not part of the prompt)
 
-- This prompt is designed to be tool-agnostic. Drop it into ChatGPT, Claude, Gemini, Gamma, Tome, Beautiful.ai, or Decktopus — anywhere that takes a long brief and emits slides or an outline.
-- For **Gamma** or **Tome**: paste it as-is; they'll generate visuals automatically.
-- For **ChatGPT/Claude/Gemini**: paste it, get the outline + speaker notes, then hand the outline to a slide generator OR build manually in Google Slides / Keynote.
-- The prompt deliberately understates the worked example up front, then weaves it back through. That mirrors the workshop arc — earn the example before deploying it.
-- The "no Bloomberg" constraint is baked in. The KH-safe framing is preserved.
-- The "no em-dash" preference is honored.
+Differences from v1:
+- Audience is now correctly identified (philanthropy team, practitioners, not executives)
+- Reduced from ~25-30 slides to exactly 10
+- Bloom's Taxonomy reframed as the gentler "purpose ladder" with rungs renamed in plain English (Describe, Understand, Measure, Judge)
+- Photo example demoted from running case study to warm-up; deck pivots to a philanthropy-shaped hypothetical
+- 3 exercises added as the workshop's primary instructional vehicle
+- Method-preachy temptations explicitly forbidden (no notation advocacy)
+- Vocabulary updated: "single truth" not "canonical"; "locked" available if needed
+- Time-and-focus close included as the audience payoff
 
-**Suggested generation order:**
-1. Run the prompt once. Read the output critically.
-2. Refine 2-3 slides that didn't land.
-3. Re-run with refinements as added constraints.
-4. Hand to a visual tool only when the structure is solid.
-</content>
-</invoke>
+What the prompt deliberately does NOT do (and why):
+- Does not name Bloomberg or any employer (KH-safe by default)
+- Does not name Kai Hamil concepts directly (this is a work workshop, not a KH funnel)
+- Does not name standing operations, elevated entity, or System // Self (those are KH-only)
+- Does not require Kyle to demo his personal photo project (the example is generic)
+
+Tool-agnostic: the company slide format pass happens after this prompt is run.
