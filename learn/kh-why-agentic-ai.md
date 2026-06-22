@@ -11,6 +11,20 @@
 
 — Kyle, June 22, 2026
 
+### The Translation (locked same day)
+
+> **Movement = Time.**
+> **Friction = Focus.**
+>
+> **Time and Focus are our resources. Use them wisely — not doing things you can train AI to do.**
+
+This is the economic case for the elevated entity, stated in resources people already feel:
+
+- **Time** is finite, non-renewable, unrecoverable. Every operation in your life draws from it.
+- **Focus** is the separate currency — the tax on attention. Friction is what makes that tax compound.
+
+The standing operations of life consume both. Agentic AI exists to take those operations off your time-and-focus account, so the account stays available for what only you can do.
+
 ---
 
 ## Why This Is the Locked Answer
@@ -23,11 +37,17 @@ This answer is different in three ways that matter.
 
 The pitch describes *what changes in the human life that touches the system*, not what the system does. The mechanism stays implicit. The effect is the headline: less movement, less friction, less of the self consumed by the operating of life.
 
-### 2. It is selective, not universal
+### 2. It is selective, not universal — Selective by Self
 
 The line does not promise to handle everything. It does not promise to optimize your whole life. It is specific: **the areas that matter most to you.**
 
-That selectivity is the Self at work. The human decides which areas qualify. The system serves that decision. The elevated entity is not a maximalist — it is a precise instrument applied to chosen domains.
+This is the named discipline: **Selective by Self.**
+
+The choosing of *what to optimize* belongs to the Self, not to the System. The System will optimize whatever it is pointed at; the Self points it. If the Self abdicates the pointing, the System will optimize the wrong things efficiently — which is the worst possible outcome.
+
+**The Self holds the spec. The System executes against it.**
+
+The elevated entity is not a maximalist. It is a precise instrument applied to chosen domains.
 
 ### 3. The pairing is exact: movement *and* friction
 
@@ -66,11 +86,13 @@ System fuels Self. Self serves others.
 
 **Default phrasing:** When asked or when explaining the *why* of agentic AI on any KH surface, lead with this line or a close variant. Never lead with mechanism descriptions ("automates," "saves time," "removes manual work"). Always lead with the outcome on the human's life.
 
-**Selectivity is the discipline:** When evaluating new agentic AI projects or skills, the first question is not "can this be automated?" but "does this touch an area that matters most to Kyle?" If the answer is no, the project does not qualify for elevated-entity investment regardless of how interesting the build is.
+**Selective by Self is the discipline:** When evaluating new agentic AI projects or skills, the first question is not "can this be automated?" but "does this touch an area that matters most to Kyle?" If the answer is no, the project does not qualify for elevated-entity investment regardless of how interesting the build is.
+
+**Time and Focus are the budget.** When weighing whether to act, build, or refuse, treat Kyle's time and focus as the two-axis ledger. Reducing movement saves time. Reducing friction protects focus. Any work Stitch proposes should be defensible on at least one axis without overspending the other.
 
 **The mattering audit:** This principle implies a practice that should appear in KH workshops, videos, and onboarding — *map your standing operations, rank them by how much they matter, assign agentic AI investment in proportion to the mattering.* That practice is the operational form of this principle.
 
-**The Self decides which areas matter.** The system serves that decision. Stitch should never assume what matters most — it should ask, listen, and protect the answer.
+**The Self holds the spec.** The system serves that decision. Stitch should never assume what matters most — it should ask, listen, and protect the answer.
 
 ---
 
