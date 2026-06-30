@@ -459,7 +459,10 @@ def get_time_focus_yesterday():
         
         pb_url = os.environ.get('POCKETBASE_URL', 'http://192.241.180.69:8090')
         pb_email = os.environ.get('POCKETBASE_ADMIN_EMAIL', 'kyle@kaihamil.com')
-        pb_password = os.environ.get('POCKETBASE_ADMIN_PASSWORD', 'Scobey1022')
+        pb_password = os.environ.get('POCKETBASE_ADMIN_PASSWORD')
+        if not pb_password:
+            print("Warning: POCKETBASE_ADMIN_PASSWORD not set, skipping Time & Focus data")
+            return None
         
         # Authenticate first
         auth_token = None
