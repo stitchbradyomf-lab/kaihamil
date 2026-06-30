@@ -9,6 +9,17 @@ import urllib.request
 import os
 import subprocess
 from datetime import datetime, timedelta
+from pathlib import Path
+
+# Load environment variables from ~/.openclaw/.env if it exists
+env_path = Path.home() / '.openclaw' / '.env'
+if env_path.exists():
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                os.environ.setdefault(key, value)
 
 # Configuration
 WORKSPACE = os.path.expanduser("~/.openclaw/workspace")
