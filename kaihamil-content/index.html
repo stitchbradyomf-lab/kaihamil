@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kai Hamil | Agency through Automation</title>
+    <title>Kai Hamil | better systems. better self.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-cream: #faf6f1;
             --bg-card: #fffdf9;
-            --bg-warm: #f8f5f0;
+            --bg-warm: #f5f0e8;
             --brown-dark: #3d2817;
             --brown-medium: #6b5344;
             --amber: #d4a574;
@@ -21,8 +21,8 @@
             --terracotta: #b87a5e;
             --ink-dark: #2c2420;
             --ink-medium: #5a5048;
-            --self-light: #faf6f1;
-            --system-dark: #3d2817;
+            --sea: #1B4D4A;
+            --ochre: #BB6F38;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,7 +34,31 @@
             min-height: 100vh;
         }
         
-        /* Navigation with Hamburger */
+        /* Background Symbol */
+        .bg-symbol {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .bg-symbol .slash {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 320px;
+            font-weight: 300;
+            color: var(--sea);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Navigation */
         .nav {
             position: fixed;
             top: 0;
@@ -45,8 +69,9 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(250, 246, 241, 0.95);
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
         
         .logo {
@@ -55,6 +80,11 @@
             font-weight: 500;
             color: var(--ink-dark);
             text-decoration: none;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo span {
+            color: var(--ochre);
         }
         
         /* Hamburger Menu */
@@ -74,18 +104,6 @@
             transition: all 0.3s;
         }
         
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-        
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -99,9 +117,7 @@
             box-shadow: -5px 0 30px rgba(0,0,0,0.1);
         }
         
-        .mobile-menu.active {
-            right: 0;
-        }
+        .mobile-menu.active { right: 0; }
         
         .mobile-menu a {
             display: block;
@@ -110,19 +126,11 @@
             text-decoration: none;
             font-size: 1.1rem;
             border-bottom: 1px solid var(--border);
-            transition: color 0.3s;
-        }
-        
-        .mobile-menu a:hover {
-            color: var(--terracotta);
         }
         
         .menu-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.3);
             opacity: 0;
             visibility: hidden;
@@ -130,398 +138,249 @@
             z-index: 140;
         }
         
-        .menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
         
-        /* Circle Hero Section */
-        .circle-hero {
+        /* Hero with Wave */
+        .hero {
             min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 40px;
+            padding: 160px 20px 80px;
             position: relative;
-            background: #ffffff;
+            z-index: 1;
+            background: linear-gradient(to bottom, rgba(250,246,241,0) 0%, var(--bg-cream) 100%),
+                        url('images/hero-wave.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
         }
         
-        .circle-hero h1 {
+        .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
+            font-size: clamp(3rem, 8vw, 5rem);
             font-weight: 400;
             color: var(--ink-dark);
-            margin-bottom: 40px;
-        }
-        
-        .circle-hero h1 strong {
-            font-weight: 600;
-            color: var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
         }
         
         .hero-tagline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-style: italic;
             color: var(--brown-medium);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .hero-philosophy {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            font-style: italic;
+            color: var(--ink-medium);
+            margin-bottom: 40px;
+            max-width: 480px;
+            line-height: 1.5;
+            opacity: 0.6;
+            font-weight: 300;
             letter-spacing: 0.02em;
         }
         
-        /* Concentric Circles */
-        .circles-container {
-            position: relative;
-            width: 340px;
-            height: 340px;
-            margin: 0 auto 30px;
-        }
-        
-        .circle-outer {
-            position: absolute;
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: var(--system-dark);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .circle-outer:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(61, 40, 23, 0.3);
-        }
-        
-        .circle-outer.active {
-            box-shadow: 0 0 0 4px var(--gold);
-        }
-        
-        .circle-outer-label {
-            position: absolute;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--gold-light);
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-        }
-        
-        .circle-outer-desc {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--amber);
+        .hero-cta {
             font-size: 0.85rem;
-            font-weight: 300;
-            white-space: nowrap;
-        }
-        
-        .circle-inner {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: var(--self-light);
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
-            z-index: 10;
-        }
-        
-        .circle-inner:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        
-        .circle-inner.active {
-            box-shadow: 0 0 0 4px var(--terracotta);
-        }
-        
-        .circle-inner-label {
-            color: var(--terracotta);
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        
-        .circle-inner-desc {
-            color: var(--brown-medium);
-            font-size: 0.8rem;
-            font-weight: 300;
-        }
-        
-        /* Key Question Link */
-        .key-question {
-            margin: 30px auto 20px;
-            text-align: center;
-        }
-        
-        .key-question a {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: var(--terracotta);
+            color: var(--ochre);
             text-decoration: none;
-            transition: color 0.3s ease;
+            padding: 12px 30px;
+            border: 1px solid var(--ochre);
+            transition: all 0.3s;
         }
         
-        .key-question a:hover {
-            color: var(--gold);
+        .hero-cta:hover {
+            background: var(--ochre);
+            color: white;
         }
         
-        /* Content Menu Below Circles */
-        .content-menu {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .menu-section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-        
-        .menu-section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .menu-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .system-menu h3 {
-            color: var(--brown-dark);
-        }
-        
-        .self-menu h3 {
-            color: var(--terracotta);
-        }
-        
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-        }
-        
-        .menu-item {
-            display: block;
-            padding: 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .system-menu .menu-item {
-            background: var(--bg-warm);
-            border: 1px solid var(--border);
-        }
-        
-        .system-menu .menu-item:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-        }
-        
-        .self-menu .menu-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-        }
-        
-        .self-menu .menu-item:hover {
-            background: #fef5ef;
-            border-color: var(--terracotta);
-            transform: translateY(-2px);
-        }
-        
-        .menu-item-title {
-            font-weight: 500;
-            color: var(--ink-dark);
-            margin-bottom: 4px;
-        }
-        
-        .menu-item-desc {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
-        }
-        
-        /* Full Navigation (default) */
-        .full-navigation {
-            display: block;
-        }
-        
-        .full-navigation.hidden {
-            display: none;
-        }
-        
-        /* Split Section: System // Self */
+        /* Split Section */
         .split-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 50vh;
+            min-height: auto;
+            position: relative;
+            z-index: 1;
         }
         
-        /* System Side */
         .system-side {
             background: var(--bg-cream);
-            padding: 50px 40px;
+            padding: 60px 40px;
             border-right: 1px solid var(--border);
+        }
+        
+        .self-side {
+            background: var(--bg-warm);
+            padding: 60px 40px;
         }
         
         .side-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .side-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 400;
-            color: var(--brown-dark);
+            color: var(--sea);
             margin-bottom: 8px;
-        }
-        
-        .side-subtitle {
-            font-size: 0.95rem;
-            color: var(--brown-medium);
-            font-weight: 300;
-        }
-        
-        .access-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 340px;
-            margin: 0 auto;
-        }
-        
-        .access-card {
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-        }
-        
-        .access-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0,0,0,0.1);
-        }
-        
-        .access-card.ai-quiz {
-            background: linear-gradient(180deg, #faf6f1 0%, #e8d5a3 100%);
-        }
-        
-        .access-card.frameworks {
-            background: linear-gradient(180deg, #f5e6d3 0%, #d4a574 100%);
-        }
-        
-        .access-card.focus {
-            background: linear-gradient(180deg, #f5d5c5 0%, #e8a838 100%);
-        }
-        
-        .access-card.wisdom {
-            background: linear-gradient(180deg, #e8d0c5 0%, #a65d3f 100%);
-        }
-        
-        .access-icon {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 10px;
-            stroke: var(--brown-dark);
-            stroke-width: 1.5;
-            fill: none;
-        }
-        
-        .access-title {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--brown-dark);
-            margin-bottom: 4px;
-        }
-        
-        .access-desc {
-            font-size: 0.8rem;
-            color: var(--brown-medium);
-            line-height: 1.4;
-        }
-        
-        /* Self Side */
-        .self-side {
-            background: var(--bg-warm);
-            padding: 50px 40px;
         }
         
         .self-side .side-title {
-            color: var(--terracotta);
+            color: var(--ochre);
         }
         
-        .self-side .access-card {
+        .side-subtitle {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            font-weight: 300;
+            font-style: italic;
+        }
+        
+        /* Category Sections */
+        .category {
+            margin-bottom: 35px;
+        }
+        
+        .category-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--brown-medium);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .category-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .category-item {
+            display: block;
+            padding: 14px 18px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-        }
-        
-        /* Product Links */
-        .product-link {
-            display: block;
-            text-align: center;
+            border-radius: 8px;
             text-decoration: none;
-            padding: 15px 0;
+            color: inherit;
+            transition: all 0.3s ease;
         }
         
-        .product-link img {
-            max-width: 180px;
-            max-height: 100px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            margin-bottom: 12px;
+        .category-item:hover {
+            transform: translateX(4px);
+            border-color: var(--gold);
         }
         
-        .product-link-desc {
-            font-size: 0.85rem;
-            color: var(--brown-medium);
-            margin-bottom: 8px;
-            line-height: 1.4;
+        .self-side .category-item:hover {
+            border-color: var(--terracotta);
         }
         
-        .product-link-cta {
-            font-size: 0.85rem;
+        .item-name {
             font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 3px;
+            font-size: 0.95rem;
         }
         
-        .system-side .product-link-cta {
-            color: var(--gold);
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
         }
         
-        .self-side .product-link-cta {
-            color: #ff6b00;
+        /* Applications Section */
+        .applications-section {
+            background: var(--bg-cream);
+            padding: 60px 40px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
         }
         
-        .product-link:hover .product-link-cta {
-            text-decoration: underline;
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--ink-dark);
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--brown-medium);
+            font-style: italic;
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .app-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .app-info {
+            flex: 1;
+        }
+        
+        .app-name {
+            font-weight: 500;
+            color: var(--ink-dark);
+            margin-bottom: 3px;
+        }
+        
+        .app-desc {
+            font-size: 0.8rem;
+            color: var(--brown-medium);
         }
         
         /* Footer */
@@ -530,6 +389,8 @@
             color: var(--amber);
             padding: 40px 20px;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-brand { margin-bottom: 20px; }
@@ -564,53 +425,32 @@
         /* Mobile */
         @media (max-width: 900px) {
             .split-section {
-                display: flex;
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
-            
             .system-side {
                 border-right: none;
-                padding: 30px 20px;
+                border-bottom: 1px solid var(--border);
             }
-            
-            .self-side {
-                padding: 30px 20px;
-                border-top: 1px solid var(--border);
-            }
-            
-            .circles-container {
-                width: 280px;
-                height: 280px;
-            }
-            
-            .circle-outer {
-                width: 280px;
-                height: 280px;
-            }
-            
-            .circle-inner {
-                width: 150px;
-                height: 150px;
-            }
+            .bg-symbol { width: 400px; height: 300px; }
+            .bg-symbol .slash { font-size: 200px; }
         }
         
         @media (max-width: 600px) {
-            .circle-hero { min-height: 60vh; padding-top: 100px; }
-            .circle-hero h1 { font-size: 2.8rem; }
-            .circles-container { width: 240px; height: 240px; }
-            .circle-outer { width: 240px; height: 240px; }
-            .circle-inner { width: 130px; height: 130px; }
-            .circle-outer-label, .circle-inner-label { font-size: 0.85rem; }
-            .side-title { font-size: 1.6rem; }
             .nav { padding: 15px 20px; }
-            .menu-grid { grid-template-columns: 1fr; }
+            .system-side, .self-side { padding: 40px 20px; }
+            .applications-section { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation with Hamburger -->
+    <!-- Background Symbol -->
+    <div class="bg-symbol">
+        <span class="slash">//</span>
+    </div>
+    
+    <!-- Navigation -->
     <nav class="nav">
-        <a href="/" class="logo">kai hamil</a>
+        <a href="/" class="logo">kai<span>//</span>hamil</a>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -621,166 +461,134 @@
     <!-- Mobile Menu -->
     <div class="menu-overlay" onclick="toggleMenu()"></div>
     <div class="mobile-menu">
-        <a href="posts/">✍️ Posts</a>
-        <a href="trips/">🧳 Trips</a>
+        <a href="posts/">Posts</a>
+        <a href="trips/">Trips</a>
         <a href="about.html">About</a>
         <a href="contact">Contact</a>
     </div>
     
-    <!-- Circle Hero Section -->
-    <section class="circle-hero">
-        <h1>kai <strong>hamil</strong></h1>
-        
-        <!-- Tagline -->
-        <p class="hero-tagline"><em>"Thinking in Systems. Anchored by Self."</em></p>
-        
-        <!-- Concentric Circles -->
-        <div class="circles-container">
-            <div class="circle-outer" onclick="selectCircle('system')" id="system-circle">
-                <span class="circle-outer-label">System</span>
-                <span class="circle-outer-desc">Doing things better</span>
-                <div class="circle-inner" onclick="event.stopPropagation(); selectCircle('self')" id="self-circle">
-                    <span class="circle-inner-label">Self</span>
-                    <span class="circle-inner-desc">Doing better things</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Key Question -->
-        <div class="key-question">
-            <a href="https://content.kaihamil.com/posts/proactive-agent-pattern">Why Agentic AI?</a>
-        </div>
-        
-        <!-- Dynamic Content Menu -->
-        <div class="content-menu">
-            <!-- System Menu -->
-            <div class="menu-section system-menu" id="system-menu">
-                <h3>Systems</h3>
-                <div class="menu-grid">
-                    <a href="tools/ai-user-quiz-v3.html" class="menu-item">
-                        <div class="menu-item-title">What Kind of AI User Are You?</div>
-                        <div class="menu-item-desc">Find your problem-solving style</div>
-                    </a>
-                    <a href="frameworks/" class="menu-item">
-                        <div class="menu-item-title">Frameworks</div>
-                        <div class="menu-item-desc">Decision tools and systems</div>
-                    </a>
-                    <a href="https://vale.kaihamil.com" class="menu-item">
-                        <div class="menu-item-title">Valé OS</div>
-                        <div class="menu-item-desc">Strategic navigation for your goals</div>
-                    </a>
-                    <a href="https://vale-pro.netlify.app" class="menu-item">
-                        <div class="menu-item-title">Valé Pro</div>
-                        <div class="menu-item-desc">Your always-on intelligent assistant</div>
-                    </a>
-                    <a href="https://kh-brief.netlify.app" class="menu-item">
-                        <div class="menu-item-title">Daily Brief</div>
-                        <div class="menu-item-desc">Your daily intelligence briefing</div>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Self Menu -->
-            <div class="menu-section self-menu" id="self-menu">
-                <h3>Self</h3>
-                <div class="menu-grid">
-                    <a href="https://kh-timefocus.netlify.app" class="menu-item">
-                        <div class="menu-item-title">Time & Focus</div>
-                        <div class="menu-item-desc">Track where your attention goes</div>
-                    </a>
-                    <a href="wisdom/" class="menu-item">
-                        <div class="menu-item-title">Wisdom</div>
-                        <div class="menu-item-desc">Philosophy and presence</div>
-                    </a>
-                    <a href="https://www.groovepal.com" class="menu-item">
-                        <div class="menu-item-title">Groove Pal</div>
-                        <div class="menu-item-desc">Send a groove. Make a pal.</div>
-                    </a>
-                    <a href="https://couples-vale.netlify.app" class="menu-item">
-                        <div class="menu-item-title">Couples Valé</div>
-                        <div class="menu-item-desc">The OS for Us ♥️</div>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>kai hamil</h1>
+        <p class="hero-tagline">better systems. better self.</p>
+        <p class="hero-philosophy">Like the wave that cannot be grasped, yet shapes the shore //<br>we work with systems, not against them.</p>
+        <a href="#content" class="hero-cta">Explore</a>
     </section>
 
-    <!-- Full Navigation (default when no circle selected) -->
-    <section class="full-navigation" id="full-nav">
-        <div class="split-section">
-            <!-- System Side -->
-            <div class="system-side">
-                <div class="side-header">
-                    <h2 class="side-title">Systems</h2>
-                    <p class="side-subtitle">Doing things better</p>
-                </div>
-                
-                <div class="access-grid">
-                    <a href="tools/ai-user-quiz-v3.html" class="access-card ai-quiz">
-                        <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
-                        <div class="access-title">What Kind of AI User Are You?</div>
-                        <div class="access-desc">Find your problem-solving style</div>
+    <!-- System // Self Split -->
+    <div id="content" class="split-section">
+        <!-- System Side -->
+        <div class="system-side">
+            <div class="side-header">
+                <h2 class="side-title">System</h2>
+                <p class="side-subtitle">Doing things better</p>
+            </div>
+            
+            <!-- Frameworks Category -->
+            <div class="category">
+                <h3 class="category-title">Frameworks</h3>
+                <div class="category-items">
+                    <a href="frameworks/" class="category-item">
+                        <div class="item-name">Decision Frameworks</div>
+                        <div class="item-desc">Tools for clarity in complexity</div>
                     </a>
-                    
-                    <a href="frameworks/" class="access-card frameworks">
-                        <svg class="access-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                        <div class="access-title">Frameworks</div>
-                        <div class="access-desc">Decision tools and systems</div>
-                    </a>
-                    
-                    <a href="https://vale.kaihamil.com" class="product-link">
-                        <img src="vale/assets/vale-logo-dark.jpg" alt="Valé OS">
-                        <div class="product-link-desc">You worry about where you want to go. Valé can worry about getting you there.</div>
-                        <span class="product-link-cta">Learn more →</span>
-                    </a>
-                    
-                    <a href="https://vale-pro.netlify.app" class="product-link" style="background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%); color: #e8d5a3; border-color: #c9a227;">
-                        <div style="font-size: 1.8rem; margin-bottom: 8px;">⚡</div>
-                        <div class="product-link-desc" style="color: #e8d5a3;">Your always-on intelligent assistant - for professionals</div>
-                        <span class="product-link-cta" style="color: #c9a227;">Launch Valé Pro →</span>
-                    </a>
-                    
-                    <a href="https://kh-brief.netlify.app" class="product-link" style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); color: #ecf0f1; border-color: #3498db;">
-                        <div style="font-size: 1.8rem; margin-bottom: 8px;">📰</div>
-                        <div class="product-link-desc" style="color: #ecf0f1;">Your daily intelligence briefing - curated and delivered</div>
-                        <span class="product-link-cta" style="color: #3498db;">Launch Daily Brief →</span>
+                    <a href="tools/ai-user-quiz-v3.html" class="category-item">
+                        <div class="item-name">AI User Quiz</div>
+                        <div class="item-desc">Discover your problem-solving style</div>
                     </a>
                 </div>
             </div>
             
-            <!-- Self Side -->
-            <div class="self-side">
-                <div class="side-header">
-                    <h2 class="side-title">Self</h2>
-                    <p class="side-subtitle">Doing better things</p>
-                </div>
-                
-                <div class="access-grid">
-                    <a href="https://kh-timefocus.netlify.app" class="access-card focus">
-                        <svg class="access-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
-                        <div class="access-title">Time & Focus</div>
-                        <div class="access-desc">Track where your attention goes</div>
+            <!-- Tools Category -->
+            <div class="category">
+                <h3 class="category-title">Tools</h3>
+                <div class="category-items">
+                    <a href="https://vale.kaihamil.com" class="category-item">
+                        <div class="item-name">Valé OS</div>
+                        <div class="item-desc">Strategic navigation for your goals</div>
                     </a>
-                    
-                    <a href="wisdom/" class="access-card wisdom">
-                        <svg class="access-icon" viewBox="0 0 24 24"><path d="M12 3c-4.5 0-8 3.5-8 8 0 3 1.5 5.5 4 7v3h8v-3c2.5-1.5 4-4 4-7 0-4.5-3.5-8-8-8z"/><path d="M9 21h6"/></svg>
-                        <div class="access-title">Wisdom</div>
-                        <div class="access-desc">Philosophy and presence</div>
+                    <a href="https://vale-pro.netlify.app" class="category-item">
+                        <div class="item-name">Valé Pro</div>
+                        <div class="item-desc">Always-on intelligent assistant</div>
                     </a>
-                    
-                    <a href="https://www.groovepal.com" class="product-link">
-                        <img src="products/groove-pal/assets/hero-logo.png" alt="Groove Pal">
-                        <div class="product-link-desc">Send a groove. Make a pal.</div>
-                        <span class="product-link-cta">Check it →</span>
+                    <a href="https://kh-brief.netlify.app" class="category-item">
+                        <div class="item-name">Daily Brief</div>
+                        <div class="item-desc">Your daily intelligence briefing</div>
                     </a>
-                    
-                    <a href="https://couples-vale.netlify.app" class="product-link" style="border-color: var(--terracotta);">
-                        <div style="font-size: 2rem; margin-bottom: 8px;">♥️</div>
-                        <div class="product-link-desc">The OS for Us - shared context for couples</div>
-                        <span class="product-link-cta" style="color: var(--terracotta);">Launch Couples Valé →</span>
+                    <a href="https://photo-flow.netlify.app" class="category-item">
+                        <div class="item-name">Photo Flow</div>
+                        <div class="item-desc">Curate, classify, and connect your visual library</div>
                     </a>
                 </div>
             </div>
+        </div>
+        
+        <!-- Self Side -->
+        <div class="self-side">
+            <div class="side-header">
+                <h2 class="side-title">Self</h2>
+                <p class="side-subtitle">Doing better things</p>
+            </div>
+            
+            <!-- Frameworks Category -->
+            <div class="category">
+                <h3 class="category-title">Frameworks</h3>
+                <div class="category-items">
+                    <a href="wisdom/" class="category-item">
+                        <div class="item-name">Wisdom</div>
+                        <div class="item-desc">Philosophy and presence</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tools Category -->
+            <div class="category">
+                <h3 class="category-title">Tools</h3>
+                <div class="category-items">
+                    <a href="https://kh-timefocus.netlify.app" class="category-item">
+                        <div class="item-name">Time & Focus</div>
+                        <div class="item-desc">Track where your attention goes</div>
+                    </a>
+                    <a href="https://couples-vale.netlify.app" class="category-item">
+                        <div class="item-name">Couples Valé</div>
+                        <div class="item-desc">The OS for Us</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Applications Section -->
+    <section class="applications-section">
+        <div class="section-header">
+            <h2 class="section-title">Applications</h2>
+            <p class="section-subtitle">Built with purpose</p>
+        </div>
+        
+        <div class="apps-grid">
+            <a href="https://www.groovepal.com" class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #f5e6d3, #d4a574);">🎵</div>
+                <div class="app-info">
+                    <div class="app-name">Groove Pal</div>
+                    <div class="app-desc">Send a groove. Make a pal.</div>
+                </div>
+            </a>
+            
+            <a href="https://whiskyxing.netlify.app" class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #3d2817, #6b5344);">🥃</div>
+                <div class="app-info">
+                    <div class="app-name">Whisky Cellar</div>
+                    <div class="app-desc">Track, taste, and treasure your collection</div>
+                </div>
+            </a>
+            
+            <a href="https://gatefield.org" class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #1a365d, #2c5282);">🏘️</div>
+                <div class="app-info">
+                    <div class="app-name">Gatefield HOA</div>
+                    <div class="app-desc">Community management, simplified</div>
+                </div>
+            </a>
         </div>
     </section>
     
@@ -788,7 +596,7 @@
     <footer class="site-footer">
         <div class="footer-brand">
             <h2>kai <strong>hamil</strong></h2>
-            <p>System // Self</p>
+            <p>better systems. better self.</p>
         </div>
         <nav class="footer-nav">
             <a href="https://substack.com/@kylejosephbrady">Substack</a>
@@ -798,49 +606,7 @@
     </footer>
     
     <script>
-        let selectedCircle = null;
-        
-        function selectCircle(circle) {
-            const systemCircle = document.getElementById('system-circle');
-            const selfCircle = document.getElementById('self-circle');
-            const systemMenu = document.getElementById('system-menu');
-            const selfMenu = document.getElementById('self-menu');
-            const fullNav = document.getElementById('full-nav');
-            
-            // Toggle off if clicking same circle
-            if (selectedCircle === circle) {
-                selectedCircle = null;
-                systemCircle.classList.remove('active');
-                selfCircle.classList.remove('active');
-                systemMenu.classList.remove('active');
-                selfMenu.classList.remove('active');
-                fullNav.classList.remove('hidden');
-                return;
-            }
-            
-            selectedCircle = circle;
-            
-            // Reset states
-            systemCircle.classList.remove('active');
-            selfCircle.classList.remove('active');
-            systemMenu.classList.remove('active');
-            selfMenu.classList.remove('active');
-            
-            // Hide full navigation
-            fullNav.classList.add('hidden');
-            
-            // Activate selected
-            if (circle === 'system') {
-                systemCircle.classList.add('active');
-                systemMenu.classList.add('active');
-            } else if (circle === 'self') {
-                selfCircle.classList.add('active');
-                selfMenu.classList.add('active');
-            }
-        }
-        
         function toggleMenu() {
-            document.querySelector('.hamburger').classList.toggle('active');
             document.querySelector('.mobile-menu').classList.toggle('active');
             document.querySelector('.menu-overlay').classList.toggle('active');
         }
