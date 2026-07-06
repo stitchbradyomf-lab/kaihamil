@@ -109,12 +109,12 @@ def search_vendors(size, format_type):
             'vendor': 'Shutterfly',
             'product': f'{format_type.title()} Wall Art',
             'size': size,
-            'price': base_price * 0.85,  # Often has sales
+            'price': base_price * 0.49,  # 51% off your discount
             'shipping': 14.99,
-            'total': (base_price * 0.85) + 14.99,
+            'total': (base_price * 0.49) + 14.99,
             'turnaround': '5-8 days',
             'rating': 4.3,
-            'specialty': 'Frequent discounts, easy ordering'
+            'specialty': '51% off - your best price advantage'
         },
         {
             'vendor': 'AdoramaPix',
@@ -151,25 +151,46 @@ def search_vendors(size, format_type):
         }
     ]
     
-    # Sort by total price, recommend cheapest
+    # Sort by total price
     vendors.sort(key=lambda x: x['total'])
     
-    return vendors, vendors[0]['vendor']
+    # With 51% Shutterfly discount, they're almost always the recommendation
+    # unless quality is paramount (Bay Photo for critical prints)
+    cheapest = vendors[0]
+    if cheapest['vendor'] == 'Shutterfly':
+        recommended = 'Shutterfly'
+        reason = f"Best price with your 51% discount (${cheapest['total']:.2f} total)"
+    else:
+        # If somehow another vendor beats Shutterfly, still note the discount
+        shutterfly = next((v for v in vendors if v['vendor'] == 'Shutterfly'), None)
+        if shutterfly:
+            price_diff = shutterfly['total'] - cheapest['total']
+            if price_diff < 20:  # Within $20, recommend Shutterfly for convenience
+                recommended = 'Shutterfly'
+                reason = f"Your 51% discount makes it competitive, plus familiar interface"
+            else:
+                recommended = cheapest['vendor']
+                reason = f"Lowest price, though Shutterfly with your discount is only ${price_diff:.2f} more"
+        else:
+            recommended = cheapest['vendor']
+            reason = 'Lowest price'
+    
+    return vendors, recommended, reason
 
-def create_proposal(request_data, photo, vendors, recommended_vendor):
+def create_proposal(request_data, photo, vendors, recommended_vendor, reason):
     """Create and save print proposal."""
     proposals_file = DATA_DIR / "print-proposals.json"
-    
+
     # Load existing
     if proposals_file.exists():
         with open(proposals_file) as f:
             data = json.load(f)
     else:
         data = {'proposals': []}
-    
+
     # Generate ID
     proposal_id = f"print-{len(data['proposals']) + 1:03d}"
-    
+
     proposal = {
         'id': proposal_id,
         'status': 'pending',
@@ -184,18 +205,18 @@ def create_proposal(request_data, photo, vendors, recommended_vendor):
         'vendor_options': vendors,
         'recommended': {
             'vendor': recommended_vendor,
-            'reason': 'Best price with good quality rating'
+            'reason': reason
         },
         'notes': f"{request_data['parsed']['style'].title()} conversion will be handled by vendor"
     }
-    
+
     data['proposals'].append(proposal)
     data['generated_at'] = datetime.now().isoformat()
-    
+
     # Save
     with open(proposals_file, 'w') as f:
         json.dump(data, f, indent=2)
-    
+
     return proposal
 
 def handle_request(text):
@@ -218,13 +239,13 @@ def handle_request(text):
         print("No matching photo found - will need manual selection")
     
     # Get vendor options
-    vendors, recommended = search_vendors(
+    vendors, recommended, reason = search_vendors(
         request_data['parsed']['size'],
         request_data['parsed']['format']
     )
     
     # Create proposal
-    proposal = create_proposal(request_data, photo, vendors, recommended)
+    proposal = create_proposal(request_data, photo, vendors, recommended, reason)
     
     print(f"\n✓ Created proposal: {proposal['id']}")
     print(f"View at: https://bradyvisuals.netlify.app/print-proposals.html")
