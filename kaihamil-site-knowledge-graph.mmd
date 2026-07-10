@@ -1,0 +1,72 @@
+flowchart TB
+    KH["Kai Hamil<br/>Thinking in Systems. Anchored by Self"]
+
+    SYS["System<br/>Doing things better"]
+    SELF["Self<br/>Doing better things"]
+    BRIDGE["Bridge Layer<br/>Surfaces that connect structure and meaning"]
+
+    %% Philosophical Foundations
+    SCHOPEN["Schopenhauer<br/>Will and Representation<br/>music as direct Will expression"]
+    WILL["The Will<br/>blind striving, inner essence<br/>beneath representation"]
+    ART_ANTIDOTE["Art as Antidote<br/>harmony navigates the Will<br/>music > concepts"]
+
+    %% Creative Expression Nodes
+    MUSIC["Music<br/>creative outlet, hobby, talent<br/>direct emotional transmission"]
+    RHYTHM["Ariosian Rhythm<br/>long-form sentence flow<br/>prose as musical phrase"]
+    APERTURE["Aperture Video Thread<br/>artistic expression<br/>short-form philosophy"]
+
+    %% Connections
+    SCHOPEN --> WILL
+    WILL --> ART_ANTIDOTE
+    SCHOPEN --> MUSIC
+    MUSIC --> ART_ANTIDOTE
+    MUSIC --> RHYTHM
+    RHYTHM --> ART_ANTIDOTE
+    ART_ANTIDOTE --> APERTURE
+    APERTURE --> MF
+
+    VALE["Valé<br/>Life operating systems<br/>clarity, coordination, automation"]
+    TF["Time & Focus<br/>attention, capacity, execution"]
+    KCAASE["KCAASE<br/>decision framework<br/>self-awareness and navigation"]
+    GP["Groove Pal<br/>ritual, trust, analog presence"]
+    BV["Brady Visuals<br/>archive, photography, lived memory"]
+    MF["Medium-form Memory Films<br/>pace, soul, rewatchability"]
+    LAT["Life & Times<br/>publication / intelligence surface<br/>the newspaper for the intelligence age"]
+
+    KH --> SYS
+    KH --> SELF
+    KH --> BRIDGE
+
+    SYS --> VALE
+    SYS --> TF
+    SYS --> KCAASE
+
+    SELF --> GP
+    SELF --> BV
+    SELF --> MF
+
+    BRIDGE --> KCAASE
+    BRIDGE --> LAT
+
+    VALE --> LAT
+    TF --> LAT
+    KCAASE --> LAT
+    GP --> LAT
+    BV --> LAT
+    MF --> LAT
+
+    BV --> MF
+    GP --> MF
+
+    classDef core fill:#111827,stroke:#111827,color:#ffffff,stroke-width:2px;
+    classDef system fill:#dbeafe,stroke:#2563eb,color:#111827,stroke-width:1.5px;
+    classDef self fill:#dcfce7,stroke:#16a34a,color:#111827,stroke-width:1.5px;
+    classDef bridge fill:#f3e8ff,stroke:#9333ea,color:#111827,stroke-width:1.5px;
+    classDef surface fill:#fef3c7,stroke:#d97706,color:#111827,stroke-width:1.5px;
+
+    class KH core;
+    class SYS,VALE,TF system;
+    class SELF,GP,BV,MF,MUSIC self;
+    class BRIDGE,KCAASE bridge;
+    class LAT surface;
+    class SCHOPEN,WILL,ART_ANTIDOTE,RHYTHM,APERTURE bridge;
