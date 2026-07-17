@@ -8,3 +8,16 @@ secrets/
 *.log
 node_modules/
 kaihamil-private/
+
+# Sensitive memory files - moved to kaihamil-private
+memory/
+MEMORY.md
+USER.md
+SOUL.md
+IDENTITY.md
+AGENTS.md
+TOOLS.md
+HEARTBEAT.md
+
+# Local Netlify folder
+.netlify
