@@ -1,12 +1,27 @@
 # Finance Flow — Private Transfer: MacBook Pro → Mac Mini
 
-Goal: move the Finance Flow app from the MacBook Pro (where it was built in Claude Desktop) to the Mac Mini, entirely over local Wi-Fi. Nothing touches the internet, GitHub, or Telegram. Everything below runs on your two Macs — encrypted end-to-end via SSH.
+Goal: move the Finance Flow app from the MacBook Pro (where it was built in Claude Desktop) to the Mac Mini, entirely over local Wi-Fi. Nothing touches the internet, GitHub, or Telegram.
+
+**Decision (July 22, 2026): AirDrop.** This is a one-shot event transfer — no recurring sync needed, so the zero-setup path wins.
 
 ---
 
-## Recommended: rsync over SSH
+## Chosen: AirDrop (one-shot, zero setup)
 
-Best fit for a code folder: encrypted, repeatable (re-run it any time to sync updates), and it skips junk like `node_modules`.
+1. On the MacBook Pro: delete `node_modules` (and any `venv/`, `.next/`, `dist/`) from the finance-flow folder to keep the zip small — they get rebuilt on the Mini.
+2. Right-click the folder → **Compress** to get `finance-flow.zip`.
+3. AirDrop the zip to the Mac Mini (both machines awake and logged in, Wi-Fi + Bluetooth on; if the Mini doesn't appear, set AirDrop to "Everyone for 10 minutes" on it).
+4. On the Mini: move the zip into the dedicated `financeflow` account's home folder, unzip, then reinstall dependencies (`npm install` or equivalent) and verify the app runs.
+
+AirDrop is peer-to-peer and encrypted; it does not route through Apple's servers.
+
+Then continue the checklist in `README.md`: Tailscale access, share with Marissa.
+
+---
+
+## Alternative (not chosen): rsync over SSH
+
+Kept for reference in case a recurring sync is ever needed. Encrypted, repeatable (re-run any time to sync updates), skips junk like `node_modules`.
 
 ### One-time setup on the Mac Mini
 

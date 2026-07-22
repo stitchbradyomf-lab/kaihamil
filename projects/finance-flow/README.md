@@ -28,7 +28,7 @@ These were set explicitly and should never be relaxed without Kyle saying so:
 ## Deployment Checklist (Kyle-owned, manual)
 
 - [ ] Create dedicated account on Mac Mini
-- [ ] Transfer app from MacBook Pro over local Wi-Fi — see `TRANSFER.md` (rsync over SSH, or AirDrop)
+- [ ] Transfer app from MacBook Pro via AirDrop (one-shot) — see `TRANSFER.md`
 - [ ] Install Finance Flow under that account
 - [ ] Configure Tailscale access
 - [ ] Share with Marissa and add her accounts
