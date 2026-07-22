@@ -1,5 +1,8 @@
 # Stitch's Kanban Board
-**Last Updated:** April 18, 2026 5:15 PM
+**Last Updated:** July 22, 2026
+
+## IN PROGRESS (July 22, 2026) 🔄
+- [ ] **Finance Flow — Resumed** — Project record created (`projects/finance-flow/README.md`), Warren agent profile drafted (`agents/warren/WARREN.md`). Awaiting: Kyle's manual Mac Mini + Tailscale deploy, Warren profile review. Constraints: no financial data via Telegram; private access only; independent from Whisky Cellar/Vendor Ops patterns.
 
 ## DONE (April 18, 2026) ✅
 - [x] **Video Idea Quick Capture System** — Instant idea capture → auto-generated outlines → morning brief integration. Just say "capture <idea>" and get a ready-to-record outline with hook, body, close structure. Auto-detects template type (what I wish I knew, behind the scenes, hot take, 60-sec tip). Connected to video rep tracker for seamless workflow.
