@@ -26,7 +26,7 @@ Finance Flow is only useful if its data stays accurate. Manual upkeep (imports, 
 - **Reconciliation** — verify account balances match statement checkpoints; flag drift.
 
 ### Periodic (monthly)
-- **Month-close summary** — spending vs. plan by category, generated inside the app (viewable over Tailscale, not pushed externally).
+- **Month-close summary** — spending vs. plan by category, generated inside the app (viewable via the Cloudflare Access-protected app, not pushed externally).
 - **Data hygiene report** — uncategorized count, stale accounts, rule suggestions ("47 of 50 'AMZN' transactions were recategorized to Household — promote to a rule?").
 
 ### Never
@@ -38,7 +38,7 @@ Finance Flow is only useful if its data stays accurate. Manual upkeep (imports, 
 
 | Surface | What flows through it |
 |---------|----------------------|
-| Finance Flow app (Tailscale) | All data, reviews, reports |
+| Finance Flow app (Cloudflare Tunnel + Access) | All data, reviews, reports |
 | Watch folder on Mac Mini | Inbound statement exports |
 | Morning brief (optional, later) | Status only: last run, items awaiting review |
 

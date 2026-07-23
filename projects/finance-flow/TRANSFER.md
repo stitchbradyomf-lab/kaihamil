@@ -15,7 +15,7 @@ Goal: move the Finance Flow app from the MacBook Pro (where it was built in Clau
 
 AirDrop is peer-to-peer and encrypted; it does not route through Apple's servers.
 
-Then continue the checklist in `README.md`: Tailscale access, share with Marissa.
+Then continue the checklist in `README.md`: Cloudflare Tunnel + Access, share with Marissa.
 
 ---
 
@@ -60,7 +60,7 @@ npm install        # or: pip install -r requirements.txt
 # then start the app and verify it works locally
 ```
 
-Then continue the checklist in `README.md`: Tailscale access, share with Marissa.
+Then continue the checklist in `README.md`: Cloudflare Tunnel + Access, share with Marissa.
 
 ---
 

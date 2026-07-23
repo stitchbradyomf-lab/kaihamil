@@ -21,7 +21,7 @@ Timeline reconstructed from session history (the Finance Flow codebase lives on 
 These were set explicitly and should never be relaxed without Kyle saying so:
 
 1. **No financial data over Telegram** — or any external messaging surface. Setup, data entry, and account details are handled manually by Kyle or locally on the Mac Mini.
-2. **Private access only** — served over Tailscale from the Mac Mini, not exposed to the public internet. (Contrast: WhiskyXing is intentionally public.)
+2. **Private access only** — served from the Mac Mini via Cloudflare Tunnel, **always behind Cloudflare Access** (email allowlist: Kyle + Marissa only). The tunnel must never run without the Access policy in front of it. (Contrast: WhiskyXing is intentionally public.) *Decision July 22, 2026: Cloudflare replaces the original Tailscale plan.*
 3. **Independent lineage** — do not import Whisky Cellar / Vendor Ops patterns into Finance Flow. Kyle keeps this one separate.
 4. **This repo is public** — only project metadata belongs here. No account names, balances, institutions, or exports.
 
@@ -30,9 +30,10 @@ These were set explicitly and should never be relaxed without Kyle saying so:
 - [ ] Create dedicated account on Mac Mini
 - [x] Transfer app from MacBook Pro via AirDrop (one-shot) — **done July 22, 2026**
 - [ ] Install Finance Flow under that account
-- [ ] Configure Tailscale access
+- [ ] Set up Cloudflare Tunnel from the Mac Mini (`cloudflared`)
+- [ ] Put Cloudflare Access in front (email allowlist: Kyle + Marissa) — **before** sharing the URL
 - [ ] Share with Marissa and add her accounts
-- [ ] Verify access from Marissa's devices over Tailscale
+- [ ] Verify Marissa's devices can log in via Access; verify a logged-out browser cannot
 
 ## Stitch-Side Work
 
