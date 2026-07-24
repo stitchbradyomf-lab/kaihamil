@@ -1,0 +1,14 @@
+{
+  "name": "@kaihamil/flow-sankey",
+  "version": "0.1.0",
+  "description": "Vertical Sankey ledger: one conserved total re-split across reorderable dimensions, with compounding click-to-drill and a ghost scope band for zoom-out. Zero chart dependencies.",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "src/index.js",
+  "type": "module",
+  "files": ["src", "examples", "README.md"],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "keywords": ["sankey", "visualization", "drill-down", "finance", "kaihamil"]
+}
