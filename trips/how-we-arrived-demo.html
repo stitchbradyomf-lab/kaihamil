@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>How We Arrived Here - Trip Decision Compression Demo</title>
+<meta name="description" content="Standalone demo artifact for a trip decision-compression timeline: spec, example graphic, and ingestion schema.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Archivo:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+ :root{
+ --pine:#1C2B23;
+ --pine-deep:#141F19;
+ --birch:#F2EDE2;
+ --birch-dim:#E7DFCE;
+ --amber:#C8862B;
+ --amber-bright:#DFA044;
+ --moss:#3E5C48;
+ --timber:#2A2620;
+ --tan:#8A7A5E;
+ --rule:#D8CEB8;
+ --card:#FBF8F0;
+ --sky:#D6E0DA;
+ --rose:#E8D8CC;
+ --nav-h:64px;
+ }
+ *{margin:0;padding:0;box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ body{
+ background:var(--birch);
+ color:var(--timber);
+ font-family:'Archivo',sans-serif;
+ font-size:16px;
+ line-height:1.6;
+ -webkit-font-smoothing:antialiased;
+ padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
+ }
+ .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+ .topbar{
+ position:sticky;top:0;z-index:40;
+ background:var(--pine);color:var(--birch);
+ padding:14px 0;
+ box-shadow:0 1px 0 rgba(0,0,0,.2);
+ }
+ .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+ .brand{
+ font-family:'Alfa Slab One',serif;font-size:20px;letter-spacing:.02em;
+ color:var(--birch);text-decoration:none;
+ }
+ .brand span{color:var(--amber-bright);}
+ .topbar .dates{
+ font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+ color:#9DB0A3;text-transform:uppercase;text-align:right;
+ }
+ .hero{
+ background:var(--pine);
+ color:var(--birch);
+ padding:46px 0 0;
+ overflow:hidden;
+ }
+ .badge{
+ display:inline-block;background:var(--amber);color:#241A08;
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+ letter-spacing:.18em;text-transform:uppercase;border-radius:4px;
+ padding:4px 12px;margin-bottom:14px;
+ }
+ h1,h2,h3{
+ font-family:'Alfa Slab One',serif;
+ font-weight:400;
+ line-height:1.04;
+ }
+ .hero h1{font-size:clamp(48px,11vw,82px);}
+ .hero h1 .yr{color:var(--amber-bright);}
+ .hero-sub{
+ margin-top:14px;font-size:17px;font-weight:500;max-width:52ch;color:var(--birch-dim);
+ }
+ .hero-meta{
+ display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:22px;
+ font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+ }
+ .hero-meta b{color:var(--amber-bright);font-weight:600;}
+ .hero-ridge{display:block;width:100%;margin-top:34px;}
+ section{padding:34px 0 10px;}
+ .sec-label{
+ font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.22em;
+ text-transform:uppercase;color:var(--amber);
+ display:flex;align-items:center;gap:14px;margin-bottom:16px;
+ }
+ .sec-label::after{content:"";flex:1;height:1px;background:var(--rule);}
+ h2{font-size:clamp(24px,4vw,30px);margin-bottom:12px;}
+ p.lead{font-size:16px;max-width:60ch;}
+ .quick{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;
+ }
+ .quick a,.quick .cardlink{
+ text-decoration:none;color:inherit;
+ border:1px solid var(--rule);border-radius:12px;background:var(--card);
+ padding:16px;display:block;
+ }
+ .q-k{
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--amber);margin-bottom:4px;
+ }
+ .q-v{font-weight:700;font-size:15.5px;line-height:1.35;}
+ .q-s{font-size:12.5px;color:var(--tan);margin-top:2px;}
+ .cta{
+ background:var(--pine);color:var(--birch);border-radius:14px;padding:24px 22px;margin:30px 0 8px;
+ }
+ .cta h2{color:var(--birch);margin-bottom:6px;}
+ .cta p{font-size:15px;max-width:54ch;color:var(--birch-dim);}
+ .reply{
+ display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;
+ background:var(--amber);color:#241A08;border-radius:6px;padding:9px 14px;margin-top:12px;letter-spacing:.04em;
+ }
+ .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px;}
+ .panel{
+ border:1px solid var(--rule);border-radius:14px;background:var(--card);padding:18px;
+ }
+ .panel h3{font-size:20px;margin-bottom:8px;}
+ .mono{
+ font-family:'IBM Plex Mono',monospace;
+ }
+ .plain{list-style:none;margin-top:10px;}
+ .plain li{
+ padding:8px 0 8px 22px;position:relative;font-size:15px;color:#4A443A;
+ border-bottom:1px solid #EFE8D8;
+ }
+ .plain li:last-child{border-bottom:none;}
+ .plain li::before{
+ content:"";position:absolute;left:2px;top:15px;
+ width:7px;height:7px;background:var(--amber);border-radius:1px;transform:rotate(45deg);
+ }
+ .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+ .pill{
+ display:inline-flex;align-items:center;gap:8px;
+ border-radius:999px;padding:6px 10px;
+ font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+ font-family:'IBM Plex Mono',monospace;font-weight:600;
+ }
+ .pill.signal{background:var(--sky);color:var(--pine);}
+ .pill.open{background:#E8E1C9;color:#60491B;}
+ .pill.narrow{background:#E8D8CC;color:#6B4034;}
+ .pill.decision{background:var(--amber);color:#241A08;}
+ .pill.execute{background:var(--moss);color:var(--birch);}
+ .moment{
+ border:1px solid var(--rule);border-radius:12px;background:var(--card);padding:16px;margin-top:12px;
+ }
+ .moment-head{
+ display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px;
+ }
+ .moment h3{font-size:18px;}
+ .moment .when{
+ font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--tan);
+ }
+ .moment-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;
+ }
+ .micro{
+ border-top:1px solid var(--rule);padding-top:10px;
+ }
+ .micro b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--tan);margin-bottom:4px;}
+ .quote{
+ border-left:3px solid var(--amber);background:var(--birch-dim);
+ border-radius:0 8px 8px 0;padding:12px 14px;margin-top:10px;font-size:14.5px;
+ }
+ .excerpt{
+ border:1px solid var(--rule);
+ background:#F6F0E3;
+ border-radius:10px;
+ padding:10px 12px;
+ margin-top:10px;
+ }
+ .excerpt b{
+ display:block;
+ font-family:'IBM Plex Mono',monospace;
+ font-size:10px;
+ letter-spacing:.12em;
+ text-transform:uppercase;
+ color:var(--tan);
+ margin-bottom:5px;
+ }
+ .excerpt p{
+ font-size:14px;
+ color:#4A443A;
+ }
+ .diagram{
+ border:1px solid var(--rule);border-radius:14px;background:linear-gradient(180deg,#f8f3e8 0%,#f3ecde 100%);
+ padding:18px;margin-top:14px;overflow:hidden;
+ }
+ .concentration{
+ position:relative;height:140px;border-radius:12px;background:var(--pine);overflow:hidden;margin-bottom:16px;
+ }
+ .concentration svg{position:absolute;inset:0;width:100%;height:100%;}
+ .concentration .legend{
+ position:absolute;left:16px;top:14px;color:var(--birch);
+ }
+ .concentration .legend b{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber-bright);}
+ .concentration .legend span{display:block;max-width:28ch;font-size:14px;color:var(--birch-dim);margin-top:5px;}
+ .lane{
+ display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start;margin-top:14px;
+ }
+ .lane-label{
+ font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tan);padding-top:6px;
+ }
+ .lane-track{
+ position:relative;border-left:2px solid var(--rule);padding-left:18px;
+ }
+ .node{
+ position:relative;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px;margin-bottom:12px;
+ }
+ .node::before{
+ content:"";position:absolute;left:-25px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--amber);border:2px solid var(--birch);
+ }
+ .node h3{font-size:18px;margin-bottom:5px;}
+ .node p{font-size:14.5px;color:#4A443A;}
+ .node .state{
+ margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tan);letter-spacing:.05em;text-transform:uppercase;
+ }
+ .rail{
+ display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px;
+ }
+ .rail .step{
+ background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 10px;
+ }
+ .rail .step b{
+ display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;
+ }
+ .rail .step span{font-size:13.5px;line-height:1.4;color:#4A443A;}
+ table.schema{
+ width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;background:var(--card);
+ border:1px solid var(--rule);border-radius:12px;overflow:hidden;
+ }
+ table.schema th,table.schema td{
+ padding:11px 10px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top;
+ }
+ table.schema th{
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tan);font-weight:600;background:#F5EFE2;
+ }
+ table.schema tr:last-child td{border-bottom:none;}
+ td code{
+ font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--birch-dim);padding:2px 5px;border-radius:5px;
+ }
+ .codebox{
+ margin-top:14px;background:#191f1b;color:#d7e2db;border-radius:14px;padding:16px;overflow:auto;
+ font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.65;
+ }
+ nav.tabbar{
+ position:fixed;left:0;right:0;bottom:0;z-index:50;
+ background:var(--pine-deep);padding-bottom:env(safe-area-inset-bottom);
+ box-shadow:0 -2px 12px rgba(0,0,0,.25);
+ }
+ nav.tabbar .inner{
+ max-width:760px;margin:0 auto;
+ display:grid;grid-template-columns:repeat(3,1fr);height:var(--nav-h);
+ }
+ nav.tabbar a{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+ text-decoration:none;color:#8FA396;
+ font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+ }
+ nav.tabbar a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+ nav.tabbar a:hover{color:var(--amber-bright);}
+ footer{
+ padding:30px 0 20px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tan);letter-spacing:.08em;text-align:center;
+ }
+ @media (max-width:720px){
+ .quick,.rail,.moment-grid,.grid-2{grid-template-columns:1fr;}
+ .lane{grid-template-columns:1fr;}
+ .lane-label{padding-top:0;}
+ table.schema{min-width:680px;}
+ .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+ }
+ @media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto;}
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <div class="wrap">
+  <a class="brand" href="#home">TRIP DECISION <span>DEMO</span></a>
+  <div class="dates">HOW WE ARRIVED HERE<br>SPEC + GRAPHIC + SCHEMA</div>
+ </div>
+</div>
+
+<div class="hero" id="home">
+ <div class="wrap">
+  <div class="badge">Independent Artifact</div>
+  <h1>HOW WE<br>ARRIVED <span class="yr">HERE</span></h1>
+  <p class="hero-sub">A three-part demonstration artifact for messy group trip planning: first the content and UX rules, then a transcript-backed decision-compression graphic, then the schema that turns raw chat into structured moments.</p>
+  <div class="hero-meta">
+   <span><b>PRIMARY USE CASE</b> FRIEND TRIP PLANNING</span>
+   <span>SECONDARY USE CASE: ANY GROUP DECISION</span>
+   <span>OUTPUT: FROM CHAT THRASH TO BOOKABLE PLAN</span>
+  </div>
+ </div>
+ <svg class="hero-ridge" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,90 L0,62 L70,44 L140,58 L215,30 L300,52 L390,14 L470,46 L560,26 L640,50 L720,38 L800,56 L800,90 Z" fill="#F2EDE2"/>
+  <path d="M0,90 L0,70 L70,54 L140,66 L215,42 L300,62 L390,28 L470,56 L560,38 L640,60 L720,50 L800,64 L800,90 Z" fill="#F2EDE2" opacity=".35"/>
+ </svg>
+</div>
+
+<div class="wrap">
+ <section>
+  <div class="sec-label">The Three Parts</div>
+  <div class="quick">
+   <a href="#spec"><div class="q-k">Part 1</div><div class="q-v">Content + UX Spec</div><div class="q-s">What the artifact should communicate and how it should behave</div></a>
+   <a href="#graphic"><div class="q-k">Part 2</div><div class="q-v">Example Graphic</div><div class="q-s">A trip coming together from loose intent to booked plan</div></a>
+   <a href="#schema"><div class="q-k">Part 3</div><div class="q-v">Ingestion Schema</div><div class="q-s">Fields that let new threads be structured the same way</div></a>
+  </div>
+
+  <div class="cta">
+   <h2>The job of this page</h2>
+   <p>Show the difference between messy discussion and useful synthesis without making the group relive every message. The user should feel the entropy at the start, the widening when a surprising option enters, and the relief when the plan becomes real.</p>
+   <span class="reply">RAW CHAT -> STRUCTURED SIGNAL -> COMMITMENT</span>
+  </div>
+ </section>
+
+ <section id="spec">
+  <div class="sec-label">Part 1 - Content + UX Spec</div>
+  <h2>What this artifact should show</h2>
+  <p class="lead">This is not a transcript viewer. It is a narrative compression layer. The page should explain how a group moved from fuzzy desire to a committed trip by isolating variables, surfacing decision moments, and turning drift into momentum.</p>
+
+  <div class="grid-2">
+   <div class="panel">
+    <h3>Core story beats</h3>
+    <ul class="plain">
+     <li>Intent appears as a catch-up + roll call problem, not a destination problem.</li>
+     <li>Date gravity forms first: "picking a date is step 1."</li>
+     <li>Trip identity emerges through motive: "What are YOU itchy for that your partner and/or children can't scratch?"</li>
+     <li>The option field opens and reopens: Hilton Head, Savannah, Asheville, Greenville, Puerto Rico, football, bourbon trail.</li>
+     <li>Weak fits fall away once travel burden, house quality, and shared-vibe fit get weighted together.</li>
+     <li>A decision event locks the weekend, package shape, and destination strongly enough to book.</li>
+     <li>Execution takes over: Airbnb reserved, flight recon shared, rides and attendance coordinated.</li>
+    </ul>
+   </div>
+   <div class="panel">
+    <h3>Visual rules</h3>
+    <ul class="plain">
+     <li>Show moments, not every message.</li>
+     <li>Separate chat signal from structured state.</li>
+     <li>Make widening and narrowing visible, not just implied.</li>
+     <li>Use labels like "decision made" and "options narrowed" sparingly but clearly.</li>
+     <li>End on one obvious output node: the final trip brief.</li>
+     <li>Keep the trip subject matter primary even if the pattern scales elsewhere.</li>
+    </ul>
+   </div>
+  </div>
+
+  <div class="panel" style="margin-top:14px;">
+   <h3>Recommended moment card anatomy</h3>
+   <div class="pill-row">
+    <span class="pill signal">signal detected</span>
+    <span class="pill open">options opened</span>
+    <span class="pill narrow">options narrowed</span>
+    <span class="pill decision">decision made</span>
+    <span class="pill execute">execution handoff</span>
+   </div>
+   <div class="moment">
+    <div class="moment-head">
+     <div>
+      <div class="when">Timestamp Window</div>
+      <h3>Moment title</h3>
+     </div>
+     <span class="pill decision">decision made</span>
+    </div>
+    <p>Each card captures the smallest useful unit of progress, not the entire conversational mess around it.</p>
+    <div class="moment-grid">
+     <div class="micro"><b>What surfaced</b>A date window, a concern, a trip identity, or a new contender.</div>
+     <div class="micro"><b>What changed</b>Which variable became tighter, wider, or finally locked.</div>
+     <div class="micro"><b>Why it mattered</b>The reason this moment reduced confusion or changed the path.</div>
+     <div class="micro"><b>State after</b>The new shortlist, commitment level, or next decision layer.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="panel" style="margin-top:14px;">
+   <h3>Tracked variables for trip planning</h3>
+   <div class="pill-row">
+    <span class="pill signal">dates</span>
+    <span class="pill signal">trip identity</span>
+    <span class="pill signal">destination field</span>
+    <span class="pill signal">travel burden</span>
+    <span class="pill signal">lodging format</span>
+    <span class="pill signal">budget comfort</span>
+    <span class="pill signal">attendance confidence</span>
+   </div>
+   <div class="quote">General principle: the artifact is reusable because the structure is "group decision under uncertainty," but the first version should feel unmistakably like a trip page rather than an abstract product diagram.</div>
+   <div class="excerpt">
+    <b>Transcript Excerpts Used In This Demo</b>
+    <p>"picking a date is step 1" ... "What are YOU itchy for that your partner and/or children can't scratch?" ... "I'm getting recommended Greenville South Carolina also" ... "Greenville is booked. 24 hours to back out."</p>
+  </div>
+ </div>
+</section>
+
+ <section id="graphic">
+  <div class="sec-label">Part 2 - Example Graphic</div>
+  <h2>Example: a trip coming together</h2>
+  <p class="lead">This is the visual demonstration layer. It shows the actual thread shape: dates first, trip identity second, destination field widening and reopening, then a final compression into Greenville plus a booked house. Greenville entering late is a feature, not a bug: it proves the system should allow the field to reopen before it closes well.</p>
+
+  <div class="diagram">
+   <div class="concentration">
+    <svg viewBox="0 0 760 140" preserveAspectRatio="none" aria-hidden="true">
+     <rect x="0" y="0" width="760" height="140" fill="#1C2B23"/>
+     <path d="M0,18 C130,8 190,88 305,70 C405,54 450,18 540,42 C610,60 675,38 760,24 L760,118 C680,112 600,108 535,96 C456,82 414,70 340,72 C240,74 180,108 0,128 Z" fill="#355041" opacity=".6"/>
+     <path d="M0,34 C100,22 155,96 280,88 C390,80 460,32 560,52 C620,64 690,56 760,42 L760,104 C705,100 640,97 575,88 C480,75 430,58 340,60 C250,62 170,98 0,116 Z" fill="#DFA044" opacity=".78"/>
+     <path d="M0,48 C95,42 140,98 250,94 C345,90 420,56 515,62 C610,68 682,62 760,52 L760,88 C684,86 620,84 540,78 C460,72 392,66 305,67 C205,68 130,91 0,98 Z" fill="#F2EDE2"/>
+    </svg>
+    <div class="legend">
+     <b>Concentration Band</b>
+     <span>Wide at the start, wider again when the group debates vibe and city, then snapping tight once Greenville plus the shared house package beats the rest.</span>
+    </div>
+   </div>
+
+   <div class="lane">
+    <div class="lane-label">Lane 1<br>Raw chat signal</div>
+    <div class="lane-track">
+     <div class="node">
+      <h3>1. The trip thread wakes back up</h3>
+      <p>The opening move is not "where should we go?" It is "we missed a trip last year" plus a push to get a long weekend on the board.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"we missed a trip last year so wanted to start a conversation on that in the next few weeks"</p>
+      </div>
+      <div class="state">State: desire exists, nothing structured yet</div>
+     </div>
+     <div class="node">
+      <h3>2. Dates become the first real constraint</h3>
+      <p>The group quickly discovers that availability is the first thing that can actually reduce the field.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"Agree with the Brians that picking a date is step 1."</p>
+      </div>
+      <div class="state">State: 11/7 and 11/20 emerge as the serious windows</div>
+     </div>
+     <div class="node">
+      <h3>3. The deeper question surfaces</h3>
+      <p>The thread gets better when the choice is reframed around what kind of trip would feel different and worth doing.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"What are YOU itchy for that your partner and/or children can't scratch?"</p>
+      </div>
+      <div class="state">State: mountain, city-basecamp, football, bourbon, easy hang all become legible lanes</div>
+     </div>
+    </div>
+   </div>
+
+   <div class="lane">
+    <div class="lane-label">Lane 2<br>Structured state</div>
+    <div class="lane-track">
+     <div class="node">
+      <h3>4. The field widens before it narrows</h3>
+      <p>Once the group has a clearer idea of the trip shape, more concrete packages can compete: Hilton Head, Savannah, Asheville, Puerto Rico, backwoods Georgia/South Carolina, then Greenville.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"Anyone want to make a strong case for a particular city? ... Let kyle run his ai bots to tell us where we should go"</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill open">options opened</span>
+       <span class="pill signal">package debate</span>
+      </div>
+      <div class="state">State: date shortlist + many viable trip packages</div>
+     </div>
+     <div class="node">
+      <h3>5. Greenville enters late and changes the board</h3>
+      <p>Greenville is not an original headline destination. It shows up as a synthesis answer: underrated downtown, nearby outdoor options, better housing, and lower burden for Miller.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"I'm getting recommended Greenville South Carolina also. Proximity to Whitewater rafting or ATV, and an underrated downtown with breweries. Worth a further look."</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill open">options opened</span>
+       <span class="pill signal">new contender</span>
+      </div>
+      <div class="state">State: Asheville and Greenville become the real finalists</div>
+     </div>
+     <div class="node">
+      <h3>6. The thread compresses to two, then one</h3>
+      <p>Savannah gets explicitly ruled out. Flights, house quality, and Monday return shape are compared against Asheville. Greenville edges ahead as the stronger whole package.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"Savannah OUT" ... "The Airbnb's look a little nicer in Greenville, but Asheville has some decent options too"</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill narrow">options narrowed</span>
+       <span class="pill signal">travel burden weighted</span>
+      </div>
+      <div class="state">State: Greenville package becomes action-ready</div>
+     </div>
+    </div>
+   </div>
+
+   <div class="lane">
+    <div class="lane-label">Lane 3<br>Commitment level</div>
+    <div class="lane-track">
+     <div class="node">
+      <h3>7. Booking creates the commitment anchor</h3>
+      <p>The whole thread changes once Kyle reserves the house. The open question is no longer "where should we go?" but "are we executing this package?"</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"Greenville is booked. 24 hours to back out."</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill decision">decision made</span>
+      </div>
+      <div class="state">State: discovery ends, execution begins</div>
+     </div>
+     <div class="node">
+      <h3>8. Logistics replace ideation</h3>
+      <p>Flights, ride plans, exact airport strategy, and possible seventh man become the remaining open loops. The group had previously leaned toward Philly after missing the cleaner Newark path, but that comparison only matters once Greenville is locked and the airport choice can be reassessed against the actual destination.</p>
+      <div class="excerpt">
+       <b>Excerpt</b>
+       <p>"Just let me know the flight you want to do and I'll book the same"</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill execute">execution handoff</span>
+      </div>
+      <div class="state">State: booked house + airport and flight strategy re-opened</div>
+     </div>
+     <div class="node">
+      <h3>9. Destination first, then the flight math flips</h3>
+      <p>After Greenville is chosen, Newark re-enters as the better full-group airport path and the earlier Philly assumption gets beaten on convenience. Kyle then evaluates fare classes in order: time first, then relative price difference, then included bag, drinks, and seat quality. First class wins because the premium over economy is small relative to what it removes and adds.</p>
+      <div class="excerpt">
+       <b>Evidence</b>
+       <p>"I booked first class UA after comparing relative price difference to economy and the benefit of checked bag + drinks + better seat of course."</p>
+      </div>
+      <div class="pill-row">
+       <span class="pill decision">decision made</span>
+       <span class="pill execute">tradeoff evaluated</span>
+      </div>
+      <div class="state">State: destination locked -> Newark revived -> first class chosen on value, not raw cheapness</div>
+     </div>
+     <div class="node">
+      <h3>10. Final trip brief</h3>
+      <p>Flights, budget, beds, activities, and next actions become a polished artifact for the group.</p>
+      <div class="state">State: bookable, shareable, durable</div>
+     </div>
+    </div>
+   </div>
+
+   <div class="rail">
+    <div class="step"><b>Open field</b><span>Many dates, many vibes, many places</span></div>
+    <div class="step"><b>Cluster</b><span>Date windows and trip identity start to stabilize</span></div>
+    <div class="step"><b>Compress</b><span>Packages compete, weak fits fade out</span></div>
+    <div class="step"><b>Commit</b><span>Booked house, chosen flight path, and a final trip page</span></div>
+   </div>
+  </div>
+ </section>
+
+ <section id="schema">
+  <div class="sec-label">Part 3 - Ingestion Schema</div>
+  <h2>How new trip threads can feed this artifact</h2>
+  <p class="lead">The schema should accept conversational mess up front, then normalize it into moments, variables, and state changes. The objective is not to store every message forever. It is to derive the small number of changes that moved the group toward a conclusion.</p>
+
+  <div class="table-wrap">
+   <table class="schema">
+    <tr>
+     <th>Field</th>
+     <th>Type</th>
+     <th>Purpose</th>
+     <th>Example</th>
+    </tr>
+    <tr>
+     <td><code>thread_id</code></td>
+     <td>string</td>
+     <td>Groups all messages and derived moments for one decision stream.</td>
+     <td><code>dude_trip_2026</code></td>
+    </tr>
+    <tr>
+     <td><code>source_message_id</code></td>
+     <td>string</td>
+     <td>Links a moment back to a real message or cluster.</td>
+     <td><code>ios_messages_jul30_cluster_03</code></td>
+    </tr>
+    <tr>
+     <td><code>timestamp_window</code></td>
+     <td>object</td>
+     <td>Captures the span when a signal emerged or a decision formed.</td>
+     <td><code>{start,end}</code></td>
+    </tr>
+    <tr>
+     <td><code>event_type</code></td>
+     <td>enum</td>
+     <td>Marks whether this was signal, opening, narrowing, decision, or execution.</td>
+     <td><code>options_narrowed</code></td>
+    </tr>
+    <tr>
+     <td><code>raw_signal</code></td>
+     <td>text[]</td>
+     <td>Short excerpts or paraphrases from chat that justify the moment.</td>
+     <td><code>[\"picking a date is step 1\", \"Savannah OUT\"]</code></td>
+    </tr>
+    <tr>
+     <td><code>variables_touched</code></td>
+     <td>enum[]</td>
+     <td>Which planning dimensions changed.</td>
+     <td><code>[\"dates\",\"destination_set\"]</code></td>
+    </tr>
+    <tr>
+     <td><code>state_before</code></td>
+     <td>object</td>
+     <td>The prior level of openness or shortlist status.</td>
+     <td><code>{dates:\"open\", locations:\"wide\"}</code></td>
+    </tr>
+    <tr>
+     <td><code>state_after</code></td>
+     <td>object</td>
+     <td>The new state after the moment resolves.</td>
+     <td><code>{dates:\"11/6-11/9\", locations:\"gvl_vs_avl\"}</code></td>
+    </tr>
+    <tr>
+     <td><code>why_it_mattered</code></td>
+     <td>text</td>
+     <td>Human-readable rationale for why this moment changed momentum.</td>
+     <td><code>Dates stabilized enough to evaluate place seriously.</code></td>
+    </tr>
+    <tr>
+     <td><code>decision_strength</code></td>
+     <td>number</td>
+     <td>How close the group is to commitment after this moment.</td>
+     <td><code>0.72</code></td>
+    </tr>
+    <tr>
+     <td><code>derived_output</code></td>
+     <td>object</td>
+     <td>Optional render-friendly summary card data.</td>
+     <td><code>{title,status,badge}</code></td>
+    </tr>
+   </table>
+  </div>
+
+  <div class="panel" style="margin-top:14px;">
+   <h3>Minimum renderable objects</h3>
+   <ul class="plain">
+    <li><code>ThreadSummary</code> for the overall trip narrative and current commitment level.</li>
+    <li><code>DecisionMoment</code> for the timeline cards.</li>
+    <li><code>VariableState</code> for dates, trip identity, locations, burden, budget, and attendance.</li>
+    <li><code>FinalPackage</code> for the polished trip brief at the end of the chain.</li>
+   </ul>
+  </div>
+
+  <div class="panel" style="margin-top:14px;">
+   <h3>Transcript ingestion note</h3>
+   <p class="lead">This version is now grounded in the reconstructed group transcript rather than a few phrases from the Telegram lane. Each moment can still become denser later, but the chronology and quoted turns are now real.</p>
+   <div class="excerpt">
+    <b>Current excerpt set</b>
+    <p>"picking a date is step 1" ... "What are YOU itchy for that your partner and/or children can't scratch?" ... "I'm getting recommended Greenville South Carolina also" ... "Greenville is booked. 24 hours to back out."</p>
+   </div>
+  </div>
+
+  <div class="codebox">{
+  "thread_id": "dude_trip_2026",
+  "title": "How We Arrived At This Plan",
+  "primary_subject": "friend_trip_planning",
+  "source_artifacts": [
+    "trips/dude-trip-26-thread-transcript.md",
+    "trips/friend-trip-product-observations-2026-07.md"
+  ],
+  "moments": [
+    {
+      "event_type": "signal_detected",
+      "timestamp_window": {
+        "start": "2026-07-27T08:20:00-04:00",
+        "end": "2026-07-27T16:05:00-04:00"
+      },
+      "source_message_id": "ios_messages_jul27_rollcall",
+      "raw_signal": [
+        "picking a date is step 1",
+        "11/20 is the front runner with 11/7 as a backup"
+      ],
+      "variables_touched": ["dates", "attendance_confidence"],
+      "state_before": {"dates": "open", "locations": "undefined"},
+      "state_after": {"dates": "11_7_or_11_20", "locations": "still_wide"},
+      "why_it_mattered": "The chat found its first compressible variable: availability."
+    },
+    {
+      "event_type": "options_opened",
+      "timestamp_window": {
+        "start": "2026-07-30T12:13:00-04:00",
+        "end": "2026-07-30T17:04:00-04:00"
+      },
+      "source_message_id": "ios_messages_jul30_vibes_and_cities",
+      "raw_signal": [
+        "What are YOU itchy for that your partner and/or children can't scratch?",
+        "I think urban area for convenience of transportation, accommodation and restaurants. Then we day trip outdoors once or twice.",
+        "I'm getting recommended Greenville South Carolina also"
+      ],
+      "variables_touched": ["trip_identity", "destination_set", "travel_burden"],
+      "state_before": {"trip_identity": "implicit", "locations": "hh_sav_avl_plus_misc"},
+      "state_after": {"trip_identity": "urban_basecamp_plus_outdoor_day", "locations": "gvl_avl_sav"},
+      "why_it_mattered": "The chat stopped debating abstract cities and started comparing whole trip packages."
+    },
+    {
+      "event_type": "options_narrowed",
+      "timestamp_window": {
+        "start": "2026-08-05T13:55:00-04:00",
+        "end": "2026-08-05T17:42:00-04:00"
+      },
+      "source_message_id": "ios_messages_aug5_vote_and_flights",
+      "raw_signal": [
+        "Savannah OUT",
+        "Both flights are on American and right around $500",
+        "The Airbnb's look a little nicer in Greenville"
+      ],
+      "variables_touched": ["destination_set", "budget_comfort", "lodging_format", "travel_burden"],
+      "state_before": {"locations": "gvl_avl_sav", "commitment": "debating"},
+      "state_after": {"locations": "gvl_vs_avl", "commitment": "action_ready"},
+      "why_it_mattered": "Package quality and logistics finally outweighed novelty.",
+      "decision_strength": 0.78
+    },
+    {
+      "event_type": "decision_made",
+      "timestamp_window": {
+        "start": "2026-08-06T13:44:00-04:00",
+        "end": "2026-08-06T20:00:00-04:00"
+      },
+      "source_message_id": "ios_messages_aug6_booking",
+      "raw_signal": [
+        "But Greenville is closer to Miller",
+        "Greenville is booked. 24 hours to back out.",
+        "I'm in on GVL, it's a nice downtown."
+      ],
+      "variables_touched": ["dates", "destination_set", "lodging_format", "commitment"],
+      "state_before": {"commitment": "action_ready"},
+      "state_after": {"commitment": "booked_house"},
+      "why_it_mattered": "A real reservation converted a chat preference into a group plan.",
+      "decision_strength": 0.96
+    },
+    {
+      "event_type": "execution_tradeoff_resolved",
+      "timestamp_window": {
+        "start": "2026-08-11T10:18:00-04:00",
+        "end": "2026-08-11T13:41:00-04:00"
+      },
+      "source_message_id": "supplemental_aug11_ua_booking_rationale",
+      "raw_signal": [
+        "UA booked Aug 11",
+        "I booked first class UA after comparing relative price difference to economy",
+        "checked bag + drinks + better seat"
+      ],
+      "variables_touched": ["destination_set", "airport_strategy", "flight_choice", "budget_comfort", "travel_burden"],
+      "state_before": {"commitment": "booked_house", "airport_strategy": "phl_thread_default_with_ewr_reopened", "flight_choice": "unlocked"},
+      "state_after": {"commitment": "booked_house_plus_ua", "airport_strategy": "ewr_preferred_for_group", "flight_choice": "ua_first_class"},
+      "why_it_mattered": "The group chose time before cost, then chose value over sticker price. Destination lock made the Newark reassessment possible, and the relative premium made first class the rational winner.",
+      "decision_strength": 0.9
+    }
+  ]
+}</div>
+ </section>
+</div>
+
+<footer>TRIP DECISION DEMO · SPEC · GRAPHIC · SCHEMA</footer>
+
+<nav class="tabbar">
+ <div class="inner">
+  <a href="#spec">
+   <svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+   Spec
+  </a>
+  <a href="#graphic">
+   <svg viewBox="0 0 24 24"><path d="M4 18l4-6 4 3 5-8 3 4"/><path d="M4 20h16"/></svg>
+   Graphic
+  </a>
+  <a href="#schema">
+   <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><path d="M8 4v16M16 4v16"/></svg>
+   Schema
+  </a>
+ </div>
+</nav>
+
+</body>
+</html>
