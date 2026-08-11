@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dude Trip 26 - Greenville, SC | Kai Hamil</title>
+<meta name="description" content="Dude Trip 26. Greenville, SC. Nov 6-9, 2026. House booked. Book your flight.">
+<meta property="og:title" content="Dude Trip 26">
+<meta property="og:description" content="Greenville, SC · Nov 6-9 · House booked. Book your flight.">
+<meta property="og:image" content="dude-trip-26-assets/house-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --pine:#1C2B23;
+ --pine-deep:#141F19;
+ --birch:#F2EDE2;
+ --birch-dim:#E7DFCE;
+ --amber:#C8862B;
+ --amber-bright:#DFA044;
+ --moss:#3E5C48;
+ --timber:#2A2620;
+ --tan:#8A7A5E;
+ --rule:#D8CEB8;
+ --nav-h:64px;
+ }
+ *{margin:0;padding:0;box-sizing:border-box;}
+ html{scroll-behavior:smooth;}
+ body{
+ background:var(--birch);
+ color:var(--timber);
+ font-family:'Archivo',sans-serif;
+ font-size:16px;line-height:1.6;
+ -webkit-font-smoothing:antialiased;
+ padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
+ }
+ .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
+
+ .topbar{
+ position:sticky;top:0;z-index:40;
+ background:var(--pine);color:var(--birch);
+ padding:14px 0;
+ box-shadow:0 1px 0 rgba(0,0,0,.2);
+ }
+ .topbar .wrap{display:flex;align-items:center;justify-content:space-between;}
+ .brand{
+ font-family:'Alfa Slab One',serif;font-size:20px;letter-spacing:.02em;
+ color:var(--birch);text-decoration:none;
+ }
+ .brand span{color:var(--amber-bright);}
+ .topbar .dates{
+ font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;
+ color:#9DB0A3;text-transform:uppercase;
+ }
+
+ .page{display:none;animation:fadein .22s ease;}
+ .page.active{display:block;}
+ @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+ section{padding:34px 0 6px;}
+ .sec-label{
+ font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.22em;
+ text-transform:uppercase;color:var(--amber);
+ display:flex;align-items:center;gap:14px;margin-bottom:16px;
+ }
+ .sec-label::after{content:"";flex:1;height:1px;background:var(--rule);}
+ h1{font-family:'Alfa Slab One',serif;font-weight:400;line-height:.95;color:var(--birch);}
+ h2{font-family:'Alfa Slab One',serif;font-weight:400;font-size:clamp(23px,5.5vw,28px);line-height:1.15;margin-bottom:12px;}
+ p.lead{font-size:16px;max-width:58ch;}
+
+ .hero{background:var(--pine);color:var(--birch);padding:44px 0 0;overflow:hidden;}
+ .booked-pill{
+ display:inline-block;background:var(--amber);color:#241A08;
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+ letter-spacing:.18em;text-transform:uppercase;border-radius:4px;
+ padding:4px 12px;margin-bottom:14px;
+ }
+ .hero h1{font-size:clamp(52px,15vw,92px);}
+ .hero h1 .yr{color:var(--amber-bright);}
+ .hero-sub{margin-top:14px;font-size:16.5px;font-weight:500;max-width:46ch;color:var(--birch-dim);}
+ .hero-meta{
+ display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:22px;
+ font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+ }
+ .hero-meta b{color:var(--amber-bright);font-weight:600;}
+ .hero-ridge{display:block;width:100%;margin-top:34px;}
+
+ .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+ .quick a{
+ text-decoration:none;color:inherit;
+ border:1px solid var(--rule);border-radius:12px;background:#FBF8F0;
+ padding:16px;display:block;transition:transform .15s ease;
+ }
+ .quick a:active{transform:scale(.98);}
+ .quick .q-k{
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--amber);margin-bottom:4px;
+ }
+ .quick .q-v{font-weight:700;font-size:15.5px;line-height:1.35;}
+ .quick .q-s{font-size:12.5px;color:var(--tan);margin-top:2px;}
+
+ .cta{background:var(--pine);color:var(--birch);border-radius:14px;padding:24px 22px;margin:30px 0 8px;}
+ .cta h2{color:var(--birch);margin-bottom:6px;}
+ .cta p{font-size:15px;max-width:50ch;color:var(--birch-dim);}
+ .cta .reply{
+ display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;
+ background:var(--amber);color:#241A08;border-radius:6px;padding:9px 14px;margin-top:12px;letter-spacing:.04em;
+ }
+
+ details.fold{
+ border:1px solid var(--rule);border-radius:12px;background:#FBF8F0;
+ margin-top:12px;overflow:hidden;
+ }
+ details.fold summary{
+ list-style:none;cursor:pointer;
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:16px 18px;
+ font-weight:700;font-size:16px;
+ user-select:none;
+ }
+ details.fold summary::-webkit-details-marker{display:none;}
+ details.fold summary .chev{
+ flex:none;width:22px;height:22px;border-radius:6px;
+ background:var(--birch-dim);
+ display:grid;place-items:center;
+ transition:transform .2s ease;
+ }
+ details.fold[open] summary .chev{transform:rotate(180deg);}
+ details.fold summary .chev svg{width:12px;height:12px;stroke:var(--timber);}
+ details.fold .fold-body{padding:0 18px 18px;font-size:15px;color:#4A443A;}
+ details.fold summary .sumtag{
+ font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tan);
+ font-weight:500;letter-spacing:.05em;white-space:nowrap;
+ }
+ details.fold.hot{border:2px solid var(--amber);}
+
+ ul.plain{list-style:none;margin-top:6px;}
+ ul.plain li{
+ padding:7px 0 7px 22px;position:relative;font-size:15px;color:#4A443A;
+ border-bottom:1px solid #EFE8D8;
+ }
+ ul.plain li:last-child{border-bottom:none;}
+ ul.plain li::before{
+ content:"";position:absolute;left:2px;top:15px;
+ width:7px;height:7px;background:var(--amber);border-radius:1px;transform:rotate(45deg);
+ }
+ .two-col{columns:2;column-gap:26px;}
+ @media (max-width:500px){.two-col{columns:1;}}
+
+ .bed-note{
+ border-left:3px solid var(--amber);background:var(--birch-dim);
+ border-radius:0 8px 8px 0;padding:12px 14px;margin-top:6px;font-size:14.5px;
+ }
+
+ .photos{
+ display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:140px 140px;
+ gap:8px;margin-top:14px;border-radius:12px;overflow:hidden;
+ }
+ .photos img{width:100%;height:100%;object-fit:cover;display:block;background:var(--birch-dim);}
+ .photos img:first-child{grid-row:1 / 3;}
+ @media (max-width:520px){
+ .photos{grid-template-columns:1fr 1fr;grid-template-rows:170px 100px 100px;}
+ .photos img:first-child{grid-row:1;grid-column:1 / 3;}
+ }
+ .bnb-link{
+ display:inline-block;margin-top:14px;
+ font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;
+ background:var(--pine);color:var(--amber-bright);
+ border-radius:6px;padding:9px 15px;letter-spacing:.04em;text-decoration:none;
+ }
+
+ table.money{width:100%;border-collapse:collapse;margin-top:12px;font-size:14.5px;}
+ table.money th,table.money td{padding:10px 6px;text-align:left;border-bottom:1px solid var(--rule);}
+ table.money th{
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;
+ text-transform:uppercase;color:var(--tan);font-weight:600;
+ }
+ table.money td.num{font-family:'IBM Plex Mono',monospace;font-size:13px;white-space:nowrap;text-align:right;}
+ table.money tr.total td{font-weight:700;border-bottom:none;padding-top:13px;}
+ table.money tr.total td.num{color:var(--amber);}
+ .money-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+ .fine{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tan);margin-top:10px;line-height:1.7;}
+
+ .daytag{
+ display:inline-block;font-family:'IBM Plex Mono',monospace;
+ font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--birch);background:var(--moss);border-radius:3px;padding:2px 7px;margin-right:8px;
+ }
+ .daytag.summit{background:var(--amber);color:#241A08;}
+
+ nav.tabbar{
+ position:fixed;left:0;right:0;bottom:0;z-index:50;
+ background:var(--pine-deep);
+ padding-bottom:env(safe-area-inset-bottom);
+ box-shadow:0 -2px 12px rgba(0,0,0,.25);
+ }
+ nav.tabbar .inner{
+ max-width:640px;margin:0 auto;
+ display:grid;grid-template-columns:repeat(5,1fr);
+ height:var(--nav-h);
+ }
+ nav.tabbar a{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+ text-decoration:none;color:#8FA396;
+ font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+ }
+ nav.tabbar a svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+ nav.tabbar a.active{color:var(--amber-bright);}
+ footer{padding:30px 0 20px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tan);letter-spacing:.08em;text-align:center;}
+
+ @media (max-width:560px){
+ .quick{grid-template-columns:1fr;}
+ table.money{min-width:520px;}
+ }
+ @media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto;}
+ .page{animation:none;}
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <div class="wrap">
+ <a class="brand" href="#/home">DUDE TRIP <span>26</span></a>
+ <div class="dates">NOV 6-9 · GVL SC</div>
+ </div>
+</div>
+
+<div class="page active" id="page-home">
+ <div class="hero">
+ <div class="wrap">
+ <div class="booked-pill">House Booked</div>
+ <h1>DUDE<br>TRIP <span class="yr">26</span></h1>
+ <p class="hero-sub">Three nights in one house near Greenville, SC - downtown a few minutes one way, the Blue Ridge escarpment the other, at peak fall color. Everybody in one place, good food, one mountain day, no schedule in the way.</p>
+ <div class="hero-meta">
+ <span><b>FRI NOV 6 -> MON NOV 9</b></span>
+ <span>GREENVILLE, SC</span>
+ <span>6 IN · ROOM FOR 2</span>
+ </div>
+ </div>
+ <svg class="hero-ridge" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true">
+ <path d="M0,90 L0,62 L70,44 L140,58 L215,30 L300,52 L390,14 L470,46 L560,26 L640,50 L720,38 L800,56 L800,90 Z" fill="#F2EDE2"/>
+ <path d="M0,90 L0,70 L70,54 L140,66 L215,42 L300,62 L390,28 L470,56 L560,38 L640,60 L720,50 L800,64 L800,90 Z" fill="#F2EDE2" opacity=".35"/>
+ </svg>
+ </div>
+
+ <div class="wrap">
+ <section>
+ <div class="sec-label">The Essentials</div>
+ <div class="quick">
+ <a href="#/house"><div class="q-k">The House</div><div class="q-v">Resort house, north Greenville</div><div class="q-s">Poker · theater · hot tub · sauna</div></a>
+ <a href="#/days"><div class="q-k">The Days</div><div class="q-v">72 hours, 1 summit</div><div class="q-s">Fri 11:17am -> Mon 11:58am</div></a>
+ <a href="#/money"><div class="q-k">The Money</div><div class="q-v">~$1,320-1,490 all-in</div><div class="q-s">Flyers, by headcount</div></a>
+ <a href="#/info"><div class="q-k">The Flight</div><div class="q-v">UA 3546 / 3631 · EWR ⇄ GSP</div><div class="q-s">Fri 9:05am out · Mon 2:06pm home</div></a>
+ </div>
+
+ <div class="cta">
+ <h2>Two things to do</h2>
+ <p>The house is locked. Book your flight this week, settle your share, and drop your flight number in the thread. Got a guy for the 7th or 8th spot? Vouch for him now.</p>
+ <span class="reply">1  BOOK EWR -> GSP  ·  2  VENMO HOUSE SHARE</span>
+ </div>
+ </section>
+ </div>
+</div>
+
+<div class="page" id="page-house">
+ <div class="wrap">
+ <section>
+ <div class="sec-label">The House - Booked</div>
+ <h2>Private resort house, north Greenville</h2>
+ <p class="lead">3,200 sq ft with a deck view running from downtown to the mountains - 10 min to Paris Mountain State Park and Travelers Rest, 15 to downtown. Rated 4.98 across 43 stays, Superhost, top 5% of listings. <b>$3,250 total</b> for 3 nights, split by headcount.</p>
+
+ <div class="photos">
+ <img src="dude-trip-26-assets/house-1.jpg" alt="The house" loading="lazy">
+ <img src="dude-trip-26-assets/house-2.jpg" alt="Interior" loading="lazy">
+ <img src="dude-trip-26-assets/house-3.jpg" alt="Interior" loading="lazy">
+ <img src="dude-trip-26-assets/house-4.jpg" alt="Amenities" loading="lazy">
+ <img src="dude-trip-26-assets/house-5.jpg" alt="View" loading="lazy">
+ </div>
+ <a class="bnb-link" href="https://www.airbnb.com/rooms/1323179882564244743" target="_blank" rel="noopener">VIEW ON AIRBNB -></a>
+
+ <details class="fold" open>
+ <summary>On the property <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <ul class="plain two-col">
+ <li>Poker table</li>
+ <li>Theater room</li>
+ <li>Hot tub</li>
+ <li>Sauna</li>
+ <li>Pool table</li>
+ <li>Arcade room</li>
+ <li>Ping pong</li>
+ <li>Tennis / pickleball court</li>
+ <li>Waterfall pool (unheated - it's November)</li>
+ <li>Gas fireplace</li>
+ <li>Screened porch + full-length deck</li>
+ <li>Kitchen w/ double ovens · dining seats 14</li>
+ <li>EV charger</li>
+ </ul>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Beds - nobody shares <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <div class="bed-note"><b>3 kings, 2 queens, 4 singles</b> (daybeds/trundles that pair up) across 4 bedrooms - 7 real sleeping spots, nobody shares, everyone gets at least a queen. An 8th man takes a single solo. Bedroom 4 has a spiral staircase straight down to the arcade.</div>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>House rules <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Check-in 4pm Friday, checkout 10am Monday. Keep outdoor volume reasonable after hours - the property uses noise-level sensors (no audio recording). Driveway fits 6 cars; no street parking.</p>
+ </div>
+ </details>
+ </section>
+ </div>
+</div>
+
+<div class="page" id="page-days">
+ <div class="wrap">
+ <section>
+ <div class="sec-label">The Days</div>
+ <h2>72 hours, one summit</h2>
+
+ <details class="fold" open>
+ <summary><span><span class="daytag">FRI 6</span>Arrive + downtown day</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>UA 3546 lands 11:17am. Straight downtown for lunch, Falls Park, and the Liberty Bridge in daylight, then into the house when check-in opens at 4. Groceries delivered. Dinner back on Main Street or first night at the house - group's call.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary><span><span class="daytag summit">SAT 7</span>Mountain day</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Pick one of the three hikes below - all ~45 minutes from the house, all at peak color. Back by dark for the hot tub, sauna, and poker.</p>
+
+ <details class="fold hot">
+ <summary>Table Rock Summit <span class="sumtag">~7 MI · 2,000+ FT · STRENUOUS</span></summary>
+ <div class="fold-body"><p>The signature Upstate climb - a real workout through Carrick Creek Falls and Governor's Rock to a huge summit view. The one we'll talk about after.</p></div>
+ </details>
+ <details class="fold">
+ <summary>Raven Cliff Falls <span class="sumtag">4.4 MI · ~1,100 FT · MODERATE</span></summary>
+ <div class="fold-body"><p>Overlook of a 420-ft waterfall - the tallest in South Carolina - off Caesars Head. Shorter day; add the drive-up Caesars Head overlook for sunset on the way out.</p></div>
+ </details>
+ <details class="fold">
+ <summary>Raven Cliff + Dismal Loop <span class="sumtag">8.1 MI · 2,100 FT · HARD</span></summary>
+ <div class="fold-body"><p>The full loop - crosses a suspension bridge directly above the falls. 4.6 stars across 2,000+ AllTrails reviews. Steep in places; the biggest day of the three.</p></div>
+ </details>
+
+ <p style="margin-top:12px;font-size:13.5px;color:#5C523F;">ATVs: guided UTV outfits are 1.5+ hrs away in the NC mountains - eats the day. Rafting season ends before November. The hike is the play; Paris Mountain (10 min) has easy trails for a Sunday leg-stretcher.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary><span><span class="daytag">SUN 8</span>Slow day + the big cook</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Loose morning - golf, the Swamp Rabbit Trail, Travelers Rest breweries, or nothing. Afternoon and evening at the house: smoker on, NFL in the theater room, pickleball, poker.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary><span><span class="daytag">MON 9</span>Out</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Out of the house by 10am, straight to GSP for the 11:58am flight. Wheels down Newark 2:06pm - home for dinner.</p>
+ </div>
+ </details>
+ </section>
+ </div>
+</div>
+
+<div class="page" id="page-money">
+ <div class="wrap">
+ <section>
+ <div class="sec-label">The Money</div>
+ <h2>Per head</h2>
+ <div class="money-wrap">
+ <table class="money">
+ <tr><th>Item</th><th style="text-align:right;">6 guys</th><th style="text-align:right;">7</th><th style="text-align:right;">8</th></tr>
+ <tr><td>House ($3,250 total)</td><td class="num">$542</td><td class="num">$464</td><td class="num">$406</td></tr>
+ <tr><td>Flight EWR <span aria-hidden="true">⇄</span> GSP (United)</td><td class="num">$549+</td><td class="num">$549+</td><td class="num">$549+</td></tr>
+ <tr><td>Gas chip-in, Ubers, groceries</td><td class="num">~$150</td><td class="num">~$130</td><td class="num">~$115</td></tr>
+ <tr><td>Restaurants + bars</td><td class="num">~$250</td><td class="num">~$250</td><td class="num">~$250</td></tr>
+ <tr class="total"><td>All-in (flyers)</td><td class="num">~$1,490</td><td class="num">~$1,390</td><td class="num">~$1,320</td></tr>
+ </table>
+ </div>
+ <div class="fine">House is paid - settle your share by Venmo. Flights: economy $549, economy plus $751, first $769 with bag + drinks. Drivers skip the flight line and get gas covered by the crew. Every extra guy lowers everyone's number.</div>
+ </section>
+ </div>
+</div>
+
+<div class="page" id="page-info">
+ <div class="wrap">
+ <section>
+ <div class="sec-label">Logistics</div>
+ <h2>Getting there + around</h2>
+
+ <details class="fold" open>
+ <summary>Fly - UA 3546 / 3631 <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>United nonstop, EWR Terminal C <span aria-hidden="true">⇄</span> GSP. Down: <b>UA 3546</b>, Fri Nov 6, 9:05am -> 11:17am. Back: <b>UA 3631</b>, Mon Nov 9, 11:58am -> 2:06pm. Kyle's booked - get on the same flights.</p>
+ <p style="margin-top:8px;">Fares as of booking: economy $549 · economy plus $751 · <b>first $769 with checked bag and drinks included</b> - $18 over economy plus, and about $140 over economy once you add a bag. Your call, but the math leans forward.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Drive crew <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Hilton Head crew brings a large vehicle (~4 hrs up). One NJ man may drive down too (~10 hrs) - if he does, we have two vehicles on site and the trip needs zero rentals.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Wheels on the ground <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>The driven vehicles cover airport pickups, the mountain day, and hauls. Ubers for downtown nights so nobody drives after drinking. Crew chips in for the drivers' gas. Fallback if the NJ car stays home: one cheap one-day rental for Saturday or a second Uber wave.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Food <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Groceries delivered to the house Friday. Sunday is the big cook - smoker requests welcome. Bring a bottle from your shelf.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Weather + packing <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p>Days in the 60s, nights in the 40s. Hoodie, flannel, real shoes for Saturday, trunks for the hot tub.</p>
+ </div>
+ </details>
+ </section>
+ </div>
+</div>
+
+<footer>DUDE TRIP 26 · NOV 6-9 · GREENVILLE, SC</footer>
+
+<nav class="tabbar">
+ <div class="inner">
+ <a href="#/home" data-page="home">
+ <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+ Home
+ </a>
+ <a href="#/house" data-page="house">
+ <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M2 9l10-6 10 6"/></svg>
+ House
+ </a>
+ <a href="#/days" data-page="days">
+ <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+ Days
+ </a>
+ <a href="#/money" data-page="money">
+ <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.2c0 3 6 1.6 6 4.6 0 1.2-1.3 2.2-3 2.2s-3-1.1-3-2.5"/></svg>
+ Money
+ </a>
+ <a href="#/info" data-page="info">
+ <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".5"/></svg>
+ Info
+ </a>
+ </div>
+</nav>
+
+<script>
+(function(){
+ var pages = ['home','house','days','money','info'];
+ function route(){
+ var h = (location.hash || '#/home').replace('#/','');
+ if (pages.indexOf(h) === -1) h = 'home';
+ pages.forEach(function(p){
+ document.getElementById('page-' + p).classList.toggle('active', p === h);
+ });
+ document.querySelectorAll('nav.tabbar a').forEach(function(a){
+ a.classList.toggle('active', a.getAttribute('data-page') === h);
+ });
+ window.scrollTo(0,0);
+ }
+ window.addEventListener('hashchange', route);
+ route();
+})();
+</script>
+
+</body>
+</html>
