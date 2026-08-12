@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>São Miguel · Trip Artifacts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#15271F;--sea:#1B4D4A;--ochre:#BB6F38;--mist:#EEF1ED;--card:#FBFCFA;--line:#D6DDD6;--muted:#5C6B61;--soft:#F4EEE6;
+ }
+ *{box-sizing:border-box;}
+ html{-webkit-text-size-adjust:100%;}
+ body{margin:0;background:
+ radial-gradient(circle at top left, rgba(27,77,74,.08), transparent 24%),
+ linear-gradient(180deg,#F7F2EB 0%,var(--mist) 34%,#F8F8F4 100%);
+ color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+ .wrap{max-width:920px;margin:0 auto;padding:0 22px 72px;}
+ a{color:var(--sea);text-decoration:none;}
+ .topnav{display:flex;justify-content:space-between;align-items:center;padding:20px 0 10px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+ .topnav a:hover{color:var(--ochre);}
+ .hero{padding:30px 0 28px;border-bottom:1px solid var(--line);}
+ .eyebrow{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sea);}
+ h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(40px,7vw,72px);line-height:.96;letter-spacing:-.03em;margin:14px 0 0;}
+ .sub{max-width:760px;margin-top:16px;color:var(--muted);font-size:18px;}
+ .jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+ .jump a{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);}
+ .jump a:hover{border-color:var(--ochre);color:var(--ochre);}
+ .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px;}
+ .stat{background:rgba(251,252,250,.88);border:1px solid var(--line);border-radius:18px;padding:18px 20px;}
+ .stat .label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+ .stat strong{display:block;margin-top:8px;font-family:"Fraunces",serif;font-size:28px;font-weight:500;}
+ section{padding-top:34px;}
+ h2{font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sea);margin:0 0 18px;display:flex;align-items:center;gap:12px;}
+ h2::after{content:"";flex:1;height:1px;background:var(--line);}
+ .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+ .card{background:rgba(251,252,250,.92);border:1px solid var(--line);border-radius:18px;padding:22px;}
+ .card h3{font-family:"Fraunces",serif;font-size:24px;font-weight:500;margin:0 0 10px;}
+ .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+ .pill{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted);}
+ .details{display:grid;gap:10px;margin-top:16px;}
+ .row{display:grid;grid-template-columns:140px 1fr;gap:12px;padding-bottom:10px;border-bottom:1px dotted var(--line);}
+ .row:last-child{border-bottom:0;padding-bottom:0;}
+ .label{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+ .value{font-size:14.5px;}
+ .note{margin-top:14px;font-size:13.5px;color:var(--muted);}
+ .footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);}
+ @media(max-width:860px){.summary,.grid{grid-template-columns:1fr;}}
+ @media(max-width:640px){.topnav{display:block;}.topnav div + div{margin-top:8px;}.row{grid-template-columns:1fr;gap:4px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topnav">
+    <div><a href="index.html">Trips</a> / <a href="azores-15-year-anniversary.html">Azores</a></div>
+    <div><a href="azores-travel-workflow.html">Workflow</a> / <a href="azores-location-glossary.html">Glossary</a></div>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Azores · Direct-access layer</p>
+    <h1>Trip Artifacts</h1>
+    <p class="sub">One place for the passes, tickets, receipts, and access-critical trip items you might need in the moment. This page is built for real travel-day retrieval, not just planning.</p>
+    <div class="jump">
+      <a href="azores-15-year-anniversary.html">Main itinerary</a>
+      <a href="azores-hour-by-hour.html">Hour by hour</a>
+      <a href="azores-travel-workflow.html">Travel workflow</a>
+      <a href="azores-location-glossary.html">Location glossary</a>
+    </div>
+    <div class="summary">
+      <div class="stat"><span class="label">Stored now</span><strong>2 artifacts</strong></div>
+      <div class="stat"><span class="label">Most urgent use</span><strong>Saturday + Sunday</strong></div>
+      <div class="stat"><span class="label">Mode</span><strong>Direct PDF access</strong></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Active Passes</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="meta">
+          <span class="pill">Activity</span>
+          <span class="pill">Booked</span>
+          <span class="pill">Saturday</span>
+        </div>
+        <h3>Sete Cidades Kayak Rental</h3>
+        <p class="note">This is the access artifact for the booked lake-time block in Sete Cidades after the ridge walk.</p>
+        <div class="details">
+          <div class="row"><div class="label">Use when</div><div class="value">Sat 22 Aug · 13:00</div></div>
+          <div class="row"><div class="label">Provider</div><div class="value">Futurismo Azores Adventures</div></div>
+          <div class="row"><div class="label">Booking</div><div class="value">371519676</div></div>
+          <div class="row"><div class="label">Covers</div><div class="value">Kayak rental for 2 people · one hour</div></div>
+          <div class="row"><div class="label">Location</div><div class="value">Sete Cidades lake area</div></div>
+          <div class="row"><div class="label">PDF</div><div class="value"><a href="assets/azores-artifacts/azores-sete-cidades-kayak-booking.pdf" target="_blank" rel="noopener">Open booking PDF</a></div></div>
+          <div class="row"><div class="label">Source</div><div class="value">FareHarbor PDF shared in Telegram thread on 2026-08-12</div></div>
+        </div>
+        <p class="note">Keep this paired with the Saturday west-day plan so the lake block stays visible between Boca do Inferno and the drive to Ferraria. The raw PDF is now stored inside the trip site for direct retrieval.</p>
+      </div>
+
+      <div class="card">
+        <div class="meta">
+          <span class="pill">Pass</span>
+          <span class="pill">Booked</span>
+          <span class="pill">Sunday</span>
+        </div>
+        <h3>Caldeira Velha Entry Pass</h3>
+        <p class="note">This is the access artifact for the booked thermal-pool stop after Lagoa do Fogo.</p>
+        <div class="details">
+          <div class="row"><div class="label">Use when</div><div class="value">Sun 23 Aug · 10:30-12:00</div></div>
+          <div class="row"><div class="label">Reservation</div><div class="value">332992</div></div>
+          <div class="row"><div class="label">Covers</div><div class="value">2 adult entries + 1 locker</div></div>
+          <div class="row"><div class="label">Amount paid</div><div class="value">22.00 EUR</div></div>
+          <div class="row"><div class="label">Names</div><div class="value">Kyle Brady · Marissa Brady</div></div>
+          <div class="row"><div class="label">PDF</div><div class="value"><a href="assets/azores-artifacts/azores-caldeira-velha-pass.pdf" target="_blank" rel="noopener">Open pass PDF</a></div></div>
+          <div class="row"><div class="label">Source</div><div class="value">PDF pass shared in Telegram thread on 2026-08-12</div></div>
+        </div>
+        <p class="note">The structured booking data and the raw PDF now live together here, so this can stay the one tap target on the day.</p>
+      </div>
+
+      <div class="card">
+        <div class="meta">
+          <span class="pill">Placeholder</span>
+          <span class="pill">Future</span>
+        </div>
+        <h3>Next Artifacts to Add</h3>
+        <div class="details">
+          <div class="row"><div class="label">Poça da Dona Beija</div><div class="value">Timed-entry pass once booked</div></div>
+          <div class="row"><div class="label">Whale watching</div><div class="value">Ticket / departure confirmation if added</div></div>
+          <div class="row"><div class="label">Rental car</div><div class="value">Pickup proof if a day-of doc becomes useful</div></div>
+          <div class="row"><div class="label">Hotels</div><div class="value">Check-in details only if retrieval friction shows up</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>SÃO MIGUEL · PASSES · TICKETS · RECEIPTS</span>
+    <span>ONE TAP TARGET FOR TRAVEL DAY</span>
+  </div>
+</div>
+</body>
+</html>

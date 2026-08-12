@@ -6,7 +6,7 @@
 <title>São Miguel · Hour by Hour</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
  :root{
  --ink:#15271F;--sea:#1B4D4A;--mist:#EEF1ED;--card:#FBFCFA;--line:#D6DDD6;--muted:#5C6B61;
@@ -24,28 +24,24 @@
  .meta{margin-top:24px;font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.04em;display:flex;flex-wrap:wrap;gap:6px 0;}
  .meta span{padding-right:15px;margin-right:15px;border-right:1px solid var(--line);white-space:nowrap;}
  .meta span:last-child{border-right:0;}
+ .hero-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+ .hero-links a{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--sea);}
+ .hero-links a:hover{border-color:#BB6F38;color:#BB6F38;}
 
- /* LEGEND */
  .legend{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
  .lg{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:11px 13px;border-left:4px solid var(--c);}
  .lg .lt{font-family:"Space Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--c);}
  .lg p{margin:4px 0 0;font-size:12.5px;color:var(--muted);line-height:1.4;}
 
  .note{margin-top:24px;font-size:14px;color:var(--muted);font-style:italic;}
-
- /* DAY */
  .day{padding-top:40px;}
  .dayhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:4px;}
  .dayhead .dl{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
  .dayhead h2{font-family:"Fraunces",serif;font-weight:600;font-size:26px;margin:3px 0 0;}
  .dayhead .theme{font-style:italic;color:var(--muted);font-size:15px;}
-
- /* BALANCE BAR */
  .bal{display:flex;height:9px;border-radius:5px;overflow:hidden;margin:14px 0 6px;border:1px solid var(--line);}
  .bal i{display:block;height:100%;}
  .ballabel{font-family:"Space Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.04em;margin-bottom:18px;}
-
- /* BLOCKS */
  .block{display:grid;grid-template-columns:84px 1fr;gap:16px;padding:10px 0;border-bottom:1px dotted var(--line);}
  .block:last-child{border-bottom:0;}
  .tm{font-family:"Space Mono",monospace;font-size:12px;color:var(--muted);padding-top:2px;white-space:nowrap;}
@@ -62,7 +58,6 @@
  .c-logistics{--c:var(--logistics);}
  .c-sleep{--c:var(--sleep);}
 
- /* SUMMARY */
  h3.sec{font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sea);margin:0 0 20px;display:flex;align-items:center;gap:12px;}
  h3.sec::after{content:"";flex:1;height:1px;background:var(--line);}
  .tally{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px 22px;}
@@ -96,6 +91,13 @@
  <span>3 NIGHTS PONTA DELGADA</span>
  <span>3 NIGHTS FURNAS</span>
  </div>
+ <div class="hero-links">
+ <a href="azores-15-year-anniversary.html">Main itinerary</a>
+ <a href="azores-travel-workflow.html">Travel workflow</a>
+ <a href="azores-location-glossary.html">Location glossary</a>
+ <a href="azores-trip-artifacts.html">Artifacts</a>
+ <a href="index.html">All trips</a>
+ </div>
 
  <div class="legend">
  <div class="lg" style="--c:var(--effort)"><div class="lt">EFFORT</div><p>Active + "pain." The good kind of hard — hikes, climbs. Punctuation, not the main course.</p></div>
@@ -107,7 +109,6 @@
  <p class="note">Balance bars below each date show the mix of waking hours (sleep excluded). They're approximate — the point is the shape, not the decimals.</p>
  </header>
 
- <!-- DAY 1 -->
  <div class="day">
  <div class="dayhead"><div><div class="dl">Day 1 · Friday, Aug 21</div><h2>Land soft</h2></div><div class="theme">recover the red-eye</div></div>
  <div class="bal"><i style="background:var(--logistics);width:18%"></i><i style="background:var(--engaged);width:22%"></i><i style="background:var(--restful);width:60%"></i></div>
@@ -125,7 +126,6 @@
  <div class="block c-sleep"><div class="tm">21:30–07:00</div><div class="bd"><div class="top"><span class="ttl">Real sleep</span><span class="chip">Sleep</span></div><div class="needs">~9.5 hrs. Reset the clock fully.</div></div></div>
  </div>
 
- <!-- DAY 2 -->
  <div class="day">
  <div class="dayhead"><div><div class="dl">Day 2 · Saturday, Aug 22</div><h2>The big day out</h2></div><div class="theme">west &amp; the ridge — the effort peak</div></div>
  <div class="bal"><i style="background:var(--logistics);width:16%"></i><i style="background:var(--effort);width:30%"></i><i style="background:var(--engaged);width:24%"></i><i style="background:var(--restful);width:30%"></i></div>
@@ -135,28 +135,29 @@
  <div class="block c-logistics"><div class="tm">08:00–08:45</div><div class="bd"><div class="top"><span class="ttl">Drive to Sete Cidades</span><span class="chip">Logistics</span></div><div class="needs">~40 min, scenic. <b>NEED</b> hiking shoes, water, sunscreen, layers.</div></div></div>
  <div class="block c-engaged"><div class="tm">08:45–09:15</div><div class="bd"><div class="top"><span class="ttl">Vista do Rei viewpoint</span><span class="chip">Engaged</span></div><div class="needs">First look down on the twin lakes. Photos before the crowds.</div></div></div>
  <div class="block c-effort"><div class="tm">09:15–11:30</div><div class="bd"><div class="top"><span class="ttl">Boca do Inferno ridge walk</span><span class="chip">Effort</span></div><div class="needs">The signature hike — the day's deliberate hard beat. <b>NEED</b> shoes, water, ~2 hrs of legs.</div></div></div>
- <div class="block c-engaged"><div class="tm">11:30–12:30</div><div class="bd"><div class="top"><span class="ttl">Down to the lake village</span><span class="chip">Engaged</span></div><div class="needs">Lakeside; optional kayak if you want water time. <b>NEED</b> swimwear (optional).</div></div></div>
- <div class="block c-restful"><div class="tm">12:30–13:45</div><div class="bd"><div class="top"><span class="ttl">Lunch in the crater village</span><span class="chip">Restful</span></div><div class="needs">Earned and unhurried.</div></div></div>
- <div class="block c-logistics"><div class="tm">13:45–14:45</div><div class="bd"><div class="top"><span class="ttl">Drive to Ponta da Ferraria</span><span class="chip">Logistics</span></div><div class="needs">Far-west tip. <b>NEED</b> to have checked the tide table — aim arrival near low tide.</div></div></div>
- <div class="block c-engaged"><div class="tm">14:45–16:45</div><div class="bd"><div class="top"><span class="ttl">Ferraria ocean hot-spring soak</span><span class="chip">Engaged</span></div><div class="needs">Hot spring meeting the sea — a little scramble, a lot of payoff. <b>NEED</b> swimsuit, water shoes, towel.</div></div></div>
- <div class="block c-logistics"><div class="tm">16:45–17:45</div><div class="bd"><div class="top"><span class="ttl">Drive back to Ponta Delgada</span><span class="chip">Logistics</span></div></div></div>
- <div class="block c-restful"><div class="tm">17:45–19:30</div><div class="bd"><div class="top"><span class="ttl">Downtime — rinse, rest, pool</span><span class="chip">Restful</span></div><div class="needs">Decompress before going back out.</div></div></div>
- <div class="block c-engaged"><div class="tm">19:30–21:30</div><div class="bd"><div class="top"><span class="ttl">Dinner out in town</span><span class="chip">Engaged</span></div><div class="needs">Livelier spot — you earned it. <b>NEED</b> a reservation.</div></div></div>
- <div class="block c-sleep"><div class="tm">22:30–07:00</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
+ <div class="block c-engaged"><div class="tm">11:30–12:45</div><div class="bd"><div class="top"><span class="ttl">Down to the lake village</span><span class="chip">Engaged</span></div><div class="needs">Lakeside reset before the water block. <b>NEED</b> swimsuit if you want to paddle in what you are already carrying.</div></div></div>
+ <div class="block c-engaged"><div class="tm">13:00–14:00</div><div class="bd"><div class="top"><span class="ttl">Sete Cidades kayak rental</span><span class="chip">Engaged</span></div><div class="needs"><b>BOOKED</b> with Futurismo Azores Adventures for 2 people. One-hour rental at <b>13:00</b>; booking <b>371519676</b>. Keep the artifact handy.</div></div></div>
+ <div class="block c-restful"><div class="tm">14:00–14:45</div><div class="bd"><div class="top"><span class="ttl">Late lunch in the crater village</span><span class="chip">Restful</span></div><div class="needs">Earned and unhurried, after the lake block instead of before it.</div></div></div>
+ <div class="block c-logistics"><div class="tm">14:45–15:30</div><div class="bd"><div class="top"><span class="ttl">Drive to Ponta da Ferraria</span><span class="chip">Logistics</span></div><div class="needs">Far-west tip. <b>NEED</b> to have checked the tide table — aim arrival near low tide.</div></div></div>
+ <div class="block c-engaged"><div class="tm">15:30–17:15</div><div class="bd"><div class="top"><span class="ttl">Ferraria ocean hot-spring soak</span><span class="chip">Engaged</span></div><div class="needs">Hot spring meeting the sea — a little scramble, a lot of payoff. <b>NEED</b> swimsuit, water shoes, towel.</div></div></div>
+ <div class="block c-logistics"><div class="tm">17:15–18:00</div><div class="bd"><div class="top"><span class="ttl">Drive back to Ponta Delgada</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-restful"><div class="tm">18:00–18:45</div><div class="bd"><div class="top"><span class="ttl">Downtime — rinse, rest, pool</span><span class="chip">Restful</span></div><div class="needs">Decompress before the drive out to dinner.</div></div></div>
+ <div class="block c-engaged"><div class="tm">18:30–22:15</div><div class="bd"><div class="top"><span class="ttl">Quinta dos Sabores — farm tasting dinner</span><span class="chip">Engaged</span></div><div class="needs">8-course, vegetable-forward menu; ~25 min out near Ribeira Grande. Leave ~18:30 to walk the farm before the <b>19:30 seating</b>. Your one land-driven night of the week. <b>BOOKED</b> · allergy on record.</div></div></div>
+ <div class="block c-sleep"><div class="tm">23:00–07:00</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
  </div>
 
- <!-- DAY 3 -->
  <div class="day">
  <div class="dayhead"><div><div class="dl">Day 3 · Sunday, Aug 23</div><h2>Crater lake, gentler</h2></div><div class="theme">deliberately lighter than yesterday</div></div>
  <div class="bal"><i style="background:var(--logistics);width:15%"></i><i style="background:var(--effort);width:10%"></i><i style="background:var(--engaged);width:20%"></i><i style="background:var(--restful);width:55%"></i></div>
- <div class="ballabel">Logistics 15% · Effort 10% · Engaged 20% · Restful 55%</div>
+ <div class="ballabel">Gentle path: Logistics 15% · Effort 10% · Engaged 20% · Restful 55% — swapping in Cabrito pushes Effort to ~25% and makes it an active day</div>
 
  <div class="block c-restful"><div class="tm">07:45–08:45</div><div class="bd"><div class="top"><span class="ttl">Slow breakfast, slow start</span><span class="chip">Restful</span></div><div class="needs">No alarm-clock urgency today.</div></div></div>
  <div class="block c-logistics"><div class="tm">08:45–09:30</div><div class="bd"><div class="top"><span class="ttl">Drive to Lagoa do Fogo</span><span class="chip">Logistics</span></div><div class="needs"><b>NEED</b> swimsuit, towel, water shoes (for Caldeira Velha next).</div></div></div>
  <div class="block c-effort"><div class="tm">09:30–10:15</div><div class="bd"><div class="top"><span class="ttl">Lagoa do Fogo viewpoint (optional descent)</span><span class="chip">Effort</span></div><div class="needs">Viewpoint is easy; the descent to the shore is the optional short "pain." Your call in the moment.</div></div></div>
- <div class="block c-restful"><div class="tm">10:30–12:30</div><div class="bd"><div class="top"><span class="ttl">Caldeira Velha thermal pools</span><span class="chip">Restful</span></div><div class="needs">Warm water under a forest waterfall. <b>NEED</b> the first timed slot pre-booked online.</div></div></div>
- <div class="block c-restful"><div class="tm">12:30–14:00</div><div class="bd"><div class="top"><span class="ttl">Lunch in Ribeira Grande</span><span class="chip">Restful</span></div><div class="needs">North-coast town, relaxed.</div></div></div>
- <div class="block c-engaged"><div class="tm">14:00–15:00</div><div class="bd"><div class="top"><span class="ttl">Wander Ribeira Grande</span><span class="chip">Engaged</span></div><div class="needs">Old bridges, the seafront. Light and easy.</div></div></div>
+ <div class="block c-restful"><div class="tm">10:30–12:00</div><div class="bd"><div class="top"><span class="ttl">Caldeira Velha thermal pools</span><span class="chip">Restful</span></div><div class="needs">Warm water under a forest waterfall. <b>BOOKED</b> — 10:30–12:00 timed slot. <b>NEED</b> swimsuit, towel, water shoes.</div></div></div>
+ <div class="block c-restful"><div class="tm">12:15–14:00</div><div class="bd"><div class="top"><span class="ttl">Lunch</span><span class="chip">Restful</span></div><div class="needs">Ribeira Grande or nearby. ~15 min from the pools.</div></div></div>
+ <div class="block c-engaged"><div class="tm">14:00–15:00</div><div class="bd"><div class="top"><span class="ttl">EITHER — wander Ribeira Grande</span><span class="chip">Engaged</span></div><div class="needs">Old town, the eight-arched bridge, the seafront, a café. Light and easy — keeps the day gentle.</div></div></div>
+ <div class="block c-effort"><div class="tm">14:00–16:00</div><div class="bd"><div class="top"><span class="ttl">OR — Salto do Cabrito waterfall</span><span class="chip">Effort</span></div><div class="needs">Gravel access road and a steep metal staircase to the base. Trades the gentle afternoon for an active one. <b>NEED</b> shoes, and to check the rental's unpaved-road terms. <b>Decide in the moment — one or the other, not both.</b></div></div></div>
  <div class="block c-logistics"><div class="tm">15:00–15:45</div><div class="bd"><div class="top"><span class="ttl">Drive back to Ponta Delgada</span><span class="chip">Logistics</span></div></div></div>
  <div class="block c-restful"><div class="tm">15:45–18:30</div><div class="bd"><div class="top"><span class="ttl">Open afternoon — pool, spa, nap, each other</span><span class="chip">Restful</span></div><div class="needs">The unprogrammed block. Use it however the mood goes.</div></div></div>
  <div class="block c-restful"><div class="tm">18:30–20:00</div><div class="bd"><div class="top"><span class="ttl">Sunset &amp; aperitivo</span><span class="chip">Restful</span></div><div class="needs">Rooftop or marina.</div></div></div>
@@ -164,27 +165,25 @@
  <div class="block c-sleep"><div class="tm">22:30–07:30</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
  </div>
 
- <!-- DAY 4 -->
  <div class="day">
- <div class="dayhead"><div><div class="dl">Day 4 · Monday, Aug 24</div><h2>Drift east</h2></div><div class="theme">the only hotel move of the trip</div></div>
- <div class="bal"><i style="background:var(--logistics);width:24%"></i><i style="background:var(--engaged);width:24%"></i><i style="background:var(--restful);width:52%"></i></div>
- <div class="ballabel">Logistics 24% · Engaged 24% · Restful 52% · (the one logistics-heavy mid-trip day)</div>
+ <div class="dayhead"><div><div class="dl">Day 4 · Monday, Aug 24</div><h2>Drift east</h2></div><div class="theme">the move east — made a day of it</div></div>
+ <div class="bal"><i style="background:var(--logistics);width:24%"></i><i style="background:var(--effort);width:6%"></i><i style="background:var(--engaged);width:18%"></i><i style="background:var(--restful);width:52%"></i></div>
+ <div class="ballabel">Logistics 24% · Effort 6% · Engaged 18% · Restful 52% · a fuller travel day than it looks</div>
 
  <div class="block c-restful"><div class="tm">07:30–08:30</div><div class="bd"><div class="top"><span class="ttl">Breakfast</span><span class="chip">Restful</span></div></div></div>
  <div class="block c-logistics"><div class="tm">08:30–09:30</div><div class="bd"><div class="top"><span class="ttl">Pack &amp; check out of Ponta Delgada</span><span class="chip">Logistics</span></div><div class="needs">The trip's main "waste" block — keep it tight and unfussy.</div></div></div>
- <div class="block c-logistics"><div class="tm">09:30–10:30</div><div class="bd"><div class="top"><span class="ttl">Drive east, coast road to Gorreana</span><span class="chip">Logistics</span></div><div class="needs">Scenic enough that it barely feels like driving.</div></div></div>
- <div class="block c-engaged"><div class="tm">10:30–11:30</div><div class="bd"><div class="top"><span class="ttl">Gorreana tea plantation</span><span class="chip">Engaged</span></div><div class="needs">Europe's oldest — free self-guided tour, tea on the terrace.</div></div></div>
- <div class="block c-logistics"><div class="tm">11:30–12:15</div><div class="bd"><div class="top"><span class="ttl">Drive Gorreana → Furnas</span><span class="chip">Logistics</span></div></div></div>
- <div class="block c-restful"><div class="tm">12:15–13:30</div><div class="bd"><div class="top"><span class="ttl">Lunch in Furnas village</span><span class="chip">Restful</span></div><div class="needs">Room won't be ready yet — eat first.</div></div></div>
- <div class="block c-engaged"><div class="tm">13:30–15:00</div><div class="bd"><div class="top"><span class="ttl">Fumaroles &amp; lake walk</span><span class="chip">Engaged</span></div><div class="needs">The steaming Caldeiras and the lakeshore — gentle exploring. <b>NEED</b> walking shoes.</div></div></div>
- <div class="block c-logistics"><div class="tm">15:00–15:30</div><div class="bd"><div class="top"><span class="ttl">Check in at Octant Furnas</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-engaged"><div class="tm">09:30–10:45</div><div class="bd"><div class="top"><span class="ttl">South-coast drive toward Caloura</span><span class="chip">Engaged</span></div><div class="needs">The scenic south road — a stick-shift drive that earns its own keep.</div></div></div>
+ <div class="block c-engaged"><div class="tm">10:45–12:00</div><div class="bd"><div class="top"><span class="ttl">Swim in the Caloura cove</span><span class="chip">Engaged</span></div><div class="needs">A dip in the volcanic sea pool before the lunch crowd. <b>NEED</b> swimsuit, towel.</div></div></div>
+ <div class="block c-restful"><div class="tm">12:00–13:30</div><div class="bd"><div class="top"><span class="ttl">Lunch at Bar Caloura</span><span class="chip">Restful</span></div><div class="needs">Grilled catch-of-the-day at an ocean-side table. No reservations — arrive at the noon opening. <b>Flag Marissa's octopus/squid allergy; stick to whole grilled fish.</b></div></div></div>
+ <div class="block c-logistics"><div class="tm">13:30–14:00</div><div class="bd"><div class="top"><span class="ttl">Drive to Vila Franca do Campo</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-effort"><div class="tm">14:00–14:45</div><div class="bd"><div class="top"><span class="ttl">Ermida de Nossa Senhora da Paz</span><span class="chip">Effort</span></div><div class="needs">The zigzag staircase up to the hilltop chapel — a short, steep climb with a sweeping coastal payoff. Go before mid-afternoon; parking up top is tight.</div></div></div>
+ <div class="block c-logistics"><div class="tm">14:45–15:30</div><div class="bd"><div class="top"><span class="ttl">Drive to Furnas → check in</span><span class="chip">Logistics</span></div><div class="needs">Into the thermal valley; check in at Octant Furnas.</div></div></div>
  <div class="block c-restful"><div class="tm">15:30–17:30</div><div class="bd"><div class="top"><span class="ttl">Terra Nostra ochre pool</span><span class="chip">Restful</span></div><div class="needs">The iconic warm iron pool, steps from the hotel. <b>NEED</b> a dark swimsuit (it stains).</div></div></div>
  <div class="block c-restful"><div class="tm">17:30–19:30</div><div class="bd"><div class="top"><span class="ttl">Settle into the valley — Octant pools</span><span class="chip">Restful</span></div><div class="needs">The pace shift from here is the whole point.</div></div></div>
  <div class="block c-restful"><div class="tm">19:30–21:30</div><div class="bd"><div class="top"><span class="ttl">Dinner at the hotel</span><span class="chip">Restful</span></div><div class="needs">Furnas is quiet at night — stay in, eat well.</div></div></div>
  <div class="block c-sleep"><div class="tm">22:30–07:30</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
  </div>
 
- <!-- DAY 5 -->
  <div class="day">
  <div class="dayhead"><div><div class="dl">Day 5 · Tuesday, Aug 25</div><h2>Open day</h2></div><div class="theme">one optional effort beat, otherwise rest</div></div>
  <div class="bal"><i style="background:var(--logistics);width:12%"></i><i style="background:var(--effort);width:20%"></i><i style="background:var(--engaged);width:13%"></i><i style="background:var(--restful);width:55%"></i></div>
@@ -192,7 +191,7 @@
 
  <div class="block c-restful"><div class="tm">08:00–09:15</div><div class="bd"><div class="top"><span class="ttl">Long breakfast, no plan</span><span class="chip">Restful</span></div></div></div>
  <div class="block c-logistics"><div class="tm">09:15–10:00</div><div class="bd"><div class="top"><span class="ttl">Drive to Faial da Terra <span style="font-weight:400;color:var(--muted)">(optional)</span></span><span class="chip">Logistics</span></div><div class="needs">Skip the whole excursion if you'd rather not move. <b>NEED</b> shoes, water, swimsuit.</div></div></div>
- <div class="block c-effort"><div class="tm">10:00–12:30</div><div class="bd"><div class="top"><span class="ttl">Salto do Prego waterfall loop <span style="font-weight:400;color:var(--muted)">(optional)</span></span><span class="chip">Effort</span></div><div class="needs">A softer "pain" than the ridge — forest loop to a swimmable falls. The second deliberate effort beat, if you want one.</div></div></div>
+ <div class="block c-effort"><div class="tm">10:00–12:30</div><div class="bd"><div class="top"><span class="ttl">Salto do Prego waterfall loop <span style="font-weight:400;color:var(--muted)">(optional)</span></span><span class="chip">Effort</span></div><div class="needs">A softer "pain" than the ridge — forest loop to a swimmable falls. Or trade it for a gentler option: Gorreana tea, or the Nordeste coast viewpoints. All optional.</div></div></div>
  <div class="block c-restful"><div class="tm">12:30–14:30</div><div class="bd"><div class="top"><span class="ttl">Lunch + drift back</span><span class="chip">Restful</span></div><div class="needs">Or, if you skipped the hike, you're already here — same result, less effort.</div></div></div>
  <div class="block c-restful"><div class="tm">14:30–18:00</div><div class="bd"><div class="top"><span class="ttl">Pure downtime at Octant Furnas</span><span class="chip">Restful</span></div><div class="needs">Pools, a book, a nap, each other. The day's real purpose.</div></div></div>
  <div class="block c-engaged"><div class="tm">18:00–19:30</div><div class="bd"><div class="top"><span class="ttl">Garden &amp; village stroll at golden hour</span><span class="chip">Engaged</span></div></div></div>
@@ -200,7 +199,6 @@
  <div class="block c-sleep"><div class="tm">22:30–07:30</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
  </div>
 
- <!-- DAY 6 -->
  <div class="day">
  <div class="dayhead"><div><div class="dl">Day 6 · Wednesday, Aug 26</div><h2>Indulgence</h2></div><div class="theme">the massage &amp; cozido — the pleasure peak</div></div>
  <div class="bal"><i style="background:var(--logistics);width:7%"></i><i style="background:var(--engaged);width:20%"></i><i style="background:var(--restful);width:73%"></i></div>
@@ -208,4 +206,41 @@
 
  <div class="block c-restful"><div class="tm">08:00–09:00</div><div class="bd"><div class="top"><span class="ttl">Breakfast, unhurried</span><span class="chip">Restful</span></div></div></div>
  <div class="block c-restful"><div class="tm">09:00–10:30</div><div class="bd"><div class="top"><span class="ttl">Lazy morning by the pools</span><span class="chip">Restful</span></div><div class="needs">Coffee, garden, warm in to the day.</div></div></div>
- <div class="block c-restful"><div class="tm">10:30–12:00</div><div class="bd"><div class="top"><span class="ttl">Couples massage at the Octant spa</span><span class="chip">Restful</span></div><div class="needs">The trip's centerpiece. <b
+ <div class="block c-restful"><div class="tm">10:30–12:00</div><div class="bd"><div class="top"><span class="ttl">Couples massage at the Octant spa</span><span class="chip">Restful</span></div><div class="needs">The trip's centerpiece. <b>NEED</b> booked in advance (with the room).</div></div></div>
+ <div class="block c-restful"><div class="tm">12:00–13:00</div><div class="bd"><div class="top"><span class="ttl">Float on the post-massage glow</span><span class="chip">Restful</span></div><div class="needs">Tea, lounge, no transition straight into anything.</div></div></div>
+ <div class="block c-restful"><div class="tm">13:00–14:30</div><div class="bd"><div class="top"><span class="ttl">Cozido das Furnas lunch</span><span class="chip">Restful</span></div><div class="needs">Stew cooked in the volcanic ground. <b>NEED</b> ordered a day ahead.</div></div></div>
+ <div class="block c-engaged"><div class="tm">14:30–16:00</div><div class="bd"><div class="top"><span class="ttl">Digestive walk · Lagoa das Furnas</span><span class="chip">Engaged</span></div><div class="needs">See the cozido cooking pits, walk the lake. Gentle.</div></div></div>
+ <div class="block c-restful"><div class="tm">16:00–18:00</div><div class="bd"><div class="top"><span class="ttl">Free / light pre-pack</span><span class="chip">Restful</span></div><div class="needs">Get the big items into the bag now so tomorrow's exit is clean.</div></div></div>
+ <div class="block c-restful"><div class="tm">18:00–20:00</div><div class="bd"><div class="top"><span class="ttl">Poça da Dona Beija at dusk</span><span class="chip">Restful</span></div><div class="needs">The hot pools, best in the evening light. <b>NEED</b> swimsuit, towel, timed ticket.</div></div></div>
+ <div class="block c-engaged"><div class="tm">20:00–22:00</div><div class="bd"><div class="top"><span class="ttl">Final dinner — the celebration</span><span class="chip">Engaged</span></div><div class="needs">Last night, anniversary trip — make it count.</div></div></div>
+ <div class="block c-sleep"><div class="tm">22:30–06:30</div><div class="bd"><div class="top"><span class="ttl">Sleep</span><span class="chip">Sleep</span></div></div></div>
+ </div>
+
+ <div class="day">
+ <div class="dayhead"><div><div class="dl">Day 7 · Thursday, Aug 27</div><h2>Home</h2></div><div class="theme">unavoidably logistics-heavy</div></div>
+ <div class="bal"><i style="background:var(--logistics);width:62%"></i><i style="background:var(--restful);width:38%"></i></div>
+ <div class="ballabel">Logistics 62% · Restful 38% · (the one day waste wins — that's fine, it's the exit)</div>
+
+ <div class="block c-logistics"><div class="tm">06:30–07:45</div><div class="bd"><div class="top"><span class="ttl">Wake, breakfast, final pack</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-logistics"><div class="tm">07:45–08:15</div><div class="bd"><div class="top"><span class="ttl">Check out of Octant Furnas</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-logistics"><div class="tm">08:15–09:10</div><div class="bd"><div class="top"><span class="ttl">Drive Furnas → PDL airport</span><span class="chip">Logistics</span></div><div class="needs">~50 min. <b>NEED</b> to leave by 8:15 for an 11:00 flight.</div></div></div>
+ <div class="block c-logistics"><div class="tm">09:10–11:00</div><div class="bd"><div class="top"><span class="ttl">Return car · check in · security · gate</span><span class="chip">Logistics</span></div></div></div>
+ <div class="block c-restful"><div class="tm">11:00–~13:15</div><div class="bd"><div class="top"><span class="ttl">Flight PDL → EWR</span><span class="chip">Restful</span></div><div class="needs">~6 hrs, but the clock falls back 4 — land early afternoon. Read, doze, look back at the photos.</div></div></div>
+ <div class="block c-logistics"><div class="tm">afternoon</div><div class="bd"><div class="top"><span class="ttl">Land EWR · drive home</span><span class="chip">Logistics</span></div><div class="needs">Same-day arrival. Home by evening.</div></div></div>
+ </div>
+
+ <div class="day">
+ <h3 class="sec">The balance, across the week</h3>
+ <div class="tally">
+ <div class="trow" style="--c:var(--restful)"><span class="tn">RESTFUL</span><div class="tbar" style="width:54%"></div><span class="tv">~54%</span></div>
+ <div class="trow" style="--c:var(--engaged)"><span class="tn">ENGAGED</span><div class="tbar" style="width:20%"></div><span class="tv">~20%</span></div>
+ <div class="trow" style="--c:var(--logistics)"><span class="tn">LOGISTICS</span><div class="tbar" style="width:14%"></div><span class="tv">~14%</span></div>
+ <div class="trow" style="--c:var(--effort)"><span class="tn">EFFORT</span><div class="tbar" style="width:12%"></div><span class="tv">~12%</span></div>
+ </div>
+ <p class="read">Read it as a shape: <strong>restful-dominant</strong> (~half the waking hours), which is right for an anniversary trip — the indulgence is the point, not a reward you have to earn. <strong>Effort sits at ~12%</strong>, concentrated in two or three clean beats (the ridge on Saturday, the optional waterfall Tuesday) so it punctuates the week instead of grinding through it. <strong>Logistics holds near ~14%</strong> and most of it lands on two days — the one hotel move and the flight home — leaving the middle days almost waste-free. And the arc matters as much as the totals: you <strong>open soft</strong> (recovery), <strong>spike effort early</strong> while you're freshest, then <strong>slope down into pure pleasure</strong>, closing on the massage and the cozido. Hard when you have the legs for it, easy when you've earned it.</p>
+ <footer>SÃO MIGUEL · AÇORES · AN EXAMPLE, NOT A COMMITMENT · KYLE &amp; MARISSA</footer>
+ </div>
+
+</div>
+</body>
+</html>

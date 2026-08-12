@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>São Miguel · Travel Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15271F;--sea:#1B4D4A;--ochre:#BB6F38;--mist:#EEF1ED;--card:#FBFCFA;
+    --line:#D6DDD6;--muted:#5C6B61;--pine:#2C6553;--sand:#E8D9C9;--rose:#A5563D;
+    --shadow:0 14px 40px rgba(21,39,31,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{background:
+    radial-gradient(circle at top left, rgba(187,111,56,.09), transparent 28%),
+    linear-gradient(180deg, #F7F2EB 0%, var(--mist) 36%, #F7F7F3 100%);
+    color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 72px;}
+  .topnav{display:flex;justify-content:space-between;align-items:center;padding:18px 0 10px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .topnav a{text-decoration:none;}
+  .topnav a:hover{color:var(--sea);}
+  .hero{padding:26px 0 28px;border-bottom:1px solid var(--line);}
+  .eyebrow{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sea);}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(40px,7vw,68px);line-height:.97;letter-spacing:-.03em;margin-top:16px;}
+  .sub{max-width:760px;margin-top:16px;color:var(--muted);font-size:18px;}
+  .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .meta span{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.06em;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.65);}
+  .jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .jump a{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);transition:transform .15s, border-color .15s;}
+  .jump a:hover{transform:translateY(-1px);border-color:var(--ochre);}
+  .overview{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:28px;}
+  .panel{background:rgba(251,252,250,.88);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);}
+  .panel.pad{padding:22px;}
+  .hero-card{padding:24px;background:linear-gradient(145deg, rgba(27,77,74,.95), rgba(44,101,83,.92));color:#F8FBF8;border-radius:18px;box-shadow:var(--shadow);}
+  .hero-card h2{font-family:"Fraunces",serif;font-weight:500;font-size:28px;margin-bottom:10px;}
+  .hero-card p{max-width:58ch;color:rgba(248,251,248,.86);}
+  .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px;}
+  .mini{padding:14px;border:1px solid rgba(255,255,255,.15);border-radius:14px;background:rgba(255,255,255,.06);}
+  .mini .label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,251,248,.7);}
+  .mini .value{display:block;margin-top:8px;font-size:14px;}
+  .status h3,.sec h2{font-family:"Fraunces",serif;font-weight:500;font-size:28px;}
+  .status-list{display:grid;gap:12px;margin-top:16px;}
+  .status-item{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);}
+  .status-item .tag{display:inline-block;font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-bottom:8px;}
+  .done{background:rgba(46,125,107,.12);color:#2E7D6B;}
+  .todo{background:rgba(187,111,56,.12);color:var(--ochre);}
+  .status-item strong{display:block;font-size:15px;margin-bottom:4px;}
+  .status-item p{font-size:13.5px;color:var(--muted);}
+  .sec{padding-top:34px;}
+  .sec-head{display:flex;align-items:end;justify-content:space-between;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:18px;}
+  .sec-head p{max-width:54ch;color:var(--muted);font-size:14px;}
+  .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+  .stack{display:grid;gap:18px;}
+  .card{background:rgba(251,252,250,.9);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);}
+  .card h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin-bottom:10px;}
+  .kicker{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sea);margin-bottom:8px;}
+  ul.clean{list-style:none;display:grid;gap:8px;}
+  ul.clean li{position:relative;padding-left:18px;font-size:14.5px;}
+  ul.clean li::before{content:"·";position:absolute;left:4px;color:var(--ochre);font-weight:700;}
+  .table{width:100%;border-collapse:collapse;margin-top:6px;}
+  .table th,.table td{padding:11px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px;}
+  .table th{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;padding-top:0;}
+  .table td:last-child,.table th:last-child{text-align:right;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .pill{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.08em;padding:7px 10px;border-radius:999px;background:rgba(27,77,74,.08);border:1px solid var(--line);}
+  .dayline{display:grid;gap:12px;}
+  .daystep{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:12px 0;border-bottom:1px dotted var(--line);}
+  .daystep:last-child{border-bottom:0;}
+  .time{font-family:"Space Mono",monospace;font-size:12px;color:var(--muted);}
+  .daystep strong{display:block;font-size:15px;margin-bottom:4px;}
+  .daystep p{font-size:13.5px;color:var(--muted);}
+  .album-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .album{padding:16px;border:1px dashed var(--line);border-radius:16px;background:rgba(255,255,255,.55);}
+  .album strong{display:block;font-size:15px;margin-bottom:6px;}
+  .album p{font-size:13.5px;color:var(--muted);}
+  .footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);}
+  @media(max-width:860px){
+    .overview,.grid-2,.album-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 16px 56px;}
+    .sec-head,.topnav{display:block;}
+    .topnav a + a{margin-left:14px;}
+    .mini-grid{grid-template-columns:1fr;}
+    .daystep{grid-template-columns:1fr;}
+    .table td:last-child,.table th:last-child{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topnav">
+    <div><a href="index.html">Trips</a> / <a href="azores-15-year-anniversary.html">Azores</a></div>
+    <div><a href="azores-hour-by-hour.html">Hour by Hour</a> / <a href="azores-location-glossary.html">Glossary</a> / <a href="azores-trip-artifacts.html">Artifacts</a></div>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Azores · Travel execution layer</p>
+    <h1>Travel Workflow</h1>
+    <p class="sub">This is the operational version of the trip: what to pack, how to eat, where the driving time really goes, what still needs to be reserved, and where to drop the memories after the fact.</p>
+    <div class="meta">
+      <span>20–27 AUG 2026</span>
+      <span>São Miguel only</span>
+      <span>Kyle + Marissa</span>
+      <span>Planning → execution → archive</span>
+    </div>
+    <div class="jump">
+      <a href="azores-15-year-anniversary.html">Main itinerary</a>
+      <a href="azores-hour-by-hour.html">Hour by hour</a>
+      <a href="azores-location-glossary.html">Location glossary</a>
+      <a href="azores-trip-artifacts.html">Artifacts</a>
+      <a href="#packing">Packing</a>
+      <a href="#meals">Meals</a>
+      <a href="#travel-facts">Travel facts</a>
+      <a href="#albums">Albums</a>
+    </div>
+
+    <div class="overview">
+      <div class="hero-card">
+        <h2>Run the trip like a system</h2>
+        <p>The planning pages decide the shape. This page handles the real-world execution: pre-flight prep, day-of movement, bookings still open, practical meal cadence, and post-trip asset capture.</p>
+        <div class="mini-grid">
+          <div class="mini"><span class="label">Phase 1</span><span class="value">Prep bags, reservations, and airport handoff</span></div>
+          <div class="mini"><span class="label">Phase 2</span><span class="value">On-island routing, food rhythm, and spa timing</span></div>
+          <div class="mini"><span class="label">Phase 3</span><span class="value">Daily reset: tomorrow's bookings, weather, and fuel</span></div>
+          <div class="mini"><span class="label">Phase 4</span><span class="value">Archive photos, receipts, and favorite places after return</span></div>
+        </div>
+      </div>
+
+      <div class="panel pad status">
+        <h3>Execution board</h3>
+        <div class="status-list">
+          <div class="status-item">
+            <span class="tag done">Booked</span>
+            <strong>Flights, rental car, both hotels</strong>
+            <p>Core transport and lodging are already locked. This trip can execute as-is.</p>
+          </div>
+          <div class="status-item">
+            <span class="tag todo">Still open</span>
+            <strong>Couples massage, Poça da Dona Beija, cozido lunch</strong>
+            <p>These are the remaining reservations most likely to constrain the experience.</p>
+          </div>
+          <div class="status-item">
+            <span class="tag done">Booked</span>
+            <strong>Caldeira Velha timed entry is locked for Sunday at 10:30–12:00</strong>
+            <p>Reservation 332992 is paid and includes 2 adult entries plus 1 locker, so the central-day thermal anchor is fully settled.</p>
+          </div>
+          <div class="status-item">
+            <span class="tag done">Booked</span>
+            <strong>Sete Cidades kayak rental is locked for Saturday at 13:00</strong>
+            <p>Futurismo booking 371519676 covers a one-hour rental for 2 people, so the west-day lake block is now an actual commitment, not just an option.</p>
+          </div>
+          <div class="status-item">
+            <span class="tag todo">Before departure</span>
+            <strong>Download maps, confirm low tide, build packing stacks</strong>
+            <p>The less phone friction on island, the better the trip feels.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec" id="packing">
+    <div class="sec-head">
+      <h2>Packing System</h2>
+      <p>Pack for three modes only: airport transfer, crater-and-coast days, and Furnas thermal days. That keeps the bag small and the decisions obvious.</p>
+    </div>
+    <div class="grid-2">
+      <div class="stack">
+        <div class="card">
+          <div class="kicker">Carry-on logic</div>
+          <h3>Flight-night essentials</h3>
+          <ul class="clean">
+            <li>Passports, licenses, rental confirmation, hotel confirmations</li>
+            <li>One change of clothes and basic toiletries in case checked luggage lags</li>
+            <li>Sleep kit: eye mask, headphones, charger, sweatshirt</li>
+            <li>Arrival kit: sunglasses, water bottle, gum, meds, sunscreen</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Thermal days</div>
+          <h3>Furnas pool stack</h3>
+          <ul class="clean">
+            <li>Dark swimsuits only for Terra Nostra and iron-rich thermal water</li>
+            <li>Water shoes or sandals with grip</li>
+            <li>Quick-dry towel if you want independence from hotel towel flows</li>
+            <li>Plastic or dry bag for wet gear back in the car</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Dark suit</span>
+            <span class="pill">Water shoes</span>
+            <span class="pill">Dry bag</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="kicker">Active days</div>
+          <h3>Hike + viewpoint stack</h3>
+          <ul class="clean">
+            <li>Trail shoes for Boca do Inferno and any optional waterfall loop</li>
+            <li>Light rain layer because São Miguel weather turns fast</li>
+            <li>Water + small snack for ridge or north-coast stretches</li>
+            <li>Hat or sunscreen for exposed viewpoints</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Clothing shape</div>
+          <h3>Capsule recommendation</h3>
+          <ul class="clean">
+            <li>2 nicer dinner outfits each</li>
+            <li>2 pool / thermal looks each</li>
+            <li>2 active daytime looks each</li>
+            <li>1 warm layer each for windier crater viewpoints or late evenings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="meals">
+    <div class="sec-head">
+      <h2>Food &amp; Meals</h2>
+      <p>The goal is not over-scheduling restaurants. It is giving each day a clean food rhythm so the trip feels taken care of.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="kicker">Base rhythm</div>
+        <h3>Daily meal cadence</h3>
+        <div class="dayline">
+          <div class="daystep"><div class="time">Morning</div><div><strong>Eat where the hotel is strongest</strong><p>Use hotel breakfast as the stability anchor. It lowers decision load and protects the morning start.</p></div></div>
+          <div class="daystep"><div class="time">Midday</div><div><strong>Lunch near the main destination</strong><p>Crater village on the west day, Ribeira Grande on the Fogo day, Bar Caloura on the move-east day, and Furnas village / cozido on the thermal days.</p></div></div>
+          <div class="daystep"><div class="time">Evening</div><div><strong>One intentional dinner, one easy dinner</strong><p>Not every night needs to be a find. Mix one stronger reservation night with one stay-close, low-friction night.</p></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Execution notes</div>
+        <h3>Meal-specific trip reminders</h3>
+        <ul class="clean">
+          <li>Arrival day: plan a forgiving lunch, not a “must-hit” reservation</li>
+          <li>Sete Cidades day: the 13:00 booked kayak slot means lunch should flex around the lake block, not compete with it</li>
+          <li>Move-east day: Bar Caloura at noon keeps the Caloura swim and chapel stop from bunching up</li>
+          <li>Cozido day: reserve the lunch ahead of time and let the rest of the day stay loose</li>
+          <li>Return day: airport food should be backup only, not the main plan</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card">
+        <div class="kicker">Light provisioning</div>
+        <h3>Small grocery run</h3>
+        <ul class="clean">
+          <li>Still water + sparkling water for hotel room resets</li>
+          <li>Fruit, protein bars, and a few salty snacks for drive days</li>
+          <li>Optional wine / aperitivo supplies if one night becomes room-first instead of restaurant-first</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="kicker">Dinner strategy</div>
+        <h3>Where to keep it easy</h3>
+        <ul class="clean">
+          <li>Ponta Delgada nights can handle one destination dinner and one “walk until it feels right” night</li>
+          <li>Furnas nights should skew hotel-first because the village pace gets quieter after dark</li>
+          <li>Massage / thermal day should avoid a rushed dinner slot immediately after spa time</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="travel-facts">
+    <div class="sec-head">
+      <h2>Travel Facts</h2>
+      <p>These are the practical numbers you want while actually traveling: airport transfer reality, drive ranges from each base, and what counts as “nearby” once the day begins.</p>
+    </div>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Base</th>
+            <th>Approx time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>PDL airport → Octant Ponta Delgada</td><td>Arrival</td><td>10 min</td></tr>
+          <tr><td>Ponta Delgada → Sete Cidades</td><td>West day</td><td>40-45 min</td></tr>
+          <tr><td>Sete Cidades → Ponta da Ferraria</td><td>West day</td><td>35-40 min</td></tr>
+          <tr><td>Ponta Delgada → Lagoa do Fogo</td><td>Central day</td><td>35-40 min</td></tr>
+          <tr><td>Lagoa do Fogo → Caldeira Velha</td><td>Central day</td><td>10-15 min</td></tr>
+          <tr><td>Ponta Delgada → Caloura</td><td>Move east</td><td>25-30 min</td></tr>
+          <tr><td>Caloura → Vila Franca do Campo</td><td>Move east</td><td>15-20 min</td></tr>
+          <tr><td>Vila Franca do Campo → Furnas</td><td>Move east</td><td>30-35 min</td></tr>
+          <tr><td>Octant Furnas → Poça da Dona Beija</td><td>Thermal day</td><td>5 min</td></tr>
+          <tr><td>Octant Furnas → Terra Nostra</td><td>Thermal day</td><td>5 min</td></tr>
+          <tr><td>Octant Furnas → Lagoa das Furnas</td><td>Thermal day</td><td>10-15 min</td></tr>
+          <tr><td>Octant Furnas → Gorreana</td><td>Tuesday option</td><td>20-25 min</td></tr>
+          <tr><td>Octant Furnas → Nordeste viewpoint loop</td><td>Optional day</td><td>45-60 min each way</td></tr>
+          <tr><td>Octant Furnas → Salto do Prego trail area</td><td>Optional day</td><td>30-35 min</td></tr>
+          <tr><td>Octant Furnas → PDL airport</td><td>Departure</td><td>50-55 min</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card">
+        <div class="kicker">Road reality</div>
+        <h3>What the times mean</h3>
+        <ul class="clean">
+          <li>Most drives are manageable, but none are “zip over there” once parking, stops, and photos begin.</li>
+          <li>The only day with real friction risk is the Ponta Delgada → Caloura → Vila Franca → Furnas transition day.</li>
+          <li>Furnas is the right second base because once you get there, the thermal highlights compress nicely.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="kicker">Day-before check</div>
+        <h3>Three operational lookups</h3>
+        <ul class="clean">
+          <li>Low tide time for Ferraria before the west day</li>
+          <li>Timed entry windows for Caldeira Velha and Poça da Dona Beija</li>
+          <li>Keep the Caldeira Velha receipt handy: reservation 332992, 2 adults, 1 locker</li>
+          <li>Keep the Sete Cidades kayak artifact handy: Futurismo booking 371519676 for Saturday at 13:00</li>
+          <li>Weather and visibility for Sete Cidades / Lagoa do Fogo viewpoint days</li>
+          <li>Directions for any optional Tuesday branch you actually choose</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="workflow">
+    <div class="sec-head">
+      <h2>On-Trip Workflow</h2>
+      <p>The app becomes most useful when it supports tiny resets: one in the morning, one in the evening. That keeps tomorrow from stealing today.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="kicker">Morning reset</div>
+        <h3>Before leaving the room</h3>
+        <ul class="clean">
+          <li>Check weather + visibility for the specific route</li>
+          <li>Confirm any timed entries or reservations for the day</li>
+          <li>Pack the right stack only: hike / thermal / town</li>
+          <li>Set first navigation destination before getting in the car</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="kicker">Evening reset</div>
+        <h3>Before bed</h3>
+        <ul class="clean">
+          <li>Verify tomorrow’s departure shape and any booking windows</li>
+          <li>Refuel the car if the next day has more movement</li>
+          <li>Separate wet gear / dirty gear from tomorrow’s clean stack</li>
+          <li>Pick a few favorite photos and note where they belong later</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="albums">
+    <div class="sec-head">
+      <h2>Albums &amp; Archive</h2>
+      <p>This closes the loop. The trip should end with an organized memory system, not a camera roll pile.</p>
+    </div>
+    <div class="album-grid">
+      <div class="album">
+        <strong>Album 1 · Full trip archive</strong>
+        <p>Primary photo album link goes here once the trip is complete. Use for every keeper image and short video.</p>
+      </div>
+      <div class="album">
+        <strong>Album 2 · Best-of selects</strong>
+        <p>A smaller shareable cut for family or public posting if you want a tighter story.</p>
+      </div>
+      <div class="album">
+        <strong>Reference set · Receipts / bookings</strong>
+        <p>Use <a href="azores-trip-artifacts.html">the dedicated artifacts page</a> as the one tap target for confirmations, receipts, and access-critical items. It now stores both the Saturday Sete Cidades kayak booking and the Sunday Caldeira Velha reservation.</p>
+      </div>
+      <div class="album">
+        <strong>Trip learnings</strong>
+        <p>What worked, what was overrated, where the pacing felt right, and what to repeat next time.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>SÃO MIGUEL · EXECUTION LAYER</span>
+    <span>PACK · MOVE · EAT · SOAK · ARCHIVE</span>
+  </div>
+</div>
+</body>
+</html>
