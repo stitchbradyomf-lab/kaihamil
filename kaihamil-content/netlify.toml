@@ -79,6 +79,21 @@
   force = true
   conditions = {Host = ["vale.kaihamil.com"]}
 
+# Apps subdomain - storefront root
+[[redirects]]
+  from = "/"
+  to = "/apps/index.html"
+  status = 200
+  force = true
+  conditions = {Host = ["apps.kaihamil.com"]}
+
+[[redirects]]
+  from = "/index.html"
+  to = "/apps/index.html"
+  status = 200
+  force = true
+  conditions = {Host = ["apps.kaihamil.com"]}
+
 # Redirects for protected routes
 [[redirects]]
   from = "/private/*"

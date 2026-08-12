@@ -34,6 +34,17 @@ export default async function handler(request: Request, context: Context) {
     return context.rewrite(newPath);
   }
 
+  // Applications storefront
+  if (host === "apps.kaihamil.com") {
+    if (url.pathname === "/" || url.pathname === "/index.html") {
+      return context.rewrite("/apps/index.html");
+    }
+
+    // Allow internal app pages like /trips/... and /tools/... to resolve directly
+    // on the apps host while keeping /apps/ for the storefront implementation.
+    return context.next();
+  }
+
   // Default: continue to origin
   return context.next();
 }

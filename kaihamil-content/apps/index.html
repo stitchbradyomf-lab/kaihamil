@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai Hamil Applications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef4f0;
+            --bg-deep: #dce8df;
+            --card: rgba(255, 255, 255, 0.82);
+            --card-strong: #f8fbf8;
+            --line: rgba(22, 56, 49, 0.14);
+            --ink: #17332f;
+            --muted: #5d716b;
+            --lake: #2d6f73;
+            --moss: #5f7f4b;
+            --hydrangea: #738db7;
+            --thermal: #bf7540;
+            --sand: #ddd5c8;
+            --shadow: 0 24px 60px rgba(23, 51, 47, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(115, 141, 183, 0.18), transparent 28%),
+                radial-gradient(circle at top right, rgba(95, 127, 75, 0.18), transparent 24%),
+                linear-gradient(180deg, #f6faf7 0%, var(--bg) 48%, var(--bg-deep) 100%);
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .shell {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 28px 24px 88px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 56px;
+        }
+
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            letter-spacing: 0.03em;
+        }
+
+        .brand span {
+            color: var(--lake);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.5);
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .nav-link.primary {
+            color: white;
+            background: linear-gradient(135deg, var(--lake), #245960);
+            border-color: transparent;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 28px;
+            align-items: stretch;
+            margin-bottom: 34px;
+        }
+
+        .hero-copy,
+        .hero-panel {
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: var(--card);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy {
+            padding: 34px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(45, 111, 115, 0.1);
+            color: var(--lake);
+            font-size: 0.78rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 5.4rem);
+            line-height: 0.95;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+        }
+
+        .lede {
+            margin: 0 0 24px;
+            max-width: 40rem;
+            color: var(--muted);
+            font-size: 1.03rem;
+            line-height: 1.65;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 18px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-weight: 600;
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--lake), #245960);
+            color: white;
+            border-color: transparent;
+        }
+
+        .hero-panel {
+            padding: 28px;
+            display: grid;
+            gap: 18px;
+            align-content: start;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .stat-card {
+            padding: 18px;
+            border-radius: 20px;
+            background: var(--card-strong);
+            border: 1px solid rgba(22, 56, 49, 0.08);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .panel-note {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .section {
+            margin-top: 34px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            margin: 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.25rem;
+            font-weight: 500;
+        }
+
+        .section-subtitle {
+            margin: 0;
+            color: var(--muted);
+            max-width: 42rem;
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 22px;
+            border-radius: 24px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.35;
+        }
+
+        .pill {
+            flex-shrink: 0;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .pill.internal {
+            background: rgba(95, 127, 75, 0.14);
+            color: var(--moss);
+        }
+
+        .pill.external {
+            background: rgba(115, 141, 183, 0.15);
+            color: var(--hydrangea);
+        }
+
+        .card-body {
+            color: var(--muted);
+            line-height: 1.62;
+            font-size: 0.95rem;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(22, 56, 49, 0.09);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .card-link {
+            font-weight: 600;
+            color: var(--lake);
+        }
+
+        .empty {
+            padding: 28px;
+            border-radius: 24px;
+            border: 1px dashed var(--line);
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .loading {
+            padding: 26px;
+            color: var(--muted);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 860px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .shell {
+                padding: 20px 18px 64px;
+            }
+
+            .nav {
+                margin-bottom: 34px;
+            }
+
+            .hero-copy,
+            .hero-panel,
+            .card {
+                padding: 20px;
+                border-radius: 22px;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <header class="nav">
+            <a class="brand" href="/">kai <span>hamil</span></a>
+            <nav class="nav-links">
+                <a class="nav-link" href="https://content.kaihamil.com/">Content</a>
+                <a class="nav-link" href="/trips/">Trips</a>
+                <a class="nav-link primary" href="/">Applications</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="eyebrow">Applications Shelf</div>
+                <h1>Packaged tools, not pages.</h1>
+                <p class="lede">This is the launch surface for Kai Hamil applications. Planning, editorial, research, frameworks, and assessments stay on <strong>content.kaihamil.com</strong>. What lives here is software you open and use.</p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#all-apps">Browse apps</a>
+                    <a class="button" href="https://content.kaihamil.com/">Back to content</a>
+                </div>
+            </div>
+
+            <aside class="hero-panel">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Shelf</div>
+                        <div class="stat-value" id="app-count">--</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Hosted here</div>
+                        <div class="stat-value" id="internal-count">--</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">External launches</div>
+                        <div class="stat-value" id="external-count">--</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Source</div>
+                        <div class="stat-value">Registry</div>
+                    </div>
+                </div>
+                <p class="panel-note">The shelf is generated from the ontology-backed metadata registry. If something is classified as a packaged application, it belongs here whether the runtime is hosted on this subdomain or elsewhere.</p>
+            </aside>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">Hosted On This Surface</h2>
+                    <p class="section-subtitle">Internal applications that can resolve directly on <strong>apps.kaihamil.com</strong> because their source lives in this repo.</p>
+                </div>
+            </div>
+            <div id="internal-apps" class="grid">
+                <div class="loading">Loading applications...</div>
+            </div>
+        </section>
+
+        <section class="section" id="all-apps">
+            <div class="section-head">
+                <div>
+                    <h2 class="section-title">External Launches</h2>
+                    <p class="section-subtitle">Packaged applications that live behind their own domains or standalone runtimes, but still belong on the Kai Hamil application shelf.</p>
+                </div>
+            </div>
+            <div id="external-apps" class="grid">
+                <div class="loading">Loading applications...</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>kai hamil applications</span>
+            <span>Powered by page metadata registry</span>
+        </footer>
+    </div>
+
+    <script>
+        const APP_COPY = {
+            "time-focus-app": "An operating tool for managing where attention goes over time.",
+            "control-chart-evaluator": "Evaluate process signals and variation without leaving the browser.",
+            "script-reader": "A stripped-back teleprompter surface for recording and rehearsal.",
+            "vale-os": "Strategic navigation software for goals, decisions, and life systems.",
+            "vale-pro": "A professional-facing Valé surface for work and client operations.",
+            "couples-vale": "A shared operating system for relationships, family coordination, and alignment.",
+            "daily-brief": "A daily briefing surface that packages the day into one launchable dashboard.",
+            "groove-pal": "A music-centered consumer app built as its own brand surface.",
+            "whisky-cellar": "A private collection app for bottles, tasting notes, and cellar memory.",
+            "gatefield-hoa": "A purpose-built neighborhood operations and communication surface.",
+            "photo-flow": "A workflow app for reviewing, classifying, and organizing visual media.",
+            "azores-15-year-app": "A trip execution app that turns travel planning into a day-of operational surface.",
+            "dude-trip-26": "A packaged group trip application rather than a simple itinerary page."
+        };
+
+        const TAG_COPY = {
+            "trip-app": "Trip app",
+            "travel": "Travel",
+            "assistant": "Assistant",
+            "dashboard": "Dashboard",
+            "workflow": "Workflow",
+            "utility": "Utility",
+            "consumer": "Consumer",
+            "family": "Family",
+            "operations": "Ops",
+            "video": "Video",
+            "collection": "Collection",
+            "media": "Media",
+            "work": "Work",
+            "daily": "Daily"
+        };
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;");
+        }
+
+        function cardMarkup(app) {
+            const href = app.launch_url || app.url;
+            const locationClass = app.canonical_surface === "applications" ? "internal" : "external";
+            const locationLabel = app.canonical_surface === "applications" ? "Hosted here" : "External";
+            const desc = APP_COPY[app.id] || app.description || "Packaged application surfaced from the Kai Hamil registry.";
+            const tags = (app.tags || [])
+                .slice(0, 3)
+                .map(tag => `<span class="tag">${escapeHtml(TAG_COPY[tag] || tag)}</span>`)
+                .join("");
+            const family = app.product_family ? `<span class="tag">${escapeHtml(app.product_family)}</span>` : "";
+            const surface = app.source_path ? `<span class="tag">${escapeHtml(app.source_path)}</span>` : "";
+
+            return `
+                <article class="card">
+                    <div class="card-top">
+                        <div>
+                            <h3 class="card-title">${escapeHtml(app.title)}</h3>
+                        </div>
+                        <span class="pill ${locationClass}">${locationLabel}</span>
+                    </div>
+                    <div class="card-body">${escapeHtml(desc)}</div>
+                    <div class="meta">
+                        ${family}
+                        ${tags}
+                        ${surface}
+                    </div>
+                    <div class="card-actions">
+                        <span class="tag">${escapeHtml(app.nav_label || app.title)}</span>
+                        <a class="card-link" href="${escapeHtml(href)}">Open app</a>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderSection(targetId, apps) {
+            const target = document.getElementById(targetId);
+            if (!apps.length) {
+                target.innerHTML = '<div class="empty">No applications found for this section.</div>';
+                return;
+            }
+
+            target.innerHTML = apps.map(cardMarkup).join("");
+        }
+
+        async function loadApps() {
+            try {
+                const response = await fetch('/data/page-metadata-registry.json');
+                if (!response.ok) {
+                    throw new Error(`Failed to load registry: ${response.status}`);
+                }
+
+                const registry = await response.json();
+                const apps = registry.pages
+                    .filter(page =>
+                        page.primary_section === 'applications' &&
+                        page.status === 'active' &&
+                        page.visibility === 'public'
+                    )
+                    .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999));
+
+                const internalApps = apps.filter(app => app.canonical_surface === 'applications');
+                const externalApps = apps.filter(app => app.canonical_surface !== 'applications');
+
+                document.getElementById('app-count').textContent = String(apps.length);
+                document.getElementById('internal-count').textContent = String(internalApps.length);
+                document.getElementById('external-count').textContent = String(externalApps.length);
+
+                renderSection('internal-apps', internalApps);
+                renderSection('external-apps', externalApps);
+            } catch (error) {
+                const message = '<div class="empty">Could not load the application registry for this shelf.</div>';
+                document.getElementById('internal-apps').innerHTML = message;
+                document.getElementById('external-apps').innerHTML = message;
+                document.getElementById('app-count').textContent = '0';
+                document.getElementById('internal-count').textContent = '0';
+                document.getElementById('external-count').textContent = '0';
+                console.error(error);
+            }
+        }
+
+        loadApps();
+    </script>
+</body>
+</html>
