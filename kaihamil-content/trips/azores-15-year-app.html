@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Azores 15 Year | Travel App</title>
+<meta name="description" content="Azores 15 Year travel app. Itinerary, hour-by-hour flow, execution workflow, location glossary, and trip artifacts in one mobile shell.">
+<meta name="theme-color" content="#153a38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --ink:#15271F;
+ --sea:#153A38;
+ --sea-soft:#2C6553;
+ --mist:#EEF1ED;
+ --card:#FBFCFA;
+ --line:#D6DDD6;
+ --muted:#5C6B61;
+ --ochre:#BB6F38;
+ --ochre-soft:#E9D7C7;
+ --sand:#F6F1EA;
+ --nav-h:68px;
+ --top-h:64px;
+ }
+ *{box-sizing:border-box;margin:0;padding:0;}
+ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+ body{
+ background:linear-gradient(180deg,#F8F3EC 0%,var(--mist) 30%,#F7F8F4 100%);
+ color:var(--ink);
+ font-family:"Inter",system-ui,sans-serif;
+ font-size:16px;
+ line-height:1.55;
+ -webkit-font-smoothing:antialiased;
+ padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
+ }
+ a{text-decoration:none;color:inherit;}
+ .topbar{
+ position:sticky;top:0;z-index:40;
+ height:var(--top-h);
+ background:rgba(21,58,56,.95);
+ backdrop-filter:blur(12px);
+ color:#F7FAF7;
+ box-shadow:0 1px 0 rgba(0,0,0,.16);
+ }
+ .topbar .inner{
+ max-width:760px;margin:0 auto;height:100%;
+ padding:0 18px;
+ display:flex;align-items:center;justify-content:space-between;gap:14px;
+ }
+ .brand{
+ font-family:"Fraunces",serif;
+ font-size:24px;
+ font-weight:500;
+ letter-spacing:-.02em;
+ }
+ .brand small{
+ display:block;
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.18em;
+ text-transform:uppercase;
+ color:rgba(247,250,247,.68);
+ margin-top:1px;
+ }
+ .top-actions{
+ display:flex;align-items:center;gap:10px;
+ font-family:"Space Mono",monospace;
+ font-size:10.5px;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ }
+ .top-actions a{
+ padding:8px 10px;
+ border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;
+ color:#F7FAF7;
+ }
+ .page{display:none;animation:fade .18s ease;}
+ .page.active{display:block;}
+ @keyframes fade{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:none;}}
+ .wrap{max-width:760px;margin:0 auto;padding:22px 18px 26px;}
+ .hero{
+ background:linear-gradient(145deg,var(--sea) 0%,var(--sea-soft) 100%);
+ color:#F7FAF7;
+ border-radius:24px;
+ padding:28px 22px 24px;
+ overflow:hidden;
+ position:relative;
+ box-shadow:0 20px 48px rgba(21,39,31,.14);
+ }
+ .hero::after{
+ content:"";
+ position:absolute;right:-40px;top:-60px;
+ width:180px;height:180px;border-radius:50%;
+ background:radial-gradient(circle, rgba(255,255,255,.18), transparent 70%);
+ }
+ .eyebrow{
+ font-family:"Space Mono",monospace;
+ font-size:10.5px;
+ letter-spacing:.18em;
+ text-transform:uppercase;
+ color:rgba(247,250,247,.72);
+ }
+ h1{
+ font-family:"Fraunces",serif;
+ font-size:clamp(42px,10vw,70px);
+ line-height:.94;
+ letter-spacing:-.03em;
+ margin-top:12px;
+ max-width:10ch;
+ }
+ .hero p{
+ margin-top:14px;
+ max-width:54ch;
+ color:rgba(247,250,247,.84);
+ font-size:15.5px;
+ }
+ .hero-meta{
+ display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;
+ }
+ .hero-meta span{
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.12em;
+ text-transform:uppercase;
+ padding:7px 10px;
+ border-radius:999px;
+ background:rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.12);
+ }
+ .quick{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px;
+ margin-top:18px;
+ }
+ .quick a,.quick .card{
+ background:rgba(251,252,250,.92);
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:16px;
+ color:var(--ink);
+ }
+ .quick .k{
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.14em;
+ text-transform:uppercase;
+ color:var(--ochre);
+ margin-bottom:6px;
+ }
+ .quick .v{
+ font-weight:600;
+ font-size:16px;
+ line-height:1.3;
+ }
+ .quick .s{
+ margin-top:4px;
+ color:var(--muted);
+ font-size:13px;
+ }
+ .section{padding-top:28px;}
+ .section-label{
+ font-family:"Space Mono",monospace;
+ font-size:11px;
+ letter-spacing:.2em;
+ text-transform:uppercase;
+ color:var(--sea);
+ display:flex;align-items:center;gap:14px;
+ margin-bottom:14px;
+ }
+ .section-label::after{content:"";flex:1;height:1px;background:var(--line);}
+ .stack{display:grid;gap:12px;}
+ .info-card{
+ background:rgba(251,252,250,.9);
+ border:1px solid var(--line);
+ border-radius:18px;
+ padding:18px;
+ }
+ .info-card h2{
+ font-family:"Fraunces",serif;
+ font-size:26px;
+ font-weight:500;
+ margin-bottom:8px;
+ }
+ .info-card p{color:var(--muted);font-size:14px;}
+ .bullets{list-style:none;margin-top:10px;display:grid;gap:8px;}
+ .bullets li{padding-left:16px;position:relative;font-size:14px;}
+ .bullets li::before{content:"•";position:absolute;left:0;color:var(--ochre);}
+ .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+ .cta{
+ font-family:"Space Mono",monospace;
+ font-size:11px;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ padding:10px 12px;
+ border-radius:999px;
+ background:var(--sand);
+ border:1px solid var(--line);
+ color:var(--sea);
+ }
+ .view{
+ min-height:calc(100vh - var(--top-h) - var(--nav-h) - env(safe-area-inset-bottom));
+ }
+ .frame-card{
+ background:rgba(251,252,250,.78);
+ border:1px solid var(--line);
+ border-radius:22px;
+ overflow:hidden;
+ box-shadow:0 16px 42px rgba(21,39,31,.08);
+ }
+ .frame-top{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:14px 16px;
+ background:var(--card);
+ border-bottom:1px solid var(--line);
+ }
+ .frame-top h2{
+ font-family:"Fraunces",serif;
+ font-size:22px;
+ font-weight:500;
+ }
+ .frame-top p{
+ color:var(--muted);
+ font-size:13px;
+ margin-top:3px;
+ }
+ .frame-actions{
+ display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;
+ }
+ .frame-actions a{
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ padding:8px 10px;
+ border-radius:999px;
+ border:1px solid var(--line);
+ background:var(--sand);
+ color:var(--sea);
+ }
+ iframe{
+ display:block;
+ width:100%;
+ height:calc(100vh - var(--top-h) - var(--nav-h) - 84px - env(safe-area-inset-bottom));
+ min-height:720px;
+ border:0;
+ background:#fff;
+ }
+ nav.tabbar{
+ position:fixed;left:0;right:0;bottom:0;z-index:60;
+ background:rgba(16,31,30,.97);
+ padding-bottom:env(safe-area-inset-bottom);
+ box-shadow:0 -4px 18px rgba(0,0,0,.24);
+ }
+nav.tabbar .inner{
+ max-width:760px;margin:0 auto;height:var(--nav-h);
+ display:grid;grid-template-columns:repeat(6,1fr);
+ }
+ nav.tabbar a{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+ color:#8EA7A1;
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.08em;
+ text-transform:uppercase;
+ }
+ nav.tabbar a svg{
+ width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;
+ stroke-linecap:round;stroke-linejoin:round;
+ }
+ nav.tabbar a.active{color:#F1D8BA;}
+ footer{
+ padding:22px 0 10px;
+ text-align:center;
+ font-family:"Space Mono",monospace;
+ font-size:10px;
+ letter-spacing:.12em;
+ color:var(--muted);
+ }
+ @media (max-width:640px){
+ .wrap{padding:16px 14px 22px;}
+ .topbar .inner{padding:0 14px;}
+ .top-actions{display:none;}
+ .quick{grid-template-columns:1fr;}
+ .frame-top{display:block;}
+ .frame-actions{justify-content:flex-start;margin-top:10px;}
+ iframe{height:calc(100vh - var(--top-h) - var(--nav-h) - 122px - env(safe-area-inset-bottom));min-height:620px;}
+ }
+ @media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto;}
+ .page{animation:none;}
+ }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+ <div class="inner">
+  <a class="brand" href="#/home">Azores 15 Year<small>Sao Miguel travel app</small></a>
+  <div class="top-actions">
+   <a href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Maps</a>
+   <a href="index.html">All trips</a>
+  </div>
+ </div>
+</div>
+
+<div class="page active" id="page-home">
+ <div class="wrap">
+  <div class="hero">
+   <div class="eyebrow">15th anniversary · 20-27 Aug 2026</div>
+   <h1>Azores 15 Year</h1>
+   <p>A mobile trip shell for the actual week: itinerary, timing, workflow, location reference, and day-of artifacts all in one entrypoint, with the Google Maps route sitting beside it as the live movement layer.</p>
+   <div class="hero-meta">
+    <span>6 nights</span>
+    <span>2 travelers</span>
+    <span>West to east</span>
+    <span>3 active PDFs stored</span>
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="section-label">Launch Pads</div>
+   <div class="quick">
+    <a href="#/itinerary"><div class="k">Itinerary</div><div class="v">The full trip arc</div><div class="s">Hotels, route, day-by-day shape, and key bookings</div></a>
+    <a href="#/hour"><div class="k">Hour by Hour</div><div class="v">The lived version</div><div class="s">Saturday through Thursday with actual timing blocks</div></a>
+    <a href="#/workflow"><div class="k">Workflow</div><div class="v">Execution system</div><div class="s">Packing, meals, driving facts, open reservations, reset checks</div></a>
+    <a href="#/places"><div class="k">Places</div><div class="v">Canonical location set</div><div class="s">Towns, sights, meal stops, spa points, and route naming clarity</div></a>
+    <a href="#/artifacts"><div class="k">Artifacts</div><div class="v">Passes and bookings</div><div class="s">Direct PDF access for kayak, Caldeira Velha, and whale watch</div></a>
+    <div class="card">
+     <div class="k">Live nav</div>
+     <div class="v">Shared Google Maps route</div>
+     <div class="s">Use the app for context, then Maps for actual turn-by-turn movement.</div>
+     <div class="cta-row">
+      <a class="cta" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="section-label">State of Play</div>
+   <div class="stack">
+    <div class="info-card">
+     <h2>Locked in now</h2>
+     <ul class="bullets">
+      <li>Flights, rental car, and both Octant hotel stays are already treated as locked.</li>
+      <li>Saturday kayak, Sunday Caldeira Velha, and Monday whale watch all have raw PDFs stored inside the trip repo.</li>
+      <li>The Wednesday couples massage is now treated as booked across the trip surfaces.</li>
+     </ul>
+    </div>
+    <div class="info-card">
+     <h2>Still worth doing before wheels-up</h2>
+     <ul class="bullets">
+      <li>Book Poça da Dona Beija if that stop is staying in the Furnas finale.</li>
+      <li>Confirm the cozido lunch execution path for Wednesday.</li>
+      <li>Download the shared Google Maps route for low-friction on-island use.</li>
+     </ul>
+     <div class="cta-row">
+      <a class="cta" href="#/workflow">Open workflow</a>
+      <a class="cta" href="#/artifacts">Open artifacts</a>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <footer>AZORES 15 YEAR · APP ENTRYPOINT</footer>
+ </div>
+</div>
+
+<div class="page" id="page-itinerary">
+ <div class="wrap view">
+  <div class="frame-card">
+   <div class="frame-top">
+    <div>
+     <h2>Itinerary</h2>
+     <p>The big-picture trip arc, hotels, route map, and day-by-day story.</p>
+    </div>
+    <div class="frame-actions">
+     <a href="azores-15-year-anniversary.html" target="_blank" rel="noopener">Open page</a>
+    </div>
+   </div>
+   <iframe src="azores-15-year-anniversary.html" title="Azores itinerary"></iframe>
+  </div>
+ </div>
+</div>
+
+<div class="page" id="page-hour">
+ <div class="wrap view">
+  <div class="frame-card">
+   <div class="frame-top">
+    <div>
+     <h2>Hour by Hour</h2>
+     <p>The timing-led version of the trip, including booked Saturday, Sunday, and Monday anchors.</p>
+    </div>
+    <div class="frame-actions">
+     <a href="azores-hour-by-hour.html" target="_blank" rel="noopener">Open page</a>
+    </div>
+   </div>
+   <iframe src="azores-hour-by-hour.html" title="Azores hour by hour"></iframe>
+  </div>
+ </div>
+</div>
+
+<div class="page" id="page-workflow">
+ <div class="wrap view">
+  <div class="frame-card">
+   <div class="frame-top">
+    <div>
+     <h2>Workflow</h2>
+     <p>Packing, meals, driving reality, open bookings, and travel-day resets.</p>
+    </div>
+    <div class="frame-actions">
+     <a href="azores-travel-workflow.html" target="_blank" rel="noopener">Open page</a>
+    </div>
+   </div>
+   <iframe src="azores-travel-workflow.html" title="Azores workflow"></iframe>
+  </div>
+ </div>
+</div>
+
+<div class="page" id="page-places">
+ <div class="wrap view">
+  <div class="frame-card">
+   <div class="frame-top">
+    <div>
+     <h2>Places</h2>
+     <p>The canonical location set, clarified names, and day-grouped stop reference.</p>
+    </div>
+    <div class="frame-actions">
+     <a href="azores-location-glossary.html" target="_blank" rel="noopener">Open page</a>
+     <a href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Maps</a>
+    </div>
+   </div>
+   <iframe src="azores-location-glossary.html" title="Azores places"></iframe>
+  </div>
+ </div>
+</div>
+
+<div class="page" id="page-artifacts">
+ <div class="wrap view">
+  <div class="frame-card">
+   <div class="frame-top">
+    <div>
+     <h2>Artifacts</h2>
+     <p>The day-of proof layer with direct PDF retrieval for stored bookings and passes.</p>
+    </div>
+    <div class="frame-actions">
+     <a href="azores-trip-artifacts.html" target="_blank" rel="noopener">Open page</a>
+    </div>
+   </div>
+   <iframe src="azores-trip-artifacts.html" title="Azores artifacts"></iframe>
+  </div>
+ </div>
+</div>
+
+<nav class="tabbar">
+ <div class="inner">
+  <a href="#/home" data-page="home">
+   <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+   Home
+  </a>
+  <a href="#/itinerary" data-page="itinerary">
+   <svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+   Plan
+  </a>
+  <a href="#/hour" data-page="hour">
+   <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+   Hour
+  </a>
+  <a href="#/workflow" data-page="workflow">
+   <svg viewBox="0 0 24 24"><path d="M5 12h5"/><path d="M14 12h5"/><path d="M10 7l4 5-4 5"/></svg>
+   Flow
+  </a>
+  <a href="#/places" data-page="places">
+   <svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+   Places
+  </a>
+  <a href="#/artifacts" data-page="artifacts">
+   <svg viewBox="0 0 24 24"><path d="M7 4h8l4 4v12H7z"/><path d="M15 4v4h4"/><path d="M10 13h4"/><path d="M10 17h4"/></svg>
+   Docs
+  </a>
+ </div>
+</nav>
+
+<script>
+(function(){
+ var pages = ['home','itinerary','hour','workflow','places','artifacts'];
+ function route(){
+  var current = (location.hash || '#/home').replace('#/','');
+  if (pages.indexOf(current) === -1) current = 'home';
+  pages.forEach(function(page){
+   document.getElementById('page-' + page).classList.toggle('active', page === current);
+  });
+  document.querySelectorAll('nav.tabbar a').forEach(function(link){
+   link.classList.toggle('active', link.getAttribute('data-page') === current);
+  });
+  window.scrollTo(0, 0);
+ }
+ window.addEventListener('hashchange', route);
+ route();
+})();
+</script>
+
+</body>
+</html>

@@ -9,157 +9,159 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
  :root{
- --ink:#15271F;--sea:#1B4D4A;--ochre:#BB6F38;--mist:#EEF1ED;--card:#FBFCFA;--line:#D6DDD6;--muted:#5C6B61;--soft:#F4EEE6;
+ --ink:#15271F;--sea:#1B4D4A;--ochre:#BB6F38;--mist:#EEF1ED;--card:#FBFCFA;--line:#D6DDD6;--muted:#5C6B61;
+ --hotel:#1B4D4A;--rest:#BB6F38;--sight:#3C7458;--activity:#6E8FBC;--town:#6E7A4E;--airport:#94A096;
  }
  *{box-sizing:border-box;}
  html{-webkit-text-size-adjust:100%;}
  body{margin:0;background:
- radial-gradient(circle at top right, rgba(187,111,56,.08), transparent 24%),
+ radial-gradient(circle at top right, rgba(110,143,188,.08), transparent 24%),
  linear-gradient(180deg,#F8F3EC 0%,var(--mist) 34%,#F8F8F4 100%);
- color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
- .wrap{max-width:980px;margin:0 auto;padding:0 22px 72px;}
+ color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+ .wrap{max-width:860px;margin:0 auto;padding:0 22px 72px;}
  a{color:var(--sea);text-decoration:none;}
  .topnav{display:flex;justify-content:space-between;align-items:center;padding:20px 0 10px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
  .topnav a:hover{color:var(--ochre);}
- .hero{padding:30px 0 28px;border-bottom:1px solid var(--line);}
- .eyebrow{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sea);}
- h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(40px,7vw,72px);line-height:.96;letter-spacing:-.03em;margin:14px 0 0;}
- .sub{max-width:760px;margin-top:16px;color:var(--muted);font-size:18px;}
+ header.hero{padding:30px 0 26px;border-bottom:1px solid var(--line);}
+ .eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--sea);margin:0 0 16px;}
+ h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(44px,10vw,76px);line-height:.96;letter-spacing:-.02em;margin:0;}
+ h1 .sub{display:block;font-style:italic;font-weight:400;font-size:clamp(17px,4vw,22px);color:var(--muted);margin-top:12px;line-height:1.35;}
  .jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
  .jump a{font-family:"Space Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);}
  .jump a:hover{border-color:var(--ochre);color:var(--ochre);}
- .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px;}
- .stat{background:rgba(251,252,250,.88);border:1px solid var(--line);border-radius:18px;padding:18px 20px;}
+ .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px;}
+ .stat{background:rgba(251,252,250,.9);border:1px solid var(--line);border-radius:18px;padding:18px 20px;}
  .stat .label{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
  .stat strong{display:block;margin-top:8px;font-family:"Fraunces",serif;font-size:28px;font-weight:500;}
- section{padding-top:34px;}
- h2{font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--sea);margin:0 0 18px;display:flex;align-items:center;gap:12px;}
- h2::after{content:"";flex:1;height:1px;background:var(--line);}
- .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
- .card{background:rgba(251,252,250,.92);border:1px solid var(--line);border-radius:18px;padding:20px;}
- .card h3{font-family:"Fraunces",serif;font-size:24px;font-weight:500;margin:0 0 12px;}
- .list{display:grid;gap:12px;}
- .item{padding:14px 0;border-bottom:1px dotted var(--line);}
- .item:last-child{border-bottom:0;padding-bottom:0;}
- .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
- .pill{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted);}
- .name{font-weight:600;font-size:15px;}
- .note{margin-top:4px;font-size:13.5px;color:var(--muted);}
- .footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);}
- @media(max-width:860px){.summary,.grid{grid-template-columns:1fr;}}
- @media(max-width:640px){.topnav{display:block;}.topnav div + div{margin-top:8px;}}
+ .callout{margin-top:18px;background:rgba(251,252,250,.92);border:1px solid var(--line);border-left:3px solid var(--ochre);border-radius:18px;padding:18px 20px;}
+ .callout strong{display:block;font-size:15px;margin-bottom:6px;}
+ .callout p{margin:0;font-size:13.5px;color:var(--muted);}
+ .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+ .chip{font-family:"Space Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;padding:3px 9px;border-radius:11px;white-space:nowrap;}
+ .c-hotel{background:var(--hotel);} .c-rest{background:var(--rest);} .c-sight{background:var(--sight);}
+ .c-activity{background:var(--activity);} .c-town{background:var(--town);} .c-airport{background:var(--airport);}
+ .group{margin-top:34px;background:rgba(251,252,250,.9);border:1px solid var(--line);border-radius:18px;padding:22px 22px 8px;}
+ .dayhead{font-family:"Space Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sea);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:4px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+ .dayhead .sub{font-family:"Inter",system-ui,sans-serif;font-style:italic;font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);font-size:13px;}
+ .row{display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:start;padding:12px 0;border-bottom:1px dotted var(--line);}
+ .row:last-child{border-bottom:0;}
+ .nm{font-weight:600;font-size:15.5px;}
+ .nm .note{display:block;font-weight:400;font-size:12.5px;color:var(--muted);font-style:italic;margin-top:2px;}
+ .meta{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px;}
+ .when{font-family:"Space Mono",monospace;font-size:11.5px;color:var(--muted);white-space:nowrap;}
+ footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+ @media (max-width:720px){.summary{grid-template-columns:1fr;}}
+ @media (max-width:560px){
+ .topnav{display:block;}
+ .topnav div + div{margin-top:8px;}
+ .row{grid-template-columns:1fr;}
+ .meta{align-items:flex-start;text-align:left;flex-direction:row;gap:10px;flex-wrap:wrap;}
+ }
+ @media print{body{background:#fff;}.wrap{max-width:none;}.row,.group{break-inside:avoid;}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="topnav">
-    <div><a href="index.html">Trips</a> / <a href="azores-15-year-anniversary.html">Azores</a></div>
-    <div><a href="azores-hour-by-hour.html">Hour by hour</a> / <a href="azores-travel-workflow.html">Workflow</a> / <a href="azores-trip-artifacts.html">Artifacts</a></div>
-  </div>
 
-  <header class="hero">
-    <p class="eyebrow">Azores · Reference layer</p>
-    <h1>Location Glossary</h1>
-    <p class="sub">One dedicated page for every airport, base, meal stop, swim spot, town, and optional detour in the trip. This is the quick-reference layer while traveling.</p>
-    <div class="jump">
-      <a href="azores-15-year-anniversary.html">Main itinerary</a>
-      <a href="azores-hour-by-hour.html">Hour by hour</a>
-      <a href="azores-travel-workflow.html">Travel workflow</a>
-      <a href="azores-trip-artifacts.html">Artifacts</a>
-      <a href="#route">By route order</a>
-      <a href="#types">By type</a>
-    </div>
-    <div class="summary">
-      <div class="stat"><span class="label">Total locations</span><strong>24</strong></div>
-      <div class="stat"><span class="label">Trip shape</span><strong>West → East</strong></div>
-      <div class="stat"><span class="label">Best use</span><strong>Live reference</strong></div>
-    </div>
-  </header>
+ <div class="topnav">
+ <div><a href="index.html">Trips</a> / <a href="azores-15-year-anniversary.html">Azores</a></div>
+ <div><a href="azores-hour-by-hour.html">Hour by hour</a> / <a href="azores-travel-workflow.html">Workflow</a> / <a href="azores-trip-artifacts.html">Artifacts</a></div>
+ </div>
 
-  <section id="route">
-    <h2>By Route Order</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Transit + west base</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Airport</span><span class="pill">Outbound</span></div><div class="name">Newark Liberty (EWR)</div><div class="note">Home-side departure airport for the overnight United nonstop.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Airport</span><span class="pill">Arrival</span></div><div class="name">João Paulo II Airport (PDL)</div><div class="note">Ponta Delgada airport and rental-car handoff point.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Hotel</span><span class="pill">Stay 1</span></div><div class="name">Octant Ponta Delgada</div><div class="note">Harbor-front base for arrival, Sete Cidades, and Lagoa do Fogo days.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Town / sight</span><span class="pill">Arrival day</span></div><div class="name">Ponta Delgada (old town / marina)</div><div class="note">Easy first-day wandering zone once bags are dropped.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Activity</span><span class="pill">Optional</span></div><div class="name">Portas do Mar (whale watching)</div><div class="note">Marina-side boat departure point if you layer in a marine excursion.</div></div>
-        </div>
-      </div>
+ <header class="hero">
+ <p class="eyebrow">Azores · Reference layer</p>
+ <h1>Location Glossary
+ <span class="sub">Every place, in trip order, with the full working location set folded into the local mini-app shell. Use this page to know what each stop is, then jump to Maps when you want routing.</span>
+ </h1>
+ <div class="jump">
+ <a href="azores-15-year-app.html">Azores app</a>
+ <a href="azores-15-year-anniversary.html">Main itinerary</a>
+ <a href="azores-hour-by-hour.html">Hour by hour</a>
+ <a href="azores-travel-workflow.html">Travel workflow</a>
+ <a href="azores-trip-artifacts.html">Artifacts</a>
+ <a href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Google Maps route</a>
+ </div>
+ <div class="summary">
+ <div class="stat"><span class="label">Total places</span><strong>29</strong></div>
+ <div class="stat"><span class="label">Trip shape</span><strong>West → East</strong></div>
+ <div class="stat"><span class="label">Best use</span><strong>Live reference + nav</strong></div>
+ </div>
+ <div class="callout">
+ <strong>Shared navigation layer</strong>
+ <p>The live Google Maps list for the planned stops is here: <a href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">open the shared Azores locations map</a>. Use this page for names, timing, and context, then switch to Maps for actual turn-by-turn movement.</p>
+ </div>
+ <div class="legend">
+ <span class="chip c-hotel">Hotel</span>
+ <span class="chip c-rest">Restaurant</span>
+ <span class="chip c-sight">Sight</span>
+ <span class="chip c-activity">Activity</span>
+ <span class="chip c-town">Town</span>
+ <span class="chip c-airport">Airport</span>
+ </div>
+ </header>
 
-      <div class="card">
-        <h3>West + central day set</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Viewpoint</span></div><div class="name">Sete Cidades — Vista do Rei</div><div class="note">First major overlook of the twin crater lakes.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Viewpoint</span></div><div class="name">Sete Cidades — Boca do Inferno</div><div class="note">The signature ridge viewpoint and main effort beat of the west day.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Thermal / ocean spring</span></div><div class="name">Ponta da Ferraria</div><div class="note">Best treated as a low-tide destination after Sete Cidades.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Restaurant</span><span class="pill">Booked</span></div><div class="name">Quinta dos Sabores</div><div class="note">Saturday tasting dinner anchor near Ribeira Grande.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Crater lake</span></div><div class="name">Lagoa do Fogo</div><div class="note">Sunday’s calmer crater-lake play, ideally before clouds build.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Thermal pools</span></div><div class="name">Caldeira Velha</div><div class="note">Warm forest pools with a booked 10:30–12:00 Sunday slot; reservation 332992 covers 2 adults and 1 locker.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Town</span><span class="pill">Sunday choice</span></div><div class="name">Ribeira Grande</div><div class="note">Gentler north-coast fallback for lunch, bridge walk, and café time.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Waterfall</span></div><div class="name">Salto do Cabrito</div><div class="note">Sunday’s more active alternative to a Ribeira Grande drift.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <div class="group">
+ <div class="dayhead">Travel <span class="sub">the bookends</span></div>
+ <div class="row"><div class="nm">Newark Liberty (EWR)</div><div class="meta"><span class="chip c-airport">Airport</span><span class="when">Thu 20 out · Thu 27 home</span></div></div>
+ <div class="row"><div class="nm">João Paulo II Airport (PDL)</div><div class="meta"><span class="chip c-airport">Airport</span><span class="when">Fri 21 in · Thu 27 out</span></div></div>
+ </div>
 
-  <section>
-    <div class="grid">
-      <div class="card">
-        <h3>Move-east day</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Restaurant</span><span class="pill">Move-east day</span></div><div class="name">Bar Caloura</div><div class="note">Lunch anchor on Monday; arrive early for the noon opening.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Swim spot</span></div><div class="name">Caloura cove</div><div class="note">Volcanic cove swim before lunch on the eastbound transition day.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Chapel</span></div><div class="name">Ermida de Nossa Senhora da Paz</div><div class="note">Short steep stair climb with a coastal payoff over Vila Franca do Campo.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Town</span><span class="pill">Pass-through</span></div><div class="name">Vila Franca do Campo</div><div class="note">South-coast town beneath the chapel stop before the turn inland.</div></div>
-        </div>
-      </div>
+ <div class="group">
+ <div class="dayhead">Friday · Aug 21 <span class="sub">arrive &amp; decompress</span></div>
+ <div class="row"><div class="nm">Octant Ponta Delgada</div><div class="meta"><span class="chip c-hotel">Hotel</span><span class="when">check in · 3 nights</span></div></div>
+ <div class="row"><div class="nm">Ponta Delgada (old town / marina)</div><div class="meta"><span class="chip c-town">Town</span><span class="when">afternoon</span></div></div>
+ <div class="row"><div class="nm">A Tasca<span class="note">early dinner · no reservations</span></div><div class="meta"><span class="chip c-rest">Restaurant</span><span class="when">evening</span></div></div>
+ </div>
 
-      <div class="card">
-        <h3>East base + thermal layer</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Hotel</span><span class="pill">Stay 2</span></div><div class="name">Octant Furnas</div><div class="note">Thermal-valley base for the slow second half and spa finish.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Thermal pool / garden</span></div><div class="name">Terra Nostra Garden</div><div class="note">Iconic ochre pool and garden grounds; dark swimsuit recommended.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Town / sight</span><span class="pill">Core east zone</span></div><div class="name">Furnas (village / fumaroles)</div><div class="note">Village center, geothermal vents, and the easiest thermal wandering base.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Lake / cozido pits</span></div><div class="name">Lagoa das Furnas</div><div class="note">Digestive walk zone after cozido lunch; also where the cooking pits sit.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Thermal pools</span></div><div class="name">Poça da Dona Beija</div><div class="note">Evening thermal pool stop for the final-night indulgence rhythm.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <div class="group">
+ <div class="dayhead">Saturday · Aug 22 <span class="sub">west &amp; the ridge</span></div>
+ <div class="row"><div class="nm">Sete Cidades — Vista do Rei</div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">morning</span></div></div>
+ <div class="row"><div class="nm">Sete Cidades — Boca do Inferno / Miradouro da Grota do Inferno<span class="note">same ridge-view zone; wording varies between sources, but this is the Saturday crater-rim viewpoint stop</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">morning · ridge walk</span></div></div>
+ <div class="row"><div class="nm">Lagoa Azul — kayak (Futurismo)<span class="note">booking 371519676 · 2 people</span></div><div class="meta"><span class="chip c-activity">Activity</span><span class="when">1:00 PM · 1 hr</span></div></div>
+ <div class="row"><div class="nm">Ponta da Ferraria<span class="note">droppable if the day runs long or the tide is wrong</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">afternoon · low tide</span></div></div>
+ <div class="row"><div class="nm">Quinta dos Sabores</div><div class="meta"><span class="chip c-rest">Restaurant</span><span class="when">19:30 · 8-course</span></div></div>
+ </div>
 
-  <section id="types">
-    <h2>Tuesday Options + Type Reference</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Tuesday option set</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Tea plantation</span></div><div class="name">Gorreana Tea Plantation</div><div class="note">Low-effort optional detour and scenic terrace stop north of Furnas.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Viewpoint</span></div><div class="name">Miradouro da Ponta do Sossego (Nordeste)</div><div class="note">The lush cliffside Nordeste viewpoint option if you want a coastal drive.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Sight</span><span class="pill">Waterfall</span></div><div class="name">Salto do Prego</div><div class="note">The more active east-side hike option for Tuesday.</div></div>
-        </div>
-      </div>
+ <div class="group">
+ <div class="dayhead">Sunday · Aug 23 <span class="sub">the crater lake, gentle</span></div>
+ <div class="row"><div class="nm">Lagoa do Fogo<span class="note">morning only, if clear — check webcams</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">roadside viewpoints</span></div></div>
+ <div class="row"><div class="nm">Caldeira Velha<span class="note">reservation 332992 · 2 adults + 1 locker · 22 € paid</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">10:30–12:00</span></div></div>
+ <div class="row"><div class="nm">Ribeira Grande</div><div class="meta"><span class="chip c-town">Town</span><span class="when">lunch &amp; wander</span></div></div>
+ <div class="row"><div class="nm">Salto do Cabrito<span class="note">game-time option — swap for the wander</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">optional</span></div></div>
+ <div class="row"><div class="nm">Bom Pesqueiro</div><div class="meta"><span class="chip c-rest">Restaurant</span><span class="when">7:00 PM</span></div></div>
+ </div>
 
-      <div class="card">
-        <h3>Type key</h3>
-        <div class="list">
-          <div class="item"><div class="meta"><span class="pill">Airport</span></div><div class="name">Transit infrastructure</div><div class="note">Use when the stop exists only to get the trip moving.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Hotel</span></div><div class="name">Base / reset point</div><div class="note">Where bags, rest, pools, and night rhythm are anchored.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Town / sight</span></div><div class="name">Flexible exploration zones</div><div class="note">Good for wandering, regrouping, or filling open blocks.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Restaurant</span></div><div class="name">Meal anchors</div><div class="note">The stops most likely to affect day pacing if mistimed.</div></div>
-          <div class="item"><div class="meta"><span class="pill">Activity</span></div><div class="name">Opt-in overlays</div><div class="note">Useful if the trip grows from itinerary into live execution choices.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <div class="group">
+ <div class="dayhead">Monday · Aug 24 <span class="sub">whales, coast &amp; the move east</span></div>
+ <div class="row"><div class="nm">Portas do Mar — whale &amp; dolphin watch (Futurismo)<span class="note">booking 371524822 · meet at loja 26</span></div><div class="meta"><span class="chip c-activity">Activity</span><span class="when">8:30 AM · catamaran</span></div></div>
+ <div class="row"><div class="nm">Bar Caloura</div><div class="meta"><span class="chip c-rest">Restaurant</span><span class="when">lunch · no reservations</span></div></div>
+ <div class="row"><div class="nm">Caloura cove</div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">swim</span></div></div>
+ <div class="row"><div class="nm">Ermida de Nossa Senhora da Paz</div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">chapel · staircase</span></div></div>
+ <div class="row"><div class="nm">Vila Franca do Campo</div><div class="meta"><span class="chip c-town">Town</span><span class="when">passing through</span></div></div>
+ <div class="row"><div class="nm">Octant Furnas<span class="note">Premium Mountain View</span></div><div class="meta"><span class="chip c-hotel">Hotel</span><span class="when">check in · 3 nights</span></div></div>
+ <div class="row"><div class="nm">Terra Nostra Garden</div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">ochre thermal pool</span></div></div>
+ </div>
 
-  <div class="footer">
-    <span>SÃO MIGUEL · REFERENCE LAYER</span>
-    <span>NAMES · TYPES · WHY EACH STOP EXISTS</span>
-  </div>
+ <div class="group">
+ <div class="dayhead">Tuesday · Aug 25 <span class="sub">open day — pick one, if any</span></div>
+ <div class="row"><div class="nm">Furnas (village / fumaroles)<span class="note">anytime Mon–Wed</span></div><div class="meta"><span class="chip c-town">Town</span><span class="when">flexible</span></div></div>
+ <div class="row"><div class="nm">Gorreana Tea Plantation<span class="note">open-day option</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">optional</span></div></div>
+ <div class="row"><div class="nm">Miradouro da Ponta do Sossego<span class="note">open-day option · Nordeste</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">optional</span></div></div>
+ <div class="row"><div class="nm">Salto do Prego<span class="note">open-day option · waterfall hike</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">optional</span></div></div>
+ </div>
+
+ <div class="group">
+ <div class="dayhead">Wednesday · Aug 26 <span class="sub">the thermal day</span></div>
+ <div class="row"><div class="nm">Octant Furnas — spa<span class="note">couples massage</span></div><div class="meta"><span class="chip c-activity">Activity</span><span class="when">booked</span></div></div>
+ <div class="row"><div class="nm">Lagoa das Furnas<span class="note">cozido cooking pits · lunch</span></div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">midday</span></div></div>
+ <div class="row"><div class="nm">Poça da Dona Beija</div><div class="meta"><span class="chip c-sight">Sight</span><span class="when">dusk · hot pools</span></div></div>
+ </div>
+
+ <footer>
+ <span>SÃO MIGUEL · REFERENCE LAYER</span>
+ <span>29 PLACES · LIVE TRIP USE</span>
+ </footer>
+
 </div>
 </body>
 </html>
