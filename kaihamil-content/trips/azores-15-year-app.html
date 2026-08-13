@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Azores 15 Year</title>
 <meta name="description" content="Azores 15 Year trip app with plan, pack, and travel in one place.">
-<meta name="theme-color" content="#1f5f7a">
+<meta name="theme-color" content="#245d8a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,18 +14,10 @@
 <style>
   :root{
     --ink:#16343e;
-    --deep:#14485d;
-    --lake:#1f5f7a;
-    --mist:#e8f1ef;
-    --green:#5b8f6a;
-    --fern:#8eb69b;
-    --sand:#f3e3c3;
-    --volcanic:#40352f;
-    --card:rgba(255,255,255,.82);
-    --line:rgba(20,72,93,.14);
     --muted:#5f7680;
-    --accent:#f0b654;
-    --shadow:0 18px 48px rgba(20,72,93,.14);
+    --card:rgba(255,255,255,.86);
+    --line:rgba(21,58,76,.12);
+    --shadow:0 18px 48px rgba(21,58,76,.12);
     --top-h:72px;
     --nav-h:72px;
   }
@@ -33,30 +25,46 @@
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
   body{
     min-height:100vh;
-    background:
-      radial-gradient(circle at top left, rgba(31,95,122,.22), transparent 26%),
-      radial-gradient(circle at top right, rgba(91,143,106,.18), transparent 24%),
-      linear-gradient(180deg, #f6fbfb 0%, #edf5f3 34%, #eef2eb 100%);
     color:var(--ink);
     font-family:"Inter",system-ui,sans-serif;
     font-size:16px;
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
     padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
+    transition:background .18s ease;
+  }
+  body[data-section="plan"]{
+    background:
+      radial-gradient(circle at top left, rgba(36,93,138,.24), transparent 24%),
+      radial-gradient(circle at top right, rgba(95,160,114,.18), transparent 22%),
+      linear-gradient(180deg,#f4fbfd 0%,#edf6f3 38%,#eef4ee 100%);
+  }
+  body[data-section="pack"]{
+    background:
+      radial-gradient(circle at top left, rgba(214,171,95,.20), transparent 26%),
+      radial-gradient(circle at top right, rgba(181,111,62,.14), transparent 20%),
+      linear-gradient(180deg,#fcf6ee 0%,#f6efe4 40%,#f7f3ec 100%);
+  }
+  body[data-section="travel"]{
+    background:
+      radial-gradient(circle at top left, rgba(33,88,71,.18), transparent 24%),
+      radial-gradient(circle at top right, rgba(43,110,140,.18), transparent 22%),
+      linear-gradient(180deg,#f0f8f7 0%,#e9f2ef 38%,#edf4f2 100%);
   }
   a{color:inherit;text-decoration:none;}
   button,input{font:inherit;}
+
   .topbar{
     position:sticky;
     top:0;
     z-index:40;
     height:var(--top-h);
     backdrop-filter:blur(16px);
-    background:rgba(248,252,251,.78);
-    border-bottom:1px solid rgba(20,72,93,.08);
+    background:rgba(248,252,251,.76);
+    border-bottom:1px solid rgba(21,58,76,.08);
   }
   .topbar .inner{
-    max-width:820px;
+    max-width:860px;
     height:100%;
     margin:0 auto;
     padding:0 18px;
@@ -65,11 +73,7 @@
     justify-content:space-between;
     gap:16px;
   }
-  .brand{
-    display:flex;
-    flex-direction:column;
-    gap:3px;
-  }
+  .brand{display:flex;flex-direction:column;gap:3px;}
   .brand strong{
     font-family:"Fraunces",serif;
     font-size:28px;
@@ -88,20 +92,53 @@
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--lake);
+    color:#245d8a;
     padding:10px 12px;
     border-radius:999px;
-    border:1px solid rgba(20,72,93,.12);
-    background:rgba(255,255,255,.7);
+    border:1px solid rgba(21,58,76,.12);
+    background:rgba(255,255,255,.74);
   }
+
   .page{display:none;animation:fade .18s ease;}
   .page.active{display:block;}
   @keyframes fade{
     from{opacity:0;transform:translateY(4px);}
     to{opacity:1;transform:none;}
   }
+  .page{
+    --accent:#245d8a;
+    --accent-soft:rgba(36,93,138,.10);
+    --hero-text:#f7fbfa;
+    --hero-sub:rgba(247,251,250,.86);
+    --hero-bg:linear-gradient(135deg,#245d8a 0%,#3d8b89 54%,#6aa16a 100%);
+  }
+  #page-plan{
+    --accent:#245d8a;
+    --accent-soft:rgba(36,93,138,.10);
+    --hero-bg:
+      radial-gradient(circle at 18% 24%, rgba(110,163,106,.42), transparent 20%),
+      radial-gradient(circle at 82% 16%, rgba(137,206,218,.18), transparent 24%),
+      linear-gradient(135deg,#245d8a 0%,#2f8a86 52%,#6ca46a 100%);
+  }
+  #page-pack{
+    --accent:#a96a2f;
+    --accent-soft:rgba(169,106,47,.12);
+    --hero-bg:
+      radial-gradient(circle at 20% 20%, rgba(243,215,164,.26), transparent 20%),
+      radial-gradient(circle at 82% 18%, rgba(187,111,56,.18), transparent 18%),
+      linear-gradient(135deg,#7e4c2a 0%,#b9783d 58%,#d7b168 100%);
+  }
+  #page-travel{
+    --accent:#245741;
+    --accent-soft:rgba(36,87,65,.10);
+    --hero-bg:
+      radial-gradient(circle at 18% 22%, rgba(114,178,138,.28), transparent 18%),
+      radial-gradient(circle at 82% 18%, rgba(79,137,170,.18), transparent 20%),
+      linear-gradient(135deg,#215847 0%,#2e7a68 50%,#4c92a8 100%);
+  }
+
   .wrap{
-    max-width:820px;
+    max-width:860px;
     margin:0 auto;
     padding:20px 18px 28px;
   }
@@ -109,19 +146,16 @@
     position:relative;
     overflow:hidden;
     border-radius:28px;
-    background:
-      radial-gradient(circle at 18% 24%, rgba(142,182,155,.42), transparent 20%),
-      radial-gradient(circle at 80% 18%, rgba(240,182,84,.24), transparent 22%),
-      linear-gradient(135deg, #1f5f7a 0%, #2a8a83 55%, #6ea36b 100%);
-    color:#f7fbfa;
+    background:var(--hero-bg);
+    color:var(--hero-text);
     padding:28px 22px 24px;
     box-shadow:var(--shadow);
   }
   .hero::after{
     content:"";
     position:absolute;
-    right:-54px;
-    top:-42px;
+    right:-56px;
+    top:-38px;
     width:180px;
     height:180px;
     border-radius:50%;
@@ -134,7 +168,7 @@
     font-size:10px;
     letter-spacing:.18em;
     text-transform:uppercase;
-    color:rgba(247,251,250,.74);
+    color:rgba(247,251,250,.76);
   }
   h1{
     position:relative;
@@ -144,14 +178,13 @@
     font-size:clamp(46px,11vw,78px);
     line-height:.92;
     letter-spacing:-.04em;
-    max-width:8ch;
   }
   .hero p{
     position:relative;
     z-index:1;
     margin-top:12px;
-    max-width:46ch;
-    color:rgba(247,251,250,.88);
+    max-width:50ch;
+    color:var(--hero-sub);
     font-size:15px;
   }
   .hero-meta{
@@ -165,16 +198,15 @@
   .hero-meta span{
     padding:7px 10px;
     border-radius:999px;
-    border:1px solid rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.16);
     background:rgba(255,255,255,.08);
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
   }
-  .section{
-    padding-top:28px;
-  }
+
+  .section{padding-top:28px;}
   .section-head{
     display:flex;
     align-items:end;
@@ -194,19 +226,18 @@
     max-width:34ch;
     text-align:right;
   }
-  .grid{
-    display:grid;
-    gap:14px;
-  }
-  .grid.two{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
+
+  .grid{display:grid;gap:14px;}
+  .grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .wide-band{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;}
+  .travel-top{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
   .card{
     background:var(--card);
     border:1px solid var(--line);
     border-radius:22px;
     padding:18px;
-    box-shadow:0 10px 28px rgba(20,72,93,.07);
+    box-shadow:0 10px 28px rgba(21,58,76,.07);
   }
   .card h3{
     font-family:"Fraunces",serif;
@@ -215,17 +246,14 @@
     letter-spacing:-.02em;
     margin-bottom:8px;
   }
-  .card p{
-    color:var(--muted);
-    font-size:14px;
-  }
+  .card p{color:var(--muted);font-size:14px;}
   .kicker{
     margin-bottom:8px;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.16em;
     text-transform:uppercase;
-    color:var(--lake);
+    color:var(--accent);
   }
   .chips{
     display:flex;
@@ -239,25 +267,21 @@
     gap:6px;
     padding:7px 10px;
     border-radius:999px;
-    border:1px solid rgba(20,72,93,.10);
-    background:rgba(255,255,255,.68);
+    border:1px solid rgba(21,58,76,.10);
+    background:rgba(255,255,255,.70);
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.08em;
     text-transform:uppercase;
-    color:var(--lake);
+    color:var(--accent);
   }
-  .day-strip{
-    display:grid;
-    gap:10px;
-    margin-top:8px;
-  }
+  .day-strip{display:grid;gap:10px;margin-top:8px;}
   .day-row{
     display:grid;
     grid-template-columns:88px 1fr;
     gap:14px;
     padding:12px 0;
-    border-bottom:1px dashed rgba(20,72,93,.12);
+    border-bottom:1px dashed rgba(21,58,76,.12);
   }
   .day-row:last-child{border-bottom:0;}
   .day-row .date{
@@ -265,22 +289,11 @@
     font-size:11px;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--lake);
+    color:var(--accent);
   }
-  .day-row strong{
-    display:block;
-    font-size:15px;
-    margin-bottom:4px;
-  }
-  .day-row span{
-    color:var(--muted);
-    font-size:13.5px;
-  }
-  .wide-band{
-    display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:14px;
-  }
+  .day-row strong{display:block;font-size:15px;margin-bottom:4px;}
+  .day-row span{color:var(--muted);font-size:13.5px;}
+
   .route-list,.pack-list,.quick-list,.artifact-list,.places-list{
     list-style:none;
     display:grid;
@@ -289,8 +302,8 @@
   .route-list li,.pack-list li,.quick-list li,.artifact-list li,.places-list li{
     padding:12px 14px;
     border-radius:16px;
-    background:rgba(255,255,255,.62);
-    border:1px solid rgba(20,72,93,.08);
+    background:rgba(255,255,255,.64);
+    border:1px solid rgba(21,58,76,.08);
   }
   .route-list strong,.artifact-list strong,.places-list strong,.quick-list strong{
     display:block;
@@ -314,35 +327,83 @@
     gap:8px;
     padding:11px 14px;
     border-radius:999px;
-    border:1px solid rgba(20,72,93,.14);
+    border:1px solid rgba(21,58,76,.14);
     background:#fff;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--lake);
+    color:var(--accent);
   }
   .action.primary{
-    background:var(--lake);
-    border-color:var(--lake);
+    background:var(--accent);
+    border-color:var(--accent);
     color:#f7fbfa;
   }
-  .action.warm{
-    background:rgba(240,182,84,.18);
-    border-color:rgba(240,182,84,.34);
-    color:var(--volcanic);
+  .action.soft{
+    background:var(--accent-soft);
+    border-color:rgba(21,58,76,.08);
+    color:var(--ink);
   }
-  .overview-frame{
+
+  .subnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .subnav button{
+    border:1px solid rgba(21,58,76,.12);
+    border-radius:999px;
+    padding:11px 14px;
+    background:rgba(255,255,255,.70);
+    color:var(--accent);
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .subnav button.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#f7fbfa;
+  }
+  .subpane{display:none;}
+  .subpane.active{display:block;}
+  .frame-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:12px;
+    box-shadow:0 10px 28px rgba(21,58,76,.07);
+  }
+  .frame-card .frame-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:6px 8px 12px;
+  }
+  .frame-card strong{
+    font-family:"Fraunces",serif;
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:-.02em;
+  }
+  .frame-card span{
+    color:var(--muted);
+    font-size:13px;
+  }
+  .embed-frame{
     width:100%;
-    min-height:720px;
+    min-height:760px;
     border:0;
     border-radius:18px;
     background:#fff;
   }
-  .pack-group{
-    display:grid;
-    gap:12px;
-  }
+
+  .pack-group{display:grid;gap:12px;}
   .pack-list li{
     display:flex;
     align-items:flex-start;
@@ -354,22 +415,16 @@
     width:18px;
     height:18px;
     margin-top:1px;
-    accent-color:var(--green);
+    accent-color:var(--accent);
   }
-  .pack-list label{
-    flex:1;
-  }
-  .pack-form{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-  }
+  .pack-list label{flex:1;}
+  .pack-form{display:flex;gap:10px;margin-top:14px;}
   .pack-form input{
     flex:1;
     min-width:0;
     border-radius:14px;
-    border:1px solid rgba(20,72,93,.14);
-    background:rgba(255,255,255,.74);
+    border:1px solid rgba(21,58,76,.14);
+    background:rgba(255,255,255,.78);
     padding:12px 14px;
     color:var(--ink);
   }
@@ -377,7 +432,7 @@
     border:0;
     border-radius:14px;
     padding:12px 16px;
-    background:var(--green);
+    background:var(--accent);
     color:#f7fbfa;
     font-family:"Space Mono",monospace;
     font-size:10px;
@@ -385,28 +440,18 @@
     text-transform:uppercase;
     cursor:pointer;
   }
-  .custom-items{
-    display:grid;
-    gap:10px;
-    margin-top:14px;
-  }
+  .custom-items{display:grid;gap:10px;margin-top:14px;}
   .custom-item{
     display:flex;
     align-items:center;
     gap:10px;
     padding:12px 14px;
     border-radius:16px;
-    border:1px solid rgba(20,72,93,.10);
-    background:rgba(255,255,255,.64);
+    border:1px solid rgba(21,58,76,.10);
+    background:rgba(255,255,255,.66);
   }
-  .custom-item.done .text{
-    text-decoration:line-through;
-    color:var(--muted);
-  }
-  .custom-item .text{
-    flex:1;
-    font-size:14px;
-  }
+  .custom-item.done .text{text-decoration:line-through;color:var(--muted);}
+  .custom-item .text{flex:1;font-size:14px;}
   .custom-item button{
     border:0;
     background:transparent;
@@ -417,11 +462,7 @@
     letter-spacing:.08em;
     text-transform:uppercase;
   }
-  .travel-top{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-  }
+
   .footer{
     padding:22px 0 8px;
     text-align:center;
@@ -431,6 +472,7 @@
     text-transform:uppercase;
     color:var(--muted);
   }
+
   .tabbar{
     position:fixed;
     left:0;
@@ -442,7 +484,7 @@
     box-shadow:0 -6px 20px rgba(0,0,0,.22);
   }
   .tabbar .inner{
-    max-width:820px;
+    max-width:860px;
     height:var(--nav-h);
     margin:0 auto;
     display:grid;
@@ -469,30 +511,31 @@
     stroke-linecap:round;
     stroke-linejoin:round;
   }
-  .tabbar a.active{
-    color:#f1ddb7;
-  }
+  .tabbar a.active{color:#f1ddb7;}
+
   @media (max-width:720px){
     .grid.two,.wide-band,.travel-top{grid-template-columns:1fr;}
     .section-head{display:block;}
     .section-head p{margin-top:6px;text-align:left;}
-    .overview-frame{min-height:620px;}
+    .embed-frame{min-height:620px;}
+    .frame-card .frame-head{display:block;}
+    .frame-card .frame-head span{display:block;margin-top:4px;}
   }
   @media (max-width:560px){
     .topbar .inner,.wrap{padding-left:14px;padding-right:14px;}
     .brand strong{font-size:24px;}
-    h1{max-width:none;}
-    .day-row{grid-template-columns:1fr;}
     .toplink{display:none;}
+    .day-row{grid-template-columns:1fr;}
     .pack-form{flex-direction:column;}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     .page{animation:none;}
+    body{transition:none;}
   }
 </style>
 </head>
-<body>
+<body data-section="plan">
 
 <div class="topbar">
   <div class="inner">
@@ -509,7 +552,7 @@
     <div class="hero">
       <div class="eyebrow">20-27 Aug 2026</div>
       <h1>Plan</h1>
-      <p>Six nights across Sao Miguel, moving from Ponta Delgada to Furnas.</p>
+      <p>Trip shape, day flow, and the deeper planning pages in one place.</p>
       <div class="hero-meta">
         <span>2 travelers</span>
         <span>6 nights</span>
@@ -520,70 +563,88 @@
 
     <div class="section">
       <div class="section-head">
-        <h2>Trip Shape</h2>
-        <p>The arc of the week.</p>
+        <h2>Planning Views</h2>
+        <p>Switch between the planning layers without leaving the app.</p>
       </div>
-      <div class="wide-band">
-        <div class="card">
-          <div class="kicker">Flow</div>
-          <div class="day-strip">
-            <div class="day-row"><div class="date">Fri 21</div><div><strong>Arrive soft</strong><span>Ponta Delgada, marina, reset, first-night dinner.</span></div></div>
-            <div class="day-row"><div class="date">Sat 22</div><div><strong>West day</strong><span>Sete Cidades, 13:00 kayak, Ferraria, Quinta dos Sabores.</span></div></div>
-            <div class="day-row"><div class="date">Sun 23</div><div><strong>Central day</strong><span>Lagoa do Fogo, Caldeira Velha, Ribeira Grande or Salto do Cabrito.</span></div></div>
-            <div class="day-row"><div class="date">Mon 24</div><div><strong>Move east</strong><span>08:30 whale watch, Caloura, Nossa Senhora da Paz, Furnas check-in.</span></div></div>
-            <div class="day-row"><div class="date">Tue 25</div><div><strong>Open day</strong><span>Nordeste loop, optional Salto do Prego, then booked Poça da Dona Beija at 18:30.</span></div></div>
-            <div class="day-row"><div class="date">Wed 26</div><div><strong>Thermal day</strong><span>11:00 massage, cozido lunch, Terra Nostra garden, quiet in-house final dinner.</span></div></div>
-            <div class="day-row"><div class="date">Thu 27</div><div><strong>Home</strong><span>Early drive back to PDL and late-morning flight.</span></div></div>
+      <div class="subnav" data-subnav="plan">
+        <button type="button" class="active" data-subview="daily">Daily itinerary</button>
+        <button type="button" data-subview="hour">Hour by hour</button>
+        <button type="button" data-subview="carousel">Photo carousel</button>
+      </div>
+
+      <div class="subpane active" data-subpane="plan-daily">
+        <div class="wide-band">
+          <div class="card">
+            <div class="kicker">Flow</div>
+            <div class="day-strip">
+              <div class="day-row"><div class="date">Fri 21</div><div><strong>Arrive soft</strong><span>Ponta Delgada, marina, reset, A Tasca.</span></div></div>
+              <div class="day-row"><div class="date">Sat 22</div><div><strong>West day</strong><span>Sete Cidades, 13:00 kayak, Ferraria, Quinta dos Sabores.</span></div></div>
+              <div class="day-row"><div class="date">Sun 23</div><div><strong>Central day</strong><span>Lagoa do Fogo, Caldeira Velha, Ribeira Grande, Bom Pesqueiro.</span></div></div>
+              <div class="day-row"><div class="date">Mon 24</div><div><strong>Move east</strong><span>08:30 whale watch, Caloura, chapel, Furnas check-in.</span></div></div>
+              <div class="day-row"><div class="date">Tue 25</div><div><strong>Open loop</strong><span>Nordeste options, then booked Poça at 18:30.</span></div></div>
+              <div class="day-row"><div class="date">Wed 26</div><div><strong>Thermal day</strong><span>11:00 massage, cozido, Terra Nostra, quiet in-house dinner.</span></div></div>
+              <div class="day-row"><div class="date">Thu 27</div><div><strong>Home</strong><span>Early drive to PDL and late-morning flight.</span></div></div>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <div class="kicker">Stay 1</div>
+              <h3>Octant Ponta Delgada</h3>
+              <p>Fri 21 to Mon 24</p>
+              <div class="chips">
+                <span class="chip">Harbor front</span>
+                <span class="chip">3 nights</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="kicker">Stay 2</div>
+              <h3>Octant Furnas</h3>
+              <p>Mon 24 to Thu 27</p>
+              <div class="chips">
+                <span class="chip">Thermal valley</span>
+                <span class="chip">3 nights</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="kicker">Locked anchors</div>
+              <div class="chips">
+                <span class="chip">Sat kayak</span>
+                <span class="chip">Sun Caldeira Velha</span>
+                <span class="chip">Mon whale watch</span>
+                <span class="chip">Tue Poça 18:30</span>
+                <span class="chip">Wed massage</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="grid">
-          <div class="card">
-            <div class="kicker">Stay 1</div>
-            <h3>Octant Ponta Delgada</h3>
-            <p>Fri 21 to Mon 24</p>
-            <div class="chips">
-              <span class="chip">Harbor front</span>
-              <span class="chip">3 nights</span>
+      </div>
+
+      <div class="subpane" data-subpane="plan-hour">
+        <div class="frame-card">
+          <div class="frame-head">
+            <div>
+              <strong>Hour by hour</strong>
+              <span>Full pacing view loaded underneath.</span>
             </div>
           </div>
-          <div class="card">
-            <div class="kicker">Stay 2</div>
-            <h3>Octant Furnas</h3>
-            <p>Mon 24 to Thu 27</p>
-            <div class="chips">
-              <span class="chip">Thermal valley</span>
-              <span class="chip">3 nights</span>
+          <iframe class="embed-frame" src="azores-hour-by-hour.html" title="Azores hour by hour"></iframe>
+        </div>
+      </div>
+
+      <div class="subpane" data-subpane="plan-carousel">
+        <div class="frame-card">
+          <div class="frame-head">
+            <div>
+              <strong>Photo carousel</strong>
+              <span>The richer day-by-day planning surface.</span>
             </div>
           </div>
-          <div class="card">
-            <div class="kicker">Booked anchors</div>
-            <div class="chips">
-              <span class="chip">Sat kayak</span>
-              <span class="chip">Sun Caldeira Velha</span>
-              <span class="chip">Mon whale watch</span>
-              <span class="chip">Tue Poça 18:30</span>
-              <span class="chip">Wed massage</span>
-            </div>
-          </div>
+          <iframe class="embed-frame" src="azores-15-year-anniversary/index.html" title="Azores carousel itinerary"></iframe>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-head">
-        <h2>Overview</h2>
-        <p>Carousel and trip page.</p>
-      </div>
-      <div class="card">
-        <iframe class="overview-frame" src="azores-15-year-anniversary.html" title="Azores itinerary overview"></iframe>
-        <div class="action-row">
-          <a class="action" href="azores-15-year-anniversary.html" target="_blank" rel="noopener">Open full plan</a>
-          <a class="action warm" href="azores-hour-by-hour.html" target="_blank" rel="noopener">Hour by hour</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">Azores 15 Year</div>
+    <div class="footer">Plan = choose the shape</div>
   </div>
 </section>
 
@@ -656,7 +717,7 @@
       </div>
     </div>
 
-    <div class="footer">Pack light. Travel easy.</div>
+    <div class="footer">Pack = keep the bag obvious</div>
   </div>
 </section>
 
@@ -665,12 +726,12 @@
     <div class="hero">
       <div class="eyebrow">Day-of layer</div>
       <h1>Travel</h1>
-      <p>Itinerary, maps, bookings, and the stops that matter once the trip starts.</p>
+      <p>Maps, bookings, location list, workflow, and the pieces you pull up while moving.</p>
       <div class="hero-meta">
         <span>Maps</span>
         <span>PDFs</span>
-        <span>Drive times</span>
-        <span>Daily use</span>
+        <span>Places</span>
+        <span>Workflow</span>
       </div>
     </div>
 
@@ -683,12 +744,12 @@
         <div class="card">
           <div class="kicker">Move</div>
           <ul class="quick-list">
-            <li><strong>Google Maps route</strong><span>All planned stops in one list.</span></li>
-            <li><strong>Today view</strong><span>Use the itinerary and hour-by-hour pages for pacing.</span></li>
+            <li><strong>Google Maps route</strong><span>All planned stops in one live list.</span></li>
+            <li><strong>Today timing</strong><span>Use the hour-by-hour view when pace matters.</span></li>
           </ul>
           <div class="action-row">
             <a class="action primary" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
-            <a class="action" href="azores-hour-by-hour.html" target="_blank" rel="noopener">Open timing</a>
+            <button type="button" class="action soft" data-travel-jump="timing">Open timing below</button>
           </div>
         </div>
         <div class="card">
@@ -709,65 +770,52 @@
     <div class="section">
       <div class="section-head">
         <h2>Trip Use</h2>
-        <p>What you pull up on island.</p>
+        <p>The live-use views stay inside the app now.</p>
       </div>
-      <div class="grid two">
-        <div class="card">
-          <div class="kicker">By day</div>
-          <ul class="route-list">
-            <li><strong>Saturday</strong><span>Sete Cidades, kayak, Ferraria, Quinta dos Sabores.</span></li>
-            <li><strong>Sunday</strong><span>Lagoa do Fogo, Caldeira Velha, Ribeira Grande or Cabrito.</span></li>
-            <li><strong>Monday</strong><span>Whale watch, Caloura, chapel, Furnas move.</span></li>
-            <li><strong>Tuesday</strong><span>Nordeste loop if you want it, then booked Poça da Dona Beija at 18:30.</span></li>
-            <li><strong>Wednesday</strong><span>11:00 massage, cozido, Terra Nostra garden, hotel pools, quiet final dinner.</span></li>
-          </ul>
-          <div class="action-row">
-            <a class="action warm" href="azores-hour-by-hour.html" target="_blank" rel="noopener">Hour by hour</a>
-            <a class="action" href="azores-15-year-anniversary.html" target="_blank" rel="noopener">Full itinerary</a>
+      <div class="subnav" data-subnav="travel">
+        <button type="button" class="active" data-subview="timing">Hour by hour</button>
+        <button type="button" data-subview="locations">Location list</button>
+        <button type="button" data-subview="workflow">Travel workflow</button>
+      </div>
+
+      <div class="subpane active" data-subpane="travel-timing">
+        <div class="frame-card">
+          <div class="frame-head">
+            <div>
+              <strong>Hour by hour</strong>
+              <span>Use this once you need the actual rhythm of the day.</span>
+            </div>
           </div>
+          <iframe class="embed-frame" src="azores-hour-by-hour.html" title="Azores hour by hour travel view"></iframe>
         </div>
-        <div class="card">
-          <div class="kicker">Near enough</div>
-          <ul class="quick-list">
-            <li><strong>PDL airport to Octant Ponta Delgada</strong><span>10 min</span></li>
-            <li><strong>Ponta Delgada to Sete Cidades</strong><span>40-45 min</span></li>
-            <li><strong>Ponta Delgada to Caloura</strong><span>25-30 min</span></li>
-            <li><strong>Furnas to PDL airport</strong><span>50-55 min</span></li>
-          </ul>
+      </div>
+
+      <div class="subpane" data-subpane="travel-locations">
+        <div class="frame-card">
+          <div class="frame-head">
+            <div>
+              <strong>Location list</strong>
+              <span>The full stop list stays in the travel layer.</span>
+            </div>
+          </div>
+          <iframe class="embed-frame" src="azores-location-glossary.html" title="Azores location list"></iframe>
+        </div>
+      </div>
+
+      <div class="subpane" data-subpane="travel-workflow">
+        <div class="frame-card">
+          <div class="frame-head">
+            <div>
+              <strong>Travel workflow</strong>
+              <span>Execution notes, checks, and practical flow.</span>
+            </div>
+          </div>
+          <iframe class="embed-frame" src="azores-travel-workflow.html" title="Azores travel workflow"></iframe>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-head">
-        <h2>Places</h2>
-        <p>Reference layer.</p>
-      </div>
-      <div class="grid two">
-        <div class="card">
-          <ul class="places-list">
-            <li><strong>Ponta Delgada base</strong><span>Octant, marina, A Tasca, Portas do Mar.</span></li>
-            <li><strong>West day</strong><span>Vista do Rei, Grota do Inferno, Lagoa Azul, Ferraria.</span></li>
-            <li><strong>Central day</strong><span>Lagoa do Fogo, Caldeira Velha, Ribeira Grande, Cabrito.</span></li>
-            <li><strong>East base</strong><span>Caloura, Vila Franca, Furnas, Terra Nostra, Lagoa das Furnas, Nordeste loop.</span></li>
-          </ul>
-          <div class="action-row">
-            <a class="action" href="azores-location-glossary.html" target="_blank" rel="noopener">Open glossary</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="kicker">Active checks</div>
-          <ul class="quick-list">
-            <li><strong>Poça da Dona Beija</strong><span>Booked for Tuesday at 18:30 · ticket PDF stored in artifacts.</span></li>
-            <li><strong>Cozido lunch</strong><span>Decide and reserve the Wednesday lunch path.</span></li>
-            <li><strong>Ferraria tide</strong><span>Check before Saturday.</span></li>
-            <li><strong>Marine conditions</strong><span>Check before Monday catamaran departure.</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">Travel tab = the live layer</div>
+    <div class="footer">Travel = the live layer</div>
   </div>
 </section>
 
@@ -791,6 +839,7 @@
 <script>
 (function(){
   var pages = ["plan","pack","travel"];
+
   function route(){
     var current = (location.hash || "#/plan").replace("#/","");
     if (pages.indexOf(current) === -1) current = "plan";
@@ -800,8 +849,38 @@
     document.querySelectorAll(".tabbar a").forEach(function(link){
       link.classList.toggle("active", link.getAttribute("data-page") === current);
     });
+    document.body.setAttribute("data-section", current);
     window.scrollTo(0, 0);
   }
+
+  function bindSubnav(scope){
+    var nav = document.querySelector('[data-subnav="' + scope + '"]');
+    if (!nav) return;
+    var buttons = nav.querySelectorAll("button");
+    var panes = document.querySelectorAll('[data-subpane^="' + scope + '-"]');
+    buttons.forEach(function(button){
+      button.addEventListener("click", function(){
+        var view = button.getAttribute("data-subview");
+        buttons.forEach(function(item){ item.classList.toggle("active", item === button); });
+        panes.forEach(function(pane){
+          pane.classList.toggle("active", pane.getAttribute("data-subpane") === scope + "-" + view);
+        });
+      });
+    });
+  }
+
+  bindSubnav("plan");
+  bindSubnav("travel");
+
+  document.querySelectorAll("[data-travel-jump]").forEach(function(button){
+    button.addEventListener("click", function(){
+      location.hash = "#/travel";
+      route();
+      var target = button.getAttribute("data-travel-jump");
+      var tab = document.querySelector('[data-subnav="travel"] button[data-subview="' + target + '"]');
+      if (tab) tab.click();
+    });
+  });
 
   var storageKey = "azores-pack-items";
   var form = document.getElementById("custom-pack-form");
@@ -838,7 +917,7 @@
         '<div class="text"></div>' +
         '<button type="button">Remove</button>';
       row.querySelector(".text").textContent = item.text;
-      row.querySelector('input').addEventListener("change", function(){
+      row.querySelector("input").addEventListener("change", function(){
         var next = loadItems();
         next[index].done = this.checked;
         saveItems(next);
