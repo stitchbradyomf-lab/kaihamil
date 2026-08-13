@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Kai Hamil favicon</title>
+  <desc id="desc">Square icon using the double slash from the Kai Hamil wordmark.</desc>
+  <rect width="256" height="256" rx="56" fill="#faf6f1"/>
+  <rect x="78" y="48" width="26" height="160" rx="13" transform="rotate(18 91 128)" fill="#BB6F38"/>
+  <rect x="144" y="48" width="26" height="160" rx="13" transform="rotate(18 157 128)" fill="#BB6F38"/>
+</svg>
