@@ -14,6 +14,8 @@
 // ---------------------------------------------------------------------------
 // Household members. Participants/cooks/raters are members, NOT auth users —
 // kids take part without accounts. Kyle & Marissa link to users rows later.
+// Kids: Hudson (12, boy), Rowan (10, girl), Dylan (6, girl) — so "Kyle and
+// the girls" in week zero = Kyle + Rowan + Dylan.
 // ---------------------------------------------------------------------------
 
 export const MEMBERS = [
