@@ -1,0 +1,758 @@
+[
+  {
+    "id": "wmdcol000000001",
+    "name": "dinner_members",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "is_kid",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "name": "user",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "sort_order",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "active",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_member_name ON dinner_members (name)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000002",
+    "name": "dinner_taxonomy",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "kind",
+        "type": "select",
+        "required": true,
+        "values": [
+          "ingredient_category",
+          "protein_type",
+          "prep_method",
+          "cuisine"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "slug",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "label",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "sort_order",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "metadata",
+        "type": "json",
+        "required": false
+      },
+      {
+        "name": "parent",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_tax_kind_slug ON dinner_taxonomy (kind, slug)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000003",
+    "name": "dinner_ingredients",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "category",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "protein_type",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "is_pantry_staple",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "name": "readiness",
+        "type": "select",
+        "required": false,
+        "values": [
+          "have",
+          "probably",
+          "need"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "typical_unit",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "nutrition_tags",
+        "type": "json",
+        "required": false
+      },
+      {
+        "name": "est_cost_band",
+        "type": "select",
+        "required": false,
+        "values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "created_by",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_ing_name ON dinner_ingredients (name)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000004",
+    "name": "dinner_meals",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "meal_kind",
+        "type": "select",
+        "required": true,
+        "values": [
+          "cooked",
+          "takeout",
+          "restaurant"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "cuisine",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "default_prep_method",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "effort",
+        "type": "select",
+        "required": true,
+        "values": [
+          "quick",
+          "moderate",
+          "project"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "kid_friendly",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "name": "cost_band",
+        "type": "select",
+        "required": false,
+        "values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "nutrition_profile",
+        "type": "json",
+        "required": false
+      },
+      {
+        "name": "recipe_steps",
+        "type": "json",
+        "required": false
+      },
+      {
+        "name": "health_notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "source_url",
+        "type": "url",
+        "required": false
+      },
+      {
+        "name": "status",
+        "type": "select",
+        "required": false,
+        "values": [
+          "active",
+          "retired"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "created_by",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX idx_dinner_meal_name ON dinner_meals (name)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000005",
+    "name": "dinner_meal_ingredients",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "meal",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000004",
+        "maxSelect": 1,
+        "cascadeDelete": true
+      },
+      {
+        "name": "ingredient",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000003",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "role",
+        "type": "select",
+        "required": true,
+        "values": [
+          "key",
+          "optional",
+          "garnish"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "quantity",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_mi ON dinner_meal_ingredients (meal, ingredient)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000006",
+    "name": "dinner_meal_instances",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "name": "meal",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000004",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "meal_type",
+        "type": "select",
+        "required": true,
+        "values": [
+          "cooked",
+          "leftovers",
+          "takeout",
+          "restaurant"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "participants",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000001",
+        "maxSelect": 12,
+        "cascadeDelete": false
+      },
+      {
+        "name": "cook",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000001",
+        "maxSelect": 3,
+        "cascadeDelete": false
+      },
+      {
+        "name": "prep_method_used",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000002",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "source_label",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "created_by",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE INDEX idx_dinner_instance_date ON dinner_meal_instances (date)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000007",
+    "name": "dinner_feedback",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "instance",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000006",
+        "maxSelect": 1,
+        "cascadeDelete": true
+      },
+      {
+        "name": "member",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000001",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "rating",
+        "type": "number",
+        "required": false,
+        "min": 1,
+        "max": 5
+      },
+      {
+        "name": "tags",
+        "type": "select",
+        "required": false,
+        "values": [
+          "make_again",
+          "tweak_it",
+          "too_much_effort",
+          "kids_complained",
+          "great_leftovers"
+        ],
+        "maxSelect": 5
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_fb ON dinner_feedback (instance, member)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000008",
+    "name": "dinner_plans",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "name": "meal",
+        "type": "relation",
+        "required": true,
+        "collectionId": "wmdcol000000004",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "status",
+        "type": "select",
+        "required": true,
+        "values": [
+          "planned",
+          "cooked",
+          "skipped"
+        ],
+        "maxSelect": 1
+      },
+      {
+        "name": "planned_cook",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000001",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "required": false
+      },
+      {
+        "name": "created_by",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX idx_dinner_plan ON dinner_plans (date, meal)"
+    ],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  },
+  {
+    "id": "wmdcol000000009",
+    "name": "dinner_shopping_extras",
+    "type": "base",
+    "fields": [
+      {
+        "name": "id",
+        "type": "text",
+        "primaryKey": true,
+        "system": true,
+        "pattern": "[a-z0-9]{15}",
+        "autogeneratePattern": "[a-z0-9]{15}"
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "name": "ingredient",
+        "type": "relation",
+        "required": false,
+        "collectionId": "wmdcol000000003",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "done",
+        "type": "bool",
+        "required": false
+      },
+      {
+        "name": "created_by",
+        "type": "relation",
+        "required": false,
+        "collectionId": "_pb_users_auth_",
+        "maxSelect": 1,
+        "cascadeDelete": false
+      },
+      {
+        "name": "created",
+        "type": "autodate",
+        "onCreate": true
+      },
+      {
+        "name": "updated",
+        "type": "autodate",
+        "onCreate": true,
+        "onUpdate": true
+      }
+    ],
+    "indexes": [],
+    "listRule": "@request.auth.id != \"\"",
+    "viewRule": "@request.auth.id != \"\"",
+    "createRule": "@request.auth.id != \"\"",
+    "updateRule": "@request.auth.id != \"\"",
+    "deleteRule": "@request.auth.id != \"\""
+  }
+]

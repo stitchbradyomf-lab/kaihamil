@@ -13,12 +13,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["about"],
+      "secondary_sections": [
+        "about"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 0,
-      "tags": ["home", "index"]
+      "tags": [
+        "home",
+        "index"
+      ]
     },
     {
       "id": "about",
@@ -30,12 +35,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["about"],
+      "secondary_sections": [
+        "about"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 10,
-      "tags": ["profile", "brand"]
+      "tags": [
+        "profile",
+        "brand"
+      ]
     },
     {
       "id": "posts",
@@ -47,12 +57,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["posts"],
+      "secondary_sections": [
+        "posts"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 20,
-      "tags": ["index", "writing"]
+      "tags": [
+        "index",
+        "writing"
+      ]
     },
     {
       "id": "research",
@@ -64,12 +79,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["research"],
+      "secondary_sections": [
+        "research"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 30,
-      "tags": ["index", "drafts"]
+      "tags": [
+        "index",
+        "drafts"
+      ]
     },
     {
       "id": "wisdom",
@@ -81,12 +101,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["wisdom"],
+      "secondary_sections": [
+        "wisdom"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 40,
-      "tags": ["index", "philosophy"]
+      "tags": [
+        "index",
+        "philosophy"
+      ]
     },
     {
       "id": "briefs",
@@ -98,12 +123,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["briefs"],
+      "secondary_sections": [
+        "briefs"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 50,
-      "tags": ["index", "updates"]
+      "tags": [
+        "index",
+        "updates"
+      ]
     },
     {
       "id": "trips",
@@ -115,12 +145,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 60,
-      "tags": ["index", "travel"]
+      "tags": [
+        "index",
+        "travel"
+      ]
     },
     {
       "id": "frameworks",
@@ -132,12 +167,17 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 10,
-      "tags": ["index", "thinking"]
+      "tags": [
+        "index",
+        "thinking"
+      ]
     },
     {
       "id": "tools",
@@ -150,12 +190,17 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 70,
-      "tags": ["legacy", "transitional"]
+      "tags": [
+        "legacy",
+        "transitional"
+      ]
     },
     {
       "id": "time-focus-assessment",
@@ -167,14 +212,23 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "time-focus",
-      "related_ids": ["time-focus-app", "time-focus-radar"],
+      "related_ids": [
+        "time-focus-app",
+        "time-focus-radar"
+      ],
       "sort_order": 10,
-      "tags": ["attention", "time", "audit"]
+      "tags": [
+        "attention",
+        "time",
+        "audit"
+      ]
     },
     {
       "id": "time-focus-app",
@@ -190,9 +244,16 @@
       "status": "active",
       "visibility": "public",
       "product_family": "time-focus",
-      "related_ids": ["time-focus-assessment", "time-focus-radar"],
+      "related_ids": [
+        "time-focus-assessment",
+        "time-focus-radar"
+      ],
       "sort_order": 10,
-      "tags": ["attention", "time", "operating-tool"]
+      "tags": [
+        "attention",
+        "time",
+        "operating-tool"
+      ]
     },
     {
       "id": "time-focus-radar",
@@ -204,14 +265,22 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "time-focus",
-      "related_ids": ["time-focus-assessment", "time-focus-app"],
+      "related_ids": [
+        "time-focus-assessment",
+        "time-focus-app"
+      ],
       "sort_order": 11,
-      "tags": ["attention", "visualization"]
+      "tags": [
+        "attention",
+        "visualization"
+      ]
     },
     {
       "id": "ai-user-type-quiz",
@@ -223,14 +292,23 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "ai-user-type",
-      "related_ids": ["quiz-result", "ai-usage-assessment"],
+      "related_ids": [
+        "quiz-result",
+        "ai-usage-assessment"
+      ],
       "sort_order": 20,
-      "tags": ["ai", "quiz", "profile"]
+      "tags": [
+        "ai",
+        "quiz",
+        "profile"
+      ]
     },
     {
       "id": "ai-usage-assessment",
@@ -242,13 +320,21 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
-      "related_ids": ["ai-user-type-quiz"],
+      "related_ids": [
+        "ai-user-type-quiz"
+      ],
       "sort_order": 30,
-      "tags": ["ai", "behavior", "assessment"]
+      "tags": [
+        "ai",
+        "behavior",
+        "assessment"
+      ]
     },
     {
       "id": "system-self-assessment",
@@ -260,14 +346,22 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "system-self",
-      "related_ids": ["system-self-framework"],
+      "related_ids": [
+        "system-self-framework"
+      ],
       "sort_order": 40,
-      "tags": ["system-self", "balance", "diagnostic"]
+      "tags": [
+        "system-self",
+        "balance",
+        "diagnostic"
+      ]
     },
     {
       "id": "realtor-discovery",
@@ -279,12 +373,18 @@
       "interaction_mode": "assessment",
       "is_packaged_application": false,
       "primary_section": "assessments",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 50,
-      "tags": ["realtor", "professional", "discovery"]
+      "tags": [
+        "realtor",
+        "professional",
+        "discovery"
+      ]
     },
     {
       "id": "five-filters",
@@ -296,12 +396,18 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 20,
-      "tags": ["decision", "filters", "uncertainty"]
+      "tags": [
+        "decision",
+        "filters",
+        "uncertainty"
+      ]
     },
     {
       "id": "problem-audit",
@@ -313,12 +419,18 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 30,
-      "tags": ["root-cause", "diagnostic", "framework"]
+      "tags": [
+        "root-cause",
+        "diagnostic",
+        "framework"
+      ]
     },
     {
       "id": "cause-and-effect",
@@ -330,12 +442,18 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 40,
-      "tags": ["causal", "systems", "analysis"]
+      "tags": [
+        "causal",
+        "systems",
+        "analysis"
+      ]
     },
     {
       "id": "life-process-mapping",
@@ -347,12 +465,18 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 50,
-      "tags": ["workflow", "mapping", "systems"]
+      "tags": [
+        "workflow",
+        "mapping",
+        "systems"
+      ]
     },
     {
       "id": "system-self-framework",
@@ -364,14 +488,22 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "system-self",
-      "related_ids": ["system-self-assessment"],
+      "related_ids": [
+        "system-self-assessment"
+      ],
       "sort_order": 60,
-      "tags": ["system-self", "balance", "model"]
+      "tags": [
+        "system-self",
+        "balance",
+        "model"
+      ]
     },
     {
       "id": "spectrum-of-attention",
@@ -383,13 +515,21 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
-      "related_ids": ["attention-spectrum-light"],
+      "related_ids": [
+        "attention-spectrum-light"
+      ],
       "sort_order": 70,
-      "tags": ["attention", "creation", "consumption"]
+      "tags": [
+        "attention",
+        "creation",
+        "consumption"
+      ]
     },
     {
       "id": "attention-spectrum-light",
@@ -401,13 +541,21 @@
       "interaction_mode": "framework",
       "is_packaged_application": false,
       "primary_section": "frameworks",
-      "secondary_sections": ["learn"],
+      "secondary_sections": [
+        "learn"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
-      "related_ids": ["spectrum-of-attention"],
+      "related_ids": [
+        "spectrum-of-attention"
+      ],
       "sort_order": 71,
-      "tags": ["attention", "lightweight", "mobile"]
+      "tags": [
+        "attention",
+        "lightweight",
+        "mobile"
+      ]
     },
     {
       "id": "control-chart-evaluator",
@@ -419,12 +567,18 @@
       "interaction_mode": "application",
       "is_packaged_application": true,
       "primary_section": "applications",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "applications",
       "status": "active",
       "visibility": "public",
       "sort_order": 20,
-      "tags": ["statistics", "evaluation", "utility"]
+      "tags": [
+        "statistics",
+        "evaluation",
+        "utility"
+      ]
     },
     {
       "id": "script-reader",
@@ -436,12 +590,18 @@
       "interaction_mode": "application",
       "is_packaged_application": true,
       "primary_section": "applications",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "applications",
       "status": "active",
       "visibility": "public",
       "sort_order": 30,
-      "tags": ["teleprompter", "video", "utility"]
+      "tags": [
+        "teleprompter",
+        "video",
+        "utility"
+      ]
     },
     {
       "id": "free-time-tool",
@@ -453,12 +613,19 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["wisdom", "tools"],
+      "secondary_sections": [
+        "wisdom",
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 80,
-      "tags": ["wisdom", "interactive", "reflection"]
+      "tags": [
+        "wisdom",
+        "interactive",
+        "reflection"
+      ]
     },
     {
       "id": "hour-apart",
@@ -470,12 +637,19 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["wisdom", "tools"],
+      "secondary_sections": [
+        "wisdom",
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 81,
-      "tags": ["wisdom", "interactive", "presence"]
+      "tags": [
+        "wisdom",
+        "interactive",
+        "presence"
+      ]
     },
     {
       "id": "parking-lot-philosophy-tool",
@@ -487,12 +661,19 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["wisdom", "tools"],
+      "secondary_sections": [
+        "wisdom",
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 82,
-      "tags": ["wisdom", "interactive", "reflection"]
+      "tags": [
+        "wisdom",
+        "interactive",
+        "reflection"
+      ]
     },
     {
       "id": "quiz-result",
@@ -504,19 +685,27 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["tools"],
+      "secondary_sections": [
+        "tools"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "ai-user-type",
-      "related_ids": ["ai-user-type-quiz"],
+      "related_ids": [
+        "ai-user-type-quiz"
+      ],
       "sort_order": 83,
-      "tags": ["results", "ai", "profile"]
+      "tags": [
+        "results",
+        "ai",
+        "profile"
+      ]
     },
     {
       "id": "vale-os",
-      "title": "Valé OS",
-      "nav_label": "Valé OS",
+      "title": "Val\u00e9 OS",
+      "nav_label": "Val\u00e9 OS",
       "url": "https://vale.kaihamil.com",
       "source_path": "vale/index.html",
       "launch_url": "https://vale.kaihamil.com",
@@ -528,14 +717,22 @@
       "status": "active",
       "visibility": "public",
       "product_family": "vale",
-      "related_ids": ["vale-pro", "couples-vale", "daily-brief"],
+      "related_ids": [
+        "vale-pro",
+        "couples-vale",
+        "daily-brief"
+      ],
       "sort_order": 40,
-      "tags": ["assistant", "os", "life-management"]
+      "tags": [
+        "assistant",
+        "os",
+        "life-management"
+      ]
     },
     {
       "id": "vale-pro",
-      "title": "Valé Pro",
-      "nav_label": "Valé Pro",
+      "title": "Val\u00e9 Pro",
+      "nav_label": "Val\u00e9 Pro",
       "url": "https://vale-pro.netlify.app",
       "launch_url": "https://vale-pro.netlify.app",
       "entity_type": "application",
@@ -546,14 +743,21 @@
       "status": "active",
       "visibility": "public",
       "product_family": "vale",
-      "related_ids": ["vale-os", "couples-vale"],
+      "related_ids": [
+        "vale-os",
+        "couples-vale"
+      ],
       "sort_order": 50,
-      "tags": ["professional", "assistant", "work"]
+      "tags": [
+        "professional",
+        "assistant",
+        "work"
+      ]
     },
     {
       "id": "couples-vale",
-      "title": "Couples Valé",
-      "nav_label": "Couples Valé",
+      "title": "Couples Val\u00e9",
+      "nav_label": "Couples Val\u00e9",
       "url": "https://couples-vale.netlify.app",
       "launch_url": "https://couples-vale.netlify.app",
       "entity_type": "application",
@@ -564,9 +768,16 @@
       "status": "active",
       "visibility": "public",
       "product_family": "vale",
-      "related_ids": ["vale-os", "vale-pro"],
+      "related_ids": [
+        "vale-os",
+        "vale-pro"
+      ],
       "sort_order": 60,
-      "tags": ["relationship", "family", "assistant"]
+      "tags": [
+        "relationship",
+        "family",
+        "assistant"
+      ]
     },
     {
       "id": "daily-brief",
@@ -582,9 +793,15 @@
       "status": "active",
       "visibility": "public",
       "product_family": "vale",
-      "related_ids": ["vale-os"],
+      "related_ids": [
+        "vale-os"
+      ],
       "sort_order": 70,
-      "tags": ["briefing", "dashboard", "daily"]
+      "tags": [
+        "briefing",
+        "dashboard",
+        "daily"
+      ]
     },
     {
       "id": "groove-pal",
@@ -597,12 +814,18 @@
       "interaction_mode": "application",
       "is_packaged_application": true,
       "primary_section": "applications",
-      "secondary_sections": ["brands"],
+      "secondary_sections": [
+        "brands"
+      ],
       "canonical_surface": "external",
       "status": "active",
       "visibility": "public",
       "sort_order": 80,
-      "tags": ["music", "consumer", "brand"]
+      "tags": [
+        "music",
+        "consumer",
+        "brand"
+      ]
     },
     {
       "id": "whisky-cellar",
@@ -618,7 +841,11 @@
       "status": "active",
       "visibility": "public",
       "sort_order": 90,
-      "tags": ["collection", "personal", "app"]
+      "tags": [
+        "collection",
+        "personal",
+        "app"
+      ]
     },
     {
       "id": "gatefield-hoa",
@@ -635,7 +862,11 @@
       "status": "active",
       "visibility": "public",
       "sort_order": 100,
-      "tags": ["hoa", "community", "operations"]
+      "tags": [
+        "hoa",
+        "community",
+        "operations"
+      ]
     },
     {
       "id": "photo-flow",
@@ -651,7 +882,11 @@
       "status": "active",
       "visibility": "public",
       "sort_order": 110,
-      "tags": ["photo", "workflow", "media"]
+      "tags": [
+        "photo",
+        "workflow",
+        "media"
+      ]
     },
     {
       "id": "brady-visuals",
@@ -662,13 +897,19 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["brands"],
+      "secondary_sections": [
+        "brands"
+      ],
       "canonical_surface": "external",
       "status": "active",
       "visibility": "public",
       "callout_style": "specialized",
       "sort_order": 90,
-      "tags": ["brand", "portfolio", "photography"]
+      "tags": [
+        "brand",
+        "portfolio",
+        "photography"
+      ]
     },
     {
       "id": "azores-15-year-app",
@@ -680,7 +921,9 @@
       "interaction_mode": "application",
       "is_packaged_application": true,
       "primary_section": "applications",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "applications",
       "status": "active",
       "visibility": "public",
@@ -693,7 +936,11 @@
         "azores-trip-artifacts"
       ],
       "sort_order": 120,
-      "tags": ["trip-app", "travel", "azores"]
+      "tags": [
+        "trip-app",
+        "travel",
+        "azores"
+      ]
     },
     {
       "id": "dude-trip-26",
@@ -705,17 +952,23 @@
       "interaction_mode": "application",
       "is_packaged_application": true,
       "primary_section": "applications",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "applications",
       "status": "active",
       "visibility": "public",
       "product_family": "dude-trip",
       "sort_order": 130,
-      "tags": ["trip-app", "travel", "group"]
+      "tags": [
+        "trip-app",
+        "travel",
+        "group"
+      ]
     },
     {
       "id": "azores-15-year-itinerary",
-      "title": "São Miguel · Six nights, west to east",
+      "title": "S\u00e3o Miguel \u00b7 Six nights, west to east",
       "nav_label": "Azores Itinerary",
       "url": "/trips/azores-15-year-anniversary.html",
       "source_path": "trips/azores-15-year-anniversary.html",
@@ -723,18 +976,26 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "azores-15-year",
-      "related_ids": ["azores-15-year-app"],
+      "related_ids": [
+        "azores-15-year-app"
+      ],
       "sort_order": 100,
-      "tags": ["trip", "itinerary", "azores"]
+      "tags": [
+        "trip",
+        "itinerary",
+        "azores"
+      ]
     },
     {
       "id": "azores-hour-by-hour",
-      "title": "São Miguel · Hour by Hour",
+      "title": "S\u00e3o Miguel \u00b7 Hour by Hour",
       "nav_label": "Hour by Hour",
       "url": "/trips/azores-hour-by-hour.html",
       "source_path": "trips/azores-hour-by-hour.html",
@@ -742,14 +1003,22 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "azores-15-year",
-      "related_ids": ["azores-15-year-app"],
+      "related_ids": [
+        "azores-15-year-app"
+      ],
       "sort_order": 101,
-      "tags": ["trip", "timing", "azores"]
+      "tags": [
+        "trip",
+        "timing",
+        "azores"
+      ]
     },
     {
       "id": "azores-travel-workflow",
@@ -761,14 +1030,22 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "azores-15-year",
-      "related_ids": ["azores-15-year-app"],
+      "related_ids": [
+        "azores-15-year-app"
+      ],
       "sort_order": 102,
-      "tags": ["trip", "workflow", "azores"]
+      "tags": [
+        "trip",
+        "workflow",
+        "azores"
+      ]
     },
     {
       "id": "azores-location-glossary",
@@ -780,14 +1057,22 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "azores-15-year",
-      "related_ids": ["azores-15-year-app"],
+      "related_ids": [
+        "azores-15-year-app"
+      ],
       "sort_order": 103,
-      "tags": ["trip", "reference", "locations"]
+      "tags": [
+        "trip",
+        "reference",
+        "locations"
+      ]
     },
     {
       "id": "azores-trip-artifacts",
@@ -799,14 +1084,22 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "product_family": "azores-15-year",
-      "related_ids": ["azores-15-year-app"],
+      "related_ids": [
+        "azores-15-year-app"
+      ],
       "sort_order": 104,
-      "tags": ["trip", "artifacts", "tickets"]
+      "tags": [
+        "trip",
+        "artifacts",
+        "tickets"
+      ]
     },
     {
       "id": "utah-arizona-trip",
@@ -818,12 +1111,42 @@
       "interaction_mode": "content",
       "is_packaged_application": false,
       "primary_section": "content",
-      "secondary_sections": ["trips"],
+      "secondary_sections": [
+        "trips"
+      ],
       "canonical_surface": "content",
       "status": "active",
       "visibility": "public",
       "sort_order": 110,
-      "tags": ["trip", "family", "southwest"]
+      "tags": [
+        "trip",
+        "family",
+        "southwest"
+      ]
+    },
+    {
+      "id": "whos-making-dinner",
+      "title": "Who's Making Dinner?",
+      "nav_label": "Who's Making Dinner?",
+      "url": "https://whos-making-dinner.netlify.app",
+      "source_path": "apps/whos-making-dinner",
+      "launch_url": "https://whos-making-dinner.netlify.app",
+      "entity_type": "application",
+      "interaction_mode": "application",
+      "is_packaged_application": true,
+      "primary_section": "applications",
+      "secondary_sections": [],
+      "canonical_surface": "external",
+      "status": "active",
+      "visibility": "public",
+      "product_family": "meal-planning",
+      "sort_order": 140,
+      "tags": [
+        "food",
+        "family",
+        "planning",
+        "household"
+      ]
     }
   ]
 }
