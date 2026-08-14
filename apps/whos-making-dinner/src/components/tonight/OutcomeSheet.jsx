@@ -90,7 +90,7 @@ export default function OutcomeSheet({ open, onClose, preset, onSaved }) {
         {cookingOutcome && (
           <>
             <div>
-              <div className="wmd-muted" style={{ marginBottom: 6 }}>who&rsquo;s making dinner? (the big question)</div>
+              <div className="wmd-muted" style={{ marginBottom: 6 }}>who cooked? (optional)</div>
               <MemberSelector value={cook ?? []} onChange={setCook} />
             </div>
             <div>
@@ -118,7 +118,7 @@ export default function OutcomeSheet({ open, onClose, preset, onSaved }) {
 
         <button
           className="wmd-btn"
-          disabled={busy || !participants?.length || (cookingOutcome && !cook?.length)}
+          disabled={busy || !participants?.length}
           onClick={save}
         >
           {busy ? 'saving…' : 'that’s dinner ✓'}

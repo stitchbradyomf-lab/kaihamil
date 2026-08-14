@@ -15,7 +15,8 @@ every week.
   **split nights** where different family members eat different things.
 - **history** — the retrospective: every night's outcomes with the fast
   per-person feedback flow (stars + tags like *make again*, *tweak it*,
-  *kids complained*), plus cook-credit and home-cooked stats.
+  *kids complained*), plus home-cooked and variety stats. Who cooked is
+  recorded as a logistical detail, not a scoreboard.
 - **meals** — the family menu: reusable meal concepts (cooked *and* ordered)
   with recipes, health notes, ingredients (key vs optional), and sentiment.
 - **plan** — the week ahead; planned dinners power tonight and the buy list.
