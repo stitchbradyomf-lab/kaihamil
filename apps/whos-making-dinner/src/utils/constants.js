@@ -70,5 +70,6 @@ export const TABS = [
   { id: 'shopping', label: 'to buy', emoji: '🛒' },
 ]
 
-// Member avatar colors rotate through the 70s palette.
-export const AVATAR_COLORS = ['#c8571f', '#7a8b3a', '#d9a326', '#9c4a3c', '#5b6b8c']
+// Member avatar colors rotate through the photo-derived palette:
+// apron orange, emerald dress, marigold, curtain crimson, blazer navy.
+export const AVATAR_COLORS = ['#d55a1e', '#2e7d54', '#e0ab28', '#8e2f33', '#33527d']
