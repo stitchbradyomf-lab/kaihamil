@@ -52,12 +52,16 @@ or compute dates in event handlers.
 
 ## Design system
 
-1970s sitcom title-card identity (after the fictional sitcom in Hacks S5E4).
-Tokens in `src/index.css`: `--cream` bg, `--ink` walnut, `--accent` burnt
-orange, `--good` avocado, `--gold`/`--gold-deep` harvest gold, `--danger`
-rust. Fraunces 900 for display (Cooper Black energy), Nunito Sans body.
-Signature motif: the three-color stripe band (`.wmd-stripe`). Readiness dots:
-🟢 have / 🟡 probably / 🔴 need. Light mode only, mobile-first.
+1970s sitcom title-card identity (after the fictional sitcom in Hacks S5E4),
+palette tuned to two inspiration photos in `public/`: `bg-stage.jpg` (velvet
+curtain, emerald dress) and `bg-kitchen.jpg` (cooking-show kitchen, marigold
+apron, orange Cooking logo). Tokens in `src/index.css`: `--cream` bg, `--ink`
+walnut espresso, `--accent` apron orange, `--good` emerald, `--gold` marigold,
+`--danger` curtain crimson. The photos ARE backgrounds too: kitchen washed at
+12% behind every screen's header (`body::before`), stage behind sign-in
+(`.wmd-stage`). Fraunces 900 for display (Cooper Black energy), Nunito Sans
+body. Signature motif: the three-color stripe band (`.wmd-stripe`). Readiness
+dots: 🟢 have / 🟡 probably / 🔴 need. Light mode only, mobile-first.
 
 ## Deploying
 

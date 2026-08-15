@@ -48,10 +48,24 @@ week zero, and auto-signs-in — the entire app is usable offline.
 
 ## Kyle's launch checklist (manual steps)
 
-Nothing below can run from the Claude sandbox (PocketBase is unreachable from
-it). From your machine:
+The Netlify project is reserved but not yet linked:
 
-1. **PocketBase setup** — creates the nine `dinner_*` collections and seeds
+- **URL:** https://whos-making-dinner.netlify.app
+- **Admin:** https://app.netlify.com/projects/whos-making-dinner
+- **Project ID:** `bb3948f9-f432-4e61-aada-9b17dd6f41eb`
+
+Nothing below can run from the Claude sandbox (no Netlify credentials;
+PocketBase unreachable). From your machine / browser:
+
+1. **Link the repo** (after the app's PR is merged to `main`) — in the Netlify
+   admin: Configuration → Build & deploy → **Link repository** →
+   `stitchbradyomf-lab/kaihamil`, production branch `main`, **base directory
+   `apps/whos-making-dinner`**. This directory's `netlify.toml` supplies the
+   rest (`npm run build` → `dist`, SPA redirect).
+2. **Environment variable** — add `VITE_PB_URL=https://pb.kaihamil.com`. It
+   must be the **HTTPS** domain; the raw `http://IP:8090` gets blocked as
+   mixed content from an HTTPS page. Then trigger the first deploy.
+3. **PocketBase setup** — creates the nine `dinner_*` collections and seeds
    members, taxonomy, ingredients, week-zero meals + instances (idempotent):
    ```bash
    cd apps/whos-making-dinner
@@ -59,17 +73,13 @@ it). From your machine:
    PB_ADMIN_PASSWORD=… node setup-pocketbase.js
    ```
    See `POCKETBASE_SETUP.md` for details and verification.
-2. **Netlify site** — create a new site from this repo with base directory
-   `apps/whos-making-dinner` (netlify.toml handles build → `dist`). Set env var
-   `VITE_PB_URL=https://pb.kaihamil.com` — it must be the **HTTPS** domain;
-   the raw `http://IP:8090` gets blocked as mixed content from an HTTPS page.
-3. **DNS (optional)** — point `dinner.kaihamil.com` at the Netlify site.
-4. **Accounts** — create Marissa's user in the PB `users` collection, then set
+4. **DNS (optional)** — point `dinner.kaihamil.com` at the Netlify site.
+5. **Accounts** — create Marissa's user in the PB `users` collection, then set
    the `user` field on the Kyle/Marissa rows in `dinner_members` so the app
    knows who's signed in.
-5. **Registry** — `kaihamil-content/data/page-metadata-registry.json` has the
-   Applications Shelf entry with a placeholder `launch_url`; correct it to the
-   real Netlify URL.
+
+The Applications Shelf registry entry already points at
+`https://whos-making-dinner.netlify.app` — no registry change needed.
 
 ## Later phases (schema-ready now)
 

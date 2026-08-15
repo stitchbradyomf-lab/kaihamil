@@ -4,28 +4,31 @@
    "who's making dinner?" — 1970s sitcom title-card identity
    (after the fictional Deborah Vance sitcom in HBO's Hacks, S5E4)
 
-   Palette: the canonical 70s kitchen — cream, walnut, burnt orange,
-   harvest gold, avocado. Wordmark set in Fraunces Black ≈ Cooper Black,
-   THE 70s sitcom typeface. Signature motif: the three-color stripe band.
+   Palette tuned to the two inspiration photos: the stage (velvet-curtain
+   crimson, emerald dress, warm bulb light) and the cooking-show kitchen
+   (airy cream, marigold apron, orange Cooking logo). Both photos also
+   appear as subtle washed backgrounds — kitchen behind the working
+   screens, stage behind the sign-in. Wordmark set in Fraunces Black ≈
+   Cooper Black. Signature motif: the three-color stripe band.
 --------------------------------------------------------------------------- */
 
 :root {
-  --cream: #f6ecd9;          /* aged title-card paper */
-  --ink: #3a2a1e;            /* walnut, not black */
+  --cream: #f7efdf;          /* kitchen cream — airy title-card paper */
+  --ink: #35261c;            /* walnut espresso, not black */
   --ink-soft: #7a6a58;
-  --accent: #c8571f;         /* burnt orange — CTAs, active tab, the "?" */
-  --accent-soft: #f6ddcb;
-  --good: #7a8b3a;           /* avocado — in-stock, success */
-  --good-soft: #e9ecd4;
-  --gold: #d9a326;           /* harvest gold — stars, highlights */
-  --gold-deep: #a67a12;      /* readable gold for text on cream */
-  --gold-soft: #f6ead0;
-  --danger: #9c4a3c;         /* rust — delete/skip/missing */
-  --danger-soft: #f0ddd8;
-  --card: #fdf7ea;
-  --line: #e6d7b8;
+  --accent: #d55a1e;         /* apron-logo orange — CTAs, active tab, the "?" */
+  --accent-soft: #f8ddc7;
+  --good: #2e7d54;           /* emerald (the dress) — in-stock, success */
+  --good-soft: #ddefe4;
+  --gold: #e0ab28;           /* marigold (the apron) — stars, highlights */
+  --gold-deep: #a0770e;      /* readable gold for text on cream */
+  --gold-soft: #f7ebca;
+  --danger: #8e2f33;         /* curtain crimson — delete/skip/missing */
+  --danger-soft: #f2dcda;
+  --card: #fdf8ec;
+  --line: #e8d9ba;
   --radius: 18px;
-  --shadow: 0 2px 10px rgba(58, 42, 30, 0.08);
+  --shadow: 0 2px 10px rgba(53, 38, 28, 0.08);
   --font-display: 'Fraunces', 'Cooper Black', Georgia, serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
 }
@@ -39,10 +42,49 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background:
-    radial-gradient(1100px 480px at 50% -8%, rgba(217, 163, 38, 0.16), transparent 65%),
+    radial-gradient(1100px 480px at 50% -8%, rgba(224, 171, 40, 0.16), transparent 65%),
     var(--cream);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+}
+
+/* The kitchen photo, washed to a whisper, warms the top of every screen. */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44vh;
+  background: url('/bg-kitchen.jpg') center top / cover no-repeat;
+  opacity: 0.12;
+  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 96%);
+  mask-image: linear-gradient(to bottom, black 20%, transparent 96%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wmd-shell { position: relative; z-index: 1; }
+
+/* Sign-in gets the stage: opening-night curtain behind a cream wash. */
+.wmd-stage {
+  position: fixed;
+  inset: 0;
+  background: url('/bg-stage.jpg') center 20% / cover no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wmd-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 239, 223, 0.82) 0%,
+    rgba(247, 239, 223, 0.9) 45%,
+    var(--cream) 92%
+  );
 }
 
 h1, h2, h3 {

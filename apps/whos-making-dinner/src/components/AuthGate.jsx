@@ -23,7 +23,8 @@ export default function AuthGate() {
 
   return (
     <div className="wmd-shell" style={{ paddingTop: '13vh' }}>
-      <div style={{ textAlign: 'center', marginBottom: 28 }}>
+      <div className="wmd-stage" aria-hidden="true" />
+      <div style={{ textAlign: 'center', marginBottom: 28, position: 'relative' }}>
         <div className="wmd-wordmark" style={{ fontSize: '2.15rem' }}>
           who&rsquo;s making dinner<span className="q">?</span>
         </div>
@@ -34,7 +35,7 @@ export default function AuthGate() {
           the nightly question, finally answered
         </p>
       </div>
-      <form className="wmd-card" onSubmit={submit} style={{ display: 'grid', gap: 12 }}>
+      <form className="wmd-card" onSubmit={submit} style={{ display: 'grid', gap: 12, position: 'relative' }}>
         <input
           className="wmd-input"
           type="email"
@@ -60,11 +61,11 @@ export default function AuthGate() {
           {busy ? 'signing in…' : mode === 'mock' ? 'enter the demo kitchen' : 'sign in'}
         </button>
       </form>
-      <p className="wmd-muted" style={{ textAlign: 'center', marginTop: 14, fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+      <p className="wmd-muted" style={{ textAlign: 'center', marginTop: 14, fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase', position: 'relative' }}>
         filmed before a live studio audience
       </p>
       {mode === 'mock' && (
-        <p className="wmd-muted" style={{ textAlign: 'center', marginTop: 6 }}>
+        <p className="wmd-muted" style={{ textAlign: 'center', marginTop: 6, position: 'relative' }}>
           demo mode — no real account needed, just tap the button
         </p>
       )}
