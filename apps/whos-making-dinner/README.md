@@ -74,9 +74,13 @@ PocketBase unreachable). From your machine / browser:
    ```
    See `POCKETBASE_SETUP.md` for details and verification.
 4. **DNS (optional)** — point `dinner.kaihamil.com` at the Netlify site.
-5. **Accounts** — create Marissa's user in the PB `users` collection, then set
-   the `user` field on the Kyle/Marissa rows in `dinner_members` so the app
-   knows who's signed in.
+5. **The household account** — the app uses ONE shared login for the whole
+   family (who cooked/ate is picked per action, not per login). In the PB
+   admin, create a single record in the `users` collection with email
+   `dinner@kaihamil.com` and the household password. If you prefer a
+   different email, also set `VITE_HOUSEHOLD_EMAIL` to match in the Netlify
+   env and rebuild. The sign-in screen only asks for the password, and the
+   session persists on each device after the first unlock.
 
 The Applications Shelf registry entry already points at
 `https://whos-making-dinner.netlify.app` — no registry change needed.

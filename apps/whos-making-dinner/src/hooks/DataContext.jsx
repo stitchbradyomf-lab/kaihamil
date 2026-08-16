@@ -71,6 +71,13 @@ export function DataProvider({ children }) {
     fetchAll(adapter).then((result) => {
       if (live) applyLoad(result)
     })
+    // Silently extend the persisted session; an expired token re-locks.
+    adapter.restoreSession?.().then((u) => {
+      if (live && !u) {
+        setUser(null)
+        setData(EMPTY)
+      }
+    })
     return () => {
       live = false
     }
