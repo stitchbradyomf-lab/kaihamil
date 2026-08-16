@@ -138,6 +138,9 @@ export function createMockAdapter() {
       me = store.users[0]
       return { ...me }
     },
+    async restoreSession() {
+      return me ? { ...me } : null
+    },
     logout() {
       me = null
     },

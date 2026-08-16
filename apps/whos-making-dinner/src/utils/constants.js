@@ -5,6 +5,10 @@ export const PB_URL = import.meta.env?.VITE_PB_URL || 'http://192.241.180.69:809
 // VITE_MOCK_PB=1 runs the app fully in-memory (no PocketBase) for dev/demo.
 export const MOCK_MODE = import.meta.env?.VITE_MOCK_PB === '1'
 
+// Single shared household account — the family is one login; who cooked/ate
+// is picked per action, not per login. Only the password is ever typed.
+export const HOUSEHOLD_EMAIL = import.meta.env?.VITE_HOUSEHOLD_EMAIL || 'dinner@kaihamil.com'
+
 export const COLLECTIONS = {
   members: 'dinner_members',
   taxonomy: 'dinner_taxonomy',

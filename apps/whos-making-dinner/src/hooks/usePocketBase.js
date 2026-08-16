@@ -231,6 +231,26 @@ export function createPBAdapter() {
       await pb.collection('users').authWithPassword(email, password)
       return this.currentUser()
     },
+    /**
+     * The SDK persists the auth token in localStorage, so the app opens
+     * unlocked. Refreshing on each open extends the session indefinitely
+     * for an actively-used device; an expired/revoked token falls back to
+     * the lock screen.
+     */
+    async restoreSession() {
+      if (!pb.authStore.isValid) return null
+      try {
+        await pb.collection('users').authRefresh()
+        return this.currentUser()
+      } catch (err) {
+        if (err?.status === 401 || err?.status === 403 || err?.status === 404) {
+          pb.authStore.clear()
+          return null
+        }
+        // Network hiccup — keep the stored session, the app runs on cache.
+        return this.currentUser()
+      }
+    },
     logout() {
       pb.authStore.clear()
     },

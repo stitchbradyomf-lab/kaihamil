@@ -66,9 +66,15 @@ Then in the admin UI (`/_/`): confirm the nine `dinner_*` collections exist,
 `dinner_members` has 5 rows, and `dinner_meal_instances` shows two rows on the
 week-zero Thursday.
 
-## 5. Accounts
+## 5. The household account
 
-1. Create Marissa's user in the `users` auth collection.
-2. Set the `user` relation on the Kyle and Marissa rows of `dinner_members` to
-   their users records — the app uses it to preselect "who's cooking" and to
-   badge the signed-in member.
+The app uses one shared family login — members (who cooked, who ate, who
+rated) are picked per action inside the app, not per login.
+
+1. Create a single record in the `users` auth collection:
+   email `dinner@kaihamil.com` (or set `VITE_HOUSEHOLD_EMAIL` in the app's
+   build env to whatever you choose), plus the household password.
+2. The sign-in screen asks for the password only; the session persists per
+   device after the first unlock (refreshed on each open).
+3. Optional: set the `user` relation on one `dinner_members` row to the
+   household account if you want a default cook preselected.
