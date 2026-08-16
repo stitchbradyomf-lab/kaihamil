@@ -604,6 +604,26 @@
       ]
     },
     {
+      "id": "whos-making-dinner",
+      "title": "who's making dinner?",
+      "nav_label": "who's making dinner?",
+      "url": "https://whos-making-dinner.netlify.app",
+      "launch_url": "https://whos-making-dinner.netlify.app",
+      "source_path": "apps/whos-making-dinner.html",
+      "description": "A household dinner planner that turns the nightly question into a clearer plan.",
+      "entity_type": "application",
+      "interaction_mode": "application",
+      "is_packaged_application": true,
+      "primary_section": "applications",
+      "secondary_sections": ["tools"],
+      "canonical_surface": "external",
+      "status": "active",
+      "visibility": "public",
+      "product_family": "whos-making-dinner",
+      "sort_order": 35,
+      "tags": ["family", "dinner", "meal-planning", "household"]
+    },
+    {
       "id": "free-time-tool",
       "title": "The Free Time Tool",
       "nav_label": "The Free Time Tool",
