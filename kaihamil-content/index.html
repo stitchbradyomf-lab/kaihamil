@@ -329,15 +329,12 @@
         .section-subtitle {
             font-size: 1rem;
             color: var(--brown-medium);
-            font-style: italic;
         }
         
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
         }
         
         .app-card {
@@ -359,14 +356,18 @@
         }
         
         .app-icon {
-            width: 50px;
-            height: 50px;
+            width: 46px;
+            height: 46px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             flex-shrink: 0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.02em;
         }
         
         .app-info {
@@ -436,6 +437,10 @@
             .bg-symbol .slash { font-size: 200px; }
         }
         
+        @media (max-width: 700px) {
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 600px) {
             .nav { padding: 15px 20px; }
             .system-side, .self-side { padding: 40px 20px; }
@@ -480,31 +485,32 @@
     <section id="content" class="applications-section">
         <div class="section-header">
             <h2 class="section-title">Applications</h2>
+            <p class="section-subtitle">Doing things</p>
         </div>
         <div class="apps-grid">
             <a href="/apps/#lifestyle" class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #4a7c5f, #6aaa82);">🏡</div>
+                <div class="app-icon" style="background: rgba(95,127,75,0.1); color: #5f7f4b;">◎</div>
                 <div class="app-info">
                     <div class="app-name">Lifestyle</div>
                     <div class="app-desc">Time &amp; Focus, Gatefield HOA, who's making dinner?, Groove Pal, Whisky Cellar</div>
                 </div>
             </a>
             <a href="/apps/#systems" class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #1B4D4A, #2d6f73);">⌘</div>
+                <div class="app-icon" style="background: rgba(27,77,74,0.1); color: #1B4D4A; font-size: 1rem; letter-spacing: 0.02em;">//</div>
                 <div class="app-info">
                     <div class="app-name">Systems</div>
                     <div class="app-desc">Valé OS, Valé Pro, Couples Valé</div>
                 </div>
             </a>
             <a href="/apps/#trips" class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #BB6F38, #d4924f);">✈︎</div>
+                <div class="app-icon" style="background: rgba(191,117,64,0.1); color: #bf7540;">→</div>
                 <div class="app-info">
                     <div class="app-name">Trips</div>
                     <div class="app-desc">Azores 15 Year, Dude Trip 26</div>
                 </div>
             </a>
             <a href="/apps/#utilities" class="app-card">
-                <div class="app-icon" style="background: linear-gradient(135deg, #4a5568, #718096);">⚙︎</div>
+                <div class="app-icon" style="background: rgba(74,85,104,0.1); color: #4a5568;">≡</div>
                 <div class="app-info">
                     <div class="app-name">Utilities</div>
                     <div class="app-desc">Daily Brief, Script Reader, Control Chart Evaluator, Photo Flow</div>
