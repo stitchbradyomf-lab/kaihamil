@@ -807,6 +807,177 @@
     .itin-row{grid-template-columns:1fr;gap:4px;}
     .itin-label{padding-top:0;}
   }
+  /* ── Carousel modal ─────────────────────────────────── */
+  .carousel-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:200;
+    background:rgba(9,28,32,.96);
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .carousel-overlay.open{display:flex;}
+  .carousel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 20px;
+    flex:0 0 auto;
+  }
+  .carousel-meta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .carousel-close{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.08);
+    color:#f7fbf8;
+    cursor:pointer;
+    font-size:20px;
+    line-height:1;
+  }
+  .carousel-track{
+    flex:1;
+    position:relative;
+    overflow:hidden;
+  }
+  .carousel-slide{
+    display:none;
+    position:absolute;
+    inset:0;
+    flex-direction:column;
+  }
+  .carousel-slide.active{display:flex;}
+  .carousel-img{
+    position:relative;
+    flex:0 0 52%;
+    overflow:hidden;
+  }
+  .carousel-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .carousel-img-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(9,28,32,.08) 40%, rgba(9,28,32,.82));
+  }
+  .carousel-img-caption{
+    position:absolute;
+    bottom:16px;
+    left:20px;
+    right:20px;
+    color:#f7fbf8;
+  }
+  .carousel-img-caption strong{
+    display:block;
+    font-family:"Fraunces",serif;
+    font-size:clamp(24px,4vw,36px);
+    font-weight:500;
+    letter-spacing:-.04em;
+    line-height:1.05;
+  }
+  .carousel-img-caption span{
+    display:block;
+    margin-top:5px;
+    font-family:"Space Mono",monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:rgba(247,251,248,.72);
+  }
+  .carousel-body{
+    flex:1;
+    overflow-y:auto;
+    padding:20px 20px 0;
+    -webkit-overflow-scrolling:touch;
+  }
+  .carousel-body ul{
+    list-style:none;
+    display:grid;
+    gap:10px;
+    margin-top:0;
+    padding:0;
+  }
+  .carousel-body li{
+    padding:12px 14px 12px 28px;
+    position:relative;
+    font-size:14px;
+    color:rgba(247,251,248,.88);
+    border-radius:14px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    line-height:1.5;
+  }
+  .carousel-body li::before{
+    content:"";
+    position:absolute;
+    left:12px;
+    top:.6em;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  .carousel-footer{
+    flex:0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 20px calc(14px + env(safe-area-inset-bottom));
+    gap:12px;
+  }
+  .carousel-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.08);
+    color:#f7fbf8;
+    cursor:pointer;
+    font-size:22px;
+    flex:0 0 auto;
+    transition:background .15s;
+  }
+  .carousel-btn:hover{background:rgba(255,255,255,.16);}
+  .carousel-btn:disabled{opacity:.28;cursor:default;}
+  .carousel-dots{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:center;
+    flex:1;
+  }
+  .carousel-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,.24);
+    border:0;
+    padding:0;
+    cursor:pointer;
+    transition:background .15s,transform .15s;
+  }
+  .carousel-dot.active{
+    background:var(--gold);
+    transform:scale(1.3);
+  }
+  @media (max-width:560px){
+    .carousel-img{flex:0 0 46%;}
+  }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
     .page{animation:none;}
@@ -885,7 +1056,7 @@
             </div>
           </div>
           <div class="action-row">
-            <a class="action primary" href="#/plan">Open the day-by-day</a>
+            <button type="button" class="action primary" id="open-carousel-btn">View the trip day by day</button>
             <button type="button" class="action soft" data-jump-page="travel">Jump to live travel links</button>
           </div>
         </div>
@@ -1328,6 +1499,180 @@
   </div>
 </section>
 
+<!-- ── Day Carousel Modal ──────────────────────────────── -->
+<div class="carousel-overlay" id="day-carousel" role="dialog" aria-modal="true" aria-label="Day by day carousel">
+  <div class="carousel-header">
+    <div class="carousel-meta">
+      <span class="day-badge" id="carousel-badge">Day 0</span>
+      <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,251,248,.6);" id="carousel-counter">1 / 8</span>
+    </div>
+    <button class="carousel-close" id="carousel-close" aria-label="Close">&times;</button>
+  </div>
+
+  <div class="carousel-track">
+
+    <div class="carousel-slide active" data-day="0">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=80" alt="Plane wing over Atlantic" loading="eager">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Flight Night</strong>
+          <span>Thursday, August 20</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li>Depart Newark (EWR) at 23:05 &middot; UA 216 nonstop to Ponta Delgada</li>
+          <li>Passports, hotel confirmations, and first-day clothes at top of bag</li>
+          <li>Sleep on the plane &mdash; island is 4 hours ahead, tomorrow needs grace not ambition</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="1">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1540774151601-87ccb231aa54?auto=format&fit=crop&w=1400&q=80" alt="Ponta Delgada harbor" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Arrival &middot; Ponta Delgada</strong>
+          <span>Friday, August 21</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li>Land PDL ~08:40 &middot; collect rental car &middot; ~10 min drive to hotel</li>
+          <li>Check into Octant Ponta Delgada (early check-in if available)</li>
+          <li>Marina walk, old town, rooftop pool</li>
+          <li>Dinner: A Tasca (if energy holds)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="2">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1536308304182-5a2e0e04bb08?auto=format&fit=crop&w=1400&q=80" alt="Sete Cidades crater lakes" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Sete Cidades &middot; West Day</strong>
+          <span>Saturday, August 22</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li>Morning: Vista do Rei viewpoint &middot; Grota do Inferno if conditions allow</li>
+          <li><strong style="color:#f3dfba;">13:00 &ndash; Futurismo kayak, Lagoa Azul</strong> (booked)</li>
+          <li>Afternoon: Ponta da Ferraria thermal ocean cove (check tide window)</li>
+          <li>Dinner: Quinta dos Sabores at 19:30</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="3">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1676065344960-6505bec2bf89?auto=format&fit=crop&w=1400&q=80" alt="Lagoa do Fogo" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Lagoa do Fogo &middot; Last Night PD</strong>
+          <span>Sunday, August 23</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li><strong style="color:#f3dfba;">10:30&ndash;12:00 &ndash; Caldeira Velha</strong> (entry + locker booked)</li>
+          <li>Lagoa do Fogo scenic ridge if weather cooperates</li>
+          <li>Lunch: Ribeira Grande &middot; wander and reset</li>
+          <li>Dinner: Bom Pesqueiro at 19:00</li>
+          <li>Pack tonight &mdash; moving east in the morning</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="4">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80" alt="Whale tail emerging from ocean" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Whale Watch &middot; Move to Furnas</strong>
+          <span>Monday, August 24</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li><strong style="color:#f3dfba;">08:30&ndash;11:30 &ndash; Futurismo whale &amp; dolphin watch</strong> (booked &middot; Portas do Mar)</li>
+          <li>Lunch: Bar Caloura &middot; swim stop if conditions allow</li>
+          <li>Nossa Senhora da Paz chapel viewpoint</li>
+          <li>Check into Octant Furnas &mdash; settle in, slow down</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="5">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?auto=format&fit=crop&w=1400&q=80" alt="Northeast Sao Miguel coast" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Open Day &middot; Dusk Soak Sacred</strong>
+          <span>Tuesday, August 25</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li>Option A (explore): Ribeira dos Caldeiroes &middot; Pelado &middot; Ponta do Sossego &middot; Ponta da Madrugada</li>
+          <li>Option B (soft): Quiet Furnas day &middot; hotel &middot; thermal pools</li>
+          <li>Salto do Prego hike only if the day still feels easy</li>
+          <li><strong style="color:#f3dfba;">18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (conf. T9WAPA) &middot; non-negotiable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="6">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=1400&q=80" alt="Thermal pool in lush garden" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Thermal Finale &middot; Last Full Day</strong>
+          <span>Wednesday, August 26</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li><strong style="color:#f3dfba;">11:00 &ndash; Couples massage</strong> (booked)</li>
+          <li>Lunch: Cozido (reserve ahead of time)</li>
+          <li>Afternoon: Terra Nostra gardens &middot; hotel pools</li>
+          <li>Easy in-house dinner &mdash; nothing that requires planning</li>
+          <li>Quiet packing tonight</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carousel-slide" data-day="7">
+      <div class="carousel-img">
+        <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=1400&q=80" alt="Airport morning light" loading="lazy">
+        <div class="carousel-img-overlay"></div>
+        <div class="carousel-img-caption">
+          <strong>Return Home</strong>
+          <span>Thursday, August 27</span>
+        </div>
+      </div>
+      <div class="carousel-body">
+        <ul>
+          <li>Depart Furnas by 08:15 &middot; ~50-minute drive to PDL airport</li>
+          <li>Return rental car &middot; check-in &middot; security</li>
+          <li>UA 217 departs PDL at 11:00 &middot; same-day arrival Newark</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /carousel-track -->
+
+  <div class="carousel-footer">
+    <button class="carousel-btn" id="carousel-prev" aria-label="Previous day">&larr;</button>
+    <div class="carousel-dots" id="carousel-dots"></div>
+    <button class="carousel-btn" id="carousel-next" aria-label="Next day">&rarr;</button>
+  </div>
+</div>
+<!-- /carousel -->
+
 <nav class="tabbar">
   <div class="inner">
     <a href="#/home" data-page="home">
@@ -1372,6 +1717,82 @@
       location.hash = "#/" + button.getAttribute("data-jump-page");
     });
   });
+
+  // ── Day Carousel ────────────────────────────────────────
+  (function(){
+    var overlay   = document.getElementById("day-carousel");
+    var closeBtn  = document.getElementById("carousel-close");
+    var prevBtn   = document.getElementById("carousel-prev");
+    var nextBtn   = document.getElementById("carousel-next");
+    var dotsEl    = document.getElementById("carousel-dots");
+    var badgeEl   = document.getElementById("carousel-badge");
+    var counterEl = document.getElementById("carousel-counter");
+    var slides    = Array.from(overlay.querySelectorAll(".carousel-slide"));
+    var total     = slides.length;
+    var current   = 0;
+
+    // Build dots
+    slides.forEach(function(_, i){
+      var dot = document.createElement("button");
+      dot.className = "carousel-dot" + (i === 0 ? " active" : "");
+      dot.setAttribute("aria-label", "Day " + i);
+      dot.addEventListener("click", function(){ goTo(i); });
+      dotsEl.appendChild(dot);
+    });
+
+    function goTo(idx){
+      slides[current].classList.remove("active");
+      dotsEl.children[current].classList.remove("active");
+      current = Math.max(0, Math.min(total - 1, idx));
+      slides[current].classList.add("active");
+      dotsEl.children[current].classList.add("active");
+      badgeEl.textContent = "Day " + current;
+      counterEl.textContent = (current + 1) + " / " + total;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+      // Scroll body to top on slide change
+      var body = slides[current].querySelector(".carousel-body");
+      if (body) body.scrollTop = 0;
+    }
+
+    function open(startDay){
+      current = -1; // force re-render
+      goTo(startDay || 0);
+      overlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function close(){
+      overlay.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    closeBtn.addEventListener("click", close);
+    prevBtn.addEventListener("click", function(){ goTo(current - 1); });
+    nextBtn.addEventListener("click", function(){ goTo(current + 1); });
+
+    // Keyboard
+    document.addEventListener("keydown", function(e){
+      if (!overlay.classList.contains("open")) return;
+      if (e.key === "ArrowLeft")  goTo(current - 1);
+      if (e.key === "ArrowRight") goTo(current + 1);
+      if (e.key === "Escape")     close();
+    });
+
+    // Touch swipe
+    var touchStartX = 0;
+    overlay.addEventListener("touchstart", function(e){ touchStartX = e.touches[0].clientX; }, {passive:true});
+    overlay.addEventListener("touchend", function(e){
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    }, {passive:true});
+
+    // Wire up the Home page button
+    document.getElementById("open-carousel-btn").addEventListener("click", function(){
+      open(0);
+    });
+
+    goTo(0);
+  })();
 
   var storageKey = "azores-pack-items";
   var form = document.getElementById("custom-pack-form");
