@@ -643,6 +643,33 @@
     font-size:13px;
     color:var(--ink-soft);
   }
+  .quick-list-link{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    border-radius:16px;
+  }
+  .quick-list-link li{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:background .14s,border-color .14s;
+    cursor:pointer;
+  }
+  .quick-list-link li > strong,
+  .quick-list-link li > span:not(.quick-list-arrow){
+    flex:1;
+  }
+  .quick-list-link:hover li{
+    background:rgba(31,122,115,.10);
+    border-color:rgba(31,122,115,.22);
+  }
+  .quick-list-arrow{
+    flex:0 0 auto;
+    font-size:16px;
+    color:var(--accent-deep);
+    display:block !important;
+  }
   .resource-grid{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1428,15 +1455,10 @@
         <div class="kicker eyebrow">Open first</div>
         <h3>Quick actions</h3>
         <ul class="quick-list">
-          <li><strong>Google Maps route list</strong><span>All planned stops in one mobile-friendly list for drive days.</span></li>
-          <li><strong>Hour-by-hour timing</strong><span>Use it when the day has real constraints or multiple moving parts.</span></li>
-          <li><strong>Artifacts and confirmations</strong><span>Tickets, PDFs, and booking evidence for the locked anchors.</span></li>
+          <a class="quick-list-link" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener"><li><strong>Google Maps route list</strong><span>All planned stops in one mobile-friendly list for drive days.</span><span class="quick-list-arrow">&rarr;</span></li></a>
+          <a class="quick-list-link" href="azores-hour-by-hour.html" target="_blank" rel="noopener"><li><strong>Hour-by-hour timing</strong><span>Use it when the day has real constraints or multiple moving parts.</span><span class="quick-list-arrow">&rarr;</span></li></a>
+          <a class="quick-list-link" href="azores-trip-artifacts.html" target="_blank" rel="noopener"><li><strong>Artifacts and confirmations</strong><span>Tickets, PDFs, and booking evidence for the locked anchors.</span><span class="quick-list-arrow">&rarr;</span></li></a>
         </ul>
-        <div class="action-row">
-          <a class="action primary" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
-          <a class="action" href="azores-hour-by-hour.html" target="_blank" rel="noopener">Hour by hour</a>
-          <a class="action" href="azores-trip-artifacts.html" target="_blank" rel="noopener">Artifacts</a>
-        </div>
       </div>
 
       <div class="card">
