@@ -4,52 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Azores 15 Year</title>
-<meta name="description" content="Azores 15 Year trip app with plan, pack, and travel in one place.">
-<meta name="theme-color" content="#245d8a">
+<meta name="description" content="Azores anniversary trip app with a home landing, day-by-day plan, packing lists, and live travel links.">
+<meta name="theme-color" content="#194b4d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16343e;
-    --muted:#5f7680;
-    --card:rgba(255,255,255,.86);
-    --line:rgba(21,58,76,.12);
-    --shadow:0 18px 48px rgba(21,58,76,.12);
-    --top-h:72px;
-    --nav-h:72px;
+    --ink:#173338;
+    --ink-soft:#466168;
+    --line:rgba(23,51,56,.12);
+    --card:rgba(255,255,255,.82);
+    --glass:rgba(255,255,255,.64);
+    --shadow:0 18px 50px rgba(23,51,56,.14);
+    --accent:#1f7a73;
+    --accent-deep:#194b4d;
+    --gold:#c79245;
+    --sand:#f7f0e7;
+    --mist:#eef7f4;
+    --rose:#f5ece9;
+    --nav-h:78px;
+    --top-h:74px;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
   body{
     min-height:100vh;
+    font-family:"Instrument Sans",system-ui,sans-serif;
     color:var(--ink);
-    font-family:"Inter",system-ui,sans-serif;
-    font-size:16px;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+    background:
+      radial-gradient(circle at top left, rgba(72,141,133,.16), transparent 24%),
+      radial-gradient(circle at top right, rgba(206,163,87,.12), transparent 24%),
+      linear-gradient(180deg,#f5fbf8 0%,#edf5f2 42%,#eef2f0 100%);
     padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom));
-    transition:background .18s ease;
+    transition:background .22s ease;
+    -webkit-font-smoothing:antialiased;
+  }
+  body[data-section="home"]{
+    background:
+      radial-gradient(circle at top left, rgba(57,133,134,.20), transparent 24%),
+      radial-gradient(circle at top right, rgba(201,150,77,.16), transparent 22%),
+      linear-gradient(180deg,#f8fcfb 0%,#edf4f1 36%,#ecf1ef 100%);
   }
   body[data-section="plan"]{
     background:
-      radial-gradient(circle at top left, rgba(36,93,138,.24), transparent 24%),
-      radial-gradient(circle at top right, rgba(95,160,114,.18), transparent 22%),
-      linear-gradient(180deg,#f4fbfd 0%,#edf6f3 38%,#eef4ee 100%);
+      radial-gradient(circle at top left, rgba(57,133,134,.18), transparent 24%),
+      radial-gradient(circle at top right, rgba(113,168,119,.16), transparent 24%),
+      linear-gradient(180deg,#f3fbfb 0%,#eaf4f1 40%,#e9efee 100%);
   }
   body[data-section="pack"]{
     background:
-      radial-gradient(circle at top left, rgba(214,171,95,.20), transparent 26%),
-      radial-gradient(circle at top right, rgba(181,111,62,.14), transparent 20%),
-      linear-gradient(180deg,#fcf6ee 0%,#f6efe4 40%,#f7f3ec 100%);
+      radial-gradient(circle at top left, rgba(199,146,69,.16), transparent 24%),
+      radial-gradient(circle at top right, rgba(181,111,56,.12), transparent 22%),
+      linear-gradient(180deg,#fcf8f2 0%,#f5eee5 40%,#f2efea 100%);
   }
   body[data-section="travel"]{
     background:
-      radial-gradient(circle at top left, rgba(33,88,71,.18), transparent 24%),
-      radial-gradient(circle at top right, rgba(43,110,140,.18), transparent 22%),
-      linear-gradient(180deg,#f0f8f7 0%,#e9f2ef 38%,#edf4f2 100%);
+      radial-gradient(circle at top left, rgba(29,92,94,.18), transparent 24%),
+      radial-gradient(circle at top right, rgba(95,146,173,.14), transparent 24%),
+      linear-gradient(180deg,#f1f8f8 0%,#e8f1f1 42%,#e7edee 100%);
   }
   a{color:inherit;text-decoration:none;}
   button,input{font:inherit;}
@@ -57,17 +73,17 @@
   .topbar{
     position:sticky;
     top:0;
-    z-index:40;
+    z-index:60;
     height:var(--top-h);
-    backdrop-filter:blur(16px);
-    background:rgba(248,252,251,.76);
-    border-bottom:1px solid rgba(21,58,76,.08);
+    backdrop-filter:blur(18px);
+    background:rgba(248,251,249,.72);
+    border-bottom:1px solid rgba(23,51,56,.08);
   }
   .topbar .inner{
-    max-width:860px;
+    max-width:1120px;
     height:100%;
     margin:0 auto;
-    padding:0 18px;
+    padding:0 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -78,183 +94,251 @@
     font-family:"Fraunces",serif;
     font-size:28px;
     font-weight:500;
-    letter-spacing:-.03em;
+    letter-spacing:-.04em;
   }
   .brand span{
     font-family:"Space Mono",monospace;
     font-size:10px;
-    letter-spacing:.16em;
+    letter-spacing:.18em;
     text-transform:uppercase;
-    color:var(--muted);
+    color:var(--ink-soft);
   }
-  .toplink{
+  .top-actions{display:flex;align-items:center;gap:10px;}
+  .top-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 14px;
+    border-radius:999px;
+    border:1px solid rgba(23,51,56,.12);
+    background:rgba(255,255,255,.74);
     font-family:"Space Mono",monospace;
     font-size:10px;
-    letter-spacing:.12em;
+    letter-spacing:.14em;
     text-transform:uppercase;
-    color:#245d8a;
-    padding:10px 12px;
-    border-radius:999px;
-    border:1px solid rgba(21,58,76,.12);
-    background:rgba(255,255,255,.74);
+    color:var(--accent-deep);
   }
 
-  .page{display:none;animation:fade .18s ease;}
+  .page{display:none;animation:rise .28s ease;}
   .page.active{display:block;}
-  @keyframes fade{
-    from{opacity:0;transform:translateY(4px);}
+  @keyframes rise{
+    from{opacity:0;transform:translateY(10px);}
     to{opacity:1;transform:none;}
-  }
-  .page{
-    --accent:#245d8a;
-    --accent-soft:rgba(36,93,138,.10);
-    --hero-text:#f7fbfa;
-    --hero-sub:rgba(247,251,250,.86);
-    --hero-bg:linear-gradient(135deg,#245d8a 0%,#3d8b89 54%,#6aa16a 100%);
-  }
-  #page-plan{
-    --accent:#245d8a;
-    --accent-soft:rgba(36,93,138,.10);
-    --hero-bg:
-      radial-gradient(circle at 18% 24%, rgba(110,163,106,.42), transparent 20%),
-      radial-gradient(circle at 82% 16%, rgba(137,206,218,.18), transparent 24%),
-      linear-gradient(135deg,#245d8a 0%,#2f8a86 52%,#6ca46a 100%);
-  }
-  #page-pack{
-    --accent:#a96a2f;
-    --accent-soft:rgba(169,106,47,.12);
-    --hero-bg:
-      radial-gradient(circle at 20% 20%, rgba(243,215,164,.26), transparent 20%),
-      radial-gradient(circle at 82% 18%, rgba(187,111,56,.18), transparent 18%),
-      linear-gradient(135deg,#7e4c2a 0%,#b9783d 58%,#d7b168 100%);
-  }
-  #page-travel{
-    --accent:#245741;
-    --accent-soft:rgba(36,87,65,.10);
-    --hero-bg:
-      radial-gradient(circle at 18% 22%, rgba(114,178,138,.28), transparent 18%),
-      radial-gradient(circle at 82% 18%, rgba(79,137,170,.18), transparent 20%),
-      linear-gradient(135deg,#215847 0%,#2e7a68 50%,#4c92a8 100%);
   }
 
   .wrap{
-    max-width:860px;
+    max-width:1120px;
     margin:0 auto;
-    padding:20px 18px 28px;
-  }
-  .hero{
-    position:relative;
-    overflow:hidden;
-    border-radius:28px;
-    background:var(--hero-bg);
-    color:var(--hero-text);
-    padding:28px 22px 24px;
-    box-shadow:var(--shadow);
-  }
-  .hero::after{
-    content:"";
-    position:absolute;
-    right:-56px;
-    top:-38px;
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,.20), transparent 68%);
+    padding:26px 20px 36px;
   }
   .eyebrow{
-    position:relative;
-    z-index:1;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.18em;
     text-transform:uppercase;
-    color:rgba(247,251,250,.76);
   }
-  h1{
-    position:relative;
-    z-index:1;
-    margin-top:12px;
-    font-family:"Fraunces",serif;
-    font-size:clamp(46px,11vw,78px);
-    line-height:.92;
-    letter-spacing:-.04em;
-  }
-  .hero p{
-    position:relative;
-    z-index:1;
-    margin-top:12px;
-    max-width:50ch;
-    color:var(--hero-sub);
-    font-size:15px;
-  }
-  .hero-meta{
-    position:relative;
-    z-index:1;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:18px;
-  }
-  .hero-meta span{
-    padding:7px 10px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.16);
-    background:rgba(255,255,255,.08);
-    font-family:"Space Mono",monospace;
-    font-size:10px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-  }
-
-  .section{padding-top:28px;}
+  .section{padding-top:34px;}
   .section-head{
     display:flex;
-    align-items:end;
+    align-items:flex-end;
     justify-content:space-between;
-    gap:14px;
-    margin-bottom:14px;
+    gap:18px;
+    margin-bottom:18px;
   }
   .section-head h2{
     font-family:"Fraunces",serif;
-    font-size:30px;
+    font-size:clamp(28px,4vw,40px);
     font-weight:500;
-    letter-spacing:-.02em;
+    letter-spacing:-.03em;
   }
   .section-head p{
-    color:var(--muted);
-    font-size:13px;
-    max-width:34ch;
+    max-width:40ch;
+    color:var(--ink-soft);
+    font-size:14px;
     text-align:right;
   }
 
-  .grid{display:grid;gap:14px;}
-  .grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .wide-band{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;}
-  .travel-top{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .hero{
+    position:relative;
+    overflow:hidden;
+    border-radius:32px;
+    min-height:520px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    color:#f7fbf8;
+    display:grid;
+    align-items:end;
+    background:
+      linear-gradient(180deg, rgba(14,35,39,.16), rgba(14,35,39,.70)),
+      url("https://images.unsplash.com/photo-1536308304182-5a2e0e04bb08?auto=format&fit=crop&w=1600&q=80") center/cover;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 14% 16%, rgba(236,221,178,.22), transparent 16%),
+      radial-gradient(circle at 84% 12%, rgba(110,177,164,.20), transparent 18%),
+      linear-gradient(130deg, rgba(9,36,44,.16), rgba(9,36,44,.05) 48%, rgba(9,36,44,.52));
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:22px;
+    align-items:end;
+  }
+  .hero-copy{max-width:56ch;}
+  .hero-copy .eyebrow{color:rgba(247,251,248,.76);}
+  .hero-copy h1{
+    margin-top:14px;
+    font-family:"Fraunces",serif;
+    font-size:clamp(42px,7vw,80px);
+    font-weight:500;
+    line-height:.92;
+    letter-spacing:-.05em;
+  }
+  .hero-copy p{
+    margin-top:16px;
+    font-size:16px;
+    color:rgba(247,251,248,.88);
+  }
+  .hero-note{
+    justify-self:end;
+    width:min(100%, 360px);
+    padding:18px;
+    border-radius:24px;
+    background:rgba(248,251,249,.16);
+    border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(10px);
+  }
+  .hero-note h3{
+    font-family:"Fraunces",serif;
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:-.03em;
+  }
+  .hero-note p{
+    margin-top:10px;
+    font-size:14px;
+    color:rgba(247,251,248,.82);
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+  .meta-pill{
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.16);
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#f7fbf8;
+  }
 
+  .grid{display:grid;gap:16px;}
+  .grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .grid.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .grid.four{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .home-story{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:16px;
+  }
   .card{
     background:var(--card);
     border:1px solid var(--line);
-    border-radius:22px;
-    padding:18px;
-    box-shadow:0 10px 28px rgba(21,58,76,.07);
+    border-radius:26px;
+    padding:20px;
+    box-shadow:0 12px 34px rgba(23,51,56,.07);
   }
   .card h3{
     font-family:"Fraunces",serif;
-    font-size:22px;
+    font-size:25px;
     font-weight:500;
-    letter-spacing:-.02em;
-    margin-bottom:8px;
+    letter-spacing:-.03em;
   }
-  .card p{color:var(--muted);font-size:14px;}
+  .card p{margin-top:8px;color:var(--ink-soft);font-size:14px;}
   .kicker{
     margin-bottom:8px;
-    font-family:"Space Mono",monospace;
-    font-size:10px;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    color:var(--accent);
+    color:var(--accent-deep);
   }
+  .soft-card{
+    background:var(--glass);
+    border:1px solid rgba(23,51,56,.10);
+    border-radius:22px;
+    padding:18px;
+  }
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+  }
+  .stat{
+    padding:16px;
+    border-radius:22px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(23,51,56,.08);
+  }
+  .stat strong{
+    display:block;
+    font-family:"Fraunces",serif;
+    font-size:32px;
+    font-weight:500;
+    letter-spacing:-.04em;
+  }
+  .stat span{
+    display:block;
+    margin-top:6px;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+
+  .journey{
+    display:grid;
+    gap:14px;
+  }
+  .journey-step{
+    display:grid;
+    grid-template-columns:84px 1fr;
+    gap:14px;
+    padding:16px 0;
+    border-bottom:1px dashed rgba(23,51,56,.12);
+  }
+  .journey-step:last-child{border-bottom:0;padding-bottom:0;}
+  .journey-step .date{
+    font-family:"Space Mono",monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+  }
+  .journey-step strong{
+    display:block;
+    font-size:16px;
+    margin-bottom:4px;
+  }
+  .journey-step span{color:var(--ink-soft);font-size:14px;}
+
+  .visual-card{
+    overflow:hidden;
+    padding:0;
+  }
+  .visual-card img{
+    display:block;
+    width:100%;
+    height:220px;
+    object-fit:cover;
+  }
+  .visual-card .body{padding:18px 18px 20px;}
+  .visual-card .body h3{font-size:24px;}
+  .visual-card .body p{margin-top:8px;}
   .chips{
     display:flex;
     flex-wrap:wrap;
@@ -264,166 +348,235 @@
   .chip{
     display:inline-flex;
     align-items:center;
-    gap:6px;
     padding:7px 10px;
     border-radius:999px;
-    border:1px solid rgba(21,58,76,.10);
-    background:rgba(255,255,255,.70);
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(23,51,56,.10);
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.08em;
     text-transform:uppercase;
-    color:var(--accent);
-  }
-  .day-strip{display:grid;gap:10px;margin-top:8px;}
-  .day-row{
-    display:grid;
-    grid-template-columns:88px 1fr;
-    gap:14px;
-    padding:12px 0;
-    border-bottom:1px dashed rgba(21,58,76,.12);
-  }
-  .day-row:last-child{border-bottom:0;}
-  .day-row .date{
-    font-family:"Space Mono",monospace;
-    font-size:11px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--accent);
-  }
-  .day-row strong{display:block;font-size:15px;margin-bottom:4px;}
-  .day-row span{color:var(--muted);font-size:13.5px;}
-
-  .route-list,.pack-list,.quick-list,.artifact-list,.places-list{
-    list-style:none;
-    display:grid;
-    gap:10px;
-  }
-  .route-list li,.pack-list li,.quick-list li,.artifact-list li,.places-list li{
-    padding:12px 14px;
-    border-radius:16px;
-    background:rgba(255,255,255,.64);
-    border:1px solid rgba(21,58,76,.08);
-  }
-  .route-list strong,.artifact-list strong,.places-list strong,.quick-list strong{
-    display:block;
-    font-size:15px;
-    margin-bottom:3px;
-  }
-  .route-list span,.artifact-list span,.places-list span,.quick-list span{
-    color:var(--muted);
-    font-size:13px;
+    color:var(--accent-deep);
   }
   .action-row{
     display:flex;
     flex-wrap:wrap;
     gap:10px;
-    margin-top:14px;
+    margin-top:16px;
   }
   .action{
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:8px;
-    padding:11px 14px;
+    min-height:42px;
+    padding:11px 15px;
     border-radius:999px;
-    border:1px solid rgba(21,58,76,.14);
+    border:1px solid rgba(23,51,56,.12);
     background:#fff;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.12em;
     text-transform:uppercase;
-    color:var(--accent);
-  }
-  .action.primary{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#f7fbfa;
-  }
-  .action.soft{
-    background:var(--accent-soft);
-    border-color:rgba(21,58,76,.08);
-    color:var(--ink);
-  }
-
-  .subnav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:14px;
-  }
-  .subnav button{
-    border:1px solid rgba(21,58,76,.12);
-    border-radius:999px;
-    padding:11px 14px;
-    background:rgba(255,255,255,.70);
-    color:var(--accent);
-    font-family:"Space Mono",monospace;
-    font-size:10px;
-    letter-spacing:.12em;
-    text-transform:uppercase;
+    color:var(--accent-deep);
     cursor:pointer;
   }
-  .subnav button.active{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#f7fbfa;
+  .action.primary{
+    background:var(--accent-deep);
+    border-color:var(--accent-deep);
+    color:#f7fbf8;
   }
-  .subpane{display:none;}
-  .subpane.active{display:block;}
-  .frame-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:22px;
-    padding:12px;
-    box-shadow:0 10px 28px rgba(21,58,76,.07);
+  .action.soft{
+    background:rgba(31,122,115,.08);
   }
-  .frame-card .frame-head{
+
+  .day-nav{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:6px 8px 12px;
+    gap:10px;
+    overflow:auto;
+    padding-bottom:4px;
+    scrollbar-width:none;
   }
-  .frame-card strong{
+  .day-nav::-webkit-scrollbar{display:none;}
+  .day-nav a{
+    flex:0 0 auto;
+    padding:10px 12px;
+    border-radius:16px;
+    background:rgba(255,255,255,.70);
+    border:1px solid rgba(23,51,56,.08);
+  }
+  .day-nav strong{
+    display:block;
+    font-family:"Space Mono",monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+  }
+  .day-nav span{
+    display:block;
+    margin-top:3px;
+    color:var(--ink-soft);
+    font-size:13px;
+  }
+
+  .plan-stack{display:grid;gap:18px;}
+  .day-card{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:0;
+    overflow:hidden;
+  }
+  .day-visual{
+    position:relative;
+    min-height:100%;
+    background:#dbe8e4;
+  }
+  .day-visual img{
+    width:100%;
+    height:100%;
+    min-height:360px;
+    object-fit:cover;
+    display:block;
+  }
+  .day-overlay{
+    position:absolute;
+    inset:auto 18px 18px 18px;
+    padding:14px 15px;
+    border-radius:18px;
+    background:linear-gradient(180deg, rgba(18,39,42,.18), rgba(18,39,42,.72));
+    color:#f7fbf8;
+  }
+  .day-overlay strong{
+    display:block;
     font-family:"Fraunces",serif;
     font-size:24px;
     font-weight:500;
-    letter-spacing:-.02em;
+    letter-spacing:-.03em;
   }
-  .frame-card span{
-    color:var(--muted);
+  .day-overlay span{
+    display:block;
+    margin-top:6px;
     font-size:13px;
+    color:rgba(247,251,248,.82);
   }
-  .embed-frame{
-    width:100%;
-    min-height:760px;
-    border:0;
+  .day-copy{padding:24px;}
+  .day-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .day-badge{
+    padding:7px 10px;
+    border-radius:999px;
+    background:rgba(31,122,115,.10);
+    color:var(--accent-deep);
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .day-copy h3{
+    font-family:"Fraunces",serif;
+    font-size:30px;
+    font-weight:500;
+    letter-spacing:-.04em;
+  }
+  .day-copy .summary{
+    margin-top:10px;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .detail-list{
+    list-style:none;
+    display:grid;
+    gap:9px;
+    margin-top:16px;
+  }
+  .detail-list li{
+    padding-left:18px;
+    position:relative;
+    color:var(--ink);
+    font-size:14px;
+  }
+  .detail-list li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.55em;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  .detail-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    margin-top:18px;
+  }
+  .mini{
     border-radius:18px;
-    background:#fff;
+    overflow:hidden;
+    background:rgba(255,255,255,.80);
+    border:1px solid rgba(23,51,56,.09);
+  }
+  .mini img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    display:block;
+  }
+  .mini .text{padding:12px 12px 14px;}
+  .mini strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:4px;
+  }
+  .mini span{
+    display:block;
+    font-size:12.5px;
+    color:var(--ink-soft);
   }
 
+  .pack-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+  }
   .pack-group{display:grid;gap:12px;}
+  .pack-list{
+    list-style:none;
+    display:grid;
+    gap:10px;
+  }
   .pack-list li{
     display:flex;
     align-items:flex-start;
     gap:10px;
-    font-size:14px;
-    color:var(--ink);
+    padding:12px 14px;
+    border-radius:16px;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(23,51,56,.08);
   }
   .pack-list input[type="checkbox"]{
     width:18px;
     height:18px;
     margin-top:1px;
-    accent-color:var(--accent);
+    accent-color:#9d6430;
   }
-  .pack-list label{flex:1;}
-  .pack-form{display:flex;gap:10px;margin-top:14px;}
+  .pack-list label{flex:1;font-size:14px;}
+  .pack-form{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+  }
   .pack-form input{
     flex:1;
     min-width:0;
     border-radius:14px;
-    border:1px solid rgba(21,58,76,.14);
+    border:1px solid rgba(23,51,56,.14);
     background:rgba(255,255,255,.78);
     padding:12px 14px;
     color:var(--ink);
@@ -432,8 +585,8 @@
     border:0;
     border-radius:14px;
     padding:12px 16px;
-    background:var(--accent);
-    color:#f7fbfa;
+    background:#8b5730;
+    color:#f8faf9;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.12em;
@@ -447,15 +600,15 @@
     gap:10px;
     padding:12px 14px;
     border-radius:16px;
-    border:1px solid rgba(21,58,76,.10);
-    background:rgba(255,255,255,.66);
+    border:1px solid rgba(23,51,56,.10);
+    background:rgba(255,255,255,.70);
   }
-  .custom-item.done .text{text-decoration:line-through;color:var(--muted);}
+  .custom-item.done .text{text-decoration:line-through;color:var(--ink-soft);}
   .custom-item .text{flex:1;font-size:14px;}
   .custom-item button{
     border:0;
     background:transparent;
-    color:var(--muted);
+    color:var(--ink-soft);
     cursor:pointer;
     font-family:"Space Mono",monospace;
     font-size:11px;
@@ -463,14 +616,65 @@
     text-transform:uppercase;
   }
 
+  .travel-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:16px;
+  }
+  .quick-list,.artifact-list,.notes-list{
+    list-style:none;
+    display:grid;
+    gap:10px;
+    margin-top:12px;
+  }
+  .quick-list li,.artifact-list li,.notes-list li{
+    padding:12px 14px;
+    border-radius:16px;
+    background:rgba(255,255,255,.68);
+    border:1px solid rgba(23,51,56,.08);
+  }
+  .quick-list strong,.artifact-list strong,.notes-list strong{
+    display:block;
+    font-size:15px;
+    margin-bottom:4px;
+  }
+  .quick-list span,.artifact-list span,.notes-list span{
+    display:block;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .resource-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    margin-top:16px;
+  }
+  .resource{
+    padding:16px;
+    border-radius:20px;
+    background:rgba(255,255,255,.76);
+    border:1px solid rgba(23,51,56,.08);
+  }
+  .resource h4{
+    font-family:"Fraunces",serif;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:-.03em;
+  }
+  .resource p{
+    margin-top:8px;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+
   .footer{
     padding:22px 0 8px;
     text-align:center;
     font-family:"Space Mono",monospace;
     font-size:10px;
-    letter-spacing:.14em;
+    letter-spacing:.16em;
     text-transform:uppercase;
-    color:var(--muted);
+    color:var(--ink-soft);
   }
 
   .tabbar{
@@ -478,25 +682,25 @@
     left:0;
     right:0;
     bottom:0;
-    z-index:50;
-    background:rgba(17,52,62,.96);
+    z-index:70;
+    background:rgba(15,43,47,.95);
     padding-bottom:env(safe-area-inset-bottom);
-    box-shadow:0 -6px 20px rgba(0,0,0,.22);
+    box-shadow:0 -8px 24px rgba(0,0,0,.22);
   }
   .tabbar .inner{
-    max-width:860px;
+    max-width:1120px;
     height:var(--nav-h);
     margin:0 auto;
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
   }
   .tabbar a{
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:5px;
-    color:#90a8af;
+    gap:6px;
+    color:#8ea7ad;
     font-family:"Space Mono",monospace;
     font-size:10px;
     letter-spacing:.12em;
@@ -511,22 +715,97 @@
     stroke-linecap:round;
     stroke-linejoin:round;
   }
-  .tabbar a.active{color:#f1ddb7;}
+  .tabbar a.active{color:#f3dfba;}
 
-  @media (max-width:720px){
-    .grid.two,.wide-band,.travel-top{grid-template-columns:1fr;}
+  @media (max-width:980px){
+    .hero-inner,.home-story,.travel-grid,.day-card{grid-template-columns:1fr;}
+    .hero-note{justify-self:start;width:100%;}
     .section-head{display:block;}
-    .section-head p{margin-top:6px;text-align:left;}
-    .embed-frame{min-height:620px;}
-    .frame-card .frame-head{display:block;}
-    .frame-card .frame-head span{display:block;margin-top:4px;}
+    .section-head p{margin-top:8px;text-align:left;}
+  }
+  @media (max-width:760px){
+    .grid.two,.grid.three,.grid.four,.detail-grid,.pack-grid,.resource-grid,.stat-strip{grid-template-columns:1fr;}
+    .day-visual img{min-height:280px;}
+    .journey-step{grid-template-columns:1fr;}
   }
   @media (max-width:560px){
     .topbar .inner,.wrap{padding-left:14px;padding-right:14px;}
+    .top-link{display:none;}
     .brand strong{font-size:24px;}
-    .toplink{display:none;}
-    .day-row{grid-template-columns:1fr;}
+    .hero{padding:18px;min-height:480px;}
+    .hero-copy h1{font-size:42px;}
+    .day-copy{padding:18px;}
     .pack-form{flex-direction:column;}
+  }
+  .itin-block{display:grid;gap:0;}
+  .itin-row{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .itin-row:first-child{padding-top:0;}
+  .itin-row:last-child{border-bottom:0;padding-bottom:0;}
+  .itin-label{
+    font-family:"Space Mono",monospace;
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-deep);
+    padding-top:2px;
+  }
+  .itin-value{font-size:14px;color:var(--ink);line-height:1.5;}
+  .itin-section-title{
+    font-family:"Fraunces",serif;
+    font-size:clamp(22px,3vw,30px);
+    font-weight:500;
+    letter-spacing:-.03em;
+    margin-bottom:14px;
+  }
+  .itin-days{display:grid;gap:12px;}
+  .itin-day{padding:20px;}
+  .itin-day-head{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .itin-day-title{
+    display:block;
+    font-family:"Fraunces",serif;
+    font-size:20px;
+    font-weight:500;
+    letter-spacing:-.03em;
+    margin-top:4px;
+  }
+  .itin-list{
+    list-style:none;
+    display:grid;
+    gap:8px;
+    padding-left:2px;
+  }
+  .itin-list li{
+    padding-left:16px;
+    position:relative;
+    font-size:14px;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .itin-list li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.58em;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+  @media (max-width:480px){
+    .itin-row{grid-template-columns:1fr;gap:4px;}
+    .itin-label{padding-top:0;}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto;}
@@ -535,292 +814,518 @@
   }
 </style>
 </head>
-<body data-section="plan">
+<body data-section="home">
 
 <div class="topbar">
   <div class="inner">
-    <a class="brand" href="#/plan">
+    <a class="brand" href="#/home">
       <strong>Azores 15 Year</strong>
-      <span>Sao Miguel</span>
+      <span>Sao Miguel for two</span>
     </a>
-    <a class="toplink" href="index.html">All Trips</a>
+    <div class="top-actions">
+      <a class="top-link" href="index.html">All trips</a>
+      <a class="top-link" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
+    </div>
   </div>
 </div>
 
-<section class="page active" id="page-plan">
+<section class="page active" id="page-home">
   <div class="wrap">
     <div class="hero">
-      <div class="eyebrow">20-27 Aug 2026</div>
-      <h1>Plan</h1>
-      <p>Trip shape, day flow, and the deeper planning pages in one place.</p>
-      <div class="hero-meta">
-        <span>2 travelers</span>
-        <span>6 nights</span>
-        <span>2 hotels</span>
-        <span>West to east</span>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">20-27 Aug 2026 · Sao Miguel · Kyle and Marissa</div>
+          <h1>Second honeymoon energy, island edition.</h1>
+          <p>Happy Anniversary to Us. We haven't traveled by ourselves since our honeymoon, and this trip is long overdue. At the same time, it's well worth the wait. 15 years later, our second honeymoon awaits.</p>
+          <div class="meta-row">
+            <span class="meta-pill">2 travelers</span>
+            <span class="meta-pill">6 nights</span>
+            <span class="meta-pill">2 Octants</span>
+            <span class="meta-pill">West to east arc</span>
+          </div>
+        </div>
+        <div class="hero-note">
+          <div class="eyebrow">What this app does</div>
+          <h3>One journey, not four disconnected planning files.</h3>
+          <p>Start here for the meaning of the trip, move into the day-by-day route, then drop into packing and live travel only when the island gets real.</p>
+        </div>
       </div>
     </div>
 
     <div class="section">
       <div class="section-head">
-        <h2>Planning Views</h2>
-        <p>Switch between the planning layers without leaving the app.</p>
+        <h2>The trip at a glance</h2>
+        <p>The whole shape should feel like a glide: arrive soft, hit the western drama early, then drift east into the thermal finale.</p>
       </div>
-      <div class="subnav" data-subnav="plan">
-        <button type="button" class="active" data-subview="daily">Daily itinerary</button>
-        <button type="button" data-subview="hour">Hour by hour</button>
-        <button type="button" data-subview="carousel">Photo carousel</button>
+      <div class="stat-strip">
+        <div class="stat"><strong>7</strong><span>day beats including flight night and return</span></div>
+        <div class="stat"><strong>5</strong><span>locked anchors already on the books</span></div>
+        <div class="stat"><strong>2</strong><span>hotel moods: harbor energy, then thermal hush</span></div>
+        <div class="stat"><strong>1</strong><span>goal: make it feel easy while it still feels special</span></div>
       </div>
+    </div>
 
-      <div class="subpane active" data-subpane="plan-daily">
-        <div class="wide-band">
-          <div class="card">
-            <div class="kicker">Flow</div>
-            <div class="day-strip">
-              <div class="day-row"><div class="date">Fri 21</div><div><strong>Arrive soft</strong><span>Ponta Delgada, marina, reset, A Tasca.</span></div></div>
-              <div class="day-row"><div class="date">Sat 22</div><div><strong>West day</strong><span>Sete Cidades, 13:00 kayak, Ferraria, Quinta dos Sabores.</span></div></div>
-              <div class="day-row"><div class="date">Sun 23</div><div><strong>Central day</strong><span>Lagoa do Fogo, Caldeira Velha, Ribeira Grande, Bom Pesqueiro.</span></div></div>
-              <div class="day-row"><div class="date">Mon 24</div><div><strong>Move east</strong><span>08:30 whale watch, Caloura, chapel, Furnas check-in.</span></div></div>
-              <div class="day-row"><div class="date">Tue 25</div><div><strong>Open loop</strong><span>Nordeste options, then booked Poça at 18:30.</span></div></div>
-              <div class="day-row"><div class="date">Wed 26</div><div><strong>Thermal day</strong><span>11:00 massage, cozido, Terra Nostra, quiet in-house dinner.</span></div></div>
-              <div class="day-row"><div class="date">Thu 27</div><div><strong>Home</strong><span>Early drive to PDL and late-morning flight.</span></div></div>
+    <div class="section">
+      <div class="home-story">
+        <div class="card">
+          <div class="kicker eyebrow">Journey arc</div>
+          <h3>How the week should feel</h3>
+          <div class="journey">
+            <div class="journey-step">
+              <div class="date">Start</div>
+              <div><strong>Recover first, do not perform.</strong><span>Arrival day is for walking the marina, eating slowly, and letting the island come to you instead of trying to win the first day.</span></div>
+            </div>
+            <div class="journey-step">
+              <div class="date">Middle</div>
+              <div><strong>Spend the legs early.</strong><span>Sete Cidades and Lagoa do Fogo carry the dramatic movement while the energy is fresh, with real anchors already holding the pace in place.</span></div>
+            </div>
+            <div class="journey-step">
+              <div class="date">Finish</div>
+              <div><strong>Slide into Furnas.</strong><span>The east side is where the trip softens: whale watch, pools, Poça at dusk, massage, cozido, and the kind of ending that makes going home feel almost rude.</span></div>
             </div>
           </div>
-          <div class="grid">
-            <div class="card">
-              <div class="kicker">Stay 1</div>
+          <div class="action-row">
+            <a class="action primary" href="#/plan">Open the day-by-day</a>
+            <button type="button" class="action soft" data-jump-page="travel">Jump to live travel links</button>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="visual-card card">
+            <img src="https://pontadelgada.octanthotels.com/api/media/file/PontaDelgada-2-500x266.png" alt="Octant Ponta Delgada harbor-facing stay" loading="lazy">
+            <div class="body">
+              <div class="kicker eyebrow">Stay 1</div>
               <h3>Octant Ponta Delgada</h3>
-              <p>Fri 21 to Mon 24</p>
+              <p>The harbor base. Walkable, social, and the right place to start while the body is still resetting from Newark.</p>
               <div class="chips">
+                <span class="chip">Fri-Mon</span>
                 <span class="chip">Harbor front</span>
-                <span class="chip">3 nights</span>
+                <span class="chip">Breakfast included</span>
               </div>
             </div>
-            <div class="card">
-              <div class="kicker">Stay 2</div>
+          </div>
+          <div class="visual-card card">
+            <img src="https://furnas.octanthotels.com/api/media/file/Furnas-3-500x433.png" alt="Octant Furnas surrounded by greenery" loading="lazy">
+            <div class="body">
+              <div class="kicker eyebrow">Stay 2</div>
               <h3>Octant Furnas</h3>
-              <p>Mon 24 to Thu 27</p>
+              <p>The thermal finish. More inward, more spa-like, and exactly where the trip should go once the scenic work is done.</p>
               <div class="chips">
+                <span class="chip">Mon-Thu</span>
                 <span class="chip">Thermal valley</span>
-                <span class="chip">3 nights</span>
-              </div>
-            </div>
-            <div class="card">
-              <div class="kicker">Locked anchors</div>
-              <div class="chips">
-                <span class="chip">Sat kayak</span>
-                <span class="chip">Sun Caldeira Velha</span>
-                <span class="chip">Mon whale watch</span>
-                <span class="chip">Tue Poça 18:30</span>
-                <span class="chip">Wed massage</span>
+                <span class="chip">Pool-first energy</span>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="subpane" data-subpane="plan-hour">
-        <div class="frame-card">
-          <div class="frame-head">
-            <div>
-              <strong>Hour by hour</strong>
-              <span>Full pacing view loaded underneath.</span>
-            </div>
-          </div>
-          <iframe class="embed-frame" src="azores-hour-by-hour.html" title="Azores hour by hour"></iframe>
-        </div>
-      </div>
-
-      <div class="subpane" data-subpane="plan-carousel">
-        <div class="frame-card">
-          <div class="frame-head">
-            <div>
-              <strong>Photo carousel</strong>
-              <span>The richer day-by-day planning surface.</span>
-            </div>
-          </div>
-          <iframe class="embed-frame" src="azores-15-year-anniversary/index.html" title="Azores carousel itinerary"></iframe>
         </div>
       </div>
     </div>
 
-    <div class="footer">Plan = choose the shape</div>
+    <div class="section">
+      <div class="section-head">
+        <h2>Anchors worth protecting</h2>
+        <p>These are the trip-makers. Everything else can flex around them.</p>
+      </div>
+      <div class="grid three">
+        <div class="visual-card card">
+          <img src="https://images.unsplash.com/photo-1536308304182-5a2e0e04bb08?auto=format&fit=crop&w=1200&q=80" alt="Sete Cidades crater lakes" loading="lazy">
+          <div class="body">
+            <div class="kicker eyebrow">Saturday</div>
+            <h3>Sete Cidades kayak</h3>
+            <p>Booked for 13:00. The west-day spine is already decided, which is good because this is one of the island's obvious memory-makers.</p>
+          </div>
+        </div>
+        <div class="visual-card card">
+          <img src="https://images.unsplash.com/photo-1676065344960-6505bec2bf89?auto=format&fit=crop&w=1200&q=80" alt="Lagoa do Fogo with green ridge lines" loading="lazy">
+          <div class="body">
+            <div class="kicker eyebrow">Sunday</div>
+            <h3>Caldeira Velha plus Fogo</h3>
+            <p>The island spine, then the thermal forest. Scenic and tactile in the same day without over-complicating it.</p>
+          </div>
+        </div>
+        <div class="visual-card card">
+          <img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=1200&q=80" alt="Warm thermal pool in lush surroundings" loading="lazy">
+          <div class="body">
+            <div class="kicker eyebrow">Finale</div>
+            <h3>Massage, cozido, Terra Nostra</h3>
+            <p>The last full day should feel decadent without apology. That is the whole point of finishing in Furnas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Home = remember why this trip exists</div>
+  </div>
+</section>
+
+<section class="page" id="page-plan">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="color:var(--accent-deep);">Plan section</div>
+        <h2>The booked itinerary</h2>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="itin-block card">
+      <div class="itin-row">
+        <div class="itin-label">Location</div>
+        <div class="itin-value">S&#227;o Miguel, Azores, Portugal</div>
+      </div>
+      <div class="itin-row">
+        <div class="itin-label">Dates</div>
+        <div class="itin-value">August 20 &ndash; 27, 2026 &middot; 7 nights</div>
+      </div>
+    </div>
+
+    <!-- Flights -->
+    <div class="section">
+      <h3 class="itin-section-title">Flight Details</h3>
+      <div class="itin-block card">
+        <div class="itin-row">
+          <div class="itin-label">Outbound</div>
+          <div class="itin-value">United nonstop &middot; EWR &rarr; PDL &middot; Thu Aug 20, departs 23:05 &middot; arrives Fri Aug 21 ~08:40</div>
+        </div>
+        <div class="itin-row">
+          <div class="itin-label">Return</div>
+          <div class="itin-value">Same-day return flight to Newark &middot; Thu Aug 27</div>
+        </div>
+        <div class="itin-row">
+          <div class="itin-label">Car rental</div>
+          <div class="itin-value">Pick up at PDL airport on arrival &middot; drop off Aug 27 before flight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hotels -->
+    <div class="section">
+      <h3 class="itin-section-title">Hotel Details</h3>
+      <div class="itin-block card">
+        <div class="itin-row">
+          <div class="itin-label">Stay 1</div>
+          <div class="itin-value"><strong>Octant Ponta Delgada</strong> &middot; Fri Aug 21 &ndash; Mon Aug 24 (3 nights) &middot; Harbor front &middot; breakfast included</div>
+        </div>
+        <div class="itin-row">
+          <div class="itin-label">Stay 2</div>
+          <div class="itin-value"><strong>Octant Furnas</strong> &middot; Mon Aug 24 &ndash; Thu Aug 27 (3 nights) &middot; Thermal valley &middot; pool-first energy</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day by day -->
+    <div class="section">
+      <h3 class="itin-section-title">Day by Day</h3>
+      <div class="itin-days">
+        <div class="itin-day card" id="day-0">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 0</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Thursday, August 20</div>
+              <strong class="itin-day-title">Flight Night</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li>Depart Newark (EWR) at 23:05 &middot; United nonstop to Ponta Delgada</li>
+            <li>Passports, hotel confirmations, and first-day clothes at top of bag</li>
+            <li>Sleep on the plane &mdash; island is 4 hours ahead, tomorrow needs grace not ambition</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-1">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 1</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Friday, August 21</div>
+              <strong class="itin-day-title">Arrival &middot; Ponta Delgada</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li>Land PDL ~08:40 &middot; collect rental car &middot; ~10 min drive to hotel</li>
+            <li>Check into Octant Ponta Delgada (early check-in if available)</li>
+            <li>Marina walk, old town, rooftop pool</li>
+            <li>Dinner: A Tasca (if energy holds)</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-2">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 2</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Saturday, August 22</div>
+              <strong class="itin-day-title">Sete Cidades &middot; West Day</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li>Morning: Vista do Rei viewpoint &middot; Grota do Inferno if conditions allow</li>
+            <li><strong>13:00 &ndash; Futurismo kayak, Lagoa Azul</strong> (booked)</li>
+            <li>Afternoon: Ponta da Ferraria thermal ocean cove (check tide window before driving out)</li>
+            <li>Dinner: Quinta dos Sabores at 19:30</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-3">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 3</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Sunday, August 23</div>
+              <strong class="itin-day-title">Lagoa do Fogo &middot; Last Night Ponta Delgada</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li><strong>10:30&ndash;12:00 &ndash; Caldeira Velha</strong> (entry + locker booked)</li>
+            <li>Lagoa do Fogo scenic ridge if weather cooperates</li>
+            <li>Lunch: Ribeira Grande &middot; wander and reset</li>
+            <li>Dinner: Bom Pesqueiro at 19:00</li>
+            <li>Pack tonight &mdash; moving east in the morning</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-4">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 4</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Monday, August 24</div>
+              <strong class="itin-day-title">Whale Watch &middot; Move to Furnas</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li><strong>08:30&ndash;11:30 &ndash; Futurismo whale and dolphin watch</strong> (booked &middot; Portas do Mar)</li>
+            <li>Lunch: Bar Caloura &middot; swim stop if conditions allow</li>
+            <li>Nossa Senhora da Paz chapel viewpoint</li>
+            <li>Check into Octant Furnas &mdash; settle in, slow down</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-5">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 5</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Tuesday, August 25</div>
+              <strong class="itin-day-title">Open Day &middot; Dusk Soak Sacred</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li>Option A (explore): Ribeira dos Caldeiroes &middot; Pelado &middot; Ponta do Sossego &middot; Ponta da Madrugada</li>
+            <li>Option B (soft): Quiet Furnas day &middot; hotel &middot; thermal pools</li>
+            <li>Salto do Prego hike only if the day still feels easy</li>
+            <li><strong>18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (confirmation T9WAPA) &middot; non-negotiable, plan everything around this</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-6">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 6</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Wednesday, August 26</div>
+              <strong class="itin-day-title">Thermal Finale &middot; Last Full Day</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li><strong>11:00 &ndash; Couples massage</strong> (booked)</li>
+            <li>Lunch: Cozido (reserve ahead of time)</li>
+            <li>Afternoon: Terra Nostra gardens &middot; hotel pools</li>
+            <li>Easy in-house dinner or close by &mdash; nothing that requires planning</li>
+            <li>Quiet packing tonight</li>
+          </ul>
+        </div>
+
+        <div class="itin-day card" id="day-7">
+          <div class="itin-day-head">
+            <span class="day-badge">Day 7</span>
+            <div>
+              <div class="eyebrow" style="color:var(--accent-deep);">Thursday, August 27</div>
+              <strong class="itin-day-title">Return Home</strong>
+            </div>
+          </div>
+          <ul class="itin-list">
+            <li>Depart Furnas by 08:15 &middot; ~50-minute drive to PDL airport</li>
+            <li>Return rental car &middot; check-in &middot; security</li>
+            <li>Board for same-day return flight to Newark</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Plan = follow the trip in order</div>
   </div>
 </section>
 
 <section class="page" id="page-pack">
   <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow">Bring only what helps</div>
-      <h1>Pack</h1>
-      <p>Flight, thermal, hike, dinner. Add your own items below.</p>
-      <div class="hero-meta">
-        <span>Flight</span>
-        <span>Thermal</span>
-        <span>Hike</span>
-        <span>Dinner</span>
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="color:#8b5730;">Pack section</div>
+        <h2>Pack for the trip you actually planned</h2>
+      </div>
+      <p>The useful frame is modes, not outfits: flight, thermal, active, and dinner. That keeps the bag light and the mornings obvious.</p>
+    </div>
+
+    <div class="pack-grid">
+      <div class="card pack-group">
+        <div class="kicker eyebrow" style="color:#8b5730;">Flight night + arrival</div>
+        <h3>Keep the first 12 hours easy</h3>
+        <ul class="pack-list">
+          <li><input type="checkbox"><label>Passports, licenses, rental confirmation, hotel confirmations</label></li>
+          <li><input type="checkbox"><label>Plane layer, headphones, chargers, eye mask</label></li>
+          <li><input type="checkbox"><label>Arrival basics in the personal item: meds, sunglasses, water, deodorant, one clean shirt</label></li>
+          <li><input type="checkbox"><label>One clean harbor-day look that does not require thinking after the red-eye</label></li>
+        </ul>
+      </div>
+
+      <div class="card pack-group">
+        <div class="kicker eyebrow" style="color:#8b5730;">Thermal days</div>
+        <h3>Furnas wants dark swim gear</h3>
+        <ul class="pack-list">
+          <li><input type="checkbox"><label>Dark swimsuits for Terra Nostra and other iron-rich thermal water</label></li>
+          <li><input type="checkbox"><label>Water shoes or grip sandals</label></li>
+          <li><input type="checkbox"><label>Dry bag or plastic bag for wet gear in the car</label></li>
+          <li><input type="checkbox"><label>Quick-dry towel if you want independence from hotel towel flows</label></li>
+        </ul>
+      </div>
+
+      <div class="card pack-group">
+        <div class="kicker eyebrow" style="color:#8b5730;">Active and scenic days</div>
+        <h3>Enough for crater loops, not a thru-hike</h3>
+        <ul class="pack-list">
+          <li><input type="checkbox"><label>Trail shoes that can handle wet ground but still look normal at lunch</label></li>
+          <li><input type="checkbox"><label>Light rain layer for viewpoint weather whiplash</label></li>
+          <li><input type="checkbox"><label>Hat, sunscreen, and refillable water bottle</label></li>
+          <li><input type="checkbox"><label>Compact tote or bag for towels, swimsuit, and post-soak clothes</label></li>
+        </ul>
+      </div>
+
+      <div class="card pack-group">
+        <div class="kicker eyebrow" style="color:#8b5730;">Dinner and hotel life</div>
+        <h3>Simple polish beats overpacking</h3>
+        <ul class="pack-list">
+          <li><input type="checkbox"><label>Two stronger dinner looks each</label></li>
+          <li><input type="checkbox"><label>One warm layer each for harbor nights and hotel terraces</label></li>
+          <li><input type="checkbox"><label>Compact jewelry or extras only if they pull real weight</label></li>
+          <li><input type="checkbox"><label>One flexible shoe that works for dinner and easy walking</label></li>
+        </ul>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-head">
-        <h2>Core Lists</h2>
-        <p>Built around the trip modes.</p>
-      </div>
-      <div class="grid two">
-        <div class="card pack-group">
-          <div class="kicker">Flight</div>
-          <ul class="pack-list">
-            <li><input type="checkbox"><label>Passports, licenses, confirmations</label></li>
-            <li><input type="checkbox"><label>Plane layer, headphones, charger</label></li>
-            <li><input type="checkbox"><label>Arrival basics: meds, water, sunglasses</label></li>
-          </ul>
+      <div class="home-story">
+        <div class="card">
+          <div class="kicker eyebrow" style="color:#8b5730;">Custom list</div>
+          <h3>Add anything this trip specifically needs</h3>
+          <p>Saved in this browser so the list survives your next late-night tweak.</p>
+          <form class="pack-form" id="custom-pack-form">
+            <input id="custom-pack-input" type="text" placeholder="Add packing item">
+            <button type="submit">Add item</button>
+          </form>
+          <div class="custom-items" id="custom-pack-list"></div>
         </div>
-        <div class="card pack-group">
-          <div class="kicker">Thermal</div>
-          <ul class="pack-list">
-            <li><input type="checkbox"><label>Dark swimsuit for Terra Nostra</label></li>
-            <li><input type="checkbox"><label>Water shoes or grip sandals</label></li>
-            <li><input type="checkbox"><label>Dry bag for wet gear</label></li>
-          </ul>
-        </div>
-        <div class="card pack-group">
-          <div class="kicker">Hike</div>
-          <ul class="pack-list">
-            <li><input type="checkbox"><label>Trail shoes</label></li>
-            <li><input type="checkbox"><label>Light rain layer</label></li>
-            <li><input type="checkbox"><label>Hat, sunscreen, water</label></li>
-          </ul>
-        </div>
-        <div class="card pack-group">
-          <div class="kicker">Dinner</div>
-          <ul class="pack-list">
-            <li><input type="checkbox"><label>Two nicer dinner looks each</label></li>
-            <li><input type="checkbox"><label>One warm evening layer each</label></li>
-            <li><input type="checkbox"><label>Simple bag for hotel-to-dinner shifts</label></li>
-          </ul>
+        <div class="visual-card card">
+          <img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=1200&q=80" alt="Thermal water and greenery" loading="lazy">
+          <div class="body">
+            <div class="kicker eyebrow" style="color:#8b5730;">Packing principle</div>
+            <h3>Pack to reduce morning friction.</h3>
+            <p>The best packing system makes it hard to get the trip wrong: one bag for movement, one pile for thermal days, one clean dinner path, and almost no outfit drama.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-head">
-        <h2>Add Your Own</h2>
-        <p>Saved in this browser.</p>
-      </div>
-      <div class="card">
-        <form class="pack-form" id="custom-pack-form">
-          <input id="custom-pack-input" type="text" placeholder="Add packing item">
-          <button type="submit">Add item</button>
-        </form>
-        <div class="custom-items" id="custom-pack-list"></div>
-      </div>
-    </div>
-
-    <div class="footer">Pack = keep the bag obvious</div>
+    <div class="footer">Pack = make the obvious choice easy</div>
   </div>
 </section>
 
 <section class="page" id="page-travel">
   <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow">Day-of layer</div>
-      <h1>Travel</h1>
-      <p>Maps, bookings, location list, workflow, and the pieces you pull up while moving.</p>
-      <div class="hero-meta">
-        <span>Maps</span>
-        <span>PDFs</span>
-        <span>Places</span>
-        <span>Workflow</span>
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" style="color:var(--accent-deep);">Travel section</div>
+        <h2>Use this when the island gets practical</h2>
+      </div>
+      <p>These are the live tools: maps, artifacts, timing, hotels, and the pages that matter once you are actually moving through the trip.</p>
+    </div>
+
+    <div class="travel-grid">
+      <div class="card">
+        <div class="kicker eyebrow">Open first</div>
+        <h3>Quick actions</h3>
+        <ul class="quick-list">
+          <li><strong>Google Maps route list</strong><span>All planned stops in one mobile-friendly list for drive days.</span></li>
+          <li><strong>Hour-by-hour timing</strong><span>Use it when the day has real constraints or multiple moving parts.</span></li>
+          <li><strong>Artifacts and confirmations</strong><span>Tickets, PDFs, and booking evidence for the locked anchors.</span></li>
+        </ul>
+        <div class="action-row">
+          <a class="action primary" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
+          <a class="action" href="azores-hour-by-hour.html" target="_blank" rel="noopener">Hour by hour</a>
+          <a class="action" href="azores-trip-artifacts.html" target="_blank" rel="noopener">Artifacts</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="kicker eyebrow">Locked items</div>
+        <h3>What is already real</h3>
+        <ul class="artifact-list">
+          <li><strong>Sat 22 · Kayak</strong><span>Futurismo booking 371519676 at 13:00 on Lagoa Azul.</span></li>
+          <li><strong>Sun 23 · Caldeira Velha</strong><span>Reservation 332992, timed 10:30-12:00, locker included.</span></li>
+          <li><strong>Mon 24 · Whale watch</strong><span>Futurismo booking 371524822 at 08:30 from Portas do Mar.</span></li>
+          <li><strong>Tue 25 · Poca da Dona Beija</strong><span>Ticket T9WAPA at 18:30 for 2 guests.</span></li>
+          <li><strong>Wed 26 · Couples massage</strong><span>Locked for 11:00 at Octant Furnas spa.</span></li>
+        </ul>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-head">
-        <h2>Quick Actions</h2>
-        <p>Open these first.</p>
-      </div>
-      <div class="travel-top">
+      <div class="grid two">
         <div class="card">
-          <div class="kicker">Move</div>
-          <ul class="quick-list">
-            <li><strong>Google Maps route</strong><span>All planned stops in one live list.</span></li>
-            <li><strong>Today timing</strong><span>Use the hour-by-hour view when pace matters.</span></li>
-          </ul>
-          <div class="action-row">
-            <a class="action primary" href="https://maps.app.goo.gl/oCKN49emtXt2LbZU9" target="_blank" rel="noopener">Open maps</a>
-            <button type="button" class="action soft" data-travel-jump="timing">Open timing below</button>
+          <div class="kicker eyebrow">Support pages</div>
+          <h3>Deep links</h3>
+          <div class="resource-grid">
+            <div class="resource">
+              <h4>Location glossary</h4>
+              <p>Full stop list if you need the exact names again.</p>
+              <div class="action-row"><a class="action soft" href="azores-location-glossary.html" target="_blank" rel="noopener">Open glossary</a></div>
+            </div>
+            <div class="resource">
+              <h4>Travel workflow</h4>
+              <p>Execution notes, checklists, and practical reminders.</p>
+              <div class="action-row"><a class="action soft" href="azores-travel-workflow.html" target="_blank" rel="noopener">Open workflow</a></div>
+            </div>
+            <div class="resource">
+              <h4>Photo carousel</h4>
+              <p>The earlier itinerary version still exists if you want the card-swiping format.</p>
+              <div class="action-row"><a class="action soft" href="azores-15-year-anniversary.html" target="_blank" rel="noopener">Open carousel</a></div>
+            </div>
+            <div class="resource">
+              <h4>Artifact PDFs</h4>
+              <p>The tickets page is the best place to save a moment when reception gets weird.</p>
+              <div class="action-row"><a class="action soft" href="azores-trip-artifacts.html" target="_blank" rel="noopener">Open tickets</a></div>
+            </div>
           </div>
         </div>
+
         <div class="card">
-          <div class="kicker">Docs</div>
-          <ul class="artifact-list">
-            <li><strong>Sat 22 · Kayak</strong><span>Booking 371519676 · 13:00 · Futurismo</span></li>
-            <li><strong>Sun 23 · Caldeira Velha</strong><span>Reservation 332992 · 10:30-12:00</span></li>
-            <li><strong>Mon 24 · Whale watch</strong><span>Booking 371524822 · 08:30 · Portas do Mar</span></li>
-            <li><strong>Tue 25 · Poça</strong><span>Ticket T9WAPA · 18:30-20:00 · 2 guests</span></li>
+          <div class="kicker eyebrow">Tiny reminders</div>
+          <h3>The details that save the day</h3>
+          <ul class="notes-list">
+            <li><strong>Check Ferraria's low-tide window</strong><span>The west day is better when you time the ocean hot spring instead of just showing up hopeful.</span></li>
+            <li><strong>Dark swimsuits really matter</strong><span>Terra Nostra and the thermal pools can stain lighter fabrics.</span></li>
+            <li><strong>Wednesday lunch should be booked</strong><span>Cozido is better when it is inevitable, not opportunistic.</span></li>
+            <li><strong>Set the first navigation stop before getting in the car</strong><span>It lowers friction and prevents a sleepy airport start from turning messy.</span></li>
+            <li><strong>The move-east day is the only day with real bunching risk</strong><span>Do less if the catamaran or lunch runs long. Furnas is not improved by arriving frazzled.</span></li>
           </ul>
-          <div class="action-row">
-            <a class="action" href="azores-trip-artifacts.html" target="_blank" rel="noopener">Open artifacts</a>
-          </div>
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-head">
-        <h2>Trip Use</h2>
-        <p>The live-use views stay inside the app now.</p>
-      </div>
-      <div class="subnav" data-subnav="travel">
-        <button type="button" class="active" data-subview="timing">Hour by hour</button>
-        <button type="button" data-subview="locations">Location list</button>
-        <button type="button" data-subview="workflow">Travel workflow</button>
-      </div>
-
-      <div class="subpane active" data-subpane="travel-timing">
-        <div class="frame-card">
-          <div class="frame-head">
-            <div>
-              <strong>Hour by hour</strong>
-              <span>Use this once you need the actual rhythm of the day.</span>
-            </div>
-          </div>
-          <iframe class="embed-frame" src="azores-hour-by-hour.html" title="Azores hour by hour travel view"></iframe>
-        </div>
-      </div>
-
-      <div class="subpane" data-subpane="travel-locations">
-        <div class="frame-card">
-          <div class="frame-head">
-            <div>
-              <strong>Location list</strong>
-              <span>The full stop list stays in the travel layer.</span>
-            </div>
-          </div>
-          <iframe class="embed-frame" src="azores-location-glossary.html" title="Azores location list"></iframe>
-        </div>
-      </div>
-
-      <div class="subpane" data-subpane="travel-workflow">
-        <div class="frame-card">
-          <div class="frame-head">
-            <div>
-              <strong>Travel workflow</strong>
-              <span>Execution notes, checks, and practical flow.</span>
-            </div>
-          </div>
-          <iframe class="embed-frame" src="azores-travel-workflow.html" title="Azores travel workflow"></iframe>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">Travel = the live layer</div>
+    <div class="footer">Travel = pull what you need in the moment</div>
   </div>
 </section>
 
 <nav class="tabbar">
   <div class="inner">
+    <a href="#/home" data-page="home">
+      <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M10 20v-5h4v5"/></svg>
+      Home
+    </a>
     <a href="#/plan" data-page="plan">
       <svg viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
       Plan
@@ -838,13 +1343,14 @@
 
 <script>
 (function(){
-  var pages = ["plan","pack","travel"];
+  var pages = ["home", "plan", "pack", "travel"];
 
   function route(){
-    var current = (location.hash || "#/plan").replace("#/","");
-    if (pages.indexOf(current) === -1) current = "plan";
+    var current = (location.hash || "#/home").replace("#/", "");
+    if (pages.indexOf(current) === -1) current = "home";
     pages.forEach(function(page){
-      document.getElementById("page-" + page).classList.toggle("active", page === current);
+      var el = document.getElementById("page-" + page);
+      if (el) el.classList.toggle("active", page === current);
     });
     document.querySelectorAll(".tabbar a").forEach(function(link){
       link.classList.toggle("active", link.getAttribute("data-page") === current);
@@ -853,32 +1359,9 @@
     window.scrollTo(0, 0);
   }
 
-  function bindSubnav(scope){
-    var nav = document.querySelector('[data-subnav="' + scope + '"]');
-    if (!nav) return;
-    var buttons = nav.querySelectorAll("button");
-    var panes = document.querySelectorAll('[data-subpane^="' + scope + '-"]');
-    buttons.forEach(function(button){
-      button.addEventListener("click", function(){
-        var view = button.getAttribute("data-subview");
-        buttons.forEach(function(item){ item.classList.toggle("active", item === button); });
-        panes.forEach(function(pane){
-          pane.classList.toggle("active", pane.getAttribute("data-subpane") === scope + "-" + view);
-        });
-      });
-    });
-  }
-
-  bindSubnav("plan");
-  bindSubnav("travel");
-
-  document.querySelectorAll("[data-travel-jump]").forEach(function(button){
+  document.querySelectorAll("[data-jump-page]").forEach(function(button){
     button.addEventListener("click", function(){
-      location.hash = "#/travel";
-      route();
-      var target = button.getAttribute("data-travel-jump");
-      var tab = document.querySelector('[data-subnav="travel"] button[data-subview="' + target + '"]');
-      if (tab) tab.click();
+      location.hash = "#/" + button.getAttribute("data-jump-page");
     });
   });
 
@@ -890,7 +1373,7 @@
   function loadItems(){
     try{
       return JSON.parse(localStorage.getItem(storageKey) || "[]");
-    }catch(err){
+    }catch(error){
       return [];
     }
   }
@@ -909,6 +1392,7 @@
       list.appendChild(empty);
       return;
     }
+
     items.forEach(function(item, index){
       var row = document.createElement("div");
       row.className = "custom-item" + (item.done ? " done" : "");
@@ -916,19 +1400,23 @@
         '<input type="checkbox"' + (item.done ? " checked" : "") + ' aria-label="Mark packed">' +
         '<div class="text"></div>' +
         '<button type="button">Remove</button>';
+
       row.querySelector(".text").textContent = item.text;
+
       row.querySelector("input").addEventListener("change", function(){
         var next = loadItems();
         next[index].done = this.checked;
         saveItems(next);
         renderItems();
       });
+
       row.querySelector("button").addEventListener("click", function(){
         var next = loadItems();
         next.splice(index, 1);
         saveItems(next);
         renderItems();
       });
+
       list.appendChild(row);
     });
   }
