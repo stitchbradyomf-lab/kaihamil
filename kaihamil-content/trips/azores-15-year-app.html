@@ -834,6 +834,14 @@
     .itin-row{grid-template-columns:1fr;gap:4px;}
     .itin-label{padding-top:0;}
   }
+  /* ── Photo strip ──────────────────────────────────────────── */
+  .photo-strip{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 0;}
+  .photo-strip::-webkit-scrollbar{display:none;}
+  .strip-item{flex:0 0 150px;height:100px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;background:#1a3a38;}
+  .strip-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s;}
+  .strip-item:hover img{transform:scale(1.05);}
+  .strip-item .strip-badge{position:absolute;top:8px;left:8px;font-family:"Space Mono",monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:999px;background:rgba(9,28,32,.7);color:#f7fbf8;backdrop-filter:blur(4px);}
+  .strip-item .strip-title{position:absolute;bottom:7px;left:8px;right:8px;font-size:10px;color:#f7fbf8;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.55);line-height:1.2;}
   /* ── Carousel modal ─────────────────────────────────── */
   .carousel-overlay{
     display:none;
@@ -1050,6 +1058,20 @@
       </div>
     </div>
 
+    <!-- Photo strip -->
+    <div class="section" style="padding-top:12px;">
+      <div class="photo-strip" id="home-photo-strip">
+        <div class="strip-item" data-carousel-day="0"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=75" alt="Flight night" loading="lazy"><span class="strip-badge">Day 0</span><span class="strip-title">Flight Night</span></div>
+        <div class="strip-item" data-carousel-day="1"><img src="https://images.unsplash.com/photo-1540774151601-87ccb231aa54?auto=format&fit=crop&w=600&q=75" alt="Ponta Delgada" loading="lazy"><span class="strip-badge">Day 1</span><span class="strip-title">Arrival · PD</span></div>
+        <div class="strip-item" data-carousel-day="2"><img src="assets/sete-cidades-aerial.jpg" alt="Sete Cidades" loading="lazy"><span class="strip-badge">Day 2</span><span class="strip-title">Sete Cidades</span></div>
+        <div class="strip-item" data-carousel-day="3"><img src="https://images.unsplash.com/photo-1676065344960-6505bec2bf89?auto=format&fit=crop&w=600&q=75" alt="Lagoa do Fogo" loading="lazy"><span class="strip-badge">Day 3</span><span class="strip-title">Lagoa do Fogo</span></div>
+        <div class="strip-item" data-carousel-day="4"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=600&q=75" alt="Whale watch" loading="lazy"><span class="strip-badge">Day 4</span><span class="strip-title">Whale Watch</span></div>
+        <div class="strip-item" data-carousel-day="5"><img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?auto=format&fit=crop&w=600&q=75" alt="Open day" loading="lazy"><span class="strip-badge">Day 5</span><span class="strip-title">Open Day</span></div>
+        <div class="strip-item" data-carousel-day="6"><img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=600&q=75" alt="Thermal finale" loading="lazy"><span class="strip-badge">Day 6</span><span class="strip-title">Thermal Finale</span></div>
+        <div class="strip-item" data-carousel-day="7"><img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=600&q=75" alt="Return home" loading="lazy"><span class="strip-badge">Day 7</span><span class="strip-title">Return Home</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <div class="section-head">
         <h2>The trip at a glance</h2>
@@ -1221,6 +1243,17 @@
 
     <!-- Day by day -->
     <div class="section">
+      <h3 class="itin-section-title">Locked Anchors</h3>
+      <div class="card">
+        <ul class="artifact-list" style="margin-top:0;">
+          <li><strong>Sat 22 &middot; Kayak</strong><span>Futurismo booking 371519676 &middot; 13:00 on Lagoa Azul</span></li>
+          <li><strong>Sun 23 &middot; Caldeira Velha</strong><span>Reservation 332992 &middot; timed 10:30&ndash;12:00 &middot; locker included</span></li>
+          <li><strong>Mon 24 &middot; Whale watch</strong><span>Futurismo booking 371524822 &middot; 08:30 from Portas do Mar</span></li>
+          <li><strong>Tue 25 &middot; Po&ccedil;a da Dona Beija</strong><span>Ticket T9WAPA &middot; 18:30 for 2 guests</span></li>
+          <li><strong>Wed 26 &middot; Couples massage</strong><span>Locked for 11:00 at Octant Furnas spa</span></li>
+        </ul>
+      </div>
+
       <h3 class="itin-section-title">Day by Day</h3>
       <div class="itin-days">
         <div class="itin-day card" id="day-0">
@@ -1461,17 +1494,6 @@
         </ul>
       </div>
 
-      <div class="card">
-        <div class="kicker eyebrow">Locked items</div>
-        <h3>What is already real</h3>
-        <ul class="artifact-list">
-          <li><strong>Sat 22 · Kayak</strong><span>Futurismo booking 371519676 at 13:00 on Lagoa Azul.</span></li>
-          <li><strong>Sun 23 · Caldeira Velha</strong><span>Reservation 332992, timed 10:30-12:00, locker included.</span></li>
-          <li><strong>Mon 24 · Whale watch</strong><span>Futurismo booking 371524822 at 08:30 from Portas do Mar.</span></li>
-          <li><strong>Tue 25 · Poca da Dona Beija</strong><span>Ticket T9WAPA at 18:30 for 2 guests.</span></li>
-          <li><strong>Wed 26 · Couples massage</strong><span>Locked for 11:00 at Octant Furnas spa.</span></li>
-        </ul>
-      </div>
     </div>
 
     <div class="section">
@@ -1811,6 +1833,13 @@
     // Wire up the Home page button
     document.getElementById("open-carousel-btn").addEventListener("click", function(){
       open(0);
+    });
+
+    // Wire up photo-strip taps
+    document.querySelectorAll(".strip-item[data-carousel-day]").forEach(function(el){
+      el.addEventListener("click", function(){
+        open(parseInt(el.getAttribute("data-carousel-day"), 10));
+      });
     });
 
     goTo(0);
