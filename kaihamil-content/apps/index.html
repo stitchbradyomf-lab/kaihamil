@@ -38,10 +38,7 @@
             min-height: 100vh;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+        a { color: inherit; text-decoration: none; }
 
         .shell {
             max-width: 1240px;
@@ -54,7 +51,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 18px;
-            margin-bottom: 56px;
+            margin-bottom: 52px;
         }
 
         .brand {
@@ -63,9 +60,7 @@
             letter-spacing: 0.03em;
         }
 
-        .brand span {
-            color: var(--lake);
-        }
+        .brand span { color: var(--lake); }
 
         .nav-links {
             display: flex;
@@ -83,288 +78,150 @@
             color: var(--muted);
         }
 
-        .nav-link.primary {
+        .nav-link.active {
             color: white;
             background: linear-gradient(135deg, var(--lake), #245960);
             border-color: transparent;
         }
 
-        .hero {
-            display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-            gap: 28px;
-            align-items: stretch;
-            margin-bottom: 34px;
+        /* Page header */
+        .page-head {
+            margin-bottom: 48px;
         }
 
-        .hero-copy,
-        .hero-panel {
-            border: 1px solid var(--line);
-            border-radius: 28px;
-            background: var(--card);
-            backdrop-filter: blur(18px);
-            box-shadow: var(--shadow);
-        }
-
-        .hero-copy {
-            padding: 34px;
-        }
-
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 11px;
-            border-radius: 999px;
-            background: rgba(45, 111, 115, 0.1);
-            color: var(--lake);
-            font-size: 0.78rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        h1 {
-            margin: 0 0 14px;
+        .page-head h1 {
+            margin: 0 0 6px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 7vw, 5.4rem);
-            line-height: 0.95;
+            font-size: clamp(2.6rem, 6vw, 4.4rem);
+            line-height: 1;
             font-weight: 500;
             letter-spacing: -0.03em;
         }
 
-        .lede {
-            margin: 0 0 24px;
-            max-width: 40rem;
+        .page-head p {
+            margin: 0;
             color: var(--muted);
-            font-size: 1.03rem;
-            line-height: 1.65;
+            font-size: 1rem;
         }
 
-        .hero-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            padding: 0 18px;
-            border-radius: 999px;
-            border: 1px solid var(--line);
-            font-weight: 600;
-        }
-
-        .button.primary {
-            background: linear-gradient(135deg, var(--lake), #245960);
-            color: white;
-            border-color: transparent;
-        }
-
-        .hero-panel {
-            padding: 28px;
-            display: grid;
-            gap: 18px;
-            align-content: start;
-        }
-
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .stat-card {
-            padding: 18px;
-            border-radius: 20px;
-            background: var(--card-strong);
-            border: 1px solid rgba(22, 56, 49, 0.08);
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--muted);
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            line-height: 1;
-        }
-
-        .panel-note {
-            color: var(--muted);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
+        /* Category sections */
         .section {
-            margin-top: 34px;
+            margin-bottom: 52px;
         }
 
         .section-head {
             display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 16px;
+            align-items: baseline;
+            gap: 14px;
             margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
         }
 
         .section-title {
             margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.25rem;
+            font-size: 1.7rem;
             font-weight: 500;
+            letter-spacing: -0.01em;
         }
 
-        .section-subtitle {
-            margin: 0;
+        .section-count {
+            font-size: 0.82rem;
             color: var(--muted);
-            max-width: 42rem;
-            line-height: 1.6;
+            letter-spacing: 0.08em;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
         }
 
+        /* Cards */
         .card {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             padding: 22px;
-            border-radius: 24px;
+            border-radius: 22px;
             border: 1px solid var(--line);
             background: var(--card);
             backdrop-filter: blur(16px);
             box-shadow: var(--shadow);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            gap: 12px;
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 32px 72px rgba(23, 51, 47, 0.15);
         }
 
         .card-title {
             margin: 0;
-            font-size: 1.1rem;
-            line-height: 1.35;
-        }
-
-        .pill {
-            flex-shrink: 0;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            font-size: 1.05rem;
             font-weight: 600;
-        }
-
-        .pill.internal {
-            background: rgba(95, 127, 75, 0.14);
-            color: var(--moss);
-        }
-
-        .pill.external {
-            background: rgba(115, 141, 183, 0.15);
-            color: var(--hydrangea);
+            line-height: 1.3;
         }
 
         .card-body {
             color: var(--muted);
             line-height: 1.62;
-            font-size: 0.95rem;
+            font-size: 0.93rem;
+            flex: 1;
         }
 
         .meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 7px;
         }
 
         .tag {
-            padding: 6px 10px;
+            padding: 5px 10px;
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(22, 56, 49, 0.09);
             color: var(--muted);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
         }
 
         .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
             margin-top: auto;
         }
 
         .card-link {
             font-weight: 600;
+            font-size: 0.93rem;
             color: var(--lake);
+        }
+
+        .card-link::after {
+            content: ' →';
         }
 
         .empty {
             padding: 28px;
-            border-radius: 24px;
+            border-radius: 22px;
             border: 1px dashed var(--line);
             color: var(--muted);
             background: rgba(255, 255, 255, 0.45);
-        }
-
-        .loading {
-            padding: 26px;
-            color: var(--muted);
+            font-size: 0.93rem;
         }
 
         .footer {
-            margin-top: 48px;
+            margin-top: 24px;
             padding-top: 24px;
             border-top: 1px solid var(--line);
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
             color: var(--muted);
-            font-size: 0.92rem;
-        }
-
-        @media (max-width: 860px) {
-            .hero {
-                grid-template-columns: 1fr;
-            }
+            font-size: 0.88rem;
         }
 
         @media (max-width: 640px) {
-            .shell {
-                padding: 20px 18px 64px;
-            }
-
-            .nav {
-                margin-bottom: 34px;
-            }
-
-            .hero-copy,
-            .hero-panel,
-            .card {
-                padding: 20px;
-                border-radius: 22px;
-            }
-
-            .stat-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .shell { padding: 20px 18px 64px; }
+            .nav { margin-bottom: 34px; }
+            .page-head { margin-bottom: 36px; }
+            .card { padding: 18px; border-radius: 18px; }
         }
     </style>
 </head>
@@ -375,193 +232,206 @@
             <nav class="nav-links">
                 <a class="nav-link" href="https://content.kaihamil.com/">Content</a>
                 <a class="nav-link" href="/trips/">Trips</a>
-                <a class="nav-link primary" href="/">Applications</a>
+                <a class="nav-link active" href="/">Applications</a>
             </nav>
         </header>
 
-        <section class="hero">
-            <div class="hero-copy">
-                <div class="eyebrow">Applications Shelf</div>
-                <h1>Packaged tools, not pages.</h1>
-                <p class="lede">This is the launch surface for Kai Hamil applications. Planning, editorial, research, frameworks, and assessments stay on <strong>content.kaihamil.com</strong>. What lives here is software you open and use.</p>
-                <div class="hero-actions">
-                    <a class="button primary" href="#all-apps">Browse apps</a>
-                    <a class="button" href="https://content.kaihamil.com/">Back to content</a>
-                </div>
-            </div>
+        <div class="page-head">
+            <h1>Applications</h1>
+            <p>Things you open and use.</p>
+        </div>
 
-            <aside class="hero-panel">
-                <div class="stat-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Shelf</div>
-                        <div class="stat-value" id="app-count">--</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Hosted here</div>
-                        <div class="stat-value" id="internal-count">--</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">External launches</div>
-                        <div class="stat-value" id="external-count">--</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Source</div>
-                        <div class="stat-value">Registry</div>
-                    </div>
-                </div>
-                <p class="panel-note">The shelf is generated from the ontology-backed metadata registry. If something is classified as a packaged application, it belongs here whether the runtime is hosted on this subdomain or elsewhere.</p>
-            </aside>
-        </section>
-
-        <section class="section">
+        <section class="section" id="lifestyle">
             <div class="section-head">
-                <div>
-                    <h2 class="section-title">Hosted On This Surface</h2>
-                    <p class="section-subtitle">Internal applications that can resolve directly on <strong>apps.kaihamil.com</strong> because their source lives in this repo.</p>
-                </div>
+                <h2 class="section-title">Lifestyle</h2>
+                <span class="section-count" id="lifestyle-count"></span>
             </div>
-            <div id="internal-apps" class="grid">
-                <div class="loading">Loading applications...</div>
+            <div id="lifestyle-grid" class="grid">
+                <div class="empty">Loading...</div>
             </div>
         </section>
 
-        <section class="section" id="all-apps">
+        <section class="section" id="systems">
             <div class="section-head">
-                <div>
-                    <h2 class="section-title">External Launches</h2>
-                    <p class="section-subtitle">Packaged applications that live behind their own domains or standalone runtimes, but still belong on the Kai Hamil application shelf.</p>
-                </div>
+                <h2 class="section-title">Systems</h2>
+                <span class="section-count" id="systems-count"></span>
             </div>
-            <div id="external-apps" class="grid">
-                <div class="loading">Loading applications...</div>
+            <div id="systems-grid" class="grid">
+                <div class="empty">Loading...</div>
+            </div>
+        </section>
+
+        <section class="section" id="trips">
+            <div class="section-head">
+                <h2 class="section-title">Trips</h2>
+                <span class="section-count" id="trips-count"></span>
+            </div>
+            <div id="trips-grid" class="grid">
+                <div class="empty">Loading...</div>
+            </div>
+        </section>
+
+        <section class="section" id="utilities">
+            <div class="section-head">
+                <h2 class="section-title">Utilities</h2>
+                <span class="section-count" id="utilities-count"></span>
+            </div>
+            <div id="utilities-grid" class="grid">
+                <div class="empty">Loading...</div>
             </div>
         </section>
 
         <footer class="footer">
-            <span>kai hamil applications</span>
-            <span>Powered by page metadata registry</span>
+            kai hamil applications
         </footer>
     </div>
 
     <script>
+        const CATEGORIES = [
+            {
+                id: 'lifestyle',
+                label: 'Lifestyle',
+                ids: ['time-focus-app', 'gatefield-hoa', 'whos-making-dinner', 'groove-pal', 'whisky-cellar']
+            },
+            {
+                id: 'systems',
+                label: 'Systems',
+                ids: ['vale-os', 'vale-pro', 'couples-vale']
+            },
+            {
+                id: 'trips',
+                label: 'Trips',
+                ids: ['azores-15-year-app', 'dude-trip-26']
+            },
+            {
+                id: 'utilities',
+                label: 'Utilities',
+                ids: ['daily-brief', 'script-reader', 'control-chart-evaluator', 'photo-flow']
+            }
+        ];
+
         const APP_COPY = {
-            "time-focus-app": "An operating tool for managing where attention goes over time.",
-            "control-chart-evaluator": "Evaluate process signals and variation without leaving the browser.",
-            "script-reader": "A stripped-back teleprompter surface for recording and rehearsal.",
-            "vale-os": "Strategic navigation software for goals, decisions, and life systems.",
-            "vale-pro": "A professional-facing Valé surface for work and client operations.",
-            "couples-vale": "A shared operating system for relationships, family coordination, and alignment.",
-            "daily-brief": "A daily briefing surface that packages the day into one launchable dashboard.",
-            "groove-pal": "A music-centered consumer app built as its own brand surface.",
-            "whisky-cellar": "A private collection app for bottles, tasting notes, and cellar memory.",
-            "gatefield-hoa": "A purpose-built neighborhood operations and communication surface.",
-            "photo-flow": "A workflow app for reviewing, classifying, and organizing visual media.",
-            "azores-15-year-app": "A trip execution app that turns travel planning into a day-of operational surface.",
-            "dude-trip-26": "A packaged group trip application rather than a simple itinerary page."
+            'time-focus-app': 'An operating tool for managing where attention goes over time.',
+            'control-chart-evaluator': 'Evaluate process signals and variation without leaving the browser.',
+            'script-reader': 'A stripped-back teleprompter surface for recording and rehearsal.',
+            'whos-making-dinner': 'A household dinner planner that turns the 5 PM question into a calmer execution plan.',
+            'vale-os': 'Strategic navigation software for goals, decisions, and life systems.',
+            'vale-pro': 'A professional-facing Valé surface for work and client operations.',
+            'couples-vale': 'A shared operating system for relationships, family coordination, and alignment.',
+            'daily-brief': 'A daily briefing surface that packages the day into one launchable dashboard.',
+            'groove-pal': 'A music-centered consumer app built on vinyl, trust, and analog patience.',
+            'whisky-cellar': 'A private collection app for bottles, tasting notes, and cellar memory.',
+            'gatefield-hoa': 'A purpose-built neighborhood operations and communication surface.',
+            'photo-flow': 'A workflow app for reviewing, classifying, and organizing visual media.',
+            'azores-15-year-app': 'A trip execution app that turns travel planning into a day-of operational surface.',
+            'dude-trip-26': 'A packaged group trip application rather than a simple itinerary page.'
         };
 
-        const TAG_COPY = {
-            "trip-app": "Trip app",
-            "travel": "Travel",
-            "assistant": "Assistant",
-            "dashboard": "Dashboard",
-            "workflow": "Workflow",
-            "utility": "Utility",
-            "consumer": "Consumer",
-            "family": "Family",
-            "operations": "Ops",
-            "video": "Video",
-            "collection": "Collection",
-            "media": "Media",
-            "work": "Work",
-            "daily": "Daily"
+        const TAG_LABELS = {
+            'trip-app': 'Trip app',
+            'travel': 'Travel',
+            'assistant': 'Assistant',
+            'dashboard': 'Dashboard',
+            'workflow': 'Workflow',
+            'utility': 'Utility',
+            'consumer': 'Consumer',
+            'family': 'Family',
+            'dinner': 'Dinner',
+            'meal-planning': 'Meal planning',
+            'household': 'Household',
+            'operations': 'Ops',
+            'video': 'Video',
+            'collection': 'Collection',
+            'media': 'Media',
+            'work': 'Work',
+            'daily': 'Daily',
+            'music': 'Music',
+            'community': 'Community',
+            'hoa': 'HOA',
+            'relationship': 'Relationship',
+            'attention': 'Attention',
+            'time': 'Time',
+            'os': 'OS',
+            'professional': 'Pro',
+            'personal': 'Personal',
+            'briefing': 'Briefing',
+            'teleprompter': 'Teleprompter',
+            'photo': 'Photo',
+            'statistics': 'Stats',
+            'group': 'Group',
+            'brand': 'Brand',
+            'azores': 'Azores'
         };
 
-        function escapeHtml(value) {
-            return value
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll('"', "&quot;");
+        function esc(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
         }
 
         function cardMarkup(app) {
             const href = app.launch_url || app.url;
-            const locationClass = app.canonical_surface === "applications" ? "internal" : "external";
-            const locationLabel = app.canonical_surface === "applications" ? "Hosted here" : "External";
-            const desc = APP_COPY[app.id] || app.description || "Packaged application surfaced from the Kai Hamil registry.";
+            const desc = APP_COPY[app.id] || app.description || '';
             const tags = (app.tags || [])
+                .filter(t => !['index', 'legacy', 'transitional', 'azores'].includes(t))
                 .slice(0, 3)
-                .map(tag => `<span class="tag">${escapeHtml(TAG_COPY[tag] || tag)}</span>`)
-                .join("");
-            const family = app.product_family ? `<span class="tag">${escapeHtml(app.product_family)}</span>` : "";
-            const surface = app.source_path ? `<span class="tag">${escapeHtml(app.source_path)}</span>` : "";
+                .map(t => `<span class="tag">${esc(TAG_LABELS[t] || t)}</span>`)
+                .join('');
 
             return `
                 <article class="card">
-                    <div class="card-top">
-                        <div>
-                            <h3 class="card-title">${escapeHtml(app.title)}</h3>
-                        </div>
-                        <span class="pill ${locationClass}">${locationLabel}</span>
-                    </div>
-                    <div class="card-body">${escapeHtml(desc)}</div>
-                    <div class="meta">
-                        ${family}
-                        ${tags}
-                        ${surface}
-                    </div>
+                    <h3 class="card-title">${esc(app.title)}</h3>
+                    <div class="card-body">${esc(desc)}</div>
+                    ${tags ? `<div class="meta">${tags}</div>` : ''}
                     <div class="card-actions">
-                        <span class="tag">${escapeHtml(app.nav_label || app.title)}</span>
-                        <a class="card-link" href="${escapeHtml(href)}">Open app</a>
+                        <a class="card-link" href="${esc(href)}">Open</a>
                     </div>
                 </article>
             `;
         }
 
-        function renderSection(targetId, apps) {
-            const target = document.getElementById(targetId);
+        function renderCategory(cat, appsById) {
+            const apps = cat.ids
+                .map(id => appsById[id])
+                .filter(Boolean);
+
+            const countEl = document.getElementById(`${cat.id}-count`);
+            const gridEl = document.getElementById(`${cat.id}-grid`);
+
+            if (countEl) countEl.textContent = `${apps.length} app${apps.length !== 1 ? 's' : ''}`;
+
+            if (!gridEl) return;
+
             if (!apps.length) {
-                target.innerHTML = '<div class="empty">No applications found for this section.</div>';
+                gridEl.innerHTML = '<div class="empty">No applications found.</div>';
                 return;
             }
 
-            target.innerHTML = apps.map(cardMarkup).join("");
+            gridEl.innerHTML = apps.map(cardMarkup).join('');
         }
 
         async function loadApps() {
             try {
-                const response = await fetch('/data/page-metadata-registry.json');
-                if (!response.ok) {
-                    throw new Error(`Failed to load registry: ${response.status}`);
-                }
+                const res = await fetch('/data/page-metadata-registry.json');
+                if (!res.ok) throw new Error(`Registry fetch failed: ${res.status}`);
 
-                const registry = await response.json();
-                const apps = registry.pages
-                    .filter(page =>
-                        page.primary_section === 'applications' &&
-                        page.status === 'active' &&
-                        page.visibility === 'public'
-                    )
-                    .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999));
+                const registry = await res.json();
 
-                const internalApps = apps.filter(app => app.canonical_surface === 'applications');
-                const externalApps = apps.filter(app => app.canonical_surface !== 'applications');
+                const appsById = {};
+                registry.pages
+                    .filter(p => p.primary_section === 'applications' && p.status === 'active' && p.visibility === 'public')
+                    .forEach(p => { appsById[p.id] = p; });
 
-                document.getElementById('app-count').textContent = String(apps.length);
-                document.getElementById('internal-count').textContent = String(internalApps.length);
-                document.getElementById('external-count').textContent = String(externalApps.length);
+                CATEGORIES.forEach(cat => renderCategory(cat, appsById));
 
-                renderSection('internal-apps', internalApps);
-                renderSection('external-apps', externalApps);
-            } catch (error) {
-                const message = '<div class="empty">Could not load the application registry for this shelf.</div>';
-                document.getElementById('internal-apps').innerHTML = message;
-                document.getElementById('external-apps').innerHTML = message;
-                document.getElementById('app-count').textContent = '0';
-                document.getElementById('internal-count').textContent = '0';
-                document.getElementById('external-count').textContent = '0';
-                console.error(error);
+            } catch (err) {
+                console.error(err);
+                CATEGORIES.forEach(cat => {
+                    const gridEl = document.getElementById(`${cat.id}-grid`);
+                    if (gridEl) gridEl.innerHTML = '<div class="empty">Could not load applications.</div>';
+                });
             }
         }
 
