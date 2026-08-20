@@ -306,7 +306,7 @@
         
         /* Applications Section */
         .applications-section {
-            background: var(--bg-cream);
+            background: var(--bg-warm);
             padding: 60px 40px;
             border-top: 1px solid var(--border);
             position: relative;
@@ -329,12 +329,18 @@
         .section-subtitle {
             font-size: 1rem;
             color: var(--brown-medium);
+            font-weight: 300;
+            font-style: italic;
         }
         
         .apps-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
+        }
+
+        @media (max-width: 880px) {
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
         }
         
         .app-card {
@@ -437,10 +443,6 @@
             .bg-symbol .slash { font-size: 200px; }
         }
         
-        @media (max-width: 700px) {
-            .apps-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
         @media (max-width: 600px) {
             .nav { padding: 15px 20px; }
             .system-side, .self-side { padding: 40px 20px; }
