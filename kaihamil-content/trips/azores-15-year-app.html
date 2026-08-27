@@ -830,6 +830,48 @@
     border-radius:50%;
     background:var(--gold);
   }
+  /* ── Trip log / actual tracking ──────────────────────────── */
+  .itin-day.day-done{border-left:3px solid #2e7d6b;}
+  .itin-day.day-current{border-left:3px solid var(--gold);}
+  .day-status-badge{
+    display:inline-block;
+    font-family:"Space Mono",monospace;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:2px 8px;
+    border-radius:999px;
+    vertical-align:middle;
+    margin-left:6px;
+  }
+  .day-status-badge.done{background:#2e7d6b;color:#fff;}
+  .day-status-badge.in-progress{background:var(--gold);color:#fff;}
+  .itin-list li.item-done{color:var(--ink);}
+  .itin-list li.item-done::before{background:#2e7d6b;}
+  .itin-list li.item-skipped{color:var(--ink-soft);text-decoration:line-through;}
+  .itin-list li.item-skipped::before{background:var(--ink-soft);opacity:.5;}
+  .actual-block{
+    margin-top:14px;
+    padding:10px 13px;
+    background:var(--mist);
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.55;
+  }
+  .actual-block .actual-label{
+    font-family:"Space Mono",monospace;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:6px;
+  }
+  .actual-block ul{list-style:none;padding-left:0;margin:0;display:grid;gap:5px;}
+  .actual-block li{padding-left:14px;position:relative;color:var(--ink);}
+  .actual-block li::before{content:"";position:absolute;left:0;top:.56em;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+  .actual-block .skipped-note{color:var(--ink-soft);font-style:italic;margin-top:8px;font-size:12.5px;}
   @media (max-width:480px){
     .itin-row{grid-template-columns:1fr;gap:4px;}
     .itin-label{padding-top:0;}
@@ -1066,8 +1108,8 @@
         <div class="strip-item" data-carousel-day="2"><img src="assets/sete-cidades-aerial.jpg" alt="Sete Cidades" loading="lazy"><span class="strip-badge">Day 2</span><span class="strip-title">Sete Cidades</span></div>
         <div class="strip-item" data-carousel-day="3"><img src="https://images.unsplash.com/photo-1676065344960-6505bec2bf89?auto=format&fit=crop&w=600&q=75" alt="Lagoa do Fogo" loading="lazy"><span class="strip-badge">Day 3</span><span class="strip-title">Lagoa do Fogo</span></div>
         <div class="strip-item" data-carousel-day="4"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=600&q=75" alt="Whale watch" loading="lazy"><span class="strip-badge">Day 4</span><span class="strip-title">Whale Watch</span></div>
-        <div class="strip-item" data-carousel-day="5"><img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?auto=format&fit=crop&w=600&q=75" alt="Open day" loading="lazy"><span class="strip-badge">Day 5</span><span class="strip-title">Open Day</span></div>
-        <div class="strip-item" data-carousel-day="6"><img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=600&q=75" alt="Thermal finale" loading="lazy"><span class="strip-badge">Day 6</span><span class="strip-title">Thermal Finale</span></div>
+        <div class="strip-item" data-carousel-day="5"><img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?auto=format&fit=crop&w=600&q=75" alt="Waterfall and tea day" loading="lazy"><span class="strip-badge">Day 5</span><span class="strip-title">Caldeirões + Tea</span></div>
+        <div class="strip-item" data-carousel-day="6"><img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=600&q=75" alt="Indulgence day" loading="lazy"><span class="strip-badge">Day 6</span><span class="strip-title">Indulgence</span></div>
         <div class="strip-item" data-carousel-day="7"><img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=600&q=75" alt="Return home" loading="lazy"><span class="strip-badge">Day 7</span><span class="strip-title">Return Home</span></div>
       </div>
     </div>
@@ -1167,8 +1209,8 @@
           <img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=1200&q=80" alt="Warm thermal pool in lush surroundings" loading="lazy">
           <div class="body">
             <div class="kicker eyebrow">Finale</div>
-            <h3>Massage, cozido, Terra Nostra</h3>
-            <p>The last full day should feel decadent without apology. That is the whole point of finishing in Furnas.</p>
+            <h3>Massage, Happy Cows, Terra Nostra</h3>
+            <p>The last full day landed as the trip's gentle finale: slow morning, spa, Tony's lunch, farm magic, Terra Nostra dinner, and one last hot tub dip.</p>
           </div>
         </div>
       </div>
@@ -1251,121 +1293,156 @@
           <li><strong>Mon 24 &middot; Whale watch</strong><span>Futurismo booking 371524822 &middot; 08:30 from Portas do Mar</span></li>
           <li><strong>Tue 25 &middot; Po&ccedil;a da Dona Beija</strong><span>Ticket T9WAPA &middot; 18:30 for 2 guests</span></li>
           <li><strong>Wed 26 &middot; Couples massage</strong><span>Locked for 11:00 at Octant Furnas spa</span></li>
+          <li><strong>Wed 26 &middot; Happy Cows</strong><span>Volcanic Beings tour with Jo&atilde;o and Mariana &middot; unforgettable farm afternoon</span></li>
+          <li><strong>Wed 26 &middot; Terra Nostra dinner</strong><span>20:30 &middot; lovely final Furnas dinner</span></li>
         </ul>
       </div>
 
       <h3 class="itin-section-title">Day by Day</h3>
       <div class="itin-days">
-        <div class="itin-day card" id="day-0">
+        <div class="itin-day card day-done" id="day-0">
           <div class="itin-day-head">
             <span class="day-badge">Day 0</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Thursday, August 20</div>
-              <strong class="itin-day-title">Flight Night</strong>
+              <strong class="itin-day-title">Flight Night <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li><strong>UA 216</strong> &middot; EWR &rarr; PDL &middot; departs 23:05 &middot; arrives Fri 08:40 &middot; 5h 35m &middot; Boeing 737 MAX 8 &middot; Terminal C</li>
-            <li>Passports, hotel confirmations, and first-day clothes at top of bag</li>
-            <li>Sleep on the plane &mdash; island is 4 hours ahead, tomorrow needs grace not ambition</li>
+            <li class="item-done"><strong>UA 216</strong> &middot; EWR &rarr; PDL &middot; departs 23:05 &middot; arrives Fri 08:40 &middot; 5h 35m &middot; Boeing 737 MAX 8 &middot; Terminal C</li>
+            <li class="item-done">Passports, hotel confirmations, and first-day clothes at top of bag</li>
+            <li class="item-done">Sleep on the plane &mdash; island is 4 hours ahead, tomorrow needs grace not ambition</li>
           </ul>
         </div>
 
-        <div class="itin-day card" id="day-1">
+        <div class="itin-day card day-done" id="day-1">
           <div class="itin-day-head">
             <span class="day-badge">Day 1</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Friday, August 21</div>
-              <strong class="itin-day-title">Arrival &middot; Ponta Delgada</strong>
+              <strong class="itin-day-title">Arrival &middot; Ponta Delgada <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li>Land PDL ~08:40 &middot; collect rental car &middot; ~10 min drive to hotel</li>
-            <li>Check into Octant Ponta Delgada (early check-in if available)</li>
-            <li>Marina walk, old town, rooftop pool</li>
-            <li>Dinner: A Tasca (if energy holds)</li>
+            <li class="item-done">Land PDL ~08:40 &middot; collect rental car &middot; ~10 min drive to hotel</li>
+            <li class="item-done">Check into Octant Ponta Delgada (early check-in if available)</li>
+            <li class="item-done">Marina walk, old town, rooftop pool</li>
+            <li class="item-done">Dinner: A Tasca (if energy holds)</li>
           </ul>
+          <div class="actual-block">
+            <div class="actual-label">What actually happened</div>
+            <ul>
+              <li>Landed &amp; got rental car on schedule</li>
+              <li>Lunch at A Tesca &mdash; ordered grilled fish, got tuna; queasy after (flight + no sleep + alcohol combo)</li>
+              <li>4-hour recovery nap &mdash; the right call</li>
+              <li>Dinner at <strong>A Terra</strong> (not A Tasca) &mdash; dragonfruit Caesar salad, pork, rockfish, strawberry tart. Excellent.</li>
+              <li>Toured spa &amp; ordered two custom pillows</li>
+              <li>Asleep by 10pm</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="itin-day card" id="day-2">
+        <div class="itin-day card day-done" id="day-2">
           <div class="itin-day-head">
             <span class="day-badge">Day 2</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Saturday, August 22</div>
-              <strong class="itin-day-title">Sete Cidades &middot; West Day</strong>
+              <strong class="itin-day-title">Sete Cidades &middot; West Day <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li>Morning: Vista do Rei viewpoint &middot; Grota do Inferno if conditions allow</li>
-            <li><strong>13:00 &ndash; Futurismo kayak, Lagoa Azul</strong> (booked)</li>
-            <li>Afternoon: Ponta da Ferraria thermal ocean cove (check tide window before driving out)</li>
-            <li>Dinner: Quinta dos Sabores at 19:30</li>
+            <li class="item-done">Morning: Vista do Rei viewpoint &middot; Grota do Inferno if conditions allow</li>
+            <li class="item-done"><strong>13:00 &ndash; Futurismo kayak, Lagoa Azul</strong> (booked) &mdash; Marissa was challenge champion</li>
+            <li class="item-skipped">Afternoon: Ponta da Ferraria thermal ocean cove &mdash; skipped</li>
+            <li class="item-done">Dinner: Quinta dos Sabores at 19:30 &mdash; 8 courses, 3.5 hours</li>
           </ul>
+          <div class="actual-block">
+            <div class="actual-label">What actually happened</div>
+            <ul>
+              <li>Spa circuit 9&ndash;10am (soaking tub, tropical shower, sauna, Turkish bath) before departing</li>
+              <li>Drove to Sete Cidades &mdash; several miradouros</li>
+              <li>Lakeside lunch in the crater village</li>
+              <li>1-hour kayak across both lakes &mdash; Marissa a force on the water</li>
+              <li>Walked the area, slowly back to PD</li>
+              <li>Skipped Ponta da Ferraria</li>
+              <li>Snack + rooftop bar sunbathing</li>
+              <li>Quinta dos Sabores: 8-course farm tasting menu, 3.5 hours &mdash; chamomile tea after &mdash; to sleep past midnight</li>
+            </ul>
+            <p class="skipped-note">Ferraria ocean hot-spring &mdash; not done. West-side only; won't be reachable from Furnas.</p>
+          </div>
         </div>
 
-        <div class="itin-day card" id="day-3">
+        <div class="itin-day card day-done" id="day-3">
           <div class="itin-day-head">
             <span class="day-badge">Day 3</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Sunday, August 23</div>
-              <strong class="itin-day-title">Lagoa do Fogo &middot; Last Night Ponta Delgada</strong>
+              <strong class="itin-day-title">Lagoa do Fogo &middot; Last Night Ponta Delgada <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li><strong>10:30&ndash;12:00 &ndash; Caldeira Velha</strong> (entry + locker booked)</li>
-            <li>Lagoa do Fogo scenic ridge if weather cooperates</li>
-            <li>Lunch: Ribeira Grande &middot; wander and reset</li>
-            <li>Dinner: Bom Pesqueiro at 19:00</li>
-            <li>Pack tonight &mdash; moving east in the morning</li>
+            <li class="item-done">Woke at 9am &middot; slow breakfast</li>
+            <li class="item-done"><strong>10:30&ndash;12:00 &ndash; Caldeira Velha</strong> (booked) &mdash; done</li>
+            <li class="item-done">Lunch: <strong>Alabote</strong>, Ribeira Grande &mdash; fish, ocean views, excellent</li>
+            <li class="item-done">Ribeira Grande &mdash; beach surf vibes, aquamarine ocean, cliff views</li>
+            <li class="item-done"><strong>Miradouro da Ribeirinha</strong> &mdash; breathtaking</li>
+            <li class="item-done">Back to PD &mdash; rest, rooftop snack + drink</li>
+            <li class="item-done">5pm spa circuit</li>
+            <li class="item-skipped">Dinner: Bom Pesqueiro at 19:00 &mdash; canceled</li>
+            <li class="item-done">Dinner: <strong>A Terra</strong> at 19:30 &mdash; returning, it earned it</li>
+            <li class="item-done">Packed for the move east</li>
           </ul>
         </div>
 
-        <div class="itin-day card" id="day-4">
+        <div class="itin-day card day-done" id="day-4">
           <div class="itin-day-head">
             <span class="day-badge">Day 4</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Monday, August 24</div>
-              <strong class="itin-day-title">Whale Watch &middot; Move to Furnas</strong>
+              <strong class="itin-day-title">Whale Watch &middot; Move to Furnas <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li><strong>08:30&ndash;11:30 &ndash; Futurismo whale and dolphin watch</strong> (booked &middot; Portas do Mar)</li>
-            <li>Lunch: Bar Caloura &middot; swim stop if conditions allow</li>
-            <li>Nossa Senhora da Paz chapel viewpoint</li>
-            <li>Check into Octant Furnas &mdash; settle in, slow down</li>
+            <li class="item-done"><strong>08:30&ndash;11:30 &ndash; Futurismo whale and dolphin watch</strong> (booked &middot; Portas do Mar)</li>
+            <li class="item-done">Nossa Senhora da Paz chapel viewpoint on the way to Furnas</li>
+            <li class="item-done">Checked into Octant Furnas &middot; hotel thermal pools</li>
+            <li class="item-done">Dinner at A Terra, Furnas walk, and cocktails at Espinha</li>
           </ul>
         </div>
 
-        <div class="itin-day card" id="day-5">
+        <div class="itin-day card day-done" id="day-5">
           <div class="itin-day-head">
             <span class="day-badge">Day 5</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Tuesday, August 25</div>
-              <strong class="itin-day-title">Open Day &middot; Dusk Soak Sacred</strong>
+              <strong class="itin-day-title">Caldeirões &middot; Gorreana &middot; Poça <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li>Option A (explore): Ribeira dos Caldeiroes &middot; Pelado &middot; Ponta do Sossego &middot; Ponta da Madrugada</li>
-            <li>Option B (soft): Quiet Furnas day &middot; hotel &middot; thermal pools</li>
-            <li>Salto do Prego hike only if the day still feels easy</li>
-            <li><strong>18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (confirmation T9WAPA) &middot; non-negotiable, plan everything around this</li>
+            <li class="item-done">Parque Natural da Ribeira dos Caldeirões &middot; loved it</li>
+            <li class="item-done">Buffet lunch at Os Melos restaurant</li>
+            <li class="item-done">Gorreana Tea Plantation &middot; drone flight, tea rows, and souvenirs</li>
+            <li class="item-done">Returned to Furnas for a town walk, then Octant thermal pool time</li>
+            <li><strong>18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (confirmation T9WAPA) &middot; fixed evening anchor</li>
           </ul>
         </div>
 
-        <div class="itin-day card" id="day-6">
+        <div class="itin-day card day-done" id="day-6">
           <div class="itin-day-head">
             <span class="day-badge">Day 6</span>
             <div>
               <div class="eyebrow" style="color:var(--accent-deep);">Wednesday, August 26</div>
-              <strong class="itin-day-title">Thermal Finale &middot; Last Full Day</strong>
+              <strong class="itin-day-title">Indulgence &middot; Last Full Day <span class="day-status-badge done">Done</span></strong>
             </div>
           </div>
           <ul class="itin-list">
-            <li><strong>11:00 &ndash; Couples massage</strong> (booked)</li>
-            <li>Lunch: Cozido (reserve ahead of time)</li>
-            <li>Afternoon: Terra Nostra gardens &middot; hotel pools</li>
-            <li>Easy in-house dinner or close by &mdash; nothing that requires planning</li>
-            <li>Quiet packing tonight</li>
+            <li class="item-done">Slow breakfast and a quick pool dip before the spa block</li>
+            <li class="item-done"><strong>11:00 &ndash; Couples massage</strong> at Octant Furnas spa &middot; very nice</li>
+            <li class="item-done">Lunch in town at <strong>Tony's</strong> &middot; cozido croquettes</li>
+            <li class="item-done"><strong>Happy Cows at Volcanic Beings</strong> &middot; Jo&atilde;o and Mariana hosted</li>
+            <li class="item-done">Met dairy cows in the field, rode a horse, milked cows, drank raw milk, met goats, and fed baby cows</li>
+            <li class="item-done"><strong>20:30 &ndash; Terra Nostra dinner</strong> &middot; lovely final Furnas dinner</li>
+            <li class="item-done">Final hot tub dip before bed</li>
           </ul>
         </div>
 
@@ -1655,16 +1732,17 @@
         <img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?auto=format&fit=crop&w=1400&q=80" alt="Northeast Sao Miguel coast" loading="lazy">
         <div class="carousel-img-overlay"></div>
         <div class="carousel-img-caption">
-          <strong>Open Day &middot; Dusk Soak Sacred</strong>
+          <strong>Caldeirões &middot; Gorreana &middot; Poça</strong>
           <span>Tuesday, August 25</span>
         </div>
       </div>
       <div class="carousel-body">
         <ul>
-          <li>Option A (explore): Ribeira dos Caldeiroes &middot; Pelado &middot; Ponta do Sossego &middot; Ponta da Madrugada</li>
-          <li>Option B (soft): Quiet Furnas day &middot; hotel &middot; thermal pools</li>
-          <li>Salto do Prego hike only if the day still feels easy</li>
-          <li><strong style="color:#f3dfba;">18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (conf. T9WAPA) &middot; non-negotiable</li>
+          <li>Parque Natural da Ribeira dos Caldeirões &middot; loved it</li>
+          <li>Buffet lunch at Os Melos restaurant</li>
+          <li>Gorreana Tea Plantation &middot; drone flight, tea rows, and souvenirs</li>
+          <li>Returned to Furnas for a town walk, then Octant thermal pool time</li>
+          <li><strong style="color:#f3dfba;">18:30 &ndash; Po&ccedil;a da Dona Beija</strong> (conf. T9WAPA) &middot; fixed evening anchor</li>
         </ul>
       </div>
     </div>
@@ -1674,17 +1752,19 @@
         <img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?auto=format&fit=crop&w=1400&q=80" alt="Thermal pool in lush garden" loading="lazy">
         <div class="carousel-img-overlay"></div>
         <div class="carousel-img-caption">
-          <strong>Thermal Finale &middot; Last Full Day</strong>
+          <strong>Indulgence &middot; Last Full Day</strong>
           <span>Wednesday, August 26</span>
         </div>
       </div>
       <div class="carousel-body">
         <ul>
-          <li><strong style="color:#f3dfba;">11:00 &ndash; Couples massage</strong> (booked)</li>
-          <li>Lunch: Cozido (reserve ahead of time)</li>
-          <li>Afternoon: Terra Nostra gardens &middot; hotel pools</li>
-          <li>Easy in-house dinner &mdash; nothing that requires planning</li>
-          <li>Quiet packing tonight</li>
+          <li>Slow breakfast and a quick pool dip before the spa block</li>
+          <li><strong style="color:#f3dfba;">11:00 &ndash; Couples massage</strong> at Octant Furnas spa &middot; very nice</li>
+          <li>Lunch in town at <strong style="color:#f3dfba;">Tony's</strong> &middot; cozido croquettes</li>
+          <li><strong style="color:#f3dfba;">Happy Cows at Volcanic Beings</strong> &middot; Jo&atilde;o and Mariana hosted</li>
+          <li>Met dairy cows in the field, rode a horse, milked cows, drank raw milk, met goats, and fed baby cows</li>
+          <li><strong style="color:#f3dfba;">20:30 &ndash; Terra Nostra dinner</strong> &middot; lovely final Furnas dinner</li>
+          <li>Final hot tub dip before bed</li>
         </ul>
       </div>
     </div>

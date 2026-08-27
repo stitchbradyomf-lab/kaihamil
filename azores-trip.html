@@ -6,7 +6,7 @@
 <title>Azores Anniversary Trip — August 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#15271F;--sea:#1B4D4A;--ochre:#BB6F38;--hydrangea:#6E8FBC;
@@ -78,6 +78,15 @@
   .budget tr.total td{font-weight:600;border-bottom:0;border-top:2px solid var(--sea);font-family:"Space Mono",monospace;}
   .smallnote{font-size:12.5px;color:var(--muted);}
 
+  /* ---------- BOOKINGS ---------- */
+  .bookings{margin:18px 24px 0;}
+  .booking{display:flex;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .booking:last-child{border-bottom:0;}
+  .booking .status{font-family:"Space Mono",monospace;font-size:9px;font-weight:700;letter-spacing:.1em;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+  .booking .status.done{background:#2E7D6B;color:#fff;}
+  .booking .status.todo{background:rgba(187,111,56,.14);color:var(--ochre);}
+  .booking .detail{font-size:12.5px;color:var(--muted);margin-left:auto;}
+
   /* ---------- NAV ---------- */
   .navbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);font-size:22px;color:var(--sea);cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;transition:background .15s;}
   .navbtn:hover{background:var(--mist);}
@@ -128,6 +137,9 @@
           <li>United · nonstop · ~5h30 flight</li>
           <li>Azores run 4 hours ahead of NJ in summer</li>
         </ul></div>
+        <div class="bookings">
+          <div class="booking"><span class="status done">✓ BOOKED</span><b>Flights</b> — EWR ⇄ PDL<span class="detail">Thu 20 Aug out · Thu 27 Aug back</span></div>
+        </div>
         <div class="blk">
           <p class="maplabel">📍 FLIGHT ROUTE: EWR → PDL</p>
           <div class="mapframe"><iframe loading="lazy" title="Route Newark to Ponta Delgada" src="https://maps.google.com/maps?q=Ponta+Delgada,+Azores&z=4&output=embed"></iframe></div>
@@ -147,12 +159,16 @@
           <li>Ease into Ponta Delgada's old town &amp; marina</li>
           <li>Long, slow lunch — no agenda</li>
           <li>Check in ~3 PM · nap off the red-eye</li>
-          <li>Rooftop pool &amp; spa · easy first dinner at <b>A Tasca</b></li>
+          <li>Rooftop pool &amp; spa · quiet first dinner</li>
         </ul></div>
         <div class="stay">
           <h6><a href="https://pontadelgada.octanthotels.com" target="_blank" rel="noopener">Octant Ponta Delgada</a></h6>
           <p>Harbor-front · 4.7★ · +351 296 249 900 · Night 1 of 3</p>
           <p class="perks"><b>Chase Sapphire Reserve:</b> $500 statement credit, daily breakfast for two, $100 hotel credit — book through the card's hotel program.</p>
+        </div>
+        <div class="bookings">
+          <div class="booking"><span class="status done">✓ BOOKED</span><b>Rental car</b> — Compact SUV (Hyundai Kauai)<span class="detail">Ilha Verde · conf. 1263620</span></div>
+          <div class="booking"><span class="status done">✓ BOOKED</span><b>Octant Ponta Delgada</b> — 3 nights<span class="detail">Chase perks applied</span></div>
         </div>
         <div class="blk">
           <p class="maplabel">📍 PDL AIRPORT → OCTANT PONTA DELGADA</p>
@@ -166,14 +182,14 @@
     <article class="card" style="--stripe:#2C6553">
       <div class="card-head"><span class="daynum">DAY 2</span><span class="when">Saturday, August 22, 2026</span></div>
       <h3 class="card-title">West — Sete Cidades <span class="star">★ ANCHOR</span></h3>
-      <div class="hero"><img src="https://images.unsplash.com/photo-1536308304182-5a2e0e04bb08?w=800&q=80" alt="Twin crater lakes of Sete Cidades" loading="lazy"><span class="cap">Sete Cidades · the twin crater lakes</span></div>
+      <div class="hero"><img src="https://images.unsplash.com/photo-1660510450208-c8bd23844280?w=800&q=80" alt="Twin crater lakes of Sete Cidades" loading="lazy"><span class="cap">Sete Cidades · the twin crater lakes</span></div>
       <div class="card-body">
         <div class="blk"><h5>Schedule</h5><ul>
           <li>Morning: Vista do Rei viewpoint over the twin lakes</li>
-          <li>Short ridge walk to the Grota do Inferno viewpoint</li>
-          <li><b>1:00 PM kayak on Lagoa Azul</b> — one-hour Futurismo rental for two</li>
+          <li>Short ridge walk to Boca do Inferno</li>
+          <li>Lunch in the crater village</li>
           <li>Afternoon: Ponta da Ferraria — hot spring inside an ocean pool, <b>timed to low tide</b></li>
-          <li>Evening: <b>Quinta dos Sabores</b> tasting dinner · booked for 7:30 PM</li>
+          <li>Evening back at the harbor</li>
         </ul></div>
         <div class="stay">
           <h6>Octant Ponta Delgada</h6>
@@ -184,7 +200,7 @@
           <div class="mapframe"><iframe loading="lazy" title="Map of Sete Cidades" src="https://maps.google.com/maps?q=Sete+Cidades,+Azores&z=11&output=embed"></iframe></div>
         </div>
       </div>
-      <div class="transport">🚗 Western loop + booked 1:00 PM kayak + Quinta dinner</div>
+      <div class="transport">🚗 ~1.5 hours total driving · western loop</div>
     </article>
 
     <!-- DAY 3 -->
@@ -194,46 +210,53 @@
       <div class="hero"><img src="https://images.unsplash.com/photo-1676065344960-6505bec2bf89?w=800&q=80" alt="Lagoa do Fogo crater lake" loading="lazy"><span class="cap">Lagoa do Fogo · the island's spine</span></div>
       <div class="card-body">
         <div class="blk"><h5>Schedule</h5><ul>
-          <li><b>Lagoa do Fogo</b> roadside viewpoints if the crater is clear <span class="opt">· weather call</span></li>
-          <li><b>Caldeira Velha</b> — booked timed entry, <b>10:30–12:00</b></li>
-          <li>Lunch and wander in <b>Ribeira Grande</b>; <b>Salto do Cabrito</b> stays game-time optional only</li>
-          <li>Back to Ponta Delgada to pack, then <b>Bom Pesqueiro</b> dinner · booked for 7:00 PM</li>
+          <li>Morning: Lagoa do Fogo — pristine crater lake <span class="opt">· optional</span></li>
+          <li>Caldeira Velha warm forest pools — <b>book the first timed slot</b></li>
+          <li>Wind down in Ribeira Grande at whatever pace feels right</li>
+          <li>Evening: rooftop pool or old-town dinner</li>
         </ul></div>
         <div class="stay">
           <h6>Octant Ponta Delgada</h6>
           <p>Night 3 of 3 — last harbor night</p>
+        </div>
+        <div class="bookings">
+          <div class="booking"><span class="status todo">TO BOOK</span><b>Caldeira Velha</b> — timed entry<span class="detail">Sun 23 Aug · first slot · parquesnaturais.azores.gov.pt</span></div>
         </div>
         <div class="blk">
           <p class="maplabel">📍 PONTA DELGADA → LAGOA DO FOGO → CALDEIRA VELHA</p>
           <div class="mapframe"><iframe loading="lazy" title="Map of Lagoa do Fogo" src="https://maps.google.com/maps?q=Lagoa+do+Fogo,+Azores&z=11&output=embed"></iframe></div>
         </div>
       </div>
-      <div class="transport">🚗 Central spine + booked Caldeira Velha + Sunday dinner in town</div>
+      <div class="transport">🚗 ~1.5 hours total driving · central spine</div>
     </article>
 
     <!-- DAY 4 -->
     <article class="card" style="--stripe:#6E7A4E">
       <div class="card-head"><span class="daynum">DAY 4</span><span class="when">Monday, August 24, 2026</span></div>
-      <h3 class="card-title">Move East — Whales, Coast &amp; Chapel</h3>
-      <div class="hero"><img src="https://images.unsplash.com/photo-1553689405-1051840967f2?w=800&q=80" alt="Gorreana tea plantation terraces" loading="lazy"><span class="cap">South coast to Furnas · the move east</span></div>
+      <h3 class="card-title">Move East — Tea &amp; Thermal Water</h3>
+      <div class="hero"><img src="https://images.unsplash.com/photo-1570613043932-0b04e0cc642f?w=800&q=80" alt="Furnas thermal valley" loading="lazy"><span class="cap">Furnas · the thermal valley</span></div>
       <div class="card-body">
         <div class="blk"><h5>Schedule</h5><ul>
-          <li><b>8:30 AM whale and dolphin watch</b> from Portas do Mar · booked catamaran</li>
-          <li>South-coast drive east to <b>Bar Caloura</b> for grilled fish lunch and a cove swim</li>
-          <li><b>Nossa Senhora da Paz</b> staircase stop above Vila Franca do Campo</li>
-          <li>Check in at Octant Furnas and ease into the geothermal pools</li>
-          <li><b>Dark swimsuits</b> — the Terra Nostra water stains light fabric</li>
+          <li>Unhurried checkout from Ponta Delgada</li>
+          <li>En route: Gorreana — Europe's oldest tea plantation</li>
+          <li>Check in at Octant Furnas</li>
+          <li>Afternoon: geothermal pools + the ochre pool at Terra Nostra</li>
+          <li><b>Dark swimsuits</b> — the iron-rich water stains light fabric</li>
         </ul></div>
         <div class="stay">
           <h6><a href="https://furnas.octanthotels.com" target="_blank" rel="noopener">Octant Hotels Furnas</a></h6>
           <p>Furnas valley · 4.7★ · +351 296 249 200 · Night 1 of 3</p>
+          <p class="perks"><b>Premium Mountain View</b> — 3 nights · $2,067</p>
+        </div>
+        <div class="bookings">
+          <div class="booking"><span class="status done">✓ BOOKED</span><b>Octant Furnas</b> — 3 nights<span class="detail">Premium Mountain View · $2,067</span></div>
         </div>
         <div class="blk">
-          <p class="maplabel">📍 ROUTE: PORTAS DO MAR → CALOURA → VILA FRANCA → FURNAS</p>
+          <p class="maplabel">📍 ROUTE: PONTA DELGADA → GORREANA → FURNAS</p>
           <div class="mapframe"><iframe loading="lazy" title="Map of Furnas" src="https://maps.google.com/maps?q=Furnas,+Azores&z=11&output=embed"></iframe></div>
         </div>
       </div>
-      <div class="transport">⛵ 8:30–11:30 whale watch + south-coast move east to Furnas</div>
+      <div class="transport">🚗 ~1 hour drive east (the only hotel move of the trip)</div>
     </article>
 
     <!-- DAY 5 -->
@@ -243,7 +266,7 @@
       <div class="hero"><img src="https://images.unsplash.com/photo-1653234775444-343d733951b3?w=800&q=80" alt="Nordeste coast" loading="lazy"><span class="cap">Waterfalls · tea fields · dusk soak</span></div>
       <div class="card-body">
         <div class="blk"><h5>Today’s shape</h5><ul>
-          <li><b>Parque Natural da Ribeira dos Caldeirões</b> — lush waterfall stop, best before the day gets crowded</li>
+          <li><b>Parque Natural da Ribeira dos Caldeirões</b> — lush waterfall stop</li>
           <li><b>Os Melos</b> — buffet lunch after the parque natural</li>
           <li><b>Gorreana Tea Plantation</b> — drone flight, tea rows, and souvenirs</li>
           <li>Returned to Furnas for a town walk, then Octant thermal pool time</li>
@@ -258,34 +281,40 @@
           <div class="mapframe"><iframe loading="lazy" title="Map of Nordeste" src="https://maps.google.com/maps?q=Ponta+do+Sossego,+Nordeste,+Azores&z=11&output=embed"></iframe></div>
         </div>
       </div>
-      <div class="transport">🚗 Flexible Nordeste loop day + booked 6:30 PM dusk soak</div>
+      <div class="transport">🚗 Gentle east-side loop · return to Furnas before the 6:30 soak</div>
     </article>
 
     <!-- DAY 6 -->
     <article class="card" style="--stripe:#B06D3D">
       <div class="card-head"><span class="daynum">DAY 6</span><span class="when">Wednesday, August 26, 2026</span></div>
-      <h3 class="card-title">Thermal &amp; Happy Cows <span class="star">★ DONE</span></h3>
-      <div class="hero"><img src="https://images.unsplash.com/photo-1557758820-ce2c887c678e?w=800&q=80" alt="Hot spring thermal pool" loading="lazy"><span class="cap">Terra Nostra · the thermal finale</span></div>
+      <h3 class="card-title">Indulgence &amp; Last Furnas Dinner <span class="star">★ DONE</span></h3>
+      <div class="hero"><img src="https://images.unsplash.com/photo-1777822982062-42e6244a133e?w=800&q=80" alt="Thermal pool in the Azores" loading="lazy"><span class="cap">Massage · Happy Cows · Terra Nostra</span></div>
       <div class="card-body">
         <div class="blk"><h5>What actually happened</h5><ul>
           <li>Slow breakfast and a quick pool dip before the spa block</li>
-          <li><b>11:00 AM couples massage</b> at the Octant spa · very nice</li>
-          <li>Lunch in town at <b>Tony's</b> · cozido croquettes</li>
-          <li><b>Happy Cows at Volcanic Beings</b> · Jo&atilde;o and Mariana hosted</li>
+          <li><b>11:00 couples massage at the Octant Furnas spa</b> — very nice</li>
+          <li>Lunch in town at <b>Tony's</b> with cozido croquettes</li>
+          <li><b>Happy Cows at Volcanic Beings</b> — Jo&atilde;o and Mariana hosted</li>
           <li>Met dairy cows in the field, rode a horse, milked cows, drank raw milk, met goats, and fed baby cows</li>
-          <li><b>8:30 PM Terra Nostra dinner</b> · lovely final Furnas dinner</li>
+          <li><b>20:30 dinner at Terra Nostra</b> — lovely final Furnas dinner</li>
           <li>Final hot tub dip before bed</li>
         </ul></div>
         <div class="stay">
           <h6>Octant Hotels Furnas</h6>
           <p>Night 3 of 3 — final night on the island</p>
         </div>
+        <div class="bookings">
+          <div class="booking"><span class="status done">✓ DONE</span><b>Couples massage</b> — Octant Furnas spa<span class="detail">Wed 26 Aug · 11:00</span></div>
+          <div class="booking"><span class="status done">✓ DONE</span><b>Tony's lunch</b> — Furnas town<span class="detail">Cozido croquettes</span></div>
+          <div class="booking"><span class="status done">✓ DONE</span><b>Happy Cows tour</b> — Volcanic Beings<span class="detail">Jo&atilde;o and Mariana hosting</span></div>
+          <div class="booking"><span class="status done">✓ DONE</span><b>Terra Nostra dinner</b> — final Furnas dinner<span class="detail">Wed 26 Aug · 20:30</span></div>
+        </div>
         <div class="blk">
-          <p class="maplabel">📍 FURNAS VALLEY · ALL WITHIN MINUTES</p>
-          <div class="mapframe"><iframe loading="lazy" title="Map of Terra Nostra" src="https://maps.google.com/maps?q=Terra+Nostra+Garden,+Furnas&z=14&output=embed"></iframe></div>
+          <p class="maplabel">📍 FURNAS → VOLCANIC BEINGS → TERRA NOSTRA</p>
+          <div class="mapframe"><iframe loading="lazy" title="Map of Terra Nostra Garden Hotel" src="https://maps.google.com/maps?q=Terra+Nostra+Garden+Hotel,+Furnas,+Azores&z=14&output=embed"></iframe></div>
         </div>
       </div>
-      <div class="transport">🚶 Spa, town lunch, farm magic, and a slow Furnas finale</div>
+      <div class="transport">🚶 Minimal driving — everything is in the valley</div>
     </article>
 
     <!-- DAY 7 -->
@@ -312,13 +341,13 @@
           <h5>Estimated budget</h5>
           <table class="budget">
             <tr><td>Flights (2 × EWR ⇄ PDL)</td><td>$1,900</td></tr>
-            <tr><td>Lodging (6 nights · 2 Octants)</td><td>$3,600</td></tr>
+            <tr><td>Lodging (6 nights · 2 Octants)</td><td>~$3,750</td></tr>
             <tr><td>Rental car (7 days)</td><td>$550</td></tr>
             <tr><td>Activities &amp; spa</td><td>$700</td></tr>
             <tr><td>Meals</td><td>$1,100</td></tr>
-            <tr class="total"><td>Estimated total</td><td>~$7,850</td></tr>
+            <tr class="total"><td>Estimated total</td><td>~$8,000</td></tr>
           </table>
-          <p class="smallnote" style="margin-top:8px;">Before Chase Sapphire Reserve offsets (−$500 statement credit, −$100 hotel credit, breakfasts included at Ponta Delgada). August is peak — book early.</p>
+          <p class="smallnote" style="margin-top:8px;">Before Chase Sapphire Reserve offsets (−$500 statement credit, −$100 hotel credit, breakfasts included at Ponta Delgada, 85K points redeemed). August is peak — book early.</p>
         </div>
       </div>
       <div class="transport">🚗 ~50 min to airport + ✈️ ~6 hour flight home</div>
