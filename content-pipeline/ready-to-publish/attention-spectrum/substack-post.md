@@ -91,4 +91,4 @@ The goal isn't to maximize one end. It's to move deliberately. To know where you
 
 ---
 
-**[→ Explore the interactive visualization](https://kaihamil.com/frameworks/spectrum-of-attention.html)**
+**[→ Explore the interactive visualization](https://content.kaihamil.com/frameworks/spectrum-of-attention.html)**
