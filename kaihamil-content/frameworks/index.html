@@ -423,6 +423,154 @@
             font-weight: 600;
             margin-bottom: 15px;
         }
+
+        /* Guided framework index */
+        .hero {
+            padding: 104px 40px 48px;
+        }
+
+        .hero p {
+            max-width: 680px;
+        }
+
+        .container {
+            max-width: 1180px;
+            padding-top: 40px;
+        }
+
+        .about-frameworks {
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+        }
+
+        .about-frameworks h2 {
+            font-size: 1.65rem;
+            margin-bottom: 6px;
+        }
+
+        .about-frameworks p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .journey-labels {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .journey-label {
+            padding: 10px 16px;
+            border-radius: 999px;
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .journey-label.problem { background: #e8f1fd; color: #315f91; }
+        .journey-label.solution { background: #f5e9bd; color: #775e12; }
+        .journey-arrow { color: var(--amber); font-size: 1.4rem; }
+
+        .framework-path {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            align-items: start;
+        }
+
+        .path-panel {
+            background: rgba(255, 253, 249, 0.72);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .path-panel.problem { border-top: 4px solid #90b8e6; }
+        .path-panel.solution { border-top: 4px solid var(--gold-light); }
+
+        .framework-section + .framework-section {
+            border-top: 1px solid var(--border);
+            margin-top: 22px;
+            padding-top: 20px;
+        }
+
+        .framework-section h2 {
+            font-size: 1.55rem;
+            margin: 0 0 4px;
+        }
+
+        .section-guide {
+            color: var(--brown-medium);
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+        }
+
+        .frameworks-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin: 0;
+        }
+
+        .framework-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas:
+                "icon title meta"
+                "icon copy meta";
+            column-gap: 13px;
+            align-items: center;
+            min-height: 0;
+            padding: 14px 16px;
+            border-radius: 12px;
+            box-shadow: none;
+        }
+
+        .framework-card::before,
+        .framework-card .badge,
+        .framework-card .interactive-badge {
+            display: none;
+        }
+
+        .framework-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .framework-icon {
+            grid-area: icon;
+            font-size: 1.35rem;
+            margin: 0;
+        }
+
+        .framework-card h3 {
+            grid-area: title;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.98rem;
+            line-height: 1.3;
+            margin: 0 0 3px;
+        }
+
+        .framework-card p {
+            grid-area: copy;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .framework-meta {
+            grid-area: meta;
+            max-width: 110px;
+            text-align: right;
+            font-size: 0.7rem;
+            line-height: 1.35;
+        }
         
         /* Footer */
         footer {
@@ -439,7 +587,14 @@
         }
         
         @media (max-width: 600px) {
-            .frameworks-grid { grid-template-columns: 1fr; }
+            .journey-labels { display: none; }
+            .framework-path { grid-template-columns: 1fr; }
+            .path-panel { padding: 18px; }
+            .framework-card {
+                grid-template-columns: auto 1fr;
+                grid-template-areas: "icon title" "icon copy";
+            }
+            .framework-meta { display: none; }
             .hero h1 { font-size: 2rem; }
             .about-frameworks { padding: 30px; }
         }
@@ -476,17 +631,24 @@
     </header>
     
     <main class="container">
-        <!-- What is a Framework - Now at the top -->
+        <!-- Compact orientation -->
         <div class="about-frameworks">
-            <h2>What is a Framework?</h2>
-            <p>A framework is a thinking tool - a structured approach for navigating complexity. Unlike rigid systems, frameworks adapt to context while providing clarity. They help you see patterns, identify leverage points, and make better decisions faster.</p>
-            <p>Each framework here has been developed through research, tested in practice, and refined through iteration. Use them as starting points, not prescriptions.</p>
-            <p><strong>How to use:</strong> Start with a diagnostic framework to understand your situation, then apply a decision framework to navigate your next move.</p>
+            <h2>Start with where you are</h2>
+            <p><strong>Assess</strong> what is happening, <strong>diagnose</strong> the underlying pattern, then choose a <strong>decision</strong> or <strong>professional</strong> framework to move toward a solution. These are adaptable thinking tools, not prescriptions.</p>
         </div>
-        
-        <!-- Assessments -->
-        <h2>Assessments</h2>
-        <div class="frameworks-grid">
+
+        <div class="journey-labels" aria-hidden="true">
+            <div class="journey-label problem">Understand the problem</div>
+            <div class="journey-arrow">→</div>
+            <div class="journey-label solution">Build toward a solution</div>
+        </div>
+
+        <div class="framework-path">
+            <section class="path-panel problem" aria-label="Problem-side frameworks">
+                <div class="framework-section">
+                    <h2>Assessments</h2>
+                    <p class="section-guide">Establish your current state and reveal the gaps worth examining.</p>
+                    <div class="frameworks-grid">
             <a href="system-self-assessment.html" class="framework-card system-self-framework">
                 <span class="badge">Assessment</span>
                 <div class="framework-icon">⚖️</div>
@@ -518,11 +680,13 @@
                 <p>Quick diagnostic to discover your AI problem-solving style. Explorer, Analyst, Designer, or Builder?</p>
                 <span class="framework-meta">Entry assessment • 2 minutes • Quadrant</span>
             </a>
-        </div>
-        
-        <!-- Diagnostic Frameworks -->
-        <h2>Diagnostic Frameworks</h2>
-        <div class="frameworks-grid">
+                    </div>
+                </div>
+
+                <div class="framework-section">
+                    <h2>Diagnostic Frameworks</h2>
+                    <p class="section-guide">Find the structure, cause, or attention pattern beneath the symptoms.</p>
+                    <div class="frameworks-grid">
             <a href="problem-audit.html" class="framework-card diagnostic-framework">
                 <span class="badge">Diagnostic</span>
                 <div class="framework-icon">🔍</div>
@@ -554,11 +718,23 @@
                 <p>Visualize your actual workflows before automating them. Understand what you actually do versus what you think you do. Critical first step before building systems.</p>
                 <span class="framework-meta">Workflow audit • 3 phases • Automation prep</span>
             </a>
-        </div>
-        
-        <!-- Decision Frameworks -->
-        <h2>Decision Frameworks</h2>
-        <div class="frameworks-grid">
+
+            <a href="spectrum-of-attention.html" class="framework-card diagnostic-framework">
+                <span class="badge">Diagnostic</span>
+                <div class="framework-icon">📷</div>
+                <h3>The Spectrum of Attention</h3>
+                <p>See how your attention moves from consumption to creation, and identify where an activity actually sits.</p>
+                <span class="framework-meta">9 positions • Interactive • Visual</span>
+            </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="path-panel solution" aria-label="Solution-side frameworks">
+                <div class="framework-section">
+                    <h2>Decision Frameworks</h2>
+                    <p class="section-guide">Choose a direction once the problem and its constraints are clear.</p>
+                    <div class="frameworks-grid">
             <a href="5-filters.html" class="framework-card decision-framework">
                 <span class="badge">Decision</span>
                 <div class="framework-icon">⬇</div>
@@ -566,31 +742,13 @@
                 <p>5-question framework for deciding under uncertainty. Applies Directional, Preferential, and Philosophical lenses to any choice.</p>
                 <span class="framework-meta">5 filters • Uncertainty navigation</span>
             </a>
-        </div>
-        
-        <!-- Interactive Diagrams -->
-        <h2>Interactive Diagrams</h2>
-        <div class="frameworks-grid">
-            <a href="spectrum-of-attention.html" class="framework-card interactive-framework">
-                <span class="interactive-badge">⚡ Interactive</span>
-                <div class="framework-icon">📷</div>
-                <h3>The Spectrum of Attention</h3>
-                <p>Map your activities from pure consumption to pure creation. Photography lives at the threshold - where taking in meets making new.</p>
-                <span class="framework-meta">9 positions • Time & Attention • Visual</span>
-            </a>
-            
-            <a href="attention-spectrum.html" class="framework-card interactive-framework">
-                <span class="interactive-badge">⚡ Interactive</span>
-                <div class="framework-icon">🎯</div>
-                <h3>Attention Spectrum (Light)</h3>
-                <p>A streamlined version of the Attention Spectrum framework. Quick assessment of where your attention flows across the consumption-creation continuum.</p>
-                <span class="framework-meta">5 positions • Quick scan • Mobile-friendly</span>
-            </a>
-        </div>
-        
-        <!-- Professional Frameworks -->
-        <h2>Professional Frameworks</h2>
-        <div class="frameworks-grid">
+                    </div>
+                </div>
+
+                <div class="framework-section">
+                    <h2>Professional Frameworks</h2>
+                    <p class="section-guide">Apply structured discovery and problem-solving in a specific working context.</p>
+                    <div class="frameworks-grid">
             <a href="realtor-discovery-framework.html" class="framework-card professional-framework">
                 <span class="badge">Professional</span>
                 <div class="framework-icon">🏠</div>
@@ -598,6 +756,9 @@
                 <p>20-question diagnostic for identifying root cause problems in realtor businesses. Maps pain points to AI solutions.</p>
                 <span class="framework-meta">20 questions • 5 phases • AI mapping</span>
             </a>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
     
