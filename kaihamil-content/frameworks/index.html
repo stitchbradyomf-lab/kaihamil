@@ -17,9 +17,11 @@
             --gold: #c9a227;
             --gold-light: #e8d5a3;
             --border: #e8dfd3;
+            --sand: #e8ddd3;
             --terracotta: #b87a5e;
             --ink-dark: #2c2420;
             --ink-medium: #5a5048;
+            --ochre: #bb6f38;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -427,11 +429,18 @@
         /* Guided framework index */
         .hero {
             padding: 104px 40px 48px;
+            background: var(--bg-cream);
+            color: var(--ink-dark);
+            border-bottom: 1px solid var(--border);
         }
 
         .hero p {
             max-width: 680px;
+            color: var(--brown-medium);
+            opacity: 0.82;
         }
+
+        .hero h1 strong { color: var(--ochre); }
 
         .container {
             max-width: 1180px;
@@ -473,9 +482,9 @@
             text-transform: uppercase;
         }
 
-        .journey-label.problem { background: #e8f1fd; color: #315f91; }
-        .journey-label.solution { background: #f5e9bd; color: #775e12; }
-        .journey-arrow { color: var(--amber); font-size: 1.4rem; }
+        .journey-label.problem { background: var(--sand); color: var(--ink-medium); }
+        .journey-label.solution { background: var(--bg-warm); color: var(--ink-medium); }
+        .journey-arrow { color: var(--terracotta); font-size: 1.4rem; opacity: 0.65; }
 
         .framework-path {
             display: grid;
@@ -491,8 +500,8 @@
             padding: 22px;
         }
 
-        .path-panel.problem { border-top: 4px solid #90b8e6; }
-        .path-panel.solution { border-top: 4px solid var(--gold-light); }
+        .path-panel.problem { border-top: 3px solid var(--brown-medium); }
+        .path-panel.solution { border-top: 3px solid var(--terracotta); }
 
         .framework-section + .framework-section {
             border-top: 1px solid var(--border);
@@ -530,6 +539,18 @@
             padding: 14px 16px;
             border-radius: 12px;
             box-shadow: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+
+        .framework-card.decision-framework,
+        .framework-card.diagnostic-framework,
+        .framework-card.assessment-framework,
+        .framework-card.interactive-framework,
+        .framework-card.system-self-framework,
+        .framework-card.professional-framework {
+            background: var(--bg-card);
+            border-color: var(--border);
         }
 
         .framework-card::before,
@@ -540,7 +561,8 @@
 
         .framework-card:hover {
             transform: translateX(4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-color: var(--amber);
+            box-shadow: 0 6px 18px rgba(61, 40, 23, 0.07);
         }
 
         .framework-icon {
@@ -570,6 +592,8 @@
             text-align: right;
             font-size: 0.7rem;
             line-height: 1.35;
+            color: var(--brown-medium);
+            opacity: 0.72;
         }
         
         /* Footer */
@@ -711,14 +735,6 @@
                 <span class="framework-meta">2 domains • Bidirectional • Balance assessment</span>
             </a>
             
-            <a href="life-process-mapping.html" class="framework-card diagnostic-framework">
-                <span class="badge">Diagnostic</span>
-                <div class="framework-icon">🗺️</div>
-                <h3>Life Process Mapping</h3>
-                <p>Visualize your actual workflows before automating them. Understand what you actually do versus what you think you do. Critical first step before building systems.</p>
-                <span class="framework-meta">Workflow audit • 3 phases • Automation prep</span>
-            </a>
-
             <a href="spectrum-of-attention.html" class="framework-card diagnostic-framework">
                 <span class="badge">Diagnostic</span>
                 <div class="framework-icon">📷</div>
@@ -741,6 +757,14 @@
                 <h3>The 5 Filters</h3>
                 <p>5-question framework for deciding under uncertainty. Applies Directional, Preferential, and Philosophical lenses to any choice.</p>
                 <span class="framework-meta">5 filters • Uncertainty navigation</span>
+            </a>
+
+            <a href="life-process-mapping.html" class="framework-card decision-framework">
+                <span class="badge">Solution</span>
+                <div class="framework-icon">🗺️</div>
+                <h3>Life Process Mapping</h3>
+                <p>Visualize how work actually happens, then use that map to redesign or automate the process deliberately.</p>
+                <span class="framework-meta">Workflow mapping • 3 phases • System design</span>
             </a>
                     </div>
                 </div>
