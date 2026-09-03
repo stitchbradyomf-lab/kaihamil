@@ -483,7 +483,11 @@
         }
 
         .journey-label.problem { background: var(--sand); color: var(--ink-medium); }
-        .journey-label.solution { background: var(--bg-warm); color: var(--ink-medium); }
+        .journey-label.solution {
+            background: #efd8c7;
+            color: #704a35;
+            border: 1px solid #e2c2aa;
+        }
         .journey-arrow { color: var(--terracotta); font-size: 1.4rem; opacity: 0.65; }
 
         .framework-path {
@@ -551,6 +555,24 @@
         .framework-card.professional-framework {
             background: var(--bg-card);
             border-color: var(--border);
+        }
+
+        .path-panel.solution .framework-card {
+            background: linear-gradient(135deg, #fffdf9 0%, #f7e9df 100%);
+            border-color: #ead8cb;
+        }
+
+        .path-panel.solution .frameworks-grid .framework-card:nth-child(even) {
+            background: linear-gradient(135deg, #fdfaf6 0%, #f3e2d6 100%);
+        }
+
+        .path-panel.solution .framework-section + .framework-section .framework-card {
+            background: linear-gradient(135deg, #fffdf9 0%, #f5e5d9 100%);
+        }
+
+        .path-panel.solution .framework-card:hover {
+            border-color: #cf9a78;
+            box-shadow: 0 6px 18px rgba(112, 74, 53, 0.09);
         }
 
         .framework-card::before,
