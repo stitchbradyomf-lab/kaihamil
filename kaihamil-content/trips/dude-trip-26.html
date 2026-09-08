@@ -176,6 +176,14 @@
  .host-tip{margin-top:13px;padding:11px 13px;border-radius:8px;background:var(--birch-dim);font-size:13.5px;}
  .open-slot{margin-top:12px;padding:12px 14px;border:1px dashed var(--amber);border-radius:8px;background:#FFF9EC;font-size:14px;}
  .open-slot b{color:#7A501A;}
+ .menu-link{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ margin-top:12px;padding:13px 15px;border-radius:9px;background:var(--pine);
+ color:var(--birch);text-decoration:none;font-family:'IBM Plex Mono',monospace;
+ font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+ }
+ .menu-link::after{content:"Open PDF →";color:var(--amber-bright);white-space:nowrap;}
+ .menu-link:active{transform:scale(.99);}
 
  .photos{
  display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:140px 140px;
@@ -472,6 +480,7 @@
  </details>
 
  <p style="margin-top:12px;"><b>Sunday dinner:</b> possible in-home dinner with host-recommended chef Alison Beach. Availability still needs to be confirmed.</p>
+ <a class="menu-link" href="dude-trip-26-assets/alison-beach-sample-menus.pdf" target="_blank" rel="noopener">View Alison's sample menus</a>
  <div class="open-slot"><b>Open opportunity:</b> someone can own the final hike selection and trail logistics. If the chef is unavailable, Sunday dinner is open too.</div>
  </div>
  </details>
