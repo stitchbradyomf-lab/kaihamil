@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Build: 2026-09-02 14:21 EDT - House details and revised itinerary -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -100,6 +101,14 @@
  .quick .q-v{font-weight:700;font-size:15.5px;line-height:1.35;}
  .quick .q-s{font-size:12.5px;color:var(--tan);margin-top:2px;}
 
+ .crew{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 28px;}
+ .crew span{
+ border:1px solid var(--rule);border-radius:10px;background:#FBF8F0;padding:12px 8px;
+ text-align:center;font-weight:700;font-size:14px;
+ }
+ .crew .open{border-style:dashed;color:var(--tan);font-weight:500;}
+ @media (max-width:520px){.crew{grid-template-columns:repeat(2,1fr);}}
+
  .cta{background:var(--pine);color:var(--birch);border-radius:14px;padding:24px 22px;margin:30px 0 8px;}
  .cta h2{color:var(--birch);margin-bottom:6px;}
  .cta p{font-size:15px;max-width:50ch;color:var(--birch-dim);}
@@ -152,6 +161,21 @@
  border-left:3px solid var(--amber);background:var(--birch-dim);
  border-radius:0 8px 8px 0;padding:12px 14px;margin-top:6px;font-size:14.5px;
  }
+ .mini-head{
+ font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;
+ letter-spacing:.13em;text-transform:uppercase;color:var(--amber);margin:15px 0 3px;
+ }
+ .mini-head:first-child{margin-top:0;}
+ .compact-copy{font-size:14.5px;line-height:1.65;}
+ .compact-copy a,.service-list a{color:var(--moss);font-weight:600;text-underline-offset:2px;}
+ .numbered{margin:7px 0 0 22px;columns:2;column-gap:34px;}
+ .numbered li{padding:4px 0 4px 3px;font-size:14px;break-inside:avoid;color:#4A443A;}
+ .service-list{list-style:none;margin-top:7px;}
+ .service-list li{padding:9px 0;border-bottom:1px solid #EFE8D8;font-size:14.5px;}
+ .service-list li:last-child{border-bottom:none;}
+ .host-tip{margin-top:13px;padding:11px 13px;border-radius:8px;background:var(--birch-dim);font-size:13.5px;}
+ .open-slot{margin-top:12px;padding:12px 14px;border:1px dashed var(--amber);border-radius:8px;background:#FFF9EC;font-size:14px;}
+ .open-slot b{color:#7A501A;}
 
  .photos{
  display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:140px 140px;
@@ -212,6 +236,7 @@
  @media (max-width:560px){
  .quick{grid-template-columns:1fr;}
  table.money{min-width:520px;}
+ .numbered{columns:1;}
  }
  @media (prefers-reduced-motion:reduce){
  html{scroll-behavior:auto;}
@@ -248,18 +273,23 @@
 
  <div class="wrap">
  <section>
+ <div class="sec-label">The Dudes</div>
+ <div class="crew" aria-label="Confirmed travelers and open spots">
+ <span>Kyle</span><span>Chet</span><span>Tommy</span><span>Miller</span>
+ <span>Paul</span><span>Weber</span><span class="open">Spot 7 open</span><span class="open">Spot 8 open</span>
+ </div>
  <div class="sec-label">The Essentials</div>
  <div class="quick">
  <a href="#/house"><div class="q-k">The House</div><div class="q-v">Resort house, north Greenville</div><div class="q-s">Poker · theater · hot tub · sauna</div></a>
- <a href="#/days"><div class="q-k">The Days</div><div class="q-v">72 hours, 1 summit</div><div class="q-s">Fri 11:17am -> Mon 11:58am</div></a>
+ <a href="#/days"><div class="q-k">The Days</div><div class="q-v">Two anchors, room to improvise</div><div class="q-s">Sat downtown · Sun summit</div></a>
  <a href="#/money"><div class="q-k">The Money</div><div class="q-v">~$1,320-1,490 all-in</div><div class="q-s">Flyers, by headcount</div></a>
- <a href="#/info"><div class="q-k">The Flight</div><div class="q-v">UA 3546 / 3631 · EWR ⇄ GSP</div><div class="q-s">Fri 9:05am out · Mon 2:06pm home</div></a>
+ <a href="#/info"><div class="q-k">Arrivals</div><div class="q-v">Early crew + late crew</div><div class="q-s">Miller driving up from Hilton Head</div></a>
  </div>
 
  <div class="cta">
- <h2>Two things to do</h2>
- <p>The house is locked. Book your flight this week, settle your share, and drop your flight number in the thread. Got a guy for the 7th or 8th spot? Vouch for him now.</p>
- <span class="reply">1  BOOK EWR -> GSP  ·  2  VENMO HOUSE SHARE</span>
+ <h2>Claim a piece of the weekend</h2>
+ <p>Saturday night and Sunday's hike are anchored. The open stretches are invitations: pick an activity, meal, game, or house plan and take the lead. Still have a guy for spot 7 or 8? Vouch for him in the thread.</p>
+ <span class="reply">SEE AN OPEN SLOT? OWN IT.</span>
  </div>
  </section>
  </div>
@@ -270,7 +300,7 @@
  <section>
  <div class="sec-label">The House - Booked</div>
  <h2>Private resort house, north Greenville</h2>
- <p class="lead">3,200 sq ft with a deck view running from downtown to the mountains - 10 min to Paris Mountain State Park and Travelers Rest, 15 to downtown. Rated 4.98 across 43 stays, Superhost, top 5% of listings. <b>$3,250 total</b> for 3 nights, split by headcount.</p>
+ <p class="lead">3,200 sq ft with a deck view running from downtown to the mountains - 10 min to Paris Mountain State Park and Travelers Rest, 15-20 to downtown. Rated 4.98 across 43 stays, Superhost, top 5% of listings. <b>$3,250 total</b> for 3 nights, split by headcount.</p>
 
  <div class="photos">
  <img src="dude-trip-26-assets/house-1.jpg" alt="The house" loading="lazy">
@@ -315,6 +345,88 @@
  <p>Check-in 4pm Friday, checkout 10am Monday. Keep outdoor volume reasonable after hours - the property uses noise-level sensors (no audio recording). Driveway fits 6 cars; no street parking.</p>
  </div>
  </details>
+
+ <details class="fold">
+ <summary>What's already at the house <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body compact-copy">
+ <div class="mini-head">Kitchen + coffee</div>
+ <p>Ground coffee, K-pods, tea, creamers, honey, and sugar. Trash bags, paper towels, dish soap, and dishwasher pods are stocked too.</p>
+ <div class="mini-head">Games + outside</div>
+ <p>Four pickleball paddles, four tennis rackets, and balls are in the entryway closet. A Paris Mountain State Park pass is on the refrigerator.</p>
+ <div class="mini-head">Laundry + bathrooms</div>
+ <p>Detergent pods, dryer sheets, hand soap, shampoo, conditioner, and body wash are provided. Pool and hot-tub towels are on the laundry-area shelves.</p>
+ <div class="mini-head">Theater</div>
+ <p>One remote controls the projector and one controls Roku. Sign into your own streaming apps.</p>
+ <div class="host-tip"><b>Cold-plunge option:</b> the pool is not heated in November. Hot tub is the recovery plan.</div>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Food + coffee nearby <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body compact-copy">
+ <p>These are the host's recommendations. Make weekend dinner reservations where available.</p>
+ <div class="mini-head">Greenville · 15-20 min</div>
+ <p><b>Lunch / dinner:</b> Soby's, The Peddler, Halls Chophouse, Trio, Rick Erwin's, Fork and Plough, Sassafras<br><b>Coffee / dessert:</b> Coffee Underground, Methodical Coffee, Village Grind, Old Europe<br><b>Breakfast:</b> Sunflower Bakery, Swamp Rabbit Cafe &amp; Grocery, Stax Omega</p>
+ <div class="mini-head">Travelers Rest · about 10 min</div>
+ <p><b>Lunch / dinner:</b> Chicora Alley, Restaurant 17, Farmhouse Tacos, Upcountry Provisions, Whistle Stop<br><b>Coffee:</b> Treehouse Cafe, Leopard Forest<br><b>Breakfast:</b> Tandem Creperie</p>
+ <div class="mini-head">Greer · about 30 min</div>
+ <p><b>All day:</b> Select<br><b>Lunch / dinner:</b> Wild Ace Pizza, Rick Erwin's Greer, L'Incanto<br><b>Coffee:</b> Flying Fox, Little Leaf, Barista Alley</p>
+ <div class="mini-head">Groceries + rides</div>
+ <p>Harris Teeter, Publix, Walmart, and Ingles are 12-15 minutes away. Delivery works through Instacart, Walmart+, Uber Eats, and Shipt. Uber and Lyft both serve the house.</p>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Host's local list <span class="sumtag">28 IDEAS</span><span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <ol class="numbered">
+ <li>Sunset from the deck, hot tub, or pool</li>
+ <li>Paris Mountain State Park</li>
+ <li>Downtown Greenville lunch</li>
+ <li>Travelers Rest dinner</li>
+ <li>Furman picnic or ball game</li>
+ <li>Greenville Theatre</li>
+ <li>Peace Center show</li>
+ <li>Bon Secours Wellness Arena</li>
+ <li>Greenville Zoo</li>
+ <li>Swamp Rabbit Trail</li>
+ <li>The Children's Museum</li>
+ <li>Mice on Main scavenger hunt</li>
+ <li>Falls Park + Liberty Bridge</li>
+ <li>Greenville County Museum of Art</li>
+ <li>Coffee Underground or Old Europe</li>
+ <li>Greenville Drive at Fluor Field</li>
+ <li>Bob Jones University Museum &amp; Gallery</li>
+ <li>Poinsett Bridge</li>
+ <li>BMW Zentrum</li>
+ <li>Gather GVL food court</li>
+ <li>Flying Rabbit zipline + ropes course</li>
+ <li>Furman lakeside concert</li>
+ <li>Pretty Place · about 1 hr</li>
+ <li>Speed Factory indoor go-karts</li>
+ <li>Pickleball or tennis at the house</li>
+ <li>Campbell's Covered Bridge · about 30 min</li>
+ <li>TR Makers Co pottery studio</li>
+ <li>JMG Ranch horseback riding · about 20 min</li>
+ </ol>
+ </div>
+ </details>
+
+ <details class="fold">
+ <summary>Host-approved services <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body compact-copy">
+ <p>These vendors are already cleared to enter the property. Mention <b>Sunset Haven</b> when booking.</p>
+ <ul class="service-list">
+ <li><b>Personal chef:</b> Alison Beach · <a href="https://www.personalchefbeach.com" target="_blank" rel="noopener">personalchefbeach.com</a></li>
+ <li><b>Mobile massage:</b> Amanda Holmes, LMT · <a href="mailto:holmesholistichealth864@gmail.com">email</a> · <a href="tel:+18648049543">864-804-9543</a></li>
+ <li><b>Women's mobile massage:</b> lymphatic massage, TMJ release, or therapeutic Swedish massage · <a href="https://braziliansculptingandwellness.com" target="_blank" rel="noopener">Brazilian Sculpting &amp; Wellness</a> · <a href="tel:+18646105392">864-610-5392</a></li>
+ <li><b>Mobile group fitness:</b> strength, mobility, pool, or pickleball sessions · <a href="https://www.ryswarriors.com" target="_blank" rel="noopener">RY's Warriors</a> · 10% off for Sunset Haven guests</li>
+ <li><b>Hair / styling / makeup:</b> Ana · <a href="mailto:faithfullystyled.by.ana@gmail.com">email</a> · <a href="tel:+18648048921">864-804-8921</a></li>
+ </ul>
+ <div class="host-tip"><b>Bringing in anyone else?</b> An unapproved outside vendor must be added to the reservation and send liability insurance documentation to the host before entering the home.</div>
+ <p style="margin-top:12px;font-size:13.5px;">Host questions: <a href="mailto:altamontbnb@gmail.com">altamontbnb@gmail.com</a> · <a href="https://havenupstategetaways.com" target="_blank" rel="noopener">Haven Upstate Getaways</a></p>
+ </div>
+ </details>
  </section>
  </div>
 </div>
@@ -323,19 +435,28 @@
  <div class="wrap">
  <section>
  <div class="sec-label">The Days</div>
- <h2>72 hours, one summit</h2>
+ <h2>Two anchors, room to improvise</h2>
 
  <details class="fold" open>
- <summary><span><span class="daytag">FRI 6</span>Arrive + downtown day</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <summary><span><span class="daytag">FRI 6</span>Split welcome day</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>UA 3546 lands 11:17am. Straight downtown for lunch, Falls Park, and the Liberty Bridge in daylight, then into the house when check-in opens at 4. Groceries delivered. Dinner back on Main Street or first night at the house - group's call.</p>
+ <p><b>Morning:</b> Kyle, Chet, and Tommy arrive on the early flight and have the day together before the 4pm house check-in. <b>By car:</b> Miller drives up from Hilton Head, about four hours. <b>Late:</b> Paul and Weber land around 11pm.</p>
+ <div class="open-slot"><b>Open opportunity:</b> early-crew activities, lunch, and the first-night welcome are unclaimed. Someone can take any piece without having to plan the whole day.</div>
  </div>
  </details>
 
- <details class="fold">
- <summary><span><span class="daytag summit">SAT 7</span>Mountain day</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <details class="fold" open>
+ <summary><span><span class="daytag summit">SAT 7</span>Downtown night</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>Pick one of the three hikes below - all ~45 minutes from the house, all at peak color. Back by dark for the hot tub, sauna, and poker.</p>
+ <p><b>Evening anchor:</b> downtown Greenville for college football, dinner, and bar hopping. Kyle has <b>Soby's reserved for 7:30pm</b>. Miller owns the rest of the evening plan.</p>
+ <div class="open-slot"><b>Open opportunity:</b> Saturday morning and afternoon are intentionally unplanned. Step up with one idea or leave the time loose.</div>
+ </div>
+ </details>
+
+ <details class="fold" open>
+ <summary><span><span class="daytag summit">SUN 8</span>Big hike + possible chef</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <div class="fold-body">
+ <p><b>Daytime anchor:</b> pick one of the three hikes below - all about 45 minutes from the house and timed for peak fall color.</p>
 
  <details class="fold hot">
  <summary>Table Rock Summit <span class="sumtag">~7 MI · 2,000+ FT · STRENUOUS</span></summary>
@@ -350,14 +471,8 @@
  <div class="fold-body"><p>The full loop - crosses a suspension bridge directly above the falls. 4.6 stars across 2,000+ AllTrails reviews. Steep in places; the biggest day of the three.</p></div>
  </details>
 
- <p style="margin-top:12px;font-size:13.5px;color:#5C523F;">ATVs: guided UTV outfits are 1.5+ hrs away in the NC mountains - eats the day. Rafting season ends before November. The hike is the play; Paris Mountain (10 min) has easy trails for a Sunday leg-stretcher.</p>
- </div>
- </details>
-
- <details class="fold">
- <summary><span><span class="daytag">SUN 8</span>Slow day + the big cook</span> <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
- <div class="fold-body">
- <p>Loose morning - golf, the Swamp Rabbit Trail, Travelers Rest breweries, or nothing. Afternoon and evening at the house: smoker on, NFL in the theater room, pickleball, poker.</p>
+ <p style="margin-top:12px;"><b>Sunday dinner:</b> possible in-home dinner with host-recommended chef Alison Beach. Availability still needs to be confirmed.</p>
+ <div class="open-slot"><b>Open opportunity:</b> someone can own the final hike selection and trail logistics. If the chef is unavailable, Sunday dinner is open too.</div>
  </div>
  </details>
 
@@ -398,38 +513,37 @@
  <h2>Getting there + around</h2>
 
  <details class="fold" open>
- <summary>Fly - UA 3546 / 3631 <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <summary>Friday arrivals <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>United nonstop, EWR Terminal C <span aria-hidden="true">⇄</span> GSP. Down: <b>UA 3546</b>, Fri Nov 6, 9:05am -> 11:17am. Back: <b>UA 3631</b>, Mon Nov 9, 11:58am -> 2:06pm. Kyle's booked - get on the same flights.</p>
- <p style="margin-top:8px;">Fares as of booking: economy $549 · economy plus $751 · <b>first $769 with checked bag and drinks included</b> - $18 over economy plus, and about $140 over economy once you add a bag. Your call, but the math leans forward.</p>
+ <p><b>Early flight:</b> Kyle, Chet, and Tommy arrive in the morning. <b>Late flight:</b> Paul and Weber arrive around 11pm. Coordinate exact airport pickups in the group thread.</p>
  </div>
  </details>
 
  <details class="fold">
- <summary>Drive crew <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
+ <summary>Miller's drive <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>Hilton Head crew brings a large vehicle (~4 hrs up). One NJ man may drive down too (~10 hrs) - if he does, we have two vehicles on site and the trip needs zero rentals.</p>
+ <p>Miller is driving up from Hilton Head, about four hours, and bringing a vehicle to the house.</p>
  </div>
  </details>
 
  <details class="fold">
  <summary>Wheels on the ground <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>The driven vehicles cover airport pickups, the mountain day, and hauls. Ubers for downtown nights so nobody drives after drinking. Crew chips in for the drivers' gas. Fallback if the NJ car stays home: one cheap one-day rental for Saturday or a second Uber wave.</p>
+ <p>Miller's vehicle can cover the Sunday hike and supply runs. Use Ubers for Saturday downtown so nobody drives after drinking. Airport pickup details still need to be coordinated around the split arrivals.</p>
  </div>
  </details>
 
  <details class="fold">
  <summary>Food <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>Groceries delivered to the house Friday. Sunday is the big cook - smoker requests welcome. Bring a bottle from your shelf.</p>
+ <p>Groceries can be delivered Friday. Soby's is reserved for 7:30pm Saturday. Sunday night may be an in-home chef dinner, pending Alison Beach's availability.</p>
  </div>
  </details>
 
  <details class="fold">
  <summary>Weather + packing <span class="chev"><svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></summary>
  <div class="fold-body">
- <p>Days in the 60s, nights in the 40s. Hoodie, flannel, real shoes for Saturday, trunks for the hot tub.</p>
+ <p>Days in the 60s, nights in the 40s. Hoodie, flannel, real hiking shoes for Sunday, trunks for the hot tub.</p>
  </div>
  </details>
  </section>
@@ -441,16 +555,16 @@
 <nav class="tabbar">
  <div class="inner">
  <a href="#/home" data-page="home">
- <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
- Home
- </a>
- <a href="#/house" data-page="house">
- <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M2 9l10-6 10 6"/></svg>
- House
+ <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="9" r="2.5"/><circle cx="19" cy="9" r="2.5"/><path d="M7 20v-2.5a5 5 0 0 1 10 0V20M1.5 20v-2a3.5 3.5 0 0 1 5-3.2M22.5 20v-2a3.5 3.5 0 0 0-5-3.2"/></svg>
+ Trip
  </a>
  <a href="#/days" data-page="days">
  <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
  Days
+ </a>
+ <a href="#/house" data-page="house">
+ <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="1"/><path d="M2 9l10-6 10 6"/></svg>
+ House
  </a>
  <a href="#/money" data-page="money">
  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.2c0 3 6 1.6 6 4.6 0 1.2-1.3 2.2-3 2.2s-3-1.1-3-2.5"/></svg>
