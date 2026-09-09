@@ -138,6 +138,13 @@ export const INGREDIENTS = [
   { name: 'fresh mint', category: 'spice-herb', readiness: 'need', typical_unit: 'bunch', est_cost_band: 'low' },
   { name: 'lime', category: 'fruit', readiness: 'probably', typical_unit: 'each', est_cost_band: 'low' },
   { name: 'baby Yukon Gold potatoes', category: 'vegetable', readiness: 'probably', typical_unit: 'bag', est_cost_band: 'low', nutrition_tags: ['carb'] },
+  { name: 'chicken thighs', category: 'protein', protein_type: 'chicken', readiness: 'need', typical_unit: 'lb', est_cost_band: 'medium', nutrition_tags: ['high-protein'] },
+  { name: 'zucchini', category: 'vegetable', readiness: 'need', typical_unit: 'each', est_cost_band: 'low', nutrition_tags: ['vegetable'] },
+  { name: 'marinara sauce', category: 'pantry-sauce-condiment', readiness: 'probably', typical_unit: '24 oz jar', est_cost_band: 'low' },
+  { name: 'mozzarella cheese', category: 'dairy-egg', readiness: 'need', typical_unit: '8 oz package', est_cost_band: 'medium' },
+  { name: 'Italian seasoning', category: 'spice-herb', is_pantry_staple: true, readiness: 'probably', typical_unit: 'jar', est_cost_band: 'low' },
+  { name: 'garlic powder', category: 'spice-herb', is_pantry_staple: true, readiness: 'probably', typical_unit: 'jar', est_cost_band: 'low' },
+  { name: 'red pepper flakes', category: 'spice-herb', is_pantry_staple: true, readiness: 'probably', typical_unit: 'jar', est_cost_band: 'low' },
 ]
 
 // ---------------------------------------------------------------------------
@@ -145,6 +152,49 @@ export const INGREDIENTS = [
 // ---------------------------------------------------------------------------
 
 export const MEALS = [
+  {
+    name: 'Baked Mozzarella Chicken with Zucchini & Spinach Pasta',
+    meal_kind: 'cooked',
+    cuisine: 'italian',
+    default_prep_method: 'oven-bake',
+    effort: 'moderate',
+    kid_friendly: true,
+    cost_band: 'medium',
+    nutrition_profile: { protein: 'high', veg: true, carb: 'pasta' },
+    health_notes:
+      'A protein-forward complete meal with vegetables incorporated directly into the main dish. Spinach and zucchini add fiber, potassium, folate, and other micronutrients without substantially increasing calories. Chicken thighs and mozzarella make it richer in fat and saturated fat than a typical tomato-based pasta; chicken breast or slightly less mozzarella can lighten it. Whole-wheat or higher-protein pasta can increase fiber and protein.',
+    notes:
+      'Serves 5. Prep: 15 minutes. Cook: 35 minutes. Total: 50 minutes. Tender chicken baked in marinara under bubbling mozzarella, with zucchini and spinach folded into the tomato sauce and tossed with pasta. Family-friendly chicken Parmesan flavors without breading or frying. Keep the chicken on top of the pasta rather than baking everything together to preserve the browned mozzarella topping. Eggplant can replace the zucchini; cube and sauté it for 7–9 minutes before adding the marinara.',
+    recipe_steps: [
+      'Preheat the oven to 425°F. Pat the chicken dry and season both sides with Italian seasoning, garlic powder, salt, and black pepper.',
+      'Heat 1 tablespoon olive oil in a large oven-safe skillet over medium-high heat. Sear the chicken thighs for 2–3 minutes per side until nicely browned; they do not need to cook through. Transfer to a plate.',
+      'Reduce the heat to medium. Add the remaining olive oil, then the optional onion and zucchini. Sauté for 4–5 minutes until the zucchini begins to brown. Add the garlic and cook for another 30–60 seconds.',
+      'Pour the marinara into the skillet. Add the spinach a handful at a time, stirring until just wilted. Season with black pepper and optional red pepper flakes.',
+      'Nestle the chicken into the vegetable marinara and spoon sauce over each piece. Transfer the uncovered skillet to the oven and bake for 12–15 minutes.',
+      'Meanwhile, boil the pasta in generously salted water until about 1 minute shy of al dente. Reserve 1 cup of pasta water before draining.',
+      'Remove the skillet from the oven and cover the chicken with mozzarella and Parmesan. Return it to the oven for 5–8 minutes, until the cheese melts and the chicken reaches at least 165°F. Thighs can continue toward 175–185°F for a more tender texture.',
+      'For extra color, broil for 1–2 minutes until the mozzarella develops browned, bubbling spots.',
+      'Transfer the chicken temporarily to a plate. Toss the cooked pasta directly into the zucchini-spinach marinara, adding reserved pasta water as needed until the sauce coats the pasta well.',
+      'Spoon the saucy vegetable pasta onto plates and top with the baked mozzarella chicken. Finish with additional Parmesan if desired.',
+    ],
+    ingredients: [
+      { ingredient: 'chicken thighs', role: 'key', quantity: '2–2½ lb boneless, skinless' },
+      { ingredient: 'Italian seasoning', role: 'key', quantity: '1 tsp' },
+      { ingredient: 'garlic powder', role: 'key', quantity: '½ tsp' },
+      { ingredient: 'salt', role: 'key', quantity: 'to taste, plus pasta water' },
+      { ingredient: 'black pepper', role: 'key', quantity: 'to taste' },
+      { ingredient: 'olive oil', role: 'key', quantity: '2 tbsp, divided' },
+      { ingredient: 'zucchini', role: 'key', quantity: '1 medium, sliced into half-moons' },
+      { ingredient: 'baby spinach', role: 'key', quantity: '2–3 large handfuls' },
+      { ingredient: 'garlic', role: 'key', quantity: '3 cloves, minced' },
+      { ingredient: 'onion', role: 'optional', quantity: '½ small, diced' },
+      { ingredient: 'marinara sauce', role: 'key', quantity: '24 oz' },
+      { ingredient: 'red pepper flakes', role: 'optional', quantity: 'to taste' },
+      { ingredient: 'pasta', role: 'key', quantity: '12–16 oz rigatoni, penne, ziti, or similar' },
+      { ingredient: 'mozzarella cheese', role: 'key', quantity: '8 oz, shredded or sliced' },
+      { ingredient: 'Parmesan cheese', role: 'key', quantity: '½ cup grated, plus more to serve' },
+    ],
+  },
   {
     name: 'Creamy Chicken Pasta',
     meal_kind: 'cooked',
