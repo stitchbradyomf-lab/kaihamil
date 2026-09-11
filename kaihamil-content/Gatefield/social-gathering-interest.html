@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fall Social Gathering - Gatefield</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--parchment:#FAF7F0;--aged-paper:#F5EDE0;--green:#1C2B22;--brass:#B08D3F;--deep-brass:#8A6A2E;--brass-tint:#C9B789;--muted:#5C5852}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--parchment);color:var(--green);font-family:Inter,sans-serif;line-height:1.6}.topbar{align-items:center;background:rgba(250,247,240,.95);border-bottom:1px solid var(--brass-tint);display:flex;justify-content:space-between;padding:1.5rem 2rem;position:sticky;top:0;z-index:10}.topbar a,.mini-rule{color:var(--green);font-family:Cinzel,serif;font-size:.68rem;letter-spacing:.2em;text-decoration:none;text-transform:uppercase}.mini-mark{font-family:Cinzel,serif;font-size:1.05rem;font-weight:600;letter-spacing:.15em}.hero{margin:auto;max-width:760px;padding:4.5rem 2rem 3rem;text-align:center}.eyebrow,.field>label,.legend{color:var(--deep-brass);font-family:Cinzel,serif;font-size:.68rem;font-weight:500;letter-spacing:.23em;text-transform:uppercase}.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.3rem,6vw,3.6rem);font-weight:500;line-height:1.08;margin:.9rem 0}.hero h1 em{color:var(--deep-brass);font-weight:400}.hero p{color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.25rem}.form-section{background:var(--aged-paper);border-top:1px solid var(--brass-tint);padding:4rem 1.25rem 6rem}.form-inner{margin:auto;max-width:680px}.intro{color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:1.18rem;margin-bottom:2.5rem;text-align:center}form{display:grid;gap:1.8rem}.field>label,.legend{display:block;margin-bottom:.65rem}.field input[type=text],textarea{background:transparent;border:0;border-bottom:1px solid var(--brass);color:var(--green);font-family:'Cormorant Garamond',serif;font-size:1.15rem;padding:.55rem 0;width:100%}.field input:focus,textarea:focus{border-bottom-color:var(--green);outline:0}textarea{min-height:110px;resize:vertical}.hint{color:var(--muted);font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;margin-top:.35rem}.options{display:grid;gap:.8rem}.option{align-items:flex-start;background:var(--parchment);border:1px solid var(--brass-tint);border-radius:5px;cursor:pointer;display:flex;font-family:'Cormorant Garamond',serif;font-size:1.08rem;gap:.8rem;line-height:1.35;padding:1rem}.option:hover{border-color:var(--brass)}.option input{accent-color:var(--green);height:18px;margin-top:3px;width:18px}.option span span{color:var(--muted);display:block;font-size:.93rem;font-style:italic;margin-top:.15rem}.submit{background:transparent;border:1px solid var(--brass);color:var(--green);cursor:pointer;font-family:Cinzel,serif;font-size:.73rem;justify-self:start;letter-spacing:.23em;margin-top:.5rem;padding:1rem 2.3rem;text-transform:uppercase}.submit:hover{background:var(--green);color:var(--parchment)}footer{border-top:1px solid var(--brass-tint);color:var(--muted);font-size:.7rem;letter-spacing:.15em;padding:2.5rem 2rem;text-align:center;text-transform:uppercase}@media(max-width:560px){.topbar{padding:1.1rem}.mini-rule{display:none}.hero{padding-top:3rem}}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="homeowner.html">← Homeowner</a><div class="mini-mark">GATEFIELD</div><div class="mini-rule">Fall Social</div></div>
+<header class="hero">
+ <div class="eyebrow">Neighborhood Gathering</div>
+ <h1>Help us plan some <em>time together.</em></h1>
+ <p>We are considering a relaxed, potluck-style neighborhood gathering this fall. Tell us which dates work for your household and how you might like to help.</p>
+</header>
+<section class="form-section"><div class="form-inner">
+ <p class="intro">Select every date you could attend. We will use the responses to choose the option that works for the greatest number of neighbors.</p>
+ <form name="fall-social-interest-2026" method="POST" action="/social-gathering-thank-you.html" data-netlify="true" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="fall-social-interest-2026">
+  <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
+  <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+  <div class="field"><label for="house-number">House Number</label><input id="house-number" name="house_number" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234" required><div class="hint">Please enter your four-digit Gatefield house number.</div></div>
+  <fieldset style="border:0"><legend class="legend">Dates that work for us</legend><div class="options">
+   <label class="option"><input type="checkbox" name="available_dates" value="Saturday October 17 afternoon"><span><strong>Saturday, October 17</strong><span>Afternoon</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Sunday October 18 midday"><span><strong>Sunday, October 18</strong><span>Midday</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Saturday October 24 afternoon"><span><strong>Saturday, October 24</strong><span>Afternoon</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Sunday October 25 midday"><span><strong>Sunday, October 25</strong><span>Midday</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Sunday November 1 midday"><span><strong>Sunday, November 1</strong><span>Midday, the day after Halloween</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Saturday November 14 afternoon"><span><strong>Saturday, November 14</strong><span>Afternoon</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="Sunday November 15 midday"><span><strong>Sunday, November 15</strong><span>Midday</span></span></label>
+   <label class="option"><input type="checkbox" name="available_dates" value="None of these dates"><span><strong>None of these dates work</strong></span></label>
+  </div></fieldset>
+  <fieldset style="border:0"><legend class="legend">Ways I could participate</legend><div class="hint" style="margin-bottom:.7rem">Select any roles you would be willing to help with.</div><div class="options">
+   <label class="option"><input type="checkbox" name="volunteer_roles" value="Planning"><span><strong>Planning</strong><span>Help shape the gathering and coordinate details.</span></span></label>
+   <label class="option"><input type="checkbox" name="volunteer_roles" value="Buying"><span><strong>Buying</strong><span>Help purchase shared supplies or event needs.</span></span></label>
+   <label class="option"><input type="checkbox" name="volunteer_roles" value="Day-of setup"><span><strong>Day-of setup</strong><span>Help prepare the gathering space.</span></span></label>
+   <label class="option"><input type="checkbox" name="volunteer_roles" value="Day-of cleanup"><span><strong>Day-of cleanup</strong><span>Help leave the neighborhood space in good order.</span></span></label>
+  </div></fieldset>
+  <div class="field"><label for="contribution">What could you contribute?</label><textarea id="contribution" name="contribution" placeholder="A potluck dish, supplies, equipment, time, a useful skill, or another contribution"></textarea></div>
+  <div class="field"><label for="ideas">Any ideas or suggestions?</label><textarea id="ideas" name="ideas" placeholder="Share an activity, format, location idea, or anything else that could make the gathering enjoyable"></textarea></div>
+  <button class="submit" type="submit">Submit Response</button>
+ </form>
+</div></section>
+<footer>© 2026 Gatefield Homeowners Association</footer>
+</body>
+</html>
