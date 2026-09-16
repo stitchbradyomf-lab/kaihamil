@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Marriage Gap Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F1;
+    --ink:#232B38;
+    --teal:#2E6E64;      /* end state / target */
+    --amber:#C99A3C;     /* current state */
+    --claret:#A63A46;    /* the gap / constraint */
+    --line:#232B3826;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'DM Sans', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16.5px;
+    line-height:1.6;
+  }
+  :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:3px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+
+  /* ---------- HEADER ---------- */
+  header{padding:64px 0 44px;border-bottom:1px solid var(--ink)}
+  .brand{font-size:14px;font-weight:500;letter-spacing:.06em;margin-bottom:26px}
+  .brand b{font-weight:700}
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(42px,8vw,62px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+  }
+  .thesis{
+    margin-top:22px;
+    font-family:var(--serif);
+    font-size:clamp(20px,3.4vw,24px);
+    font-style:italic;
+    line-height:1.4;
+    max-width:34ch;
+  }
+  .method{
+    margin-top:30px;
+    font-size:15.5px;
+    max-width:56ch;
+  }
+  .method p+p{margin-top:10px}
+
+  /* ---------- STEPS ---------- */
+  section{padding:52px 0 6px}
+  .stepnum{
+    font-family:var(--serif);
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:.14em;
+    color:var(--teal);
+    margin-bottom:8px;
+  }
+  h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(30px,5vw,40px);
+    line-height:1.12;
+  }
+  .kicker{margin-top:12px;max-width:56ch;font-size:15.5px}
+
+  /* ---------- END STATE SPEC ---------- */
+  .endstate{
+    margin-top:26px;
+    border:1.5px solid var(--ink);
+    background:#fff;
+    padding:26px 26px 22px;
+  }
+  .endstate .goal{
+    font-family:var(--serif);
+    font-size:clamp(21px,3.6vw,26px);
+    line-height:1.35;
+    border-left:3px solid var(--teal);
+    padding-left:18px;
+  }
+  .endstate ul{margin-top:20px;list-style:none}
+  .endstate li{
+    padding:9px 0 9px 26px;
+    border-top:1px solid var(--line);
+    position:relative;
+    font-size:15.5px;
+  }
+  .endstate li::before{
+    content:"—";
+    position:absolute;left:0;
+    color:var(--teal);font-weight:700;
+  }
+  .northstar{
+    margin-top:18px;
+    font-size:14.5px;
+    font-style:italic;
+    color:var(--ink);
+    opacity:.8;
+  }
+
+  /* ---------- ASSESSMENT ---------- */
+  .dim{margin-top:30px}
+  .dim h3{
+    font-family:var(--serif);
+    font-size:23px;
+    font-weight:600;
+    padding-bottom:8px;
+    border-bottom:1.5px solid var(--ink);
+    margin-bottom:4px;
+  }
+  .item{
+    padding:16px 0 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .item p{font-size:15.5px;font-weight:500;margin-bottom:12px}
+  .scale{display:flex;gap:7px;flex-wrap:wrap}
+  .scale button{
+    font-family:var(--sans);
+    font-size:13.5px;
+    font-weight:500;
+    padding:7px 13px;
+    background:#fff;
+    border:1.5px solid var(--ink);
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .scale button:hover{background:#F0EBE0}
+  .scale button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#fff;font-weight:700}
+  .tally{
+    margin-top:20px;
+    font-size:14.5px;
+    font-weight:500;
+    opacity:.75;
+  }
+
+  /* ---------- GAP RESULTS ---------- */
+  .results{display:none;margin-top:26px}
+  .results.show{display:block}
+  .legend{display:flex;gap:20px;font-size:13.5px;font-weight:500;margin-bottom:18px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:11px;height:11px;border-radius:50%}
+  .dot.t{background:var(--teal)}
+  .dot.a{background:var(--amber)}
+  .bar-group{margin-bottom:20px}
+  .bar-group .lab{
+    display:flex;justify-content:space-between;
+    font-size:15px;font-weight:700;margin-bottom:7px;
+  }
+  .bar-group .lab .gapval{color:var(--claret)}
+  .track{
+    height:22px;
+    background:#fff;
+    border:1.5px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  .track .fill{
+    position:absolute;inset:0 auto 0 0;
+    background:var(--amber);
+    width:0%;
+    transition:width .7s ease;
+  }
+  .track .target{
+    position:absolute;inset:0 0 0 auto;
+    width:100%;
+    background:repeating-linear-gradient(135deg,#2E6E6422 0 6px,transparent 6px 12px);
+    pointer-events:none;
+  }
+  .constraint{
+    display:none;
+    margin-top:26px;
+    border:1.5px solid var(--claret);
+    background:#fff;
+    padding:22px 24px;
+  }
+  .constraint.show{display:block}
+  .constraint .tag{
+    display:inline-block;
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:#fff;
+    background:var(--claret);
+    padding:4px 12px;
+    margin-bottom:12px;
+  }
+  .constraint h4{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:8px}
+  .constraint p{font-size:15px}
+  .constraint p+p{margin-top:8px}
+
+  /* ---------- MILESTONE ---------- */
+  .fruitnote{
+    margin-top:24px;
+    padding:18px 22px;
+    background:#F0EBE0;
+    border-left:3px solid var(--amber);
+    font-size:15px;
+  }
+  .loops{margin-top:24px;display:grid;gap:14px}
+  .loop{
+    border:1.5px solid var(--ink);
+    background:#fff;
+    padding:20px 22px;
+    position:relative;
+  }
+  .loop.recommended{border-width:2.5px;border-color:var(--teal)}
+  .loop .rec{
+    display:none;
+    position:absolute;top:-11px;left:18px;
+    background:var(--teal);color:#fff;
+    font-size:12px;font-weight:700;letter-spacing:.06em;
+    padding:3px 12px;
+  }
+  .loop.recommended .rec{display:inline-block}
+  .loop h5{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:6px}
+  .loop .cadence{
+    font-size:13px;font-weight:700;color:var(--teal);
+    margin-bottom:8px;
+  }
+  .loop p{font-size:15px}
+
+  /* ---------- ACTION GUIDE ---------- */
+  .guide{margin-top:26px}
+  details{
+    border:1.5px solid var(--ink);
+    background:#fff;
+    margin-bottom:12px;
+  }
+  details.priority{border-width:2.5px;border-color:var(--claret)}
+  summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:21px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .startbadge{
+    display:none;
+    font-family:var(--sans);
+    font-size:12px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--claret);
+    padding:3px 10px;
+  }
+  details.priority summary .startbadge{display:inline-block}
+  summary .caret{font-family:var(--sans);font-size:14px;transition:transform .2s}
+  details[open] summary .caret{transform:rotate(90deg)}
+  .steps{padding:0 20px 18px}
+  .steps li{
+    list-style:none;
+    padding:12px 0 12px 30px;
+    border-top:1px solid var(--line);
+    position:relative;
+    font-size:15px;
+  }
+  .steps li::before{
+    content:"→";
+    position:absolute;left:2px;
+    color:var(--teal);font-weight:700;
+  }
+  .steps li b{display:block;font-weight:700;margin-bottom:2px}
+
+  footer{
+    margin-top:64px;
+    border-top:1px solid var(--ink);
+    padding:44px 0 72px;
+  }
+  footer .close{
+    font-family:var(--serif);
+    font-size:clamp(22px,4vw,28px);
+    font-style:italic;
+    line-height:1.4;
+    max-width:36ch;
+  }
+  footer .loopnote{margin-top:18px;font-size:15px;max-width:56ch}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="brand">KAI HAMIL · <b>SYSTEM // SELF</b> · Instrument No. 3</p>
+    <h1>The Marriage<br>Gap Analysis</h1>
+    <p class="thesis">You can't close a gap you haven't measured — and most marriages are managed against the wrong metric entirely.</p>
+    <div class="method">
+      <p>This instrument runs the same process that fixes broken operations anywhere: <strong>define the end state, measure the current state, find the gap, name the constraint</strong> — and only then act. Applied here to one of the highest-stakes systems you'll ever run: a marriage where you've drifted from partner into boss.</p>
+      <p>The action guide at the bottom already assumes the gap exists. It works on its own. But it works better once you know exactly where your gap lives.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- STEP 1 -->
+  <section>
+    <p class="stepnum">STEP 1 · THE END STATE</p>
+    <h2>Define where you're going</h2>
+    <p class="kicker">Not "a husband who does more." That's a task metric, and task metrics are how you got here. The real end state:</p>
+
+    <div class="endstate">
+      <p class="goal">An equal partner who shares the burden, the responsibility, and the joy — across a long and winding life together.</p>
+      <ul>
+        <li>The load is shared without a supervisor standing over it</li>
+        <li>Two people who genuinely like each other, not just co-manage a household</li>
+        <li>Disagreements that repair instead of accumulate</li>
+        <li>Desire and affection that persist because both people keep choosing each other</li>
+        <li>A friendship at the core that outlasts every season of logistics</li>
+      </ul>
+      <p class="northstar">North star check: the metrics that matter here are felt connection, mutual respect, and shared joy — not task-completion rate. If you optimize the wrong metric, you get local efficiencies and a stranger across the dinner table.</p>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section>
+    <p class="stepnum">STEP 2 · THE CURRENT STATE</p>
+    <h2>Measure where you are</h2>
+    <p class="kicker">Fifteen behaviors across the three subsystems of the partnership. Rate how often each is true — of you, this season, honestly. This measures your behavior, not his, because your behavior is the only lever you directly control.</p>
+
+    <div id="assess">
+      <div class="dim" data-dim="0">
+        <h3>Communication</h3>
+        <div class="item"><p>I ask about what's weighing on him — not just status updates on tasks.</p><div class="scale"></div></div>
+        <div class="item"><p>I make requests and thank him, rather than issuing assignments.</p><div class="scale"></div></div>
+        <div class="item"><p>When he shares an opinion, I get curious before I evaluate.</p><div class="scale"></div></div>
+        <div class="item"><p>I say what I need directly — no hints, no tests.</p><div class="scale"></div></div>
+        <div class="item"><p>When we disagree, I argue the issue, not his character.</p><div class="scale"></div></div>
+      </div>
+
+      <div class="dim" data-dim="1">
+        <h3>Respect &amp; Operations</h3>
+        <div class="item"><p>When he does something his way, I let the result stand without correcting it.</p><div class="scale"></div></div>
+        <div class="item"><p>I thank him for specific things, by name — not generic gratitude.</p><div class="scale"></div></div>
+        <div class="item"><p>I speak well of him to friends, family, and our kids.</p><div class="scale"></div></div>
+        <div class="item"><p>I ask his advice on real decisions — and sometimes it changes my course.</p><div class="scale"></div></div>
+        <div class="item"><p>I treat his time — friends, hobbies, decompression — as worth protecting.</p><div class="scale"></div></div>
+      </div>
+
+      <div class="dim" data-dim="2">
+        <h3>Connection</h3>
+        <div class="item"><p>We do things together that exist purely for fun, not logistics.</p><div class="scale"></div></div>
+        <div class="item"><p>I touch him affectionately in passing, with no agenda.</p><div class="scale"></div></div>
+        <div class="item"><p>I initiate intimacy — I don't only respond to it.</p><div class="scale"></div></div>
+        <div class="item"><p>I let him see me vulnerable, without grading his response.</p><div class="scale"></div></div>
+        <div class="item"><p>We laugh together — at ourselves, at each other, at nothing.</p><div class="scale"></div></div>
+      </div>
+    </div>
+    <p class="tally" id="tally">0 of 15 answered</p>
+  </section>
+
+  <!-- STEP 3 -->
+  <section>
+    <p class="stepnum">STEP 3 · THE GAP</p>
+    <h2>See the distance</h2>
+    <p class="kicker" id="gapKicker">Complete the assessment above and your gap map appears here.</p>
+
+    <div class="results" id="results">
+      <div class="legend">
+        <span><i class="dot a"></i> Current state</span>
+        <span><i class="dot t"></i> End state (target)</span>
+      </div>
+      <div class="bar-group">
+        <div class="lab"><span>Communication</span><span class="gapval" id="gap0"></span></div>
+        <div class="track"><div class="target"></div><div class="fill" id="bar0"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="lab"><span>Respect &amp; Operations</span><span class="gapval" id="gap1"></span></div>
+        <div class="track"><div class="target"></div><div class="fill" id="bar1"></div></div>
+      </div>
+      <div class="bar-group">
+        <div class="lab"><span>Connection</span><span class="gapval" id="gap2"></span></div>
+        <div class="track"><div class="target"></div><div class="fill" id="bar2"></div></div>
+      </div>
+    </div>
+
+    <div class="constraint" id="constraintBox">
+      <span class="tag">YOUR CONSTRAINT</span>
+      <h4 id="constraintName"></h4>
+      <p id="constraintText"></p>
+      <p>A system improves fastest when you work the bottleneck, not everything at once. Pour your first month of effort here; the other subsystems will feel it too.</p>
+    </div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section>
+    <p class="stepnum">STEP 4 · THE MILESTONE</p>
+    <h2>Don't fix the marriage. Pick one loop.</h2>
+    <p class="kicker">"Be a better partner" is an end goal, not a milestone. A milestone is a repeatable behavior, run on a schedule, that changes the situation — chosen so it moves you toward the end state. Scheduling it is the point: the decision gets removed from you in the moment, and you just act.</p>
+
+    <div class="fruitnote">
+      <strong>Low-hanging fruit vs. the real gap:</strong> if something can be fixed in one conversation or one apology — that's fruit. Pick it today, no ceremony required. The real gap is whatever needs <em>repeated</em> steps over weeks. That's what earns a loop below.
+    </div>
+
+    <div class="loops">
+      <div class="loop" data-dim="0">
+        <span class="rec">START HERE — YOUR CONSTRAINT</span>
+        <h5>The Dinner Question Protocol</h5>
+        <p class="cadence">Every dinner · 30 days</p>
+        <p>One non-logistical question, every evening: what's weighing on him, what was good today, what's he thinking about. One follow-up required. No verdicts issued. You're rebuilding the channel before you renegotiate the traffic.</p>
+      </div>
+      <div class="loop" data-dim="1">
+        <span class="rec">START HERE — YOUR CONSTRAINT</span>
+        <h5>The No-Correction Rule</h5>
+        <p class="cadence">One task per week · 4 weeks</p>
+        <p>Each week, one task happens entirely his way — zero redo, zero commentary, one specific thank-you. You're retraining the system's trust: his effort is safe with you, so more effort comes.</p>
+      </div>
+      <div class="loop" data-dim="2">
+        <span class="rec">START HERE — YOUR CONSTRAINT</span>
+        <h5>The Standing Fun Block</h5>
+        <p class="cadence">Recurring · weekly</p>
+        <p>One recurring, logistics-free block on the calendar that belongs only to the two of you — game, walk, show, anything with no household purpose. Plus a daily micro-rep: one affectionate touch in passing, no agenda. Connection compounds on cadence, not on grand gestures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE GUIDE -->
+  <section>
+    <p class="stepnum">THE GUIDE · ACTION STEPS</p>
+    <h2>The full playbook</h2>
+    <p class="kicker" id="guideKicker">Useful on its own — it already assumes the gap exists. If you ran the assessment, your constraint subsystem is flagged first.</p>
+
+    <div class="guide">
+      <details data-dim="0">
+        <summary>Communication <span><span class="startbadge">PRIORITY</span> <span class="caret">▸</span></span></summary>
+        <ul class="steps">
+          <li><b>Ask about his problems, not his progress.</b> Trade one status check per day for one genuine question about his inner weather.</li>
+          <li><b>Requests in, work orders out.</b> Ask, then thank — specifically. Retire the assignment-plus-irritation pattern entirely.</li>
+          <li><b>Curiosity before verdict.</b> "Tell me more" buys you a husband who still talks to you in ten years.</li>
+          <li><b>No hints, no tests.</b> One plain sentence beats a pop quiz he didn't know he was failing.</li>
+          <li><b>Fight the problem, not the man.</b> Character attacks — and their gesture-forms, the eye-roll and the sigh — are off the table permanently.</li>
+        </ul>
+      </details>
+
+      <details data-dim="1">
+        <summary>Respect &amp; Operations <span><span class="startbadge">PRIORITY</span> <span class="caret">▸</span></span></summary>
+        <ul class="steps">
+          <li><b>His way is a way.</b> Different is not wrong. Every correction you swallow is a deposit in his willingness to try.</li>
+          <li><b>Praise with coordinates.</b> Name exactly what he did and why it mattered. Specificity is how "thanks" becomes "I see you."</li>
+          <li><b>Brag publicly, gripe never.</b> He should overhear his best self in how you describe him to others.</li>
+          <li><b>Consult him for real.</b> Ask his advice on decisions that matter, and let it visibly change your course sometimes.</li>
+          <li><b>Protect his restoration time.</b> The friends, the hobby, the quiet — send him off warmly and receive back a better husband.</li>
+        </ul>
+      </details>
+
+      <details data-dim="2">
+        <summary>Connection <span><span class="startbadge">PRIORITY</span> <span class="caret">▸</span></span></summary>
+        <ul class="steps">
+          <li><b>Date your friend.</b> Recurring fun with zero logistical payload. The friendship is the operating system everything else runs on.</li>
+          <li><b>Drive-by affection.</b> Touch that asks for nothing, daily. It lands deeper than words for most men.</li>
+          <li><b>Make the first move.</b> Desire is often responsive — it arrives after you begin. Initiating says <em>I still choose you</em>, which is the whole message.</li>
+          <li><b>Vulnerability without a scorecard.</b> Show him the unarmored version and expect nothing back. Trust extended is intimacy created.</li>
+          <li><b>Laugh on purpose.</b> Re-legalize silliness. Couples who crack each other up hold together through nearly anything.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <p class="close">A gap analysis is not a verdict. It's a loop. Run the milestone for thirty days, re-measure, and watch the bars move — that's what closing the distance looks like.</p>
+    <p class="loopnote">And remember which metric you're actually optimizing: not a husband who performs better, but a partner who's still reaching for you across a long and winding life. Measure that.</p>
+  </footer>
+
+</main>
+
+<script>
+  const LABELS = ['Never','Rarely','Sometimes','Often','Always'];
+  const DIMS = ['Communication','Respect & Operations','Connection'];
+  const CONSTRAINT_TEXT = [
+    'The channel between you is carrying mostly logistics and verdicts. Until the talking changes, every other improvement gets misread. This is your bottleneck.',
+    'He\u2019s operating under supervision, and supervised people stop volunteering effort. Rebuilding respect for his way of doing things unlocks everything downstream. This is your bottleneck.',
+    'The partnership is running on task-completion while the friendship, affection, and desire quietly starve. Reconnection is your bottleneck \u2014 and the highest-leverage repair available.'
+  ];
+
+  // Build scales
+  document.querySelectorAll('.item .scale').forEach(scale => {
+    LABELS.forEach((lab, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lab;
+      b.dataset.val = i;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', () => {
+        scale.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed','false'));
+        b.setAttribute('aria-pressed','true');
+        recompute();
+      });
+      scale.appendChild(b);
+    });
+  });
+
+  const tally = document.getElementById('tally');
+  const results = document.getElementById('results');
+  const gapKicker = document.getElementById('gapKicker');
+  const constraintBox = document.getElementById('constraintBox');
+
+  function recompute(){
+    const dims = [...document.querySelectorAll('#assess .dim')];
+    let answeredTotal = 0;
+    const pct = [];
+
+    dims.forEach((dim, d) => {
+      const items = [...dim.querySelectorAll('.item')];
+      let score = 0, answered = 0;
+      items.forEach(it => {
+        const sel = it.querySelector('button[aria-pressed="true"]');
+        if(sel){ score += Number(sel.dataset.val); answered++; }
+      });
+      answeredTotal += answered;
+      pct[d] = answered === items.length ? Math.round(score / (items.length * 4) * 100) : null;
+    });
+
+    tally.textContent = answeredTotal + ' of 15 answered';
+    if(pct.some(p => p === null)) return;
+
+    // Render
+    results.classList.add('show');
+    gapKicker.textContent = 'Amber is where you are. The full bar is where you\u2019re going. The number is the distance.';
+    pct.forEach((p, d) => {
+      document.getElementById('bar' + d).style.width = p + '%';
+      document.getElementById('gap' + d).textContent = 'gap: ' + (100 - p) + '%';
+    });
+
+    // Constraint = widest gap
+    const minP = Math.min(...pct);
+    const cd = pct.indexOf(minP);
+    constraintBox.classList.add('show');
+    document.getElementById('constraintName').textContent = DIMS[cd];
+    document.getElementById('constraintText').textContent = CONSTRAINT_TEXT[cd];
+
+    // Flag recommended loop + priority guide section
+    document.querySelectorAll('.loop').forEach(l =>
+      l.classList.toggle('recommended', Number(l.dataset.dim) === cd));
+    document.querySelectorAll('.guide details').forEach(dt => {
+      const isC = Number(dt.dataset.dim) === cd;
+      dt.classList.toggle('priority', isC);
+      if(isC) dt.open = true;
+    });
+  }
+</script>
+</body>
+</html>

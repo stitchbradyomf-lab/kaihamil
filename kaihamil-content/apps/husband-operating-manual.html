@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Husband Operating Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFAF3;
+    --ink:#22304A;
+    --coral:#FF5D73;
+    --marigold:#FFB84C;
+    --teal:#2E9E8F;
+    --line:#22304A22;
+    --radius:14px;
+    --font:'Bricolage Grotesque', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none !important;animation:none !important}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font);
+    font-size:17px;
+    line-height:1.55;
+  }
+  a{color:var(--coral)}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+  /* ---------- HERO / MANUAL COVER ---------- */
+  header{
+    border-bottom:3px solid var(--ink);
+    padding:56px 0 40px;
+  }
+  .stamp{
+    display:inline-block;
+    border:2.5px solid var(--ink);
+    border-radius:999px;
+    padding:5px 16px;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.04em;
+    transform:rotate(-2deg);
+    background:var(--marigold);
+    margin-bottom:22px;
+  }
+  h1{
+    font-size:clamp(40px,8vw,64px);
+    line-height:1.02;
+    font-weight:800;
+    letter-spacing:-0.02em;
+  }
+  h1 .sub{
+    display:block;
+    font-size:clamp(18px,3vw,24px);
+    font-weight:500;
+    letter-spacing:0;
+    margin-top:10px;
+    color:var(--ink);
+    opacity:.85;
+  }
+  .specs{
+    margin-top:30px;
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    overflow:hidden;
+    font-size:15px;
+    background:#fff;
+  }
+  .specs div{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px 16px;
+    border-bottom:1.5px dashed var(--line);
+  }
+  .specs div:last-child{border-bottom:none}
+  .specs dt{font-weight:700;white-space:nowrap}
+  .specs dd{text-align:right}
+
+  /* ---------- MODE SWITCH ---------- */
+  .mode{
+    margin-top:34px;
+    text-align:center;
+  }
+  .mode p.lead{font-weight:600;margin-bottom:14px}
+  .switch{
+    display:inline-flex;
+    border:3px solid var(--ink);
+    border-radius:999px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .switch button{
+    font-family:var(--font);
+    font-size:16px;
+    font-weight:700;
+    padding:12px 22px;
+    border:none;
+    background:transparent;
+    color:var(--ink);
+    cursor:pointer;
+    transition:background .25s,color .25s;
+  }
+  .switch button[aria-pressed="true"]{color:#fff}
+  .switch button#btnBoss[aria-pressed="true"]{background:var(--coral)}
+  .switch button#btnTeam[aria-pressed="true"]{background:var(--teal)}
+  .demo{
+    margin:22px auto 0;
+    max-width:520px;
+    border-radius:var(--radius);
+    padding:20px 22px;
+    font-size:19px;
+    font-weight:600;
+    border:2.5px solid var(--ink);
+    transition:background .25s;
+  }
+  .demo.boss{background:#FFE3E7}
+  .demo.team{background:#DFF3EF}
+  .demo small{display:block;font-weight:500;font-size:14px;margin-top:8px;opacity:.75}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:52px 0 8px}
+  .secnum{
+    font-weight:800;
+    font-size:14px;
+    color:#fff;
+    background:var(--ink);
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+  h2{font-size:clamp(28px,5vw,36px);font-weight:800;letter-spacing:-0.01em;line-height:1.1}
+  .kicker{margin-top:10px;font-size:17px;opacity:.85;max-width:56ch}
+
+  /* ---------- TRANSLATOR ---------- */
+  .translator{margin-top:26px;display:grid;gap:12px}
+  .phrase{
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    padding:16px 18px;
+    cursor:pointer;
+    text-align:left;
+    font-family:var(--font);
+    font-size:17px;
+    width:100%;
+    transition:background .2s;
+  }
+  .phrase:hover{background:#FFF4E2}
+  .phrase .bossy{font-weight:700}
+  .phrase.flipped{background:#DFF3EF;border-color:var(--teal)}
+  .phrase.flipped .bossy{text-decoration:line-through;opacity:.5;font-weight:600}
+  .phrase .better{
+    display:none;
+    margin-top:10px;
+    font-weight:700;
+    color:var(--teal);
+  }
+  .phrase.flipped .better{display:block}
+  .phrase .tap{display:block;font-size:13px;margin-top:8px;opacity:.55}
+  .phrase.flipped .tap{display:none}
+
+  /* ---------- CHAPTERS / TIPS ---------- */
+  .chapter{margin-top:30px}
+  .chapter h3{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .chip{font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;border:2px solid var(--ink)}
+  .chip.talk{background:var(--marigold)}
+  .chip.ops{background:#FFD3DA}
+  .chip.heart{background:#CBEAE4}
+  details{
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  summary{
+    list-style:none;
+    cursor:pointer;
+    padding:15px 18px;
+    font-weight:700;
+    font-size:17px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .plus{
+    flex:none;
+    width:26px;height:26px;
+    border:2.5px solid var(--ink);
+    border-radius:50%;
+    display:grid;place-items:center;
+    font-size:16px;
+    transition:transform .2s;
+  }
+  details[open] summary .plus{transform:rotate(45deg);background:var(--marigold)}
+  .tipbody{padding:0 18px 18px;font-size:16px}
+  .fieldtest{
+    margin-top:12px;
+    background:var(--paper);
+    border:2px dashed var(--ink);
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:15px;
+  }
+  .fieldtest strong{color:var(--coral)}
+
+  /* ---------- QUIZ ---------- */
+  .quiz{margin-top:26px;display:grid;gap:12px}
+  .q{
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    padding:16px 18px;
+  }
+  .q p{font-weight:600;margin-bottom:10px}
+  .q .opts{display:flex;gap:10px}
+  .q .opts button{
+    font-family:var(--font);
+    font-weight:700;
+    font-size:15px;
+    padding:8px 18px;
+    border-radius:999px;
+    border:2.5px solid var(--ink);
+    background:#fff;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .q .opts button[aria-pressed="true"].yes{background:var(--coral);color:#fff}
+  .q .opts button[aria-pressed="true"].no{background:var(--teal);color:#fff}
+  .result{
+    display:none;
+    margin-top:6px;
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    background:var(--marigold);
+  }
+  .result.show{display:block}
+  .result h4{font-size:22px;font-weight:800;margin-bottom:6px}
+  .meter{
+    height:16px;
+    border:2.5px solid var(--ink);
+    border-radius:999px;
+    background:#fff;
+    overflow:hidden;
+    margin:12px 0 4px;
+  }
+  .meter i{
+    display:block;height:100%;
+    background:linear-gradient(90deg,var(--teal),var(--marigold),var(--coral));
+    width:0%;
+    transition:width .5s;
+  }
+
+  /* ---------- MISSIONS ---------- */
+  .missions{margin-top:26px;border:2.5px solid var(--ink);border-radius:var(--radius);background:#fff;padding:20px}
+  .missions label{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:10px 4px;
+    border-bottom:1.5px dashed var(--line);
+    cursor:pointer;
+    font-size:16px;
+  }
+  .missions label:last-of-type{border-bottom:none}
+  .missions input{
+    appearance:none;
+    flex:none;
+    width:24px;height:24px;
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    margin-top:1px;
+    cursor:pointer;
+    display:grid;place-items:center;
+    background:#fff;
+  }
+  .missions input:checked{background:var(--teal)}
+  .missions input:checked::after{content:"✓";color:#fff;font-weight:800;font-size:15px}
+  .missions input:checked + span{text-decoration:line-through;opacity:.55}
+  .progress{margin-top:16px}
+  .progress .meter i{background:var(--teal)}
+  .progress p{font-weight:700;font-size:15px;margin-top:8px;min-height:1.4em}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    margin-top:60px;
+    border-top:3px solid var(--ink);
+    padding:44px 0 70px;
+    text-align:center;
+  }
+  footer .big{
+    font-size:clamp(22px,4vw,30px);
+    font-weight:800;
+    line-height:1.25;
+    max-width:22ch;
+    margin:0 auto 16px;
+  }
+  footer .big em{color:var(--coral);font-style:normal}
+  footer p{max-width:52ch;margin:0 auto;opacity:.85}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="stamp">Quick-Start Edition · Rev. 2.0</span>
+    <h1>The Husband<br>Operating Manual
+      <span class="sub">For the woman who runs everything — and would rather not run <em>him</em>.</span>
+    </h1>
+
+    <dl class="specs">
+      <div><dt>Model</dt><dd>Husband™ — Yours (one of one, discontinued)</dd></div>
+      <div><dt>Power source</dt><dd>Appreciation, touch, snacks, being believed in</dd></div>
+      <div><dt>Known incompatibility</dt><dd>Being managed</dd></div>
+      <div><dt>Warranty</dt><dd>Voided by scorekeeping &amp; public criticism</dd></div>
+    </dl>
+
+    <div class="mode">
+      <p class="lead">Every marriage runs in one of two modes. Try the switch:</p>
+      <div class="switch" role="group" aria-label="Relationship mode switch">
+        <button id="btnBoss" aria-pressed="true">Boss Mode</button>
+        <button id="btnTeam" aria-pressed="false">Teammate Mode</button>
+      </div>
+      <div class="demo boss" id="demoBox" aria-live="polite">
+        <span id="demoLine">“You need to get the kids at 4. Don't be late again.”</span>
+        <small id="demoNote">Result: task completed. Warmth not included.</small>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- SECTION 1: TRANSLATOR -->
+  <section id="translator">
+    <span class="secnum">SEC. 1</span>
+    <h2>The Bossy-to-Better Translator</h2>
+    <p class="kicker">Same request, entirely different marriage. Tap any phrase you've said this month. (No judgment. Okay, mild judgment.)</p>
+
+    <div class="translator">
+      <button class="phrase">
+        <span class="bossy">“You need to pick up the kids at 4.”</span>
+        <span class="better">→ “Can you grab the kids at 4? You're a lifesaver.”</span>
+        <span class="tap">Tap to translate</span>
+      </button>
+      <button class="phrase">
+        <span class="bossy">“That is not how you load a dishwasher.”</span>
+        <span class="better">→ Say nothing. The dishes are getting clean. Walk away, hero.</span>
+        <span class="tap">Tap to translate</span>
+      </button>
+      <button class="phrase">
+        <span class="bossy">“Fine. I'll just do it myself.”</span>
+        <span class="better">→ “I'd love your help with this — team up with me?”</span>
+        <span class="tap">Tap to translate</span>
+      </button>
+      <button class="phrase">
+        <span class="bossy">“Why would you do it like that?”</span>
+        <span class="better">→ “Huh, interesting — walk me through your logic.”</span>
+        <span class="tap">Tap to translate</span>
+      </button>
+      <button class="phrase">
+        <span class="bossy">“You never listen to me.”</span>
+        <span class="better">→ “Hey. I need ten minutes of your full attention. Got me?”</span>
+        <span class="tap">Tap to translate</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE MANUAL -->
+  <section id="manual">
+    <span class="secnum">SEC. 2</span>
+    <h2>Care &amp; Feeding Instructions</h2>
+    <p class="kicker">Fourteen field-tested moves, organized by subsystem. Each one comes with a Field Test you can run tonight.</p>
+
+    <div class="chapter">
+      <h3><span class="chip talk">Ch. 1</span> How You Talk to Him</h3>
+
+      <details>
+        <summary>Ask about his problems, not his progress <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>“Did you handle that thing yet?” is a status update. “What's actually weighing on you lately?” is a marriage. Most men aren't hiding their inner life — nobody's asked about it since 2019.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Ask one question tonight with zero logistical value. Then ask a follow-up. Watch what happens.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Requests in, work orders out <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>“Can you grab this?” + a real thank-you lands completely differently than an assignment + irritation at the five-minute delay. Same task. One builds goodwill; the other builds a guy who technically complies.</p>
+          <div class="fieldtest"><strong>Field test:</strong> One ask, one specific thanks. No inspection of the results.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Listen without issuing a verdict <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>When he floats an idea, resist the instant performance review. Try “tell me more” before “here's what you're missing.” A man who gets graded every time he talks eventually stops talking — and then you'll miss the talking.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Next opinion he shares, respond with curiosity only. Verdicts are closed for the evening.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Say it straight — no hints, no tests <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>“He should just <em>know</em>” is a pop quiz he didn't get the study guide for. He fails; you collect evidence he doesn't care; everybody loses. Being genuinely known beats being guessed at correctly, every time.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Want something this week? Say it in one plain sentence. Radical, we know.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Fight the problem, not the man <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>“The trash didn't go out” gets fixed in a day. “You're so lazy” gets remembered for a decade. And mind the leaks — eye-rolls and heavy sighs are contempt in gesture form, and contempt is the termite of marriage.</p>
+          <div class="fieldtest"><strong>Field test:</strong> One full disagreement, character insults off the table. Sighs count.</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="chapter">
+      <h3><span class="chip ops">Ch. 2</span> How You Treat What He Does</h3>
+
+      <details>
+        <summary>His way is <em>a</em> way <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>The towels are folded weird. The kids' outfits clash. The route to the restaurant was creative. Let. It. Ride. Every correction teaches him that trying isn't worth it — and then you're doing everything, resentful, married to a man you trained to stand down.</p>
+          <div class="fieldtest"><strong>Field test:</strong> One task, his method, zero commentary. Bite the inside of your cheek if needed.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Praise with GPS coordinates <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>“Thanks for handling the insurance call — I didn't have to think about it once” beats a generic “thanks” tenfold. Specific appreciation says <em>I see you</em>. Men will quietly move mountains for someone who notices.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Thank him for one thing so specifically he could find it on a map.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Brag publicly, gripe never <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>Praising him to your friends, family, and kids is rocket fuel. Criticizing him in public — even “jokingly” — is a wound he won't mention and won't forget. If your group chat only knows his flaws, audit the story you're telling yourself too.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Brag about him to someone this week. Bonus points if he's in earshot.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Ask his advice — then actually take it sometimes <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>Bring him a real decision and let his input genuinely change your course. Nothing says “I respect you” like his judgment mattering. Nothing says “you're decorative” like input you collect and shred.</p>
+          <div class="fieldtest"><strong>Field test:</strong> One real question, one real consideration. Not a formality — a consultation.</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="chapter">
+      <h3><span class="chip heart">Ch. 3</span> How You Stay Connected</h3>
+
+      <details>
+        <summary>Date your friend <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>You were friends before you were co-managers of a household. Plan something with zero logistical purpose: a game night, a dumb competition, a show that's only yours. Shared fun isn't the bonus feature of a marriage — it's the operating system.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Put one purely-fun thing on the calendar. No errands may attach themselves to it.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Drive-by affection <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>A hand on his back. A shoulder squeeze on your way to the kitchen. Touch that asks for nothing and leads to nothing says <em>you're wanted just for existing in my space</em> — and for most men, that lands deeper than words.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Three casual touches today. No agenda permitted.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Make the first move <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>In long marriages, desire is often responsive — it shows up <em>after</em> you begin, not before. If he's always the one reaching for you, he'll eventually stop reaching; not because he stopped wanting you, but because losing bets get abandoned. You initiating, sometimes, says: <em>I still choose you.</em></p>
+          <div class="fieldtest"><strong>Field test:</strong> You know exactly what this one is.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Show him the unarmored version <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>Let him see you uncertain or scared — not as a strategy, and without grading his response afterward. Vulnerability without a scorecard says <em>I trust you</em>. If he only ever meets your armor, he can only ever love your armor.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Share one real worry this week. Expect nothing back. See what comes anyway.</div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Guard his garage time <span class="plus">+</span></summary>
+        <div class="tipbody">
+          <p>The friend group, the hobby, the twenty minutes of silence after work — protect it instead of resenting it. He comes back from those things a better husband. Be the person who restores him, not the last demand of his day.</p>
+          <div class="fieldtest"><strong>Field test:</strong> Next time he heads to his thing, send him off warmly. Watch him come back different.</div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- SECTION 3: QUIZ -->
+  <section id="quiz">
+    <span class="secnum">SEC. 3</span>
+    <h2>Diagnostic: Boss or Teammate?</h2>
+    <p class="kicker">Five questions. Honesty setting: maximum. Nobody's watching.</p>
+
+    <div class="quiz" id="quizBox">
+      <div class="q"><p>When he finishes a chore, I usually re-do or “fix” part of it.</p>
+        <div class="opts"><button class="yes">Yep</button><button class="no">Nope</button></div></div>
+      <div class="q"><p>I can't remember the last time I asked how he's <em>actually</em> doing.</p>
+        <div class="opts"><button class="yes">Yep</button><button class="no">Nope</button></div></div>
+      <div class="q"><p>I tell him what to do more often than I ask him.</p>
+        <div class="opts"><button class="yes">Yep</button><button class="no">Nope</button></div></div>
+      <div class="q"><p>My friends have heard more complaints about him than brags.</p>
+        <div class="opts"><button class="yes">Yep</button><button class="no">Nope</button></div></div>
+      <div class="q"><p>He initiates affection way more than I do.</p>
+        <div class="opts"><button class="yes">Yep</button><button class="no">Nope</button></div></div>
+    </div>
+
+    <div class="result" id="resultBox" aria-live="polite">
+      <h4 id="resultTitle"></h4>
+      <div class="meter"><i id="resultMeter"></i></div>
+      <p id="resultText"></p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: MISSIONS -->
+  <section id="missions">
+    <span class="secnum">SEC. 4</span>
+    <h2>This Week's Missions</h2>
+    <p class="kicker">Pick a few. Small moves, run consistently, change everything.</p>
+
+    <div class="missions">
+      <label><input type="checkbox"><span>Ask about his day like you mean it — one follow-up question required</span></label>
+      <label><input type="checkbox"><span>Let one task happen entirely his way, zero corrections</span></label>
+      <label><input type="checkbox"><span>Touch him in passing, no reason, no agenda</span></label>
+      <label><input type="checkbox"><span>Brag about him to someone else</span></label>
+      <label><input type="checkbox"><span>Thank him for something so specific he knows you noticed</span></label>
+      <label><input type="checkbox"><span>Plan one fun thing with no logistics attached</span></label>
+      <label><input type="checkbox"><span>Make the first move</span></label>
+
+      <div class="progress">
+        <div class="meter"><i id="missionMeter"></i></div>
+        <p id="missionMsg">0 of 7 — the manual is judging you gently.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="big">He's not your employee, your project, or your report card. He's the man you chose — <em>keep choosing him out loud.</em></p>
+    <p>The mirror test: if someone ran <em>you</em> the way you run him — the tone, the corrections, the scorekeeping — would you feel loved, or managed? Manage the household together. Love the man. Different jobs. Only one keeps him close.</p>
+  </footer>
+
+</main>
+
+<script>
+  // ---- Mode switch ----
+  const btnBoss = document.getElementById('btnBoss');
+  const btnTeam = document.getElementById('btnTeam');
+  const demoBox = document.getElementById('demoBox');
+  const demoLine = document.getElementById('demoLine');
+  const demoNote = document.getElementById('demoNote');
+
+  function setMode(team){
+    btnBoss.setAttribute('aria-pressed', String(!team));
+    btnTeam.setAttribute('aria-pressed', String(team));
+    demoBox.classList.toggle('team', team);
+    demoBox.classList.toggle('boss', !team);
+    if(team){
+      demoLine.textContent = '“Can you grab the kids at 4? Thank you — seriously.”';
+      demoNote.textContent = 'Result: task completed. Also, he likes you.';
+    } else {
+      demoLine.textContent = '“You need to get the kids at 4. Don\u2019t be late again.”';
+      demoNote.textContent = 'Result: task completed. Warmth not included.';
+    }
+  }
+  btnBoss.addEventListener('click', () => setMode(false));
+  btnTeam.addEventListener('click', () => setMode(true));
+
+  // ---- Translator ----
+  document.querySelectorAll('.phrase').forEach(p => {
+    p.addEventListener('click', () => p.classList.toggle('flipped'));
+  });
+
+  // ---- Quiz ----
+  const quizBox = document.getElementById('quizBox');
+  const resultBox = document.getElementById('resultBox');
+  const resultTitle = document.getElementById('resultTitle');
+  const resultText = document.getElementById('resultText');
+  const resultMeter = document.getElementById('resultMeter');
+
+  quizBox.querySelectorAll('.q').forEach(q => {
+    q.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        q.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        scoreQuiz();
+      });
+    });
+  });
+
+  function scoreQuiz(){
+    const qs = [...quizBox.querySelectorAll('.q')];
+    const answered = qs.filter(q => q.querySelector('button[aria-pressed="true"]'));
+    if(answered.length < qs.length) return;
+    const yeps = qs.filter(q => q.querySelector('button.yes[aria-pressed="true"]')).length;
+    resultBox.classList.add('show');
+    resultMeter.style.width = (yeps/5*100) + '%';
+    if(yeps <= 1){
+      resultTitle.textContent = 'Teammate 🏆';
+      resultText.textContent = 'You two are running the good firmware. Keep choosing him out loud — and maybe forward this to a friend who needs Section 1.';
+    } else if(yeps <= 3){
+      resultTitle.textContent = 'Middle Management 📋';
+      resultText.textContent = 'Some boss habits have crept into the org chart. Nothing a few missions can\u2019t fix — start with the one that made you wince.';
+    } else {
+      resultTitle.textContent = 'Full CEO Mode 👔';
+      resultText.textContent = 'He\u2019s been reporting to you for a while now. Good news: this is entirely fixable, and he\u2019s going to love the new management style. Scroll up. Start anywhere.';
+    }
+    resultBox.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  // ---- Missions ----
+  const checks = document.querySelectorAll('.missions input');
+  const missionMeter = document.getElementById('missionMeter');
+  const missionMsg = document.getElementById('missionMsg');
+  const msgs = [
+    '0 of 7 — the manual is judging you gently.',
+    '1 of 7 — a spark!',
+    '2 of 7 — he\u2019s noticed something\u2019s different.',
+    '3 of 7 — officially suspicious (the good kind).',
+    '4 of 7 — momentum. Don\u2019t tell him about the checklist.',
+    '5 of 7 — he told his friends you\u2019ve been amazing lately.',
+    '6 of 7 — honeymoon firmware restored.',
+    '7 of 7 — manual complete. Go enjoy your marriage. 💛'
+  ];
+  checks.forEach(c => c.addEventListener('change', () => {
+    const n = [...checks].filter(x => x.checked).length;
+    missionMeter.style.width = (n/7*100) + '%';
+    missionMsg.textContent = msgs[n];
+  }));
+</script>
+</body>
+</html>

@@ -341,6 +341,17 @@
             color: rgba(255,255,255,0.9);
         }
 
+        .visual-husband-manual {
+            background: linear-gradient(135deg, #22304A 0%, #2E9E8F 55%, #FFB84C 100%);
+        }
+        .visual-husband-manual::before {
+            content: 'TEAM';
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.95);
+        }
+
         .card-body {
             padding: 20px;
             flex: 1;
@@ -493,13 +504,14 @@
 
     <script>
         const CATEGORIES = [
-            { id: 'lifestyle', label: 'Lifestyle', ids: ['time-focus-app', 'whos-making-dinner', 'groove-pal', 'whisky-cellar'] },
+            { id: 'lifestyle', label: 'Lifestyle', ids: ['husband-operating-manual', 'time-focus-app', 'whos-making-dinner', 'groove-pal', 'whisky-cellar'] },
             { id: 'systems', label: 'Systems', ids: ['vale-os', 'vale-pro', 'couples-vale', 'gatefield-hoa'] },
             { id: 'trips', label: 'Trips', ids: ['azores-15-year-app', 'dude-trip-26'] },
             { id: 'utilities', label: 'Utilities', ids: ['daily-brief', 'script-reader', 'control-chart-evaluator', 'photo-flow'] }
         ];
 
         const APP_COPY = {
+            'husband-operating-manual': 'An interactive field guide for replacing boss habits with teammate behaviors in marriage.',
             'time-focus-app': 'An operating tool for managing where attention goes over time.',
             'control-chart-evaluator': 'Evaluate process signals and variation without leaving the browser.',
             'script-reader': 'A stripped-back teleprompter surface for recording and rehearsal.',
@@ -517,6 +529,7 @@
         };
 
         const VISUAL_MAP = {
+            'husband-operating-manual': 'visual-husband-manual',
             'groove-pal': 'visual-groove-pal',
             'azores-15-year-app': 'visual-azores',
             'dude-trip-26': 'visual-dude-trip',
