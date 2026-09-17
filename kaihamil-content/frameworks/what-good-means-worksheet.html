@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>The "What Good Means" Worksheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#FFFAF3;
+    --ink:#22304A;
+    --coral:#FF5D73;
+    --marigold:#FFB84C;
+    --teal:#2E9E8F;
+    --line:#22304A22;
+    --radius:14px;
+    --font:'Bricolage Grotesque', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+  }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font);
+    font-size:17px;
+    line-height:1.55;
+  }
+  :focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+
+  /* ---------- COVER ---------- */
+  header{border-bottom:3px solid var(--ink);padding:56px 0 44px}
+  .stamp{
+    display:inline-block;
+    border:2.5px solid var(--ink);
+    border-radius:999px;
+    padding:5px 16px;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.04em;
+    transform:rotate(-2deg);
+    background:var(--marigold);
+    margin-bottom:22px;
+  }
+  h1{font-size:clamp(38px,8vw,60px);line-height:1.03;font-weight:800;letter-spacing:-0.02em}
+  h1 .sub{
+    display:block;
+    font-size:clamp(17px,3vw,22px);
+    font-weight:500;
+    letter-spacing:0;
+    margin-top:12px;
+    opacity:.85;
+  }
+  .intro{margin-top:24px;max-width:58ch;font-size:16px}
+  .intro p+p{margin-top:10px}
+
+  /* ---------- WHO ---------- */
+  .who{margin-top:30px}
+  .who p{font-weight:700;margin-bottom:12px}
+  .switch{display:inline-flex;border:3px solid var(--ink);border-radius:999px;overflow:hidden;background:#fff}
+  .switch button{
+    font-family:var(--font);font-size:16px;font-weight:700;
+    padding:12px 22px;border:none;background:transparent;color:var(--ink);
+    cursor:pointer;transition:background .25s,color .25s;
+  }
+  .switch button[aria-pressed="true"]{color:#fff;background:var(--teal)}
+  .who small{display:block;margin-top:10px;font-size:13.5px;opacity:.65;max-width:52ch}
+
+  /* ---------- MIRROR RULE ---------- */
+  .rulebox{
+    margin-top:34px;
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    overflow:hidden;
+  }
+  .rulebox .rulehead{
+    background:var(--coral);
+    color:#fff;
+    font-weight:800;
+    letter-spacing:.05em;
+    font-size:14px;
+    padding:10px 20px;
+  }
+  .rulebox .rulebody{padding:20px 22px}
+  .rulebox .big{
+    font-size:clamp(20px,3.6vw,25px);
+    font-weight:800;
+    line-height:1.3;
+  }
+  .rulebox .big em{color:var(--coral);font-style:normal}
+  .rulebox p.note{margin-top:12px;font-size:15px;opacity:.85}
+
+  /* ---------- ORDER ---------- */
+  section{padding:50px 0 8px}
+  .secnum{
+    font-weight:800;font-size:14px;color:#fff;background:var(--ink);
+    display:inline-block;padding:4px 12px;border-radius:6px;margin-bottom:10px;
+  }
+  h2{font-size:clamp(27px,5vw,35px);font-weight:800;letter-spacing:-0.01em;line-height:1.12}
+  .kicker{margin-top:10px;font-size:16px;opacity:.87;max-width:57ch}
+  .order{margin-top:24px;display:grid;gap:12px}
+  .order .o{
+    display:flex;gap:16px;align-items:flex-start;
+    border:2.5px solid var(--ink);border-radius:var(--radius);
+    background:#fff;padding:16px 18px;
+  }
+  .order .n{
+    flex:none;width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;
+    font-weight:800;font-size:18px;color:#fff;
+  }
+  .order .o:nth-child(1) .n{background:var(--coral)}
+  .order .o:nth-child(2) .n{background:var(--marigold)}
+  .order .o:nth-child(3) .n{background:var(--teal)}
+  .order h3{font-size:19px;font-weight:800;margin-bottom:3px}
+  .order p{font-size:15px}
+
+  /* ---------- WORKSHEET ---------- */
+  .ws{
+    margin-top:26px;
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    padding:22px;
+  }
+  .ws h3{font-size:22px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .ws .badge{font-size:12.5px;font-weight:800;padding:3px 11px;border-radius:999px;border:2px solid var(--ink)}
+  .ws[data-key="joy"] .badge{background:#FFD3DA}
+  .ws[data-key="burden"] .badge{background:#FFE9C4}
+  .ws[data-key="resp"] .badge{background:#CBEAE4}
+  .ws .prompt{font-size:15.5px;margin-bottom:14px;opacity:.9}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chips span.lab{font-size:13px;font-weight:700;opacity:.6;width:100%}
+  .chips button{
+    font-family:var(--font);font-size:13.5px;font-weight:600;
+    padding:7px 13px;border:2px dashed var(--ink);border-radius:999px;
+    background:var(--paper);cursor:pointer;transition:background .15s;
+  }
+  .chips button:hover{background:var(--marigold)}
+  .inputrow{display:flex;gap:10px}
+  .inputrow input{
+    flex:1;font-family:var(--font);font-size:15.5px;
+    padding:12px 14px;border:2.5px solid var(--ink);border-radius:10px;
+    background:var(--paper);color:var(--ink);
+  }
+  .inputrow input::placeholder{opacity:.5}
+  .inputrow button{
+    font-family:var(--font);font-weight:800;font-size:15px;
+    padding:12px 20px;border:2.5px solid var(--ink);border-radius:10px;
+    background:var(--teal);color:#fff;cursor:pointer;
+  }
+  .inputrow button:disabled{opacity:.4;cursor:not-allowed}
+  .smell{
+    display:none;
+    margin-top:12px;
+    border:2px solid var(--marigold);
+    background:#FFF4DE;
+    border-radius:10px;
+    padding:12px 15px;
+    font-size:14px;
+  }
+  .smell.show{display:block}
+  .smell b{color:#9A6B10}
+  .maxnote{margin-top:10px;font-size:13px;opacity:.6}
+
+  /* entries */
+  .entries{margin-top:16px;display:grid;gap:10px}
+  .entry{
+    border:2.5px solid var(--ink);
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+  }
+  .entry .hope{padding:12px 44px 10px 15px;font-size:15px;background:#fff}
+  .entry .hope b{font-size:12px;letter-spacing:.05em;display:block;opacity:.6;margin-bottom:2px}
+  .entry .give{
+    padding:10px 44px 12px 15px;font-size:15px;
+    background:#EAF6F3;border-top:2px dashed var(--ink);
+  }
+  .entry .give b{font-size:12px;letter-spacing:.05em;display:block;color:var(--teal);margin-bottom:2px}
+  .entry .del{
+    position:absolute;top:8px;right:8px;
+    width:28px;height:28px;border-radius:50%;
+    border:2px solid var(--ink);background:#fff;
+    font-weight:800;font-size:14px;cursor:pointer;line-height:1;
+  }
+  .entry .del:hover{background:var(--coral);color:#fff}
+
+  /* ---------- COMPILED ---------- */
+  .compiled{
+    margin-top:26px;
+    border:3px solid var(--ink);
+    border-radius:var(--radius);
+    background:var(--marigold);
+    padding:26px 24px;
+  }
+  .compiled h3{font-size:24px;font-weight:800;margin-bottom:8px}
+  .compiled .empty{font-size:15px;opacity:.75}
+  .compiled ol{margin:14px 0 0 0;list-style:none;counter-reset:good}
+  .compiled li{
+    counter-increment:good;
+    background:#fff;
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    padding:12px 15px 12px 46px;
+    margin-bottom:10px;
+    position:relative;
+    font-size:15px;
+  }
+  .compiled li::before{
+    content:counter(good);
+    position:absolute;left:12px;top:12px;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--ink);color:#fff;
+    display:grid;place-items:center;
+    font-weight:800;font-size:13px;
+  }
+  .compiled li b{display:block}
+  .compiled li i{display:block;font-size:13.5px;font-style:normal;opacity:.7;margin-top:2px}
+  .vow{
+    margin-top:14px;font-weight:700;font-size:16px;
+    border-top:2px dashed var(--ink);padding-top:14px;
+  }
+  .copyrow{margin-top:16px;display:flex;gap:10px;align-items:center}
+  .copyrow button{
+    font-family:var(--font);font-weight:800;font-size:15px;
+    padding:11px 20px;border:2.5px solid var(--ink);border-radius:999px;
+    background:#fff;cursor:pointer;
+  }
+  .copyrow button:hover{background:var(--paper)}
+  .copyrow span{font-size:13.5px;font-weight:700;color:var(--teal)}
+
+  /* ---------- HONEST MIRROR ---------- */
+  .aq{
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    background:#fff;
+    padding:16px 18px;
+    margin-bottom:12px;
+  }
+  .aq p.qt{font-weight:600;font-size:15.5px;margin-bottom:12px}
+  .aq .scale{display:flex;gap:7px;flex-wrap:wrap}
+  .aq .scale button{
+    font-family:var(--font);font-size:13.5px;font-weight:600;
+    padding:7px 13px;border:2px solid var(--ink);border-radius:999px;
+    background:var(--paper);cursor:pointer;transition:background .15s,color .15s;
+  }
+  .aq .scale button:hover{background:#FFF4DE}
+  .aq .scale button[aria-pressed="true"]{background:var(--ink);color:#fff}
+  .atally{margin-top:6px;font-size:14px;font-weight:700;opacity:.65}
+  .noticebox{
+    display:none;margin-top:18px;
+    border:3px solid var(--ink);border-radius:var(--radius);
+    background:#fff;overflow:hidden;
+  }
+  .noticebox.show{display:block}
+  .noticebox .nhead{
+    background:var(--teal);color:#fff;font-weight:800;
+    letter-spacing:.05em;font-size:14px;padding:10px 20px;
+  }
+  .noticebox .nbody{padding:18px 20px}
+  .noticebox p.obs{
+    padding:10px 0 10px 28px;
+    border-bottom:1.5px dashed var(--line);
+    position:relative;font-size:15px;
+  }
+  .noticebox p.obs::before{
+    content:"👁";position:absolute;left:0;top:11px;font-size:14px;
+  }
+  .noticebox p.obs:last-of-type{border-bottom:none}
+  .noticebox .nfoot{margin-top:14px;font-size:13.5px;opacity:.7;font-style:italic}
+
+  footer{
+    margin-top:56px;border-top:3px solid var(--ink);
+    padding:42px 0 70px;text-align:center;
+  }
+  footer .big{
+    font-size:clamp(20px,3.8vw,26px);font-weight:800;line-height:1.3;
+    max-width:26ch;margin:0 auto 14px;
+  }
+  footer .big em{color:var(--coral);font-style:normal}
+  footer p{max-width:54ch;margin:0 auto;font-size:15px;opacity:.85}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="stamp">Companion Worksheet · Fill Out Separately, Compare Bravely</span>
+    <h1>What Good Means
+      <span class="sub">A worksheet for defining the marriage you actually want — with one small catch.</span>
+    </h1>
+    <div class="intro">
+      <p>Before you can measure a gap, close a gap, or complain about a gap, you have to define the standard. This worksheet is where you write it down. Each spouse fills one out on their own. Then you trade.</p>
+      <p>Working assumption baked in: a marriage exists to <strong>increase joy, reduce burden, and share responsibility</strong> — ideally in that order.</p>
+    </div>
+
+    <div class="who">
+      <p>Who's holding the pen?</p>
+      <div class="switch" role="group" aria-label="Who is filling this out">
+        <button id="whoWife" aria-pressed="false">The Wife</button>
+        <button id="whoHusband" aria-pressed="false">The Husband</button>
+      </div>
+      <small>Same worksheet, same rules, same math — this only tunes the example phrases to how each of you tends to talk about these things. The mirror doesn't care who's looking into it.</small>
+    </div>
+
+    <div class="rulebox">
+      <div class="rulehead">⚠ THE ONLY RULE — READ BEFORE WRITING</div>
+      <div class="rulebody">
+        <p class="big">Whatever you write down as an expectation of your spouse is, from this moment, <em>expected of you too.</em></p>
+        <p class="note">We call it the Mirror Rule, and it's doing quiet, important work: it makes "unload the dishwasher by 8pm" a very expensive thing to write, and "help that shows up before I ask" a very wise one. Tasks are outputs. Good is a standard. Write standards you'd be proud to be held to — because you're about to be.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ORDER OF OPERATIONS -->
+  <section>
+    <span class="secnum">SEC. 1</span>
+    <h2>The Order of Operations</h2>
+    <p class="kicker">Three purposes, deliberately ranked. You'll write your definition of good under each one.</p>
+    <div class="order">
+      <div class="o"><div class="n">1</div><div><h3>Increase joy</h3><p>The point of the whole enterprise. If the marriage runs flawlessly and nobody's having any fun, congratulations — you've built a very efficient sadness.</p></div></div>
+      <div class="o"><div class="n">2</div><div><h3>Reduce burden</h3><p>Life is heavy. A marriage should make each life in it lighter — not by keeping score, but because watching your person struggle and doing nothing isn't love.</p></div></div>
+      <div class="o"><div class="n">3</div><div><h3>Share responsibility</h3><p>The mechanics. Two owners, no supervisor. Ranked third on purpose: it serves the first two. It is not the mission statement.</p></div></div>
+    </div>
+  </section>
+
+  <!-- WORKSHEETS -->
+  <section>
+    <span class="secnum">SEC. 2</span>
+    <h2>Write Your Definition</h2>
+    <p class="kicker">Up to three entries per purpose — scarcity is the point. Phrase each one as a standard (a few words, no verbs required), tap an example to borrow it, and watch the mirror answer underneath.</p>
+
+    <div class="ws" data-key="joy">
+      <h3><span class="badge">1 · JOY</span> What does joy look like at your best?</h3>
+      <p class="prompt">Not events, not date-night quotas. A standard — the felt thing you hope this marriage keeps producing.</p>
+      <div class="chips" data-key="joy"><span class="lab">Need a starting point? Tap one:</span></div>
+      <div class="inputrow">
+        <input type="text" maxlength="90" placeholder="I hope for…" aria-label="Joy expectation">
+        <button type="button">Add</button>
+      </div>
+      <div class="smell"></div>
+      <p class="maxnote">3 max — good is a standard, not a wish list.</p>
+      <div class="entries"></div>
+    </div>
+
+    <div class="ws" data-key="burden">
+      <h3><span class="badge">2 · BURDEN</span> What makes your life lighter because they're in it?</h3>
+      <p class="prompt">Where do you most want the weight shared — not the chores, the <em>weight</em>?</p>
+      <div class="chips" data-key="burden"><span class="lab">Need a starting point? Tap one:</span></div>
+      <div class="inputrow">
+        <input type="text" maxlength="90" placeholder="I hope for…" aria-label="Burden expectation">
+        <button type="button">Add</button>
+      </div>
+      <div class="smell"></div>
+      <p class="maxnote">3 max — good is a standard, not a wish list.</p>
+      <div class="entries"></div>
+    </div>
+
+    <div class="ws" data-key="resp">
+      <h3><span class="badge">3 · RESPONSIBILITY</span> What does true co-ownership mean to you?</h3>
+      <p class="prompt">Beyond the chore chart. What does it mean for this life to have two owners and zero supervisors?</p>
+      <div class="chips" data-key="resp"><span class="lab">Need a starting point? Tap one:</span></div>
+      <div class="inputrow">
+        <input type="text" maxlength="90" placeholder="I hope for…" aria-label="Responsibility expectation">
+        <button type="button">Add</button>
+      </div>
+      <div class="smell"></div>
+      <p class="maxnote">3 max — good is a standard, not a wish list.</p>
+      <div class="entries"></div>
+    </div>
+  </section>
+
+  <!-- COMPILED -->
+  <section>
+    <span class="secnum">SEC. 3</span>
+    <h2>Your Definition of Good</h2>
+    <p class="kicker">This is what you'll trade with your spouse. Notice the fine print under every line: it's yours now too.</p>
+
+    <div class="compiled">
+      <h3>In this marriage, good means…</h3>
+      <p class="empty" id="emptyMsg">Your definition compiles here as you write. The mirror is warmed up and waiting.</p>
+      <ol id="compiledList"></ol>
+      <p class="vow" id="vowLine" style="display:none">I expect it. I extend it. In that order when it's hard.</p>
+      <div class="copyrow">
+        <button type="button" id="copyBtn">Copy my definition</button>
+        <span id="copyMsg"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONEST MIRROR -->
+  <section>
+    <span class="secnum">SEC. 4</span>
+    <h2>The Honest Mirror</h2>
+    <p class="kicker">One last stop before you trade: fifteen statements about how things currently go, rated Never to Always. No score, no verdicts, nobody's on trial — the mirror just reflects the story you're carrying and quietly points at anything lopsided in it.</p>
+    <div id="aqBox"></div>
+    <p class="atally" id="aqTally">0 of 15 answered</p>
+    <div class="noticebox" id="noticeBox" aria-live="polite">
+      <div class="nhead">WHAT THE MIRROR NOTICED</div>
+      <div class="nbody">
+        <div id="obsList"></div>
+        <p class="nfoot">These are observations about your story, not facts about your marriage. The most useful question isn't "who's right?" — it's "what would my partner's worksheet say?" Trade and find out.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="big">Define good once. <em>Live it twice</em> — once in what you hope for, once in what you give.</p>
+    <p>North star, as always: an equal partner who shares the burden, the responsibility, and the joy — across a long and winding life together. When you've both finished, trade worksheets. The overlap is your marriage's definition of good. The differences are your next great conversation.</p>
+  </footer>
+
+</main>
+
+<script>
+  // ----- Example chips: same standards, tuned vocabulary per respondent -----
+  const CHIPS = {
+    neutral: {
+      joy:    ['fun with zero logistics attached','laughter that\u2019s just ours','being chosen, not just scheduled'],
+      burden: ['help that shows up before I ask','a soft place to land on hard days','worry that gets shared, not carried solo'],
+      resp:   ['two owners, zero supervisors','decisions made together, not reported','the invisible work seen and split']
+    },
+    wife: {
+      joy:    ['being pursued, not just scheduled','laughter that\u2019s just ours','delight in me, not just approval of me'],
+      burden: ['help that shows up before I ask','room to fall apart without managing his reaction','the mental load noticed without a memo'],
+      resp:   ['a co-owner of the invisible work','decisions made together, not reported','my people treated as our people']
+    },
+    husband: {
+      joy:    ['being wanted, not just useful','playfulness that survived the wedding','laughter that\u2019s just ours'],
+      burden: ['a soft landing after a hard day','trust to handle things my way','recharge time that costs no toll'],
+      resp:   ['a teammate, not a supervisor','decisions made together, not reported','my people treated as our people']
+    }
+  };
+
+  // ----- Task-smell detector (applies identically to everyone) -----
+  const SMELL = /\b(dish|dishes|dishwasher|laundry|trash|garbage|mow|lawn|vacuum|grocery|groceries|cook dinner|chore|chores|8pm|9pm|by \d|every day|every night|always|never|50\/50|schedule)\b/i;
+
+  const state = { joy: [], burden: [], resp: [] };
+  const MAX = 3;
+
+  // Who toggle
+  const whoWife = document.getElementById('whoWife');
+  const whoHusband = document.getElementById('whoHusband');
+  let who = 'neutral';
+
+  function renderChips(){
+    document.querySelectorAll('.chips').forEach(box => {
+      const key = box.dataset.key;
+      box.querySelectorAll('button').forEach(b => b.remove());
+      CHIPS[who][key].forEach(txt => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = txt;
+        b.addEventListener('click', () => {
+          const input = box.parentElement.querySelector('input');
+          input.value = txt;
+          input.focus();
+        });
+        box.appendChild(b);
+      });
+    });
+  }
+
+  function setWho(w){
+    who = w;
+    whoWife.setAttribute('aria-pressed', String(w === 'wife'));
+    whoHusband.setAttribute('aria-pressed', String(w === 'husband'));
+    renderChips();
+    renderAQTexts();
+  }
+  whoWife.addEventListener('click', () => setWho('wife'));
+  whoHusband.addEventListener('click', () => setWho('husband'));
+  renderChips();
+
+  // ----- Worksheet mechanics -----
+  document.querySelectorAll('.ws').forEach(ws => {
+    const key = ws.dataset.key;
+    const input = ws.querySelector('input');
+    const addBtn = ws.querySelector('.inputrow button');
+    const smell = ws.querySelector('.smell');
+    const entriesBox = ws.querySelector('.entries');
+
+    function checkSmell(){
+      const v = input.value.trim();
+      if(v && SMELL.test(v)){
+        smell.innerHTML = '<b>Task detected.</b> That\u2019s an output, and the mirror will bill you for it nightly. Zoom out: what does that task <em>give</em> you \u2014 lightness? being thought of? Write that instead. (Or add it anyway. The mirror works both ways, remember.)';
+        smell.classList.add('show');
+      } else {
+        smell.classList.remove('show');
+      }
+    }
+    input.addEventListener('input', checkSmell);
+
+    function renderEntries(){
+      entriesBox.innerHTML = '';
+      state[key].forEach((txt, i) => {
+        const card = document.createElement('div');
+        card.className = 'entry';
+        card.innerHTML =
+          '<div class="hope"><b>YOU HOPE FOR</b>' + escapeHtml(txt) + '</div>' +
+          '<div class="give"><b>SO YOU EXTEND \u2014 MIRROR RULE</b>' + escapeHtml(txt) + '</div>';
+        const del = document.createElement('button');
+        del.className = 'del';
+        del.type = 'button';
+        del.textContent = '\u00D7';
+        del.setAttribute('aria-label','Remove this entry');
+        del.addEventListener('click', () => {
+          state[key].splice(i,1);
+          renderEntries(); renderCompiled(); syncAdd();
+        });
+        card.appendChild(del);
+        entriesBox.appendChild(card);
+      });
+    }
+
+    function syncAdd(){
+      addBtn.disabled = state[key].length >= MAX;
+      addBtn.textContent = state[key].length >= MAX ? 'Full' : 'Add';
+    }
+
+    function add(){
+      const v = input.value.trim();
+      if(!v || state[key].length >= MAX) return;
+      state[key].push(v);
+      input.value = '';
+      smell.classList.remove('show');
+      renderEntries(); renderCompiled(); syncAdd();
+    }
+    addBtn.addEventListener('click', add);
+    input.addEventListener('keydown', e => { if(e.key === 'Enter') add(); });
+    syncAdd();
+  });
+
+  // ----- Compiled definition -----
+  const SECTION_LABEL = { joy:'Joy', burden:'Burden', resp:'Responsibility' };
+  const compiledList = document.getElementById('compiledList');
+  const emptyMsg = document.getElementById('emptyMsg');
+  const vowLine = document.getElementById('vowLine');
+
+  function renderCompiled(){
+    compiledList.innerHTML = '';
+    let count = 0;
+    ['joy','burden','resp'].forEach(key => {
+      state[key].forEach(txt => {
+        count++;
+        const li = document.createElement('li');
+        li.innerHTML = '<b>' + escapeHtml(txt) + '</b><i>' + SECTION_LABEL[key] + ' \u00B7 expected of them, expected of me</i>';
+        compiledList.appendChild(li);
+      });
+    });
+    emptyMsg.style.display = count ? 'none' : 'block';
+    vowLine.style.display = count ? 'block' : 'none';
+  }
+
+  // ----- Copy -----
+  const copyBtn = document.getElementById('copyBtn');
+  const copyMsg = document.getElementById('copyMsg');
+  copyBtn.addEventListener('click', () => {
+    const lines = ['In this marriage, good means:'];
+    ['joy','burden','resp'].forEach(key => {
+      state[key].forEach(txt => lines.push('\u2022 ' + txt + '  (' + SECTION_LABEL[key] + ' \u2014 expected of them, expected of me)'));
+    });
+    if(lines.length === 1){ copyMsg.textContent = 'Nothing to copy yet \u2014 the mirror is empty.'; return; }
+    lines.push('', 'I expect it. I extend it. In that order when it\u2019s hard.');
+    const text = lines.join('\n');
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(
+        () => { copyMsg.textContent = 'Copied \u2014 now go trade.'; },
+        () => { fallbackCopy(text); }
+      );
+    } else { fallbackCopy(text); }
+  });
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); copyMsg.textContent = 'Copied \u2014 now go trade.'; }
+    catch(e){ copyMsg.textContent = 'Select and copy manually \u2014 the mirror forgives.'; }
+    document.body.removeChild(ta);
+  }
+
+  // ----- Honest Mirror assessment -----
+  // Paired statements are deliberately interleaved so answers stay honest;
+  // the mirror pairs them back up afterward.
+  const AQ = [
+    { t: 'My partner proactively does things to benefit me.', pair: 'benefit', side: 'them' },
+    { t: 'I initiate physical contact first.', pair: 'contact', side: 'me' },
+    { t: 'Marital conflict ends with me apologizing and acknowledging wrongdoing.', pair: 'apology', side: 'me' },
+    { t: 'My partner makes plans for the two of us.', pair: 'plans', side: 'them' },
+    { t: 'My actions or behavior contribute to marital conflict.', pair: 'conflict', side: 'me' },
+    { t: 'My partner takes responsibility for the health of our marriage.', pair: 'health', side: 'them' },
+    { t: 'When I\u2019m doing a task, I find myself thinking about why my {SPOUSE} didn\u2019t already do it.', pair: 'ledger', side: 'me' },
+    { t: 'My partner initiates physical contact first.', pair: 'contact', side: 'them' },
+    { t: 'I want what\u2019s best for my partner and act to make their life better.', pair: 'best', side: 'me' },
+    { t: 'Marital conflict ends with my partner apologizing and acknowledging wrongdoing.', pair: 'apology', side: 'them' },
+    { t: 'I make plans for the two of us.', pair: 'plans', side: 'me' },
+    { t: 'My partner initiates conflict within the marriage.', pair: 'conflict', side: 'them' },
+    { t: 'I proactively do things to benefit my partner.', pair: 'benefit', side: 'me' },
+    { t: 'My partner wants what\u2019s best for me and to make my life better.', pair: 'best', side: 'them' },
+    { t: 'I take responsibility for the health of our marriage.', pair: 'health', side: 'me' }
+  ];
+  const AQ_LABELS = ['Never','Rarely','Sometimes','Often','Always'];
+  const aqAnswers = Array(AQ.length).fill(null);
+  const aqBox = document.getElementById('aqBox');
+  const aqTally = document.getElementById('aqTally');
+  const noticeBox = document.getElementById('noticeBox');
+  const obsList = document.getElementById('obsList');
+
+  function spouseWord(){
+    return who === 'wife' ? 'husband' : who === 'husband' ? 'wife' : 'spouse';
+  }
+  function aqText(q){ return q.t.replace('{SPOUSE}', spouseWord()); }
+
+  AQ.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'aq';
+    const p = document.createElement('p');
+    p.className = 'qt';
+    p.textContent = aqText(q);
+    card.appendChild(p);
+    const scale = document.createElement('div');
+    scale.className = 'scale';
+    AQ_LABELS.forEach((lab, v) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = lab;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', () => {
+        scale.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed','false'));
+        b.setAttribute('aria-pressed','true');
+        aqAnswers[i] = v;
+        aqRecompute();
+      });
+      scale.appendChild(b);
+    });
+    card.appendChild(scale);
+    aqBox.appendChild(card);
+  });
+
+  function renderAQTexts(){
+    aqBox.querySelectorAll('.aq .qt').forEach((p, i) => { p.textContent = aqText(AQ[i]); });
+  }
+
+  function pairVals(key){
+    const out = {};
+    AQ.forEach((q, i) => { if(q.pair === key) out[q.side] = aqAnswers[i]; });
+    return out; // {them, me}
+  }
+
+  function aqRecompute(){
+    const answered = aqAnswers.filter(a => a !== null).length;
+    aqTally.textContent = answered + ' of ' + AQ.length + ' answered';
+    if(answered < AQ.length) return;
+
+    const obs = [];
+    let v;
+
+    // Conflict authorship
+    v = pairVals('conflict'); // them: partner initiates; me: I contribute
+    if(v.them - v.me >= 2) obs.push('In your telling, conflict mostly has one author \u2014 and it isn\u2019t you. One-author conflict stories are rare in the wild. Worth re-reading your own line before you trade.');
+    else if(v.me - v.them >= 2) obs.push('You\u2019re carrying most of the conflict blame in your own story. Over-owning is a pattern too \u2014 sometimes it\u2019s honesty, sometimes it\u2019s just quieter scorekeeping.');
+    else if(v.them >= 3 && v.me >= 3) obs.push('Conflict is frequent and co-authored in your telling. Not comfortable \u2014 but honest accounting is the best possible starting point.');
+
+    // Physical contact
+    v = pairVals('contact');
+    if(v.me - v.them >= 2) obs.push('You\u2019re the designated opener for physical affection. Before resentment files that away, get curious instead: what would make reaching back feel easy for them?');
+    else if(v.them - v.me >= 2) obs.push('Your partner reaches first, mostly. The mirror\u2019s gentle question: what are they hoping comes back \u2014 and what does it cost them each time it doesn\u2019t?');
+    else if(v.me <= 1 && v.them <= 1) obs.push('Physical affection barely has an opener at all right now. No verdict \u2014 just possibly the single easiest place to start warming things back up.');
+
+    // Apology direction
+    v = pairVals('apology');
+    if(v.me - v.them >= 2) obs.push('Repair flows one direction: you apologize, they\u2019re absolved. Either you\u2019re the sole source of wrongdoing (statistically bold) or apologizing has become your assigned job.');
+    else if(v.them - v.me >= 2) obs.push('Conflict tends to end with your partner doing the apologizing. Being undefeated in arguments is a strange championship \u2014 check what the title is costing.');
+
+    // Planning
+    v = pairVals('plans');
+    if(v.me - v.them >= 2) obs.push('Togetherness has a single planner: you. Fair question to bring to the trade \u2014 is that preference, habit, or surrender?');
+    else if(v.them - v.me >= 2) obs.push('Your partner does the planning for two. That\u2019s a gift with a shelf life \u2014 planners who are never planned-for eventually stop.');
+
+    // Day-to-day investment
+    v = pairVals('benefit');
+    if(v.me - v.them >= 2) obs.push('By your account, you invest in them more than they invest in you. Before that hardens into a grievance, remember the assignment: define good, extend it first, then trade stories.');
+    else if(v.them - v.me >= 2) obs.push('By your own account, your partner out-gives you day to day. The Mirror Rule has thoughts about that.');
+
+    // Goodwill belief
+    v = pairVals('best');
+    if(v.me - v.them >= 2) obs.push('You believe in your goodwill toward them more than theirs toward you. That belief gap shapes everything \u2014 make it the first line you compare when you trade.');
+    else if(v.them - v.me >= 2) obs.push('You rated your partner\u2019s goodwill above your own. Unusual \u2014 and quietly promising. Goodwill you can see is goodwill you can match.');
+
+    // Stewardship
+    v = pairVals('health');
+    if(v.me - v.them >= 2) obs.push('You\u2019ve made yourself the marriage\u2019s sole maintenance department. Solo stewardship burns out \u2014 the worksheet trade is a good moment to hand over a wrench.');
+    else if(v.them - v.me >= 2) obs.push('In your telling, your partner carries the stewardship of the marriage. The mirror suggests picking up a wrench before you trade.');
+
+    // The ledger
+    v = pairVals('ledger');
+    if(v.me >= 3) obs.push('The mid-task ledger is running \u2014 \u201cwhy didn\u2019t they already do this?\u201d That mental invoice is boss-mode\u2019s favorite paperwork: the task takes minutes, the resentment compounds daily. Noticing it is how it stops.');
+
+    if(obs.length === 0) obs.push('Nothing lopsided worth flagging \u2014 your story has two authors all the way through. Either you\u2019re in great shape or impressively diplomatic. The trade will tell which.');
+
+    obsList.innerHTML = '';
+    obs.forEach(o => {
+      const p = document.createElement('p');
+      p.className = 'obs';
+      p.textContent = o;
+      obsList.appendChild(p);
+    });
+    noticeBox.classList.add('show');
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+</script>
+</body>
+</html>
