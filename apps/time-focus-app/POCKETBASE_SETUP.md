@@ -52,7 +52,7 @@ Run the setup script with your admin credentials:
 ```bash
 cd apps/time-focus-app
 npm install  # if not already done
-PB_ADMIN_PASSWORD=Scobey1022 node setup-pocketbase.js
+PB_ADMIN_PASSWORD=<your-admin-password> node setup-pocketbase.js
 ```
 
 ### Option 2: Manual Setup in PocketBase Admin

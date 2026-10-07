@@ -26,6 +26,33 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Never serve private data publicly. These sit first so they win over
+# every other rule, and force = true so they apply even though the files
+# exist in the publish directory. Netlify functions still read them from disk.
+[[redirects]]
+  from = "/data/allowlist.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/dreaming-backlog.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/dreaming-backlog"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/products/vale-os/verticals/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Groove Pal domain routing
 [[redirects]]
   from = "/"
@@ -95,13 +122,17 @@
   conditions = {Host = ["apps.kaihamil.com"]}
 
 # Redirects for protected routes
+# force = true is required: without it Netlify serves the existing files
+# under /private/ to anyone and never reaches these rules.
 [[redirects]]
   from = "/private/*"
-  to = "/private/index.html"
+  to = "/private/:splat"
   status = 200
+  force = true
   conditions = {Role = ["admin"]}
 
 [[redirects]]
   from = "/private/*"
   to = "/login.html"
   status = 302
+  force = true
