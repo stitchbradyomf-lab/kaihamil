@@ -8,8 +8,7 @@ import RadarChart from './RadarChart.jsx';
 import { useRatingsRange } from '../hooks/useDailyRatings.js';
 import { CATEGORIES, DOMAINS, DOMAIN_CATEGORIES } from '../utils/constants.js';
 import {
-  fmtDate, fmtMonthDay, fmtAvg, weekBounds, daysInRange,
-  weeksInRange, scorePercent,
+  fmtDate, fmtMonthDay, daysInRange,
 } from '../utils/formatters.js';
 import { aggregateWeek, generateInsights, correlate } from '../utils/calculations.js';
 
@@ -73,8 +72,7 @@ export default function ReportingDashboard() {
     pointRadius: 0,
   })), [records]);
 
-  // Sleep vs performance scatter (rendered as line, sorted by date)
-  const sleepVsScore = records.map(r => ({ x: r.ratings?.sleep ?? 0, y: r.total }));
+  // Sleep vs performance correlation
   const sleepCorr    = aggregate
     ? correlate(records.map(r => r.ratings?.sleep ?? null), records.map(r => r.total))
     : null;

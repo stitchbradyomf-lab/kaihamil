@@ -6,7 +6,6 @@ Processes natural language print requests from Telegram.
 
 import json
 import re
-import os
 from datetime import datetime
 from pathlib import Path
 
@@ -167,7 +166,7 @@ def search_vendors(size, format_type):
             price_diff = shutterfly['total'] - cheapest['total']
             if price_diff < 20:  # Within $20, recommend Shutterfly for convenience
                 recommended = 'Shutterfly'
-                reason = f"Your 51% discount makes it competitive, plus familiar interface"
+                reason = "Your 51% discount makes it competitive, plus familiar interface"
             else:
                 recommended = cheapest['vendor']
                 reason = f"Lowest price, though Shutterfly with your discount is only ${price_diff:.2f} more"
@@ -248,7 +247,7 @@ def handle_request(text):
     proposal = create_proposal(request_data, photo, vendors, recommended, reason)
     
     print(f"\n✓ Created proposal: {proposal['id']}")
-    print(f"View at: https://bradyvisuals.netlify.app/print-proposals.html")
+    print("View at: https://bradyvisuals.netlify.app/print-proposals.html")
     
     return proposal
 

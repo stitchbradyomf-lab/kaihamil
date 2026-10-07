@@ -5,9 +5,7 @@ Generates a gratitude-focused morning message with current work items.
 """
 
 import random
-import json
 import csv
-from datetime import datetime
 from pathlib import Path
 
 # Gratitude quotes - rotating themes

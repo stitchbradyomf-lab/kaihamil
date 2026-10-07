@@ -5,7 +5,6 @@ Integrates morning brief with intentional daily planning and evening reflection
 """
 
 import json
-import os
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -67,7 +66,7 @@ def extract_dream_insights():
                     insights.append(line)
         
         return insights[:2]  # Return top 2 insights
-    except Exception as e:
+    except Exception:
         return []
 
 def get_video_rep_status():

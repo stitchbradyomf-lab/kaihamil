@@ -122,7 +122,7 @@ export default function GoodDayFramework() {
   const [date, setDate] = useState(todayStr());
 
   // Use the daily ratings hook but extend it for framework data
-  const { ratings, notes, saving, saved, pbAvailable, setNotes, save } = useDailyRatings(date);
+  const { notes, saving, saved, pbAvailable, setNotes, save } = useDailyRatings(date);
 
   // Framework data stored within the day's notes as JSON
   const [frameworkData, setFrameworkData] = useState(() => {

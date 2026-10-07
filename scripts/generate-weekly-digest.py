@@ -10,7 +10,6 @@ Usage:
 
 import argparse
 import json
-import os
 import subprocess
 import sys
 from datetime import datetime, timedelta
@@ -165,7 +164,7 @@ def generate_digest(monday, sunday, dry_run=False):
     else:
         digest += "- No operational commits this week\n"
     
-    digest += f"""
+    digest += """
 ---
 
 ## 📋 Outstanding Tasks

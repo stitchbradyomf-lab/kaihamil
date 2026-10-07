@@ -17,10 +17,10 @@ RDF_PREFIX = """@prefix kh: <http://kaihamil.com/ontology/> .
 def create_client_triples():
     triples = []
     triples.append(f"kh:{CLIENT_ID} rdf:type kh:Realtor ;")
-    triples.append(f'    kh:name "Jeffrey Weber" ;')
+    triples.append('    kh:name "Jeffrey Weber" ;')
     triples.append(f'    kh:yearsActive "{CLIENT_DATA["years_active"]}"^^xsd:integer ;')
     triples.append(f'    kh:totalTransactions "{CLIENT_DATA["total_transactions"]}"^^xsd:integer ;')
-    triples.append(f'    kh:profileUrl "https://www.homes.com/real-estate-agents/jeffrey-weber/kgce42c/" ;')
+    triples.append('    kh:profileUrl "https://www.homes.com/real-estate-agents/jeffrey-weber/kgce42c/" ;')
     
     for neighborhood in CLIENT_DATA["neighborhoods"]:
         triples.append(f'    kh:activeInArea "{neighborhood}" ;')

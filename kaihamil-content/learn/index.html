@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn | Kai Hamil</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ :root {
+ --ink: #1a1812;
+ --cream: #f5f0e8;
+ --warm-white: #faf8f4;
+ --clay: #c4875a;
+ --clay-light: #e8c4a0;
+ --charcoal: #2e2b26;
+ --muted: #8a8378;
+ }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+ background: var(--warm-white);
+ color: var(--ink);
+ line-height: 1.7;
+ font-size: 16px;
+ }
+ nav {
+ position: fixed; top: 0; left: 0; right: 0;
+ background: var(--ink);
+ padding: 1rem 2rem;
+ display: flex; justify-content: space-between; align-items: center;
+ z-index: 100;
+ }
+ nav a { color: var(--cream); text-decoration: none; font-size: 0.85rem; }
+ nav a:hover { color: var(--clay-light); }
+ .hero {
+ display: flex; flex-direction: column; justify-content: center; align-items: center;
+ text-align: center;
+ padding: 7rem 2rem 4rem;
+ background: var(--ink); color: var(--cream);
+ }
+ .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 1rem; }
+ .hero p { font-size: 1.1rem; color: var(--clay-light); max-width: 36rem; }
+ main { max-width: 44rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; display: grid; gap: 1rem; }
+ .card {
+ display: block; text-decoration: none; color: inherit;
+ background: #fff; border: 1px solid #e6dfd3; border-radius: 12px;
+ padding: 1.5rem;
+ transition: border-color .15s, transform .15s;
+ }
+ .card:hover { border-color: var(--clay); transform: translateY(-2px); }
+ .card h2 { font-size: 1.2rem; font-weight: 500; margin-bottom: .35rem; color: var(--charcoal); }
+ .card p { color: var(--muted); font-size: .95rem; }
+ footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 2rem; }
+</style>
+</head>
+<body>
+
+<nav>
+ <a href="/">← Kai Hamil</a>
+ <a href="/learn/">Learn</a>
+</nav>
+
+<section class="hero">
+ <h1>Learn</h1>
+ <p>The method, the course, and the thinking behind them.</p>
+</section>
+
+<main>
+ <a class="card" href="method.html">
+  <h2>The Kai Hamil Method</h2>
+  <p>The core framework: from clarity to execution to learning.</p>
+ </a>
+ <a class="card" href="phase-1-course.html">
+  <h2>Phase 1: Build a Daily Brief That Doesn't Work</h2>
+  <p>A four-week course: build a system expecting it to fail, then learn from what broke.</p>
+ </a>
+ <a class="card" href="socratic-method.html">
+  <h2>Socratic Method for Kai Hamil</h2>
+  <p>Teaching people to develop their own method, using these frameworks as tools.</p>
+ </a>
+ <a class="card" href="quarterly-journey.html">
+  <h2>Three Month Journey</h2>
+  <p>How Kai Hamil evolved, phase by phase.</p>
+ </a>
+</main>
+
+<footer>
+ <p>Kai Hamil · Learn</p>
+</footer>
+
+</body>
+</html>

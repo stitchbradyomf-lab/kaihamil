@@ -37,7 +37,7 @@ def get_openclaw_sessions():
         with urllib.request.urlopen(req, timeout=5) as response:
             data = json.loads(response.read().decode('utf-8'))
             return data.get('sessions', [])
-    except Exception as e:
+    except Exception:
         # Fallback to CLI
         try:
             result = subprocess.run(
@@ -548,7 +548,7 @@ def get_time_focus_yesterday():
                 result['ratings'] = ratings
                 result['average'] = round(total / count, 1) if count > 0 else 0
                 
-    except Exception as e:
+    except Exception:
         # Silently fail - auth might be wrong
         pass
     

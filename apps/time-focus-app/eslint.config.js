@@ -7,6 +7,11 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist']),
   {
+    // Node-side setup script
+    files: ['setup-pocketbase.js'],
+    languageOptions: { globals: globals.node },
+  },
+  {
     files: ['**/*.{js,jsx}'],
     extends: [
       js.configs.recommended,
@@ -24,6 +29,8 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // React Compiler is not enabled in this app, so this advisory rule only adds noise.
+      'react-hooks/preserve-manual-memoization': 'off',
     },
   },
 ])

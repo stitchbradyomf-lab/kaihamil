@@ -5,8 +5,7 @@ Adds video rep status to daily briefings
 """
 
 import json
-import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path.home() / ".openclaw" / "workspace"

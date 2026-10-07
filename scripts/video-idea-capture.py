@@ -6,9 +6,7 @@ surface in morning brief when ready to record.
 """
 
 import json
-import os
-import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 # Configuration
@@ -207,13 +205,13 @@ def save_idea_file(idea):
     for point in idea['outline']['notes']['talking_points']:
         content += f"- {point}\n"
     
-    content += f"""
+    content += """
 ### CTA Options
 """
     for cta in idea['outline']['notes']['cta_ideas']:
         content += f"- {cta}\n"
     
-    content += f"""
+    content += """
 ## Production Notes
 - [ ] Record video
 - [ ] Edit (if needed)
@@ -369,8 +367,8 @@ def main():
         print(f"   Template: {idea['outline']['template']}")
         print(f"   Title: {idea['outline']['title'][:50]}")
         print(f"   Duration: {idea['outline']['duration']}s")
-        print(f"")
-        print(f"💡 Ready to record? Check the outline:")
+        print("")
+        print("💡 Ready to record? Check the outline:")
         print(f"   {CAPTURED_DIR}/{datetime.now().strftime('%Y-%m-%d')}_idea-{idea['id']}.md")
         
     elif command == "status":

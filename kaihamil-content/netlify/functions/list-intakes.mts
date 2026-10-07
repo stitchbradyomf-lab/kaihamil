@@ -4,9 +4,10 @@ export default async function handler(req: Request) {
   const url = new URL(req.url);
   const secret = url.searchParams.get("secret");
   
-  const adminSecret = process.env.ADMIN_SECRET || "vale2026";
-  
-  if (secret !== adminSecret) {
+  // Fail closed: never fall back to a default secret (this repo is public).
+  const adminSecret = process.env.ADMIN_SECRET;
+
+  if (!adminSecret || secret !== adminSecret) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { "Content-Type": "application/json" }

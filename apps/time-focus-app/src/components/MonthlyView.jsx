@@ -19,7 +19,7 @@ function monthAnchor(offset) {
 export default function MonthlyView() {
   const [monthOffset, setMonthOffset] = useState(0);
   const anchor = monthAnchor(monthOffset);
-  const { records, weeklyRows, monthlyData, loading, startStr, endStr } = useMonthlyAggregation(anchor);
+  const { records, weeklyRows, monthlyData, loading } = useMonthlyAggregation(anchor);
 
   const { start, end } = monthBounds(anchor);
   const allDays = daysInRange(start, end);
