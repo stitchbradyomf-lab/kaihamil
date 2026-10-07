@@ -5,10 +5,8 @@ Processes "done" replies to morning brief and auto-logs video reps
 Integrates with OpenClaw's message handling
 """
 
-import json
 import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path.home() / ".openclaw" / "workspace"

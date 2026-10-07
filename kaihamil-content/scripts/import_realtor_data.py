@@ -52,7 +52,7 @@ def create_client_triples(client_data: Dict) -> str:
     triples.append(f'    kh:name "{CLIENT_NAME}" ;')
     triples.append(f'    kh:yearsActive "{client_data.get("years_active", 5)}"^^xsd:integer ;')
     triples.append(f'    kh:totalTransactions "{client_data.get("total_transactions", 0)}"^^xsd:integer ;')
-    triples.append(f'    kh:profileUrl "https://www.homes.com/real-estate-agents/jeffrey-weber/kgce42c/" ;')
+    triples.append('    kh:profileUrl "https://www.homes.com/real-estate-agents/jeffrey-weber/kgce42c/" ;')
     
     # Active neighborhoods
     for neighborhood in client_data.get("neighborhoods", []):
@@ -291,7 +291,7 @@ if __name__ == "__main__":
     result_path = import_all_data(SAMPLE_CLIENT_DATA, SAMPLE_TRANSACTIONS)
     
     print()
-    print(f"✅ Import complete! Files created:")
+    print("✅ Import complete! Files created:")
     print(f"   Raw data: {RAW_DIR}/")
     print(f"   RDF triples: {result_path}")
     print(f"   Summary: {EXTRACTED_DIR}/profile-summary.json")

@@ -5,10 +5,8 @@ One-command logging for instant habit reinforcement
 Reply to morning brief with 'done' or run this to log a rep in seconds
 """
 
-import json
 import sys
 import subprocess
-from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path.home() / ".openclaw" / "workspace"

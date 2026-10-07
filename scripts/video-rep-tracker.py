@@ -5,7 +5,6 @@ Tracks video creation reps to break perfectionism and build momentum
 """
 
 import json
-import os
 from datetime import datetime, timedelta
 from pathlib import Path
 

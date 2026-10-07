@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { usePocketBase } from '../hooks/usePocketBase.js';
 
 export default function AuthGate({ children }) {
-  const { isLoggedIn, login, register, logout, pb } = usePocketBase();
+  const { isLoggedIn, login, register, pb } = usePocketBase();
   const [mode, setMode]       = useState('login'); // 'login' | 'register'
   const [email, setEmail]     = useState('');
   const [password, setPassword] = useState('');

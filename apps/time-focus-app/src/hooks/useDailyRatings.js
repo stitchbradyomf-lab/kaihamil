@@ -14,7 +14,7 @@ function loadFromLS(date) {
 }
 
 function saveToLS(date, data) {
-  try { localStorage.setItem(LS_KEY(date), JSON.stringify(data)); } catch {}
+  try { localStorage.setItem(LS_KEY(date), JSON.stringify(data)); } catch { /* storage full or unavailable */ }
 }
 
 export function useDailyRatings(date = todayStr()) {

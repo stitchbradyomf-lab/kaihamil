@@ -14,7 +14,7 @@ function weekStart(offset = 0) {
 export default function WeeklyView() {
   const [weekOffset, setWeekOffset] = useState(0);
   const anchor = weekStart(weekOffset);
-  const { days, weekly, insights, startStr, endStr, loading } = useWeeklyAggregation(anchor);
+  const { days, weekly, insights, startStr, loading } = useWeeklyAggregation(anchor);
 
   // Intentions (optional)
   const { getIntentions } = usePocketBase();
